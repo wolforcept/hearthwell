@@ -1,0 +1,13 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BAB",
+	"ACA",
+    "BAB" ],
+  "key": {
+    "A": [{ "item": "hwell:heavy_ingot" }],
+    "B": [{ "item": "hwell:soulsteel_ingot" }],
+	"C": [{ "item": "hwell:heavy_block" }]
+  },
+  "result": { "item": "hwell:heavy_protection_block" , "count": 4}
+}

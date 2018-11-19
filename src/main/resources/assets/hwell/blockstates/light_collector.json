@@ -1,0 +1,8 @@
+{
+    "variants": {
+		"charge=0": { "model": "hwell:light_collector1" },
+		"charge=1": { "model": "hwell:light_collector2" },
+		"charge=2": { "model": "hwell:light_collector3" },
+		"charge=3": { "model": "hwell:light_collector4" }
+    }
+}

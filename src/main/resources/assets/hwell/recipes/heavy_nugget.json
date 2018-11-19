@@ -1,0 +1,14 @@
+{ 
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+	  "item": "hwell:heavy_ingot",
+	  "data": 0
+	}
+  ],
+  "result": {
+    "item": "hwell:heavy_nugget",
+	"count": 9,
+    "data": 0
+  }
+}

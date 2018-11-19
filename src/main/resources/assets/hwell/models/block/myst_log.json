@@ -1,0 +1,7 @@
+{
+	"parent": "block/cube_column",
+	"textures": {
+		"end": "hwell:blocks/myst_log",
+		"side": "hwell:blocks/myst_log_side"
+	}
+}

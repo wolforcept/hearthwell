@@ -1,0 +1,13 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+	"ACA",
+    "ABA" ],
+  "key": {
+	"A": [{ "item": "hwell:heavy_ingot" }],
+	"B": [{ "item": "hwell:furnace_tube" }],
+	"C": [{ "item": "minecraft:stone", "data": 0 }]
+  },
+  "result": { "item": "hwell:precision_grinder_empty" }
+}

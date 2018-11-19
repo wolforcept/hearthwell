@@ -1,0 +1,124 @@
+package wolforce;
+
+import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+@Config(modid = Main.MODID, category="everything")
+@Config.LangKey("hwell.config.title")
+public class HWellConfig {
+
+	@Config.Comment({ "General settings" })
+	public static General general = new General();
+
+	@Config.Comment({ "Liquid settings" })
+	public static Liquid liquid = new Liquid();
+
+	@Config.Comment({ "Crafting settings" })
+	public static Crafting crafting = new Crafting();
+
+	public static class General {
+		@Config.Comment("Water based liquids causing nausea when swam in [default: true]")
+		public boolean liquidsCausesNausea = true;
+
+		@Config.Comment("Makes liquid ore have a 1 in X chance of drying into an ore block (higher = less chance) [default: 64]")
+		@Config.RangeInt(min = 6, max = 640)
+		public int oreChance = 64;
+	}
+
+	public static class Liquid {
+		@Config.Comment("The time liquid dirt types take to solidify [default: 220]")
+		@Config.RangeInt(min = 6, max = 640)
+		public int dirtSolidifyTime = 220;
+	}
+
+	public static class Crafting {
+		@Config.Comment("Enable crafting buckets with ice [default: true]")
+		public boolean enableCraftingWithIce = true;
+	}
+
+	//
+	// WHAT IS THIS
+	//
+
+	@Mod.EventBusSubscriber(modid = Main.MODID)
+	private static class EventHandler {
+
+		@SubscribeEvent
+		public static void onConfigChanged(final ConfigChangedEvent.OnConfigChangedEvent event) {
+			if (event.getModID().equals(Main.MODID)) {
+				ConfigManager.sync(Main.MODID, Config.Type.INSTANCE);
+			}
+		}
+	}
+}
+
+
+
+// THIS BECOMES:
+
+//# Configuration file
+//
+//everything {
+//
+//    ##########################################################################################################
+//    # general
+//    #--------------------------------------------------------------------------------------------------------#
+//    # General settings
+//    ##########################################################################################################
+//
+//    general {
+//        # Water based liquids causing nausea when swam in [default: true]
+//        B:liquidsCausesNausea=true
+//
+//        # Makes liquid ore have a 1 in X chance of drying into an ore block (higher = less chance) [default: 64]
+//        # Min: 6
+//        # Max: 640
+//        I:oreChance=64
+//    }
+//
+//    ##########################################################################################################
+//    # liquid
+//    #--------------------------------------------------------------------------------------------------------#
+//    # Liquid settings
+//    ##########################################################################################################
+//
+//    liquid {
+//        # The time liquid dirt types take to solidify [default: 220]
+//        # Min: 6
+//        # Max: 640
+//        I:dirtSolidifyTime=220
+//    }
+//
+//    ##########################################################################################################
+//    # crafting
+//    #--------------------------------------------------------------------------------------------------------#
+//    # Crafting settings
+//    ##########################################################################################################
+//
+//    crafting {
+//        # Enable crafting buckets with ice [default: true]
+//        B:enableCraftingWithIce=true
+//    }
+//
+//}
+//
+//
+//"hearth well configuration settings" {
+//
+//    general {
+//        B:liquidsCausesNausea=true
+//        I:oreChance=64
+//    }
+//
+//    liquid {
+//        I:dirtSolidifyTime=220
+//    }
+//
+//    crafting {
+//        B:enableCraftingWithIce=true
+//    }
+//
+//}

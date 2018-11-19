@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=up": { "model": "hwell:separator" },
+        "facing=down": { "model": "hwell:separator" },
+        "facing=north": { "model": "hwell:separator" },
+        "facing=south": { "model": "hwell:separator", "y": 180 },
+        "facing=west":  { "model": "hwell:separator", "y": 270 },
+        "facing=east":  { "model": "hwell:separator", "y": 90 }
+    }
+}

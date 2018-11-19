@@ -1,0 +1,28 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+	"BCB",
+    "AAA" ],
+  "key": {
+    "A": [
+      {
+        "item": "minecraft:brick"
+      }
+    ],
+	"B": [
+      {
+        "item": "minecraft:hardened_clay"
+      }
+    ],
+	"C": [
+      {
+        "item": "hwell:crystal_nether"
+      }
+    ]
+  },
+  "result": {
+    "item": "hwell:heat_block",
+	"count": 4
+  }
+}

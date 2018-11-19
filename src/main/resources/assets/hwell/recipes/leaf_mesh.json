@@ -1,0 +1,22 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+	"ABA",
+    "AAA" ],
+  "key": {
+    "A": [
+      {
+        "item": "hwell:myst_leaves"
+      }
+    ],
+	"B": [
+      {
+        "item": "hwell:myst_dust"
+      }
+    ]
+  },
+  "result": {
+    "item": "hwell:leaf_mesh"
+  }
+}

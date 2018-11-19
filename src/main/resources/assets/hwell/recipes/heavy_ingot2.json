@@ -1,0 +1,19 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"  ],
+  "key": {
+    "A": [
+      {
+        "item": "hwell:heavy_nugget",
+        "data": 0
+      }
+    ]
+  },
+  "result": {
+    "item": "hwell:heavy_ingot",
+    "data": 0
+  }
+}

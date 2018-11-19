@@ -1,0 +1,13 @@
+{
+    "variants": {
+		"type=core_base": { "model": "hwell:core_heat" },
+		"type=core_ca": { "model": "hwell:core_heat_ca" },
+		"type=core_c": { "model": "hwell:core_heat_c" },
+		"type=core_au": { "model": "hwell:core_heat_au" },
+		"type=core_fe": { "model": "hwell:core_heat_fe" },
+		"type=core_h": { "model": "hwell:core_heat_h" },
+		"type=core_n": { "model": "hwell:core_heat_n" },
+		"type=core_p": { "model": "hwell:core_heat_p" },
+		"type=core_o": { "model": "hwell:core_heat_o" }
+    }
+}

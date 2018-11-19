@@ -1,0 +1,104 @@
+item.dust.name=Stone Dust
+item.myst_dust.name=Mysterious Dust
+item.myst_fertilizer.name=Mysterious Fertilizer
+item.heavy_mesh.name=Heavy Mix Lump
+item.heavy_ingot.name=Heavy Ingot
+item.heavy_nugget.name=Heavy Nugget
+item.heavy_shears.name=Heavy Shears
+item.leaf_mesh.name=Mysterious Mixture
+item.crystal.name=Crystal
+item.crystal_nether.name=Nether Crystal
+item.crystal_bowl.name=Crystal Bowl
+item.crystal_bowl_water.name=Water Filled Crystal Bowl
+item.shard_fe.name=Shard of the Sacred Land
+item.shard_au.name=Shard of the Shining Dawn
+item.shard_o.name=Shard of the Root of Life
+item.shard_c.name=Shard of the Soil of Fire
+item.shard_h.name=Shard of the Living World
+item.shard_p.name=Shard of the Morning Star
+item.shard_ca.name=Shard of the Born Might
+item.shard_n.name=Shard of the Pure Giver
+item.obsidian_displacer.name=Obsidian Displacer
+item.grinding_wheel_flint.name=Flint Grinding Wheel
+item.grinding_wheel_iron.name=Iron Grinding Wheel
+item.grinding_wheel_diamond.name=Diamond Grinding Wheel
+item.grinding_wheel_crystal.name=Crystal Grinding Wheel
+item.grinding_wheel_crystal_nether.name=Nether Crystal Grinding Wheel
+item.myst_dust_picker_fe.name=Dust Picker
+item.myst_dust_picker_ca.name=Dust Picker
+item.myst_dust_picker_c.name=Dust Picker
+item.myst_dust_picker_o.name=Dust Picker
+item.myst_dust_picker_au.name=Dust Picker
+item.myst_dust_picker_h.name=Dust Picker
+item.myst_dust_picker_p.name=Dust Picker
+item.myst_dust_picker_n.name=Dust Picker
+tile.locked_light.name=Imprisoned Light
+
+item.soulsteel_ingot.name=Soulsteel Ingot
+item.asul_ingot.name=Asul Ingot
+item.soul_dust.name=Soul Dust
+
+
+
+
+tile.heavy_block.name=Heavy Block
+tile.crystal_block.name=Crystal Block
+tile.crystal_nether_block.name=Nether Crystal Block
+tile.myst_grass.name=Mysterious Grass
+tile.myst_bush.name=Mysterious Bush
+tile.myst_bush_big.name=Grown Mysterious Bush
+tile.myst_dust_block.name=Mysterious Dust Block
+tile.dust_block.name=Stone Dust Block
+tile.myst_log.name=Mysterious Wood Log
+tile.myst_planks.name=Mysterious Wood Planks
+tile.myst_leaves.name=Mysterious Leaves
+
+tile.burst_seed_dirt.name=Dirt Burst Seed
+tile.burst_seed_stone.name=Stone Burst Seed
+tile.burst_seed_sand.name=Sand Burst Seed
+tile.burst_seed_snow.name=Snow Burst Seed
+tile.burst_seed_netherracl.name=Netherrack Burst Seed
+
+tile.protection_block.name=Protection Block
+tile.heavy_protection_block.json.name=Superior Protection Block
+tile.heat_block.name=Heat Block
+tile.compressed_clay.name=Compressed Clay
+tile.moonstone_block.name=Moonstone
+tile.onyx_block.name=Onyx
+tile.azurite_block.name=Weathered Azurite
+tile.smooth_azurite_block.name=Smooth Azurite
+tile.fullgrass_block.name=Fullgrass
+tile.slab_lamp.name=Slab Lamp
+
+tile.crushing_block.name=Crushing Block
+tile.gravity_block.name=Gravity Block
+tile.gravity_powered_block.name=Powered Gravity Block
+tile.furnace_tube.name=Furnace Tube
+tile.heat_furnace.name=Heat Furnace
+tile.precision_grinder_flint.name=Precision Grinder (Flint Grinding Wheel)
+tile.precision_grinder_iron.name=Precision Grinder (Iron Grinding Wheel)
+tile.precision_grinder_diamond.name=Precision Grinder (Diamond Grinding Wheel)
+tile.precision_grinder_crystal.name=Precision Grinder (Crystal Grinding Wheel)
+tile.precision_grinder_crystal_nether.name=Precision Grinder (Nether Crystal Grinding Wheel)
+tile.precision_grinder_empty.name=Precision Grinder
+tile.picking_table.name=Shard Picking Table
+tile.separator.name=Separator
+
+tile.light_collector.name=Light Collector
+
+tile.core_stone.name=Rock Core
+tile.core_heat.name=Warm Core
+tile.core_green.name=Verdant Core
+tile.core_sentient.name=Sentient Core
+
+tile.weeping_block.name=Weeping Block
+
+tile.soulsteel_block.name=Soulsteel Block
+tile.asul_block.name=Asul Block
+tile.scorch_grit.name=Scorch Grit
+tile.scorch_glass.name=Scorch Glass
+tile.metal_diamond_block.name=Metaldiamond Block
+
+
+fluid.liquid_souls=Liquid Souls
+itemGroup.hwell=Hearth Well

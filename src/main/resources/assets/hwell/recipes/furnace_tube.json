@@ -1,0 +1,23 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+	"BBB",
+    "AAA" ],
+  "key": {
+    "A": [
+      {
+        "item": "hwell:heavy_ingot"
+      }
+    ],
+	"B": [
+      {
+        "item": "minecraft:glass"
+      }
+    ]
+  },
+  "result": {
+    "item": "hwell:furnace_tube",
+	"count": 4
+  }
+}

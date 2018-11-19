@@ -1,0 +1,14 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+	"ABA",
+    " A " ],
+  "key": {
+    "A": [{ "item": "minecraft:snow"}],
+	"B": [{ "item": "hwell:shard_ca" }]
+  },
+  "result": {
+    "item": "hwell:burst_seed_snow"
+  }
+}

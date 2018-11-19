@@ -1,0 +1,14 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A  ",
+	" B ",
+    "  B" ],
+  "key": {
+    "A": [{ "item": "hwell:crystal" }],
+	"B": [{ "item": "hwell:heavy_ingot" }]
+  },
+  "result": {
+    "item": "hwell:obsidian_displacer"
+  }
+}

@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "hwell:metal_diamond_block" }
+        ]
+    }
+}

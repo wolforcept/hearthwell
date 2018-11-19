@@ -1,0 +1,12 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "ACA",
+    "AAA"  ],
+  "key": {
+    "A": [{ "item": "minecraft:stone", "data": 0 }],
+    "C": [{ "item": "hwell:shard_ca" }]
+  },
+  "result": { "item": "hwell:moonstone_block", "count": 8 }
+}

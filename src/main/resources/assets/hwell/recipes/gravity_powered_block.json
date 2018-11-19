@@ -1,0 +1,21 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA"
+	],
+  "key": {
+    "A": [
+      {
+        "item": "minecraft:redstone"
+      }
+    ],
+	"B": [
+      {
+        "item": "hwell:gravity_block"
+      }
+    ]
+  },
+  "result": {
+    "item": "hwell:gravity_powered_block"
+  }
+}
