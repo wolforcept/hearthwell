@@ -60,11 +60,11 @@ public class BlockSeparator extends Block implements ITileEntityProvider {
 						// VAMOS POR
 						itemHandler.insertItem(0, new ItemStack(held.getItem(), 1, held.getMetadata()), false);
 						held.shrink(1);
-						tile.sendUpdates();
+						tile.markDirty();
 					}
 				} else {
 					ItemStack itemToTake = itemHandler.extractItem(0, 64, false);
-					tile.sendUpdates();
+					tile.markDirty();
 					// NAO TA VAZIO
 					if (held.isEmpty()) { // NAO TEM NADA NA MAO
 						// VAMOS TIRAR

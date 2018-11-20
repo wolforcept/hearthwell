@@ -20,7 +20,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import wolforce.Main;
-import wolforce.RecipeCrushing;
+import wolforce.recipes.RecipeCrushing;
 
 public class BlockCrushing extends BlockFalling {
 

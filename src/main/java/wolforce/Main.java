@@ -13,6 +13,10 @@ import javax.annotation.Nonnull;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import mezz.jei.config.JEIModGuiFactory;
+import mezz.jei.runtime.JeiHelpers;
+import mezz.jei.runtime.JeiRuntime;
+import mezz.jei.startup.JeiStarter;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -34,10 +38,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -69,6 +75,7 @@ import wolforce.blocks.BlockSlabLamp;
 import wolforce.blocks.BlockTube;
 import wolforce.blocks.MyLog;
 import wolforce.fluids.BlockLiquidSouls;
+import wolforce.integration.WithJei;
 import wolforce.items.ItemCrystalBowl;
 import wolforce.items.ItemCrystalBowlWater;
 import wolforce.items.ItemDustPicker;
@@ -78,6 +85,10 @@ import wolforce.items.ItemLockedLight;
 import wolforce.items.ItemMystDust;
 import wolforce.items.ItemMystFertilizer;
 import wolforce.items.ItemObsidianDisplacer;
+import wolforce.recipes.RecipeCoring;
+import wolforce.recipes.RecipeCrushing;
+import wolforce.recipes.RecipeGrinder;
+import wolforce.recipes.RecipeSeparator;
 import wolforce.tesrs.TesrSeparator;
 import wolforce.tile.TileCore;
 import wolforce.tile.TileGravity;
@@ -102,6 +113,7 @@ public class Main {
 	private static LinkedList<Block> blocks;
 
 	public static Material material_heavy, material_soulsteel;
+	public static MaterialLiquid material_liquid_souls;
 
 	// tier 1
 	public static Item dust;
@@ -126,8 +138,8 @@ public class Main {
 	public static Block light_collector;
 	public static BlockCore core_stone, core_heat, core_green, core_sentient;
 	public static Block picking_table;
-	public static Block compressed_clay, moonstone_block, onyx_block, azurite_block, smooth_azurite_block, scorch_grit, scorch_glass, fullgrass_block,
-			metal_diamond_block;
+	public static Block compressed_clay, moonstone_block, onyx_block, azurite_block, smooth_azurite_block, scorch_grit, scorch_glass,
+			fullgrass_block, metal_diamond_block;
 
 	// tier 2
 	// public static Block coreGreen;
@@ -308,7 +320,8 @@ public class Main {
 				Material.ROCK, Blocks.SNOW, "shovel", SoundType.STONE);
 		blocks.add(burst_seed_netherrack);
 
-		obsidian_displacer = new ItemObsidianDisplacer("obsidian_displacer", "Pops obsidian right off", "at the expense of some hunger");
+		obsidian_displacer = new ItemObsidianDisplacer("obsidian_displacer", "Pops obsidian right off",
+				"at the expense of some hunger");
 		items.add(obsidian_displacer);
 
 		// TIER 2
@@ -375,7 +388,8 @@ public class Main {
 		blocks.add(precision_grinder_diamond);
 		precision_grinder_crystal = new BlockPrecisionGrinder("precision_grinder_crystal", grinding_wheel_crystal);
 		blocks.add(precision_grinder_crystal);
-		precision_grinder_crystal_nether = new BlockPrecisionGrinder("precision_grinder_crystal_nether", grinding_wheel_crystal_nether);
+		precision_grinder_crystal_nether = new BlockPrecisionGrinder("precision_grinder_crystal_nether",
+				grinding_wheel_crystal_nether);
 		blocks.add(precision_grinder_crystal_nether);
 
 		grinding_wheel_flint.grinder = precision_grinder_flint;
@@ -461,7 +475,7 @@ public class Main {
 		//
 
 		// FLUIDS
-		MaterialLiquid liquid_souls_mat = new MaterialLiquid(MapColor.CYAN) {
+		material_liquid_souls = new MaterialLiquid(MapColor.CYAN) {
 			@Override
 			public boolean blocksMovement() {
 				return true;
@@ -472,7 +486,7 @@ public class Main {
 		FluidRegistry.addBucketForFluid(liquid_souls);
 		FluidRegistry.registerFluid(liquid_souls);
 
-		liquid_souls_block = new BlockLiquidSouls(liquid_souls, liquid_souls_mat);
+		liquid_souls_block = new BlockLiquidSouls(liquid_souls, material_liquid_souls);
 		blocks.add(liquid_souls_block);
 
 		mapFluidState(liquid_souls_block, liquid_souls);
@@ -535,6 +549,10 @@ public class Main {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileSeparator.class, new TesrSeparator());
 	}
 
+	//
+
+	// FLUIDS
+
 	private static void mapFluidState(Block block, Fluid fluid) {
 		Item item = Item.getItemFromBlock(block);
 		FluidStateMapper mapper = new FluidStateMapper(fluid);
@@ -565,15 +583,20 @@ public class Main {
 		}
 	}
 
+	//
+
+	// RECIPES
+
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		RecipeCrushing.init();
-		RecipeGrinder.init();
+		RecipeCrushing.initRecipes();
+		RecipeGrinder.initRecipes();
+		RecipeSeparator.initRecipes();
+		RecipeCoring.initRecipes();
 		ItemMystDust.initRecipes();
-		TileCore.initRecipes();
 		initCrystals();
+		MinecraftForge.EVENT_BUS.register(new HwellEventSubscriber());
 	}
-
 	/*
 	 * 
 	 * 

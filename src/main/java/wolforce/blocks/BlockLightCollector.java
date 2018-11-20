@@ -27,6 +27,7 @@ import net.minecraft.world.World;
 import wolforce.Main;
 import wolforce.MyBlock;
 import wolforce.Util;
+import wolforce.blocks.BlockCore.CoreType;
 import wolforce.items.ItemDustPicker;
 import wolforce.tile.TileCore;
 

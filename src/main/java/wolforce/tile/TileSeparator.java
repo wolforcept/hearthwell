@@ -18,42 +18,49 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import wolforce.Main;
-import wolforce.RecipeGrinder;
 import wolforce.Util;
 import wolforce.Util.BlockWithMeta;
-import wolforce.blocks.BlockHeatFurnace;
-import wolforce.blocks.BlockPrecisionGrinder;
-import wolforce.blocks.BlockPrecisionGrinderEmpty;
-import wolforce.items.ItemGrindingWheel;
+import wolforce.blocks.BlockLightCollector;
+import wolforce.blocks.BlockSeparator;
+import wolforce.recipes.RecipeGrinder;
+import wolforce.recipes.RecipeSeparator;
 
 public class TileSeparator extends TileEntity implements ITickable {
 
-	static final int MAX_COOLDOWN = 100;
+	static final int MAX_CHARGE = 100;
 
 	static final String[][][] multiblock = new String[][][] { //
 			{ //
-					{ "HB", "SL", "HB" }, //
-					{ "PB", "00", "PB" }, //
-					{ "HB", "PB", "HB" }, //
-			}, { //
-					{ null, "PB", null }, //
-					{ "PB", "AR", "AR" }, //
-					{ null, "PB", null } //
+					{ null, "HB", "PB", "HB", null }, //
+					{ "L1", "L1", "L0", "L1", "L1" }, //
+					{ null, "HB", "PB", "HB", null }, //
+			}, //
+			{ //
+					{ null, "AR", "AR", "AR", null }, //
+					{ null, "HB", "PB", "HB", null }, //
+					{ null, "AR", "00", "AR", null }, //
+			}, //
+			{ //
+					{ null, null, null, null, null }, //
+					{ null, "FT", "AR", "FT", null }, //
+					{ null, null, null, null, null }, //
+			}, //
+			{ //
+					{ null, null, null, null, null }, //
+					{ null, "LC", "AR", "LC", null }, //
+					{ null, null, null, null, null }, //
+			}, //
 
-			}, { //
-					{ null, "PB", null }, //
-					{ "PB", "SL", "AR" }, //
-					{ null, "PB", null } //
-
-			} };
+	};
 
 	//
 
 	private ItemStackHandler inventory = new ItemStackHandler(1);
-	int cooldown = 0;
+	int charge = 0;
 
 	@Override
 	public void update() {
@@ -61,53 +68,51 @@ public class TileSeparator extends TileEntity implements ITickable {
 		if (world.isRemote)
 			return;
 
-		if (cooldown > 0) {
-			cooldown -= 5;
-			return;
-		}
-
 		IBlockState block = world.getBlockState(pos);
-		if (!(block.getBlock() instanceof BlockPrecisionGrinder))
+		if (!(block.getBlock() instanceof BlockSeparator))
 			return;
-		EnumFacing facing = block.getValue(BlockHeatFurnace.FACING);
+		// BlockSeparator separator = (BlockSeparator)block.getBlock();
+		EnumFacing facing = block.getValue(BlockSeparator.FACING);
 
-		List<EntityItem> entities = world.getEntitiesWithinAABB(EntityItem.class, //
-				new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1.5, pos.getZ() + 1));
-		if (entities.size() > 0) {
+		ItemStack[] result = RecipeSeparator.getResult(inventory.getStackInSlot(0));
+
+		if (!inventory.getStackInSlot(0).equals(ItemStack.EMPTY) && result != null) {
 			HashMap<String, BlockWithMeta> table = new HashMap<>();
-			table.put("PB", new BlockWithMeta(Main.protection_block));
-			table.put("HB", new BlockWithMeta(Main.heavy_block));
-			table.put("SL", new BlockWithMeta(Main.slab_lamp, EnumFacing.DOWN.ordinal()));
+			table.put("PB", new BlockWithMeta(Main.heavy_protection_block));
+			table.put("HB", new BlockWithMeta(Main.heat_block));
+			table.put("FT", new BlockWithMeta(Main.furnace_tube));
+			int metaSource = Main.liquid_souls_block.getMetaFromState(Main.liquid_souls_block.getBlockState().getBaseState());
+			table.put("L0", new BlockWithMeta(Main.liquid_souls_block, metaSource));
+			table.put("L1", new BlockWithMeta(Main.liquid_souls_block, metaSource, true));
+			table.put("LC", new BlockWithMeta(Main.light_collector, Main.light_collector.getMetaFromState(//
+					Main.light_collector.getDefaultState().withProperty(BlockLightCollector.CHARGE, 3))));
 			table.put("AR", new BlockWithMeta(Blocks.AIR));
 
 			if (Util.isMultiblockBuilt(world, pos, facing, multiblock, table)) {
-				ItemGrindingWheel gwheel = ((BlockPrecisionGrinder) block.getBlock()).grindingWheel;
-				EntityItem entityItem = entities.get(0);
-				ItemStack result = RecipeGrinder.getResult(gwheel, entityItem.getItem());
-				if (result != null && result != ItemStack.EMPTY) {
-					output(result, facing);
-					entityItem.getItem().shrink(1);
-					cooldown = MAX_COOLDOWN;
-					double prob = Math.pow(entityItem.getItem().getCount(), 4) / 33333300.0;
-					if (entityItem.getItem().getCount() > 20 && Math.random() < prob)
-						popGrindingWheel(entityItem, gwheel, facing);
-				}
+				if (chargeup())
+					done(facing);
 			}
 		}
 	}
 
-	private void output(ItemStack result, EnumFacing facing) {
-		BlockPos newpos = pos.offset(facing);
-		EntityItem newentity = new EntityItem(world, newpos.getX() + .5, newpos.getY(), newpos.getZ() + .5,
-				new ItemStack(result.getItem(), result.getCount(), result.getMetadata()));
-		BlockPos velpos = new BlockPos(0, 0, 0).offset(facing);
-		newentity.setVelocity(velpos.getX() / 2.0, velpos.getY() / 2.0, velpos.getZ() / 2.0); // TODO set velocity depending on facing
-		world.spawnEntity(newentity);
+	private void done(EnumFacing facing) {
+		ItemStack[] result = RecipeSeparator.getResult(inventory.extractItem(0, 64, false));
+		markDirty();
+
+		BlockPos leftPos = pos.offset(facing.rotateYCCW()).offset(facing).offset(EnumFacing.DOWN);
+		Util.spawnItem(world, leftPos, result[0], 0, 0, 0);
+
+		BlockPos rightPos = pos.offset(facing.rotateY()).offset(facing).offset(EnumFacing.DOWN);
+		Util.spawnItem(world, rightPos, result[1], 0, 0, 0);
 	}
 
-	private void popGrindingWheel(EntityItem entityItem, ItemGrindingWheel gwheel, EnumFacing facing) {
-		Util.spawnItem(world, pos.up(), new ItemStack(gwheel));
-		world.setBlockState(pos, Main.precision_grinder_empty.getDefaultState().withProperty(BlockPrecisionGrinderEmpty.FACING, facing));
+	private boolean chargeup() {
+		charge++;
+		if (charge >= MAX_CHARGE) {
+			charge = 0;
+			return true;
+		}
+		return false;
 	}
 
 	//
@@ -118,7 +123,7 @@ public class TileSeparator extends TileEntity implements ITickable {
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-		compound.setInteger("cooldown", cooldown);
+		compound.setInteger("charge", charge);
 		compound.setTag("inventory", inventory.serializeNBT());
 		return super.writeToNBT(compound);
 	}
@@ -126,7 +131,7 @@ public class TileSeparator extends TileEntity implements ITickable {
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
-		cooldown = compound.getInteger("cooldown");
+		charge = compound.getInteger("charge");
 		inventory.deserializeNBT(compound.getCompoundTag("inventory"));
 	}
 
@@ -151,11 +156,12 @@ public class TileSeparator extends TileEntity implements ITickable {
 		return world.getBlockState(pos);
 	}
 
-	public void sendUpdates() {
+	@Override
+	public void markDirty() {
 		world.markBlockRangeForRenderUpdate(pos, pos);
 		world.notifyBlockUpdate(pos, getState(), getState(), 3);
 		world.scheduleBlockUpdate(pos, this.getBlockType(), 0, 0);
-		markDirty();
+		super.markDirty();
 	}
 
 	@Override

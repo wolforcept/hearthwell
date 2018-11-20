@@ -1,4 +1,4 @@
-package wolforce;
+package wolforce.recipes;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,12 +11,13 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import wolforce.Main;
 
 public class RecipeCrushing {
 
 	private static final HashMap<Item, RecipeCrushing[]> recipes = new HashMap<>();
 
-	static void init() {
+	public static void initRecipes() {
 		putRecipe(new ItemStack(Blocks.COBBLESTONE), new RecipeCrushing(Main.dust));
 		putRecipe(new ItemStack(Blocks.STONE), new RecipeCrushing(Main.dust));
 		putRecipe(new ItemStack(Blocks.SANDSTONE), new RecipeCrushing(Main.dust));

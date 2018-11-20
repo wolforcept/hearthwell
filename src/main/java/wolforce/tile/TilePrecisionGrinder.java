@@ -14,13 +14,12 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import wolforce.Main;
-import wolforce.RecipeGrinder;
 import wolforce.Util;
 import wolforce.Util.BlockWithMeta;
-import wolforce.blocks.BlockHeatFurnace;
 import wolforce.blocks.BlockPrecisionGrinder;
 import wolforce.blocks.BlockPrecisionGrinderEmpty;
 import wolforce.items.ItemGrindingWheel;
+import wolforce.recipes.RecipeGrinder;
 
 public class TilePrecisionGrinder extends TileEntity implements ITickable {
 
@@ -58,7 +57,7 @@ public class TilePrecisionGrinder extends TileEntity implements ITickable {
 		IBlockState block = world.getBlockState(pos);
 		if (!(block.getBlock() instanceof BlockPrecisionGrinder))
 			return;
-		EnumFacing facing = block.getValue(BlockHeatFurnace.FACING);
+		EnumFacing facing = block.getValue(BlockPrecisionGrinder.FACING);
 
 		List<EntityItem> entities = world.getEntitiesWithinAABB(EntityItem.class, //
 				new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1.5, pos.getZ() + 1));
