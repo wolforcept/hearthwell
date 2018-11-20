@@ -11,4 +11,5 @@
 !/gradle.properties
 !.gitattributes
 !ASSETS_LICENSE.txt
-!/web/
+!/docs/
+!index.html
