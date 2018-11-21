@@ -35,11 +35,12 @@ public class RecipeCrushing {
 				new RecipeCrushing(Main.crystal, 3, .05), new RecipeCrushing(Main.crystal, 7, .05) //
 		);
 		putRecipe(new ItemStack(Main.crystal), null, // <- this null means that only one of the recipes will output
-				new RecipeCrushing(Main.shard_ca, 1, .20), //
-				new RecipeCrushing(Main.shard_c, 1, .20), //
-				new RecipeCrushing(Main.shard_h, 1, .20), //
-				new RecipeCrushing(Main.shard_fe, 1, .15), //
-				new RecipeCrushing(Main.shard_o, 1, .15), //
+				new RecipeCrushing(Main.shard_ca, 1, .18), //
+				new RecipeCrushing(Main.shard_c, 1, .18), //
+				new RecipeCrushing(Main.shard_h, 1, .18), //
+				new RecipeCrushing(Main.shard_o, 1, .12), //
+				new RecipeCrushing(Main.shard_fe, 1, .12), //
+				new RecipeCrushing(Main.shard_n, 1, .12), //
 				new RecipeCrushing(Main.shard_p, 1, .05), //
 				new RecipeCrushing(Main.shard_au, 1, .05) //
 		);
@@ -47,10 +48,11 @@ public class RecipeCrushing {
 				new RecipeCrushing(Main.shard_ca, 1, .14), //
 				new RecipeCrushing(Main.shard_c, 1, .14), //
 				new RecipeCrushing(Main.shard_h, 1, .14), //
-				new RecipeCrushing(Main.shard_fe, 1, .14), //
 				new RecipeCrushing(Main.shard_o, 1, .14), //
-				new RecipeCrushing(Main.shard_p, 1, .16), //
-				new RecipeCrushing(Main.shard_au, 1, .14) //
+				new RecipeCrushing(Main.shard_fe, 1, .11), //
+				new RecipeCrushing(Main.shard_p, 1, .11), //
+				new RecipeCrushing(Main.shard_n, 1, .11), //
+				new RecipeCrushing(Main.shard_au, 1, .11) //
 		);
 	}
 

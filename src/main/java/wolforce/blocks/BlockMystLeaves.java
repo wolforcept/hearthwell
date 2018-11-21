@@ -56,13 +56,13 @@ public class BlockMystLeaves extends MyBlock implements IShearable {
 
 	@Override
 	public int quantityDropped(IBlockState state, int fortune, Random random) {
-		return random.nextInt(10) < 1 ? 1 : 0;
+		return 0;// random.nextInt(10) < 1 ? 1 : 0;
 	}
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return Main.getRandomCrystal(rand);
-	}
+	// @Override
+	// public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+	// return Main.getRandomCrystal(rand);
+	// }
 
 	@Override
 	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {

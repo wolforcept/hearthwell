@@ -9,6 +9,6 @@
 	"B": [{ "item": "hwell:shard_p" }]
   },
   "result": {
-    "item": "hwell:scorch_grit"
+    "item": "hwell:scorch_grit", "count": 8
   }
 }

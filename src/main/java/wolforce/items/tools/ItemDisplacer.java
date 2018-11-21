@@ -1,4 +1,4 @@
-package wolforce.items;
+package wolforce.items.tools;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
@@ -20,13 +20,19 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import scala.collection.parallel.ParIterableLike.Drop;
 import wolforce.Main;
 import wolforce.MyItem;
+import wolforce.Util;
 
-public class ItemObsidianDisplacer extends MyItem {
+public class ItemDisplacer extends MyItem {
 
-	public ItemObsidianDisplacer(String name, String... lore) {
+	private boolean onlyObsidian;
+
+	public ItemDisplacer(String name, boolean onlyObsidian, String... lore) {
 		super(name, lore);
+		this.onlyObsidian = onlyObsidian;
+		setMaxStackSize(1);
 	}
 
 	@Override
@@ -52,7 +58,7 @@ public class ItemObsidianDisplacer extends MyItem {
 			return new ActionResult<>(EnumActionResult.FAIL, stack);
 
 		Block block = world.getBlockState(pos).getBlock();
-		if (block == Blocks.OBSIDIAN) {
+		if (canDisplace(world, player, pos)) {
 
 			player.setActiveHand(hand);
 			return new ActionResult<>(EnumActionResult.SUCCESS, stack);
@@ -77,14 +83,24 @@ public class ItemObsidianDisplacer extends MyItem {
 		if (!world.isBlockModifiable(player, pos))
 			return stack;
 
-		Block block = world.getBlockState(pos).getBlock();
-		if (block == Blocks.OBSIDIAN) {
+		IBlockState state = world.getBlockState(pos);
+		if (canDisplace(world, player, pos)) {
 
 			player.playSound(SoundEvents.BLOCK_LAVA_POP, 1f, 1f);
-			world.destroyBlock(pos, true);
-			player.getFoodStats().addExhaustion(3);
+
+			world.destroyBlock(pos, false);
+			ItemStack drop = new ItemStack(state.getBlock(), state.getBlock().getMetaFromState(state));
+			Util.spawnItem(world, pos, drop);
+
+			player.getFoodStats().addExhaustion(-5);
 		}
 		return stack;
+	}
+
+	private boolean canDisplace(World world, EntityPlayer player, BlockPos pos) {
+		IBlockState state = world.getBlockState(pos);
+		return state.getBlock().equals(Blocks.OBSIDIAN)
+				|| (!onlyObsidian && state.getBlock().canSilkHarvest(world, pos, world.getBlockState(pos), player));
 	}
 
 }

@@ -9,6 +9,6 @@
 	"B": [{ "item": "hwell:shard_n" }]
   },
   "result": {
-    "item": "hwell:fullgrass_block"
+    "item": "hwell:fullgrass_block", "count": 8
   }
 }

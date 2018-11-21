@@ -9,6 +9,6 @@
 	"B": [{ "item": "hwell:shard_o" }]
   },
   "result": {
-    "item": "hwell:azurite_block"
+    "item": "hwell:azurite_block", "count": 8
   }
 }

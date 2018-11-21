@@ -5,7 +5,7 @@
     "ACA",
     "AAA"  ],
   "key": {
-    "A": [{ "item": "minecraft:stone", "data": 0 }],
+    "A": [{ "item": "minecraft:cobblestone", "data": 0 }],
     "C": [{ "item": "hwell:shard_c" }]
   },
   "result": { "item": "hwell:onyx_block", "count": 8 }

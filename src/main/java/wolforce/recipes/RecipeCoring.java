@@ -44,41 +44,42 @@ public class RecipeCoring {
 
 		putRecipe(stone, core_c, COAL_BLOCK, LOG, LOG2);
 		putRecipe(stone, core_fe, IRON_BLOCK, COBBLESTONE, STONE, SANDSTONE);
-		putRecipe(stone, core_au, GOLD_BLOCK, IRON_BLOCK, IRON_ORE);
-		putRecipe(stone, core_h, AIR, AIR); // TODO
+		putRecipe(stone, core_au, GOLD_BLOCK, IRON_BLOCK);
+		putRecipe(stone, core_h, SOUL_SAND, QUARTZ_BLOCK); // TODO
 		putRecipe(stone, core_o, new Iri(Main.compressed_clay), new Iri(WATER), new Iri(FLOWING_WATER, 15));
 		putRecipe(stone, core_ca, BONE_BLOCK, GLASS, GLASS_PANE, STAINED_GLASS, STAINED_GLASS_PANE);
 		putRecipe(stone, core_p, REDSTONE_BLOCK, NETHERRACK, MAGMA);
-		putRecipe(stone, core_n, AIR, AIR); // TODO
+		putRecipe(stone, core_n, AIR); // TODO
 
-		putRecipe(heat, core_c, TNT, NETHERRACK);
-		putRecipe(heat, core_fe, AIR, AIR); // TODO
-		putRecipe(heat, core_au, GLOWSTONE, GOLD_BLOCK, GOLD_ORE);
+		putRecipe(heat, core_c, TNT, HARDENED_CLAY, STAINED_HARDENED_CLAY);
+		putRecipe(heat, core_fe, AIR); // TODO
+		putRecipe(heat, core_au, GLOWSTONE, GOLD_BLOCK);
 		putRecipe(heat, core_h, NETHERRACK, COAL_BLOCK);
 		putRecipe(heat, core_o, SEA_LANTERN, SNOW, ICE, PACKED_ICE);
-		putRecipe(heat, core_ca, QUARTZ_BLOCK, IRON_BLOCK);
+		putRecipe(heat, core_ca, QUARTZ_BLOCK, SNOW);
 		putRecipe(heat, core_p, MAGMA, NETHERRACK);
-		putRecipe(heat, core_n, Main.compressed_clay, WATER, ICE, PACKED_ICE, SNOW, DIRT);
+		putRecipe(heat, core_n, EMERALD_BLOCK, DIAMOND_BLOCK);
 
 		putRecipe(green, core_c, MYCELIUM, RED_MUSHROOM, BROWN_MUSHROOM);
-		putRecipe(green, core_fe, GLASS, BONE_BLOCK);
-		putRecipe(green, core_au, COBBLESTONE, COAL_BLOCK);
-		putRecipe(green, core_h, IRON_BLOCK, GOLD_BLOCK);
-		putRecipe(green, core_o, WATER, Main.compressed_clay);
-		putRecipe(green, core_ca, Main.compressed_clay, DIRT);
+		putRecipe(green, core_fe, MELON_BLOCK, TNT);
+		putRecipe(green, core_au, PUMPKIN, MELON_BLOCK);
+		putRecipe(green, core_h, AIR); // TODO
+		putRecipe(green, core_o, LAPIS_BLOCK, PRISMARINE);
+		putRecipe(green, core_ca, AIR);
 		// SPECIAL CASE
-		putRecipe(green, core_n, Main.compressed_clay, WATER, ICE, PACKED_ICE, SNOW, DIRT);
+		putRecipe(green, core_p, Main.compressed_clay, WATER, ICE, PACKED_ICE, SNOW, DIRT);
+		putRecipe(green, core_n, PRISMARINE, QUARTZ_BLOCK);
 
 		Iri podzol = new Iri(DIRT,
 				DIRT.getMetaFromState(DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.PODZOL)));
 		putRecipe(senti, core_c, podzol, MYCELIUM);
-		putRecipe(senti, core_fe, GLASS, BONE_BLOCK);
-		putRecipe(senti, core_au, COBBLESTONE, COAL_BLOCK);
-		putRecipe(senti, core_h, IRON_BLOCK, GOLD_BLOCK);
-		putRecipe(senti, core_o, WATER, Main.compressed_clay);
-		putRecipe(senti, core_ca, Main.compressed_clay, WATER, ICE, PACKED_ICE, SNOW, DIRT);
-		putRecipe(senti, core_p, Main.compressed_clay, WATER, ICE, PACKED_ICE, SNOW, DIRT);
-		putRecipe(senti, core_n, Main.compressed_clay, WATER, ICE, PACKED_ICE, SNOW, DIRT);
+		putRecipe(senti, core_fe, AIR); // TODO
+		putRecipe(senti, core_au, END_STONE, GLOWSTONE);
+		putRecipe(senti, core_h, PURPUR_BLOCK, END_STONE);
+		putRecipe(senti, core_o, DIAMOND_BLOCK, REDSTONE_BLOCK);
+		putRecipe(senti, core_ca, AIR); // TODO
+		putRecipe(senti, core_p, AIR/*Main.leather_block*/, BROWN_MUSHROOM_BLOCK, RED_MUSHROOM_BLOCK);
+		putRecipe(senti, core_n, AIR/*Blocks.endblock*/, END_STONE);
 	}
 
 	private static void putRecipe(Block coreBlock, CoreType coreType, Iri result, Iri... consumes) {

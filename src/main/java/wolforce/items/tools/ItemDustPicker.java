@@ -1,4 +1,4 @@
-package wolforce.items;
+package wolforce.items.tools;
 
 import java.util.HashSet;
 import java.util.Set;

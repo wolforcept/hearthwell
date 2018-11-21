@@ -28,7 +28,7 @@ import wolforce.Main;
 import wolforce.MyBlock;
 import wolforce.Util;
 import wolforce.blocks.BlockCore.CoreType;
-import wolforce.items.ItemDustPicker;
+import wolforce.items.tools.ItemDustPicker;
 import wolforce.tile.TileCore;
 
 public class BlockLightCollector extends MyBlock {
@@ -47,7 +47,8 @@ public class BlockLightCollector extends MyBlock {
 	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
 		if (worldIn.isDaytime() && worldIn.canBlockSeeSky(pos.up())) {
 			int curr = state.getValue(CHARGE);
-			worldIn.setBlockState(pos, getDefaultState().withProperty(CHARGE, curr == 3 ? 0 : curr + 1));
+			if (curr < 3)
+				worldIn.setBlockState(pos, getDefaultState().withProperty(CHARGE, curr + 1));
 		}
 	}
 
