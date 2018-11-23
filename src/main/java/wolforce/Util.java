@@ -182,8 +182,8 @@ public class Util {
 		if (!isCorrect) {
 			// ----------------------------------
 			if (tableEntry.meta != -1)
-				world.setBlockState(realPos.subtract(thispos),
-						tableEntry.block.getStateFromMeta(tableEntry.inverse ? (tableEntry.meta != 0 ? 0 : tableEntry.meta) : tableEntry.meta), 2);
+				world.setBlockState(realPos.subtract(thispos), tableEntry.block
+						.getStateFromMeta(tableEntry.inverse ? (tableEntry.meta != 0 ? 0 : tableEntry.meta) : tableEntry.meta), 2);
 			else
 				world.setBlockState(realPos.subtract(thispos), tableEntry.block.getDefaultState(), 2);
 			return true;
@@ -247,11 +247,12 @@ public class Util {
 
 	// RENDERING HELPERS
 
-	public static void simpleRenderItem(World world, ItemStack item, double x, double y, double z) {
+	public static void simpleRenderItem(World world, ItemStack item, double x, double y, double z, boolean rotating) {
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(x + 0.5F, y + 1.225F, z + 0.5F);
 
-		GlStateManager.rotate((Minecraft.getSystemTime() / 720.0F) * (180.0F / (float) Math.PI), 0.0F, 1.0F, 0.0F);
+		if (rotating)
+			GlStateManager.rotate((Minecraft.getSystemTime() / 720.0F) * (180.0F / (float) Math.PI), 0.0F, 1.0F, 0.0F);
 		GlStateManager.scale(0.5F, 0.5F, 0.5F);
 		GlStateManager.pushAttrib();
 
@@ -263,7 +264,8 @@ public class Util {
 
 	static float i = 0;
 
-	public static void renderItem(double temp, double temp2, World world, ItemStack item, double x, double y, double z, double... ins) {
+	public static void renderItem(double debug1, double debug2, //
+			World world, ItemStack item, double x, double y, double z, double... ins) {
 
 		boolean flag1 = ins.length >= 3;
 		boolean flag2 = ins.length >= 6;
@@ -282,9 +284,7 @@ public class Util {
 		GlStateManager.rotate(rz, 0, 0, 1);
 		GlStateManager.scale(.5f * sx, .5f * sy, .5f * sz);
 		GlStateManager.pushAttrib();
-
 		Minecraft.getMinecraft().getRenderItem().renderItem(item, ItemCameraTransforms.TransformType.FIXED);
-
 		GlStateManager.popAttrib();
 		GlStateManager.popMatrix();
 
@@ -318,7 +318,7 @@ public class Util {
 		return 0;
 	}
 
-	public static boolean canRenderTESR(TileSeparator te) {
+	public static boolean canRenderTESR(TileEntity te) {
 		if (te == null)
 			return false;
 		World world = te.getWorld();

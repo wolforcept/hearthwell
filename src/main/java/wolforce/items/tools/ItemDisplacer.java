@@ -27,11 +27,11 @@ import wolforce.Util;
 
 public class ItemDisplacer extends MyItem {
 
-	private boolean onlyObsidian;
+	private boolean powered;
 
-	public ItemDisplacer(String name, boolean onlyObsidian, String... lore) {
+	public ItemDisplacer(String name, boolean powered, String... lore) {
 		super(name, lore);
-		this.onlyObsidian = onlyObsidian;
+		this.powered = powered;
 		setMaxStackSize(1);
 	}
 
@@ -89,9 +89,11 @@ public class ItemDisplacer extends MyItem {
 			player.playSound(SoundEvents.BLOCK_LAVA_POP, 1f, 1f);
 
 			world.destroyBlock(pos, false);
-			ItemStack drop = new ItemStack(state.getBlock(), state.getBlock().getMetaFromState(state));
-			Util.spawnItem(world, pos, drop);
-
+			if (!world.isRemote) {
+				ItemStack drop = new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state));
+				Util.spawnItem(world, pos, drop);
+			}
+			
 			player.getFoodStats().addExhaustion(-5);
 		}
 		return stack;
@@ -99,8 +101,12 @@ public class ItemDisplacer extends MyItem {
 
 	private boolean canDisplace(World world, EntityPlayer player, BlockPos pos) {
 		IBlockState state = world.getBlockState(pos);
-		return state.getBlock().equals(Blocks.OBSIDIAN)
-				|| (!onlyObsidian && state.getBlock().canSilkHarvest(world, pos, world.getBlockState(pos), player));
+		return state.getBlock().equals(Blocks.OBSIDIAN) || //
+				state.getBlock().equals(Blocks.GLASS) || //
+				state.getBlock().equals(Blocks.GLASS_PANE) || //
+				state.getBlock().equals(Blocks.STAINED_GLASS) || //
+				state.getBlock().equals(Blocks.STAINED_GLASS_PANE) || //
+				(powered && state.getBlock().canSilkHarvest(world, pos, world.getBlockState(pos), player));
 	}
 
 }

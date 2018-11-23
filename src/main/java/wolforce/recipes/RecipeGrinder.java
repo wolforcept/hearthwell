@@ -21,6 +21,8 @@ public class RecipeGrinder {
 		ItemGrindingWheel nether = Main.grinding_wheel_crystal_nether;
 
 		recipes = new HashMap<>();
+
+		// FLINT AND UP
 		put(new Iri(Blocks.STONE), new RecipeGrinder(new ItemStack(Blocks.GRAVEL, 1), flint, iron, diamond));
 		put(new Iri(Blocks.COBBLESTONE), new RecipeGrinder(new ItemStack(Blocks.GRAVEL, 1), flint, iron, diamond));
 		put(new Iri(Blocks.GRAVEL), new RecipeGrinder(new ItemStack(Blocks.SAND, 1), flint, iron, diamond));
@@ -32,8 +34,9 @@ public class RecipeGrinder {
 		put(new Iri(Blocks.LOG2, 1), new RecipeGrinder(new ItemStack(Blocks.PLANKS, 6, 5), flint, iron, diamond));
 		put(new Iri(Main.myst_log), new RecipeGrinder(new ItemStack(Main.myst_planks, 6), flint, iron, diamond));
 
-		// IRON AND DIAMOND ONLY
-		put(new Iri(Blocks.BONE_BLOCK), new RecipeGrinder(new ItemStack(Items.BONE, 2), iron, diamond));
+		// IRON AND UP
+		put(new Iri(Blocks.BONE_BLOCK), new RecipeGrinder(new ItemStack(Items.BONE, 1), iron, diamond));
+		put(new Iri(Blocks.MELON_BLOCK), new RecipeGrinder(new ItemStack(Items.MELON, 9), iron, diamond));
 
 		// DIAMOND ONLY
 		// iron stuff
@@ -94,7 +97,10 @@ public class RecipeGrinder {
 	//
 
 	public static ItemStack getResult(ItemGrindingWheel gwheel, ItemStack itemStack) {
-		RecipeGrinder result = recipes.get(new Iri(itemStack.getItem(), itemStack.getMetadata()));
+		RecipeGrinder result = recipes.get(new Iri(itemStack.getItem()));
+		if (result != null && Arrays.asList(result.levels).contains(gwheel))
+			return result.result;
+		result = recipes.get(new Iri(itemStack.getItem(), itemStack.getMetadata()));
 		if (result != null && Arrays.asList(result.levels).contains(gwheel))
 			return result.result;
 		return null;

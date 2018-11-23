@@ -32,6 +32,7 @@ import wolforce.blocks.BlockCore;
 import wolforce.blocks.BlockCore.CoreType;
 import wolforce.recipes.Iri;
 import wolforce.recipes.RecipeCoring;
+import wolforce.recipes.RecipeSeparator;
 
 public class TileCore extends TileEntity implements ITickable {
 
@@ -68,7 +69,7 @@ public class TileCore extends TileEntity implements ITickable {
 			IBlockState state = world.getBlockState(pos1);
 
 			// check if there is a block to consume at pos1
-			if (Arrays.asList(result.consumes).contains(new Iri(state))) {
+			if (hasResult(result, state)) {
 				// at this point the core will certainly charge
 				// (charges faster with more blocks surrounding it)
 				particlesandsounds(pos);
@@ -92,6 +93,14 @@ public class TileCore extends TileEntity implements ITickable {
 
 			}
 		}
+	}
+
+	private boolean hasResult(RecipeCoring result, IBlockState state) {
+		if (Arrays.asList(result.consumes).contains(new Iri(state.getBlock())))
+			return true;
+		if (Arrays.asList(result.consumes).contains(new Iri(state)))
+			return true;
+		return false;
 	}
 
 	@SideOnly(Side.CLIENT)

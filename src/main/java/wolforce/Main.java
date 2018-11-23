@@ -53,6 +53,7 @@ import wolforce.blocks.BlockBurstSeed;
 import wolforce.blocks.BlockCore;
 import wolforce.blocks.BlockCrushing;
 import wolforce.blocks.BlockDust;
+import wolforce.blocks.BlockFreezer;
 import wolforce.blocks.BlockGravity;
 import wolforce.blocks.BlockGroundShovel;
 import wolforce.blocks.BlockHeat;
@@ -62,6 +63,7 @@ import wolforce.blocks.BlockMyGlass;
 import wolforce.blocks.BlockMystBush;
 import wolforce.blocks.BlockMystGrass;
 import wolforce.blocks.BlockMystLeaves;
+import wolforce.blocks.BlockPickerHolder;
 import wolforce.blocks.BlockPickingTable;
 import wolforce.blocks.BlockPrecisionGrinder;
 import wolforce.blocks.BlockPrecisionGrinderEmpty;
@@ -87,9 +89,11 @@ import wolforce.recipes.RecipeCoring;
 import wolforce.recipes.RecipeCrushing;
 import wolforce.recipes.RecipeGrinder;
 import wolforce.recipes.RecipeSeparator;
+import wolforce.tesrs.TesrPickerHolder;
 import wolforce.tesrs.TesrSeparator;
 import wolforce.tile.TileCore;
 import wolforce.tile.TileGravity;
+import wolforce.tile.TilePickerHolder;
 import wolforce.tile.TileSeparator;
 
 @Mod(modid = Main.MODID, name = Main.NAME, version = Main.VERSION)
@@ -135,9 +139,10 @@ public class Main {
 	public static Block myst_log, myst_planks, myst_leaves;
 	public static Block light_collector;
 	public static BlockCore core_stone, core_heat, core_green, core_sentient;
-	public static Block picking_table;
+	public static Block picking_table, picker_holder;
 	public static Block compressed_clay, moonstone_block, moonstone_bricks, citrinic_stone, citrinic_sand, onyx_block,
 			smooth_onyx_block, azurite_block, smooth_azurite_block, scorch_grit, scorch_glass, fullgrass_block, metal_diamond_block;
+	public static Block freezer;
 
 	// tier 2
 	// public static Block coreGreen;
@@ -174,14 +179,14 @@ public class Main {
 	public static Block asul_block;
 	public static Block weeping_block;
 
-	static Item[] crystals;
+	public static Item[] shards;
 
-	public static void initCrystals() {
-		crystals = new Item[] { shard_ca, shard_c, shard_au, shard_fe, shard_o, shard_h };
+	public static void initShards() {
+		shards = new Item[] { shard_ca, shard_c, shard_au, shard_fe, shard_o, shard_h };
 	}
 
 	public static Item getRandomCrystal(Random rand) {
-		return crystals[rand.nextInt(crystals.length)];
+		return shards[rand.nextInt(shards.length)];
 	}
 
 	private HashMap<String, Class> tiles;
@@ -323,12 +328,16 @@ public class Main {
 				Material.SNOW, Blocks.SNOW, "shovel", SoundType.SNOW);
 		blocks.add(burst_seed_snow);
 		burst_seed_netherrack = new BlockBurstSeed("burst_seed_netherrack", //
-				Material.ROCK, Blocks.SNOW, "shovel", SoundType.STONE);
+				Material.ROCK, Blocks.NETHERRACK, "shovel", SoundType.STONE);
 		blocks.add(burst_seed_netherrack);
 
-		obsidian_displacer = new ItemDisplacer("obsidian_displacer", true, "Pops obsidian right off", "at the expense of some hunger");
-		empowered_displacer = new ItemDisplacer("empowered_displacer", false, "Pops everything right off!");
+		obsidian_displacer = new ItemDisplacer("obsidian_displacer", false, "Pops obsidian and glass right off",
+				"at the expense of some hunger");
 		items.add(obsidian_displacer);
+		empowered_displacer = new ItemDisplacer("empowered_displacer", true, "Pops almost everything right off!");
+		items.add(empowered_displacer);
+		freezer = new BlockFreezer("freezer");
+		blocks.add(freezer);
 
 		// TIER 2
 
@@ -453,6 +462,9 @@ public class Main {
 		separator = new BlockSeparator("separator");
 		blocks.add(separator);
 
+		picker_holder = new BlockPickerHolder("picker_holder");
+		blocks.add(picker_holder);
+
 		//
 
 		//
@@ -564,6 +576,7 @@ public class Main {
 	@EventHandler
 	public void registerTesrs(FMLPostInitializationEvent event) {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileSeparator.class, new TesrSeparator());
+		ClientRegistry.bindTileEntitySpecialRenderer(TilePickerHolder.class, new TesrPickerHolder());
 	}
 
 	//
@@ -611,7 +624,7 @@ public class Main {
 		RecipeSeparator.initRecipes();
 		RecipeCoring.initRecipes();
 		ItemMystDust.initRecipes();
-		initCrystals();
+		initShards();
 		MinecraftForge.EVENT_BUS.register(new HwellEventSubscriber());
 	}
 	/*

@@ -34,6 +34,10 @@ public class RecipeCrushing {
 				new RecipeCrushing(Main.crystal, 4, .20), new RecipeCrushing(Main.crystal, 6, .20), //
 				new RecipeCrushing(Main.crystal, 3, .05), new RecipeCrushing(Main.crystal, 7, .05) //
 		);
+		putRecipe(new ItemStack(Main.crystal_nether_block), null, new RecipeCrushing(Main.crystal_nether, 5, .50), //
+				new RecipeCrushing(Main.crystal_nether, 4, .20), new RecipeCrushing(Main.crystal_nether, 6, .20), //
+				new RecipeCrushing(Main.crystal_nether, 3, .05), new RecipeCrushing(Main.crystal_nether, 7, .05) //
+		);
 		putRecipe(new ItemStack(Main.crystal), null, // <- this null means that only one of the recipes will output
 				new RecipeCrushing(Main.shard_ca, 1, .18), //
 				new RecipeCrushing(Main.shard_c, 1, .18), //

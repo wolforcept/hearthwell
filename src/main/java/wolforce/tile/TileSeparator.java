@@ -35,21 +35,25 @@ public class TileSeparator extends TileEntity implements ITickable {
 
 	static final String[][][] multiblock = new String[][][] { //
 			{ //
-					{ null, "HB", "PB", "HB", null }, //
+					{ null, null, "L1", null, null }, //
+					{ null, "HB", "L1", "HB", null }, //
 					{ "L1", "L1", "L0", "L1", "L1" }, //
 					{ null, "HB", "PB", "HB", null }, //
 			}, //
 			{ //
-					{ null, "AR", "AR", "AR", null }, //
+					{ null, null, null, null, null }, //
+					{ null, "PB", "PB", "PB", null }, //
 					{ null, "HB", "PB", "HB", null }, //
 					{ null, "AR", "00", "AR", null }, //
 			}, //
 			{ //
 					{ null, null, null, null, null }, //
+					{ null, null, null, null, null }, //
 					{ null, "FT", "AR", "FT", null }, //
 					{ null, null, null, null, null }, //
 			}, //
 			{ //
+					{ null, null, null, null, null }, //
 					{ null, null, null, null, null }, //
 					{ null, "LC", "AR", "LC", null }, //
 					{ null, null, null, null, null }, //
@@ -75,7 +79,6 @@ public class TileSeparator extends TileEntity implements ITickable {
 		EnumFacing facing = block.getValue(BlockSeparator.FACING);
 
 		ItemStack[] result = RecipeSeparator.getResult(inventory.getStackInSlot(0));
-
 		if (!inventory.getStackInSlot(0).equals(ItemStack.EMPTY) && result != null) {
 			HashMap<String, BlockWithMeta> table = new HashMap<>();
 			table.put("PB", new BlockWithMeta(Main.heavy_protection_block));
@@ -104,6 +107,11 @@ public class TileSeparator extends TileEntity implements ITickable {
 
 		BlockPos rightPos = pos.offset(facing.rotateY()).offset(facing).offset(EnumFacing.DOWN);
 		Util.spawnItem(world, rightPos, result[1], 0, 0, 0);
+
+		if (!result[2].equals(ItemStack.EMPTY)) {
+			BlockPos backPos = pos.offset(facing).offset(facing).offset(EnumFacing.DOWN);
+			Util.spawnItem(world, backPos, result[2], 0, 0, 0);
+		}
 	}
 
 	private boolean chargeup() {
@@ -114,12 +122,12 @@ public class TileSeparator extends TileEntity implements ITickable {
 		}
 		return false;
 	}
-
+	
 	//
 
 	//
 
-	//
+	// HAS DATA TO SAVE
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {

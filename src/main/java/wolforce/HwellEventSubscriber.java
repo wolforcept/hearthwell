@@ -56,7 +56,7 @@ public class HwellEventSubscriber {
 		if (event.phase == TickEvent.Phase.END && event.player.world.isRemote)
 			motion(event.player);
 	}
-
+	
 	@SubscribeEvent // (priority = EventPriority.NORMAL, receiveCanceled = true)
 	public void onEvent(WorldTickEvent event) {
 		if (event.phase == TickEvent.Phase.START)
@@ -79,6 +79,13 @@ public class HwellEventSubscriber {
 		}
 	}
 
+	
+	//
+	
+	//
+	
+	//
+	
 	private void motion(EntityPlayer player) {
 		if (isInsideLiquidSouls(player))
 			player.motionY = .05;

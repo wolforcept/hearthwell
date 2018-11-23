@@ -16,12 +16,12 @@ public class Iri {
 	 */
 	public Iri(Item _item) {
 		item = _item;
-		meta = 0;
+		meta = -1;
 	}
 
 	public Iri(Block _block) {
 		item = Item.getItemFromBlock(_block);
-		meta = 0;
+		meta = -1;
 	}
 
 	public Iri(Item _item, int _meta) {
@@ -40,11 +40,15 @@ public class Iri {
 
 	@Override
 	public boolean equals(Object obj) {
-		return item == ((Iri) obj).item && meta == ((Iri) obj).meta;
+		if (obj == null || !(obj instanceof Iri))
+			return false;
+		return item == ((Iri) obj).item && (meta == -1 || ((Iri) obj).meta == -1 || meta == ((Iri) obj).meta);
 	}
 
 	@Override
 	public int hashCode() {
+		if (meta == -1)
+			return item.hashCode();
 		return (item.hashCode() + "" + meta).hashCode();
 	}
 

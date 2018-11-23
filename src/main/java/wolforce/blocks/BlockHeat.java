@@ -30,7 +30,19 @@ public class BlockHeat extends Block {
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setHardness(2);
+		setResistance(.5f);
 		setHarvestLevel("pickaxe", -1);
+	}
+
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand,
+			EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (playerIn.getHeldItem(hand).getItem().equals(Items.FLINT_AND_STEEL)) {
+			worldIn.createExplosion(playerIn, pos.getX(), pos.getY(), pos.getZ(), 1, true);
+			playerIn.getHeldItem(hand).damageItem(1, playerIn);
+			return true;
+		}
+		return false;
 	}
 
 	@Override

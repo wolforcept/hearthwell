@@ -19,6 +19,7 @@ item.shard_p.name=Shard of the Morning Star
 item.shard_ca.name=Shard of the Born Might
 item.shard_n.name=Shard of the Pure Giver
 item.obsidian_displacer.name=Obsidian Displacer
+item.empowered_displacer.name=Empowered Displacer
 item.grinding_wheel_flint.name=Flint Grinding Wheel
 item.grinding_wheel_iron.name=Iron Grinding Wheel
 item.grinding_wheel_diamond.name=Diamond Grinding Wheel
@@ -82,6 +83,7 @@ tile.precision_grinder_crystal.name=Precision Grinder (Crystal Grinding Wheel)
 tile.precision_grinder_crystal_nether.name=Precision Grinder (Nether Crystal Grinding Wheel)
 tile.precision_grinder_empty.name=Precision Grinder
 tile.picking_table.name=Shard Picking Table
+tile.picker_holder.name=Dust Picker Holder
 tile.separator.name=Separator
 
 tile.light_collector.name=Light Collector

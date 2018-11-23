@@ -21,24 +21,13 @@ import static net.minecraft.util.EnumFacing.*;
 
 import net.minecraft.block.Block;
 
-public class TesrSeparator extends TileEntitySpecialRenderer<TileSeparator> {
+public class TesrDisplayStand extends TileEntitySpecialRenderer<TileSeparator> { // TODO
 
 	@Override
 	public void render(TileSeparator te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
 		IItemHandler itemh = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
 		ItemStack stack = itemh.getStackInSlot(0);
-
-		double i = Util.getNrForDebugFromHand(te.getWorld(), x, y, z);
-		// double j = -.0625 * Util.getNrForDebugFromHand2(te.getWorld(), x, y, z);
-
-		if (stack != null && Util.canRenderTESR(te)) {
-			EnumFacing facing = te.getWorld().getBlockState(te.getPos()).getValue(BlockSeparator.FACING);
-			double d = .25;
-			double dx = facing == EnumFacing.WEST ? d : (facing == EnumFacing.EAST ? -d : 0);
-			double dz = facing == EnumFacing.NORTH ? d : (facing == EnumFacing.SOUTH ? -d : 0);
-			double ryy = facing == NORTH ? 180 : facing == SOUTH ? 0 : facing == WEST ? 90 : 270;
-			double sy = Block.getBlockFromItem(stack.getItem()).equals(Blocks.AIR) ? 1 : .125;
-			Util.renderItem(i, 0, te.getWorld(), stack, x + dx, y + .125, z + dz, 90, 0, ryy, 1, 1, sy);
-		}
+		if (stack != null && Util.canRenderTESR(te))
+			Util.simpleRenderItem(te.getWorld(), stack, x, y, z, true);
 	}
 }

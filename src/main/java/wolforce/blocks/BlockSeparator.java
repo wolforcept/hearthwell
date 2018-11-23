@@ -109,7 +109,8 @@ public class BlockSeparator extends Block implements ITileEntityProvider {
 
 	//
 
-	//
+	// BLOCK VISUALS
+	
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
 			EntityLivingBase placer) {
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
@@ -130,11 +131,6 @@ public class BlockSeparator extends Block implements ITileEntityProvider {
 		return false;
 	}
 
-	@Override
-	public boolean isTranslucent(IBlockState state) {
-		return true;
-	}
-
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return aabb;
 	}
@@ -142,12 +138,6 @@ public class BlockSeparator extends Block implements ITileEntityProvider {
 	@Nullable
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
 		return aabb;
-	}
-
-	@Override
-	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
-		return this == Main.precision_grinder_crystal || this == Main.precision_grinder_crystal_nether ? //
-				layer == BlockRenderLayer.TRANSLUCENT : super.canRenderInLayer(state, layer);
 	}
 
 	@Override

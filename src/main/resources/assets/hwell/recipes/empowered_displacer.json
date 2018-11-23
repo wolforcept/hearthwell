@@ -1,0 +1,14 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A ",
+	" B" ],
+  "key": {
+    "A": [{ "item": "minecraft:diamond" }],
+	"B": [{ "item": "hwell:obsidian_displacer" }],
+	"B": [{ "item": "hwell:soulsteel_ingot" }]
+  },
+  "result": {
+    "item": "hwell:empowered_displacer"
+  }
+}
