@@ -1,13 +1,12 @@
 package wolforce;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,9 +16,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import wolforce.tile.TileSeparator;
+import wolforce.blocks.simplevariants.MySlab;
+import wolforce.blocks.simplevariants.MyStairs;
 
 public class Util {
 
@@ -95,6 +94,28 @@ public class Util {
 	// - .1);
 	// }
 	// }
+
+	static LinkedList<Block> makeVariants(Block... blocks) {
+		LinkedList<Block> variants = new LinkedList<>();
+		for (Block block : blocks) {
+
+			MySlab slab = new MySlab(block);
+			variants.add(slab);
+
+			MyStairs stairs = new MyStairs(block);
+			variants.add(stairs);
+
+			MyBlock brick = new MyBlock(block.getRegistryName().getResourcePath() + "_bricks", block.getDefaultState().getMaterial());
+			variants.add(brick);
+
+			MySlab brickslab = new MySlab(brick);
+			variants.add(brickslab);
+
+			MyStairs brickstairs = new MyStairs(brick);
+			variants.add(brickstairs);
+		}
+		return variants;
+	}
 
 	public static ResourceLocation res(String string) {
 		return new ResourceLocation(Main.MODID, string);

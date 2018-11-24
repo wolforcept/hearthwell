@@ -1,0 +1,4 @@
+{
+    "parent": "block/outer_stairs",
+    "textures": { "bottom": "hwell:blocks/onyx_brick_brick", "top": "hwell:blocks/onyx_brick_brick", "side": "hwell:blocks/onyx_brick_brick" }
+}

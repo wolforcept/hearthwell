@@ -1,23 +1,8 @@
 {
-    "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
+    "parent": "hwell:block/slab_base_side",
     "textures": {
         "particle": "hwell:blocks/slab_lamp_side",
         "0": "hwell:blocks/slab_lamp_end",
         "1": "hwell:blocks/slab_lamp_side"
-    },
-    "elements": [
-        {
-            "name": "Cube",
-            "from": [ 0.0, 0.0, 0.0 ], 
-            "to": [ 16.0, 16.0, 8.0 ], 
-            "faces": {
-                "north": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
-                "east": { "texture": "#1", "uv": [ 0.0, 0.0, 16.0, 8.0 ], "rotation": 90 },
-                "south": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
-                "west": { "texture": "#1", "uv": [ 0.0, 0.0, 16.0, 8.0 ], "rotation": 90 },
-                "up": { "texture": "#1", "uv": [ 0.0, 0.0, 16.0, 8.0 ] },
-                "down": { "texture": "#1", "uv": [ 0.0, 0.0, 16.0, 8.0 ] }
-            }
-        }
-    ]
+    }
 }

@@ -1,0 +1,4 @@
+{
+    "parent": "block/outer_stairs",
+    "textures": { "bottom": "hwell:blocks/moonstone_bricks", "top": "hwell:blocks/moonstone_bricks", "side": "hwell:blocks/moonstone_bricks" }
+}

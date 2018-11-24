@@ -1,6 +1,7 @@
 package wolforce;
 
 import java.awt.Color;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -13,11 +14,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockHalfStoneSlab;
+import net.minecraft.block.BlockSlab;
+import net.minecraft.block.BlockStoneSlabNew;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialLiquid;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -140,8 +145,8 @@ public class Main {
 	public static Block light_collector;
 	public static BlockCore core_stone, core_heat, core_green, core_sentient;
 	public static Block picking_table, picker_holder;
-	public static Block compressed_clay, moonstone_block, moonstone_bricks, citrinic_stone, citrinic_sand, onyx_block,
-			smooth_onyx_block, azurite_block, smooth_azurite_block, scorch_grit, scorch_glass, fullgrass_block, metal_diamond_block;
+	public static Block compressed_clay, white_block, moonstone, moonstone_bricks, citrinic_stone, citrinic_sand, onyx, smooth_onyx,
+			azurite, smooth_azurite, scorch_grit, scorch_glass, fullgrass_block, metal_diamond_block;
 	public static Block freezer;
 
 	// tier 2
@@ -292,22 +297,33 @@ public class Main {
 		compressed_clay = new MyBlock("compressed_clay", Material.CLAY).setHardness(2).setResistance(2);
 		blocks.add(compressed_clay);
 
-		citrinic_stone = new MyBlock("citrinic_stone", Material.ROCK).setHardness(2).setResistance(2);
+		citrinic_stone = new MyBlock("citrinic_stone", Material.ROCK)//
+				.setHarvest("pickaxe", 0).setHardness(1).setResistance(10);
 		blocks.add(citrinic_stone);
-		citrinic_sand = new MyBlock("citrinic_sand", Material.SAND).setHardness(2).setResistance(2);
+		citrinic_sand = new MyBlock("citrinic_sand", Material.SAND)//
+				.setHarvest("pickaxe", 0).setHardness(1).setResistance(10);
 		blocks.add(citrinic_sand);
-		azurite_block = new MyBlock("azurite_block", Material.ROCK).setHardness(2).setResistance(2);
-		blocks.add(azurite_block);
-		smooth_azurite_block = new MyBlock("smooth_azurite_block", Material.ROCK).setHardness(2).setResistance(2);
-		blocks.add(smooth_azurite_block);
-		moonstone_block = new MyBlock("moonstone_block", Material.ROCK).setHardness(2).setResistance(2);
-		blocks.add(moonstone_block);
-		moonstone_bricks = new MyBlock("moonstone_bricks", Material.ROCK).setHardness(2).setResistance(2);
-		blocks.add(moonstone_bricks);
-		onyx_block = new MyBlock("onyx_block", Material.ROCK).setHardness(2).setResistance(2);
-		blocks.add(onyx_block);
-		smooth_onyx_block = new MyBlock("smooth_onyx_block", Material.ROCK).setHardness(2).setResistance(2);
-		blocks.add(smooth_onyx_block);
+		azurite = new MyBlock("azurite", Material.ROCK)//
+				.setHarvest("pickaxe", 0).setHardness(1).setResistance(10);
+		blocks.add(azurite);
+		smooth_azurite = new MyBlock("smooth_azurite", Material.ROCK)//
+				.setHarvest("pickaxe", 0).setHardness(1).setResistance(10);
+		blocks.add(smooth_azurite);
+
+		moonstone = new MyBlock("moonstone", Material.ROCK)//
+				.setHarvest("pickaxe", 0).setHardness(1).setResistance(10);
+		blocks.add(moonstone);
+		onyx = new MyBlock("onyx", Material.ROCK)//
+				.setHarvest("pickaxe", 0).setHardness(1).setResistance(10);
+		blocks.add(onyx);
+		smooth_onyx = new MyBlock("smooth_onyx", Material.ROCK)//
+				.setHarvest("pickaxe", 0).setHardness(1).setResistance(10);
+		blocks.add(smooth_onyx);
+		blocks.addAll(Util.makeVariants(citrinic_stone, citrinic_sand, azurite, smooth_azurite, moonstone, onyx, smooth_onyx));
+
+		white_block = new MyBlock("white_block", Material.ROCK)//
+				.setHarvest("pickaxe", 0).setHardness(.1f).setResistance(10);
+		blocks.add(white_block);
 		scorch_grit = new BlockGroundShovel("scorch_grit");
 		blocks.add(scorch_grit);
 		fullgrass_block = new BlockGroundShovel("fullgrass_block");
@@ -563,8 +579,8 @@ public class Main {
 		GameRegistry.addSmelting(leaf_mesh, new ItemStack(crystal_block, 1), .5f);
 		GameRegistry.addSmelting(compressed_clay, new ItemStack(Blocks.HARDENED_CLAY, 9), 0f);
 		GameRegistry.addSmelting(scorch_grit, new ItemStack(scorch_glass), 0f);
-		GameRegistry.addSmelting(azurite_block, new ItemStack(smooth_azurite_block), 0f);
-		GameRegistry.addSmelting(onyx_block, new ItemStack(smooth_onyx_block), 0f);
+		GameRegistry.addSmelting(azurite, new ItemStack(smooth_azurite), 0f);
+		GameRegistry.addSmelting(onyx, new ItemStack(smooth_onyx), 0f);
 		GameRegistry.addSmelting(raw_soulsteel, new ItemStack(soulsteel_ingot, 2), 1f);
 
 		OreDictionary.registerOre("logWood", myst_log);

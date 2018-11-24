@@ -1,5 +1,4 @@
 SET /p name="Block Name: "
-@echo off
 
 @echo {>blockstates/%name%.json
 @echo     "variants": {>>blockstates/%name%.json

@@ -1,0 +1,8 @@
+{ "variants": {														 
+    "facing=north": { "model": "hwell:smooth_onyx_slab_side", "y": 180 },
+    "facing=south": { "model": "hwell:smooth_onyx_slab_side" },
+    "facing=west":  { "model": "hwell:smooth_onyx_slab_side", "y": 90 },
+    "facing=east":  { "model": "hwell:smooth_onyx_slab_side", "y": 270 },
+    "facing=up":  { "model": "hwell:smooth_onyx_slab" },
+    "facing=down":  { "model": "hwell:smooth_onyx_slab", "x": 180 }
+} }

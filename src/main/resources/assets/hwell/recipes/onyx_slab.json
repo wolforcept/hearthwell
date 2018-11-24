@@ -1,0 +1,4 @@
+{ "type": "minecraft:crafting_shaped",
+  "pattern": [ "AAA" ],
+  "key": { "A": [{"item": "hwell:onyx"}] },
+  "result": { "item": "hwell:onyx_slab", "count": 6 }}

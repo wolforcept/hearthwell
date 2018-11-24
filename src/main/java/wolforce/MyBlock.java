@@ -15,15 +15,9 @@ public class MyBlock extends Block {
 
 	public MyBlock(String name, Material mat, boolean tickRandomly) {
 		super(mat);
-
 		setUnlocalizedName(name);
 		setRegistryName(name);
-
-		// setResistance(2f);
-		// setHardness(.2f);
-		// setLightLevel(1.0f);
 		setTickRandomly(tickRandomly);
-
 	}
 
 	/**

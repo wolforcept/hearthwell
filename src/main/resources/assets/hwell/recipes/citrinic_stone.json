@@ -6,7 +6,7 @@
     "AAA" ],
   "key": {
     "A": [{ "item": "minecraft:stone", "data": 0 }],
-	"B": [{ "item": "hwell:shard_au" }]
+	"B": [{ "item": "hwell:shard_fe" }]
   },
   "result": {
     "item": "hwell:citrinic_stone", "count": 8

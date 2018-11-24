@@ -131,10 +131,6 @@ public class BlockSeparator extends Block implements ITileEntityProvider {
 		return false;
 	}
 
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return aabb;
-	}
-
 	@Nullable
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
 		return aabb;
