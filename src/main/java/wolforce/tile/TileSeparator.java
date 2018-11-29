@@ -26,7 +26,7 @@ import wolforce.Util;
 import wolforce.Util.BlockWithMeta;
 import wolforce.blocks.BlockLightCollector;
 import wolforce.blocks.BlockSeparator;
-import wolforce.recipes.RecipeGrinder;
+import wolforce.recipes.RecipeGrinding;
 import wolforce.recipes.RecipeSeparator;
 
 public class TileSeparator extends TileEntity implements ITickable {

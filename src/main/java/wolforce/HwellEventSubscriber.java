@@ -3,8 +3,12 @@ package wolforce;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,7 +16,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.DimensionType;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.biome.BiomeColorHelper;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -23,6 +31,17 @@ import wolforce.fluids.BlockLiquidSouls;
 
 @Mod.EventBusSubscriber
 public class HwellEventSubscriber {
+
+	@SubscribeEvent
+	public static void registerColors(ColorHandlerEvent.Block event) {
+		IBlockColor grassBlockColor = new IBlockColor() {
+			public int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) {
+				return worldIn != null && pos != null ? BiomeColorHelper.getGrassColorAtPos(worldIn, pos)
+						: ColorizerGrass.getGrassColor(0.5D, 1.0D);
+			}
+		};
+		event.getBlockColors().registerBlockColorHandler(grassBlockColor, Main.fullgrass_block);
+	}
 
 	@SubscribeEvent
 	public static void makeCrystalPassPortals(EntityTravelToDimensionEvent event) {
@@ -56,7 +75,7 @@ public class HwellEventSubscriber {
 		if (event.phase == TickEvent.Phase.END && event.player.world.isRemote)
 			motion(event.player);
 	}
-	
+
 	@SubscribeEvent // (priority = EventPriority.NORMAL, receiveCanceled = true)
 	public void onEvent(WorldTickEvent event) {
 		if (event.phase == TickEvent.Phase.START)
@@ -79,13 +98,12 @@ public class HwellEventSubscriber {
 		}
 	}
 
-	
 	//
-	
+
 	//
-	
+
 	//
-	
+
 	private void motion(EntityPlayer player) {
 		if (isInsideLiquidSouls(player))
 			player.motionY = .05;

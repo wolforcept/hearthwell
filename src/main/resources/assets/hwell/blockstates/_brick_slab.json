@@ -1,8 +1,0 @@
-{ "variants": {														 
-    "facing=north": { "model": "hwell:_brick_slab_side", "y": 180 },
-    "facing=south": { "model": "hwell:_brick_slab_side" },
-    "facing=west":  { "model": "hwell:_brick_slab_side", "y": 90 },
-    "facing=east":  { "model": "hwell:_brick_slab_side", "y": 270 },
-    "facing=up":  { "model": "hwell:_brick_slab" },
-    "facing=down":  { "model": "hwell:_brick_slab", "x": 180 }
-} }

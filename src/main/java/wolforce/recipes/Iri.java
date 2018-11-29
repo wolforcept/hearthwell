@@ -3,13 +3,14 @@ package wolforce.recipes;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 /**
  * ITEM RECIPE INPUT
  */
 public class Iri {
-	Item item;
-	int meta;
+	public final Item item;
+	public final int meta;
 
 	/**
 	 * ITEM RECIPE INPUT
@@ -54,6 +55,10 @@ public class Iri {
 
 	public Block getBlock() {
 		return Block.getBlockFromItem(item);
+	}
+
+	public ItemStack stack() {
+		return new ItemStack(item, 1, meta);
 	}
 
 }

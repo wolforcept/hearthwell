@@ -1,4 +1,0 @@
-{ "type": "minecraft:crafting_shaped",
-  "pattern": ["A","A"],
-  "key": {"A": [{"item": "hwell:azurite_brick_brick_slab"}]},
-  "result": { "item": "hwell:azurite_brick_brick" }}

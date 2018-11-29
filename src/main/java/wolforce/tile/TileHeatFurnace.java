@@ -1,42 +1,23 @@
 package wolforce.tile;
 
-import static wolforce.blocks.BlockCore.CoreType.*;
-import static net.minecraft.init.Blocks.*;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemHangingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Rotations;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import wolforce.Main;
 import wolforce.Util;
 import wolforce.Util.BlockWithMeta;
-import wolforce.blocks.BlockCore;
 import wolforce.blocks.BlockHeatFurnace;
-import wolforce.blocks.BlockCore.CoreType;
 
 public class TileHeatFurnace extends TileEntity implements ITickable {
 
@@ -90,8 +71,8 @@ public class TileHeatFurnace extends TileEntity implements ITickable {
 			table.put("HB", new BlockWithMeta(Main.heat_block));
 			BlockLog.EnumAxis axis = facing == EnumFacing.NORTH || facing == EnumFacing.SOUTH ? BlockLog.EnumAxis.Z
 					: BlockLog.EnumAxis.X;
-			table.put("FT", new BlockWithMeta(Main.furnace_tube, Main.furnace_tube
-					.getMetaFromState(Main.furnace_tube.getDefaultState().withProperty(BlockLog.LOG_AXIS, axis))));
+			table.put("FT", new BlockWithMeta(Main.furnace_tube,
+					Main.furnace_tube.getMetaFromState(Main.furnace_tube.getDefaultState().withProperty(BlockLog.LOG_AXIS, axis))));
 			table.put("W0", new BlockWithMeta(Blocks.WATER, 0));
 			table.put("L0", new BlockWithMeta(Blocks.LAVA, 0));
 			table.put("L1", new BlockWithMeta(Blocks.LAVA));
@@ -99,12 +80,10 @@ public class TileHeatFurnace extends TileEntity implements ITickable {
 
 			if (Util.isMultiblockBuilt(world, pos, facing, multiblock, table))
 				for (EntityItem entityItem : entities) {
-					ItemStack result = FurnaceRecipes.instance()
-							.getSmeltingResult(new ItemStack(entityItem.getItem().getItem()));
+					ItemStack result = FurnaceRecipes.instance().getSmeltingResult(new ItemStack(entityItem.getItem().getItem()));
 					if (result != ItemStack.EMPTY) {
 						BlockPos newpos = pos.offset(facing, 6);
-						EntityItem newentity = new EntityItem(world, newpos.getX() + .5, newpos.getY() + .5,
-								newpos.getZ() + .5,
+						EntityItem newentity = new EntityItem(world, newpos.getX() + .5, newpos.getY() + .5, newpos.getZ() + .5,
 								new ItemStack(result.getItem(), result.getCount() * entityItem.getItem().getCount()));
 						newentity.setVelocity(0, 0, 0);
 						world.spawnEntity(newentity);

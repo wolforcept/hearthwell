@@ -1,7 +1,5 @@
 package wolforce.blocks;
 
-import static wolforce.blocks.BlockCore.CoreType.core_base;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -17,6 +15,8 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import wolforce.Main;
+import wolforce.Util;
+import wolforce.recipes.RecipeCoring;
 import wolforce.tile.TileCore;
 
 public class BlockCore extends Block implements ITileEntityProvider {
@@ -31,38 +31,41 @@ public class BlockCore extends Block implements ITileEntityProvider {
 		setRegistryName(name);
 		setHardness(2);
 		setHarvestLevel("pickaxe", -1);
-		setDefaultState(blockState.getBaseState().withProperty(TYPE, core_base));
+		setDefaultState(blockState.getBaseState().withProperty(TYPE, CoreType.core_base));
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand enumhand, EnumFacing facing,
-			float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand enumhand,
+			EnumFacing facing, float hitX, float hitY, float hitZ) {
 
 		Comparable prev = state.getProperties().get(TYPE);
 		Item hand = playerIn.getHeldItem(enumhand).getItem();
 
-		/**/if (prev == core_base && hand == Main.shard_ca)
+		if (RecipeCoring.getResult(this, hand) == null)
+			return false;
+
+		/**/if (prev == CoreType.core_base && hand == Main.shard_ca)
 			set(world, pos, CoreType.core_ca);
 
-		else if (prev == core_base && hand == Main.shard_c)
+		else if (prev == CoreType.core_base && hand == Main.shard_c)
 			set(world, pos, CoreType.core_c);
 
-		else if (prev == core_base && hand == Main.shard_au)
+		else if (prev == CoreType.core_base && hand == Main.shard_au)
 			set(world, pos, CoreType.core_au);
 
-		else if (prev == core_base && hand == Main.shard_fe)
+		else if (prev == CoreType.core_base && hand == Main.shard_fe)
 			set(world, pos, CoreType.core_fe);
 
-		else if (prev == core_base && hand == Main.shard_o)
+		else if (prev == CoreType.core_base && hand == Main.shard_o)
 			set(world, pos, CoreType.core_o);
 
-		else if (prev == core_base && hand == Main.shard_h)
+		else if (prev == CoreType.core_base && hand == Main.shard_h)
 			set(world, pos, CoreType.core_h);
 
-		else if (prev == core_base && hand == Main.shard_p)
+		else if (prev == CoreType.core_base && hand == Main.shard_p)
 			set(world, pos, CoreType.core_p);
 
-		else if (prev == core_base && hand == Main.shard_n)
+		else if (prev == CoreType.core_base && hand == Main.shard_n)
 			set(world, pos, CoreType.core_n);
 
 		// else if (prev == iron && hand == Main.soul_dust)
@@ -87,6 +90,30 @@ public class BlockCore extends Block implements ITileEntityProvider {
 		public String getName() {
 			return name();
 		}
+
+		public Item getShard() {
+			switch (this) {
+			case core_au:
+				return Main.shard_au;
+			case core_c:
+				return Main.shard_c;
+			case core_ca:
+				return Main.shard_ca;
+			case core_fe:
+				return Main.shard_fe;
+			case core_h:
+				return Main.shard_h;
+			case core_n:
+				return Main.shard_n;
+			case core_o:
+				return Main.shard_o;
+			case core_p:
+				return Main.shard_p;
+			default:
+			}
+			return null;
+		}
+
 	}
 
 	// TILE ENTITIES

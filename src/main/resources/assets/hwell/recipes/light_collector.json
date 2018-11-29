@@ -1,0 +1,9 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["AAA", "ABA", "AAA" ],
+  "key": {
+    "A": [{ "item": "hwell:white_block" }],
+    "B": [{ "item": "minecraft:blaze_powder" }]
+  },
+  "result": { "item": "hwell:light_collector" }
+}

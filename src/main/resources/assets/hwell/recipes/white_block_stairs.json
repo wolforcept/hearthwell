@@ -1,4 +1,0 @@
-{ "type": "minecraft:crafting_shaped",
-  "pattern": [ "A ","AA" ],
-  "key": {"A": [{"item": "hwell:white_block"}]},
-  "result": { "item": "hwell:white_block_stairs", "count": 4 }}

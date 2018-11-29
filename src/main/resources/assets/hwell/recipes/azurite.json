@@ -8,7 +8,5 @@
     "A": [{ "item": "minecraft:cobblestone", "data": 0 }],
 	"B": [{ "item": "hwell:shard_o" }]
   },
-  "result": {
-    "item": "hwell:azurite_block", "count": 8
-  }
+  "result": { "item": "hwell:azurite", "count": 8 }
 }

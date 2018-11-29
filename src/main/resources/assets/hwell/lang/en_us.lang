@@ -33,12 +33,25 @@ item.myst_dust_picker_au.name=Dust Picker
 item.myst_dust_picker_h.name=Dust Picker
 item.myst_dust_picker_p.name=Dust Picker
 item.myst_dust_picker_n.name=Dust Picker
-tile.locked_light.name=Imprisoned Light
+item.locked_light.name=Imprisoned Light
+item.empty_rod_1.name=Empty Rod
+item.empty_rod_2.name=33% Filled Rod
+item.empty_rod_3.name=66% Filled Rod
+item.crystal_catalyst.name=Crystal Catalyst
 
+item.raw_soulsteel.name=Raw Soulsteel
 item.soulsteel_ingot.name=Soulsteel Ingot
 item.asul_ingot.name=Asul Ingot
 item.soul_dust.name=Soul Dust
 
+item.soulsteel_shovel.name=Soulsteel Shovel
+item.soulsteel_sword.name=Soulsteel Sword
+item.soulsteel_pickaxe.name=Soulsteel Pickaxe
+item.soulsteel_axe.name=Soulsteel Axe
+item.soulsteel_helmet.name=Soulsteel Helmet
+item.soulsteel_chest.name=Soulsteel Chestplate
+item.soulsteel_legs.name=Soulsteel Leggings
+item.soulsteel_boots.name=Soulsteel Boots
 
 
 
@@ -54,21 +67,68 @@ tile.myst_log.name=Mysterious Wood Log
 tile.myst_planks.name=Mysterious Wood Planks
 tile.myst_leaves.name=Mysterious Leaves
 
+tile.myst_planks_slab.name=Mysterious Wood Slab
+tile.myst_planks_stairs.name=Mysterious Wood Stairs
+tile.moonstone_slab.name=Moonstone Slab
+tile.moonstone_stairs.name=Moonstone Stairs
+tile.onyx_slab.name=Onyx Slab
+tile.onyx_stairs.name=Onyx Stairs
+tile.smooth_onyx_slab.name=Smooth Onyx Slab
+tile.smooth_onyx_stairs.name=Smooth Onyx Stairs
+tile.azurite_slab.name=Weathered Azurite Slab
+tile.azurite_stairs.name=Weathered Azurite Stairs
+tile.smooth_azurite_slab.name=Smooth Azurite Slab
+tile.smooth_azurite_stairs.name=Smooth Azurite Stairs
+tile.citrinic_stone_slab.name=Tricinic Stone Slab
+tile.citrinic_stone_stairs.name=Tricinic Stone Stairs
+tile.citrinic_sand_slab.name=White Tricinic Stone Slab
+tile.citrinic_sand_stairs.name=White Tricinic Stone Stairs
+
+tile.moonstone_bricks.name=Moonstone Bricks
+tile.onyx_bricks.name=Onyx Bricks
+tile.smooth_onyx_bricks.name=Smooth Onyx Bricks
+tile.azurite_bricks.name=Weathered Azurite Bricks
+tile.citrinic_stone_bricks.name=Tricinic Stone Bricks
+tile.citrinic_sand_bricks.name=White Tricinic Stone Bricks
+tile.smooth_azurite_bricks.name=Smooth Azurite Bricks
+
+tile.moonstone_bricks_slab.name=Moonstone Bricks Slab
+tile.moonstone_bricks_stairs.name=Moonstone Bricks Stairs
+tile.onyx_bricks_slab.name=Onyx Bricks Slab
+tile.onyx_bricks_stairs.name=Onyx Bricks Stairs
+tile.smooth_onyx_bricks_slab.name=Smooth Onyx Bricks Slab
+tile.smooth_onyx_bricks_stairs.name=Smooth Onyx Bricks Stairs
+tile.azurite_bricks_slab.name=Weathered Azurite Bricks Slab
+tile.azurite_bricks_stairs.name=Weathered Azurite Bricks Stairs
+tile.smooth_azurite_bricks_slab.name=Smooth Azurite Bricks Slab
+tile.smooth_azurite_bricks_stairs.name=Smooth Azurite Bricks Stairs
+tile.citrinic_stone_bricks_slab.name=Tricinic Stone Bricks Slab
+tile.citrinic_stone_bricks_stairs.name=Tricinic Stone Bricks Stairs
+tile.citrinic_sand_bricks_slab.name=White Tricinic Stone Bricks Slab
+tile.citrinic_sand_bricks_stairs.name=White Tricinic Stone Bricks Stairs
+
+
 tile.burst_seed_dirt.name=Dirt Burst Seed
 tile.burst_seed_stone.name=Stone Burst Seed
 tile.burst_seed_sand.name=Sand Burst Seed
 tile.burst_seed_snow.name=Snow Burst Seed
-tile.burst_seed_netherracl.name=Netherrack Burst Seed
+tile.burst_seed_netherrack.name=Netherrack Burst Seed
 
 tile.protection_block.name=Protection Block
+tile.heavy_protection_block.name=Heavy Protection Block
 tile.heavy_protection_block.json.name=Superior Protection Block
 tile.heat_block.name=Heat Block
 tile.compressed_clay.name=Compressed Clay
-tile.moonstone_block.name=Moonstone
-tile.onyx_block.name=Onyx
-tile.azurite_block.name=Weathered Azurite
-tile.smooth_azurite_block.name=Smooth Azurite
-tile.fullgrass_block.name=Fullgrass
+
+tile.moonstone.name=Moonstone
+tile.onyx.name=Onyx
+tile.smooth_onyx.name=Smooth Onyx
+tile.azurite.name=Weathered Azurite
+tile.citrinic_stone.name=Tricinic Stone
+tile.citrinic_sand.name=White Tricinic Stone
+tile.smooth_azurite.name=Smooth Azurite
+tile.white_block.name=White Block
+tile.fullgrass_block.name=Turf Block
 tile.slab_lamp.name=Slab Lamp
 
 tile.crushing_block.name=Crushing Block
@@ -85,6 +145,7 @@ tile.precision_grinder_empty.name=Precision Grinder
 tile.picking_table.name=Shard Picking Table
 tile.picker_holder.name=Dust Picker Holder
 tile.separator.name=Separator
+tile.freezer.name=Freezing Rod
 
 tile.light_collector.name=Light Collector
 
@@ -102,5 +163,6 @@ tile.scorch_glass.name=Scorch Glass
 tile.metal_diamond_block.name=Metaldiamond Block
 
 
+tile.hwell.fluid_liquid_souls=Liquid Souls
 fluid.liquid_souls=Liquid Souls
 itemGroup.hwell=Hearth Well

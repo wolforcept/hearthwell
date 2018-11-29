@@ -1,8 +1,0 @@
-{
-    "parent": "hwell:block/slab_base",
-    "textures": {
-        "particle": "hwell:blocks/_brick",
-        "0": "hwell:blocks/_brick",
-        "1": "hwell:blocks/_brick"
-    }
-}

@@ -19,7 +19,7 @@ import wolforce.Util.BlockWithMeta;
 import wolforce.blocks.BlockPrecisionGrinder;
 import wolforce.blocks.BlockPrecisionGrinderEmpty;
 import wolforce.items.ItemGrindingWheel;
-import wolforce.recipes.RecipeGrinder;
+import wolforce.recipes.RecipeGrinding;
 
 public class TilePrecisionGrinder extends TileEntity implements ITickable {
 
@@ -71,7 +71,7 @@ public class TilePrecisionGrinder extends TileEntity implements ITickable {
 			if (Util.isMultiblockBuilt(world, pos, facing, multiblock, table)) {
 				ItemGrindingWheel gwheel = ((BlockPrecisionGrinder) block.getBlock()).grindingWheel;
 				EntityItem entityItem = entities.get(0);
-				ItemStack result = RecipeGrinder.getResult(gwheel, entityItem.getItem());
+				ItemStack result = RecipeGrinding.getResult(gwheel, entityItem.getItem());
 				if (result != null && result != ItemStack.EMPTY) {
 					output(result, facing);
 					entityItem.getItem().shrink(1);

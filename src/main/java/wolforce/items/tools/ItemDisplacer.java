@@ -20,6 +20,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.IShearable;
 import scala.collection.parallel.ParIterableLike.Drop;
 import wolforce.Main;
 import wolforce.MyItem;
@@ -33,6 +36,7 @@ public class ItemDisplacer extends MyItem {
 		super(name, lore);
 		this.powered = powered;
 		setMaxStackSize(1);
+		setMaxDamage(64);
 	}
 
 	@Override
@@ -88,12 +92,25 @@ public class ItemDisplacer extends MyItem {
 
 			player.playSound(SoundEvents.BLOCK_LAVA_POP, 1f, 1f);
 
+			//
+			// if (!world.isRemote) {
+			// ItemStack drop = getSilkTouchDrop(state);
+			// // new ItemStack(state.getBlock(), 1,
+			// state.getBlock().getMetaFromState(state));
+			// Util.spawnItem(world, pos, drop);
+
+			if (state.getBlock() instanceof IShearable && ((IShearable) state.getBlock()).isShearable(stack, world, pos))
+				for (ItemStack a : ((IShearable) state.getBlock()).onSheared(stack, world, pos, 0)) {
+					if (!world.isRemote)
+						Util.spawnItem(world, pos, a);
+				}
+			else
+				state.getBlock().harvestBlock(world, player, pos, state, null, stack);
+
 			world.destroyBlock(pos, false);
-			if (!world.isRemote) {
-				ItemStack drop = new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state));
-				Util.spawnItem(world, pos, drop);
-			}
-			
+			stack.damageItem(1, player);
+			// }
+
 			player.getFoodStats().addExhaustion(-5);
 		}
 		return stack;
@@ -106,7 +123,19 @@ public class ItemDisplacer extends MyItem {
 				state.getBlock().equals(Blocks.GLASS_PANE) || //
 				state.getBlock().equals(Blocks.STAINED_GLASS) || //
 				state.getBlock().equals(Blocks.STAINED_GLASS_PANE) || //
-				(powered && state.getBlock().canSilkHarvest(world, pos, world.getBlockState(pos), player));
+				(powered && // when powered can also silk harvest and shear
+						(state.getBlock().canSilkHarvest(world, pos, world.getBlockState(pos), player)
+								|| state.getBlock() instanceof IShearable));
+	}
+
+	@Override
+	public boolean canHarvestBlock(IBlockState blockIn) {
+		return false;
+	}
+
+	@Override
+	public boolean canHarvestBlock(IBlockState state, ItemStack stack) {
+		return false;
 	}
 
 }

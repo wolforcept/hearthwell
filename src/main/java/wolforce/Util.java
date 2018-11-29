@@ -2,6 +2,7 @@ package wolforce;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -11,6 +12,7 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -105,14 +107,17 @@ public class Util {
 			MyStairs stairs = new MyStairs(block);
 			variants.add(stairs);
 
-			MyBlock brick = new MyBlock(block.getRegistryName().getResourcePath() + "_bricks", block.getDefaultState().getMaterial());
-			variants.add(brick);
+			if (block != Main.myst_planks) {
+				MyBlock brick = new MyBlock(block.getRegistryName().getResourcePath() + "_bricks",
+						block.getDefaultState().getMaterial());
+				variants.add(brick);
 
-			MySlab brickslab = new MySlab(brick);
-			variants.add(brickslab);
+				MySlab brickslab = new MySlab(brick);
+				variants.add(brickslab);
 
-			MyStairs brickstairs = new MyStairs(brick);
-			variants.add(brickstairs);
+				MyStairs brickstairs = new MyStairs(brick);
+				variants.add(brickstairs);
+			}
 		}
 		return variants;
 	}
@@ -344,5 +349,19 @@ public class Util {
 			return false;
 		World world = te.getWorld();
 		return world != null && world.isBlockLoaded(te.getPos()) && !world.getBlockState(te.getPos()).getBlock().equals(Blocks.AIR);
+	}
+
+	public static List<ItemStack> listOfOneItemStack(ItemStack item) {
+		LinkedList<ItemStack> list = new LinkedList<>();
+		list.add(item);
+		return list;
+	}
+
+	public static List<ItemStack> listOfOneItemStack(Item item) {
+		return listOfOneItemStack(new ItemStack(item));
+	}
+
+	public static List<ItemStack> listOfOneItemStack(Block block) {
+		return listOfOneItemStack(new ItemStack(block));
 	}
 }

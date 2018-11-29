@@ -39,8 +39,7 @@
 	  "item": "minecraft:log2",
 	  "data": 0
 	},{
-	  "item": "minecraft:log2",
-	  "data": 1
+	  "item": "hwell:myst_log"
 	}]
   ],
   "result": {

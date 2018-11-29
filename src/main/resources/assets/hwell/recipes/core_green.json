@@ -1,0 +1,9 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [" A ", "ABA", " A " ],
+  "key": {
+    "A": [{ "item": "minecraft:grass" }],
+    "B": [{ "item": "hwell:locked_light" }]
+  },
+  "result": { "item": "hwell:core_green" }
+}

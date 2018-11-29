@@ -1,0 +1,4 @@
+{
+    "parent": "block/inner_stairs",
+    "textures": { "bottom": "hwell:blocks/myst_planks", "top": "hwell:blocks/myst_planks", "side": "hwell:blocks/myst_planks" }
+}

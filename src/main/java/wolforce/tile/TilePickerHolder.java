@@ -28,7 +28,7 @@ import wolforce.Util.BlockWithMeta;
 import wolforce.blocks.BlockLightCollector;
 import wolforce.blocks.BlockSeparator;
 import wolforce.items.tools.ItemDustPicker;
-import wolforce.recipes.RecipeGrinder;
+import wolforce.recipes.RecipeGrinding;
 import wolforce.recipes.RecipeSeparator;
 
 public class TilePickerHolder extends TileEntity implements ITickable {

@@ -1,19 +1,8 @@
 { 
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "AAA",
-    "AAA",
-    "AAA"  ],
+  "pattern": ["AAA", "AAA", "AAA" ],
   "key": {
-    "A": [
-      {
-        "item": "hwell:asul_ingot",
-        "data": 0
-      }
-    ]
+    "A": [{ "item": "hwell:asul_ingot" }]
   },
-  "result": {
-    "item": "hwell:asul_block",
-    "data": 0
-  }
+  "result": { "item": "hwell:asul_block" }
 }

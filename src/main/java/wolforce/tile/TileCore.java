@@ -1,38 +1,23 @@
 package wolforce.tile;
 
-import static wolforce.blocks.BlockCore.CoreType.*;
-import static net.minecraft.init.Blocks.*;
-
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemHangingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import wolforce.Main;
 import wolforce.Util;
 import wolforce.blocks.BlockCore;
-import wolforce.blocks.BlockCore.CoreType;
 import wolforce.recipes.Iri;
 import wolforce.recipes.RecipeCoring;
-import wolforce.recipes.RecipeSeparator;
 
 public class TileCore extends TileEntity implements ITickable {
 
@@ -52,12 +37,12 @@ public class TileCore extends TileEntity implements ITickable {
 			return;
 
 		Block coreBlock = (Block) world.getBlockState(pos).getBlock();
-		CoreType coreType = (CoreType) world.getBlockState(pos).getValue(BlockCore.TYPE);
+		BlockCore.CoreType coreType = (BlockCore.CoreType) world.getBlockState(pos).getValue(BlockCore.TYPE);
 
-		if (coreType == CoreType.core_base)
+		if (coreType == BlockCore.CoreType.core_base)
 			return;
 
-		RecipeCoring result = RecipeCoring.getResult(coreBlock, coreType);
+		RecipeCoring result = RecipeCoring.getResult(coreBlock, coreType.getShard());
 
 		if (result == null)
 			return;

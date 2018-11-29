@@ -1,3 +1,6 @@
 {
-    "parent": "hwell:block/fullgrass_block"
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "hwell:blocks/fullgrass_block"
+    }
 }
