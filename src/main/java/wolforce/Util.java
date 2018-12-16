@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import mezz.jei.api.ingredients.IIngredients;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -19,48 +20,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import wolforce.blocks.simplevariants.MySlab;
 import wolforce.blocks.simplevariants.MyStairs;
+import wolforce.recipes.Irio;
 
 public class Util {
-
-	String[][] stone = { //
-			{ "Coal Block", "Wood Logs" }, //
-			{ "Iron Block", "Stone / Cobblestone / Sandstone" }, //
-			{ "Gold Block", "Iron Blocks" }, //
-			{ "", "" }, //
-			{ "Clay Block", "Water" }, //
-			{ "Bone Block", "Snow Blocks" }, //
-			{ "Redstone Block", "Netherrack / Magma Blocks" }, //
-			{ "", "" } //
-	}, heat = { //
-			{ "Gunpowder Block", "?" }, //
-			{ "", "" }, //
-			{ "Glowstone", "Gold Blocks" }, //
-			{ "Netherrack", "Coal Blocks / Charcoal Blocks" }, //
-			{ "Sea Lantern", "Snow / Ice / Packed Ice" }, //
-			{ "Quartz Block", "Iron Blocks" }, //
-			{ "Magma Block", "Netherrack" }, //
-			{ "Prismarine", "Sea Lantern / Quartz / Dark Prismarine" } //
-	}, green = { //
-			{ "Podzol", "Fullgrass Blocks" }, //
-			{ "Melon", "Water" }, //
-			{ "Pumpkin", "Melon" }, //
-			{ "Wheat Seeds Crate	", "" }, //
-			{ "Packed Ice", "Ice" }, //
-			{ "Feather Block", "Wool Blocks" }, //
-			{ "Mushroom Block", "?" }, //
-			{ "Emerald Block", "Diamond Block" } //
-	}, sentient = { //
-			{ "Podzol", "Grass Blocks" }, //
-			{ "", "" }, //
-			{ "End Stone", "Glowstone / Glowstone Lamp" }, //
-			{ "Purpur Block", "End Stone" }, //
-			{ "Diamond Block", "Redstone Blocks" }, //
-			{ "Bone Block", "Snow Blocks" }, //
-			{ "Leather Block", "Terracota" }, //
-			{ "Ender Pearl ", "End Stone Blocks" } //
-	};
 
 	public static boolean isValid(ItemStack stack) {
 		return stack != null && !stack.isEmpty();
@@ -97,9 +63,9 @@ public class Util {
 	// }
 	// }
 
-	static LinkedList<Block> makeVariants(Block... blocks) {
+	static LinkedList<Block> makeVariants(MyBlock... blocks) {
 		LinkedList<Block> variants = new LinkedList<>();
-		for (Block block : blocks) {
+		for (MyBlock block : blocks) {
 
 			MySlab slab = new MySlab(block);
 			variants.add(slab);
@@ -108,14 +74,21 @@ public class Util {
 			variants.add(stairs);
 
 			if (block != Main.myst_planks) {
+
 				MyBlock brick = new MyBlock(block.getRegistryName().getResourcePath() + "_bricks",
 						block.getDefaultState().getMaterial());
+				brick.setHardness(block.hardness);
+				brick.setResistance(block.resistance);
 				variants.add(brick);
 
 				MySlab brickslab = new MySlab(brick);
+				brickslab.setHardness(block.hardness);
+				brickslab.setResistance(block.resistance);
 				variants.add(brickslab);
 
 				MyStairs brickstairs = new MyStairs(brick);
+				brickstairs.setHardness(block.hardness);
+				brickstairs.setResistance(block.resistance);
 				variants.add(brickstairs);
 			}
 		}
@@ -135,6 +108,8 @@ public class Util {
 				pos.add(0, -1, 0), pos.add(0, 0, 1), //
 				pos.add(0, 0, -1), pos.add(0, 0, 1) };
 	}
+
+	//
 
 	//
 
@@ -205,7 +180,7 @@ public class Util {
 		boolean isCorrect = tableEntry.block == state.getBlock()
 				&& hasCorrectMeta(tableEntry.block, tableEntry.meta, tableEntry.block.getMetaFromState(state), tableEntry.inverse);
 
-		if (!isCorrect) {
+		if (!isCorrect && HWellConfig.isAutomaticMultiblocks) {
 			// ----------------------------------
 			if (tableEntry.meta != -1)
 				world.setBlockState(realPos.subtract(thispos), tableEntry.block
@@ -219,7 +194,7 @@ public class Util {
 	}
 
 	private static boolean hasCorrectMeta(Block block, int requiredMeta, int meta, boolean inverse) {
-		return (meta == -1 || (inverse ? meta != requiredMeta : meta == requiredMeta));
+		return (requiredMeta == -1 || (inverse ? meta != requiredMeta : meta == requiredMeta));
 	}
 
 	private static BlockPos getMyPosition(EnumFacing facing, String[][][] multiblock) {
@@ -363,5 +338,58 @@ public class Util {
 
 	public static List<ItemStack> listOfOneItemStack(Block block) {
 		return listOfOneItemStack(new ItemStack(block));
+	}
+
+	public static Irio toIrio(IBlockState blockState) {
+		return new Irio(blockState.getBlock(), blockState.getBlock().getMetaFromState(blockState));
+	}
+
+	public static boolean isVanillaFluid(Block in) {
+		return in == Blocks.WATER || in == Blocks.FLOWING_WATER || in == Blocks.LAVA || in == Blocks.FLOWING_LAVA;
+	}
+
+	public static FluidStack vanillaFluidToFluidStack(Block in) {
+		if (in == Blocks.WATER || in == Blocks.FLOWING_WATER)
+			return new FluidStack(FluidRegistry.WATER, 1000);
+		if (in == Blocks.LAVA || in == Blocks.FLOWING_LAVA)
+			return new FluidStack(FluidRegistry.LAVA, 1000);
+		return null;
+	}
+
+	public static void setIngredients(IIngredients ingredients, Object[] ins, Object[] outs) {
+		LinkedList<ItemStack> inList = new LinkedList<>();
+		LinkedList<ItemStack> outList = new LinkedList<>();
+
+		if (ins instanceof Block[]) {
+			System.out.println("Util.setIngredients(A)");
+			for (Block block : ((Block[]) ins))
+				inList.add(new ItemStack(block));
+		}
+		if (ins instanceof Item[]) {
+			System.out.println("Util.setIngredients(B)");
+			for (Item item : ((Item[]) ins))
+				inList.add(new ItemStack(item));
+		}
+
+		if (outs instanceof Block[]) {
+			System.out.println("Util.setIngredients(C)");
+			for (Block block : ((Block[]) outs))
+				outList.add(new ItemStack(block));
+		}
+		if (outs instanceof Item[]) {
+			System.out.println("Util.setIngredients(D)");
+			for (Item item : ((Item[]) outs))
+				outList.add(new ItemStack(item));
+		}
+
+		ingredients.setInputs(ItemStack.class, inList);
+		ingredients.setOutputs(ItemStack.class, outList);
+	}
+
+	public static List<ItemStack> toItemStackList(Block[] blocks) {
+		List<ItemStack> list = new LinkedList<>();
+		for (Block block : blocks)
+			list.add(new ItemStack(block));
+		return list;
 	}
 }

@@ -71,6 +71,7 @@ import wolforce.blocks.BlockCore;
 import wolforce.blocks.BlockCrushing;
 import wolforce.blocks.BlockDust;
 import wolforce.blocks.BlockFreezer;
+import wolforce.blocks.BlockGeneratorHeat;
 import wolforce.blocks.BlockGravity;
 import wolforce.blocks.BlockGroundShovel;
 import wolforce.blocks.BlockHeat;
@@ -88,6 +89,7 @@ import wolforce.blocks.BlockSeparator;
 import wolforce.blocks.BlockSlabLamp;
 import wolforce.blocks.BlockTube;
 import wolforce.blocks.MyLog;
+import wolforce.blocks.base.BlockWithDescription;
 import wolforce.fluids.BlockLiquidSouls;
 import wolforce.items.ItemCrystalBowl;
 import wolforce.items.ItemCrystalBowlWater;
@@ -106,8 +108,10 @@ import wolforce.items.tools.MyShovel;
 import wolforce.items.tools.MySword;
 import wolforce.recipes.RecipeCoring;
 import wolforce.recipes.RecipeCrushing;
+import wolforce.recipes.RecipeFreezer;
 import wolforce.recipes.RecipeGrinding;
 import wolforce.recipes.RecipeSeparator;
+import wolforce.recipes.RecipeTube;
 import wolforce.tesrs.TesrPickerHolder;
 import wolforce.tesrs.TesrSeparator;
 import wolforce.tile.TileCore;
@@ -140,7 +144,7 @@ public class Main {
 	// tier 1
 	public static Item dust;
 	public static Item myst_dust, myst_fertilizer;
-	public static Item heavy_mesh, heavy_ingot, heavy_nugget;
+	public static Item heavy_mesh, heavy_ingot, heavy_nugget, fuel_dust, fuel_dust_tiny;
 	public static Item heavy_shears, leaf_mesh;
 	public static Item crystal, crystal_nether, crystal_bowl, crystal_bowl_water;
 	public static Item shard_fe, shard_au, shard_o, shard_c, shard_h, shard_ca, shard_p, shard_n;
@@ -159,10 +163,11 @@ public class Main {
 	public static Block myst_log, myst_planks, myst_leaves;
 	public static Block light_collector;
 	public static BlockCore core_stone, core_heat, core_green, core_sentient;
+	public static Block stabiliser;
 	public static Block picking_table, picker_holder;
 	public static Block compressed_clay, white_block, moonstone, moonstone_bricks, citrinic_stone, citrinic_sand, onyx, smooth_onyx,
 			azurite, smooth_azurite, scorch_grit, scorch_glass, fullgrass_block, metal_diamond_block;
-	public static Block freezer;
+	public static Block freezer, generator_heat;
 
 	// tier 2
 	// public static Block coreGreen;
@@ -233,13 +238,22 @@ public class Main {
 		heavy_block = new MyBlock("heavy_block", Material.IRON).setResistance(2.5f).setHardness(1.6f);
 		heavy_block.setHarvestLevel("pickaxe", -1);
 		blocks.add(heavy_block);
-		heavy_nugget = new MyItem("heavy_nugget") {
+		heavy_nugget = new MyItem("heavy_nugget", "Crush to make fuel dust.");
+		items.add(heavy_nugget);
+		fuel_dust = new MyItem("fuel_dust", "Smelts 4 items.") {
 			@Override
 			public int getItemBurnTime(ItemStack itemStack) {
 				return 800;
 			}
 		};
-		items.add(heavy_nugget);
+		items.add(fuel_dust);
+		fuel_dust_tiny = new MyItem("fuel_dust_tiny", "Smelts one item.") {
+			@Override
+			public int getItemBurnTime(ItemStack itemStack) {
+				return 200;
+			}
+		};
+		items.add(fuel_dust_tiny);
 
 		crushing_block = new BlockCrushing("crushing_block");
 		blocks.add(crushing_block);
@@ -313,36 +327,36 @@ public class Main {
 		shard_n = new MyItem("shard_n");
 		items.add(shard_n);
 
-		compressed_clay = new MyBlock("compressed_clay", Material.CLAY).setHardness(2).setResistance(2);
+		compressed_clay = new MyBlock("compressed_clay", Material.CLAY).setHardness(.5f).setResistance(2);
 		blocks.add(compressed_clay);
 
 		citrinic_stone = new MyBlock("citrinic_stone", Material.ROCK)//
-				.setHarvest("pickaxe", 0).setHardness(1).setResistance(10);
+				.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
 		blocks.add(citrinic_stone);
 		citrinic_sand = new MyBlock("citrinic_sand", Material.SAND)//
-				.setHarvest("pickaxe", 0).setHardness(1).setResistance(10);
+				.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
 		blocks.add(citrinic_sand);
 		azurite = new MyBlock("azurite", Material.ROCK)//
-				.setHarvest("pickaxe", 0).setHardness(1).setResistance(10);
+				.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
 		blocks.add(azurite);
 		smooth_azurite = new MyBlock("smooth_azurite", Material.ROCK)//
-				.setHarvest("pickaxe", 0).setHardness(1).setResistance(10);
+				.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
 		blocks.add(smooth_azurite);
 
 		moonstone = new MyBlock("moonstone", Material.ROCK)//
-				.setHarvest("pickaxe", 0).setHardness(1).setResistance(10);
+				.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
 		blocks.add(moonstone);
 		onyx = new MyBlock("onyx", Material.ROCK)//
-				.setHarvest("pickaxe", 0).setHardness(1).setResistance(10);
+				.setHarvest("pickaxe", 0).setHardness(2).setResistance(10);
 		blocks.add(onyx);
 		smooth_onyx = new MyBlock("smooth_onyx", Material.ROCK)//
-				.setHarvest("pickaxe", 0).setHardness(1).setResistance(10);
+				.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
 		blocks.add(smooth_onyx);
-		blocks.addAll(
-				Util.makeVariants(citrinic_stone, citrinic_sand, azurite, smooth_azurite, moonstone, onyx, smooth_onyx, myst_planks));
+		blocks.addAll(Util.makeVariants((MyBlock) citrinic_stone, (MyBlock) citrinic_sand, (MyBlock) azurite, (MyBlock) smooth_azurite,
+				(MyBlock) moonstone, (MyBlock) onyx, (MyBlock) smooth_onyx, (MyBlock) myst_planks));
 
 		white_block = new MyBlock("white_block", Material.ROCK)//
-				.setHarvest("pickaxe", 0).setHardness(.1f).setResistance(10);
+				.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
 		blocks.add(white_block);
 		scorch_grit = new BlockGroundShovel("scorch_grit");
 		blocks.add(scorch_grit);
@@ -374,6 +388,9 @@ public class Main {
 		items.add(empowered_displacer);
 		freezer = new BlockFreezer("freezer");
 		blocks.add(freezer);
+
+		generator_heat = new BlockGeneratorHeat("generator_heat");
+		blocks.add(generator_heat);
 
 		// TIER 2
 
@@ -466,7 +483,7 @@ public class Main {
 		core_sentient = new BlockCore("core_sentient", false);
 		blocks.add(core_sentient);
 
-		// TIER 4
+		// TIER 3
 		crystal_catalyst = new MyItem("crystal_catalyst");
 		items.add(crystal_catalyst);
 		raw_soulsteel = new MyItem("raw_soulsteel");
@@ -510,6 +527,9 @@ public class Main {
 		// 429 + 64, soulsteel_ingot, 25);
 		// items.add(soulsteel_boots);
 
+		stabiliser = new MyBlock("stabiliser", Material.ROCK).setHarvest("pickaxe", -1).setHardness(1).setResistance(1);
+		blocks.add(stabiliser);
+
 		separator = new BlockSeparator("separator");
 		blocks.add(separator);
 
@@ -539,11 +559,11 @@ public class Main {
 
 		//
 
-		asul_ingot = new MyItem("asul_ingot");
-		items.add(asul_ingot);
-		asul_block = new MyBlock("asul_block", Material.CLAY).setHardness(.55f);
-		asul_block.setHarvestLevel("pickaxe", -1);
-		blocks.add(asul_block);
+		// asul_ingot = new MyItem("asul_ingot");
+		// items.add(asul_ingot);
+		// asul_block = new MyBlock("asul_block", Material.CLAY).setHardness(.55f);
+		// asul_block.setHarvestLevel("pickaxe", -1);
+		// blocks.add(asul_block);
 
 		metal_diamond_block = new MyBlock("metal_diamond_block", Material.IRON).setHardness(3).setResistance(3);
 		blocks.add(metal_diamond_block);
@@ -632,6 +652,7 @@ public class Main {
 		GameRegistry.addSmelting(compressed_clay, new ItemStack(Blocks.HARDENED_CLAY, 9), 0f);
 		GameRegistry.addSmelting(scorch_grit, new ItemStack(scorch_glass), 0f);
 		GameRegistry.addSmelting(azurite, new ItemStack(smooth_azurite), 0f);
+		GameRegistry.addSmelting(citrinic_stone, new ItemStack(citrinic_sand), 0f);
 		GameRegistry.addSmelting(onyx, new ItemStack(smooth_onyx), 0f);
 		GameRegistry.addSmelting(raw_soulsteel, new ItemStack(soulsteel_ingot, 2), 1f);
 
@@ -695,6 +716,8 @@ public class Main {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		RecipeCrushing.initRecipes();
+		RecipeTube.initRecipes();
+		RecipeFreezer.initRecipes();
 		RecipeGrinding.initRecipes();
 		RecipeSeparator.initRecipes();
 		RecipeCoring.initRecipes();
@@ -743,14 +766,26 @@ public class Main {
 
 	@SubscribeEvent
 	public static void registerItemBlocks(RegistryEvent.Register<Item> event) {
-		for (Block block : blocks)
-			event.getRegistry().registerAll(new ItemBlock(block).setRegistryName(block.getRegistryName()));
+		for (Block block : blocks) {
+			Item item = !(block instanceof BlockWithDescription) ? new ItemBlock(block) : //
+					new ItemBlock(block) {
+						public void addInformation(ItemStack stack, net.minecraft.world.World worldIn, java.util.List<String> tooltip,
+								net.minecraft.client.util.ITooltipFlag flagIn) {
+							for (String string : ((BlockWithDescription) block).getDescription()) {
+								tooltip.add(string);
+							}
+						};
+					};
+			item.setRegistryName(block.getRegistryName());
+			event.getRegistry().registerAll(item);
+		}
 	}
 
 	@SubscribeEvent
 	public static void registerRendersBlock(ModelRegistryEvent event) {
 		for (Block block : blocks) {
 			Item item = Item.getItemFromBlock(block);
+
 			ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
 		}
 	}

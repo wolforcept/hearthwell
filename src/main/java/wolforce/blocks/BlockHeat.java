@@ -21,9 +21,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import wolforce.Main;
 import wolforce.Util;
+import wolforce.blocks.base.BlockEnergyProvider;
 import wolforce.tile.TileCore;
 
-public class BlockHeat extends Block {
+public class BlockHeat extends Block implements BlockEnergyProvider {
 
 	public BlockHeat(String name) {
 		super(Material.CLAY);
@@ -52,6 +53,11 @@ public class BlockHeat extends Block {
 	}
 
 	@Override
+	public boolean canDropFromExplosion(Explosion explosionIn) {
+		return false;
+	}
+
+	@Override
 	public boolean isFlammable(IBlockAccess world, BlockPos pos, EnumFacing face) {
 		return false;
 	}
@@ -59,6 +65,16 @@ public class BlockHeat extends Block {
 	@Override
 	public int getFlammability(IBlockAccess world, BlockPos pos, EnumFacing face) {
 		return 0;
+	}
+
+	@Override
+	public boolean hasEnergy(World world, BlockPos pos, int energy) {
+		return energy <= 10000;
+	}
+
+	@Override
+	public void consume(World world, BlockPos pos, int energy) {
+		world.setBlockToAir(pos);
 	}
 
 }

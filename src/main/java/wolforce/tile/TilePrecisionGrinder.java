@@ -18,6 +18,7 @@ import wolforce.Util;
 import wolforce.Util.BlockWithMeta;
 import wolforce.blocks.BlockPrecisionGrinder;
 import wolforce.blocks.BlockPrecisionGrinderEmpty;
+import wolforce.blocks.base.BlockEnergyConsumer;
 import wolforce.items.ItemGrindingWheel;
 import wolforce.recipes.RecipeGrinding;
 
@@ -57,6 +58,8 @@ public class TilePrecisionGrinder extends TileEntity implements ITickable {
 		IBlockState block = world.getBlockState(pos);
 		if (!(block.getBlock() instanceof BlockPrecisionGrinder))
 			return;
+		BlockPrecisionGrinder grinder = (BlockPrecisionGrinder) block.getBlock();
+
 		EnumFacing facing = block.getValue(BlockPrecisionGrinder.FACING);
 
 		List<EntityItem> entities = world.getEntitiesWithinAABB(EntityItem.class, //
@@ -72,7 +75,11 @@ public class TilePrecisionGrinder extends TileEntity implements ITickable {
 				ItemGrindingWheel gwheel = ((BlockPrecisionGrinder) block.getBlock()).grindingWheel;
 				EntityItem entityItem = entities.get(0);
 				ItemStack result = RecipeGrinding.getResult(gwheel, entityItem.getItem());
-				if (result != null && result != ItemStack.EMPTY) {
+				if (Util.isValid(result)) {
+					// ENERGY CONSUMPTION
+					if (!BlockEnergyConsumer.tryConsume(world, pos, grinder.getEnergyConsumption())) {
+						return;
+					}
 					output(result, facing);
 					entityItem.getItem().shrink(1);
 					cooldown = MAX_COOLDOWN;
@@ -95,7 +102,8 @@ public class TilePrecisionGrinder extends TileEntity implements ITickable {
 
 	private void popGrindingWheel(EntityItem entityItem, ItemGrindingWheel gwheel, EnumFacing facing) {
 		Util.spawnItem(world, pos.up(), new ItemStack(gwheel));
-		world.setBlockState(pos, Main.precision_grinder_empty.getDefaultState().withProperty(BlockPrecisionGrinderEmpty.FACING, facing));
+		world.setBlockState(pos,
+				Main.precision_grinder_empty.getDefaultState().withProperty(BlockPrecisionGrinderEmpty.FACING, facing));
 	}
 
 	@Override

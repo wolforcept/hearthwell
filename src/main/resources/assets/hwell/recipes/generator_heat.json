@@ -1,0 +1,14 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+	"ABA",
+    "DCD" ],
+  "key": {
+    "A": [{ "item": "hwell:onyx" }],
+	"B": [{ "item": "hwell:crystal" }],
+	"C": [{ "item": "hwell:shard_p" }],
+	"D": [{ "item": "minecraft:iron_ingot" }]
+  },
+  "result": { "item": "hwell:generator_heat" }
+}

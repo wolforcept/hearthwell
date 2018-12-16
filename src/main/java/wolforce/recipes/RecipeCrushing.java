@@ -23,6 +23,7 @@ public class RecipeCrushing {
 		putRecipe(new ItemStack(Blocks.COBBLESTONE), new RecipeCrushing(Main.dust));
 		putRecipe(new ItemStack(Blocks.STONE), new RecipeCrushing(Main.dust));
 		putRecipe(new ItemStack(Blocks.SANDSTONE), new RecipeCrushing(Main.dust));
+		putRecipe(new ItemStack(Main.heavy_nugget), new RecipeCrushing(Main.fuel_dust, 2));
 
 		putRecipe(new ItemStack(Main.myst_rod), new RecipeCrushing(Main.myst_dust, 2));
 
@@ -31,10 +32,10 @@ public class RecipeCrushing {
 		putRecipe(new ItemStack(Blocks.CLAY), new RecipeCrushing(Items.CLAY_BALL, 4));
 		putRecipe(new ItemStack(Blocks.SOUL_SAND), new RecipeCrushing(Main.soul_dust, 4));
 
-		putRecipe(new ItemStack(Main.crystal_block), new RecipeCrushing(Main.crystal, 5, .50), //
-				new RecipeCrushing(Main.crystal, 4, .20), new RecipeCrushing(Main.crystal, 6, .20), //
-				new RecipeCrushing(Main.crystal, 3, .05), new RecipeCrushing(Main.crystal, 7, .05) //
-		);
+//		putRecipe(new ItemStack(Main.crystal_block), new RecipeCrushing(Main.crystal, 5, .50), //
+//				new RecipeCrushing(Main.crystal, 4, .20), new RecipeCrushing(Main.crystal, 6, .20), //
+//				new RecipeCrushing(Main.crystal, 3, .05), new RecipeCrushing(Main.crystal, 7, .05) //
+//		);
 		putRecipe(new ItemStack(Main.crystal_nether_block), //
 				new RecipeCrushing(Main.crystal_nether, 3, .05), //
 				new RecipeCrushing(Main.crystal_nether, 4, .20), //

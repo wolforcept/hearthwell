@@ -35,6 +35,10 @@ public class ItemEmptyRod extends MyItem {
 			public ItemStack onItemUseFinish(EntityPlayer player, ItemStack stack, ItemStack hand2, Item nextItem) {
 				if (hand2.getItem().equals(BLAZE.consumes))
 					return BLAZE.onItemUseFinish(player, stack, hand2, Main.rod_blaze_1);
+				if (hand2.getItem().equals(Main.myst_dust)) {
+					hand2.shrink(1);
+					return MYST.onItemUseFinish(player, stack, hand2, Main.myst_rod);
+				}
 				return MYST.onItemUseFinish(player, stack, hand2, Main.rod_myst_1);
 			}
 		},

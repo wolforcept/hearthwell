@@ -24,7 +24,7 @@ import wolforce.Main;
 import wolforce.Util;
 import wolforce.blocks.BlockCore;
 import wolforce.integration.jei.JeiCatCrushing.JeiRecCrushing;
-import wolforce.recipes.Iri;
+import wolforce.recipes.Irio;
 import wolforce.recipes.RecipeCoring;
 import wolforce.recipes.RecipeCrushing;
 
@@ -103,7 +103,6 @@ public class JeiCatCrushing<T extends JeiRecCrushing> implements IRecipeCategory
 		private ItemStack crushingBlock;
 		private ItemStack in;
 		private List<ItemStack> out;
-		private boolean isSingleResult;
 		private RecipeCrushing[] results;
 
 		public JeiRecCrushing(Item in, RecipeCrushing[] results) {
@@ -122,17 +121,14 @@ public class JeiCatCrushing<T extends JeiRecCrushing> implements IRecipeCategory
 			ins.add(crushingBlock);
 			ins.add(in);
 			ingredients.setInputs(ItemStack.class, ins);
-			if (isSingleResult) {
-				ingredients.setOutput(ItemStack.class, out);
-			} else {
-				List<List<ItemStack>> outs = new LinkedList<>();
-				for (ItemStack stack : out) {
-					List<ItemStack> listofone = new LinkedList<>();
-					listofone.add(stack);
-					outs.add(listofone);
-				}
-				ingredients.setOutputLists(ItemStack.class, outs);
-			}
+			ingredients.setOutput(ItemStack.class, out);
+			// List<List<ItemStack>> outs = new LinkedList<>();
+			// for (ItemStack stack : out) {
+			// List<ItemStack> listofone = new LinkedList<>();
+			// listofone.add(stack);
+			// outs.add(listofone);
+			// }
+			// ingredients.setOutputLists(ItemStack.class, outs);
 		}
 
 		@Override

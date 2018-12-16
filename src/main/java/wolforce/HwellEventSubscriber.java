@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IBlockColor;
@@ -106,7 +107,7 @@ public class HwellEventSubscriber {
 
 	private void motion(EntityPlayer player) {
 		if (isInsideLiquidSouls(player))
-			player.motionY = .05;
+			player.motionY = player.isSneaking() ? -.05 : .05;
 	}
 
 	private void motion(EntityItem item) {
@@ -123,14 +124,12 @@ public class HwellEventSubscriber {
 	}
 
 	private boolean isInsideLiquidSouls(EntityPlayer player) {
-		IBlockState state = player.world.getBlockState(new BlockPos(//
+		BlockPos pos1 = new BlockPos(//
 				(int) player.posX - (player.posX < 0 ? 1 : 0), //
 				(int) player.posY, //
-				(int) player.posZ - (player.posZ < 0 ? 1 : 0)));
-		Block block = state.getBlock();
-		return block.getMaterial(state).equals(Main.material_liquid_souls);
-		// || block.equals(Main.liquid_souls_block) ||
-		// block.isAssociatedBlock(Main.liquid_souls_block) || block instanceof
-		// BlockLiquidSouls
+				(int) player.posZ - (player.posZ < 0 ? 1 : 0) //
+		);
+		return player.world.getBlockState(pos1).getMaterial().equals(Main.material_liquid_souls)
+				|| player.world.getBlockState(pos1.up()).getMaterial().equals(Main.material_liquid_souls);
 	}
 }

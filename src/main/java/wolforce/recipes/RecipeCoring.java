@@ -73,7 +73,7 @@ public class RecipeCoring {
 		putRecipe(stone, Main.shard_fe, IRON_BLOCK, COBBLESTONE, STONE, SANDSTONE);
 		putRecipe(stone, Main.shard_au, GOLD_BLOCK, IRON_BLOCK);
 		putRecipe(stone, Main.shard_h, SOUL_SAND, QUARTZ_BLOCK);
-		putRecipe(stone, Main.shard_o, new Iri(Main.compressed_clay), new Iri(WATER), new Iri(FLOWING_WATER, 15));
+		putRecipe(stone, Main.shard_o, new Irio(Main.compressed_clay), new Irio(WATER), new Irio(FLOWING_WATER, 15));
 		putRecipe(stone, Main.shard_ca, BONE_BLOCK, GLASS, GLASS_PANE, STAINED_GLASS, STAINED_GLASS_PANE);
 		putRecipe(stone, Main.shard_p, REDSTONE_BLOCK, NETHERRACK, MAGMA);
 		// putRecipe(stone, Main.shard_n, AIR); // TODO
@@ -98,7 +98,7 @@ public class RecipeCoring {
 		// SNOW, DIRT);
 		putRecipe(green, Main.shard_n, PRISMARINE, QUARTZ_BLOCK);
 
-		Iri podzol = new Iri(DIRT,
+		Irio podzol = new Irio(DIRT,
 				DIRT.getMetaFromState(DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.PODZOL)));
 		putRecipe(senti, Main.shard_c, podzol, MYCELIUM);
 		// putRecipe(senti, Main.shard_fe, AIR); // TODO
@@ -110,20 +110,20 @@ public class RecipeCoring {
 		putRecipe(senti, Main.shard_n, AIR/* Blocks.endblock */, END_STONE);
 	}
 
-	private static void putRecipe(Block coreBlock, Item shard, Iri result, Iri... consumes) {
+	private static void putRecipe(Block coreBlock, Item shard, Irio result, Irio... consumes) {
 		recipeLists.get(coreBlock).put(shard, new RecipeCoring(result, consumes));
 	}
 
-	private static void putRecipe(Block coreBlock, Item shard, Iri result, Block... bconsumes) {
-		Iri[] consumes = new Iri[bconsumes.length];
+	private static void putRecipe(Block coreBlock, Item shard, Irio result, Block... bconsumes) {
+		Irio[] consumes = new Irio[bconsumes.length];
 		for (int i = 0; i < consumes.length; i++) {
-			consumes[i] = new Iri(bconsumes[i]);
+			consumes[i] = new Irio(bconsumes[i]);
 		}
 		putRecipe(coreBlock, shard, result, consumes);
 	}
 
 	private static void putRecipe(Block coreBlock, Item shard, Block result, Block... consumes) {
-		putRecipe(coreBlock, shard, new Iri(result), consumes);
+		putRecipe(coreBlock, shard, new Irio(result), consumes);
 	}
 
 	//
@@ -133,26 +133,26 @@ public class RecipeCoring {
 			throw new RuntimeException(coreBlock.getUnlocalizedName() + " is not a valid core");
 		// SPECIAL CASE
 		if (coreBlock == green && shard == Main.shard_p)
-			return new RecipeCoring(new Iri(Math.random() < .5 ? BROWN_MUSHROOM_BLOCK : RED_MUSHROOM_BLOCK), new Iri(MELON_BLOCK));
+			return new RecipeCoring(new Irio(Math.random() < .5 ? BROWN_MUSHROOM_BLOCK : RED_MUSHROOM_BLOCK), new Irio(MELON_BLOCK));
 		return recipeLists.get(coreBlock).get(shard);
 	}
 
 	//
 
-	public final Iri result;
-	public final Iri[] consumes;
+	public final Irio result;
+	public final Irio[] consumes;
 
-	private RecipeCoring(Iri result, Iri... consumes) {
+	private RecipeCoring(Irio result, Irio... consumes) {
 		this.result = result;
 		this.consumes = consumes;
 	}
 
-	private Iri i(Block block) {
-		return new Iri(block);
+	private Irio i(Block block) {
+		return new Irio(block);
 	}
 
-	private Iri i(Block block, int meta) {
-		return new Iri(block, meta);
+	private Irio i(Block block, int meta) {
+		return new Irio(block, meta);
 	}
 
 	// FOR JEI INTEGRATION

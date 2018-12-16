@@ -3,9 +3,11 @@ package wolforce.tile;
 import java.util.Arrays;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockNewLog;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemCompass;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -14,9 +16,10 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import wolforce.Main;
 import wolforce.Util;
 import wolforce.blocks.BlockCore;
-import wolforce.recipes.Iri;
+import wolforce.recipes.Irio;
 import wolforce.recipes.RecipeCoring;
 
 public class TileCore extends TileEntity implements ITickable {
@@ -59,14 +62,16 @@ public class TileCore extends TileEntity implements ITickable {
 				// (charges faster with more blocks surrounding it)
 				particlesandsounds(pos);
 				particlesandsounds(pos1);
-				if (charge % 10 == 0)
-					System.out.println(charge);
+				// if (charge % 10 == 0)
+				// System.out.println(charge);
 				if (Math.random() < .015) {
-					// remove and drop the block on that pos1
-					ItemStack drop = getSilkTouchDrop(world.getBlockState(pos1));
-					world.notifyBlockUpdate(pos1, state, Blocks.AIR.getDefaultState(), 1 | 2);
-					world.setBlockToAir(pos1);
-					Util.spawnItem(world, pos1, drop);
+					if (!world.getBlockState(pos1.down()).getBlock().equals(Main.stabiliser) || Math.random() < .2) {
+						// remove and drop the block on that pos1
+						ItemStack drop = getSilkTouchDrop(world.getBlockState(pos1));
+						world.notifyBlockUpdate(pos1, state, Blocks.AIR.getDefaultState(), 1 | 2);
+						world.setBlockToAir(pos1);
+						Util.spawnItem(world, pos1, drop);
+					}
 				}
 				if (charge == MAX_CHARGE - 1) {
 					world.setBlockState(pos, result.result.getBlock().getDefaultState(), 2 | 4); // im quite sure its a block
@@ -81,9 +86,9 @@ public class TileCore extends TileEntity implements ITickable {
 	}
 
 	private boolean hasResult(RecipeCoring result, IBlockState state) {
-		if (Arrays.asList(result.consumes).contains(new Iri(state.getBlock())))
+		if (Arrays.asList(result.consumes).contains(new Irio(state.getBlock())))
 			return true;
-		if (Arrays.asList(result.consumes).contains(new Iri(state)))
+		if (Arrays.asList(result.consumes).contains(new Irio(state)))
 			return true;
 		return false;
 	}
@@ -115,10 +120,9 @@ public class TileCore extends TileEntity implements ITickable {
 		int i = 0;
 
 		if (item.getHasSubtypes()) {
-			i = state.getBlock().getMetaFromState(state);
+			i = state.getBlock().damageDropped(state);
 		}
 
 		return new ItemStack(item, 1, i);
 	}
-
 }

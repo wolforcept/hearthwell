@@ -28,7 +28,7 @@ import wolforce.Main;
 import wolforce.Util;
 import wolforce.blocks.BlockCore;
 import wolforce.integration.jei.JeiCatCoring.JeiRecCoring;
-import wolforce.recipes.Iri;
+import wolforce.recipes.Irio;
 import wolforce.recipes.RecipeCoring;
 
 public class JeiCatCoring<T extends JeiRecCoring> implements IRecipeCategory<JeiRecCoring> {
@@ -113,8 +113,8 @@ public class JeiCatCoring<T extends JeiRecCoring> implements IRecipeCategory<Jei
 		}
 		// SPECIAL CASE
 		if (core == Main.core_green)
-			list.add(new JeiRecCoring(core, Main.shard_p, new Iri[] { new Iri(MELON_BLOCK) },
-					new Iri[] { new Iri(BROWN_MUSHROOM_BLOCK), new Iri(RED_MUSHROOM_BLOCK) }));
+			list.add(new JeiRecCoring(core, Main.shard_p, new Irio[] { new Irio(MELON_BLOCK) },
+					new Irio[] { new Irio(BROWN_MUSHROOM_BLOCK), new Irio(RED_MUSHROOM_BLOCK) }));
 		return list;
 	}
 
@@ -125,22 +125,22 @@ public class JeiCatCoring<T extends JeiRecCoring> implements IRecipeCategory<Jei
 		private List<ItemStack> coretype;
 		private List<ItemStack> out;
 
-		public JeiRecCoring(Block coretype, Item shard, Iri[] consumes, Iri result) {
-			this(coretype, shard, consumes, new Iri[] { result });
+		public JeiRecCoring(Block coretype, Item shard, Irio[] consumes, Irio result) {
+			this(coretype, shard, consumes, new Irio[] { result });
 		}
 
-		public JeiRecCoring(Block coretype, Item shard, Iri[] consumes, Iri[] result) {
+		public JeiRecCoring(Block coretype, Item shard, Irio[] consumes, Irio[] result) {
 			this.coretype = new LinkedList<>();
 			this.coretype.add(new ItemStack(coretype));
 			this.shard = new LinkedList<>();
 			this.shard.add(new ItemStack(shard));
 
 			this.consumes = new LinkedList<>();
-			for (Iri iri : consumes)
+			for (Irio iri : consumes)
 				this.consumes.add(new ItemStack(iri.item, 1, iri.meta));
 
 			this.out = new LinkedList<>();
-			for (Iri iri : result)
+			for (Irio iri : result)
 				this.out.add(new ItemStack(iri.item));
 		}
 

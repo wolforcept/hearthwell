@@ -9,6 +9,8 @@ import net.minecraft.item.ItemBlock;
 
 public class MyBlock extends Block {
 
+	public float hardness, resistance;
+
 	public MyBlock(String name, Material mat) {
 		this(name, mat, false);
 	}
@@ -31,7 +33,14 @@ public class MyBlock extends Block {
 	@Override
 	public MyBlock setHardness(float hardness) {
 		super.setHardness(hardness);
+		this.hardness = hardness;
 		return this;
 	}
 
+	@Override
+	public MyBlock setResistance(float resistance) {
+		super.setResistance(resistance);
+		this.resistance = resistance;
+		return this;
+	}
 }

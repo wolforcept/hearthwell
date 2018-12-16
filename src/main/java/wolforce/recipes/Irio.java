@@ -8,42 +8,44 @@ import net.minecraft.item.ItemStack;
 /**
  * ITEM RECIPE INPUT
  */
-public class Iri {
+public class Irio {
 	public final Item item;
 	public final int meta;
 
-	/**
-	 * ITEM RECIPE INPUT
-	 */
-	public Iri(Item _item) {
-		item = _item;
-		meta = -1;
-	}
-
-	public Iri(Block _block) {
-		item = Item.getItemFromBlock(_block);
-		meta = -1;
-	}
-
-	public Iri(Item _item, int _meta) {
+	public Irio(Item _item, int _meta) {
 		item = _item;
 		meta = _meta;
 	}
 
-	public Iri(Block _block, int _meta) {
-		item = Item.getItemFromBlock(_block);
-		meta = _meta;
+	public Irio(Item _item) {
+		this(_item, -1);
 	}
 
-	public Iri(IBlockState state) {
+	public Irio(Block _block) {
+		this(Item.getItemFromBlock(_block));
+	}
+
+	public Irio(Block _block, int _meta) {
+		this(Item.getItemFromBlock(_block), _meta);
+	}
+
+	public Irio(IBlockState state) {
 		this(state.getBlock(), state.getBlock().getMetaFromState(state));
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (obj == null || !(obj instanceof Iri))
+	public boolean equals(Object obj2) {
+		if (obj2 == null || !(obj2 instanceof Irio))
 			return false;
-		return item == ((Iri) obj).item && (meta == -1 || ((Iri) obj).meta == -1 || meta == ((Iri) obj).meta);
+
+		Irio irio2 = (Irio) obj2;
+		if (meta == -1 || irio2.meta == -1)
+			return item.equals(irio2.item);
+
+		return item.equals(irio2.item) && meta == irio2.meta;
+
+		// return item == ((Irio) obj).item && (meta == -1 || ((Irio) obj).meta == -1 ||
+		// meta == ((Irio) obj).meta);
 	}
 
 	@Override

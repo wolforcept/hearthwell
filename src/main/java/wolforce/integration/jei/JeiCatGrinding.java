@@ -23,7 +23,7 @@ import scala.actors.threadpool.Arrays;
 import wolforce.Main;
 import wolforce.Util;
 import wolforce.integration.jei.JeiCatGrinding.JeiRecGrinding;
-import wolforce.recipes.Iri;
+import wolforce.recipes.Irio;
 import wolforce.recipes.RecipeGrinding;
 
 public class JeiCatGrinding<T extends JeiRecGrinding> implements IRecipeCategory<JeiRecGrinding> {
@@ -89,7 +89,7 @@ public class JeiCatGrinding<T extends JeiRecGrinding> implements IRecipeCategory
 
 	public static List<JeiRecGrinding> getAllRecipes() {
 		List<JeiRecGrinding> list = new LinkedList<JeiRecGrinding>();
-		for (Entry<Iri, RecipeGrinding> entry : RecipeGrinding.getRecipeList()) {
+		for (Entry<Irio, RecipeGrinding> entry : RecipeGrinding.getRecipeList()) {
 			JeiRecGrinding recipe = new JeiRecGrinding(entry.getKey(), entry.getValue());
 			System.out.println("added jei crushing recipe: " + recipe);
 			list.add(recipe);
@@ -106,7 +106,7 @@ public class JeiCatGrinding<T extends JeiRecGrinding> implements IRecipeCategory
 
 		private RecipeGrinding result;
 
-		public JeiRecGrinding(Iri in, RecipeGrinding recipeGrinding) {
+		public JeiRecGrinding(Irio in, RecipeGrinding recipeGrinding) {
 			this.result = recipeGrinding;
 
 			this.grinder = Util.listOfOneItemStack(Main.precision_grinder_empty);

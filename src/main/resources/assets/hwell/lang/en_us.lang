@@ -4,6 +4,8 @@ item.myst_fertilizer.name=Mysterious Fertilizer
 item.heavy_mesh.name=Heavy Mix Lump
 item.heavy_ingot.name=Heavy Ingot
 item.heavy_nugget.name=Heavy Nugget
+item.fuel_dust.name=Heavy Fuel Dust
+item.fuel_dust_tiny.name=Tiny Pile of Heavy Fuel Dust
 item.heavy_shears.name=Heavy Shears
 item.leaf_mesh.name=Mysterious Mixture
 item.crystal.name=Crystal
@@ -34,9 +36,12 @@ item.myst_dust_picker_h.name=Dust Picker
 item.myst_dust_picker_p.name=Dust Picker
 item.myst_dust_picker_n.name=Dust Picker
 item.locked_light.name=Imprisoned Light
-item.empty_rod_1.name=Empty Rod
-item.empty_rod_2.name=33% Filled Rod
-item.empty_rod_3.name=66% Filled Rod
+item.empty_rod.name=Empty Rod
+item.rod_blaze_1.name=25% Blaze Filled Rod
+item.rod_blaze_2.name=50% Blaze Filled Rod
+item.empty_rod_3.name=75% Blaze Filled Rod
+item.rod_myst_1.name=33% Soul Filled Rod
+item.rod_myst_2.name=66% Soul Filled Rod
 item.crystal_catalyst.name=Crystal Catalyst
 
 item.raw_soulsteel.name=Raw Soulsteel
@@ -146,7 +151,7 @@ tile.picking_table.name=Shard Picking Table
 tile.picker_holder.name=Dust Picker Holder
 tile.separator.name=Separator
 tile.freezer.name=Freezing Rod
-
+tile.generator_heat.name=Heat Generator
 tile.light_collector.name=Light Collector
 
 tile.core_stone.name=Rock Core

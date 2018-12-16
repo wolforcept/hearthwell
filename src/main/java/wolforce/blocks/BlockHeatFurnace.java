@@ -11,9 +11,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import wolforce.HWellConfig;
+import wolforce.blocks.base.BlockEnergyConsumer;
 import wolforce.tile.TileHeatFurnace;
 
-public class BlockHeatFurnace extends Block implements ITileEntityProvider {
+public class BlockHeatFurnace extends Block implements BlockEnergyConsumer, ITileEntityProvider {
 
 	public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.<EnumFacing>create("facing", EnumFacing.class);
 
@@ -53,8 +55,8 @@ public class BlockHeatFurnace extends Block implements ITileEntityProvider {
 	// }
 	// }
 
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-			EntityLivingBase placer) {
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
+			int meta, EntityLivingBase placer) {
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
 	}
 
@@ -80,6 +82,16 @@ public class BlockHeatFurnace extends Block implements ITileEntityProvider {
 	@Override
 	public int getMetaFromState(IBlockState state) {
 		return ((EnumFacing) state.getValue(FACING)).ordinal();
+	}
+
+	@Override
+	public String[] getDescription() {
+		return new String[] { "Smelts items.", "Consumes " + getEnergyConsumption() + " per operation." };
+	}
+
+	@Override
+	public int getEnergyConsumption() {
+		return HWellConfig.energyConsumptionFurnace;
 	}
 
 }

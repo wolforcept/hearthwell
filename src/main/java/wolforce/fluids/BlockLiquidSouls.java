@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -54,6 +55,7 @@ public class BlockLiquidSouls extends BlockFluid {
 			return vec;
 		Vec3d vec_flow = this.getFlowVector(world, pos);
 		return vec.addVector(vec_flow.x * (quantaPerBlock * 4), vec_flow.y * (quantaPerBlock * 4), vec_flow.z * (quantaPerBlock * 4));
+		// TODO update clients
 	}
 
 }

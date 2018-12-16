@@ -24,6 +24,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import wolforce.HWellConfig;
 import wolforce.Main;
 import wolforce.MyBlock;
 import wolforce.Util;
@@ -44,11 +45,12 @@ public class BlockLightCollector extends MyBlock {
 	}
 
 	@Override
-	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-		if (worldIn.isDaytime() && worldIn.canBlockSeeSky(pos.up())) {
+	public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
+		if (/**/(world.isDaytime() || !HWellConfig.isLightCollectorRequiredToBeDay) && //
+				(world.canBlockSeeSky(pos.up()) || !HWellConfig.isLightCollectorRequiredToSeeSky)) {
 			int curr = state.getValue(CHARGE);
 			if (curr < 3)
-				worldIn.setBlockState(pos, getDefaultState().withProperty(CHARGE, curr + 1));
+				world.setBlockState(pos, getDefaultState().withProperty(CHARGE, curr + 1));
 		}
 	}
 

@@ -6,5 +6,5 @@
     "B": [{ "item": "minecraft:glowstone_dust" }],
     "C": [{ "item": "hwell:heavy_ingot" }]
   },
-  "result": { "item": "hwell:core_sentient" }
+  "result": { "item": "hwell:core_sentient", "count": 4 }
 }

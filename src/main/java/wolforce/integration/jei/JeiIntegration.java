@@ -16,6 +16,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 import wolforce.Main;
+import wolforce.recipes.RecipeFreezer;
+import wolforce.recipes.RecipeTube;
 
 @JEIPlugin
 public class JeiIntegration implements IModPlugin {
@@ -50,6 +52,12 @@ public class JeiIntegration implements IModPlugin {
 
 		reg.addRecipeCategories(new JeiCatGrinding<>(helpers));
 
+		reg.addRecipeCategories(new JeiCatSeparating<>(helpers));
+
+		reg.addRecipeCategories(new JeiCatTubing<>(helpers));
+
+		reg.addRecipeCategories(new JeiCatFreezing<>(helpers));
+
 		// HwellCatergory coring = new HwellCatergory("coring", "Coring", Main.MODID,
 		// res(guiHelper, "items/stone_core"));
 		// reg.addRecipeCategories(coring);
@@ -72,6 +80,12 @@ public class JeiIntegration implements IModPlugin {
 		reg.addRecipes(JeiCatCrushing.getAllRecipes(), JeiCatCrushing.UID_CRUSHING);
 
 		reg.addRecipes(JeiCatGrinding.getAllRecipes(), JeiCatGrinding.UID_GRINDING);
+
+		reg.addRecipes(JeiCatSeparating.getAllRecipes(), JeiCatSeparating.UID_SEPARATOR);
+
+		reg.addRecipes(RecipeTube.recipes, JeiCatTubing.UID_TUBING);
+
+		reg.addRecipes(RecipeFreezer.recipes, JeiCatFreezing.UID_FREEZING);
 
 		// reg.addRecipeClickArea(guiContainerClass, xPos, yPos, width, height,
 		// recipeCategoryUids);

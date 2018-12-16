@@ -20,12 +20,15 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import wolforce.HWellConfig;
 import wolforce.Main;
 import wolforce.Util;
+import wolforce.blocks.base.BlockEnergyConsumer;
+import wolforce.blocks.base.BlockWithDescription;
 import wolforce.items.ItemGrindingWheel;
 import wolforce.tile.TilePrecisionGrinder;
 
-public class BlockPrecisionGrinder extends Block implements ITileEntityProvider {
+public class BlockPrecisionGrinder extends Block implements ITileEntityProvider, BlockEnergyConsumer {
 
 	private final static double F = 1.0 / 16.0;
 	protected static final AxisAlignedBB aabb = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 12.0 * F, 1.0D);
@@ -42,8 +45,8 @@ public class BlockPrecisionGrinder extends Block implements ITileEntityProvider 
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 	}
 
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-			EntityLivingBase placer) {
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
+			int meta, EntityLivingBase placer) {
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
 
@@ -54,12 +57,13 @@ public class BlockPrecisionGrinder extends Block implements ITileEntityProvider 
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX,
-			float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
+			EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!player.isSneaking())
 			return false;
 		EnumFacing prevfacing = world.getBlockState(pos).getValue(FACING);
-		world.setBlockState(pos, Main.precision_grinder_empty.getDefaultState().withProperty(BlockPrecisionGrinder.FACING, prevfacing));
+		world.setBlockState(pos,
+				Main.precision_grinder_empty.getDefaultState().withProperty(BlockPrecisionGrinder.FACING, prevfacing));
 		if (!world.isRemote)
 			Util.spawnItem(world, pos.offset(facing), new ItemStack(grindingWheel));
 		return true;
@@ -131,4 +135,13 @@ public class BlockPrecisionGrinder extends Block implements ITileEntityProvider 
 		return ((EnumFacing) state.getValue(FACING)).ordinal();
 	}
 
+	@Override
+	public int getEnergyConsumption() {
+		return HWellConfig.energyConsumptionGrinder;
+	}
+
+	@Override
+	public String[] getDescription() {
+		return new String[] { "Consumes " + getEnergyConsumption() + " Energy per Operation." };
+	}
 }

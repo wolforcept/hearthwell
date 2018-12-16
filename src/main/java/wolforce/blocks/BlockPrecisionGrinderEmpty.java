@@ -20,10 +20,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import wolforce.Main;
+import wolforce.blocks.base.BlockWithDescription;
 import wolforce.items.ItemGrindingWheel;
 import wolforce.tile.TilePrecisionGrinder;
 
-public class BlockPrecisionGrinderEmpty extends Block {
+public class BlockPrecisionGrinderEmpty extends Block implements BlockWithDescription {
 
 	public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.<EnumFacing>create("facing", EnumFacing.class);
 
@@ -36,8 +37,8 @@ public class BlockPrecisionGrinderEmpty extends Block {
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 	}
 
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY,
-			float hitZ, int meta, EntityLivingBase placer) {
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
+			int meta, EntityLivingBase placer) {
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
 
@@ -48,8 +49,8 @@ public class BlockPrecisionGrinderEmpty extends Block {
 		if (heldItem instanceof ItemGrindingWheel) {
 			player.getHeldItem(hand).shrink(1);
 			EnumFacing prevfacing = world.getBlockState(pos).getValue(FACING);
-			world.setBlockState(pos, ((ItemGrindingWheel) heldItem).grinder.getDefaultState()
-					.withProperty(BlockPrecisionGrinder.FACING, prevfacing));
+			world.setBlockState(pos,
+					((ItemGrindingWheel) heldItem).grinder.getDefaultState().withProperty(BlockPrecisionGrinder.FACING, prevfacing));
 			return true;
 		}
 		return false;
@@ -74,7 +75,7 @@ public class BlockPrecisionGrinderEmpty extends Block {
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
 		return BlockPrecisionGrinder.aabb;
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;
@@ -97,4 +98,8 @@ public class BlockPrecisionGrinderEmpty extends Block {
 		return ((EnumFacing) state.getValue(FACING)).ordinal();
 	}
 
+	@Override
+	public String[] getDescription() {
+		return new String[] { "Consumes 5 Energy per Operation." };
+	}
 }

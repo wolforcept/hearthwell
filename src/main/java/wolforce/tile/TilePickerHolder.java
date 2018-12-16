@@ -31,7 +31,7 @@ import wolforce.items.tools.ItemDustPicker;
 import wolforce.recipes.RecipeGrinding;
 import wolforce.recipes.RecipeSeparator;
 
-public class TilePickerHolder extends TileEntity implements ITickable {
+public class TilePickerHolder extends TileEntity {
 
 	public static final int nSlots = 8;
 	public ItemStackHandler inventory = new ItemStackHandler(nSlots);
@@ -114,16 +114,6 @@ public class TilePickerHolder extends TileEntity implements ITickable {
 	}
 
 	//
-
-	//
-
-	//
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-
-	}
 
 	//
 

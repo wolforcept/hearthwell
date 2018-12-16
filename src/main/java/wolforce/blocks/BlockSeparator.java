@@ -25,11 +25,13 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import wolforce.HWellConfig;
 import wolforce.Main;
 import wolforce.Util;
+import wolforce.blocks.base.BlockEnergyConsumer;
 import wolforce.tile.TileSeparator;
 
-public class BlockSeparator extends Block implements ITileEntityProvider {
+public class BlockSeparator extends Block implements BlockEnergyConsumer, ITileEntityProvider {
 
 	private final static double F = 1.0 / 16.0;
 	protected static final AxisAlignedBB aabb = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 4.0 * F, 1.0D);
@@ -47,8 +49,8 @@ public class BlockSeparator extends Block implements ITileEntityProvider {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX,
-			float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side,
+			float hitX, float hitY, float hitZ) {
 		if (!world.isRemote) {
 			TileSeparator tile = (TileSeparator) world.getTileEntity(pos);
 			IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
@@ -110,9 +112,9 @@ public class BlockSeparator extends Block implements ITileEntityProvider {
 	//
 
 	// BLOCK VISUALS
-	
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-			EntityLivingBase placer) {
+
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
+			int meta, EntityLivingBase placer) {
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
 	}
 
@@ -165,6 +167,16 @@ public class BlockSeparator extends Block implements ITileEntityProvider {
 	@Override
 	public int getMetaFromState(IBlockState state) {
 		return ((EnumFacing) state.getValue(FACING)).ordinal();
+	}
+
+	@Override
+	public String[] getDescription() {
+		return new String[] { "Separates items into its components.", "Consumes " + getEnergyConsumption() + " per operation." };
+	}
+
+	@Override
+	public int getEnergyConsumption() {
+		return HWellConfig.energyConsumptionSeparator;
 	}
 
 }

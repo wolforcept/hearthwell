@@ -18,6 +18,7 @@ import wolforce.Main;
 import wolforce.Util;
 import wolforce.Util.BlockWithMeta;
 import wolforce.blocks.BlockHeatFurnace;
+import wolforce.blocks.base.BlockEnergyConsumer;
 
 public class TileHeatFurnace extends TileEntity implements ITickable {
 
@@ -78,20 +79,26 @@ public class TileHeatFurnace extends TileEntity implements ITickable {
 			table.put("L1", new BlockWithMeta(Blocks.LAVA));
 			table.put("AR", new BlockWithMeta(Blocks.AIR));
 
-			if (Util.isMultiblockBuilt(world, pos, facing, multiblock, table))
-				for (EntityItem entityItem : entities) {
-					ItemStack result = FurnaceRecipes.instance().getSmeltingResult(new ItemStack(entityItem.getItem().getItem()));
-					if (result != ItemStack.EMPTY) {
-						BlockPos newpos = pos.offset(facing, 6);
-						EntityItem newentity = new EntityItem(world, newpos.getX() + .5, newpos.getY() + .5, newpos.getZ() + .5,
-								new ItemStack(result.getItem(), result.getCount() * entityItem.getItem().getCount()));
-						newentity.setVelocity(0, 0, 0);
-						world.spawnEntity(newentity);
-						entityItem.setDead();
-						if (Math.random() < .05 * entityItem.getItem().getCount())
-							deleteSomeWater(pos, facing);
+			if (Util.isMultiblockBuilt(world, pos, facing, multiblock, table)) {
+				EntityItem entityItem = entities.get(0);
+				ItemStack result = FurnaceRecipes.instance().getSmeltingResult(new ItemStack(entityItem.getItem().getItem()));
+				if (Util.isValid(result)) {
+
+					if (!BlockEnergyConsumer.tryConsume(world, pos,
+							((BlockEnergyConsumer) Main.heat_furnace).getEnergyConsumption())) {
+						return;
 					}
+
+					BlockPos newpos = pos.offset(facing, 6);
+					EntityItem newentity = new EntityItem(world, newpos.getX() + .5, newpos.getY() + .5, newpos.getZ() + .5,
+							new ItemStack(result.getItem(), result.getCount() * entityItem.getItem().getCount()));
+					newentity.setVelocity(0, 0, 0);
+					world.spawnEntity(newentity);
+					entityItem.setDead();
+					if (Math.random() < .05 * entityItem.getItem().getCount())
+						deleteSomeWater(pos, facing);
 				}
+			}
 		}
 	}
 

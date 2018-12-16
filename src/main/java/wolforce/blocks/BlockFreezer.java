@@ -9,33 +9,20 @@ import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.properties.PropertyInteger;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import wolforce.Main;
+import wolforce.HWellConfig;
 import wolforce.MyBlock;
 import wolforce.Util;
-import wolforce.blocks.BlockCore.CoreType;
-import wolforce.items.tools.ItemDustPicker;
-import wolforce.tile.TileCore;
+import wolforce.blocks.base.BlockEnergyConsumer;
+import wolforce.recipes.RecipeFreezer;
 
-public class BlockFreezer extends MyBlock {
+public class BlockFreezer extends MyBlock implements BlockEnergyConsumer {
 
 	private final static double F = 1.0 / 16.0;
 	protected static final AxisAlignedBB aabb = new AxisAlignedBB(6 * F, 0, 6 * F, 10 * F, 9 * F, 10 * F);
@@ -51,23 +38,41 @@ public class BlockFreezer extends MyBlock {
 	public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
 		if (world.isRemote)
 			return;
-		if (!world.isDaytime()) {
-			List<BlockPos> nearWater = getNearWater(world, pos);
-			if (nearWater.size() == 0)
+		if (!world.isDaytime() || !HWellConfig.isFreezerRequiredToBeNight) {
+
+			List<BlockPos> nearBlocks = getNearBlocks(world, pos);
+			if (nearBlocks.size() == 0)
 				return;
-			Collections.shuffle(nearWater);
-			world.setBlockState(nearWater.get(0), Math.random() < .5 ? Blocks.SNOW.getDefaultState() : Blocks.ICE.getDefaultState());
+
+			// ENERGY CONSUMPTION
+			if (!BlockEnergyConsumer.tryConsume(world, pos, getEnergyConsumption())) {
+				return;
+			}
+
+			int randomIndex = (int) (Math.random() * nearBlocks.size());
+			world.setBlockState(//
+					nearBlocks.get(randomIndex), //
+					RecipeFreezer.getResult(//
+							world.getBlockState(nearBlocks.get(randomIndex))//
+					).getDefaultState()//
+			);
+
 		}
 	}
 
-	private List<BlockPos> getNearWater(World world, BlockPos pos) {
+	private List<BlockPos> getNearBlocks(World world, BlockPos pos) {
 		LinkedList<BlockPos> list = new LinkedList<>();
-		for (int x = -5; x < 5; x++) {
-			for (int y = -5; y < 5; y++) {
-				for (int z = -5; z < 5; z++) {
-					Block block = world.getBlockState(pos.add(x, y, z)).getBlock();
-					if (block.equals(Blocks.FLOWING_WATER) || block.equals(Blocks.WATER))
-						list.add(pos.add(x, y, z));
+		final int n = HWellConfig.freezerRange;
+		for (int x = -n; x <= n; x++) {
+			for (int y = -n; y <= n; y++) {
+				for (int z = -n; z <= n; z++) {
+					BlockPos thispos = pos.add(x, y, z);
+					IBlockState state = world.getBlockState(thispos);
+					// if (!world.isRemote && RecipeFreezer.hasResult(state))//
+					// !state.equals(Blocks.AIR.getDefaultState()))
+					// System.out.println(state + " > " + RecipeFreezer.hasResult(state));
+					if (RecipeFreezer.hasResult(state))
+						list.add(thispos);
 				}
 			}
 		}
@@ -101,6 +106,17 @@ public class BlockFreezer extends MyBlock {
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;
+	}
+
+	@Override
+	public String[] getDescription() {
+		return new String[] { "Will freeze nearby water to ice or snow,", "and nearby lava to obsidian.",
+				"Consumes " + getEnergyConsumption() + " Energy per Operation." };
+	}
+
+	@Override
+	public int getEnergyConsumption() {
+		return HWellConfig.energyConsumptionFreezer;
 	}
 
 }

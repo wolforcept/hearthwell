@@ -11,27 +11,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import wolforce.HWellConfig;
 import wolforce.Main;
+import wolforce.recipes.RecipeTube;
 
 public class BlockTube extends MyLog {
-
-	// RECIPES
-
-	private boolean makesLava(Block block) {
-		return block == Blocks.STONE || block == Blocks.COBBLESTONE || block == Blocks.SANDSTONE || block == Blocks.NETHERRACK;
-	}
-
-	private boolean makesWater(Block block) {
-		return block == Blocks.CACTUS || //
-				block == Blocks.LEAVES || //
-				block == Blocks.LEAVES2 || //
-				block == Blocks.SNOW || //
-				block == Blocks.CLAY || //
-				block == Blocks.ICE || //
-				block == Blocks.PACKED_ICE;
-	}
-
-	// CLASS
 
 	public BlockTube(String name) {
 		super(name);
@@ -45,16 +29,18 @@ public class BlockTube extends MyLog {
 	public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
 		if (state.getValue(BlockLog.LOG_AXIS) != BlockLog.EnumAxis.Y)
 			return;
-		if (makesLava(world.getBlockState(pos.down()).getBlock())) {
-			int nTubes = getNrOfTubesOnTop(world, pos);
-			if (Math.random() < nTubes * .1)
-				world.setBlockState(pos.down(), Blocks.LAVA.getDefaultState(), 1 | 2);
+		Block result = RecipeTube.getResult(world.getBlockState(pos.down()).getBlock());
+		if (result != null)
+			tryMake(world, pos, result.getDefaultState());
+	}
 
-		} else if (makesWater(world.getBlockState(pos.down()).getBlock())) {
-			int nTubes = getNrOfTubesOnTop(world, pos);
-			if (Math.random() < nTubes * .1)
-				world.setBlockState(pos.down(), Blocks.WATER.getDefaultState(), 1 | 2);
-		}
+	private void tryMake(World world, BlockPos pos, IBlockState state) {
+		int nTubes = getNrOfTubesOnTop(world, pos);
+		if (/**/(world.canBlockSeeSky(pos.up(nTubes)) || !HWellConfig.isTubeRequiredToSeeSky) && //
+				(world.isDaytime() || !HWellConfig.isTubeRequiredToBeDay) && //
+				Math.random() < nTubes * .1 //
+		)
+			world.setBlockState(pos.down(), state, 1 | 2);
 	}
 
 	private int getNrOfTubesOnTop(World world, BlockPos pos) {

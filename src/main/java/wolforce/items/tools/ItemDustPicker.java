@@ -14,6 +14,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import wolforce.Main;
 import wolforce.blocks.BlockPickerHolder;
 
 public class ItemDustPicker extends ItemTool {
@@ -26,6 +27,16 @@ public class ItemDustPicker extends ItemTool {
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setMaxDamage(64);
+	}
+
+	@Override
+	public boolean isRepairable() {
+		return true;
+	}
+
+	@Override
+	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+		return repair.getItem() == Main.heavy_ingot;
 	}
 
 	@Override

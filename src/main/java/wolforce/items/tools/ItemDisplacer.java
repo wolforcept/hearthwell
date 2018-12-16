@@ -40,6 +40,16 @@ public class ItemDisplacer extends MyItem {
 	}
 
 	@Override
+	public boolean isRepairable() {
+		return true;
+	}
+
+	@Override
+	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+		return repair.getItem() == Main.heavy_ingot;
+	}
+
+	@Override
 	public int getMaxItemUseDuration(ItemStack stack) {
 		return 20;
 	}
