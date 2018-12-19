@@ -33,6 +33,10 @@ public class TileGeneratorHeat extends TileEntity implements ITickable {
 		int next = world.getBlockState(pos).getValue(BlockGeneratorHeat.TEMP) + 1;
 		if (next != 10)
 			world.setBlockState(pos, Main.generator_heat.getDefaultState().withProperty(BlockGeneratorHeat.TEMP, next));
+
+		if (Math.random() < .001) {
+			world.setBlockState(pos.down(), Blocks.OBSIDIAN.getDefaultState());
+		}
 	}
 
 }

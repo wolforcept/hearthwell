@@ -1,0 +1,12 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+	"A A",
+	"A A"
+  ],
+  "key": {
+    "A": [{ "item": "hwell:soulsteel_ingot" }]
+  },
+  "result": { "item": "hwell:soulsteel_legs" }
+}
