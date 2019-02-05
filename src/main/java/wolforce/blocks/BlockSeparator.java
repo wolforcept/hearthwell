@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -29,7 +30,7 @@ import wolforce.HWellConfig;
 import wolforce.Main;
 import wolforce.Util;
 import wolforce.blocks.base.BlockEnergyConsumer;
-import wolforce.tile.TileSeparator;
+import wolforce.blocks.tile.TileSeparator;
 
 public class BlockSeparator extends Block implements BlockEnergyConsumer, ITileEntityProvider {
 
@@ -39,7 +40,7 @@ public class BlockSeparator extends Block implements BlockEnergyConsumer, ITileE
 	public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.<EnumFacing>create("facing", EnumFacing.class);
 
 	public BlockSeparator(String name) {
-		super(Main.material_soulsteel);
+		super(Material.ROCK);
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setHardness(2);
@@ -171,7 +172,8 @@ public class BlockSeparator extends Block implements BlockEnergyConsumer, ITileE
 
 	@Override
 	public String[] getDescription() {
-		return new String[] { "Separates items into its components.", "Consumes " + getEnergyConsumption() + " per operation." };
+		return new String[] { "Separates items into its components.",
+				"Consumes " + getEnergyConsumption() + " energy per operation.", "Requires a multiblock Structure."  };
 	}
 
 	@Override

@@ -1,9 +1,11 @@
 package wolforce.items;
 
 import java.util.HashMap;
+import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -13,10 +15,14 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.storage.loot.LootContext;
+import net.minecraft.world.storage.loot.LootTable;
+import net.minecraft.world.storage.loot.LootTableList;
 import wolforce.Main;
 import wolforce.MyItem;
 import wolforce.Util;
-import wolforce.tile.TileDismantler;
+import wolforce.blocks.tile.TileDismantler;
 
 public class ItemLockedLight extends MyItem {
 
@@ -32,4 +38,5 @@ public class ItemLockedLight extends MyItem {
 	// return EnumActionResult.PASS;
 	// }
 
+	
 }

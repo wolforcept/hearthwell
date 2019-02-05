@@ -1,60 +1,61 @@
 package wolforce;
 
 import java.awt.Color;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockGrass;
-import net.minecraft.block.BlockHalfStoneSlab;
-import net.minecraft.block.BlockSlab;
-import net.minecraft.block.BlockStoneSlabNew;
+import net.minecraft.block.BlockHay;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialLiquid;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
-import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ColorizerGrass;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.biome.BiomeColorHelper;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.storage.loot.LootContext;
+import net.minecraft.world.storage.loot.LootTable;
+import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.common.crafting.CraftingHelper.ShapedPrimer;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -66,13 +67,21 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.RecipeSorter;
+import net.minecraftforge.registries.GameData;
+import scala.actors.threadpool.Arrays;
+import wolforce.blocks.BlockAntiGravity;
+import wolforce.blocks.BlockBox;
+import wolforce.blocks.BlockBoxer;
 import wolforce.blocks.BlockBurstSeed;
 import wolforce.blocks.BlockCore;
 import wolforce.blocks.BlockCrushing;
 import wolforce.blocks.BlockDust;
+import wolforce.blocks.BlockFertileSoil;
 import wolforce.blocks.BlockFreezer;
 import wolforce.blocks.BlockGeneratorHeat;
 import wolforce.blocks.BlockGravity;
+import wolforce.blocks.BlockGravityMini;
 import wolforce.blocks.BlockGroundShovel;
 import wolforce.blocks.BlockHeat;
 import wolforce.blocks.BlockHeatFurnace;
@@ -81,43 +90,58 @@ import wolforce.blocks.BlockMyGlass;
 import wolforce.blocks.BlockMystBush;
 import wolforce.blocks.BlockMystGrass;
 import wolforce.blocks.BlockMystLeaves;
+import wolforce.blocks.BlockNourisher;
 import wolforce.blocks.BlockPickerHolder;
 import wolforce.blocks.BlockPickingTable;
 import wolforce.blocks.BlockPrecisionGrinder;
 import wolforce.blocks.BlockPrecisionGrinderEmpty;
+import wolforce.blocks.BlockProducer;
+import wolforce.blocks.BlockPuller;
 import wolforce.blocks.BlockSeparator;
 import wolforce.blocks.BlockSlabLamp;
+import wolforce.blocks.BlockStoneDust;
+import wolforce.blocks.BlockTotem;
 import wolforce.blocks.BlockTube;
 import wolforce.blocks.MyLog;
 import wolforce.blocks.base.BlockWithDescription;
+import wolforce.blocks.tile.TileCore;
+import wolforce.blocks.tile.TileGravity;
+import wolforce.blocks.tile.TilePickerHolder;
+import wolforce.blocks.tile.TileSeparator;
 import wolforce.fluids.BlockLiquidSouls;
+import wolforce.items.ItemCrystal;
 import wolforce.items.ItemCrystalBowl;
 import wolforce.items.ItemCrystalBowlWater;
 import wolforce.items.ItemEmptyRod;
 import wolforce.items.ItemGrindingWheel;
 import wolforce.items.ItemHeavyShears;
 import wolforce.items.ItemLockedLight;
+import wolforce.items.ItemLoot;
 import wolforce.items.ItemMystDust;
 import wolforce.items.ItemMystFertilizer;
-import wolforce.items.tools.ItemDustPicker;
+import wolforce.items.ItemRawSoulsteel;
+import wolforce.items.ItemSeedOfLife;
+import wolforce.items.ItemShard;
 import wolforce.items.tools.ItemDisplacer;
+import wolforce.items.tools.ItemDustPicker;
 import wolforce.items.tools.MyArmor;
 import wolforce.items.tools.MyAxe;
+import wolforce.items.tools.MyDagger;
 import wolforce.items.tools.MyPickaxe;
 import wolforce.items.tools.MyShovel;
 import wolforce.items.tools.MySword;
+import wolforce.recipes.MyShapedRecipe;
+import wolforce.recipes.RecipeBoxer;
 import wolforce.recipes.RecipeCoring;
 import wolforce.recipes.RecipeCrushing;
 import wolforce.recipes.RecipeFreezer;
 import wolforce.recipes.RecipeGrinding;
+import wolforce.recipes.RecipePuller;
+import wolforce.recipes.RecipeRepairingPaste;
 import wolforce.recipes.RecipeSeparator;
 import wolforce.recipes.RecipeTube;
 import wolforce.tesrs.TesrPickerHolder;
 import wolforce.tesrs.TesrSeparator;
-import wolforce.tile.TileCore;
-import wolforce.tile.TileGravity;
-import wolforce.tile.TilePickerHolder;
-import wolforce.tile.TileSeparator;
 
 @Mod(modid = Main.MODID, name = Main.NAME, version = Main.VERSION)
 @Mod.EventBusSubscriber(modid = Main.MODID)
@@ -137,71 +161,91 @@ public class Main {
 
 	private static LinkedList<Block> blocks;
 
-	public static Material material_heavy, material_soulsteel;
-	public static ArmorMaterial material_armor_soulsteel;
+	// public static Material material_heavy, material_mystic_iron, material_asul,
+	// material_soulsteel;
+	public static ToolMaterial material_tool_mystic_iron, material_tool_soulsteel;
+	public static ArmorMaterial material_armor_mystic_iron, material_armor_soulsteel;
 	public static MaterialLiquid material_liquid_souls;
+
+	public static Block glowstone_ore, quartz_ore;
+	public static Item seed_of_life;
+	public static Block fertile_soil;
+	public static Item wheat_flour, salt;
 
 	// tier 1
 	public static Item dust;
 	public static Item myst_dust, myst_fertilizer;
 	public static Item heavy_mesh, heavy_ingot, heavy_nugget, fuel_dust, fuel_dust_tiny;
+	public static Block heavy_block;
 	public static Item heavy_shears, leaf_mesh;
 	public static Item crystal, crystal_nether, crystal_bowl, crystal_bowl_water;
-	public static Item shard_fe, shard_au, shard_o, shard_c, shard_h, shard_ca, shard_p, shard_n;
+	public static ItemShard shard_fe, shard_au, shard_o, shard_c, shard_h, shard_ca, shard_p, shard_n;
 	public static Item obsidian_displacer, empowered_displacer;
-	public static ItemGrindingWheel grinding_wheel_flint, grinding_wheel_iron, grinding_wheel_diamond, grinding_wheel_crystal,
-			grinding_wheel_crystal_nether;
+	public static ItemGrindingWheel /* grinding_wheel_flint, */ grinding_wheel_iron, grinding_wheel_diamond, grinding_wheel_crystal;
+	// , grinding_wheel_crystal_nether;
 	// public static Item shard_water;
 
-	public static Block heavy_block;
 	public static Block crystal_block, crystal_nether_block;
 	public static Block myst_grass;
 	public static Block myst_bush, myst_bush_big;
 	public static Block myst_dust_block;
 	public static Block dust_block;
-	public static Block dismantler, crushing_block, gravity_block, gravity_powered_block;
+	public static Block dismantler, crushing_block, gravity_block, gravity_block_mini, gravity_powered_block, antigravity_block,
+			antigravity_powered_block;
 	public static Block myst_log, myst_planks, myst_leaves;
+
+	public static Item asul_ingot, asul_nugget;
+	public static Block raw_asul_block, asul_block;
+	public static Block asul_machine_case;
+
 	public static Block light_collector;
 	public static BlockCore core_stone, core_heat, core_green, core_sentient;
 	public static Block stabiliser;
 	public static Block picking_table, picker_holder;
-	public static Block compressed_clay, white_block, moonstone, moonstone_bricks, citrinic_stone, citrinic_sand, onyx, smooth_onyx,
-			azurite, smooth_azurite, scorch_grit, scorch_glass, fullgrass_block, metal_diamond_block;
+	public static Block white_block, moonstone, moonstone_bricks, citrinic_stone, citrinic_sand, onyx, smooth_onyx, azurite,
+			smooth_azurite, scorch_grit, scorch_glass, fullgrass_block, metaldiamond_block;
+	public static BlockNourisher nourisher;
 	public static Block freezer, generator_heat;
-
-	// tier 2
-	// public static Block coreGreen;
-	// public static Block coreGreen2;
-
-	// tier 3
-	public static Item crystal_catalyst, soul_dust, raw_soulsteel, soulsteel_ingot;
+	public static Block compressed_clay, fertilizer_block;
+	public static Item raw_mystic_iron, mystic_iron_ingot;
+	public static Block mystic_iron_block;
+	public static Item mystic_iron_sword, mystic_iron_dagger, mystic_iron_pickaxe, mystic_iron_axe, mystic_iron_shovel,
+			mystic_iron_hoe;
+	public static Item mystic_iron_helmet, mystic_iron_chest, mystic_iron_legs, mystic_iron_boots;
+	public static Block mutation_paste_block;
+	public static Item metaldiamond, crystal_catalyst, soul_dust, raw_soulsteel, soulsteel_ingot, mutation_paste, raw_repairing_paste,
+			repairing_paste;
 	public static Block soulsteel_block;
-	public static Item soulsteel_sword, soulsteel_pickaxe, soulsteel_axe, soulsteel_shovel, soulsteel_hoe;
+	public static Item soulsteel_sword, soulsteel_dagger, soulsteel_pickaxe, soulsteel_axe, soulsteel_shovel, soulsteel_hoe;
 	public static Item soulsteel_helmet, soulsteel_chest, soulsteel_legs, soulsteel_boots;
-
 	public static Item locked_light, empty_rod, myst_rod, rod_myst_1, rod_myst_2, rod_blaze_1, rod_blaze_2, rod_blaze_3;
 	public static Item myst_dust_picker_fe, myst_dust_picker_ca, //
 			myst_dust_picker_c, myst_dust_picker_o, myst_dust_picker_au, //
 			myst_dust_picker_h, myst_dust_picker_p, myst_dust_picker_n;
-
 	public static Block slab_lamp;
 	public static Block furnace_tube, heat_furnace;
 	public static Block protection_block, heavy_protection_block;
 	public static Block precision_grinder_flint, precision_grinder_iron, precision_grinder_diamond, precision_grinder_crystal,
-			precision_grinder_crystal_nether, precision_grinder_empty;
+			precision_grinder_empty;
+	// , precision_grinder_crystal_nether
 	public static Block heat_block;
-
 	public static Block burst_seed_stone, burst_seed_sand, burst_seed_dirt, burst_seed_snow, burst_seed_netherrack;
+	public static Block totem_enderman, totem_zombie, totem_skeleton, totem_creeper;
+	public static Item loot_base;
+	public static ItemLoot loot_blaze, loot_creeper, loot_enderman, loot_ghast, loot_shulker, loot_skeleton, loot_slime, loot_spider,
+			loot_witch, loot_wither, loot_zombie;
+	public static BlockProducer producer;
+	public static BlockPuller puller;
 
 	public static CreativeTabs creativeTab;
 
 	//
+	public static Block boxer;
+	public static BlockBox[] boxes;
 
 	// tier 4
 	public static Block separator;
 
-	public static Item asul_ingot;
-	public static Block asul_block;
 	public static Block weeping_block;
 
 	public static Item[] shards;
@@ -219,14 +263,60 @@ public class Main {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 
-		material_heavy = new Material(MapColor.SAND);
-		material_soulsteel = new Material(MapColor.SAND);
+		// material_heavy = new Material(MapColor.SAND);
+		// material_mystic_iron = new Material(MapColor.SAND);
+		// material_asul = new Material(MapColor.SAND);
+		// material_soulsteel = new Material(MapColor.SAND);
 
-		material_armor_soulsteel = EnumHelper.addArmorMaterial("Soulsteel", "soulsteel", 10, new int[] { 0, 0, 0, 0 }, 25,
-				SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2);
+		material_armor_mystic_iron = EnumHelper.addArmorMaterial("mysticIron", "mystic_iron", 10, new int[] { 2, 5, 6, 2 }, 25,
+				SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2);
+		material_armor_soulsteel = EnumHelper.addArmorMaterial("soulsteel", "soulsteel", 10, new int[] { 3, 6, 8, 3 }, 25,
+				SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2);
+		material_tool_mystic_iron = EnumHelper.addToolMaterial("mysticIron", 2, 425, 6, 2, 15);
+		material_tool_soulsteel = EnumHelper.addToolMaterial("soulsteel", 3, 1920, 8, 3, 20);
 
 		items = new LinkedList<>();
 		blocks = new LinkedList<>();
+
+		quartz_ore = new MyBlock("quartz_ore", Material.ROCK);
+		blocks.add(quartz_ore);
+		glowstone_ore = new MyBlock("glowstone_ore", Material.ROCK);
+		blocks.add(glowstone_ore);
+
+		loot_base = new ItemLoot("loot_base", "Produced in a Loot Kit Producer.");
+		items.add(loot_base);
+		loot_blaze = new ItemLoot("loot_blaze");
+		items.add(loot_blaze);
+		loot_creeper = new ItemLoot("loot_creeper");
+		items.add(loot_creeper);
+		loot_enderman = new ItemLoot("loot_enderman");
+		items.add(loot_enderman);
+		loot_ghast = new ItemLoot("loot_ghast");
+		items.add(loot_ghast);
+		loot_shulker = new ItemLoot("loot_shulker");
+		items.add(loot_shulker);
+		loot_skeleton = new ItemLoot("loot_skeleton");
+		items.add(loot_skeleton);
+		loot_slime = new ItemLoot("loot_slime");
+		items.add(loot_slime);
+		loot_spider = new ItemLoot("loot_spider");
+		items.add(loot_spider);
+		loot_witch = new ItemLoot("loot_witch");
+		items.add(loot_witch);
+		loot_wither = new ItemLoot("loot_wither");
+		items.add(loot_wither);
+		loot_zombie = new ItemLoot("loot_zombie");
+		items.add(loot_zombie);
+
+		producer = new BlockProducer("producer");
+		blocks.add(producer);
+		puller = new BlockPuller("puller");
+		blocks.add(puller);
+
+		seed_of_life = new ItemSeedOfLife("seed_of_life", "Right-click on the ground to breed life!");
+		items.add(seed_of_life);
+		fertile_soil = new BlockFertileSoil("fertile_soil");
+		blocks.add(fertile_soil);
 
 		// TIER 1
 
@@ -255,6 +345,17 @@ public class Main {
 		};
 		items.add(fuel_dust_tiny);
 
+		asul_machine_case = new MyBlock("asul_machine_case", Material.ROCK).setHarvest("pickaxe", -1);
+		blocks.add(asul_machine_case);
+		asul_ingot = new MyItem("asul_ingot");
+		items.add(asul_ingot);
+		asul_nugget = new MyItem("asul_nugget");
+		items.add(asul_nugget);
+		asul_block = new MyBlock("asul_block", Material.CLAY).setHardness(.55f).setHarvest("pickaxe", -1);
+		blocks.add(asul_block);
+		raw_asul_block = new MyBlock("raw_asul_block", Material.CLAY).setHardness(.55f).setHarvest("pickaxe", -1);
+		blocks.add(raw_asul_block);
+
 		crushing_block = new BlockCrushing("crushing_block");
 		blocks.add(crushing_block);
 		core_stone = new BlockCore("core_stone", true);
@@ -263,8 +364,14 @@ public class Main {
 		items.add(heavy_shears);
 		gravity_block = new BlockGravity("gravity_block", true);
 		blocks.add(gravity_block);
+		gravity_block_mini = new BlockGravityMini("gravity_block_mini", false);
+		blocks.add(gravity_block_mini);
 		gravity_powered_block = new BlockGravity("gravity_powered_block", false);
 		blocks.add(gravity_powered_block);
+		antigravity_block = new BlockAntiGravity("antigravity_block", true);
+		blocks.add(antigravity_block);
+		antigravity_powered_block = new BlockAntiGravity("antigravity_powered_block", false);
+		blocks.add(antigravity_powered_block);
 
 		dust = new MyItem("dust");
 		items.add(dust);
@@ -272,7 +379,7 @@ public class Main {
 		items.add(myst_dust);
 		myst_dust_block = new BlockDust("myst_dust_block");
 		blocks.add(myst_dust_block);
-		dust_block = new BlockDust("dust_block");
+		dust_block = new BlockStoneDust("dust_block");
 		blocks.add(dust_block);
 
 		slab_lamp = new BlockSlabLamp("slab_lamp");
@@ -302,7 +409,7 @@ public class Main {
 		crystal_block = new BlockMyGlass("crystal_block");
 		blocks.add(crystal_block);
 
-		crystal = new MyItem("crystal");
+		crystal = new ItemCrystal("crystal");
 		items.add(crystal);
 
 		crystal_bowl = new ItemCrystalBowl("crystal_bowl");
@@ -310,21 +417,25 @@ public class Main {
 		crystal_bowl_water = new ItemCrystalBowlWater("crystal_bowl_water", "Drink it!");
 		items.add(crystal_bowl_water);
 
-		shard_c = new MyItem("shard_c");
+		wheat_flour = new MyItem("wheat_flour");
+		items.add(wheat_flour);
+		salt = new MyItem("salt");
+		items.add(salt);
+		shard_c = new ItemShard("shard_c");
 		items.add(shard_c);
-		shard_fe = new MyItem("shard_fe");
+		shard_fe = new ItemShard("shard_fe");
 		items.add(shard_fe);
-		shard_au = new MyItem("shard_au");
+		shard_au = new ItemShard("shard_au");
 		items.add(shard_au);
-		shard_o = new MyItem("shard_o");
+		shard_o = new ItemShard("shard_o");
 		items.add(shard_o);
-		shard_h = new MyItem("shard_h");
+		shard_h = new ItemShard("shard_h");
 		items.add(shard_h);
-		shard_ca = new MyItem("shard_ca");
+		shard_ca = new ItemShard("shard_ca");
 		items.add(shard_ca);
-		shard_p = new MyItem("shard_p");
+		shard_p = new ItemShard("shard_p");
 		items.add(shard_p);
-		shard_n = new MyItem("shard_n");
+		shard_n = new ItemShard("shard_n");
 		items.add(shard_n);
 
 		compressed_clay = new MyBlock("compressed_clay", Material.CLAY).setHardness(.5f).setResistance(2);
@@ -388,6 +499,8 @@ public class Main {
 		items.add(empowered_displacer);
 		freezer = new BlockFreezer("freezer");
 		blocks.add(freezer);
+		nourisher = new BlockNourisher("nourisher");
+		blocks.add(nourisher);
 
 		generator_heat = new BlockGeneratorHeat("generator_heat");
 		blocks.add(generator_heat);
@@ -407,6 +520,9 @@ public class Main {
 
 		weeping_block = new MyBlock("weeping_block", Material.CLAY);
 		blocks.add(weeping_block);
+
+		fertilizer_block = new MyBlock("fertilizer_block", Material.GOURD);
+		blocks.add(fertilizer_block);
 
 		picking_table = new BlockPickingTable("picking_table");
 		blocks.add(picking_table);
@@ -438,9 +554,10 @@ public class Main {
 		precision_grinder_empty = new BlockPrecisionGrinderEmpty("precision_grinder_empty");
 		blocks.add(precision_grinder_empty);
 
-		grinding_wheel_flint = new ItemGrindingWheel("grinding_wheel_flint", "Allows the grind of:", //
-				"", "");
-		items.add(grinding_wheel_flint);
+		// grinding_wheel_flint = new ItemGrindingWheel("grinding_wheel_flint", "Allows
+		// the grind of:", //
+		// "", "");
+		// items.add(grinding_wheel_flint);
 		grinding_wheel_iron = new ItemGrindingWheel("grinding_wheel_iron", "Allows the grind of:", //
 				"", "");
 		items.add(grinding_wheel_iron);
@@ -450,32 +567,68 @@ public class Main {
 		grinding_wheel_crystal = new ItemGrindingWheel("grinding_wheel_crystal", "Allows the grind of:", //
 				"", "");
 		items.add(grinding_wheel_crystal);
-		grinding_wheel_crystal_nether = new ItemGrindingWheel("grinding_wheel_crystal_nether", "Allows the grind of:", //
-				"", "");
-		items.add(grinding_wheel_crystal_nether);
+		// grinding_wheel_crystal_nether = new
+		// ItemGrindingWheel("grinding_wheel_crystal_nether", "Allows the grind of:", //
+		// "", "");
+		// items.add(grinding_wheel_crystal_nether);
 
-		precision_grinder_flint = new BlockPrecisionGrinder("precision_grinder_flint", grinding_wheel_flint);
-		blocks.add(precision_grinder_flint);
+		// precision_grinder_flint = new
+		// BlockPrecisionGrinder("precision_grinder_flint", grinding_wheel_flint);
+		// blocks.add(precision_grinder_flint);
 		precision_grinder_iron = new BlockPrecisionGrinder("precision_grinder_iron", grinding_wheel_iron);
 		blocks.add(precision_grinder_iron);
 		precision_grinder_diamond = new BlockPrecisionGrinder("precision_grinder_diamond", grinding_wheel_diamond);
 		blocks.add(precision_grinder_diamond);
 		precision_grinder_crystal = new BlockPrecisionGrinder("precision_grinder_crystal", grinding_wheel_crystal);
 		blocks.add(precision_grinder_crystal);
-		precision_grinder_crystal_nether = new BlockPrecisionGrinder("precision_grinder_crystal_nether",
-				grinding_wheel_crystal_nether);
-		blocks.add(precision_grinder_crystal_nether);
+		// precision_grinder_crystal_nether = new
+		// BlockPrecisionGrinder("precision_grinder_crystal_nether",
+		// grinding_wheel_crystal_nether);
+		// blocks.add(precision_grinder_crystal_nether);
 
-		grinding_wheel_flint.grinder = precision_grinder_flint;
+		// grinding_wheel_flint.grinder = precision_grinder_flint;
 		grinding_wheel_iron.grinder = precision_grinder_iron;
 		grinding_wheel_diamond.grinder = precision_grinder_diamond;
 		grinding_wheel_crystal.grinder = precision_grinder_crystal;
-		grinding_wheel_crystal_nether.grinder = precision_grinder_crystal_nether;
+		// grinding_wheel_crystal_nether.grinder = precision_grinder_crystal_nether;
 
 		light_collector = new BlockLightCollector("light_collector");
 		blocks.add(light_collector);
 		locked_light = new ItemLockedLight("locked_light", "Drops from charged light collectors");
 		items.add(locked_light);
+
+		raw_mystic_iron = new MyItem("raw_mystic_iron");
+		items.add(raw_mystic_iron);
+		mystic_iron_ingot = new MyItem("mystic_iron_ingot");
+		items.add(mystic_iron_ingot);
+		mystic_iron_block = new MyBlock("mystic_iron_block", Material.CLAY).setHardness(.55f);
+		blocks.add(mystic_iron_block);
+
+		mystic_iron_sword = new MySword("mystic_iron_sword", material_tool_mystic_iron, mystic_iron_ingot, -2.4000000953674316);
+		items.add(mystic_iron_sword);
+		mystic_iron_dagger = new MyDagger("mystic_iron_dagger", material_tool_mystic_iron, mystic_iron_ingot,
+				-2.4000000953674316 / 3d);
+		items.add(mystic_iron_dagger);
+		mystic_iron_axe = new MyAxe("mystic_iron_axe", material_tool_mystic_iron, mystic_iron_ingot, -3);
+		items.add(mystic_iron_axe);
+		mystic_iron_pickaxe = new MyPickaxe("mystic_iron_pickaxe", material_tool_mystic_iron, mystic_iron_ingot);
+		items.add(mystic_iron_pickaxe);
+		mystic_iron_shovel = new MyShovel("mystic_iron_shovel", material_tool_mystic_iron, mystic_iron_ingot);
+		items.add(mystic_iron_shovel);
+		// TODO mystic_iron_hoe;
+
+		mystic_iron_helmet = new MyArmor("mystic_iron_helmet", "mystic_iron", EntityEquipmentSlot.HEAD, material_armor_mystic_iron,
+				mystic_iron_ingot, 20);
+		items.add(mystic_iron_helmet);
+		mystic_iron_chest = new MyArmor("mystic_iron_chest", "mystic_iron", EntityEquipmentSlot.CHEST, material_armor_mystic_iron,
+				mystic_iron_ingot, 20);
+		items.add(mystic_iron_chest);
+		mystic_iron_legs = new MyArmor("mystic_iron_legs", "mystic_iron", EntityEquipmentSlot.LEGS, material_armor_mystic_iron,
+				mystic_iron_ingot, 20);
+		items.add(mystic_iron_legs);
+		mystic_iron_boots = new MyArmor("mystic_iron_boots", "mystic_iron", EntityEquipmentSlot.FEET, material_armor_mystic_iron,
+				mystic_iron_ingot, 20);
+		items.add(mystic_iron_boots);
 
 		core_green = new BlockCore("core_green", false);
 		blocks.add(core_green);
@@ -486,32 +639,50 @@ public class Main {
 		// TIER 3
 		crystal_catalyst = new MyItem("crystal_catalyst");
 		items.add(crystal_catalyst);
-		raw_soulsteel = new MyItem("raw_soulsteel");
+		metaldiamond = new MyItem("metaldiamond");
+		items.add(metaldiamond);
+		raw_soulsteel = new ItemRawSoulsteel("raw_soulsteel", "The trapped souls swirl inside.");
 		items.add(raw_soulsteel);
 		soul_dust = new MyItem("soul_dust");
 		items.add(soul_dust);
-		soulsteel_ingot = new MyItem("soulsteel_ingot");
+		soulsteel_ingot = new MyItem("soulsteel_ingot", "A strong material with high enchantability.");
 		items.add(soulsteel_ingot);
+		mutation_paste = new MyItem("mutation_paste");
+		items.add(mutation_paste);
+		mutation_paste_block = new MyBlock("mutation_paste_block", Material.GRASS).setHardness(1f).setResistance(1f);
+		blocks.add(mutation_paste_block);
+		repairing_paste = new MyItem("repairing_paste", new String[] {
+				"Place it on your left hand to slowly repair items on your right hand.", "Can repair up to 500 damage." })
+						.setMaxStackSize(1).setMaxDamage(500);
+		items.add(repairing_paste);
+		raw_repairing_paste = new MyItem("raw_repairing_paste");
+		items.add(raw_repairing_paste);
 		soulsteel_block = new MyBlock("soulsteel_block", Material.CLAY).setHardness(.55f);
 		blocks.add(soulsteel_block);
 
-		soulsteel_sword = new MySword("soulsteel_sword", 1920, 2.5f, soulsteel_ingot);
+		soulsteel_sword = new MySword("soulsteel_sword", material_tool_soulsteel, soulsteel_ingot, -2.4000000953674316);
 		items.add(soulsteel_sword);
-		soulsteel_axe = new MyAxe("soulsteel_axe", 1920, 3, 2.5f, -3f, soulsteel_ingot);
+		soulsteel_dagger = new MyDagger("soulsteel_dagger", material_tool_soulsteel, soulsteel_ingot, -2.4000000953674316 / 3d);
+		items.add(soulsteel_dagger);
+		soulsteel_axe = new MyAxe("soulsteel_axe", material_tool_soulsteel, soulsteel_ingot, -3);
 		items.add(soulsteel_axe);
-		soulsteel_pickaxe = new MyPickaxe("soulsteel_pickaxe", 1920, 3, soulsteel_ingot);
+		soulsteel_pickaxe = new MyPickaxe("soulsteel_pickaxe", material_tool_soulsteel, soulsteel_ingot);
 		items.add(soulsteel_pickaxe);
-		soulsteel_shovel = new MyShovel("soulsteel_shovel", 1920, 3, soulsteel_ingot);
+		soulsteel_shovel = new MyShovel("soulsteel_shovel", material_tool_soulsteel, soulsteel_ingot);
 		items.add(soulsteel_shovel);
 		// TODO soulsteel_hoe;
 
-		soulsteel_helmet = new MyArmor("soulsteel_helmet", EntityEquipmentSlot.HEAD, material_armor_soulsteel, soulsteel_ingot);
+		soulsteel_helmet = new MyArmor("soulsteel_helmet", "soulsteel", EntityEquipmentSlot.HEAD, material_armor_soulsteel,
+				soulsteel_ingot, 20);
 		items.add(soulsteel_helmet);
-		soulsteel_chest = new MyArmor("soulsteel_chest", EntityEquipmentSlot.CHEST, material_armor_soulsteel, soulsteel_ingot);
+		soulsteel_chest = new MyArmor("soulsteel_chest", "soulsteel", EntityEquipmentSlot.CHEST, material_armor_soulsteel,
+				soulsteel_ingot, 20);
 		items.add(soulsteel_chest);
-		soulsteel_legs = new MyArmor("soulsteel_legs", EntityEquipmentSlot.LEGS, material_armor_soulsteel, soulsteel_ingot);
+		soulsteel_legs = new MyArmor("soulsteel_legs", "soulsteel", EntityEquipmentSlot.LEGS, material_armor_soulsteel,
+				soulsteel_ingot, 20);
 		items.add(soulsteel_legs);
-		soulsteel_boots = new MyArmor("soulsteel_boots", EntityEquipmentSlot.FEET, material_armor_soulsteel, soulsteel_ingot);
+		soulsteel_boots = new MyArmor("soulsteel_boots", "soulsteel", EntityEquipmentSlot.FEET, material_armor_soulsteel,
+				soulsteel_ingot, 20);
 		items.add(soulsteel_boots);
 
 		// soulsteel_helmet = new MyArmor("soulsteel_helmet", EntityEquipmentSlot.HEAD,
@@ -553,38 +724,69 @@ public class Main {
 		rod_blaze_1 = new ItemEmptyRod("rod_blaze_1", ItemEmptyRod.RodType.BLAZE, rod_blaze_2);
 		items.add(rod_blaze_1);
 
-		//
+		totem_enderman = new BlockTotem("totem_enderman");
+		blocks.add(totem_enderman);
+		totem_zombie = new BlockTotem("totem_zombie");
+		blocks.add(totem_zombie);
+		totem_skeleton = new BlockTotem("totem_skeleton");
+		blocks.add(totem_skeleton);
+		totem_creeper = new BlockTotem("totem_creeper");
+		blocks.add(totem_creeper);
+		// totem_ = new BlockTotem("totem_");
+		// blocks.add(totem_);
 
 		//
 
 		//
 
-		// asul_ingot = new MyItem("asul_ingot");
-		// items.add(asul_ingot);
-		// asul_block = new MyBlock("asul_block", Material.CLAY).setHardness(.55f);
-		// asul_block.setHarvestLevel("pickaxe", -1);
-		// blocks.add(asul_block);
+		//
 
-		metal_diamond_block = new MyBlock("metal_diamond_block", Material.IRON).setHardness(3).setResistance(3);
-		blocks.add(metal_diamond_block);
+		metaldiamond_block = new MyBlock("metaldiamond_block", Material.IRON).setHardness(3).setResistance(3);
+		blocks.add(metaldiamond_block);
 
 		tiles = new HashMap<>();
 		tiles.put("tile_core", TileCore.class);
 		tiles.put("tile_gravity_block", TileGravity.class);
 
-		blocks.sort(new Comparator<Block>() {
-			@Override
-			public int compare(Block o1, Block o2) {
-				return o1.getUnlocalizedName().compareToIgnoreCase(o2.getUnlocalizedName());
-			}
-		});
+		boxer = new BlockBoxer("boxer");
+		blocks.add(boxer);
+		Block[] blocksToBox = new Block[] {
+				// WITH AXIS
+				Blocks.BONE_BLOCK, Blocks.HAY_BLOCK, Main.furnace_tube,
+				// NORMAL MINECRAFT
+				Blocks.DIAMOND_BLOCK, Blocks.GOLD_BLOCK, Blocks.IRON_BLOCK, //
+				Blocks.COAL_BLOCK, Blocks.EMERALD_BLOCK, Blocks.LAPIS_BLOCK, Blocks.QUARTZ_BLOCK, //
+				Blocks.SLIME_BLOCK, Blocks.MELON_BLOCK, Blocks.NETHER_WART_BLOCK, //
+				Blocks.NOTEBLOCK,
+				// HWELL
+				asul_block, soulsteel_block, mystic_iron_block, heavy_block, metaldiamond_block, //
+				crystal_block, crystal_nether_block, //
+				core_stone, core_heat, core_green, core_sentient, //
+				crushing_block, boxer, producer, //
+				compressed_clay, mutation_paste_block, //
+				protection_block, heavy_protection_block, //
+				gravity_block, gravity_powered_block, antigravity_block, Main.antigravity_powered_block,//
+		};
+		boxes = new BlockBox[blocksToBox.length];
+		for (int i = 0; i < blocksToBox.length; i++) {
+			boxes[i] = new BlockBox(blocksToBox[i], i < 3);
+			// DO NOT ADD BOXES TO BLOCKS TO REGISTER
+			// THESE ARE DEALT SEPARATLY
+		}
 
-		items.sort(new Comparator<Item>() {
-			@Override
-			public int compare(Item o1, Item o2) {
-				return o1.getUnlocalizedName().compareToIgnoreCase(o2.getUnlocalizedName());
-			}
-		});
+		// blocks.sort(new Comparator<Block>() {
+		// @Override
+		// public int compare(Block o1, Block o2) {
+		// return o1.getUnlocalizedName().compareToIgnoreCase(o2.getUnlocalizedName());
+		// }
+		// });
+		//
+		// items.sort(new Comparator<Item>() {
+		// @Override
+		// public int compare(Item o1, Item o2) {
+		// return o1.getUnlocalizedName().compareToIgnoreCase(o2.getUnlocalizedName());
+		// }
+		// });
 
 		//
 
@@ -598,7 +800,7 @@ public class Main {
 		};
 		liquid_souls = new Fluid("liquid_souls", Util.res("liquid_souls"), Util.res("liquid_souls_flowing"), Color.white);
 		FluidRegistry.addBucketForFluid(liquid_souls);
-		FluidRegistry.registerFluid(liquid_souls);
+		// FluidRegistry.registerFluid(liquid_souls);
 
 		liquid_souls_block = new BlockLiquidSouls(liquid_souls, material_liquid_souls);
 		blocks.add(liquid_souls_block);
@@ -609,7 +811,7 @@ public class Main {
 
 		//
 
-		creativeTab = new GodCreativeTab();
+		creativeTab = new HwellCreativeTab();
 		for (Block block : blocks) {
 			block.setCreativeTab(creativeTab);
 		}
@@ -646,6 +848,8 @@ public class Main {
 				}
 			}
 
+		GameRegistry.addSmelting(glowstone_ore, new ItemStack(Items.GLOWSTONE_DUST), 0.5f);
+		GameRegistry.addSmelting(quartz_ore, new ItemStack(Items.QUARTZ), 0.5f);
 		GameRegistry.addSmelting(heavy_mesh, new ItemStack(heavy_ingot, 2), 0.5f);
 		GameRegistry.addSmelting(dust_block, new ItemStack(Blocks.GLASS, 2), 0f);
 		GameRegistry.addSmelting(leaf_mesh, new ItemStack(crystal_block, 1), .5f);
@@ -654,7 +858,19 @@ public class Main {
 		GameRegistry.addSmelting(azurite, new ItemStack(smooth_azurite), 0f);
 		GameRegistry.addSmelting(citrinic_stone, new ItemStack(citrinic_sand), 0f);
 		GameRegistry.addSmelting(onyx, new ItemStack(smooth_onyx), 0f);
-		GameRegistry.addSmelting(raw_soulsteel, new ItemStack(soulsteel_ingot, 2), 1f);
+		GameRegistry.addSmelting(raw_mystic_iron, new ItemStack(mystic_iron_ingot), 1f);
+		GameRegistry.addSmelting(raw_soulsteel, new ItemStack(soulsteel_ingot), 1f);
+		GameRegistry.addSmelting(raw_repairing_paste, new ItemStack(repairing_paste), 1f);
+		GameRegistry.addSmelting(wheat_flour, new ItemStack(Items.BREAD), 1f);
+
+		GameRegistry.addShapedRecipe(Util.res("producer." + producer.getRegistryName().getResourcePath()), Util.res("hwell.producer"),
+				new ItemStack(Main.producer), //
+				"ABA", "MCM", "MYM", //
+				'B', FluidUtil.getFilledBucket(new FluidStack(Main.liquid_souls, Fluid.BUCKET_VOLUME)), //
+				'A', Main.smooth_azurite, //
+				'M', Main.metaldiamond_block, //
+				'C', Main.asul_machine_case, //
+				'Y', Main.crystal_block);
 
 		OreDictionary.registerOre("logWood", myst_log);
 		OreDictionary.registerOre("plankWood", myst_planks);
@@ -715,6 +931,7 @@ public class Main {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+		RecipePuller.initRecipes();
 		RecipeCrushing.initRecipes();
 		RecipeTube.initRecipes();
 		RecipeFreezer.initRecipes();
@@ -722,10 +939,33 @@ public class Main {
 		RecipeSeparator.initRecipes();
 		RecipeCoring.initRecipes();
 		ItemMystDust.initRecipes();
+		RecipeRepairingPaste.initRecipes();
 		initShards();
 		MinecraftForge.EVENT_BUS.register(new HwellEventSubscriber());
+		ItemLoot.setLootTables();
 	}
 	/*
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
 	 * 
 	 * 
 	 * 
@@ -761,7 +1001,11 @@ public class Main {
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
 		for (Block b : blocks)
-			event.getRegistry().registerAll(b);
+			event.getRegistry().register(b);
+		for (BlockBox box : boxes) {
+			event.getRegistry().register(box);
+			ModelLoader.setCustomStateMapper(box, box.getMapper());
+		}
 	}
 
 	@SubscribeEvent
@@ -777,16 +1021,38 @@ public class Main {
 						};
 					};
 			item.setRegistryName(block.getRegistryName());
-			event.getRegistry().registerAll(item);
+			event.getRegistry().register(item);
+		}
+
+		for (BlockBox box : boxes) {
+			Item item = new ItemBlock(box) {
+
+				@Override
+				public String getItemStackDisplayName(ItemStack stack) {
+					return Item.getItemFromBlock(box.block).getItemStackDisplayName(stack) + " Box";
+				}
+
+				@Override
+				public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+					tooltip.add(box.getDescription());
+					super.addInformation(stack, worldIn, tooltip, flagIn);
+				}
+			};
+			item.setRegistryName(box.getRegistryName());
+			event.getRegistry().register(item);
 		}
 	}
 
 	@SubscribeEvent
-	public static void registerRendersBlock(ModelRegistryEvent event) {
+	public static void registerRendersBlockItem(ModelRegistryEvent event) {
 		for (Block block : blocks) {
 			Item item = Item.getItemFromBlock(block);
-
 			ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+		}
+
+		for (BlockBox box : boxes) {
+			Item item = Item.getItemFromBlock(box);
+			ModelLoader.setCustomModelResourceLocation(item, 0, box.getModelRes("inventory"));
 		}
 	}
 
@@ -796,9 +1062,9 @@ public class Main {
 
 	//
 
-	public static class GodCreativeTab extends CreativeTabs {
+	public static class HwellCreativeTab extends CreativeTabs {
 
-		public GodCreativeTab() {
+		public HwellCreativeTab() {
 			super("hwell");
 		}
 

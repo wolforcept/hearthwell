@@ -1,0 +1,16 @@
+{ 
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "hwell:fertilizer_block" },
+    { "item": "hwell:fertilizer_block" },
+    { "item": "hwell:shard_n" },
+    { "item": "hwell:shard_n" },
+    { "item": "hwell:soul_dust" },
+    { "item": "hwell:soul_dust" },
+    { "item": "hwell:myst_dust" },
+    { "item": "hwell:myst_dust" }
+  ],
+  "result": {
+    "item": "hwell:raw_repairing_paste", "count": 3
+  }
+}

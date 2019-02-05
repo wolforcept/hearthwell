@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
@@ -29,9 +30,9 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import wolforce.Main;
 import wolforce.Util;
+import wolforce.blocks.tile.TilePickerHolder;
+import wolforce.blocks.tile.TileSeparator;
 import wolforce.items.tools.ItemDustPicker;
-import wolforce.tile.TilePickerHolder;
-import wolforce.tile.TileSeparator;
 
 public class BlockPickerHolder extends Block implements ITileEntityProvider {
 
@@ -39,7 +40,7 @@ public class BlockPickerHolder extends Block implements ITileEntityProvider {
 	protected static final AxisAlignedBB aabb = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 16 * F, 16 * F, 16 * F);
 
 	public BlockPickerHolder(String name) {
-		super(Main.material_soulsteel);
+		super(Material.WOOD);
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setHardness(2);

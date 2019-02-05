@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import wolforce.Main;
 import wolforce.blocks.BlockDismantler;
-import wolforce.tile.TileDismantler;
+import wolforce.blocks.tile.TileDismantler;
 
 @SideOnly(Side.CLIENT)
 public class RenderDismantler/* extends TileEntitySpecialRenderer<TileDismantler> */ {

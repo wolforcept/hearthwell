@@ -21,8 +21,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import wolforce.Main;
 import wolforce.blocks.base.BlockWithDescription;
+import wolforce.blocks.tile.TilePrecisionGrinder;
 import wolforce.items.ItemGrindingWheel;
-import wolforce.tile.TilePrecisionGrinder;
 
 public class BlockPrecisionGrinderEmpty extends Block implements BlockWithDescription {
 
@@ -100,6 +100,6 @@ public class BlockPrecisionGrinderEmpty extends Block implements BlockWithDescri
 
 	@Override
 	public String[] getDescription() {
-		return new String[] { "Consumes 5 Energy per Operation." };
+		return new String[] { "Consumes 5 Energy per Operation.", "Requires a multiblock Structure." };
 	}
 }

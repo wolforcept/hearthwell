@@ -1,18 +1,22 @@
 package wolforce.recipes;
 
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import net.minecraft.block.Block;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import mezz.jei.recipes.RecipeRegistry;
+import net.minecraft.client.util.RecipeItemHelper;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import wolforce.blocks.BlockPrecisionGrinder;
-import wolforce.items.ItemGrindingWheel;
+import net.minecraft.item.crafting.ShapedRecipes;
+import wolforce.Util;
 
 public class RecipeSeparator {
 
@@ -20,28 +24,32 @@ public class RecipeSeparator {
 
 	public static void initRecipes() {
 		recipes = new HashMap<>();
-		put(new Irio(Items.MAGMA_CREAM), new RecipeSeparator(//
-				new ItemStack(Items.SLIME_BALL, 1), new ItemStack(Items.BLAZE_POWDER, 1)));
-		put(new Irio(Blocks.MAGMA), new RecipeSeparator(//
-				new ItemStack(Items.SLIME_BALL, 4), new ItemStack(Items.BLAZE_POWDER, 4)));
-		put(new Irio(Blocks.TNT), new RecipeSeparator(//
-				new ItemStack(Items.GUNPOWDER, 5), new ItemStack(Blocks.SAND, 4)));
-		put(new Irio(Items.PAINTING), new RecipeSeparator(//
-				new ItemStack(Items.STRING, 4), new ItemStack(Items.STICK, 8)));
-		put(new Irio(Items.ENDER_EYE), new RecipeSeparator(//
-				new ItemStack(Items.ENDER_PEARL, 1), new ItemStack(Items.BLAZE_POWDER, 1)));
-		put(new Irio(Blocks.ENDER_CHEST), new RecipeSeparator(//
-				new ItemStack(Items.ENDER_EYE, 1), new ItemStack(Blocks.OBSIDIAN, 8)));
-		put(new Irio(Blocks.DISPENSER), new RecipeSeparator(//
-				new ItemStack(Items.BOW, 1), new ItemStack(Items.REDSTONE, 1)));
-		put(new Irio(Blocks.DROPPER), new RecipeSeparator(//
-				new ItemStack(Blocks.COBBLESTONE, 7), new ItemStack(Items.REDSTONE, 1)));
-		put(new Irio(Blocks.ENCHANTING_TABLE), new RecipeSeparator(//
-				new ItemStack(Blocks.OBSIDIAN, 4), new ItemStack(Items.DIAMOND, 2)));
-		put(new Irio(Blocks.BREWING_STAND), new RecipeSeparator(//
-				new ItemStack(Blocks.COBBLESTONE, 3), new ItemStack(Items.BLAZE_ROD, 1)));
-		put(new Irio(Items.PUMPKIN_PIE), new RecipeSeparator(//
-				new ItemStack(Blocks.PUMPKIN, 1), new ItemStack(Items.EGG, 1), new ItemStack(Items.SUGAR, 1)));
+		// RecipeSeparator a = new Gson().fromJson("", RecipeSeparator.class);
+
+		try {
+			readRecipes("recipes_separator");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void readRecipes(String filename) throws IOException {
+		JsonArray recipes = Util.readJson("hwell:" + filename + ".json").getAsJsonArray();
+		for (JsonElement e : recipes) {
+			readRecipe(e.getAsJsonObject());
+		}
+	}
+
+	private static void readRecipe(JsonObject o) {
+		ItemStack input = ShapedRecipes.deserializeItem(o.get("input").getAsJsonObject(), true);
+		ItemStack output1 = ShapedRecipes.deserializeItem(o.get("output1").getAsJsonObject(), true);
+		ItemStack output2 = ShapedRecipes.deserializeItem(o.get("output2").getAsJsonObject(), true);
+		if (!o.has("output3")) {
+			put(new Irio(input), new RecipeSeparator(output1, output2));
+		} else {
+			ItemStack output3 = ShapedRecipes.deserializeItem(o.get("output3").getAsJsonObject(), true);
+			put(new Irio(input), new RecipeSeparator(output1, output2, output3));
+		}
 	}
 
 	private static void put(Irio stack, RecipeSeparator recipeGrinder) {

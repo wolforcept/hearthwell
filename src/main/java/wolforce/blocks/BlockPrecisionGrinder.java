@@ -25,8 +25,8 @@ import wolforce.Main;
 import wolforce.Util;
 import wolforce.blocks.base.BlockEnergyConsumer;
 import wolforce.blocks.base.BlockWithDescription;
+import wolforce.blocks.tile.TilePrecisionGrinder;
 import wolforce.items.ItemGrindingWheel;
-import wolforce.tile.TilePrecisionGrinder;
 
 public class BlockPrecisionGrinder extends Block implements ITileEntityProvider, BlockEnergyConsumer {
 
@@ -98,11 +98,12 @@ public class BlockPrecisionGrinder extends Block implements ITileEntityProvider,
 		return aabb;
 	}
 
-	@Override
-	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
-		return this == Main.precision_grinder_crystal || this == Main.precision_grinder_crystal_nether ? //
-				layer == BlockRenderLayer.TRANSLUCENT : super.canRenderInLayer(state, layer);
-	}
+	// @Override
+	// public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
+	// return this == Main.precision_grinder_crystal || this ==
+	// Main.precision_grinder_crystal_nether ? //
+	// layer == BlockRenderLayer.TRANSLUCENT : super.canRenderInLayer(state, layer);
+	// }
 
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
@@ -142,6 +143,6 @@ public class BlockPrecisionGrinder extends Block implements ITileEntityProvider,
 
 	@Override
 	public String[] getDescription() {
-		return new String[] { "Consumes " + getEnergyConsumption() + " Energy per Operation." };
+		return new String[] { "Consumes " + getEnergyConsumption() + " energy per operation." };
 	}
 }

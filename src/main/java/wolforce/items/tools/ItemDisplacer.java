@@ -46,7 +46,7 @@ public class ItemDisplacer extends MyItem {
 
 	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-		return repair.getItem() == Main.heavy_ingot;
+		return repair.getItem() == Main.heavy_ingot || repair.getItem() == Main.soulsteel_ingot;
 	}
 
 	@Override
@@ -114,14 +114,19 @@ public class ItemDisplacer extends MyItem {
 					if (!world.isRemote)
 						Util.spawnItem(world, pos, a);
 				}
-			else
-				state.getBlock().harvestBlock(world, player, pos, state, null, stack);
-
+			else {
+				if (powered)
+					state.getBlock().harvestBlock(world, player, pos, state, null, stack);
+				else {
+					if (!world.isRemote)
+						Util.spawnItem(world, pos, new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state)));
+				}
+			}
 			world.destroyBlock(pos, false);
 			stack.damageItem(1, player);
 			// }
 
-			player.getFoodStats().addExhaustion(-5);
+			player.getFoodStats().addStats(-1, -1);
 		}
 		return stack;
 	}

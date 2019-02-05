@@ -2,10 +2,12 @@ package wolforce;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -15,20 +17,29 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.BiomeColorHelper;
+import net.minecraft.world.storage.loot.LootContext;
+import net.minecraft.world.storage.loot.LootTable;
+import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.common.util.ITeleporter;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
+import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import wolforce.fluids.BlockLiquidSouls;
+import wolforce.recipes.RecipeRepairingPaste;
 
 @Mod.EventBusSubscriber
 public class HwellEventSubscriber {
@@ -42,39 +53,61 @@ public class HwellEventSubscriber {
 			}
 		};
 		event.getBlockColors().registerBlockColorHandler(grassBlockColor, Main.fullgrass_block);
-	}
+	}	
 
-	@SubscribeEvent
-	public static void makeCrystalPassPortals(EntityTravelToDimensionEvent event) {
-
-		if (!(event.getEntity() instanceof EntityItem))
-			return;
-
-		if (event.getDimension() == DimensionType.NETHER.getId()) {
-			EntityItem entityItem = (EntityItem) event.getEntity();
-			if (entityItem.getItem().getItem() == Main.crystal) {
-				entityItem.setItem(new ItemStack(Main.crystal_nether, entityItem.getItem().getCount()));
-			}
-			if (entityItem.getItem().getItem() == Item.getItemFromBlock(Main.crystal_block)) {
-				entityItem.setItem(new ItemStack(Main.crystal_nether_block, entityItem.getItem().getCount()));
-			}
-		}
-
-		if (event.getDimension() == DimensionType.OVERWORLD.getId()) {
-			EntityItem entityItem = (EntityItem) event.getEntity();
-			if (entityItem.getItem().getItem() == Main.crystal_nether) {
-				entityItem.setItem(new ItemStack(Main.crystal, entityItem.getItem().getCount()));
-			}
-			if (entityItem.getItem().getItem() == Item.getItemFromBlock(Main.crystal_nether_block)) {
-				entityItem.setItem(new ItemStack(Main.crystal_block, entityItem.getItem().getCount()));
-			}
-		}
-	}
+	// @SubscribeEvent
+	// public static void makeCrystalPassPortals(EntityTravelToDimensionEvent event)
+	// {
+	//
+	// if (!(event.getEntity() instanceof EntityItem))
+	// return;
+	//
+	// if (event.getDimension() == DimensionType.NETHER.getId()) {
+	// EntityItem entityItem = (EntityItem) event.getEntity();
+	// if (entityItem.getItem().getItem() == Main.crystal) {
+	// entityItem.setItem(new ItemStack(Main.crystal_nether,
+	// entityItem.getItem().getCount()));
+	// }
+	// if (entityItem.getItem().getItem() ==
+	// Item.getItemFromBlock(Main.crystal_block)) {
+	// entityItem.setItem(new ItemStack(Main.crystal_nether_block,
+	// entityItem.getItem().getCount()));
+	// }
+	// }
+	//
+	// if (event.getDimension() == DimensionType.OVERWORLD.getId()) {
+	// EntityItem entityItem = (EntityItem) event.getEntity();
+	// if (entityItem.getItem().getItem() == Main.crystal_nether) {
+	// entityItem.setItem(new ItemStack(Main.crystal,
+	// entityItem.getItem().getCount()));
+	// }
+	// if (entityItem.getItem().getItem() ==
+	// Item.getItemFromBlock(Main.crystal_nether_block)) {
+	// entityItem.setItem(new ItemStack(Main.crystal_block,
+	// entityItem.getItem().getCount()));
+	// }
+	// }
+	// }
 
 	@SubscribeEvent // (priority = EventPriority.NORMAL, receiveCanceled = true)
 	public void onEvent(PlayerTickEvent event) {
+		if (event.phase == TickEvent.Phase.END && !event.player.world.isRemote) {
+			if (event.player.getHeldItem(EnumHand.OFF_HAND).getItem().equals(Main.repairing_paste)) {
+				ItemStack stack = event.player.getHeldItem(EnumHand.MAIN_HAND);
+				ItemStack paste = event.player.getHeldItem(EnumHand.OFF_HAND);
+				if (timeConstraint(event.player) && stack.isItemDamaged() && RecipeRepairingPaste.isRepairable(stack.getItem())) {
+					paste.damageItem(1, event.player);
+					stack.damageItem(-1, event.player);
+				}
+			}
+		}
 		if (event.phase == TickEvent.Phase.END && event.player.world.isRemote)
 			motion(event.player);
+	}
+
+	private boolean timeConstraint(EntityPlayer player) {
+		String str = (player.getEntityWorld().getTotalWorldTime() + "");
+		return str.charAt(str.length() - 2) == '0';
 	}
 
 	@SubscribeEvent // (priority = EventPriority.NORMAL, receiveCanceled = true)
@@ -87,11 +120,10 @@ public class HwellEventSubscriber {
 		// while (iterator.hasNext())
 		// motion(iterator.next());
 
-		List entityList = event.world.loadedEntityList;
-		Iterator<Entity> iterator = entityList.iterator();
+		List<Entity> entityList = event.world.loadedEntityList;
 
-		while (iterator.hasNext()) {
-			Entity entity = iterator.next();
+		for (int i = 0; i < entityList.size(); i++) {
+			Entity entity = entityList.get(i);
 			if (entity instanceof EntityPlayer)
 				motion((EntityPlayer) entity);
 			else if (entity instanceof EntityItem)
@@ -106,8 +138,10 @@ public class HwellEventSubscriber {
 	//
 
 	private void motion(EntityPlayer player) {
-		if (isInsideLiquidSouls(player))
-			player.motionY = player.isSneaking() ? -.05 : .05;
+		if (isInsideLiquidSouls(player)) {
+			player.motionY = player.isSneaking() ? -.08 : .08;
+			player.fallDistance = 0;
+		}
 	}
 
 	private void motion(EntityItem item) {

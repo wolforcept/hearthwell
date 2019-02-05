@@ -1,0 +1,7 @@
+{ 
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "hwell:gravity_block" }
+  ],
+  "result": { "item": "hwell:gravity_block_mini", "count": 4 }
+}

@@ -40,17 +40,36 @@ item.empty_rod.name=Empty Rod
 item.rod_blaze_1.name=25% Blaze Filled Rod
 item.rod_blaze_2.name=50% Blaze Filled Rod
 item.rod_blaze_3.name=75% Blaze Filled Rod
+item.myst_rod.name=Myst Rod
 item.rod_myst_1.name=33% Soul Filled Rod
 item.rod_myst_2.name=66% Soul Filled Rod
 item.crystal_catalyst.name=Crystal Catalyst
+item.salt.name=Salt
 
+item.metaldiamond.name=Metaldiamond
 item.raw_soulsteel.name=Raw Soulsteel
 item.soulsteel_ingot.name=Soulsteel Ingot
 item.asul_ingot.name=Asul Ingot
 item.soul_dust.name=Soul Dust
+item.raw_repairing_paste.name=Raw Repairing Paste
+item.repairing_paste.name=Repairing Paste
+item.seed_of_life.name=Seed of Life
+item.wheat_flour.name=Wheat Flour
+
+item.mystic_iron_ingot.name=Mystic Iron Ingot
+item.mystic_iron_shovel.name=Mystic Iron Shovel
+item.mystic_iron_sword.name=Mystic Iron Sword
+item.mystic_iron_dagger.name=Mystic Iron Dagger
+item.mystic_iron_pickaxe.name=Mystic Iron Pickaxe
+item.mystic_iron_axe.name=Mystic Iron Axe
+item.mystic_iron_helmet.name=Mystic Iron Helmet
+item.mystic_iron_chest.name=Mystic Iron Chestplate
+item.mystic_iron_legs.name=Mystic Iron Leggings
+item.mystic_iron_boots.name=Mystic Iron Boots
 
 item.soulsteel_shovel.name=Soulsteel Shovel
 item.soulsteel_sword.name=Soulsteel Sword
+item.soulsteel_dagger.name=Soulsteel Dagger
 item.soulsteel_pickaxe.name=Soulsteel Pickaxe
 item.soulsteel_axe.name=Soulsteel Axe
 item.soulsteel_helmet.name=Soulsteel Helmet
@@ -59,6 +78,28 @@ item.soulsteel_legs.name=Soulsteel Leggings
 item.soulsteel_boots.name=Soulsteel Boots
 
 
+item.loot_base.name=Loot Kit Base
+item.loot_blaze.name=Blaze Loot Kit
+item.loot_creeper.name=Creeper Loot Kit
+item.loot_enderman.name=Enderman Loot Kit
+item.loot_ghast.name=Ghast Loot Kit
+item.loot_shulker.name=Shulker Loot Kit
+item.loot_skeleton.name=Skeleton Loot Kit
+item.loot_slime.name=Slime Loot Kit
+item.loot_witch.name=Witch Loot Kit
+item.loot_wither.name=Wither Skeleton Loot Kit
+item.loot_zombie.name=Zombie Loot Kit
+
+item.mutation_paste.name=Mutation Paste
+tile.mutation_paste_block.name=Mutation Paste Block
+
+tile.producer.name=Loot Kit Producer
+tile.nourisher.name=Nourisher
+tile.puller.name=Mystical Ore Puller
+tile.boxer.name=Block Boxer
+
+tile.quartz_ore.name=Quartz Ore
+tile.glowstone_ore.name=Glowstone Ore
 
 tile.heavy_block.name=Heavy Block
 tile.crystal_block.name=Crystal Block
@@ -71,9 +112,12 @@ tile.dust_block.name=Stone Dust Block
 tile.myst_log.name=Mysterious Wood Log
 tile.myst_planks.name=Mysterious Wood Planks
 tile.myst_leaves.name=Mysterious Leaves
-
 tile.myst_planks_slab.name=Mysterious Wood Slab
 tile.myst_planks_stairs.name=Mysterious Wood Stairs
+
+tile.asul_machine_case.name=Asul Machine Case
+
+
 tile.moonstone_slab.name=Moonstone Slab
 tile.moonstone_stairs.name=Moonstone Stairs
 tile.onyx_slab.name=Onyx Slab
@@ -84,17 +128,17 @@ tile.azurite_slab.name=Weathered Azurite Slab
 tile.azurite_stairs.name=Weathered Azurite Stairs
 tile.smooth_azurite_slab.name=Smooth Azurite Slab
 tile.smooth_azurite_stairs.name=Smooth Azurite Stairs
-tile.citrinic_stone_slab.name=Tricinic Stone Slab
-tile.citrinic_stone_stairs.name=Tricinic Stone Stairs
-tile.citrinic_sand_slab.name=White Tricinic Stone Slab
-tile.citrinic_sand_stairs.name=White Tricinic Stone Stairs
+tile.citrinic_stone_slab.name=Brackish Stone Slab
+tile.citrinic_stone_stairs.name=Brackish Stone Stairs
+tile.citrinic_sand_slab.name=White Brackish Stone Slab
+tile.citrinic_sand_stairs.name=White Brackish Stone Stairs
 
 tile.moonstone_bricks.name=Moonstone Bricks
 tile.onyx_bricks.name=Onyx Bricks
 tile.smooth_onyx_bricks.name=Smooth Onyx Bricks
 tile.azurite_bricks.name=Weathered Azurite Bricks
-tile.citrinic_stone_bricks.name=Tricinic Stone Bricks
-tile.citrinic_sand_bricks.name=White Tricinic Stone Bricks
+tile.citrinic_stone_bricks.name=Brackish Stone Bricks
+tile.citrinic_sand_bricks.name=White Brackish Stone Bricks
 tile.smooth_azurite_bricks.name=Smooth Azurite Bricks
 
 tile.moonstone_bricks_slab.name=Moonstone Bricks Slab
@@ -107,10 +151,10 @@ tile.azurite_bricks_slab.name=Weathered Azurite Bricks Slab
 tile.azurite_bricks_stairs.name=Weathered Azurite Bricks Stairs
 tile.smooth_azurite_bricks_slab.name=Smooth Azurite Bricks Slab
 tile.smooth_azurite_bricks_stairs.name=Smooth Azurite Bricks Stairs
-tile.citrinic_stone_bricks_slab.name=Tricinic Stone Bricks Slab
-tile.citrinic_stone_bricks_stairs.name=Tricinic Stone Bricks Stairs
-tile.citrinic_sand_bricks_slab.name=White Tricinic Stone Bricks Slab
-tile.citrinic_sand_bricks_stairs.name=White Tricinic Stone Bricks Stairs
+tile.citrinic_stone_bricks_slab.name=Brackish Stone Bricks Slab
+tile.citrinic_stone_bricks_stairs.name=Brackish Stone Bricks Stairs
+tile.citrinic_sand_bricks_slab.name=White Brackish Stone Bricks Slab
+tile.citrinic_sand_bricks_stairs.name=White Brackish Stone Bricks Stairs
 
 
 tile.burst_seed_dirt.name=Dirt Burst Seed
@@ -123,22 +167,28 @@ tile.protection_block.name=Protection Block
 tile.heavy_protection_block.name=Heavy Protection Block
 tile.heavy_protection_block.json.name=Superior Protection Block
 tile.heat_block.name=Heat Block
+tile.stabiliser.name=Core Stabilizer
 tile.compressed_clay.name=Compressed Clay
+tile.fertilizer_block.name=Fertilizer Block
 
 tile.moonstone.name=Moonstone
 tile.onyx.name=Onyx
 tile.smooth_onyx.name=Smooth Onyx
 tile.azurite.name=Weathered Azurite
-tile.citrinic_stone.name=Tricinic Stone
-tile.citrinic_sand.name=White Tricinic Stone
+tile.citrinic_stone.name=Brackish Stone
+tile.citrinic_sand.name=White Brackish Stone
 tile.smooth_azurite.name=Smooth Azurite
 tile.white_block.name=White Block
 tile.fullgrass_block.name=Turf Block
 tile.slab_lamp.name=Slab Lamp
+tile.fertile_soil.name=Fertile Soil
 
 tile.crushing_block.name=Crushing Block
 tile.gravity_block.name=Gravity Block
+tile.gravity_block_mini.name=Mini Gravity Block
 tile.gravity_powered_block.name=Powered Gravity Block
+tile.antigravity_block.name=Anti-Gravity Block
+tile.antigravity_powered_block.name=Powered Anti-Gravity Block
 tile.furnace_tube.name=Amplifying Tube
 tile.heat_furnace.name=Heat Furnace
 tile.precision_grinder_flint.name=Precision Grinder (Flint Grinding Wheel)
@@ -150,7 +200,7 @@ tile.precision_grinder_empty.name=Precision Grinder
 tile.picking_table.name=Shard Picking Table
 tile.picker_holder.name=Dust Picker Holder
 tile.separator.name=Separator
-tile.freezer.name=Freezing Rod
+tile.freezer.name=Freezer
 tile.generator_heat.name=Heat Generator
 tile.light_collector.name=Light Collector
 
@@ -161,12 +211,18 @@ tile.core_sentient.name=Sentient Core
 
 tile.weeping_block.name=Weeping Block
 
+tile.mystic_iron_block.name=Mystic Iron Block
 tile.soulsteel_block.name=Soulsteel Block
+tile.raw_asul_block.name=Raw Asul Block
 tile.asul_block.name=Asul Block
 tile.scorch_grit.name=Scorch Grit
 tile.scorch_glass.name=Scorch Glass
-tile.metal_diamond_block.name=Metaldiamond Block
+tile.metaldiamond_block.name=Metaldiamond Block
 
+tile.totem_zombie.name=Zombie Totem
+tile.totem_creeper.name=Creeper Totem
+tile.totem_skeleton.name=Skeleton Totem
+tile.totem_enderman.name=Enderman Totem
 
 tile.hwell.fluid_liquid_souls=Liquid Souls
 fluid.liquid_souls=Liquid Souls

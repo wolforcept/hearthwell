@@ -1,14 +1,15 @@
 { 
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "AAA",
-	"ABA",
-    "DCD" ],
+    "CPC",
+	"OMO",
+    "CTC" ],
   "key": {
-    "A": [{ "item": "hwell:onyx" }],
-	"B": [{ "item": "hwell:crystal" }],
-	"C": [{ "item": "hwell:shard_p" }],
-	"D": [{ "item": "minecraft:iron_ingot" }]
+    "O": [{ "item": "hwell:onyx" }],
+	"C": [{ "item": "hwell:crystal" }],
+	"P": [{ "item": "hwell:shard_p" }],
+	"T": [{ "item": "hwell:furnace_tube" }],
+	"M": [{ "item": "hwell:asul_machine_case" }]
   },
   "result": { "item": "hwell:generator_heat" }
 }

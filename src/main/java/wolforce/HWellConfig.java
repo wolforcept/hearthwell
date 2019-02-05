@@ -16,25 +16,45 @@ public class HWellConfig {
 
 	// ----------------------------------------
 
+	// PULLER
+	@Config.Comment({ "Puller Energy Consumption per Operation (default: 100)" })
+	public static int energyConsumptionPuller = 100;
+	@Config.Comment({ "Puller Delay Between pulls (default: 3000)" })
+	public static int pullerDelay = 3000;
+
+	// GRINDER
 	@Config.Comment({ "Grinder Energy Consumption per Operation (default: 100)" })
 	public static int energyConsumptionGrinder = 100;
 
+	// SEPARATOR
 	@Config.Comment({ "Separator Energy Consumption per Operation (default: 100)" })
 	public static int energyConsumptionSeparator = 100;
 
+	// FREEZER
 	@Config.Comment({ "Freezer Energy Consumption per Operation  (default: 30)" })
 	public static int energyConsumptionFreezer = 30;
-	
-	@Config.Comment({ "Heat Furnace Energy Consumption per Operation  (default: 100)" })
-	public static int energyConsumptionFurnace = 100;
-	// ----------------------------------------
-
-	@Config.Comment({ "Is tube required to see sky? (default: true)" })
-	public static boolean isTubeRequiredToSeeSky = true;
 
 	@Config.Comment({ "Range of freezer? (default: 5)" })
 	@Config.RangeInt(min = 1, max = 16)
 	public static int freezerRange = 5;
+
+	// // HEAT FURNACE
+	// @Config.Comment({ "Heat Furnace Energy Consumption per Operation (default:
+	// 100)" })
+	// public static int energyConsumptionFurnace = 100;
+
+	// GRAVITY
+	@Config.Comment({ "Range of Gravity Block? (default: 5)" })
+	@Config.RangeInt(min = 1, max = 16)
+	public static int gravityBlockDistance = 5;
+	
+	@Config.Comment({ "Range of Mini Gravity Block? (default: 1)" })
+	@Config.RangeInt(min = 1, max = 16)
+	public static int gravityBlockDistanceMini = 1;
+	// ----------------------------------------
+
+	@Config.Comment({ "Is tube required to see sky? (default: true)" })
+	public static boolean isTubeRequiredToSeeSky = true;
 
 	@Config.Comment({ "Does tube only work in day time? (default: true)" })
 	public static boolean isTubeRequiredToBeDay = true;

@@ -9,13 +9,11 @@ public class MyShovel extends ItemSpade {
 
 	private ItemStack repairIngot;
 
-	public MyShovel(String name, int maxUses, int harvestLevel, Item repairIngot) {
-		super(ToolMaterial.DIAMOND);
+	public MyShovel(String name, ToolMaterial mat, Item repairIngot) {
+		super(mat);
 		this.repairIngot = new ItemStack(repairIngot);
 		setRegistryName(name);
 		setUnlocalizedName(name);
-		setMaxDamage(maxUses);
-		setHarvestLevel("shovel", harvestLevel);
 		setMaxStackSize(1);
 	}
 

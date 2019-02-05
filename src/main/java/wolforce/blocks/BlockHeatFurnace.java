@@ -13,9 +13,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import wolforce.HWellConfig;
 import wolforce.blocks.base.BlockEnergyConsumer;
-import wolforce.tile.TileHeatFurnace;
+import wolforce.blocks.base.BlockWithDescription;
+import wolforce.blocks.tile.TileHeatFurnace;
 
-public class BlockHeatFurnace extends Block implements BlockEnergyConsumer, ITileEntityProvider {
+public class BlockHeatFurnace extends Block implements ITileEntityProvider, BlockWithDescription {
 
 	public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.<EnumFacing>create("facing", EnumFacing.class);
 
@@ -86,12 +87,6 @@ public class BlockHeatFurnace extends Block implements BlockEnergyConsumer, ITil
 
 	@Override
 	public String[] getDescription() {
-		return new String[] { "Smelts items.", "Consumes " + getEnergyConsumption() + " per operation." };
+		return new String[] { "Smelts items instantly and at no cost.", "Requires a multiblock Structure." };
 	}
-
-	@Override
-	public int getEnergyConsumption() {
-		return HWellConfig.energyConsumptionFurnace;
-	}
-
 }

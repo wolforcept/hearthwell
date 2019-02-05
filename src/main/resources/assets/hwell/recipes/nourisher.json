@@ -1,0 +1,14 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QQQ",
+    "LFL",
+    "FCF"  ],
+  "key": {
+	"F": [{ "item": "hwell:fullgrass_block" }],
+	"C": [{ "item": "hwell:asul_machine_case" }],
+	"L": [{ "item": "hwell:locked_light" }],
+ 	"Q": [{ "item": "minecraft:quartz" }]
+  },
+  "result": { "item": "hwell:nourisher" }
+}

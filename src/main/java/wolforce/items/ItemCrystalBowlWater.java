@@ -27,7 +27,7 @@ import scala.actors.threadpool.Arrays;
 import wolforce.Main;
 import wolforce.MyItem;
 import wolforce.Util;
-import wolforce.tile.TileDismantler;
+import wolforce.blocks.tile.TileDismantler;
 
 public class ItemCrystalBowlWater extends ItemBucketMilk {
 

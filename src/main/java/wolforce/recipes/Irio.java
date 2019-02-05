@@ -6,11 +6,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 /**
- * ITEM RECIPE INPUT
+ * ITEM RECIPE INPUT OUPUT
  */
 public class Irio {
 	public final Item item;
 	public final int meta;
+
+	public Irio(ItemStack itemstack) {
+		item = itemstack.getItem();
+		meta = itemstack.getMetadata();
+	}
 
 	public Irio(Item _item, int _meta) {
 		item = _item;
@@ -55,12 +60,22 @@ public class Irio {
 		return (item.hashCode() + "" + meta).hashCode();
 	}
 
+	public ItemStack stack() {
+		return new ItemStack(item, 1, meta);
+	}
+
+	/**
+	 * ONLY FOR IRIOS OF BLOCKS
+	 */
 	public Block getBlock() {
 		return Block.getBlockFromItem(item);
 	}
 
-	public ItemStack stack() {
-		return new ItemStack(item, 1, meta);
+	/**
+	 * ONLY FOR IRIOS OF BLOCKS
+	 */
+	public IBlockState getState() {
+		return Block.getBlockFromItem(item).getStateFromMeta(meta);
 	}
 
 }

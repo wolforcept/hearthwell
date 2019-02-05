@@ -29,8 +29,8 @@ import wolforce.Main;
 import wolforce.MyBlock;
 import wolforce.Util;
 import wolforce.blocks.BlockCore.CoreType;
+import wolforce.blocks.tile.TileCore;
 import wolforce.items.tools.ItemDustPicker;
-import wolforce.tile.TileCore;
 
 public class BlockLightCollector extends MyBlock {
 

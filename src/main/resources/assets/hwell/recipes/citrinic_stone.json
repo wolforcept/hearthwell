@@ -5,7 +5,7 @@
 	"ABA",
     "AAA" ],
   "key": {
-    "A": [{ "item": "minecraft:stone", "data": 0 }],
+    "A": [{ "item": "minecraft:cobblestone" }],
 	"B": [{ "item": "hwell:shard_fe" }]
   },
   "result": {

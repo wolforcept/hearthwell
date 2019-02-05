@@ -1,0 +1,8 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["AAA", "AAA", "AAA" ],
+  "key": {
+    "A": [{ "item": "hwell:asul_ingot" }]
+  },
+  "result": { "item": "hwell:asul_block" }
+}

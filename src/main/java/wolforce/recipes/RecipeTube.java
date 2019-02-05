@@ -21,6 +21,7 @@ public class RecipeTube implements IRecipeWrapper {
 	public final static LinkedList<RecipeTube> recipes = new LinkedList<>();
 
 	public static void initRecipes() {
+		put(Main.raw_asul_block, Main.asul_block);
 		put(Blocks.CACTUS, Blocks.WATER);
 		put(Blocks.LEAVES, Blocks.WATER);
 		put(Blocks.LEAVES2, Blocks.WATER);

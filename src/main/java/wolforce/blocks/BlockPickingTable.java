@@ -23,8 +23,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import wolforce.Main;
 import wolforce.Util;
+import wolforce.blocks.tile.TileCore;
 import wolforce.items.tools.ItemDustPicker;
-import wolforce.tile.TileCore;
 
 public class BlockPickingTable extends Block {
 

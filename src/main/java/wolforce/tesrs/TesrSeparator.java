@@ -16,7 +16,8 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import wolforce.Util;
 import wolforce.blocks.BlockSeparator;
-import wolforce.tile.TileSeparator;
+import wolforce.blocks.tile.TileSeparator;
+
 import static net.minecraft.util.EnumFacing.*;
 
 import net.minecraft.block.Block;

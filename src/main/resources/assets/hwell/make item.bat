@@ -1,4 +1,4 @@
-SET /p name="Block Name: "
+SET /p name="Item Name: "
 @echo off
 
 @echo {>models/item/%name%.json

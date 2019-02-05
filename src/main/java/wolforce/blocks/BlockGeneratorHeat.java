@@ -1,34 +1,32 @@
 package wolforce.blocks;
 
-import java.util.Random;
-
 import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import wolforce.MyBlock;
 import wolforce.blocks.base.BlockEnergyProvider;
-import wolforce.tile.TileGeneratorHeat;
+import wolforce.blocks.base.BlockMachineBase;
+import wolforce.blocks.tile.TileGeneratorHeat;
 
-public class BlockGeneratorHeat extends MyBlock implements BlockEnergyProvider, ITileEntityProvider {
+public class BlockGeneratorHeat extends BlockMachineBase implements BlockEnergyProvider, ITileEntityProvider {
 
 	public static final int E = 15; // energy per temp value
 	public static final PropertyInteger TEMP = PropertyInteger.create("temp", 0, 9);
 
 	public BlockGeneratorHeat(String name) {
-		super(name, Material.ROCK);
-		setHardness(1);
-		setResistance(5);
+		super(name);
 		setDefaultState(getDefaultState().withProperty(TEMP, 0));
 	}
 
 	@Override
 	public boolean hasEnergy(World world, BlockPos pos, int energy) {
-		return world.getBlockState(pos).getValue(TEMP) * E >= energy;
+		if (world.getBlockState(pos).getBlock() instanceof BlockGeneratorHeat)
+			return world.getBlockState(pos).getValue(TEMP) * E >= energy;
+		return false;
 	}
 
 	@Override
@@ -36,6 +34,9 @@ public class BlockGeneratorHeat extends MyBlock implements BlockEnergyProvider, 
 		int energy = world.getBlockState(pos).getValue(TEMP);
 		int newEnergy = energy - energyDecrease / E - 1;
 		world.setBlockState(pos, getDefaultState().withProperty(TEMP, newEnergy));
+		if (Math.random() < .01) {
+			world.setBlockState(pos.down(), Blocks.OBSIDIAN.getDefaultState());
+		}
 	}
 	// BLOCK STATES
 

@@ -9,13 +9,11 @@ public class MyPickaxe extends ItemPickaxe {
 
 	private ItemStack repairIngot;
 
-	public MyPickaxe(String name, int maxUses, int harvestLevel, Item repairIngot) {
-		super(ToolMaterial.DIAMOND);
+	public MyPickaxe(String name, ToolMaterial mat, Item repairIngot) {
+		super(mat);
 		this.repairIngot = new ItemStack(repairIngot);
 		setRegistryName(name);
 		setUnlocalizedName(name);
-		setMaxDamage(maxUses);
-		setHarvestLevel("pickaxe", harvestLevel);
 		setMaxStackSize(1);
 	}
 

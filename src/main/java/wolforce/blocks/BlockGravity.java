@@ -1,19 +1,18 @@
 package wolforce.blocks;
 
 import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import wolforce.MyBlock;
-import wolforce.tile.TileGravity;
+import wolforce.blocks.base.BlockMachineBase;
+import wolforce.blocks.tile.TileGravity;
 
-public class BlockGravity extends MyBlock implements ITileEntityProvider {
+public class BlockGravity extends BlockMachineBase implements ITileEntityProvider {
 
-	private boolean isToRegister;
+	private boolean isTileToRegister;
 
-	public BlockGravity(String name, boolean isToRegister) {
-		super(name, Material.ROCK);
-		this.isToRegister = isToRegister;
+	public BlockGravity(String name, boolean isTileToRegister) {
+		super(name);
+		this.isTileToRegister = isTileToRegister;
 	}
 
 	@Override

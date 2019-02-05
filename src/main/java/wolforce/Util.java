@@ -1,8 +1,16 @@
 package wolforce;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import mezz.jei.api.ingredients.IIngredients;
 import net.minecraft.block.Block;
@@ -291,6 +299,10 @@ public class Util {
 
 	}
 
+	public static int getNrForDebugFromHand(World world, BlockPos pos) {
+		return getNrForDebugFromHand(world, pos.getX(), pos.getY(), pos.getZ());
+	}
+
 	public static int getNrForDebugFromHand(World world, double x, double y, double z) {
 
 		EntityPlayer player = world.getClosestPlayer(x, y, z, 1000, false);
@@ -326,18 +338,18 @@ public class Util {
 		return world != null && world.isBlockLoaded(te.getPos()) && !world.getBlockState(te.getPos()).getBlock().equals(Blocks.AIR);
 	}
 
-	public static List<ItemStack> listOfOneItemStack(ItemStack item) {
-		LinkedList<ItemStack> list = new LinkedList<>();
+	public static <T> List<T> listOfOne(T item) {
+		LinkedList<T> list = new LinkedList<>();
 		list.add(item);
 		return list;
 	}
 
 	public static List<ItemStack> listOfOneItemStack(Item item) {
-		return listOfOneItemStack(new ItemStack(item));
+		return listOfOne(new ItemStack(item));
 	}
 
 	public static List<ItemStack> listOfOneItemStack(Block block) {
-		return listOfOneItemStack(new ItemStack(block));
+		return listOfOne(new ItemStack(block));
 	}
 
 	public static Irio toIrio(IBlockState blockState) {
@@ -391,5 +403,94 @@ public class Util {
 		for (Block block : blocks)
 			list.add(new ItemStack(block));
 		return list;
+	}
+
+	public static JsonElement readJson(String path) throws IOException {
+		Gson gson = new Gson();
+		ResourceLocation loc = new ResourceLocation(path);
+		InputStream in = Minecraft.getMinecraft().getResourceManager().getResource(loc).getInputStream();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+		JsonElement je = gson.fromJson(reader, JsonElement.class);
+		return je;
+	}
+
+	public static Item getRegisteredItem(String name) {
+		Item item = Item.REGISTRY.getObject(new ResourceLocation(name));
+		if (item == null) {
+			throw new IllegalStateException("Invalid Item requested: " + name);
+		} else {
+			return item;
+		}
+	}
+
+	public static Block getRegisteredBlock(String name) {
+		Block block = Block.REGISTRY.getObject(new ResourceLocation(name));
+		if (block == null) {
+			throw new IllegalStateException("Invalid Block requested: " + name);
+		} else {
+			return block;
+		}
+	}
+
+	private void makeTree(World world, BlockPos pos) {
+		IBlockState wood = Blocks.LOG.getDefaultState();
+		IBlockState leaf = Blocks.LEAVES.getDefaultState();
+		world.setBlockState(pos.up(0), wood);
+		world.setBlockState(pos.up(1), wood);
+		world.setBlockState(pos.up(2), wood);
+		world.setBlockState(pos.up(3), wood);
+		world.setBlockState(pos.up(4), wood);
+
+		// layer 2
+		for (int[] d : new int[][] { //
+				{ -2, -2 }, { -2, -1 }, { -2, 0 }, { -2, 1 }, { -2, 2 }, //
+				{ -1, -2 }, { -1, -1 }, { -1, 0 }, { -1, 1 }, { -1, 2 }, //
+				{ 0, -2 }, { 0, -1 }, { 0, 0 }, { 0, 1 }, { 0, 2 }, //
+				{ 1, -2 }, { 1, -1 }, { 1, 0 }, { 1, 1 }, { 1, 2 }, //
+				{ 2, -2 }, { 2, -1 }, { 2, 0 }, { 2, 1 }, { 2, 2 }, //
+		}) {
+			BlockPos dpos = pos.add(d[0], 2, d[1]);
+			if (world.isAirBlock(dpos))
+				world.setBlockState(dpos, leaf);
+		}
+
+		// layer 3
+		for (int[] d : new int[][] { //
+				{ -2, -1 }, { -2, 0 }, { -2, 1 }, //
+				{ -1, -2 }, { -1, -1 }, { -1, 0 }, { -1, 1 }, { -1, 2 }, //
+				{ 0, -2 }, { 0, -1 }, { 0, 1 }, { 0, 2 }, //
+				{ 1, -2 }, { 1, -1 }, { 1, 0 }, { 1, 1 }, { 1, 2 }, //
+				{ 2, -1 }, { 2, 0 }, { 2, 1 }, //
+		}) {
+			BlockPos dpos = pos.add(d[0], 3, d[1]);
+			if (world.isAirBlock(dpos))
+				world.setBlockState(dpos, leaf);
+		}
+
+		// layer 4
+		for (int[] d : new int[][] { //
+				{ -1, -1 }, { -1, 0 }, { -1, 1 }, //
+				{ 0, -1 }, /*       */ { 0, 1 }, //
+				{ 1, -1 }, { 1, 0 }, { 1, 1 }, //
+		}) {
+			BlockPos dpos = pos.add(d[0], 4, d[1]);
+			if (world.isAirBlock(dpos))
+				world.setBlockState(dpos, leaf);
+		}
+
+		// layer 5
+		for (int[] d : new int[][] { //
+				{ -1, 0 }, //
+				{ 0, -1 }, { 0, 0 }, { 0, 1 }, //
+				{ 1, 0 }, //
+		}) {
+			BlockPos dpos = pos.add(d[0], 5, d[1]);
+			if (world.isAirBlock(dpos))
+				world.setBlockState(dpos, leaf);
+		}
+	}
+
+	public static Block blockAt(World world, BlockPos pos) {
+		return world.getBlockState(pos).getBlock();
 	}
 }

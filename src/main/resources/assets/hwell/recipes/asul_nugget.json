@@ -1,0 +1,7 @@
+{ 
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "hwell:asul_ingot" }
+  ],
+  "result": { "item": "hwell:asul_nugget", "count": 9, "data": 0 }
+}

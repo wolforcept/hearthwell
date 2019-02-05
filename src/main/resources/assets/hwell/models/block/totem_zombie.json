@@ -1,0 +1,47 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "hwell:blocks/totem_zombie",
+		"particle": "hwell:blocks/totem_zombie"
+	},
+	"elements": [
+		{
+			"from": [6, 0, 6],
+			"to": [10, 12, 10],
+			"faces": {
+				"north": {"uv": [2, 0, 6, 12], "texture": "#0"},
+				"east": {"uv": [8, 0, 12, 12], "texture": "#0"},
+				"south": {"uv": [8, 0, 12, 12], "texture": "#0"},
+				"west": {"uv": [8, 0, 12, 12], "texture": "#0"},
+				"up": {"uv": [8, 0, 12, 4], "texture": "#0"},
+				"down": {"uv": [8, 0, 12, 4], "texture": "#0"}
+			}
+		},
+		{
+			"from": [4, 7, 2],
+			"to": [6, 9, 8],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [0, 8, 2, 10], "rotation": 180, "texture": "#0"},
+				"east": {"uv": [0, 4, 2, 10], "rotation": 270, "texture": "#0"},
+				"south": {"uv": [0, 4, 2, 6], "texture": "#0"},
+				"west": {"uv": [0, 4, 2, 10], "rotation": 90, "texture": "#0"},
+				"up": {"uv": [0, 4, 2, 10], "rotation": 180, "texture": "#0"},
+				"down": {"uv": [0, 4, 2, 10], "texture": "#0"}
+			}
+		},
+		{
+			"from": [10, 7, 2],
+			"to": [12, 9, 8],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [0, 8, 2, 10], "rotation": 180, "texture": "#0"},
+				"east": {"uv": [0, 4, 2, 10], "rotation": 270, "texture": "#0"},
+				"south": {"uv": [0, 4, 2, 6], "texture": "#0"},
+				"west": {"uv": [0, 4, 2, 10], "rotation": 90, "texture": "#0"},
+				"up": {"uv": [0, 4, 2, 10], "rotation": 180, "texture": "#0"},
+				"down": {"uv": [0, 4, 2, 10], "texture": "#0"}
+			}
+		}
+	]
+}

@@ -1,0 +1,13 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GFG",
+	"FOF",
+    "GFG" ],
+  "key": {
+	"O": [{ "item": "hwell:shard_o" }],
+	"G": [{ "item": "minecraft:grass" }],
+	"F": [{ "item": "hwell:fertilizer_block" }]
+  },
+  "result": { "item": "hwell:fertile_soil" }
+}

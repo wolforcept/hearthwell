@@ -5,8 +5,8 @@
 	"ACA",
     "BAB" ],
   "key": {
-    "A": [{ "item": "hwell:heavy_ingot", "data": 0 }],
-    "B": [{ "item": "minecraft:iron_ingot", "data": 0 }],
+    "A": [{ "item": "hwell:heavy_ingot" }],
+    "B": [{ "item": "hwell:mystic_iron_ingot" }],
 	"C": [{ "item": "hwell:dust_block" }]
   },
   "result": { "item": "hwell:protection_block" , "count": 4}

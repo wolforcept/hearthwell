@@ -5,7 +5,7 @@
     "BCB",
     "ABA"  ],
   "key": {
-    "A": [{ "item": "minecraft:iron_ingot" }],
+    "A": [{ "item": "hwell:metaldiamond" }],
     "B": [{ "item": "hwell:soul_dust" }],
     "C": [{ "item": "hwell:crystal_catalyst" }]
   },

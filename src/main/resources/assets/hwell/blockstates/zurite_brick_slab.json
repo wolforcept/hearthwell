@@ -1,8 +1,0 @@
-{ "variants": {														 
-    "facing=north": { "model": "hwell:zurite_brick_slab_side", "y": 180 },
-    "facing=south": { "model": "hwell:zurite_brick_slab_side" },
-    "facing=west":  { "model": "hwell:zurite_brick_slab_side", "y": 90 },
-    "facing=east":  { "model": "hwell:zurite_brick_slab_side", "y": 270 },
-    "facing=up":  { "model": "hwell:zurite_brick_slab" },
-    "facing=down":  { "model": "hwell:zurite_brick_slab", "x": 180 }
-} }

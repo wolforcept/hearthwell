@@ -1,0 +1,7 @@
+{ 
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "hwell:metaldiamond_block" }
+  ],
+  "result": { "item": "hwell:metaldiamond", "count": 9 }
+}

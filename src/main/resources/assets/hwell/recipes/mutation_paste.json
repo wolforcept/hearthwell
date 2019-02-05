@@ -1,0 +1,7 @@
+{ 
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "hwell:mutation_paste_block" }
+  ],
+  "result": { "item": "hwell:mutation_paste", "count": 9 }
+}

@@ -11,11 +11,15 @@ import net.minecraftforge.common.util.EnumHelper;
 import wolforce.Util;
 
 public class MyArmor extends ItemArmor {
-	
-	private ItemStack repairIngot;
 
-	public MyArmor(String name, EntityEquipmentSlot slot, ArmorMaterial mat, Item repairIngot) {
+	private ItemStack repairIngot;
+	private int enchantability;
+	private String fileName;
+
+	public MyArmor(String name, String fileName, EntityEquipmentSlot slot, ArmorMaterial mat, Item repairIngot, int enchantability) {
 		super(mat, 3, slot);
+		this.fileName = fileName;
+		this.enchantability = enchantability;
 		this.repairIngot = new ItemStack(repairIngot);
 		setRegistryName(name);
 		setUnlocalizedName(name);
@@ -23,8 +27,13 @@ public class MyArmor extends ItemArmor {
 	}
 
 	@Override
+	public int getItemEnchantability() {
+		return enchantability;
+	}
+
+	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
-		return "hwell:textures/armor/soulsteel_" + (slot == EntityEquipmentSlot.LEGS ? 2 : 1) + ".png";
+		return "hwell:textures/armor/" + fileName + "_" + (slot == EntityEquipmentSlot.LEGS ? 2 : 1) + ".png";
 	}
 
 	@Override

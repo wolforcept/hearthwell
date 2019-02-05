@@ -9,13 +9,11 @@ public class MyAxe extends ItemAxe {
 
 	private ItemStack repairIngot;
 
-	public MyAxe(String name, int maxUses, int harvestLevel, float attackDamage, float attackSpeed, Item repairIngot) {
-		super(ToolMaterial.DIAMOND, attackDamage, attackSpeed);
+	public MyAxe(String name, ToolMaterial mat, Item repairIngot, float attackSpeed) {
+		super(mat, mat.getAttackDamage() + 3, attackSpeed);
 		this.repairIngot = new ItemStack(repairIngot);
 		setRegistryName(name);
 		setUnlocalizedName(name);
-		setMaxDamage(maxUses);
-		setHarvestLevel("axe", harvestLevel);
 		setMaxStackSize(1);
 	}
 
