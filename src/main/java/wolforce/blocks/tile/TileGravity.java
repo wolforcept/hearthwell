@@ -11,8 +11,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
-import wolforce.HWellConfig;
 import wolforce.Main;
+import wolforce.HWellConfig;
 
 public class TileGravity extends TileEntity implements ITickable {
 

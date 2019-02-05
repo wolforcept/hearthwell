@@ -71,7 +71,7 @@ public class Util {
 	// }
 	// }
 
-	static LinkedList<Block> makeVariants(MyBlock... blocks) {
+	public static LinkedList<Block> makeVariants(MyBlock... blocks) {
 		LinkedList<Block> variants = new LinkedList<>();
 		for (MyBlock block : blocks) {
 
@@ -104,7 +104,7 @@ public class Util {
 	}
 
 	public static ResourceLocation res(String string) {
-		return new ResourceLocation(Main.MODID, string);
+		return new ResourceLocation(Hwell.MODID, string);
 	}
 
 	//

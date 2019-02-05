@@ -1,6 +1,5 @@
 package integration.jei;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -15,20 +14,18 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import scala.actors.threadpool.Arrays;
 import wolforce.Main;
+import wolforce.Hwell;
 import wolforce.Util;
 import wolforce.recipes.Irio;
 import wolforce.recipes.RecipeGrinding;
 
 public class JeiCatGrinding<T extends JeiRecGrinding> implements IRecipeCategory<JeiRecGrinding> {
 
-	public static final String UID_GRINDING = Main.MODID + ".grinding";
+	public static final String UID_GRINDING = Hwell.MODID + ".grinding";
 
 	static final ResourceLocation TEX = Util.res("textures/gui/grinding.png");
 	static IDrawableStatic back;
@@ -59,7 +56,7 @@ public class JeiCatGrinding<T extends JeiRecGrinding> implements IRecipeCategory
 
 	@Override
 	public String getModName() {
-		return Main.MODID;
+		return Hwell.MODID;
 	}
 
 	@Override

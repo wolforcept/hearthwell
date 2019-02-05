@@ -1,11 +1,9 @@
 package wolforce;
 
 import java.awt.Color;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Nonnull;
@@ -14,7 +12,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockHay;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -23,9 +20,7 @@ import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
@@ -35,41 +30,22 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
-import net.minecraft.world.storage.loot.LootContext;
-import net.minecraft.world.storage.loot.LootTable;
-import net.minecraft.world.storage.loot.LootTableList;
-import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.common.crafting.CraftingHelper.ShapedPrimer;
 import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.RecipeSorter;
-import net.minecraftforge.registries.GameData;
-import scala.actors.threadpool.Arrays;
 import wolforce.blocks.BlockAntiGravity;
 import wolforce.blocks.BlockBox;
 import wolforce.blocks.BlockBoxer;
@@ -103,7 +79,6 @@ import wolforce.blocks.BlockStoneDust;
 import wolforce.blocks.BlockTotem;
 import wolforce.blocks.BlockTube;
 import wolforce.blocks.MyLog;
-import wolforce.blocks.base.BlockWithDescription;
 import wolforce.blocks.tile.TileCore;
 import wolforce.blocks.tile.TileGravity;
 import wolforce.blocks.tile.TilePickerHolder;
@@ -130,8 +105,6 @@ import wolforce.items.tools.MyDagger;
 import wolforce.items.tools.MyPickaxe;
 import wolforce.items.tools.MyShovel;
 import wolforce.items.tools.MySword;
-import wolforce.recipes.MyShapedRecipe;
-import wolforce.recipes.RecipeBoxer;
 import wolforce.recipes.RecipeCoring;
 import wolforce.recipes.RecipeCrushing;
 import wolforce.recipes.RecipeFreezer;
@@ -143,13 +116,7 @@ import wolforce.recipes.RecipeTube;
 import wolforce.tesrs.TesrPickerHolder;
 import wolforce.tesrs.TesrSeparator;
 
-@Mod(modid = Main.MODID, name = Main.NAME, version = Main.VERSION)
-@Mod.EventBusSubscriber(modid = Main.MODID)
 public class Main {
-
-	static {
-		FluidRegistry.enableUniversalBucket();
-	}
 
 	public static final String MODID = "hwell";
 	public static final String NAME = "Hearth Well";
@@ -157,9 +124,8 @@ public class Main {
 
 	public static final Logger logger = LogManager.getLogger(NAME);
 
-	private static LinkedList<Item> items;
-
-	private static LinkedList<Block> blocks;
+	static LinkedList<Item> items;
+	static LinkedList<Block> blocks;
 
 	// public static Material material_heavy, material_mystic_iron, material_asul,
 	// material_soulsteel;
@@ -258,10 +224,9 @@ public class Main {
 		return shards[rand.nextInt(shards.length)];
 	}
 
-	private HashMap<String, Class> tiles;
+	// private static HashMap<String, Class> tiles;
 
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
+	public static void preInit(FMLPreInitializationEvent event) {
 
 		// material_heavy = new Material(MapColor.SAND);
 		// material_mystic_iron = new Material(MapColor.SAND);
@@ -744,9 +709,9 @@ public class Main {
 		metaldiamond_block = new MyBlock("metaldiamond_block", Material.IRON).setHardness(3).setResistance(3);
 		blocks.add(metaldiamond_block);
 
-		tiles = new HashMap<>();
-		tiles.put("tile_core", TileCore.class);
-		tiles.put("tile_gravity_block", TileGravity.class);
+		// tiles = new HashMap<>();
+		// tiles.put("tile_core", TileCore.class);
+		// tiles.put("tile_gravity_block", TileGravity.class);
 
 		boxer = new BlockBoxer("boxer");
 		blocks.add(boxer);
@@ -811,7 +776,7 @@ public class Main {
 
 		//
 
-		creativeTab = new HwellCreativeTab();
+		creativeTab = new Hwell.HwellCreativeTab();
 		for (Block block : blocks) {
 			block.setCreativeTab(creativeTab);
 		}
@@ -832,8 +797,7 @@ public class Main {
 	 * 
 	 */
 
-	@EventHandler
-	public void init(FMLInitializationEvent event) {
+	public static void init(FMLInitializationEvent event) {
 
 		HashSet<Class> loaded = new HashSet<>();
 		for (Block block : blocks)
@@ -884,13 +848,6 @@ public class Main {
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
-	@EventHandler
-	public void registerTesrs(FMLPostInitializationEvent event) {
-		ClientRegistry.bindTileEntitySpecialRenderer(TileSeparator.class, new TesrSeparator());
-		ClientRegistry.bindTileEntitySpecialRenderer(TilePickerHolder.class, new TesrPickerHolder());
-	}
-
 	//
 
 	// FLUIDS
@@ -929,8 +886,7 @@ public class Main {
 
 	// RECIPES
 
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
+	public static void postInit(FMLPostInitializationEvent event) {
 		RecipePuller.initRecipes();
 		RecipeCrushing.initRecipes();
 		RecipeTube.initRecipes();
@@ -943,134 +899,10 @@ public class Main {
 		initShards();
 		MinecraftForge.EVENT_BUS.register(new HwellEventSubscriber());
 		ItemLoot.setLootTables();
-	}
-	/*
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 */
 
-	// ----------------------
-	// FOR ITEMS
-
-	@SubscribeEvent
-	public static void registerItems(RegistryEvent.Register<Item> event) {
-		for (Item item : items) {
-			event.getRegistry().registerAll(item);
-		}
-	}
-
-	@SubscribeEvent
-	public static void registerRendersItem(ModelRegistryEvent event) {
-		for (Item item : items) {
-			registerRenderItem(item);
-		}
-	}
-
-	private static void registerRenderItem(Item item) {
-		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
-	}
-
-	// ----------------------
-	// FOR BLOCKS
-
-	@SubscribeEvent
-	public static void registerBlocks(RegistryEvent.Register<Block> event) {
-		for (Block b : blocks)
-			event.getRegistry().register(b);
-		for (BlockBox box : boxes) {
-			event.getRegistry().register(box);
-			ModelLoader.setCustomStateMapper(box, box.getMapper());
-		}
-	}
-
-	@SubscribeEvent
-	public static void registerItemBlocks(RegistryEvent.Register<Item> event) {
-		for (Block block : blocks) {
-			Item item = !(block instanceof BlockWithDescription) ? new ItemBlock(block) : //
-					new ItemBlock(block) {
-						public void addInformation(ItemStack stack, net.minecraft.world.World worldIn, java.util.List<String> tooltip,
-								net.minecraft.client.util.ITooltipFlag flagIn) {
-							for (String string : ((BlockWithDescription) block).getDescription()) {
-								tooltip.add(string);
-							}
-						};
-					};
-			item.setRegistryName(block.getRegistryName());
-			event.getRegistry().register(item);
-		}
-
-		for (BlockBox box : boxes) {
-			Item item = new ItemBlock(box) {
-
-				@Override
-				public String getItemStackDisplayName(ItemStack stack) {
-					return Item.getItemFromBlock(box.block).getItemStackDisplayName(stack) + " Box";
-				}
-
-				@Override
-				public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-					tooltip.add(box.getDescription());
-					super.addInformation(stack, worldIn, tooltip, flagIn);
-				}
-			};
-			item.setRegistryName(box.getRegistryName());
-			event.getRegistry().register(item);
-		}
-	}
-
-	@SubscribeEvent
-	public static void registerRendersBlockItem(ModelRegistryEvent event) {
-		for (Block block : blocks) {
-			Item item = Item.getItemFromBlock(block);
-			ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
-		}
-
-		for (BlockBox box : boxes) {
-			Item item = Item.getItemFromBlock(box);
-			ModelLoader.setCustomModelResourceLocation(item, 0, box.getModelRes("inventory"));
-		}
-	}
-
-	//
-
-	//
-
-	//
-
-	public static class HwellCreativeTab extends CreativeTabs {
-
-		public HwellCreativeTab() {
-			super("hwell");
-		}
-
-		@Override
-		public ItemStack getTabIconItem() {
-			return new ItemStack(Main.myst_dust);
+		if (event.getSide() == Side.CLIENT) {
+			ClientRegistry.bindTileEntitySpecialRenderer(TileSeparator.class, new TesrSeparator());
+			ClientRegistry.bindTileEntitySpecialRenderer(TilePickerHolder.class, new TesrPickerHolder());
 		}
 	}
 

@@ -12,12 +12,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import wolforce.Main;
+import wolforce.Hwell;
 import wolforce.Util;
 import wolforce.recipes.RecipeTube;
 
 public class JeiCatTubing<T extends RecipeTube> implements IRecipeCategory<RecipeTube> {
 
-	public static final String UID_TUBING = Main.MODID + ".tubing";
+	public static final String UID_TUBING = Hwell.MODID + ".tubing";
 
 	static final ResourceLocation TEX = Util.res("textures/gui/tubing.png");
 	static IDrawableStatic back;
@@ -48,7 +49,7 @@ public class JeiCatTubing<T extends RecipeTube> implements IRecipeCategory<Recip
 
 	@Override
 	public String getModName() {
-		return Main.MODID;
+		return Hwell.MODID;
 	}
 
 	@Override

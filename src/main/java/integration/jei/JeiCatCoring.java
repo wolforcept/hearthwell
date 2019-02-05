@@ -26,6 +26,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import scala.actors.threadpool.Arrays;
 import wolforce.Main;
+import wolforce.Hwell;
 import wolforce.Util;
 import wolforce.blocks.BlockCore;
 import wolforce.recipes.Irio;
@@ -33,10 +34,10 @@ import wolforce.recipes.RecipeCoring;
 
 public class JeiCatCoring<T extends JeiRecCoring> implements IRecipeCategory<JeiRecCoring> {
 
-	public static final String UID_CORING_STONE = Main.MODID + ".coring.stone";
-	public static final String UID_CORING_HEAT = Main.MODID + ".coring.heat";
-	public static final String UID_CORING_GREEN = Main.MODID + ".coring.green";
-	public static final String UID_CORING_SENTIENT = Main.MODID + ".coring.sentient";
+	public static final String UID_CORING_STONE = Hwell.MODID + ".coring.stone";
+	public static final String UID_CORING_HEAT = Hwell.MODID + ".coring.heat";
+	public static final String UID_CORING_GREEN = Hwell.MODID + ".coring.green";
+	public static final String UID_CORING_SENTIENT = Hwell.MODID + ".coring.sentient";
 
 	static final ResourceLocation TEX = Util.res("textures/gui/coring.png");
 	static IDrawableStatic back;
@@ -76,7 +77,7 @@ public class JeiCatCoring<T extends JeiRecCoring> implements IRecipeCategory<Jei
 
 	@Override
 	public String getModName() {
-		return Main.MODID;
+		return Hwell.MODID;
 	}
 
 	@Override

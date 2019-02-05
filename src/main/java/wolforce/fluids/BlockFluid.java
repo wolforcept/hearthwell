@@ -7,7 +7,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
-import wolforce.Main;
+import wolforce.Hwell;
 
 public class BlockFluid extends BlockFluidClassic {
 
@@ -18,8 +18,8 @@ public class BlockFluid extends BlockFluidClassic {
 		super(fluid, material);
 		String fluidBlockName = "fluid_" + fluid.getName();
 		this.name = fluidBlockName;
-		setUnlocalizedName(Main.MODID + "." + fluidBlockName);
-		setRegistryName(new ResourceLocation(Main.MODID, fluidBlockName));
+		setUnlocalizedName(Hwell.MODID + "." + fluidBlockName);
+		setRegistryName(new ResourceLocation(Hwell.MODID, fluidBlockName));
 		this.fluid = fluid;
 	}
 

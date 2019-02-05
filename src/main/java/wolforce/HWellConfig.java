@@ -6,7 +6,7 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Config(modid = Main.MODID, category = "everything")
+@Config(modid = Hwell.MODID, category = "everything")
 // @Config.LangKey("hwell.config.title")
 public class HWellConfig {
 
@@ -47,7 +47,7 @@ public class HWellConfig {
 	@Config.Comment({ "Range of Gravity Block? (default: 5)" })
 	@Config.RangeInt(min = 1, max = 16)
 	public static int gravityBlockDistance = 5;
-	
+
 	@Config.Comment({ "Range of Mini Gravity Block? (default: 1)" })
 	@Config.RangeInt(min = 1, max = 16)
 	public static int gravityBlockDistanceMini = 1;
@@ -104,13 +104,13 @@ public class HWellConfig {
 	// WHAT IS THIS
 	//
 
-	@Mod.EventBusSubscriber(modid = Main.MODID)
+	@Mod.EventBusSubscriber(modid = Hwell.MODID)
 	private static class EventHandler {
 
 		@SubscribeEvent
 		public static void onConfigChanged(final ConfigChangedEvent.OnConfigChangedEvent event) {
-			if (event.getModID().equals(Main.MODID)) {
-				ConfigManager.sync(Main.MODID, Config.Type.INSTANCE);
+			if (event.getModID().equals(Hwell.MODID)) {
+				ConfigManager.sync(Hwell.MODID, Config.Type.INSTANCE);
 			}
 		}
 	}

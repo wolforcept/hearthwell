@@ -1,6 +1,5 @@
 package integration.jei;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -15,21 +14,17 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import scala.actors.threadpool.Arrays;
+import wolforce.Hwell;
 import wolforce.Main;
 import wolforce.Util;
 import wolforce.recipes.Irio;
-import wolforce.recipes.RecipeGrinding;
 import wolforce.recipes.RecipeSeparator;
 
 public class JeiCatSeparating<T extends JeiRecSeparating> implements IRecipeCategory<JeiRecSeparating> {
 
-	public static final String UID_SEPARATOR = Main.MODID + ".separating";
+	public static final String UID_SEPARATOR = Hwell.MODID + ".separating";
 
 	static final ResourceLocation TEX = Util.res("textures/gui/separating.png");
 	static IDrawableStatic back;
@@ -61,7 +56,7 @@ public class JeiCatSeparating<T extends JeiRecSeparating> implements IRecipeCate
 
 	@Override
 	public String getModName() {
-		return Main.MODID;
+		return Hwell.MODID;
 	}
 
 	@Override

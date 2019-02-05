@@ -1,5 +1,6 @@
 package wolforce;
 
+import java.util.Arrays;
 import java.util.List;
 
 import net.minecraft.client.util.ITooltipFlag;
@@ -7,7 +8,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import scala.actors.threadpool.Arrays;
 
 public class MyItem extends Item {
 

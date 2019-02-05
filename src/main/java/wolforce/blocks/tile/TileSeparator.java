@@ -21,6 +21,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import wolforce.Hwell;
 import wolforce.Main;
 import wolforce.Util;
 import wolforce.Util.BlockWithMeta;
@@ -122,7 +123,7 @@ public class TileSeparator extends TileEntity implements ITickable {
 		}
 		return false;
 	}
-	
+
 	//
 
 	//

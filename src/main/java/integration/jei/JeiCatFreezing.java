@@ -16,12 +16,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import scala.actors.threadpool.Arrays;
 import wolforce.Main;
+import wolforce.Hwell;
 import wolforce.Util;
 import wolforce.recipes.RecipeFreezer;
 
 public class JeiCatFreezing<T extends RecipeFreezer> implements IRecipeCategory<RecipeFreezer> {
 
-	public static final String UID_FREEZING = Main.MODID + ".freezing";
+	public static final String UID_FREEZING = Hwell.MODID + ".freezing";
 
 	static final ResourceLocation TEX = Util.res("textures/gui/freezing.png");
 	static IDrawableStatic back;
@@ -52,7 +53,7 @@ public class JeiCatFreezing<T extends RecipeFreezer> implements IRecipeCategory<
 
 	@Override
 	public String getModName() {
-		return Main.MODID;
+		return Hwell.MODID;
 	}
 
 	@Override

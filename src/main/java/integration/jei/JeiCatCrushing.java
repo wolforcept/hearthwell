@@ -22,6 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import scala.actors.threadpool.Arrays;
 import wolforce.Main;
+import wolforce.Hwell;
 import wolforce.Util;
 import wolforce.blocks.BlockCore;
 import wolforce.recipes.Irio;
@@ -30,7 +31,7 @@ import wolforce.recipes.RecipeCrushing;
 
 public class JeiCatCrushing<T extends JeiRecCrushing> implements IRecipeCategory<JeiRecCrushing> {
 
-	public static final String UID_CRUSHING = Main.MODID + ".crushing";
+	public static final String UID_CRUSHING = Hwell.MODID + ".crushing";
 
 	static final ResourceLocation TEX = Util.res("textures/gui/crushing.png");
 	static IDrawableStatic back;
@@ -61,7 +62,7 @@ public class JeiCatCrushing<T extends JeiRecCrushing> implements IRecipeCategory
 
 	@Override
 	public String getModName() {
-		return Main.MODID;
+		return Hwell.MODID;
 	}
 
 	@Override
