@@ -34,8 +34,12 @@ public class RecipeSeparator {
 	}
 
 	private static void readRecipes(String filename) throws IOException {
-		JsonArray recipes = Util.readJson("hwell:" + filename + ".json").getAsJsonArray();
+		JsonArray recipes = Util.readJson("hwell:" + filename + ".json", true).getAsJsonArray();
 		for (JsonElement e : recipes) {
+			readRecipe(e.getAsJsonObject());
+		}
+		JsonArray recipes2 = Util.readJson("customrecipes.json", false).getAsJsonArray();
+		for (JsonElement e : recipes2) {
 			readRecipe(e.getAsJsonObject());
 		}
 	}

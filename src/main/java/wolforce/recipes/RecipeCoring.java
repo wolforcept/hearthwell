@@ -53,7 +53,7 @@ public class RecipeCoring {
 		putRecipe(green, Main.shard_au, PUMPKIN, Main.fertilizer_block);
 		// putRecipe(green, Main.shard_h, );
 		putRecipe(green, Main.shard_o, LAPIS_BLOCK, PRISMARINE);
-		putRecipe(green, Main.shard_ca, WOOL, AIR);
+		putRecipe(green, Main.shard_ca, Main.compressed_wool, AIR);
 		// SPECIAL CASE
 		// putRecipe(green, Main.shard_p, Main.compressed_clay, WATER, ICE, PACKED_ICE,
 		// SNOW, DIRT);

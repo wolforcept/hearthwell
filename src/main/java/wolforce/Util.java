@@ -1,16 +1,18 @@
 package wolforce;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
 import mezz.jei.api.ingredients.IIngredients;
 import net.minecraft.block.Block;
@@ -30,6 +32,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
 import wolforce.blocks.simplevariants.MySlab;
 import wolforce.blocks.simplevariants.MyStairs;
 import wolforce.recipes.Irio;
@@ -373,29 +377,55 @@ public class Util {
 		LinkedList<ItemStack> outList = new LinkedList<>();
 
 		if (ins instanceof Block[]) {
-			System.out.println("Util.setIngredients(A)");
 			for (Block block : ((Block[]) ins))
 				inList.add(new ItemStack(block));
 		}
 		if (ins instanceof Item[]) {
-			System.out.println("Util.setIngredients(B)");
 			for (Item item : ((Item[]) ins))
 				inList.add(new ItemStack(item));
 		}
 
 		if (outs instanceof Block[]) {
-			System.out.println("Util.setIngredients(C)");
 			for (Block block : ((Block[]) outs))
 				outList.add(new ItemStack(block));
 		}
 		if (outs instanceof Item[]) {
-			System.out.println("Util.setIngredients(D)");
 			for (Item item : ((Item[]) outs))
 				outList.add(new ItemStack(item));
 		}
+		ToStringer<ItemStack> outStringer = new ToStringer<ItemStack>() {
+			@Override
+			public String toString(ItemStack t) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+		};
+		ToStringer<ItemStack> toStringer = new ToStringer<ItemStack>() {
+
+			@Override
+			public String toString(ItemStack t) {
+				return t.getCount() + "x" + t.getItem().getRegistryName() + ((t.getMetadata() == 0) ? "" : t.getMetadata());
+			}
+		};
+		System.out.println("New Separator Recipe: [" + toStringed(inList, toStringer) + "] -> [" + toStringed(outList) + "]");
 
 		ingredients.setInputs(ItemStack.class, inList);
 		ingredients.setOutputs(ItemStack.class, outList);
+	}
+
+	private static <T> String toStringed(Collection<T> inList, ToStringer<T>... toStringer) {
+		String s = "";
+		for (T t : inList) {
+			if (toStringer.length > 0)
+				s += toStringer[0].toString(t) + ", ";
+			else
+				s += t.toString() + ", ";
+		}
+		return s.substring(0, s.length() - 3);
+	}
+
+	private interface ToStringer<T> {
+		String toString(T t);
 	}
 
 	public static List<ItemStack> toItemStackList(Block[] blocks) {
@@ -405,13 +435,22 @@ public class Util {
 		return list;
 	}
 
-	public static JsonElement readJson(String path) throws IOException {
-		Gson gson = new Gson();
-		ResourceLocation loc = new ResourceLocation(path);
-		InputStream in = Minecraft.getMinecraft().getResourceManager().getResource(loc).getInputStream();
-		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-		JsonElement je = gson.fromJson(reader, JsonElement.class);
-		return je;
+	public static JsonElement readJson(String path, boolean internal) throws IOException {
+//		if (internal) {
+			Gson gson = new Gson();
+			ResourceLocation loc = new ResourceLocation(path);
+			InputStream in = Minecraft.getMinecraft().getResourceManager().getResource(loc).getInputStream();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+			JsonElement je = gson.fromJson(reader, JsonElement.class);
+			return je;
+//		} else {
+//			File file = FMLCommonHandler.instance().getSide().equals(Side.CLIENT) ? Minecraft.getMinecraft().: FMLCommonHandler.instance().getMinecraftServerInstance().getFile(path);
+//			Gson gson = new Gson();
+//			InputStream in = new FileInputStream(file);
+//			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+//			JsonElement je = gson.fromJson(reader, JsonElement.class);
+//			return je;
+//		}
 	}
 
 	public static Item getRegisteredItem(String name) {

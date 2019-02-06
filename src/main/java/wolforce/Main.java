@@ -172,7 +172,7 @@ public class Main {
 			smooth_azurite, scorch_grit, scorch_glass, fullgrass_block, metaldiamond_block;
 	public static BlockNourisher nourisher;
 	public static Block freezer, generator_heat;
-	public static Block compressed_clay, fertilizer_block;
+	public static Block compressed_clay, compressed_wool, fertilizer_block;
 	public static Item raw_mystic_iron, mystic_iron_ingot;
 	public static Block mystic_iron_block;
 	public static Item mystic_iron_sword, mystic_iron_dagger, mystic_iron_pickaxe, mystic_iron_axe, mystic_iron_shovel,
@@ -405,6 +405,9 @@ public class Main {
 
 		compressed_clay = new MyBlock("compressed_clay", Material.CLAY).setHardness(.5f).setResistance(2);
 		blocks.add(compressed_clay);
+		
+		compressed_wool = new MyBlock("compressed_wool", Material.CLAY).setHardness(.5f).setResistance(2);
+		blocks.add(compressed_wool);
 
 		citrinic_stone = new MyBlock("citrinic_stone", Material.ROCK)//
 				.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
@@ -728,7 +731,7 @@ public class Main {
 				crystal_block, crystal_nether_block, //
 				core_stone, core_heat, core_green, core_sentient, //
 				crushing_block, boxer, producer, //
-				compressed_clay, mutation_paste_block, //
+				compressed_clay, compressed_wool, mutation_paste_block, //
 				protection_block, heavy_protection_block, //
 				gravity_block, gravity_powered_block, antigravity_block, Main.antigravity_powered_block,//
 		};
