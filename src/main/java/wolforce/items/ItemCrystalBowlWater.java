@@ -1,5 +1,6 @@
 package wolforce.items;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,7 +24,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import scala.actors.threadpool.Arrays;
 import wolforce.Main;
 import wolforce.MyItem;
 import wolforce.Util;
@@ -54,8 +54,7 @@ public class ItemCrystalBowlWater extends ItemBucketMilk {
 		if (entityLiving instanceof EntityPlayer && !((EntityPlayer) entityLiving).capabilities.isCreativeMode) {
 			stack.shrink(1);
 			if (!stack.isEmpty())
-				if (!((EntityPlayer) entityLiving).inventory
-						.addItemStackToInventory(new ItemStack(Main.crystal_bowl))) {
+				if (!((EntityPlayer) entityLiving).inventory.addItemStackToInventory(new ItemStack(Main.crystal_bowl))) {
 					((EntityPlayer) entityLiving).dropItem(new ItemStack(Main.crystal_bowl), false);
 				}
 		}

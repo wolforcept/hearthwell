@@ -22,7 +22,7 @@ import scala.actors.threadpool.Arrays;
 import wolforce.Main;
 import wolforce.MyBlock;
 
-public class BlockMystLeaves extends MyBlock implements IShearable {
+public class BlockMystLeaves extends MyBlock /*implements IShearable*/ {
 
 	public BlockMystLeaves(String name) {
 		super(name, Material.LEAVES);
@@ -42,32 +42,31 @@ public class BlockMystLeaves extends MyBlock implements IShearable {
 				for (int z = -4; z <= 4; z++) {
 					if (world.getBlockState(pos.add(x, y, z)).getBlock() == Main.myst_log)
 						return true;
-
 				}
 			}
 		}
 		return false;
 	}
 
-	@Override
+	/*@Override
 	public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos) {
 		return true;
-	}
+	}*/
 
-	@Override
+	/*@Override
 	public int quantityDropped(IBlockState state, int fortune, Random random) {
 		return 0;// random.nextInt(10) < 1 ? 1 : 0;
-	}
+	}*/
 
 	// @Override
 	// public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 	// return Main.getRandomCrystal(rand);
 	// }
 
-	@Override
+	/*@Override
 	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
 		return Arrays.asList(new ItemStack[] { new ItemStack(Main.myst_leaves, 1) });
-	}
+	}*/
 
 	@Override
 	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {

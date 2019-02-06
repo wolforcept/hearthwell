@@ -24,7 +24,7 @@ import wolforce.Util;
 import wolforce.blocks.base.BlockWithCustomStateMapper;
 import wolforce.blocks.base.BlockWithDescription;
 
-public class BlockBox extends BlockRotatedPillar implements IRecipeWrapper {
+public class BlockBox extends BlockRotatedPillar {
 
 	public final Block block;
 	private boolean hasAxis;
@@ -98,11 +98,6 @@ public class BlockBox extends BlockRotatedPillar implements IRecipeWrapper {
 	//
 
 	// RECIPE RELATED
-
-	@Override
-	public void getIngredients(IIngredients ingredients) {
-		Util.setIngredients(ingredients, new Block[] { Main.boxer, block }, new Block[] { this });
-	}
 
 	@Override
 	public String toString() {
