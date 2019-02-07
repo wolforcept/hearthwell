@@ -21,7 +21,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import wolforce.Main;
 import wolforce.MyBlock;
 import wolforce.Util;
-import wolforce.blocks.base.BlockWithCustomStateMapper;
 import wolforce.blocks.base.BlockWithDescription;
 
 public class BlockBox extends BlockRotatedPillar {

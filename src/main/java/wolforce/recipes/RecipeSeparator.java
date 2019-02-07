@@ -38,10 +38,11 @@ public class RecipeSeparator {
 		for (JsonElement e : recipes) {
 			readRecipe(e.getAsJsonObject());
 		}
-		JsonArray recipes2 = Util.readJson("customrecipes.json", false).getAsJsonArray();
-		for (JsonElement e : recipes2) {
-			readRecipe(e.getAsJsonObject());
-		}
+		// TODO JsonArray recipes2 = Util.readJson("customrecipes.json",
+		// false).getAsJsonArray();
+		// for (JsonElement e : recipes2) {
+		// readRecipe(e.getAsJsonObject());
+		// }
 	}
 
 	private static void readRecipe(JsonObject o) {

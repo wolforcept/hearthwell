@@ -1,5 +1,4 @@
 package wolforce;
-
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.HashSet;

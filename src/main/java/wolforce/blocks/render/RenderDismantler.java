@@ -1,18 +1,7 @@
 package wolforce.blocks.render;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import wolforce.Main;
-import wolforce.blocks.BlockDismantler;
-import wolforce.blocks.tile.TileDismantler;
 
 @SideOnly(Side.CLIENT)
 public class RenderDismantler/* extends TileEntitySpecialRenderer<TileDismantler> */ {

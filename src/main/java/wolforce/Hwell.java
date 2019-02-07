@@ -3,8 +3,6 @@ package wolforce;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -21,6 +19,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import wolforce.blocks.BlockBox;
 import wolforce.blocks.base.BlockWithDescription;
 
@@ -67,6 +67,7 @@ public class Hwell {
 		}
 	}
 
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public static void registerRendersItem(ModelRegistryEvent event) {
 		for (Item item : Main.items) {
@@ -75,7 +76,8 @@ public class Hwell {
 	}
 
 	private static void registerRenderItem(Item item) {
-		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+		ModelLoader.setCustomModelResourceLocation(item, 0,
+				new net.minecraft.client.renderer.block.model.ModelResourceLocation(item.getRegistryName(), "inventory"));
 	}
 
 	// ----------------------
@@ -116,7 +118,8 @@ public class Hwell {
 				}
 
 				@Override
-				public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+				public void addInformation(ItemStack stack, World worldIn, List<String> tooltip,
+						net.minecraft.client.util.ITooltipFlag flagIn) {
 					tooltip.add(box.getDescription());
 					super.addInformation(stack, worldIn, tooltip, flagIn);
 				}
@@ -127,11 +130,13 @@ public class Hwell {
 		}
 	}
 
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public static void registerRendersBlockItem(ModelRegistryEvent event) {
 		for (Block block : Main.blocks) {
 			Item item = Item.getItemFromBlock(block);
-			ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+			ModelLoader.setCustomModelResourceLocation(item, 0,
+					new net.minecraft.client.renderer.block.model.ModelResourceLocation(item.getRegistryName(), "inventory"));
 		}
 
 		for (BlockBox box : Main.boxes) {

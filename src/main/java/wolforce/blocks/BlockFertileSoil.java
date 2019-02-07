@@ -41,7 +41,7 @@ public class BlockFertileSoil extends MyBlock implements ITileEntityProvider, Bl
 
 	@Override
 	public String[] getDescription() {
-		return new String[] { "Increases the speed at which sapplings grow over it." };
+		return new String[] { "Increases the speed at which saplings grow over it." };
 	}
 	// TILE ENTITIES
 

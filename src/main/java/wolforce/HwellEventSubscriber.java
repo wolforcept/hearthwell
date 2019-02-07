@@ -10,8 +10,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -38,22 +36,25 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import wolforce.fluids.BlockLiquidSouls;
 import wolforce.recipes.RecipeRepairingPaste;
 
 @Mod.EventBusSubscriber
 public class HwellEventSubscriber {
 
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public static void registerColors(ColorHandlerEvent.Block event) {
-		IBlockColor grassBlockColor = new IBlockColor() {
+		net.minecraft.client.renderer.color.IBlockColor grassBlockColor = new net.minecraft.client.renderer.color.IBlockColor() {
 			public int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) {
 				return worldIn != null && pos != null ? BiomeColorHelper.getGrassColorAtPos(worldIn, pos)
 						: ColorizerGrass.getGrassColor(0.5D, 1.0D);
 			}
 		};
 		event.getBlockColors().registerBlockColorHandler(grassBlockColor, Main.fullgrass_block);
-	}	
+	}
 
 	// @SubscribeEvent
 	// public static void makeCrystalPassPortals(EntityTravelToDimensionEvent event)
