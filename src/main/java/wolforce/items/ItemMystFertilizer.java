@@ -1,12 +1,9 @@
 package wolforce.items;
 
-import java.util.HashMap;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -16,7 +13,6 @@ import net.minecraft.world.World;
 import wolforce.Main;
 import wolforce.MyItem;
 import wolforce.Util;
-import wolforce.blocks.tile.TileDismantler;
 
 public class ItemMystFertilizer extends MyItem {
 

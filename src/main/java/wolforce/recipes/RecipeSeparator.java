@@ -9,55 +9,49 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import mezz.jei.recipes.RecipeRegistry;
-import net.minecraft.client.util.RecipeItemHelper;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
+import crafttweaker.annotations.ZenRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
+import stanhebben.zenscript.annotations.ZenClass;
+import stanhebben.zenscript.annotations.ZenMethod;
 import wolforce.Util;
 
+//@ZenClass("mods.hwell.separator")
+//@ZenRegister
 public class RecipeSeparator {
 
 	private static HashMap<Irio, RecipeSeparator> recipes;
 
-	public static void initRecipes() {
+	public static void initRecipes(JsonArray recipesJson) {
 		recipes = new HashMap<>();
-		// RecipeSeparator a = new Gson().fromJson("", RecipeSeparator.class);
-
-		try {
-			readRecipes("recipes_separator");
-		} catch (IOException e) {
-			e.printStackTrace();
+		for (JsonElement e : recipesJson) {
+			readAndAddRecipe(e.getAsJsonObject());
 		}
 	}
 
-	private static void readRecipes(String filename) throws IOException {
-		JsonArray recipes = Util.readJson("hwell:" + filename + ".json", true).getAsJsonArray();
-		for (JsonElement e : recipes) {
-			readRecipe(e.getAsJsonObject());
-		}
-		// TODO JsonArray recipes2 = Util.readJson("customrecipes.json",
-		// false).getAsJsonArray();
-		// for (JsonElement e : recipes2) {
-		// readRecipe(e.getAsJsonObject());
-		// }
-	}
-
-	private static void readRecipe(JsonObject o) {
+	private static void readAndAddRecipe(JsonObject o) {
 		ItemStack input = ShapedRecipes.deserializeItem(o.get("input").getAsJsonObject(), true);
 		ItemStack output1 = ShapedRecipes.deserializeItem(o.get("output1").getAsJsonObject(), true);
 		ItemStack output2 = ShapedRecipes.deserializeItem(o.get("output2").getAsJsonObject(), true);
 		if (!o.has("output3")) {
-			put(new Irio(input), new RecipeSeparator(output1, output2));
+			addRecipe(new Irio(input), new RecipeSeparator(output1, output2));
 		} else {
 			ItemStack output3 = ShapedRecipes.deserializeItem(o.get("output3").getAsJsonObject(), true);
-			put(new Irio(input), new RecipeSeparator(output1, output2, output3));
+			addRecipe(new Irio(input), new RecipeSeparator(output1, output2, output3));
 		}
 	}
 
-	private static void put(Irio stack, RecipeSeparator recipeGrinder) {
+	// @ZenMethod
+	public static void addRecipe(ItemStack input, ItemStack output1, ItemStack output2, ItemStack output3) {
+		addRecipe(new Irio(input), new RecipeSeparator(output1, output2, output3));
+	}
+
+	// @ZenMethod
+	public static void addRecipe(ItemStack input, ItemStack output1, ItemStack output2) {
+		addRecipe(new Irio(input), new RecipeSeparator(output1, output2));
+	}
+
+	private static void addRecipe(Irio stack, RecipeSeparator recipeGrinder) {
 		recipes.put(stack, recipeGrinder);
 	}
 

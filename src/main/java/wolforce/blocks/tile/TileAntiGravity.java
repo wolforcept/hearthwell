@@ -2,18 +2,13 @@ package wolforce.blocks.tile;
 
 import java.util.List;
 
-import org.lwjgl.input.Keyboard;
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.chunk.Chunk.EnumCreateEntityType;
 import wolforce.Main;
-import wolforce.Util;
 
 public class TileAntiGravity extends TileEntity implements ITickable {
 

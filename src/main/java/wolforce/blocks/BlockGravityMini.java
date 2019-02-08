@@ -2,21 +2,12 @@ package wolforce.blocks;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import wolforce.blocks.base.BlockMachineBase;
-import wolforce.blocks.tile.TileGravity;
 
 public class BlockGravityMini extends BlockGravity {
 

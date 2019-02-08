@@ -1,13 +1,8 @@
 package wolforce.blocks.tile;
 
-import java.util.HashMap;
-import java.util.List;
-
 import javax.annotation.Nullable;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,21 +10,10 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import wolforce.Main;
-import wolforce.Util;
-import wolforce.Util.BlockWithMeta;
-import wolforce.blocks.BlockLightCollector;
-import wolforce.blocks.BlockSeparator;
-import wolforce.items.tools.ItemDustPicker;
-import wolforce.recipes.RecipeGrinding;
-import wolforce.recipes.RecipeSeparator;
 
 public class TilePickerHolder extends TileEntity {
 

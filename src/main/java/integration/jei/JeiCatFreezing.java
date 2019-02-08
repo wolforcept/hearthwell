@@ -1,7 +1,8 @@
 package integration.jei;
 
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.LinkedList;
 
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
@@ -11,20 +12,22 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
+import mezz.jei.api.recipe.IRecipeWrapper;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
-import scala.actors.threadpool.Arrays;
-import wolforce.Main;
 import wolforce.Hwell;
+import wolforce.Main;
 import wolforce.Util;
 import wolforce.recipes.RecipeFreezer;
 
-public class JeiCatFreezing<T extends RecipeFreezer> implements IRecipeCategory<RecipeFreezer> {
+public class JeiCatFreezing implements IRecipeCategory<IRecipeWrapper> {
 
 	public static final String UID_FREEZING = Hwell.MODID + ".freezing";
 
 	static final ResourceLocation TEX = Util.res("textures/gui/freezing.png");
+
 	static IDrawableStatic back;
 	static private IDrawable icon;
 
@@ -62,23 +65,28 @@ public class JeiCatFreezing<T extends RecipeFreezer> implements IRecipeCategory<
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, RecipeFreezer recipe, IIngredients ingredients) {
+	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipe, IIngredients ingredients) {
 		IGuiItemStackGroup stacks = recipeLayout.getItemStacks();
-
-		// the freezer block
+		// recipeLayout.getFluidStacks().init(0, true, 9, 31);
 		stacks.init(0, true, 40, 30);
-		stacks.set(0, new ItemStack(Main.freezer));
-
-		// in
-		FluidStack fluid = Util.vanillaFluidToFluidStack(recipe.blockIn);
-		if (fluid != null) {
-			recipeLayout.getFluidStacks().init(0, true, 9, 31);
-			recipeLayout.getFluidStacks().set(0, fluid);
-		}
-
-		// out
 		stacks.init(1, false, 72, 30);
-		stacks.set(1, Util.toItemStackList(recipe.blocksOut));
+		stacks.set(ingredients);
+	}
+
+	public static Collection<?> getRecipes() {
+		LinkedList<IRecipeWrapper> recipeWrappers = new LinkedList<>();
+		for (RecipeFreezer recipe : RecipeFreezer.recipes) {
+			IRecipeWrapper recipeWrapper = new IRecipeWrapper() {
+
+				@Override
+				public void getIngredients(IIngredients ingredients) {
+					ingredients.setInput(ItemStack.class, Main.freezer);
+					ingredients.setInput(FluidStack.class, recipe.fluidIn);
+					ingredients.setOutputs(Block.class, Arrays.<Block>asList(recipe.blocksOut));
+				}
+			};
+		}
+		return recipeWrappers;
 	}
 
 	// public static List<RecipeTube> getAllRecipes() {

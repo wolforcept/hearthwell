@@ -1,17 +1,20 @@
 package wolforce.recipes;
 
+import static net.minecraft.init.Blocks.COAL_ORE;
+import static net.minecraft.init.Blocks.DIAMOND_ORE;
+import static net.minecraft.init.Blocks.EMERALD_ORE;
+import static net.minecraft.init.Blocks.GOLD_ORE;
+import static net.minecraft.init.Blocks.IRON_ORE;
+import static net.minecraft.init.Blocks.LAPIS_ORE;
+import static net.minecraft.init.Blocks.REDSTONE_ORE;
+
+import java.util.LinkedList;
+import java.util.List;
+
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import wolforce.Main;
 import wolforce.items.ItemShard;
-
-import static net.minecraft.init.Blocks.*;
-
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
 
 public class RecipePuller {
 

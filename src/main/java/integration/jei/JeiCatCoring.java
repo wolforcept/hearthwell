@@ -1,7 +1,6 @@
 package integration.jei;
 
 import static net.minecraft.init.Blocks.BROWN_MUSHROOM_BLOCK;
-import static net.minecraft.init.Blocks.MELON_BLOCK;
 import static net.minecraft.init.Blocks.RED_MUSHROOM_BLOCK;
 
 import java.util.ArrayList;
@@ -20,13 +19,11 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import scala.actors.threadpool.Arrays;
-import wolforce.Main;
 import wolforce.Hwell;
+import wolforce.Main;
 import wolforce.Util;
 import wolforce.blocks.BlockCore;
 import wolforce.recipes.Irio;

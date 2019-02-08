@@ -33,7 +33,20 @@ minecraft {
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
 
+repositories {
+    maven {
+        url "http://dvs1.progwml6.com/files/maven"
+    }
+    //maven {
+    //    url 'http://maven.blamejared.com'
+    //}
+}
+
 dependencies {
+
+    deobfCompile "mezz.jei:jei_1.12.2:+"
+    //deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.+"
+        
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"

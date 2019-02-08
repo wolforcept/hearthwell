@@ -5,7 +5,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import wolforce.blocks.base.BlockEnergyConsumer;
 import wolforce.blocks.base.BlockMachineBase;
-import wolforce.blocks.tile.TileAntiGravity;
 import wolforce.blocks.tile.TileNourisher;
 
 public class BlockNourisher extends BlockMachineBase implements ITileEntityProvider, BlockEnergyConsumer {

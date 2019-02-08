@@ -1,5 +1,9 @@
 package integration.jei;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedList;
+
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.IDrawable;
@@ -8,15 +12,18 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
+import mezz.jei.api.recipe.IRecipeWrapper;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
-import wolforce.Main;
 import wolforce.Hwell;
+import wolforce.Main;
 import wolforce.Util;
+import wolforce.recipes.RecipeFreezer;
 import wolforce.recipes.RecipeTube;
 
-public class JeiCatTubing<T extends RecipeTube> implements IRecipeCategory<RecipeTube> {
+public class JeiCatTubing implements IRecipeCategory {
 
 	public static final String UID_TUBING = Hwell.MODID + ".tubing";
 
@@ -58,29 +65,45 @@ public class JeiCatTubing<T extends RecipeTube> implements IRecipeCategory<Recip
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, RecipeTube recipe, IIngredients ingredients) {
+	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipe, IIngredients ingredients) {
 
 		IGuiItemStackGroup stacks = recipeLayout.getItemStacks();
+		stacks.set(ingredients);
+		//
+		// // the tube block
+		// stacks.init(0, true, 8, 32);
+		// stacks.set(0, new ItemStack(Main.furnace_tube));
+		//
+		// // in
+		// stacks.init(1, true, 8, 64);
+		// stacks.set(1, new ItemStack(recipe.in));
+		//
+		// // out
+		// stacks.init(2, false, 44, 64);
+		// stacks.set(2, new ItemStack(recipe.out));
+		// // stacks.set(ingredients);
+		//
+		// FluidStack fluid = Util.vanillaFluidBlockToFluidStack(recipe.out);
+		// if (fluid != null) {
+		// recipeLayout.getFluidStacks().init(0, true, 45, 65);
+		// recipeLayout.getFluidStacks().set(0, fluid);
+		// }
 
-		// the tube block
-		stacks.init(0, true, 8, 32);
-		stacks.set(0, new ItemStack(Main.furnace_tube));
+	}
 
-		// in
-		stacks.init(1, true, 8, 64);
-		stacks.set(1, new ItemStack(recipe.in));
+	public static Collection<?> getRecipes() {
+		LinkedList<IRecipeWrapper> recipeWrappers = new LinkedList<>();
+		for (RecipeFreezer recipe : RecipeFreezer.recipes) {
+			IRecipeWrapper recipeWrapper = new IRecipeWrapper() {
 
-		// out
-		stacks.init(2, false, 44, 64);
-		stacks.set(2, new ItemStack(recipe.out));
-		// stacks.set(ingredients);
-
-		FluidStack fluid = Util.vanillaFluidToFluidStack(recipe.out);
-		if (fluid != null) {
-			recipeLayout.getFluidStacks().init(0, true, 45, 65);
-			recipeLayout.getFluidStacks().set(0, fluid);
+				@Override
+				public void getIngredients(IIngredients ingredients) {
+					// TODO ingredients.setInputLists(Block.class, Main.furnace_tube);
+					// Util.setIngredients(ingredients, new Block[] { , in }, new Block[] { out });
+				}
+			};
 		}
-
+		return recipeWrappers;
 	}
 
 	//

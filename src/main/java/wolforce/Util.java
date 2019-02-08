@@ -14,26 +14,21 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
-import mezz.jei.api.ingredients.IIngredients;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.relauncher.Side;
 import wolforce.blocks.simplevariants.MySlab;
 import wolforce.blocks.simplevariants.MyStairs;
 import wolforce.recipes.Irio;
@@ -192,7 +187,7 @@ public class Util {
 		boolean isCorrect = tableEntry.block == state.getBlock()
 				&& hasCorrectMeta(tableEntry.block, tableEntry.meta, tableEntry.block.getMetaFromState(state), tableEntry.inverse);
 
-		if (!isCorrect && HWellConfig.isAutomaticMultiblocks) {
+		if (!isCorrect && HwellConfig.isAutomaticMultiblocks) {
 			// ----------------------------------
 			if (tableEntry.meta != -1)
 				world.setBlockState(realPos.subtract(thispos), tableEntry.block
@@ -250,98 +245,6 @@ public class Util {
 
 	}
 
-	//
-
-	//
-
-	//
-
-	//
-
-	// RENDERING HELPERS
-
-	public static void simpleRenderItem(World world, ItemStack item, double x, double y, double z, boolean rotating) {
-		GlStateManager.pushMatrix();
-		GlStateManager.translate(x + 0.5F, y + 1.225F, z + 0.5F);
-
-		if (rotating)
-			GlStateManager.rotate((Minecraft.getSystemTime() / 720.0F) * (180.0F / (float) Math.PI), 0.0F, 1.0F, 0.0F);
-		GlStateManager.scale(0.5F, 0.5F, 0.5F);
-		GlStateManager.pushAttrib();
-
-		Minecraft.getMinecraft().getRenderItem().renderItem(item, ItemCameraTransforms.TransformType.FIXED);
-
-		GlStateManager.popAttrib();
-		GlStateManager.popMatrix();
-	}
-
-	static float i = 0;
-
-	public static void renderItem(double debug1, double debug2, //
-			World world, ItemStack item, double x, double y, double z, double... ins) {
-
-		boolean flag1 = ins.length >= 3;
-		boolean flag2 = ins.length >= 6;
-		float rx = flag1 ? (float) ins[0] : 0;
-		float ry = flag1 ? (float) ins[1] : 0;
-		float rz = flag1 ? (float) ins[2] : 0;
-		double sx = flag2 ? ins[3] : 1;
-		double sy = flag2 ? ins[4] : 1;
-		double sz = flag2 ? ins[5] : 1;
-
-		GlStateManager.pushMatrix();
-		GlStateManager.translate(x + .5f, y, z + .5f);
-
-		GlStateManager.rotate(rx, 1, 0, 0);
-		GlStateManager.rotate(ry, 0, 1, 0);
-		GlStateManager.rotate(rz, 0, 0, 1);
-		GlStateManager.scale(.5f * sx, .5f * sy, .5f * sz);
-		GlStateManager.pushAttrib();
-		Minecraft.getMinecraft().getRenderItem().renderItem(item, ItemCameraTransforms.TransformType.FIXED);
-		GlStateManager.popAttrib();
-		GlStateManager.popMatrix();
-
-	}
-
-	public static int getNrForDebugFromHand(World world, BlockPos pos) {
-		return getNrForDebugFromHand(world, pos.getX(), pos.getY(), pos.getZ());
-	}
-
-	public static int getNrForDebugFromHand(World world, double x, double y, double z) {
-
-		EntityPlayer player = world.getClosestPlayer(x, y, z, 1000, false);
-		if (player == null)
-			return 0;
-
-		ItemStack stack = player.getHeldItemMainhand();
-
-		if (Util.isValid(stack))
-			return stack.getCount();
-
-		return 0;
-	}
-
-	public static int getNrForDebugFromHand2(World world, double x, double y, double z) {
-
-		EntityPlayer player = world.getClosestPlayer(x, y, z, 1000, false);
-		if (player == null)
-			return 0;
-
-		ItemStack stack = player.getHeldItemOffhand();
-
-		if (Util.isValid(stack))
-			return stack.getCount();
-
-		return 0;
-	}
-
-	public static boolean canRenderTESR(TileEntity te) {
-		if (te == null)
-			return false;
-		World world = te.getWorld();
-		return world != null && world.isBlockLoaded(te.getPos()) && !world.getBlockState(te.getPos()).getBlock().equals(Blocks.AIR);
-	}
-
 	public static <T> List<T> listOfOne(T item) {
 		LinkedList<T> list = new LinkedList<>();
 		list.add(item);
@@ -364,7 +267,7 @@ public class Util {
 		return in == Blocks.WATER || in == Blocks.FLOWING_WATER || in == Blocks.LAVA || in == Blocks.FLOWING_LAVA;
 	}
 
-	public static FluidStack vanillaFluidToFluidStack(Block in) {
+	public static FluidStack vanillaFluidBlockToFluidStack(Block in) {
 		if (in == Blocks.WATER || in == Blocks.FLOWING_WATER)
 			return new FluidStack(FluidRegistry.WATER, 1000);
 		if (in == Blocks.LAVA || in == Blocks.FLOWING_LAVA)
@@ -372,46 +275,54 @@ public class Util {
 		return null;
 	}
 
-	public static void setIngredients(IIngredients ingredients, Object[] ins, Object[] outs) {
-		LinkedList<ItemStack> inList = new LinkedList<>();
-		LinkedList<ItemStack> outList = new LinkedList<>();
-
-		if (ins instanceof Block[]) {
-			for (Block block : ((Block[]) ins))
-				inList.add(new ItemStack(block));
-		}
-		if (ins instanceof Item[]) {
-			for (Item item : ((Item[]) ins))
-				inList.add(new ItemStack(item));
-		}
-
-		if (outs instanceof Block[]) {
-			for (Block block : ((Block[]) outs))
-				outList.add(new ItemStack(block));
-		}
-		if (outs instanceof Item[]) {
-			for (Item item : ((Item[]) outs))
-				outList.add(new ItemStack(item));
-		}
-		ToStringer<ItemStack> outStringer = new ToStringer<ItemStack>() {
-			@Override
-			public String toString(ItemStack t) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-		};
-		ToStringer<ItemStack> toStringer = new ToStringer<ItemStack>() {
-
-			@Override
-			public String toString(ItemStack t) {
-				return t.getCount() + "x" + t.getItem().getRegistryName() + ((t.getMetadata() == 0) ? "" : t.getMetadata());
-			}
-		};
-		System.out.println("New Separator Recipe: [" + toStringed(inList, toStringer) + "] -> [" + toStringed(outList) + "]");
-
-		ingredients.setInputs(ItemStack.class, inList);
-		ingredients.setOutputs(ItemStack.class, outList);
-	}
+	// public static void setIngredients(IIngredients ingredients, Object[] ins,
+	// Object[] outs) {
+	// LinkedList<ItemStack> inList = new LinkedList<>();
+	// for (Object object : ins) {
+	//
+	// }
+	// LinkedList<ItemStack> outList = new LinkedList<>();
+	//
+	// if (ins instanceof Block[]) {
+	// for (Block block : ((Block[]) ins))
+	// inList.add(new ItemStack(block));
+	// }
+	// if (ins instanceof Item[]) {
+	// for (Item item : ((Item[]) ins))
+	// inList.add(new ItemStack(item));
+	// }
+	//
+	// if (outs instanceof Block[]) {
+	// for (Block block : ((Block[]) outs))
+	// outList.add(new ItemStack(block));
+	// }
+	// if (outs instanceof Item[]) {
+	// for (Item item : ((Item[]) outs))
+	// outList.add(new ItemStack(item));
+	// }
+	// // ToStringer<ItemStack> outStringer = new ToStringer<ItemStack>() {
+	// // @Override
+	// // public String toString(ItemStack t) {
+	// // // TODO Auto-generated method stub
+	// // return null;
+	// // }
+	// // };
+	// // ToStringer<ItemStack> toStringer = new ToStringer<ItemStack>() {
+	// //
+	// // @Override
+	// // public String toString(ItemStack t) {
+	// // return t.getCount() + "x" + t.getItem().getRegistryName() +
+	// ((t.getMetadata()
+	// // == 0) ? "" : t.getMetadata());
+	// // }
+	// // };
+	// // System.out.println("New Separator Recipe: [" + toStringed(inList,
+	// toStringer)
+	// // + "] -> [" + toStringed(outList) + "]");
+	//
+	// ingredients.setInputs(ItemStack.class, inList);
+	// ingredients.setOutputs(ItemStack.class, outList);
+	// }
 
 	private static <T> String toStringed(Collection<T> inList, ToStringer<T>... toStringer) {
 		String s = "";
@@ -433,24 +344,6 @@ public class Util {
 		for (Block block : blocks)
 			list.add(new ItemStack(block));
 		return list;
-	}
-
-	public static JsonElement readJson(String path, boolean internal) throws IOException {
-//		if (internal) {
-			Gson gson = new Gson();
-			ResourceLocation loc = new ResourceLocation(path);
-			InputStream in = Minecraft.getMinecraft().getResourceManager().getResource(loc).getInputStream();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-			JsonElement je = gson.fromJson(reader, JsonElement.class);
-			return je;
-//		} else {
-//			File file = FMLCommonHandler.instance().getSide().equals(Side.CLIENT) ? Minecraft.getMinecraft().: FMLCommonHandler.instance().getMinecraftServerInstance().getFile(path);
-//			Gson gson = new Gson();
-//			InputStream in = new FileInputStream(file);
-//			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-//			JsonElement je = gson.fromJson(reader, JsonElement.class);
-//			return je;
-//		}
 	}
 
 	public static Item getRegisteredItem(String name) {
@@ -531,5 +424,33 @@ public class Util {
 
 	public static Block blockAt(World world, BlockPos pos) {
 		return world.getBlockState(pos).getBlock();
+	}
+
+	public static Fluid getFluidFromBlock(IBlockState stateIn) {
+		if (stateIn.getMaterial() == Material.WATER)
+			return FluidRegistry.WATER;
+		if (stateIn.getMaterial() == Material.WATER)
+			return FluidRegistry.WATER;
+		return FluidRegistry.getFluid(stateIn.getBlock().getRegistryName().getResourcePath());
+	}
+
+	public static JsonElement readJson(File file) throws IOException {
+		// if (internal) {
+		// Gson gson = new Gson();
+		// ResourceLocation loc = new ResourceLocation(path);
+		// InputStream in =
+		// Minecraft.getMinecraft().getResourceManager().getResource(loc).getInputStream();
+		// BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+		// JsonElement je = gson.fromJson(reader, JsonElement.class);
+		// return je;
+		// } else {
+		// File file =
+		// FMLCommonHandler.instance().getMinecraftServerInstance().getFile(path);
+		Gson gson = new Gson();
+		InputStream in = new FileInputStream(file);
+		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+		JsonElement je = gson.fromJson(reader, JsonElement.class);
+		return je;
+		// }
 	}
 }

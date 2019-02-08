@@ -3,11 +3,9 @@ package wolforce.blocks.tile;
 import java.util.LinkedList;
 
 import net.minecraft.block.BlockCrops;
-import net.minecraft.block.IGrowable;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
-import scala.util.Random;
 import wolforce.Main;
 import wolforce.Util;
 import wolforce.blocks.base.BlockEnergyConsumer;

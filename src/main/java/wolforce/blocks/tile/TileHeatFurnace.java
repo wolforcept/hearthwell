@@ -18,7 +18,6 @@ import wolforce.Main;
 import wolforce.Util;
 import wolforce.Util.BlockWithMeta;
 import wolforce.blocks.BlockHeatFurnace;
-import wolforce.blocks.base.BlockEnergyConsumer;
 
 public class TileHeatFurnace extends TileEntity implements ITickable {
 

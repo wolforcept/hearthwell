@@ -1,14 +1,8 @@
 package wolforce.items;
 
-import java.util.Set;
-
-import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
-import scala.collection.mutable.HashSet;
 
 public class ItemHeavyShears extends ItemShears {
 

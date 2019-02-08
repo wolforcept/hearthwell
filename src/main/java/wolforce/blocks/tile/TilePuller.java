@@ -4,9 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -14,17 +12,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import wolforce.HwellConfig;
 import wolforce.Main;
-import wolforce.HWellConfig;
 import wolforce.Util;
 import wolforce.Util.BlockWithMeta;
 import wolforce.blocks.BlockLightCollector;
-import wolforce.blocks.BlockPrecisionGrinder;
-import wolforce.blocks.BlockPrecisionGrinderEmpty;
 import wolforce.blocks.base.BlockEnergyConsumer;
-import wolforce.items.ItemGrindingWheel;
 import wolforce.items.ItemShard;
-import wolforce.recipes.RecipeGrinding;
 import wolforce.recipes.RecipePuller;
 
 public class TilePuller extends TileEntity implements ITickable {
@@ -59,7 +53,7 @@ public class TilePuller extends TileEntity implements ITickable {
 			} };
 
 	int cooldown = 0;
-	static final int MAX_COOLDOWN = HWellConfig.pullerDelay;
+	static final int MAX_COOLDOWN = HwellConfig.pullerDelay;
 
 	@Override
 	public void update() {

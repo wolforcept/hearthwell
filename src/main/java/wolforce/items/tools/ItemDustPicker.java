@@ -1,7 +1,6 @@
 package wolforce.items.tools;
 
 import java.util.HashSet;
-import java.util.Set;
 
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;

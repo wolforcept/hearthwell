@@ -1,6 +1,5 @@
 package integration.jei;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -15,18 +14,12 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import scala.actors.threadpool.Arrays;
-import wolforce.Main;
 import wolforce.Hwell;
+import wolforce.Main;
 import wolforce.Util;
-import wolforce.blocks.BlockCore;
 import wolforce.recipes.Irio;
-import wolforce.recipes.RecipeCoring;
 import wolforce.recipes.RecipeCrushing;
 
 public class JeiCatCrushing<T extends JeiRecCrushing> implements IRecipeCategory<JeiRecCrushing> {

@@ -9,11 +9,16 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.IIngredientRegistry;
+import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import mezz.jei.api.recipe.IRecipeWrapper;
+import mezz.jei.api.recipe.IRecipeWrapperFactory;
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 import wolforce.Main;
+import wolforce.Util;
 import wolforce.recipes.RecipeFreezer;
 import wolforce.recipes.RecipeTube;
 
@@ -52,9 +57,9 @@ public class JeiIntegration implements IModPlugin {
 
 		reg.addRecipeCategories(new JeiCatSeparating<>(helpers));
 
-		reg.addRecipeCategories(new JeiCatTubing<>(helpers));
+		reg.addRecipeCategories(new JeiCatTubing(helpers));
 
-		reg.addRecipeCategories(new JeiCatFreezing<>(helpers));
+		reg.addRecipeCategories(new JeiCatFreezing(helpers));
 
 		// HwellCatergory coring = new HwellCatergory("coring", "Coring", Main.MODID,
 		// res(guiHelper, "items/stone_core"));
@@ -81,9 +86,9 @@ public class JeiIntegration implements IModPlugin {
 
 		reg.addRecipes(JeiCatSeparating.getAllRecipes(), JeiCatSeparating.UID_SEPARATOR);
 
-		reg.addRecipes(RecipeTube.recipes, JeiCatTubing.UID_TUBING);
+		reg.addRecipes(JeiCatTubing.getRecipes(), JeiCatTubing.UID_TUBING);
 
-		reg.addRecipes(RecipeFreezer.recipes, JeiCatFreezing.UID_FREEZING);
+		reg.addRecipes(JeiCatFreezing.getRecipes(), JeiCatFreezing.UID_FREEZING);
 
 		// reg.addRecipeClickArea(guiContainerClass, xPos, yPos, width, height,
 		// recipeCategoryUids);

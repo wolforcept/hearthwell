@@ -8,7 +8,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Config(modid = Hwell.MODID, category = "everything")
 // @Config.LangKey("hwell.config.title")
-public class HWellConfig {
+public class HwellConfig {
+
+	@Config.Comment({ "Where the base recipes file is located (default: config/hwell_recipes.json)" })
+	public static String recipeFileLocation = "config/hwell_recipes.json";
 
 	@Config.Comment({ "Build multiblocks automatically when they are needed. "
 			+ "This should always be false except for debugging (default: false)" })

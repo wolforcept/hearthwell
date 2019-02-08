@@ -1,7 +1,7 @@
 [
 {
-  "modid": "godkeepers",
-  "name": "God Keepers",
+  "modid": "hwell",
+  "name": "Hearth Well",
   "description": "A mod about making minecraft items from other minecraft items.",
   "version": "${version}",
   "mcversion": "${mcversion}",

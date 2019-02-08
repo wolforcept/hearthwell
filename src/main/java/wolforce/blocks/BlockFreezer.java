@@ -1,25 +1,13 @@
 package wolforce.blocks;
 
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import javax.annotation.Nullable;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import wolforce.Main;
-import wolforce.HWellConfig;
-import wolforce.MyBlock;
-import wolforce.Util;
+import wolforce.HwellConfig;
 import wolforce.blocks.base.BlockEnergyConsumer;
 import wolforce.blocks.base.BlockMachineBase;
 import wolforce.recipes.RecipeFreezer;
@@ -39,7 +27,7 @@ public class BlockFreezer extends BlockMachineBase implements BlockEnergyConsume
 	public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
 		if (world.isRemote)
 			return;
-		if (!world.isDaytime() || !HWellConfig.isFreezerRequiredToBeNight) {
+		if (!world.isDaytime() || !HwellConfig.isFreezerRequiredToBeNight) {
 
 			List<BlockPos> nearBlocks = getNearBlocks(world, pos);
 			if (nearBlocks.size() == 0)
@@ -63,7 +51,7 @@ public class BlockFreezer extends BlockMachineBase implements BlockEnergyConsume
 
 	private List<BlockPos> getNearBlocks(World world, BlockPos pos) {
 		LinkedList<BlockPos> list = new LinkedList<>();
-		final int n = HWellConfig.freezerRange;
+		final int n = HwellConfig.freezerRange;
 		for (int x = -n; x <= n; x++) {
 			for (int y = -n; y <= n; y++) {
 				for (int z = -n; z <= n; z++) {
@@ -119,7 +107,7 @@ public class BlockFreezer extends BlockMachineBase implements BlockEnergyConsume
 
 	@Override
 	public int getEnergyConsumption() {
-		return HWellConfig.energyConsumptionFreezer;
+		return HwellConfig.energyConsumptionFreezer;
 	}
 
 }

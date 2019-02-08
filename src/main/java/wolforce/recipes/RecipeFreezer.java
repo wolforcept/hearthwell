@@ -66,32 +66,27 @@
 
 package wolforce.recipes;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 
-import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import wolforce.Main;
+import net.minecraftforge.fluids.FluidStack;
 import wolforce.Util;
 
-public class RecipeFreezer implements IRecipeWrapper {
+public class RecipeFreezer {
 
 	public static final LinkedList<RecipeFreezer> recipes = new LinkedList<>();
 
 	public static void initRecipes() {
-		put(Blocks.WATER, 0, new Block[] { Blocks.SNOW, Blocks.ICE });
-		put(Blocks.FLOWING_WATER, 0, new Block[] { Blocks.SNOW, Blocks.ICE });
-		put(Blocks.LAVA, 0, new Block[] { Blocks.OBSIDIAN });
-		put(Blocks.FLOWING_LAVA, 0, new Block[] { Blocks.OBSIDIAN });
+		put(FluidRegistry.WATER, 0, new Block[] { Blocks.SNOW, Blocks.ICE });
+		put(FluidRegistry.LAVA, 0, new Block[] { Blocks.OBSIDIAN });
 	}
 
-	private static void put(Block block, int meta, Block[] blocks) {
-		recipes.add(new RecipeFreezer(block, meta, blocks));
+	private static void put(Fluid fluid, int meta, Block[] blocks) {
+		recipes.add(new RecipeFreezer(new FluidStack(fluid, Fluid.BUCKET_VOLUME), meta, blocks));
 	}
 
 	///////////////////////////////////////////////////////////////////////
@@ -101,7 +96,7 @@ public class RecipeFreezer implements IRecipeWrapper {
 			return null;
 
 		for (RecipeFreezer r : recipes) {
-			if (r.blockIn == stateIn.getBlock()) {
+			if (r.fluidIn.getFluid().equals(Util.getFluidFromBlock(stateIn))) {
 				if (r.metaIn == -1 || stateIn.getBlock().getMetaFromState(stateIn) == r.metaIn)
 					return r.blocksOut[(int) (Math.random() * r.blocksOut.length)];
 			}
@@ -112,7 +107,7 @@ public class RecipeFreezer implements IRecipeWrapper {
 
 	public static boolean hasResult(IBlockState stateIn) {
 		for (RecipeFreezer r : recipes) {
-			if (r.blockIn == stateIn.getBlock()) {
+			if (r.fluidIn.getFluid().equals(Util.getFluidFromBlock(stateIn))) {
 				if (r.metaIn == -1 || stateIn.getBlock().getMetaFromState(stateIn) == r.metaIn)
 					return true;
 			}
@@ -122,19 +117,14 @@ public class RecipeFreezer implements IRecipeWrapper {
 
 	///////////////////////////////////////////////////////////////////////
 
-	public Block blockIn;
+	public FluidStack fluidIn;
 	public int metaIn;
 	public Block[] blocksOut;
 
-	public RecipeFreezer(Block block, int meta, Block[] blocks) {
-		this.blockIn = block;
+	public RecipeFreezer(FluidStack fluid, int meta, Block[] blocks) {
+		this.fluidIn = fluid;
 		this.metaIn = meta;
 		this.blocksOut = blocks;
-	}
-
-	@Override
-	public void getIngredients(IIngredients ingredients) {
-		Util.setIngredients(ingredients, new Block[] { Main.freezer, blockIn }, blocksOut);
 	}
 
 	// @Override

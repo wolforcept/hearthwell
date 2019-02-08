@@ -1,60 +1,25 @@
 package wolforce;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
-import javax.annotation.Nullable;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockDispenser;
-import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.ColorizerGrass;
-import net.minecraft.world.DimensionType;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
-import net.minecraft.world.biome.BiomeColorHelper;
-import net.minecraft.world.storage.loot.LootContext;
-import net.minecraft.world.storage.loot.LootTable;
-import net.minecraft.world.storage.loot.LootTableList;
-import net.minecraftforge.client.event.ColorHandlerEvent;
-import net.minecraftforge.common.util.ITeleporter;
-import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
-import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import wolforce.fluids.BlockLiquidSouls;
 import wolforce.recipes.RecipeRepairingPaste;
 
 @Mod.EventBusSubscriber
-public class HwellEventSubscriber {
-
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public static void registerColors(ColorHandlerEvent.Block event) {
-		net.minecraft.client.renderer.color.IBlockColor grassBlockColor = new net.minecraft.client.renderer.color.IBlockColor() {
-			public int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) {
-				return worldIn != null && pos != null ? BiomeColorHelper.getGrassColorAtPos(worldIn, pos)
-						: ColorizerGrass.getGrassColor(0.5D, 1.0D);
-			}
-		};
-		event.getBlockColors().registerBlockColorHandler(grassBlockColor, Main.fullgrass_block);
-	}
+public class HwellEvents {
 
 	// @SubscribeEvent
 	// public static void makeCrystalPassPortals(EntityTravelToDimensionEvent event)

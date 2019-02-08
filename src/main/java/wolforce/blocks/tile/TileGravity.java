@@ -2,17 +2,12 @@ package wolforce.blocks.tile;
 
 import java.util.List;
 
-import net.minecraft.block.BlockRedstoneDiode;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec2f;
-import net.minecraft.util.math.Vec3d;
+import wolforce.HwellConfig;
 import wolforce.Main;
-import wolforce.HWellConfig;
 
 public class TileGravity extends TileEntity implements ITickable {
 
@@ -21,7 +16,7 @@ public class TileGravity extends TileEntity implements ITickable {
 		if (world.getBlockState(pos).getBlock() == Main.gravity_block || world.getBlockState(pos).getBlock() == Main.gravity_block_mini
 				|| world.isBlockPowered(pos)) {
 			int dist = world.getBlockState(pos).getBlock() == Main.gravity_block_mini ? //
-					HWellConfig.gravityBlockDistanceMini : HWellConfig.gravityBlockDistance;
+					HwellConfig.gravityBlockDistanceMini : HwellConfig.gravityBlockDistance;
 			List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class,
 					new AxisAlignedBB(pos.add(-dist, -dist, -dist), pos.add(dist, dist, dist)));
 			for (EntityItem entityItem : items) {

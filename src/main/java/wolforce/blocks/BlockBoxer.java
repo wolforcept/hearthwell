@@ -5,7 +5,7 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import wolforce.HWellConfig;
+import wolforce.HwellConfig;
 import wolforce.blocks.base.BlockEnergyConsumer;
 import wolforce.blocks.tile.TileBoxer;
 
@@ -28,7 +28,7 @@ public class BlockBoxer extends Block implements ITileEntityProvider, BlockEnerg
 
 	@Override
 	public int getEnergyConsumption() {
-		return HWellConfig.energyConsumptionGrinder;
+		return HwellConfig.energyConsumptionGrinder;
 	}
 
 	@Override

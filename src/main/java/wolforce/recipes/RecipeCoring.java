@@ -1,13 +1,50 @@
 package wolforce.recipes;
 
-import static net.minecraft.init.Blocks.*;
+import static net.minecraft.init.Blocks.AIR;
+import static net.minecraft.init.Blocks.BONE_BLOCK;
+import static net.minecraft.init.Blocks.BROWN_MUSHROOM_BLOCK;
+import static net.minecraft.init.Blocks.COAL_BLOCK;
+import static net.minecraft.init.Blocks.COBBLESTONE;
+import static net.minecraft.init.Blocks.DIAMOND_BLOCK;
+import static net.minecraft.init.Blocks.DIRT;
+import static net.minecraft.init.Blocks.EMERALD_BLOCK;
+import static net.minecraft.init.Blocks.END_STONE;
+import static net.minecraft.init.Blocks.GLASS;
+import static net.minecraft.init.Blocks.GLASS_PANE;
+import static net.minecraft.init.Blocks.GLOWSTONE;
+import static net.minecraft.init.Blocks.GOLD_BLOCK;
+import static net.minecraft.init.Blocks.HARDENED_CLAY;
+import static net.minecraft.init.Blocks.ICE;
+import static net.minecraft.init.Blocks.IRON_BLOCK;
+import static net.minecraft.init.Blocks.LAPIS_BLOCK;
+import static net.minecraft.init.Blocks.LOG;
+import static net.minecraft.init.Blocks.LOG2;
+import static net.minecraft.init.Blocks.MAGMA;
+import static net.minecraft.init.Blocks.MELON_BLOCK;
+import static net.minecraft.init.Blocks.MYCELIUM;
+import static net.minecraft.init.Blocks.NETHERRACK;
+import static net.minecraft.init.Blocks.PACKED_ICE;
+import static net.minecraft.init.Blocks.PRISMARINE;
+import static net.minecraft.init.Blocks.PUMPKIN;
+import static net.minecraft.init.Blocks.PURPUR_BLOCK;
+import static net.minecraft.init.Blocks.QUARTZ_BLOCK;
+import static net.minecraft.init.Blocks.REDSTONE_BLOCK;
+import static net.minecraft.init.Blocks.RED_MUSHROOM_BLOCK;
+import static net.minecraft.init.Blocks.SANDSTONE;
+import static net.minecraft.init.Blocks.SEA_LANTERN;
+import static net.minecraft.init.Blocks.SNOW;
+import static net.minecraft.init.Blocks.SOUL_SAND;
+import static net.minecraft.init.Blocks.STAINED_GLASS;
+import static net.minecraft.init.Blocks.STAINED_GLASS_PANE;
+import static net.minecraft.init.Blocks.STAINED_HARDENED_CLAY;
+import static net.minecraft.init.Blocks.STONE;
+import static net.minecraft.init.Blocks.TNT;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Set;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDirt;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import wolforce.Main;
@@ -46,7 +83,7 @@ public class RecipeCoring {
 		putRecipe(heat, Main.shard_o, SEA_LANTERN, SNOW, ICE, PACKED_ICE);
 		putRecipe(heat, Main.shard_ca, QUARTZ_BLOCK, SNOW);
 		putRecipe(heat, Main.shard_p, MAGMA, NETHERRACK);
-//		putRecipe(heat, Main.shard_n, EMERALD_BLOCK, DIAMOND_BLOCK);
+		// putRecipe(heat, Main.shard_n, EMERALD_BLOCK, DIAMOND_BLOCK);
 
 		putRecipe(green, Main.shard_c, MYCELIUM, RED_MUSHROOM_BLOCK, BROWN_MUSHROOM_BLOCK);
 		putRecipe(green, Main.shard_fe, MELON_BLOCK, Main.fertilizer_block);

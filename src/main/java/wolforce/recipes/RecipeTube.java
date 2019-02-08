@@ -1,22 +1,12 @@
 package wolforce.recipes;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map.Entry;
-import java.util.Set;
 
-import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import wolforce.Main;
-import wolforce.Util;
-import wolforce.items.ItemGrindingWheel;
 
-public class RecipeTube implements IRecipeWrapper {
+public class RecipeTube {
 
 	public final static LinkedList<RecipeTube> recipes = new LinkedList<>();
 
@@ -64,11 +54,6 @@ public class RecipeTube implements IRecipeWrapper {
 	public RecipeTube(Block in, Block out) {
 		this.in = in;
 		this.out = out;
-	}
-
-	@Override
-	public void getIngredients(IIngredients ingredients) {
-		Util.setIngredients(ingredients, new Block[] { Main.furnace_tube, in }, new Block[] { out });
 	}
 
 	@Override

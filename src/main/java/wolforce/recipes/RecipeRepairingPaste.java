@@ -1,12 +1,72 @@
 package wolforce.recipes;
 
-import net.minecraft.item.Item;
+import static net.minecraft.init.Items.BOW;
+import static net.minecraft.init.Items.DIAMOND_AXE;
+import static net.minecraft.init.Items.DIAMOND_BOOTS;
+import static net.minecraft.init.Items.DIAMOND_CHESTPLATE;
+import static net.minecraft.init.Items.DIAMOND_HELMET;
+import static net.minecraft.init.Items.DIAMOND_HOE;
+import static net.minecraft.init.Items.DIAMOND_LEGGINGS;
+import static net.minecraft.init.Items.DIAMOND_PICKAXE;
+import static net.minecraft.init.Items.DIAMOND_SHOVEL;
+import static net.minecraft.init.Items.GOLDEN_AXE;
+import static net.minecraft.init.Items.GOLDEN_BOOTS;
+import static net.minecraft.init.Items.GOLDEN_CHESTPLATE;
+import static net.minecraft.init.Items.GOLDEN_HELMET;
+import static net.minecraft.init.Items.GOLDEN_HOE;
+import static net.minecraft.init.Items.GOLDEN_LEGGINGS;
+import static net.minecraft.init.Items.GOLDEN_PICKAXE;
+import static net.minecraft.init.Items.GOLDEN_SHOVEL;
+import static net.minecraft.init.Items.IRON_AXE;
+import static net.minecraft.init.Items.IRON_BOOTS;
+import static net.minecraft.init.Items.IRON_CHESTPLATE;
+import static net.minecraft.init.Items.IRON_HELMET;
+import static net.minecraft.init.Items.IRON_HOE;
+import static net.minecraft.init.Items.IRON_LEGGINGS;
+import static net.minecraft.init.Items.IRON_PICKAXE;
+import static net.minecraft.init.Items.IRON_SHOVEL;
+import static net.minecraft.init.Items.LEATHER_BOOTS;
+import static net.minecraft.init.Items.LEATHER_CHESTPLATE;
+import static net.minecraft.init.Items.LEATHER_HELMET;
+import static net.minecraft.init.Items.LEATHER_LEGGINGS;
+import static net.minecraft.init.Items.SHEARS;
+import static net.minecraft.init.Items.WOODEN_AXE;
+import static net.minecraft.init.Items.WOODEN_HOE;
+import static net.minecraft.init.Items.WOODEN_PICKAXE;
+import static net.minecraft.init.Items.WOODEN_SHOVEL;
+import static wolforce.Main.empowered_displacer;
+import static wolforce.Main.myst_dust_picker_au;
+import static wolforce.Main.myst_dust_picker_c;
+import static wolforce.Main.myst_dust_picker_ca;
+import static wolforce.Main.myst_dust_picker_fe;
+import static wolforce.Main.myst_dust_picker_h;
+import static wolforce.Main.myst_dust_picker_n;
+import static wolforce.Main.myst_dust_picker_o;
+import static wolforce.Main.myst_dust_picker_p;
+import static wolforce.Main.mystic_iron_axe;
+import static wolforce.Main.mystic_iron_boots;
+import static wolforce.Main.mystic_iron_chest;
+import static wolforce.Main.mystic_iron_dagger;
+import static wolforce.Main.mystic_iron_helmet;
+import static wolforce.Main.mystic_iron_legs;
+import static wolforce.Main.mystic_iron_pickaxe;
+import static wolforce.Main.mystic_iron_shovel;
+import static wolforce.Main.mystic_iron_sword;
+import static wolforce.Main.obsidian_displacer;
+import static wolforce.Main.repairing_paste;
+import static wolforce.Main.soulsteel_axe;
+import static wolforce.Main.soulsteel_boots;
+import static wolforce.Main.soulsteel_chest;
+import static wolforce.Main.soulsteel_dagger;
+import static wolforce.Main.soulsteel_helmet;
+import static wolforce.Main.soulsteel_legs;
+import static wolforce.Main.soulsteel_pickaxe;
+import static wolforce.Main.soulsteel_shovel;
+import static wolforce.Main.soulsteel_sword;
 
-import static net.minecraft.init.Items.*;
-import static wolforce.Main.*;
-
-import java.util.Arrays;
 import java.util.HashSet;
+
+import net.minecraft.item.Item;
 
 public class RecipeRepairingPaste {
 

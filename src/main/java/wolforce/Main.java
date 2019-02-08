@@ -1,14 +1,9 @@
 package wolforce;
+
 import java.awt.Color;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Random;
-
-import javax.annotation.Nonnull;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -16,10 +11,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialLiquid;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.ItemMeshDefinition;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
@@ -31,19 +22,12 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidUtil;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.OreDictionary;
 import wolforce.blocks.BlockAntiGravity;
 import wolforce.blocks.BlockBox;
@@ -78,10 +62,6 @@ import wolforce.blocks.BlockStoneDust;
 import wolforce.blocks.BlockTotem;
 import wolforce.blocks.BlockTube;
 import wolforce.blocks.MyLog;
-import wolforce.blocks.tile.TileCore;
-import wolforce.blocks.tile.TileGravity;
-import wolforce.blocks.tile.TilePickerHolder;
-import wolforce.blocks.tile.TileSeparator;
 import wolforce.fluids.BlockLiquidSouls;
 import wolforce.items.ItemCrystal;
 import wolforce.items.ItemCrystalBowl;
@@ -104,52 +84,63 @@ import wolforce.items.tools.MyDagger;
 import wolforce.items.tools.MyPickaxe;
 import wolforce.items.tools.MyShovel;
 import wolforce.items.tools.MySword;
-import wolforce.recipes.RecipeCoring;
-import wolforce.recipes.RecipeCrushing;
-import wolforce.recipes.RecipeFreezer;
-import wolforce.recipes.RecipeGrinding;
-import wolforce.recipes.RecipePuller;
-import wolforce.recipes.RecipeRepairingPaste;
-import wolforce.recipes.RecipeSeparator;
-import wolforce.recipes.RecipeTube;
-import wolforce.tesrs.TesrPickerHolder;
-import wolforce.tesrs.TesrSeparator;
 
 public class Main {
 
-	public static final String MODID = "hwell";
-	public static final String NAME = "Hearth Well";
-	public static final String VERSION = "1.0";
+	//
+	//
+	//
+	//
+	// LISTS
 
-	public static final Logger logger = LogManager.getLogger(NAME);
+	public static LinkedList<Item> items;
+	public static LinkedList<Block> blocks;
 
-	static LinkedList<Item> items;
-	static LinkedList<Block> blocks;
+	//
+	//
+	//
+	//
+	// ITEMS
 
-	// public static Material material_heavy, material_mystic_iron, material_asul,
-	// material_soulsteel;
 	public static ToolMaterial material_tool_mystic_iron, material_tool_soulsteel;
 	public static ArmorMaterial material_armor_mystic_iron, material_armor_soulsteel;
 	public static MaterialLiquid material_liquid_souls;
 
-	public static Block glowstone_ore, quartz_ore;
+	public static Item asul_ingot, asul_nugget;
+	public static Item raw_mystic_iron, mystic_iron_ingot;
+	public static Item mystic_iron_sword, mystic_iron_dagger, mystic_iron_pickaxe, mystic_iron_axe, mystic_iron_shovel,
+			mystic_iron_hoe;
+	public static Item mystic_iron_helmet, mystic_iron_chest, mystic_iron_legs, mystic_iron_boots;
 	public static Item seed_of_life;
-	public static Block fertile_soil;
 	public static Item wheat_flour, salt;
-
-	// tier 1
 	public static Item dust;
 	public static Item myst_dust, myst_fertilizer;
 	public static Item heavy_mesh, heavy_ingot, heavy_nugget, fuel_dust, fuel_dust_tiny;
-	public static Block heavy_block;
 	public static Item heavy_shears, leaf_mesh;
 	public static Item crystal, crystal_nether, crystal_bowl, crystal_bowl_water;
-	public static ItemShard shard_fe, shard_au, shard_o, shard_c, shard_h, shard_ca, shard_p, shard_n;
 	public static Item obsidian_displacer, empowered_displacer;
-	public static ItemGrindingWheel /* grinding_wheel_flint, */ grinding_wheel_iron, grinding_wheel_diamond, grinding_wheel_crystal;
-	// , grinding_wheel_crystal_nether;
-	// public static Item shard_water;
+	public static Item loot_base;
+	public static Item metaldiamond, crystal_catalyst, soul_dust, raw_soulsteel, soulsteel_ingot, mutation_paste, raw_repairing_paste,
+			repairing_paste;
+	public static Item soulsteel_sword, soulsteel_dagger, soulsteel_pickaxe, soulsteel_axe, soulsteel_shovel, soulsteel_hoe;
+	public static Item soulsteel_helmet, soulsteel_chest, soulsteel_legs, soulsteel_boots;
+	public static Item locked_light, empty_rod, myst_rod, rod_myst_1, rod_myst_2, rod_blaze_1, rod_blaze_2, rod_blaze_3;
+	public static Item myst_dust_picker_fe, myst_dust_picker_ca, myst_dust_picker_c, myst_dust_picker_o, myst_dust_picker_au,
+			myst_dust_picker_h, myst_dust_picker_p, myst_dust_picker_n;
+	public static ItemShard shard_fe, shard_au, shard_o, shard_c, shard_h, shard_ca, shard_p, shard_n;
+	public static ItemGrindingWheel grinding_wheel_iron, grinding_wheel_diamond, grinding_wheel_crystal;
+	public static ItemLoot loot_blaze, loot_creeper, loot_enderman, loot_ghast, loot_shulker, loot_skeleton, loot_slime, loot_spider,
+			loot_witch, loot_wither, loot_zombie;
 
+	//
+	//
+	//
+	//
+	// BLOCKS
+
+	public static Block glowstone_ore, quartz_ore;
+	public static Block fertile_soil;
+	public static Block heavy_block;
 	public static Block crystal_block, crystal_nether_block;
 	public static Block myst_grass;
 	public static Block myst_bush, myst_bush_big;
@@ -158,60 +149,59 @@ public class Main {
 	public static Block dismantler, crushing_block, gravity_block, gravity_block_mini, gravity_powered_block, antigravity_block,
 			antigravity_powered_block;
 	public static Block myst_log, myst_planks, myst_leaves;
-
-	public static Item asul_ingot, asul_nugget;
 	public static Block raw_asul_block, asul_block;
 	public static Block asul_machine_case;
-
 	public static Block light_collector;
-	public static BlockCore core_stone, core_heat, core_green, core_sentient;
 	public static Block stabiliser;
 	public static Block picking_table, picker_holder;
 	public static Block white_block, moonstone, moonstone_bricks, citrinic_stone, citrinic_sand, onyx, smooth_onyx, azurite,
 			smooth_azurite, scorch_grit, scorch_glass, fullgrass_block, metaldiamond_block;
-	public static BlockNourisher nourisher;
 	public static Block freezer, generator_heat;
-	public static Block compressed_clay, compressed_wool, fertilizer_block;
-	public static Item raw_mystic_iron, mystic_iron_ingot;
-	public static Block mystic_iron_block;
-	public static Item mystic_iron_sword, mystic_iron_dagger, mystic_iron_pickaxe, mystic_iron_axe, mystic_iron_shovel,
-			mystic_iron_hoe;
-	public static Item mystic_iron_helmet, mystic_iron_chest, mystic_iron_legs, mystic_iron_boots;
+	public static Block fertilizer_block;
+	public static Block compressed_clay, compressed_wool, weeping_block;
+	public static Block mystic_iron_block, soulsteel_block;
 	public static Block mutation_paste_block;
-	public static Item metaldiamond, crystal_catalyst, soul_dust, raw_soulsteel, soulsteel_ingot, mutation_paste, raw_repairing_paste,
-			repairing_paste;
-	public static Block soulsteel_block;
-	public static Item soulsteel_sword, soulsteel_dagger, soulsteel_pickaxe, soulsteel_axe, soulsteel_shovel, soulsteel_hoe;
-	public static Item soulsteel_helmet, soulsteel_chest, soulsteel_legs, soulsteel_boots;
-	public static Item locked_light, empty_rod, myst_rod, rod_myst_1, rod_myst_2, rod_blaze_1, rod_blaze_2, rod_blaze_3;
-	public static Item myst_dust_picker_fe, myst_dust_picker_ca, //
-			myst_dust_picker_c, myst_dust_picker_o, myst_dust_picker_au, //
-			myst_dust_picker_h, myst_dust_picker_p, myst_dust_picker_n;
+	public static BlockNourisher nourisher;
+	public static BlockCore core_stone, core_heat, core_green, core_sentient;
 	public static Block slab_lamp;
 	public static Block furnace_tube, heat_furnace;
 	public static Block protection_block, heavy_protection_block;
 	public static Block precision_grinder_flint, precision_grinder_iron, precision_grinder_diamond, precision_grinder_crystal,
 			precision_grinder_empty;
-	// , precision_grinder_crystal_nether
 	public static Block heat_block;
 	public static Block burst_seed_stone, burst_seed_sand, burst_seed_dirt, burst_seed_snow, burst_seed_netherrack;
 	public static Block totem_enderman, totem_zombie, totem_skeleton, totem_creeper;
-	public static Item loot_base;
-	public static ItemLoot loot_blaze, loot_creeper, loot_enderman, loot_ghast, loot_shulker, loot_skeleton, loot_slime, loot_spider,
-			loot_witch, loot_wither, loot_zombie;
+	public static Block separator;
 	public static BlockProducer producer;
 	public static BlockPuller puller;
+
+	//
+
+	public static Block boxer;
+	public static BlockBox[] boxes;
+
+	//
+	//
+	//
+	//
+	// FLUIDS
+
+	public static Fluid liquid_souls;
+	public static Block liquid_souls_block;
+
+	//
+	//
+	//
+	//
+	// TABS
 
 	public static CreativeTabs creativeTab;
 
 	//
-	public static Block boxer;
-	public static BlockBox[] boxes;
-
-	// tier 4
-	public static Block separator;
-
-	public static Block weeping_block;
+	//
+	//
+	//
+	// SHARDS
 
 	public static Item[] shards;
 
@@ -223,14 +213,13 @@ public class Main {
 		return shards[rand.nextInt(shards.length)];
 	}
 
-	// private static HashMap<String, Class> tiles;
+	//
+	//
+	//
+	//
+	//
 
 	public static void preInit(FMLPreInitializationEvent event) {
-
-		// material_heavy = new Material(MapColor.SAND);
-		// material_mystic_iron = new Material(MapColor.SAND);
-		// material_asul = new Material(MapColor.SAND);
-		// material_soulsteel = new Material(MapColor.SAND);
 
 		material_armor_mystic_iron = EnumHelper.addArmorMaterial("mysticIron", "mystic_iron", 10, new int[] { 2, 5, 6, 2 }, 25,
 				SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2);
@@ -282,11 +271,8 @@ public class Main {
 		fertile_soil = new BlockFertileSoil("fertile_soil");
 		blocks.add(fertile_soil);
 
-		// TIER 1
-
 		heavy_mesh = new MyItem("heavy_mesh");
 		items.add(heavy_mesh);
-		// TODO make new material?
 		heavy_ingot = new MyItem("heavy_ingot");
 		items.add(heavy_ingot);
 		heavy_block = new MyBlock("heavy_block", Material.IRON).setResistance(2.5f).setHardness(1.6f);
@@ -404,7 +390,7 @@ public class Main {
 
 		compressed_clay = new MyBlock("compressed_clay", Material.CLAY).setHardness(.5f).setResistance(2);
 		blocks.add(compressed_clay);
-		
+
 		compressed_wool = new MyBlock("compressed_wool", Material.CLAY).setHardness(.5f).setResistance(2);
 		blocks.add(compressed_wool);
 
@@ -521,21 +507,20 @@ public class Main {
 		precision_grinder_empty = new BlockPrecisionGrinderEmpty("precision_grinder_empty");
 		blocks.add(precision_grinder_empty);
 
-		// grinding_wheel_flint = new ItemGrindingWheel("grinding_wheel_flint", "Allows
+		// grinding_wheel_flint = new ItemGrindingWheel("grinding_wheel_flint",
+		// "Allows
 		// the grind of:", //
 		// "", "");
 		// items.add(grinding_wheel_flint);
-		grinding_wheel_iron = new ItemGrindingWheel("grinding_wheel_iron", "Allows the grind of:", //
-				"", "");
+		grinding_wheel_iron = new ItemGrindingWheel("grinding_wheel_iron");
 		items.add(grinding_wheel_iron);
-		grinding_wheel_diamond = new ItemGrindingWheel("grinding_wheel_diamond", "Allows the grind of:", //
-				"", "");
+		grinding_wheel_diamond = new ItemGrindingWheel("grinding_wheel_diamond");
 		items.add(grinding_wheel_diamond);
-		grinding_wheel_crystal = new ItemGrindingWheel("grinding_wheel_crystal", "Allows the grind of:", //
-				"", "");
+		grinding_wheel_crystal = new ItemGrindingWheel("grinding_wheel_crystal");
 		items.add(grinding_wheel_crystal);
 		// grinding_wheel_crystal_nether = new
-		// ItemGrindingWheel("grinding_wheel_crystal_nether", "Allows the grind of:", //
+		// ItemGrindingWheel("grinding_wheel_crystal_nether", "Allows the grind of:",
+		//
 		// "", "");
 		// items.add(grinding_wheel_crystal_nether);
 
@@ -652,19 +637,6 @@ public class Main {
 				soulsteel_ingot, 20);
 		items.add(soulsteel_boots);
 
-		// soulsteel_helmet = new MyArmor("soulsteel_helmet", EntityEquipmentSlot.HEAD,
-		// 363 + 64, soulsteel_ingot, 25);
-		// items.add(soulsteel_helmet);
-		// soulsteel_chest = new MyArmor("soulsteel_chest", EntityEquipmentSlot.CHEST,
-		// 528 + 64, soulsteel_ingot, 25);
-		// items.add(soulsteel_chest);
-		// soulsteel_legs = new MyArmor("soulsteel_legs", EntityEquipmentSlot.LEGS, 495
-		// + 64, soulsteel_ingot, 25);
-		// items.add(soulsteel_legs);
-		// soulsteel_boots = new MyArmor("soulsteel_boots", EntityEquipmentSlot.FEET,
-		// 429 + 64, soulsteel_ingot, 25);
-		// items.add(soulsteel_boots);
-
 		stabiliser = new MyBlock("stabiliser", Material.ROCK).setHarvest("pickaxe", -1).setHardness(1).setResistance(1);
 		blocks.add(stabiliser);
 
@@ -744,14 +716,16 @@ public class Main {
 		// blocks.sort(new Comparator<Block>() {
 		// @Override
 		// public int compare(Block o1, Block o2) {
-		// return o1.getUnlocalizedName().compareToIgnoreCase(o2.getUnlocalizedName());
+		// return
+		// o1.getUnlocalizedName().compareToIgnoreCase(o2.getUnlocalizedName());
 		// }
 		// });
 		//
 		// items.sort(new Comparator<Item>() {
 		// @Override
 		// public int compare(Item o1, Item o2) {
-		// return o1.getUnlocalizedName().compareToIgnoreCase(o2.getUnlocalizedName());
+		// return
+		// o1.getUnlocalizedName().compareToIgnoreCase(o2.getUnlocalizedName());
 		// }
 		// });
 
@@ -772,13 +746,11 @@ public class Main {
 		liquid_souls_block = new BlockLiquidSouls(liquid_souls, material_liquid_souls);
 		blocks.add(liquid_souls_block);
 
-		mapFluidState(liquid_souls_block, liquid_souls);
-
 		//
 
 		//
 
-		creativeTab = new Hwell.HwellCreativeTab();
+		creativeTab = new HwellCreativeTab();
 		for (Block block : blocks) {
 			block.setCreativeTab(creativeTab);
 		}
@@ -786,9 +758,6 @@ public class Main {
 			item.setCreativeTab(creativeTab);
 		}
 	}
-
-	public static Fluid liquid_souls;
-	public static Block liquid_souls_block;
 
 	/*
 	 * 
@@ -805,38 +774,15 @@ public class Main {
 		for (Block block : blocks)
 			if (block instanceof ITileEntityProvider) {
 				// && ((IEntity) block).isToRegister() //
-				// && GameRegistry.findRegistry(((IEntity) block).getTileEntityClass()) == null
+				// && GameRegistry.findRegistry(((IEntity) block).getTileEntityClass()) ==
+				// null
 				// //
 				Class clazz = ((ITileEntityProvider) block).createNewTileEntity(null, 0).getClass();
 				if (!loaded.contains(clazz)) {
-					GameRegistry.registerTileEntity(clazz, new ResourceLocation(MODID + ":tile_" + block.getUnlocalizedName()));
+					GameRegistry.registerTileEntity(clazz, new ResourceLocation(Hwell.MODID + ":tile_" + block.getUnlocalizedName()));
 					loaded.add(clazz);
 				}
 			}
-
-		GameRegistry.addSmelting(glowstone_ore, new ItemStack(Items.GLOWSTONE_DUST), 0.5f);
-		GameRegistry.addSmelting(quartz_ore, new ItemStack(Items.QUARTZ), 0.5f);
-		GameRegistry.addSmelting(heavy_mesh, new ItemStack(heavy_ingot, 2), 0.5f);
-		GameRegistry.addSmelting(dust_block, new ItemStack(Blocks.GLASS, 2), 0f);
-		GameRegistry.addSmelting(leaf_mesh, new ItemStack(crystal_block, 1), .5f);
-		GameRegistry.addSmelting(compressed_clay, new ItemStack(Blocks.HARDENED_CLAY, 9), 0f);
-		GameRegistry.addSmelting(scorch_grit, new ItemStack(scorch_glass), 0f);
-		GameRegistry.addSmelting(azurite, new ItemStack(smooth_azurite), 0f);
-		GameRegistry.addSmelting(citrinic_stone, new ItemStack(citrinic_sand), 0f);
-		GameRegistry.addSmelting(onyx, new ItemStack(smooth_onyx), 0f);
-		GameRegistry.addSmelting(raw_mystic_iron, new ItemStack(mystic_iron_ingot), 1f);
-		GameRegistry.addSmelting(raw_soulsteel, new ItemStack(soulsteel_ingot), 1f);
-		GameRegistry.addSmelting(raw_repairing_paste, new ItemStack(repairing_paste), 1f);
-		GameRegistry.addSmelting(wheat_flour, new ItemStack(Items.BREAD), 1f);
-
-		GameRegistry.addShapedRecipe(Util.res("producer." + producer.getRegistryName().getResourcePath()), Util.res("hwell.producer"),
-				new ItemStack(Main.producer), //
-				"ABA", "MCM", "MYM", //
-				'B', FluidUtil.getFilledBucket(new FluidStack(Main.liquid_souls, Fluid.BUCKET_VOLUME)), //
-				'A', Main.smooth_azurite, //
-				'M', Main.metaldiamond_block, //
-				'C', Main.asul_machine_case, //
-				'Y', Main.crystal_block);
 
 		OreDictionary.registerOre("logWood", myst_log);
 		OreDictionary.registerOre("plankWood", myst_planks);
@@ -851,61 +797,5 @@ public class Main {
 	}
 
 	//
-
-	// FLUIDS
-
-	private static void mapFluidState(Block block, Fluid fluid) {
-		Item item = Item.getItemFromBlock(block);
-		FluidStateMapper mapper = new FluidStateMapper(fluid);
-		if (item != Items.AIR) {
-			ModelLoader.registerItemVariants(item);
-			ModelLoader.setCustomMeshDefinition(item, mapper);
-		}
-		ModelLoader.setCustomStateMapper(block, mapper);
-	}
-
-	static class FluidStateMapper extends StateMapperBase implements ItemMeshDefinition {
-		public final ModelResourceLocation location;
-
-		public FluidStateMapper(Fluid fluid) {
-			this.location = new ModelResourceLocation(MODID + ":fluid_block", fluid.getName());
-		}
-
-		@Nonnull
-		@Override
-		protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
-			return location;
-		}
-
-		@Nonnull
-		@Override
-		public ModelResourceLocation getModelLocation(@Nonnull ItemStack stack) {
-			return location;
-		}
-	}
-
-	//
-
-	// RECIPES
-
-	public static void postInit(FMLPostInitializationEvent event) {
-		RecipePuller.initRecipes();
-		RecipeCrushing.initRecipes();
-		RecipeTube.initRecipes();
-		RecipeFreezer.initRecipes();
-		RecipeGrinding.initRecipes();
-		RecipeSeparator.initRecipes();
-		RecipeCoring.initRecipes();
-		ItemMystDust.initRecipes();
-		RecipeRepairingPaste.initRecipes();
-		initShards();
-		MinecraftForge.EVENT_BUS.register(new HwellEventSubscriber());
-		ItemLoot.setLootTables();
-
-		if (event.getSide() == Side.CLIENT) {
-			ClientRegistry.bindTileEntitySpecialRenderer(TileSeparator.class, new TesrSeparator());
-			ClientRegistry.bindTileEntitySpecialRenderer(TilePickerHolder.class, new TesrPickerHolder());
-		}
-	}
 
 }

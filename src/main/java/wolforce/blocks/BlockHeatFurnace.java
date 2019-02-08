@@ -11,8 +11,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import wolforce.HWellConfig;
-import wolforce.blocks.base.BlockEnergyConsumer;
 import wolforce.blocks.base.BlockWithDescription;
 import wolforce.blocks.tile.TileHeatFurnace;
 

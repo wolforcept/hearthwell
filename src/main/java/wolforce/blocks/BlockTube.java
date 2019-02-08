@@ -5,14 +5,13 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import wolforce.HwellConfig;
 import wolforce.Main;
-import wolforce.HWellConfig;
 import wolforce.recipes.RecipeTube;
 
 public class BlockTube extends MyLog {
@@ -36,8 +35,8 @@ public class BlockTube extends MyLog {
 
 	private void tryMake(World world, BlockPos pos, IBlockState state) {
 		int nTubes = getNrOfTubesOnTop(world, pos);
-		if (/**/(world.canBlockSeeSky(pos.up(nTubes)) || !HWellConfig.isTubeRequiredToSeeSky) && //
-				(world.isDaytime() || !HWellConfig.isTubeRequiredToBeDay) && //
+		if (/**/(world.canBlockSeeSky(pos.up(nTubes)) || !HwellConfig.isTubeRequiredToSeeSky) && //
+				(world.isDaytime() || !HwellConfig.isTubeRequiredToBeDay) && //
 				Math.random() < nTubes * .1 //
 		)
 			world.setBlockState(pos.down(), state, 1 | 2);

@@ -3,11 +3,9 @@ package wolforce.blocks.tile;
 import java.util.Arrays;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockNewLog;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemCompass;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
