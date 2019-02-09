@@ -205,7 +205,7 @@ tile.generator_heat.name=Тепловой генератор
 tile.light_collector.name=Световой генератор
 
 tile.core_stone.name=Каменное ядро
-tile.core_heat.name=Тёплое ядро
+tile.core_heat.name=Тепловое ядро
 tile.core_green.name=Зеленеющее ядро
 tile.core_sentient.name=Чувствительное ядро
 
