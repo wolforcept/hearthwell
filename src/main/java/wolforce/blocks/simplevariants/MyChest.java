@@ -1,4 +1,4 @@
-package wolforce.blocks;
+package wolforce.blocks.simplevariants;
 //package wolforce.blocks;
 //
 //import javax.annotation.Nullable;

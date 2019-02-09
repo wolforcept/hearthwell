@@ -22,7 +22,7 @@ public class BlockBox extends BlockRotatedPillar {
 		setHardness(.25f);
 		setResistance(2f);
 	}
-
+	
 	@Override
 	public String getLocalizedName() {
 		return block.getLocalizedName() + " Box";

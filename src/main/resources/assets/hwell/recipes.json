@@ -1,0 +1,98 @@
+{
+	"freezer_recipes": [
+		{	
+			"input": { "item": "minecraft:water" },
+			"outputs": [{ "item": "minecraft:ice"}, { "item": "minecraft:snow_block" }]
+		},
+		{	
+			"input": { "item": "minecraft:flowing_water" },
+			"outputs": [{ "item": "minecraft:ice" }, { "item": "minecraft:snow_block" }]
+		},
+		{	
+			"input": { "item": "minecraft:lava" },
+			"outputs": [{ "item": "minecraft:obsidian" }]
+		},
+		{	
+			"input": { "item": "minecraft:flowing_lava" },
+			"outputs": [{ "item": "minecraft:obsidian" }]
+		}
+	]
+	
+	,
+	
+	"separator_recipes": [
+		{	
+			"input": { "item": "minecraft:magma_cream" },
+			"output1": { "item": "minecraft:slime_ball" },
+			"output2": { "item": "minecraft:blaze_powder" }
+		},
+		{	
+			"input": { "item": "minecraft:magma" },
+			"output1": { "item": "minecraft:slime_ball", "count": 4 },
+			"output2": { "item": "minecraft:blaze_powder", "count": 4 }
+		}
+		,{	
+			"input": { "item": "minecraft:tnt" },
+			"output1": { "item": "minecraft:gunpowder", "count": 5 },
+			"output2": { "item": "minecraft:sand", "count": 4, "data": 0 }
+		},
+		{	
+			"input": { "item": "minecraft:painting" },
+			"output1": { "item": "minecraft:string", "count": 4 },
+			"output2": { "item": "minecraft:stick", "count": 8 }
+		},
+		{	
+			"input": { "item": "minecraft:ender_eye" },
+			"output1": { "item": "minecraft:ender_pearl" },
+			"output2": { "item": "minecraft:blaze_powder" }
+		},
+		{	
+			"input": { "item": "minecraft:ender_chest" },
+			"output1": { "item": "minecraft:obsidian", "count": 8 },
+			"output2": { "item": "minecraft:ender_eye" }
+		},
+		{	
+			"input": { "item": "minecraft:dispenser" },
+			"output1": { "item": "minecraft:redstone" },
+			"output2": { "item": "minecraft:bow" },
+			"output3": { "item": "minecraft:cobblestone", "count": 7 }}
+		,
+		{	
+			"input": { "item": "minecraft:dropper" },
+			"output1": { "item": "minecraft:redstone" },
+			"output2": { "item": "minecraft:cobblestone", "count": 7 }}
+		,
+		{	
+			"input": { "item": "minecraft:enchanting_table" },
+			"output1": { "item": "minecraft:obsidian", "count": 4 },
+			"output2": { "item": "minecraft:diamond", "count": 2 },
+			"output3": { "item": "minecraft:book" }
+		},
+		{	
+			"input": { "item": "minecraft:brewing_stand" },
+			"output1": { "item": "minecraft:blaze_rod" },
+			"output2": { "item": "minecraft:cobblestone", "count": 3 }
+		},
+		{	
+			"input": { "item": "minecraft:pumpkin_pie" },
+			"output1": { "item": "minecraft:sugar" },
+			"output2": { "item": "minecraft:pumpkin" },
+			"output3": { "item": "minecraft:egg" }
+		},
+		{	
+			"input": { "item": "minecraft:sea_lantern" },
+			"output1": { "item": "minecraft:prismarine_shard", "count": 4 },
+			"output2": { "item": "minecraft:prismarine_crystals", "count": 5 }
+		},
+		{	
+			"input": { "item": "minecraft:clock" },
+			"output1": { "item": "minecraft:gold_ingot", "count": 4 },
+			"output2": { "item": "minecraft:redstone"}
+		},
+		{	
+			"input": { "item": "minecraft:compass" },
+			"output1": { "item": "minecraft:iron_ingot", "count": 4 },
+			"output2": { "item": "minecraft:redstone" }
+		}
+	]
+}

@@ -12,8 +12,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import wolforce.Main;
 import wolforce.Util;
 import wolforce.blocks.BlockCore;
@@ -28,11 +29,11 @@ public class TileCore extends TileEntity implements ITickable {
 
 	@Override
 	public void update() {
-		// IBlockState block = world.getBlockState(pos);
-		// if (!(block.getBlock() instanceof BlockCore)) {
-		// System.out.println("ERROR! core tile entity is not on a core block");
-		// return;
-		// }
+		IBlockState block = world.getBlockState(pos);
+		if (!(block.getBlock() instanceof BlockCore)) {
+			System.out.println("ERROR! core tile entity is not on a core block");
+			return;
+		}
 
 		if (world.isRemote)
 			return;
@@ -58,7 +59,6 @@ public class TileCore extends TileEntity implements ITickable {
 			if (hasResult(result, state)) {
 				// at this point the core will certainly charge
 				// (charges faster with more blocks surrounding it)
-				particlesandsounds(pos);
 				particlesandsounds(pos1);
 				// if (charge % 10 == 0)
 				// System.out.println(charge);
@@ -92,14 +92,16 @@ public class TileCore extends TileEntity implements ITickable {
 		return false;
 	}
 
-	@SideOnly(Side.CLIENT)
 	private void particlesandsounds(BlockPos pos) {
 		// world.playSound(x, y, z, new SoundEv, category, volume, pitch,
 		// distanceDelay);
-		for (int i = 0; i < 10; i++) {
-			world.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, //
-					pos.getX(), pos.getY(), pos.getZ(), Math.random() * .2 - .1, Math.random() * .2 - .1, Math.random() * .2 - .1);
-		}
+		((WorldServer) world).spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, // particleType,
+				false, // long distance
+				pos.getX() + Math.random(), pos.getY() + 1, pos.getZ() + Math.random(), // xCoord, yCoord, zCoord,
+				1, // numberOfParticles,
+				0, -.2, 0, // xOffset, yOffset, zOffset,
+				.01 * Math.random() // particleSpeed,
+		);
 	}
 
 	@Override

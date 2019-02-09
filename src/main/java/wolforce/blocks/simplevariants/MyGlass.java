@@ -1,4 +1,4 @@
-package wolforce.blocks;
+package wolforce.blocks.simplevariants;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -13,11 +13,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import wolforce.Main;
 import wolforce.MyBlock;
 
-public class BlockMyGlass extends MyBlock {
+public class MyGlass extends MyBlock {
 
 	private boolean ignoreSimilarity = false;
 
-	public BlockMyGlass(String name) {
+	public MyGlass(String name) {
 		super(name, Material.GLASS);
 		// super(name, new Material(MapColor.AIR) {
 		//

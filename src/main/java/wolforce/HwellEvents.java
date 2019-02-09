@@ -56,7 +56,7 @@ public class HwellEvents {
 	// }
 
 	@SubscribeEvent // (priority = EventPriority.NORMAL, receiveCanceled = true)
-	public void onEvent(PlayerTickEvent event) {
+	public static void onEvent(PlayerTickEvent event) {
 		if (event.phase == TickEvent.Phase.END && !event.player.world.isRemote) {
 			if (event.player.getHeldItem(EnumHand.OFF_HAND).getItem().equals(Main.repairing_paste)) {
 				ItemStack stack = event.player.getHeldItem(EnumHand.MAIN_HAND);
@@ -71,13 +71,13 @@ public class HwellEvents {
 			motion(event.player);
 	}
 
-	private boolean timeConstraint(EntityPlayer player) {
+	private static boolean timeConstraint(EntityPlayer player) {
 		String str = (player.getEntityWorld().getTotalWorldTime() + "");
 		return str.charAt(str.length() - 2) == '0';
 	}
 
 	@SubscribeEvent // (priority = EventPriority.NORMAL, receiveCanceled = true)
-	public void onEvent(WorldTickEvent event) {
+	public static void onEvent(WorldTickEvent event) {
 		if (event.phase == TickEvent.Phase.START)
 			return;
 
@@ -103,14 +103,14 @@ public class HwellEvents {
 
 	//
 
-	private void motion(EntityPlayer player) {
+	private static void motion(EntityPlayer player) {
 		if (isInsideLiquidSouls(player)) {
 			player.motionY = player.isSneaking() ? -.08 : .08;
 			player.fallDistance = 0;
 		}
 	}
 
-	private void motion(EntityItem item) {
+	private static void motion(EntityItem item) {
 		IBlockState bstate = item.world.getBlockState(item.getPosition());
 		if (bstate.getBlock().equals(Main.liquid_souls_block) || bstate.getBlock().isAssociatedBlock(Main.liquid_souls_block)
 				|| bstate.getBlock() instanceof BlockLiquidSouls) {
@@ -123,7 +123,7 @@ public class HwellEvents {
 		}
 	}
 
-	private boolean isInsideLiquidSouls(EntityPlayer player) {
+	private static boolean isInsideLiquidSouls(EntityPlayer player) {
 		BlockPos pos1 = new BlockPos(//
 				(int) player.posX - (player.posX < 0 ? 1 : 0), //
 				(int) player.posY, //

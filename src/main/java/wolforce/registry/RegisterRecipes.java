@@ -37,11 +37,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -57,6 +58,7 @@ import wolforce.Main;
 import wolforce.Util;
 import wolforce.items.ItemLoot;
 import wolforce.items.ItemMystDust;
+import wolforce.recipes.Irio;
 import wolforce.recipes.RecipeCoring;
 import wolforce.recipes.RecipeCrushing;
 import wolforce.recipes.RecipeFreezer;
@@ -69,12 +71,13 @@ import wolforce.recipes.RecipeTube;
 @Mod.EventBusSubscriber(modid = Hwell.MODID)
 public class RegisterRecipes {
 
-	private static final String RECIPES_FILE = "recipes_separator.json";
+	private static final String INNER_RECIPES_FILE = "recipes.json";
 
 	@SubscribeEvent
 	public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
 
 		File recipesFile = new File(HwellConfig.recipeFileLocation);
+
 		if (!recipesFile.exists())
 			try {
 				writeRecipesFile(HwellConfig.recipeFileLocation);
@@ -82,18 +85,23 @@ public class RegisterRecipes {
 				System.err.println("Could not initialise the Recipes File!!");
 				return;
 			}
-		try {
-			JsonArray recipes = (JsonArray) Util.readJson(recipesFile);
-			RecipeSeparator.initRecipes(recipes);
-		} catch (IOException e) {
-			System.err.println("Could not initialise the Recipes File!!");
-			return;
-		}
+		JsonObject recipes = null;
 
+		try {
+			recipes = Util.readJson(HwellConfig.recipeFileLocation).getAsJsonObject();
+		} catch (Exception e) {
+			System.err.println("Could not read the Recipes File! Defaulting all recipes.");
+			try {
+				recipes = Util.readJson("/assets/hwell/" + INNER_RECIPES_FILE, true).getAsJsonObject();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+		RecipeSeparator.initRecipes(recipes.get("separator_recipes").getAsJsonArray());
+		RecipeFreezer.initRecipes(recipes.get("freezer_recipes").getAsJsonArray());
 		RecipePuller.initRecipes();
 		RecipeCrushing.initRecipes();
 		RecipeTube.initRecipes();
-		RecipeFreezer.initRecipes();
 		RecipeGrinding.initRecipes();
 		RecipeCoring.initRecipes();
 		ItemMystDust.initRecipes();
@@ -127,12 +135,13 @@ public class RegisterRecipes {
 	}
 
 	private static void writeRecipesFile(String destination) throws IOException {
-		ResourceLocation loc = new ResourceLocation("hwell:" + RECIPES_FILE);
-		InputStream inStream = Minecraft.getMinecraft().getResourceManager().getResource(loc).getInputStream();
+		// ResourceLocation loc = new ResourceLocation("hwell:" + INNER_RECIPES_FILE);
+		// String str = "assets/" + loc.toString().replace(":", "/");
+		InputStream inStream = Hwell.class.getResourceAsStream("/assets/hwell/" + INNER_RECIPES_FILE);
 		BufferedReader in = new BufferedReader(new InputStreamReader(inStream));
 
-		FileWriter fstream = new FileWriter(destination, false);
-		BufferedWriter out = new BufferedWriter(fstream);
+		FileWriter outstream = new FileWriter(destination, false);
+		BufferedWriter out = new BufferedWriter(outstream);
 
 		String aLine = null;
 		while ((aLine = in.readLine()) != null) {
@@ -142,4 +151,5 @@ public class RegisterRecipes {
 		in.close();
 		out.close();
 	}
+
 }

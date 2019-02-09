@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -77,7 +78,8 @@ public class ItemSeedOfLife extends MyItem {
 
 		world.setBlockState(pos, Main.fertile_soil.getDefaultState());
 		world.setBlockState(pos.up(), Blocks.SAPLING.getDefaultState());
-		player.playSound(SoundEvents.BLOCK_GRASS_BREAK, 1f, 1f);
+		world.playSound(null, entityLiving.getPosition(), SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1, 1);
+
 		// makeTree(world, pos.up());
 
 		// ON THE SERVER ONLY, CHANGE THE GROUND AROUND IT

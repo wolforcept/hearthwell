@@ -27,7 +27,9 @@ public class ItemCrystal extends MyItem {
 			EntityItem dc = (EntityItem) location;
 			EntityItem newCrystal = new EntityItem(dc.world, dc.posX, dc.posY, dc.posZ, dc.getItem()) {
 				{
-					setVelocity(dc.motionX, dc.motionY, dc.motionZ);
+					motionX = dc.motionX;
+					motionY = dc.motionY;
+					motionZ = dc.motionZ;
 					setPickupDelay(40);
 				}
 

@@ -7,11 +7,13 @@ import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import wolforce.HwellConfig;
 import wolforce.Main;
+import wolforce.blocks.simplevariants.MyLog;
 import wolforce.recipes.RecipeTube;
 
 public class BlockTube extends MyLog {
@@ -25,6 +27,21 @@ public class BlockTube extends MyLog {
 	}
 
 	@Override
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+		if (state.getValue(BlockLog.LOG_AXIS) != BlockLog.EnumAxis.Y)
+			return;
+		int nTubes = getNrOfTubesOnTop(world, pos);
+		if (!isPossible(nTubes, world, pos))
+			return;
+		if (RecipeTube.getResult(world.getBlockState(pos.down()).getBlock()) != null) {
+			for (int i = 0; i < 3; i++) {
+				world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + Math.random(), pos.getY() + (Math.random() * nTubes) + 1,
+						pos.getZ() + Math.random(), 0, -.02 - Math.random() * .2, 0);
+			}
+		}
+	}
+
+	@Override
 	public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
 		if (state.getValue(BlockLog.LOG_AXIS) != BlockLog.EnumAxis.Y)
 			return;
@@ -35,13 +52,21 @@ public class BlockTube extends MyLog {
 
 	private void tryMake(World world, BlockPos pos, IBlockState state) {
 		int nTubes = getNrOfTubesOnTop(world, pos);
-		if (/**/(world.canBlockSeeSky(pos.up(nTubes)) || !HwellConfig.isTubeRequiredToSeeSky) && //
-				(world.isDaytime() || !HwellConfig.isTubeRequiredToBeDay) && //
+		if (/**/isPossible(nTubes, world, pos) && //
 				Math.random() < nTubes * .1 //
 		)
 			world.setBlockState(pos.down(), state, 1 | 2);
 	}
 
+	private boolean isPossible(int nTubes, World world, BlockPos pos) {
+		return nTubes > 0 && nTubes < 10 && //
+				(world.canBlockSeeSky(pos.up(nTubes)) || !HwellConfig.isTubeRequiredToSeeSky) && //
+				(world.isDaytime() || !HwellConfig.isTubeRequiredToBeDay);
+	}
+
+	/**
+	 * ON TOP
+	 */
 	private int getNrOfTubesOnTop(World world, BlockPos pos) {
 		int n = 0;
 		BlockPos currentPos = pos.up();

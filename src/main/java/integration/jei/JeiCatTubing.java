@@ -1,6 +1,5 @@
 package integration.jei;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -13,15 +12,12 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.FluidStack;
 import wolforce.Hwell;
 import wolforce.Main;
 import wolforce.Util;
 import wolforce.recipes.RecipeFreezer;
-import wolforce.recipes.RecipeTube;
 
 public class JeiCatTubing implements IRecipeCategory {
 
@@ -91,7 +87,7 @@ public class JeiCatTubing implements IRecipeCategory {
 
 	}
 
-	public static Collection<?> getRecipes() {
+	public static Collection<?> getAllRecipes() {
 		LinkedList<IRecipeWrapper> recipeWrappers = new LinkedList<>();
 		for (RecipeFreezer recipe : RecipeFreezer.recipes) {
 			IRecipeWrapper recipeWrapper = new IRecipeWrapper() {

@@ -172,6 +172,7 @@ tile.heavy_protection_block.json.name=Superior Protection Block
 tile.heat_block.name=Heat Block
 tile.stabiliser.name=Core Stabilizer
 tile.compressed_clay.name=Compressed Clay
+tile.compressed_wool.name=Compressed Wool
 tile.fertilizer_block.name=Fertilizer Block
 
 tile.moonstone.name=Moonstone

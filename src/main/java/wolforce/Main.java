@@ -45,7 +45,6 @@ import wolforce.blocks.BlockGroundShovel;
 import wolforce.blocks.BlockHeat;
 import wolforce.blocks.BlockHeatFurnace;
 import wolforce.blocks.BlockLightCollector;
-import wolforce.blocks.BlockMyGlass;
 import wolforce.blocks.BlockMystBush;
 import wolforce.blocks.BlockMystGrass;
 import wolforce.blocks.BlockMystLeaves;
@@ -61,7 +60,8 @@ import wolforce.blocks.BlockSlabLamp;
 import wolforce.blocks.BlockStoneDust;
 import wolforce.blocks.BlockTotem;
 import wolforce.blocks.BlockTube;
-import wolforce.blocks.MyLog;
+import wolforce.blocks.simplevariants.MyGlass;
+import wolforce.blocks.simplevariants.MyLog;
 import wolforce.fluids.BlockLiquidSouls;
 import wolforce.items.ItemCrystal;
 import wolforce.items.ItemCrystalBowl;
@@ -356,7 +356,7 @@ public class Main {
 
 		leaf_mesh = new MyItem("leaf_mesh");
 		items.add(leaf_mesh);
-		crystal_block = new BlockMyGlass("crystal_block");
+		crystal_block = new MyGlass("crystal_block");
 		blocks.add(crystal_block);
 
 		crystal = new ItemCrystal("crystal");
@@ -426,7 +426,7 @@ public class Main {
 		blocks.add(scorch_grit);
 		fullgrass_block = new BlockGroundShovel("fullgrass_block");
 		blocks.add(fullgrass_block);
-		scorch_glass = new BlockMyGlass("scorch_glass");
+		scorch_glass = new MyGlass("scorch_glass");
 		blocks.add(scorch_glass);
 
 		burst_seed_stone = new BlockBurstSeed("burst_seed_stone", //
@@ -462,7 +462,7 @@ public class Main {
 
 		crystal_nether = new MyItem("crystal_nether");
 		items.add(crystal_nether);
-		crystal_nether_block = new BlockMyGlass("crystal_nether_block");
+		crystal_nether_block = new MyGlass("crystal_nether_block");
 		blocks.add(crystal_nether_block);
 
 		heat_block = new BlockHeat("heat_block");

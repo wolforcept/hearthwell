@@ -1,6 +1,5 @@
 package integration.jei;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -11,12 +10,11 @@ import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.FluidStack;
 import wolforce.Hwell;
 import wolforce.Main;
 import wolforce.Util;
@@ -67,24 +65,29 @@ public class JeiCatFreezing implements IRecipeCategory<IRecipeWrapper> {
 	@Override
 	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipe, IIngredients ingredients) {
 		IGuiItemStackGroup stacks = recipeLayout.getItemStacks();
-		// recipeLayout.getFluidStacks().init(0, true, 9, 31);
 		stacks.init(0, true, 40, 30);
 		stacks.init(1, false, 72, 30);
 		stacks.set(ingredients);
+		recipeLayout.getFluidStacks().init(0, true, 9, 31);
+		recipeLayout.getFluidStacks().set(ingredients);
 	}
 
-	public static Collection<?> getRecipes() {
+	public static Collection<?> getAllRecipes() {
 		LinkedList<IRecipeWrapper> recipeWrappers = new LinkedList<>();
-		for (RecipeFreezer recipe : RecipeFreezer.recipes) {
+		for (final RecipeFreezer recipe : RecipeFreezer.recipes) {
 			IRecipeWrapper recipeWrapper = new IRecipeWrapper() {
 
 				@Override
 				public void getIngredients(IIngredients ingredients) {
-					ingredients.setInput(ItemStack.class, Main.freezer);
-					ingredients.setInput(FluidStack.class, recipe.fluidIn);
-					ingredients.setOutputs(Block.class, Arrays.<Block>asList(recipe.blocksOut));
+					ingredients.setInputLists(VanillaTypes.FLUID, Util.listOfOne(Util.listOfOne(recipe.fluidIn)));
+					ingredients.setInputLists(VanillaTypes.ITEM, Util.listOfOne(Util.listOfOne(new ItemStack(Main.freezer))));
+					ingredients.setOutputs(VanillaTypes.ITEM, Util.toItemStackList(recipe.blocksOut));
+					// ingredients.setInput(ItemStack.class, Main.freezer);
+					// ingredients.setInput(FluidStack.class, recipe.fluidIn);
+					// ingredients.setOutputs(Block.class, Arrays.<Block>asList(recipe.blocksOut));
 				}
 			};
+			recipeWrappers.add(recipeWrapper);
 		}
 		return recipeWrappers;
 	}

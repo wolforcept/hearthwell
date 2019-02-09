@@ -1,6 +1,5 @@
 package wolforce.recipes;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -9,12 +8,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import crafttweaker.annotations.ZenRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
-import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenMethod;
-import wolforce.Util;
 
 //@ZenClass("mods.hwell.separator")
 //@ZenRegister

@@ -13,6 +13,10 @@ public class HwellConfig {
 	@Config.Comment({ "Where the base recipes file is located (default: config/hwell_recipes.json)" })
 	public static String recipeFileLocation = "config/hwell_recipes.json";
 
+	// @Config.Comment({ "If this is true, when failing to read the recipes file,
+	// the file will be (default: config/hwell_recipes.json)" })
+	// public static boolean alwaysWriteRecipes = true;
+
 	@Config.Comment({ "Build multiblocks automatically when they are needed. "
 			+ "This should always be false except for debugging (default: false)" })
 	public static boolean isAutomaticMultiblocks = false;
@@ -41,6 +45,14 @@ public class HwellConfig {
 	@Config.RangeInt(min = 1, max = 16)
 	public static int freezerRange = 5;
 
+	@Config.Comment({ "Does freezer only work in night time? (default: true)" })
+	public static boolean isFreezerRequiredToBeNight = true;
+
+	// LOOT
+	@Config.Comment({ "Number of ticks that a loot kit need to hatch. 20 ticks = 1 second. (default: 600)" })
+	@Config.RangeInt(min = 40, max = 16000)
+	public static int lootTimeToHatch = 600;
+
 	// // HEAT FURNACE
 	// @Config.Comment({ "Heat Furnace Energy Consumption per Operation (default:
 	// 100)" })
@@ -56,20 +68,19 @@ public class HwellConfig {
 	public static int gravityBlockDistanceMini = 1;
 	// ----------------------------------------
 
+	// TUBES
 	@Config.Comment({ "Is tube required to see sky? (default: true)" })
 	public static boolean isTubeRequiredToSeeSky = true;
 
 	@Config.Comment({ "Does tube only work in day time? (default: true)" })
 	public static boolean isTubeRequiredToBeDay = true;
 
+	// LIGHT COLLECTOR
 	@Config.Comment({ "Is light collector required to see sky? (default: true)" })
 	public static boolean isLightCollectorRequiredToSeeSky = true;
 
 	@Config.Comment({ "Does Light Collector only work in day time? (default: true)" })
 	public static boolean isLightCollectorRequiredToBeDay = true;
-
-	@Config.Comment({ "Does freezer only work in night time? (default: true)" })
-	public static boolean isFreezerRequiredToBeNight = true;
 
 	// @Config.Comment({ "General settings" })
 	// public static General general = new General();

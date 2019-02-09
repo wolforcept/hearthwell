@@ -102,7 +102,7 @@ public class RecipeCoring {
 		// System.out.println(DIRT.getMetaFromState(DIRT.getDefaultState().withProperty(BlockDirt.VARIANT,
 		// BlockDirt.DirtType.PODZOL)));
 		putRecipe(senti, Main.shard_c, new Irio(DIRT, 2), MYCELIUM);
-		putRecipe(senti, Main.shard_fe, Main.metaldiamond_block, DIAMOND_BLOCK); // TODO
+		putRecipe(senti, Main.shard_fe, Main.metaldiamond_block, DIAMOND_BLOCK);
 		putRecipe(senti, Main.shard_au, END_STONE, GLOWSTONE);
 		putRecipe(senti, Main.shard_h, PURPUR_BLOCK, END_STONE);
 		putRecipe(senti, Main.shard_o, DIAMOND_BLOCK, REDSTONE_BLOCK);

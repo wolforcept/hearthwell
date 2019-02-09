@@ -66,11 +66,18 @@
 
 package wolforce.recipes;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -80,7 +87,30 @@ public class RecipeFreezer {
 
 	public static final LinkedList<RecipeFreezer> recipes = new LinkedList<>();
 
-	public static void initRecipes() {
+	// public static void initRecipes(JsonArray recipesJson) {
+	// recipes = new HashMap<>();
+	// for (JsonElement e : recipesJson) {
+	// readAndAddRecipe(e.getAsJsonObject());
+	// }
+	// }
+	//
+	// private static void readAndAddRecipe(JsonObject o) {
+	// ItemStack input =
+	// ShapedRecipes.deserializeItem(o.get("input").getAsJsonObject(), true);
+	// ItemStack output1 =
+	// ShapedRecipes.deserializeItem(o.get("output1").getAsJsonObject(), true);
+	// ItemStack output2 =
+	// ShapedRecipes.deserializeItem(o.get("output2").getAsJsonObject(), true);
+	// if (!o.has("output3")) {
+	// addRecipe(new Irio(input), new RecipeSeparator(output1, output2));
+	// } else {
+	// ItemStack output3 =
+	// ShapedRecipes.deserializeItem(o.get("output3").getAsJsonObject(), true);
+	// addRecipe(new Irio(input), new RecipeSeparator(output1, output2, output3));
+	// }
+	// }
+
+	public static void initRecipes(JsonArray recipesJson) {
 		put(FluidRegistry.WATER, 0, new Block[] { Blocks.SNOW, Blocks.ICE });
 		put(FluidRegistry.LAVA, 0, new Block[] { Blocks.OBSIDIAN });
 	}

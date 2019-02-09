@@ -95,9 +95,7 @@ public class TilePrecisionGrinder extends TileEntity implements ITickable {
 		BlockPos newpos = pos.offset(facing);
 		EntityItem newentity = new EntityItem(world, newpos.getX() + .5, newpos.getY(), newpos.getZ() + .5,
 				new ItemStack(result.getItem(), result.getCount(), result.getMetadata()));
-		BlockPos velpos = new BlockPos(0, 0, 0).offset(facing);
-		newentity.setVelocity(velpos.getX() / 2.0, velpos.getY() / 2.0, velpos.getZ() / 2.0); // TODO set velocity depending on facing
-		world.spawnEntity(newentity);
+		Util.spawnItem(world, newpos, result, facing);
 	}
 
 	private void popGrindingWheel(EntityItem entityItem, ItemGrindingWheel gwheel, EnumFacing facing) {

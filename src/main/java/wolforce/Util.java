@@ -22,13 +22,14 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import wolforce.blocks.simplevariants.MySlab;
 import wolforce.blocks.simplevariants.MyStairs;
 import wolforce.recipes.Irio;
@@ -43,10 +44,36 @@ public class Util {
 		return ItemStack.areItemsEqual(stack1, stack2) && ItemStack.areItemStackTagsEqual(stack1, stack2);
 	}
 
+	// SPAWN ITEMS
+
+	public static void spawnItem(World world, BlockPos pos, ItemStack stack, EnumFacing facing) {
+		spawnItem(world, new Vec3d(pos.getX() + .5, pos.getY(), pos.getZ() + .5), stack, facing);
+	}
+
+	public static void spawnItem(World world, Vec3d pos, ItemStack stack, EnumFacing facing) {
+		spawnItem(world, pos, stack, 0, facing);
+	}
+
+	public static void spawnItem(World world, Vec3d pos, ItemStack stack, int pickupDelay, EnumFacing facing) {
+		Vec3d v = facingToVector(facing);
+		spawnItem(world, pos, stack, pickupDelay, v.x / 2.0, v.y / 2.0, v.z / 2.0);
+	}
+
 	public static void spawnItem(World world, BlockPos pos, ItemStack stack, double... speeds) {
+		spawnItem(world, new Vec3d(pos.getX() + .5, pos.getY(), pos.getZ() + .5), stack, speeds);
+	}
+
+	public static void spawnItem(World world, Vec3d pos, ItemStack stack, double... speeds) {
+		spawnItem(world, pos, stack, 0, speeds);
+	}
+
+	/**
+	 * default pickupDelay = 10 player throw pickupDelay = 40
+	 */
+	public static void spawnItem(World world, Vec3d pos, ItemStack stack, int pickupDelay, double... speeds) {
 		if (!Util.isValid(stack))
 			return;
-		EntityItem entityitem = new EntityItem(world, pos.getX() + .5, pos.getY(), pos.getZ() + .5, stack);
+		EntityItem entityitem = new EntityItem(world, pos.x, pos.y, pos.z, stack);
 		if (speeds.length == 0) {
 			entityitem.motionX = Math.random() * .4 - .2;
 			entityitem.motionY = Math.random() * .2;
@@ -56,7 +83,15 @@ public class Util {
 			entityitem.motionY = speeds[1];
 			entityitem.motionZ = speeds[2];
 		}
+		entityitem.setPickupDelay(pickupDelay);
 		world.spawnEntity(entityitem);
+	}
+
+	public static Vec3d facingToVector(EnumFacing facing) {
+		return new Vec3d(//
+				facing.getAxisDirection().getOffset() * (facing.getAxis().equals(Axis.X) ? 1 : 0), //
+				facing.getAxisDirection().getOffset() * (facing.getAxis().equals(Axis.Y) ? 1 : 0), //
+				facing.getAxisDirection().getOffset() * (facing.getAxis().equals(Axis.Z) ? 1 : 0));
 	}
 
 	// @SideOnly(Side.CLIENT)
@@ -108,17 +143,13 @@ public class Util {
 
 	//
 
-	private static int[][] touches = new int[][] { { -1, 0, 0 }, { 1, 0, 0 }, { 0, -1, 0 }, { 0, 1, 0 }, { 0, 0, -1 }, { 0, 0, 1 } };
-
 	public static BlockPos[] getBlocksTouching(World world, BlockPos pos) {
-		return new BlockPos[] { pos.add(-1, 0, 0), pos.add(1, 0, 0), //
-				pos.add(0, -1, 0), pos.add(0, 0, 1), //
-				pos.add(0, 0, -1), pos.add(0, 0, 1) };
+		BlockPos[] ret = new BlockPos[EnumFacing.VALUES.length];
+		for (int i = 0; i < ret.length; i++) {
+			ret[i] = pos.offset(EnumFacing.VALUES[i]);
+		}
+		return ret;
 	}
-
-	//
-
-	//
 
 	//
 
@@ -434,20 +465,12 @@ public class Util {
 		return FluidRegistry.getFluid(stateIn.getBlock().getRegistryName().getResourcePath());
 	}
 
-	public static JsonElement readJson(File file) throws IOException {
-		// if (internal) {
-		// Gson gson = new Gson();
-		// ResourceLocation loc = new ResourceLocation(path);
-		// InputStream in =
-		// Minecraft.getMinecraft().getResourceManager().getResource(loc).getInputStream();
-		// BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-		// JsonElement je = gson.fromJson(reader, JsonElement.class);
-		// return je;
-		// } else {
-		// File file =
-		// FMLCommonHandler.instance().getMinecraftServerInstance().getFile(path);
+	public static JsonElement readJson(String resource, boolean... internal) throws IOException {
 		Gson gson = new Gson();
-		InputStream in = new FileInputStream(file);
+
+		InputStream in = (internal.length > 0 && internal[0]) ? //
+				Hwell.class.getResourceAsStream(resource) : //
+				new FileInputStream(new File(resource));
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 		JsonElement je = gson.fromJson(reader, JsonElement.class);
 		return je;

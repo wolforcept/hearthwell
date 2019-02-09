@@ -16,6 +16,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import wolforce.MyBlock;
 
 public class BlockBurstSeed extends MyBlock {
@@ -42,7 +43,12 @@ public class BlockBurstSeed extends MyBlock {
 
 		world.playSound(null, pos, SoundEvents.ENTITY_FIREWORK_BLAST, SoundCategory.BLOCKS, 1, 1);
 		world.playSound(null, pos, sound.getBreakSound(), SoundCategory.BLOCKS, 10, 1);
-		world.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, pos.getX(), pos.getY(), pos.getZ(), 1.0D, 0.0D, 0.0D);
+		// world.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, pos.getX(),
+		// pos.getY(), pos.getZ(), 1.0D, 0.0D, 0.0D);
+		for (int i = 0; i < 35; i++)
+			world.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, //
+					pos.getX(), pos.getY(), pos.getZ(), //
+					Math.random() - .5, Math.random() - .5, Math.random() - .5);
 
 		world.setBlockToAir(pos);
 		int n = (int) (Math.random() * 32) + 32;

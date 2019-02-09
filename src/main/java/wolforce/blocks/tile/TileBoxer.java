@@ -19,7 +19,7 @@ public class TileBoxer extends TileEntity implements ITickable {
 		Block result = RecipeBoxer.getResult(block);
 		if (result != null) {
 			world.destroyBlock(pos.up(), false);
-			Util.spawnItem(world, pos.up(), new ItemStack(result, 64), 0, 0.2, 0);
+			Util.spawnItem(world, pos.up(), new ItemStack(result, 64), 0.0, 0.2, 0.0);
 		}
 	}
 }

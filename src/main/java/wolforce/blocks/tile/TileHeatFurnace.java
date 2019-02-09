@@ -89,10 +89,9 @@ public class TileHeatFurnace extends TileEntity implements ITickable {
 					// }
 
 					BlockPos newpos = pos.offset(facing, 6);
-					EntityItem newentity = new EntityItem(world, newpos.getX() + .5, newpos.getY() + .5, newpos.getZ() + .5,
-							new ItemStack(result.getItem(), result.getCount() * entityItem.getItem().getCount()));
-					newentity.setVelocity(0, 0, 0);
-					world.spawnEntity(newentity);
+					ItemStack itemToSpawn = new ItemStack(result.getItem(), result.getCount() * entityItem.getItem().getCount(),
+							result.getMetadata());
+					Util.spawnItem(world, newpos, itemToSpawn, facing);
 					entityItem.setDead();
 					if (Math.random() < .05 * entityItem.getItem().getCount())
 						deleteSomeWater(pos, facing);
@@ -102,7 +101,6 @@ public class TileHeatFurnace extends TileEntity implements ITickable {
 	}
 
 	private void deleteSomeWater(BlockPos center, EnumFacing facing) {
-		// System.out.println("TileHeatFurnace.deleteSomeWater()");
 		BlockPos pos = center.up().offset(facing, (int) (Math.random() * 5));
 		world.setBlockToAir(pos);
 		world.setBlockToAir(pos.offset(facing));

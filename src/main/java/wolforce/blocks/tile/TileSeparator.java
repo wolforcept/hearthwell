@@ -67,14 +67,18 @@ public class TileSeparator extends TileEntity implements ITickable {
 		if (world.isRemote)
 			return;
 
+		if (!Util.isValid(inventory.getStackInSlot(0)))
+			return;
+
 		IBlockState block = world.getBlockState(pos);
 		if (!(block.getBlock() instanceof BlockSeparator))
 			return;
+
 		// BlockSeparator separator = (BlockSeparator)block.getBlock();
 		EnumFacing facing = block.getValue(BlockSeparator.FACING);
 
 		ItemStack[] result = RecipeSeparator.getResult(inventory.getStackInSlot(0));
-		if (!inventory.getStackInSlot(0).equals(ItemStack.EMPTY) && result != null) {
+		if (result != null) {
 			HashMap<String, BlockWithMeta> table = new HashMap<>();
 			table.put("PB", new BlockWithMeta(Main.heavy_protection_block));
 			table.put("HB", new BlockWithMeta(Main.heat_block));

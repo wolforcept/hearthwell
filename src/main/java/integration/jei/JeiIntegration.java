@@ -9,23 +9,15 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.IIngredientRegistry;
-import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
-import mezz.jei.api.recipe.IRecipeWrapper;
-import mezz.jei.api.recipe.IRecipeWrapperFactory;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 import wolforce.Main;
-import wolforce.Util;
-import wolforce.recipes.RecipeFreezer;
-import wolforce.recipes.RecipeTube;
 
 @JEIPlugin
 public class JeiIntegration implements IModPlugin {
 
-	private static IIngredientRegistry ingreg;
+	private static IIngredientRegistry ingReg;
 
 	@Override
 	public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
@@ -34,11 +26,11 @@ public class JeiIntegration implements IModPlugin {
 		List<ItemStack> templist1 = new LinkedList<>();
 		List<ItemStack> templist2 = new LinkedList<>();
 		templist1.add(new ItemStack(Main.empowered_displacer));
-		ingreg.removeIngredientsAtRuntime(ItemStack.class, templist1);
+		ingReg.removeIngredientsAtRuntime(ItemStack.class, templist1);
 		ItemStack item = new ItemStack(Main.empowered_displacer);
 		item.addEnchantment(Enchantments.SILK_TOUCH, 1);
 		templist2.add(item);
-		ingreg.addIngredientsAtRuntime(ItemStack.class, templist2);
+		ingReg.addIngredientsAtRuntime(ItemStack.class, templist2);
 	}
 
 	@Override
@@ -69,7 +61,7 @@ public class JeiIntegration implements IModPlugin {
 	@Override
 	public void register(IModRegistry reg) {
 
-		ingreg = reg.getIngredientRegistry();
+		ingReg = reg.getIngredientRegistry();
 		IJeiHelpers jeiHelpers = reg.getJeiHelpers();
 
 		// crafting helper +
@@ -86,16 +78,12 @@ public class JeiIntegration implements IModPlugin {
 
 		reg.addRecipes(JeiCatSeparating.getAllRecipes(), JeiCatSeparating.UID_SEPARATOR);
 
-		reg.addRecipes(JeiCatTubing.getRecipes(), JeiCatTubing.UID_TUBING);
+		reg.addRecipes(JeiCatTubing.getAllRecipes(), JeiCatTubing.UID_TUBING);
 
-		reg.addRecipes(JeiCatFreezing.getRecipes(), JeiCatFreezing.UID_FREEZING);
+		reg.addRecipes(JeiCatFreezing.getAllRecipes(), JeiCatFreezing.UID_FREEZING);
 
 		// reg.addRecipeClickArea(guiContainerClass, xPos, yPos, width, height,
 		// recipeCategoryUids);
-
-		reg.addIngredientInfo(new ItemStack(Blocks.SNOW), ItemStack.class, "Obtained by placing a freezer near water.");
-
-		reg.addIngredientInfo(new ItemStack(Blocks.ICE), ItemStack.class, "Obtained by placing a freezer near water.");
 
 		reg.addIngredientInfo(new ItemStack(Main.crystal_nether), ItemStack.class,
 				"Obtained by throwing a crystal into the nether portal.");

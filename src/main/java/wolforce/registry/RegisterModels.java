@@ -65,7 +65,7 @@ public class RegisterModels {
 	}
 
 	private static void mapBoxBlock(BlockBox box) {
-		ModelLoader.setCustomStateMapper(box, new CustomStateMapper(box.getRegistryName(), box.hasAxis, box.isCore(box.block)));
+		ModelLoader.setCustomStateMapper(box, new CustomStateMapper(box.block.getRegistryName(), box.hasAxis, box.isCore(box.block)));
 	}
 
 	private static ModelResourceLocation getModelRes(BlockBox box, String variant) {

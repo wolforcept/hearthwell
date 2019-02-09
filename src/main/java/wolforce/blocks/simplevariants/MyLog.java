@@ -1,4 +1,4 @@
-package wolforce.blocks;
+package wolforce.blocks.simplevariants;
 
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.IProperty;
