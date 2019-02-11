@@ -3,8 +3,10 @@ package wolforce.blocks;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDaylightDetector;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -13,8 +15,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import wolforce.HwellConfig;
 import wolforce.Main;
+import wolforce.Util;
 import wolforce.blocks.simplevariants.MyLog;
 import wolforce.recipes.RecipeTube;
 
@@ -29,47 +33,57 @@ public class BlockTube extends MyLog {
 	}
 
 	@Override
-	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
-		if (state.getValue(BlockLog.LOG_AXIS) != BlockLog.EnumAxis.Y)
+	public void randomDisplayTick(IBlockState state, World world, BlockPos _pos, Random rand) {
+		if (state.getValue(BlockLog.LOG_AXIS) != BlockLog.EnumAxis.Y || !Util.clientIsDaytime(world))
 			return;
-		int nTubes = getNrOfTubesOnTop(world, pos);
-		if (!isPossible(nTubes, world, pos))
+		BlockPos bot = getBlockUnderTube(world, _pos);
+		int nTubes = getNrOfTubesOnTop(world, bot);
+		if (!isPossible(nTubes, world, bot))
 			return;
-		if (RecipeTube.getResult(world.getBlockState(pos.down())) != null) {
-			for (int i = 0; i < 3; i++) {
-				world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + Math.random(), pos.getY() + (Math.random() * nTubes) + 1,
-						pos.getZ() + Math.random(), 0, -.02 - Math.random() * .2, 0);
-			}
+		if (RecipeTube.getResult(world.getBlockState(bot)) != null) {
+			world.spawnParticle(EnumParticleTypes.FLAME, _pos.getX() + Math.random(), _pos.getY() + (Math.random()),
+					_pos.getZ() + Math.random(), 0, -.02 - Math.random() * .2, 0);
 		}
 	}
 
 	@Override
-	public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
+	public void randomTick(World world, BlockPos _pos, IBlockState state, Random random) {
 		if (state.getValue(BlockLog.LOG_AXIS) != BlockLog.EnumAxis.Y)
 			return;
-		Object result = RecipeTube.getResult(world.getBlockState(pos.down()));
+
+		BlockPos bot = getBlockUnderTube(world, _pos);
+
+		Object result = RecipeTube.getResult(world.getBlockState(bot));
 		if (result instanceof ItemStack) {
 			Block resultBlock = Block.getBlockFromItem(((ItemStack) result).getItem());
-			tryMake(world, pos, resultBlock.getDefaultState());
+			tryMake(world, bot, resultBlock.getDefaultState());
 		}
 
 		if (result instanceof FluidStack) {
-			Block resultBlock =((FluidStack)result).getFluid().getBlock();
-			tryMake(world, pos, resultBlock.getDefaultState());
+			Block resultBlock = ((FluidStack) result).getFluid().getBlock();
+			tryMake(world, bot, resultBlock.getDefaultState());
 		}
 
+	}
+
+	private BlockPos getBlockUnderTube(World world, BlockPos _pos) {
+		BlockPos pos = _pos;
+		while (world.getBlockState(pos).getBlock() instanceof BlockTube) {
+			pos = pos.down();
+		}
+		return pos;
 	}
 
 	private void tryMake(World world, BlockPos pos, IBlockState state) {
 		int nTubes = getNrOfTubesOnTop(world, pos);
 		if (/**/isPossible(nTubes, world, pos) && //
-				Math.random() < nTubes * .1 //
+				Math.random() < (.2 + nTubes * .1) //
 		)
-			world.setBlockState(pos.down(), state, 1 | 2);
+			world.setBlockState(pos, state);
 	}
 
 	private boolean isPossible(int nTubes, World world, BlockPos pos) {
-		return nTubes > 0 && nTubes < 10 && //
+		return nTubes > 0 && nTubes <= 8 && //
 				(world.canBlockSeeSky(pos.up(nTubes)) || !HwellConfig.isTubeRequiredToSeeSky) && //
 				(world.isDaytime() || !HwellConfig.isTubeRequiredToBeDay);
 	}

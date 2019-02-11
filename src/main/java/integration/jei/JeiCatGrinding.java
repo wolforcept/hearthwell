@@ -14,8 +14,10 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import wolforce.Hwell;
 import wolforce.Main;
@@ -110,6 +112,11 @@ public class JeiCatGrinding<T extends JeiRecGrinding> implements IRecipeCategory
 			this.grindingWheel = new LinkedList<ItemStack>();
 			for (Item wheel : recipeGrinding.levels)
 				grindingWheel.add(new ItemStack(wheel));
+			if (in.item.getHasSubtypes()) {
+				NonNullList<ItemStack> itemSubtypes = NonNullList.create();
+				in.item.getSubItems(CreativeTabs.SEARCH, itemSubtypes);
+				this.in = itemSubtypes;
+			}
 			this.in = Util.listOfOne(in.stack());
 			out = recipeGrinding.result;
 		}

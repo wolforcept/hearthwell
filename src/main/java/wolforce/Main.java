@@ -615,7 +615,10 @@ public class Main {
 			@Override
 			public void onUpdate(ItemStack paste, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 				super.onUpdate(paste, worldIn, entityIn, itemSlot, isSelected);
-				if (entityIn instanceof EntityPlayer && itemSlot == EntityEquipmentSlot.OFFHAND.getSlotIndex()) {
+				if (worldIn.isRemote)
+					return;
+				if (entityIn instanceof EntityPlayer
+						&& ((EntityPlayer) entityIn).getHeldItemOffhand().getItem().equals(Main.repairing_paste)) {
 					EntityPlayer player = (EntityPlayer) entityIn;
 					if (player.getHeldItem(EnumHand.OFF_HAND).getItem().equals(Main.repairing_paste)) {
 						ItemStack stack = player.getHeldItem(EnumHand.MAIN_HAND);

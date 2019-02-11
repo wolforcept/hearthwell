@@ -114,8 +114,7 @@ public class RegisterRecipes {
 		RecipeTube.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonArray());
 
 		recipeName = "grinding_recipes";
-		// RecipeGrinding.initRecipes((recipes.has(recipeName) ? recipes :
-		// defaultRecipes).get(recipeName).getAsJsonArray());
+		RecipeGrinding.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonArray());
 		RecipeGrinding.initRecipes();
 
 		recipeName = "coring_recipes";

@@ -2,18 +2,66 @@ package wolforce.recipes;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map.Entry;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 import java.util.Set;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import wolforce.Main;
 import wolforce.items.ItemGrindingWheel;
 
 public class RecipeGrinding {
 
 	private static HashMap<Irio, RecipeGrinding> recipes;
+
+	public static void initRecipes(JsonArray recipesJson) {
+		recipes = new HashMap<>();
+		for (JsonElement e : recipesJson) {
+			recipes.put(readInput(e.getAsJsonObject().get("input").getAsJsonObject()), readRecipe(e.getAsJsonObject()));
+		}
+	}
+
+	private static Irio readInput(JsonObject o) {
+		if (!o.has("data")) {
+			o.addProperty("data", 0);
+			ItemStack input = ShapedRecipes.deserializeItem(o, true);
+			return new Irio(input.getItem());
+		}
+		ItemStack input = ShapedRecipes.deserializeItem(o, true);
+		return new Irio(input.getItem(), input.getMetadata());
+	}
+
+	private static RecipeGrinding readRecipe(JsonObject o) {
+		JsonArray wheelsArray = o.get("wheels").getAsJsonArray();
+		ItemGrindingWheel[] wheels = new ItemGrindingWheel[wheelsArray.size()];
+		for (int i = 0; i < wheels.length; i++) {
+			wheels[i] = getWheelOf(wheelsArray.get(i).getAsString());
+		}
+		ItemStack output = ShapedRecipes.deserializeItem(o.get("output").getAsJsonObject(), true);
+		return new RecipeGrinding(output, wheels);
+	}
+
+	private static ItemGrindingWheel getWheelOf(String wheelString) {
+		switch (wheelString) {
+		case "iron":
+			return Main.grinding_wheel_iron;
+		case "diamond":
+			return Main.grinding_wheel_diamond;
+		case "crystal":
+			return Main.grinding_wheel_crystal;
+		}
+		return null;
+	}
 
 	public static void initRecipes() {
 		// ItemGrindingWheel flint = Main.grinding_wheel_flint;
@@ -22,7 +70,7 @@ public class RecipeGrinding {
 		ItemGrindingWheel crystal = Main.grinding_wheel_crystal;
 		// ItemGrindingWheel nether = Main.grinding_wheel_crystal_nether;
 
-		recipes = new HashMap<>();
+//		recipes = new HashMap<>();
 
 		// IRON AND UP
 		put(new Irio(Blocks.STONE), new RecipeGrinding(new ItemStack(Blocks.COBBLESTONE, 1), iron, diamond));
@@ -119,10 +167,10 @@ public class RecipeGrinding {
 	public static ItemStack getResult(ItemGrindingWheel gwheel, ItemStack itemStack) {
 		RecipeGrinding result = recipes.get(new Irio(itemStack.getItem()));
 		if (result != null && Arrays.asList(result.levels).contains(gwheel))
-			return result.result;
+			return result.result.copy();
 		result = recipes.get(new Irio(itemStack.getItem(), itemStack.getMetadata()));
 		if (result != null && Arrays.asList(result.levels).contains(gwheel))
-			return result.result;
+			return result.result.copy();
 		return null;
 	}
 

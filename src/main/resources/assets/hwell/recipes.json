@@ -1,4 +1,24 @@
 {
+	"grinding_recipes": [
+		{	
+			"POSSIBLE_WHEELS": ["iron", "diamond", "crystal"],
+			"WARNING": "IF THE INPUT HAS NO data, ALL BLOCKS OF DIFFERENT METADATA WILL BE CONSIDERED",
+			
+			"input": { "item": "minecraft:coal_ore" },
+			"wheels": ["diamond"],
+			"output": { "item": "minecraft:coal", "data": 0}
+		},
+		{	
+			"POSSIBLE_WHEELS": ["iron", "diamond", "crystal"],
+			
+			"input": { "item": "minecraft:planks"},
+			"wheels": ["iron", "diamond"],
+			"output": { "item": "minecraft:coal", "data": 1}
+		}
+	]
+	
+	,
+	
 	"puller_recipes": [
 		{	
 			"FINAL_PROBABILITY": "THIS PROBABILITY / SUM OF ALL PROBABILITIES",
@@ -95,6 +115,30 @@
 		{	
 			"input": { "item": "minecraft:cactus" },
 			"output_fluid": "water"
+		},
+		{	
+			"input": { "item": "minecraft:stone", "data":0 },
+			"output_fluid": "lava"
+		},
+		{	
+			"input": { "item": "minecraft:stone", "data":1 },
+			"output_fluid": "lava"
+		},
+		{	
+			"input": { "item": "minecraft:stone", "data":2 },
+			"output_fluid": "lava"
+		},
+		{	
+			"input": { "item": "minecraft:stone", "data":3 },
+			"output_fluid": "lava"
+		},
+		{	
+			"input": { "item": "minecraft:sandstone", "data": 0 },
+			"output_fluid": "lava"
+		},
+		{	
+			"input": { "item": "minecraft:sandstone", "data": 1 },
+			"output_fluid": "lava"
 		},
 		{	
 			"input": { "item": "hwell:myst_dust_block"  },

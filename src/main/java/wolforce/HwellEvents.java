@@ -11,6 +11,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -64,6 +65,7 @@ public class HwellEvents {
 		}
 	}
 
+	@SubscribeEvent
 	public static void onEvent(PlayerTickEvent event) {
 //		if (event.phase == TickEvent.Phase.END && !event.player.world.isRemote) {
 //			if (event.player.getHeldItem(EnumHand.OFF_HAND).getItem().equals(Main.repairing_paste)) {

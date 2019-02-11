@@ -30,6 +30,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import wolforce.blocks.simplevariants.MySlab;
 import wolforce.blocks.simplevariants.MyStairs;
 import wolforce.recipes.Irio;
@@ -467,5 +468,9 @@ public class Util {
 		JsonElement je = gson.fromJson(reader, JsonElement.class);
 		return je;
 		// }
+	}
+
+	public static boolean clientIsDaytime(World world) {
+		return world.getWorldTime() < 12550 || world.getWorldTime() > 23300;
 	}
 }
