@@ -1,20 +1,121 @@
 {
+	"puller_recipes": [
+		{	
+			"FINAL_PROBABILITY": "THIS PROBABILITY / SUM OF ALL PROBABILITIES",
+			
+			"output": { "item": "minecraft:coal_ore" },
+			"probability": 30.0,
+			"filter": { "item": "hwell:shard_c"}
+		},
+		{	
+			"output": { "item": "minecraft:iron_ore" },
+			"probability": 25.0,
+			"filter": { "item": "hwell:shard_fe"}
+		},
+		{	
+			"output": { "item": "minecraft:gold_ore" },
+			"probability": 8.0,
+			"filter": { "item": "hwell:shard_au"}
+		},
+		{	
+			"output": { "item": "minecraft:redstone_ore" },
+			"probability": 8.0,
+			"filter": { "item": "hwell:shard_p"}
+		},
+		{	
+			"output": { "item": "hwell:quartz_ore" },
+			"probability": 8.0,
+			"filter": { "item": "hwell:shard_ca"}
+		},
+		{	
+			"output": { "item": "hwell:glowstone_ore" },
+			"probability": 8.0,
+			"filter": { "item": "hwell:shard_au"}
+		},
+		{	
+			"output": { "item": "minecraft:lapis_ore" },
+			"probability": 8.0,
+			"filter": { "item": "hwell:shard_o"}
+		},
+		{	
+			"output": { "item": "minecraft:diamond_ore" },
+			"probability": 2.5,
+			"filter": { "item": "hwell:shard_h"}
+		},
+		{	
+			"output": { "item": "minecraft:emerald_ore" },
+			"probability": 2.5,
+			"filter": { "item": "hwell:shard_n"}
+		}
+	]
+	
+	,
+	
+	"tube_recipes": [
+		{	
+			"input": { "item": "hwell:raw_asul_block" },
+			"output": { "item": "hwell:asul_block"}
+		},
+		{	
+			"input": { "item": "minecraft:leaves", "data":0  },
+			"output_fluid": "water"
+		},
+		{	
+			"input": { "item": "minecraft:leaves", "data":1  },
+			"output_fluid": "water"
+		},
+		{	
+			"input": { "item": "minecraft:leaves", "data":2  },
+			"output_fluid": "water"
+		},
+		{	
+			"input": { "item": "minecraft:leaves", "data":3  },
+			"output_fluid": "water"
+		},
+		{	
+			"input": { "item": "minecraft:leaves2", "data":0  },
+			"output_fluid": "water"
+		},
+		{	
+			"input": { "item": "minecraft:leaves2", "data":1  },
+			"output_fluid": "water"
+		},
+		{	
+			"input": { "item": "hwell:myst_leaves" },
+			"output_fluid": "water"
+		},
+		{	
+			"input": { "item": "minecraft:ice" },
+			"output_fluid": "water"
+		},
+		{	
+			"input": { "item": "minecraft:packed_ice" },
+			"output_fluid": "water"
+		},
+		{	
+			"input": { "item": "minecraft:cactus" },
+			"output_fluid": "water"
+		},
+		{	
+			"input": { "item": "hwell:myst_dust_block"  },
+			"output_fluid": "liquid_souls"
+		}
+	]
+	
+	,
+	
 	"freezer_recipes": [
 		{	
-			"input": { "item": "minecraft:water" },
-			"outputs": [{ "item": "minecraft:ice"}, { "item": "minecraft:snow_block" }]
+			"input": "water",
+			"outputs": [{ "item": "minecraft:ice"}, { "item": "minecraft:snow" }]
 		},
 		{	
-			"input": { "item": "minecraft:flowing_water" },
-			"outputs": [{ "item": "minecraft:ice" }, { "item": "minecraft:snow_block" }]
-		},
-		{	
-			"input": { "item": "minecraft:lava" },
+			"input": "lava",
 			"outputs": [{ "item": "minecraft:obsidian" }]
 		},
 		{	
-			"input": { "item": "minecraft:flowing_lava" },
-			"outputs": [{ "item": "minecraft:obsidian" }]
+			"input": "liquid_souls",
+			"outputs": [{ "item": "hwell:myst_dust_block" }]
 		}
 	]
 	

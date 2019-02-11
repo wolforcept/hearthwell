@@ -5,12 +5,14 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 import wolforce.HwellConfig;
 import wolforce.Main;
 import wolforce.blocks.simplevariants.MyLog;
@@ -33,7 +35,7 @@ public class BlockTube extends MyLog {
 		int nTubes = getNrOfTubesOnTop(world, pos);
 		if (!isPossible(nTubes, world, pos))
 			return;
-		if (RecipeTube.getResult(world.getBlockState(pos.down()).getBlock()) != null) {
+		if (RecipeTube.getResult(world.getBlockState(pos.down())) != null) {
 			for (int i = 0; i < 3; i++) {
 				world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + Math.random(), pos.getY() + (Math.random() * nTubes) + 1,
 						pos.getZ() + Math.random(), 0, -.02 - Math.random() * .2, 0);
@@ -45,9 +47,17 @@ public class BlockTube extends MyLog {
 	public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
 		if (state.getValue(BlockLog.LOG_AXIS) != BlockLog.EnumAxis.Y)
 			return;
-		Block result = RecipeTube.getResult(world.getBlockState(pos.down()).getBlock());
-		if (result != null)
-			tryMake(world, pos, result.getDefaultState());
+		Object result = RecipeTube.getResult(world.getBlockState(pos.down()));
+		if (result instanceof ItemStack) {
+			Block resultBlock = Block.getBlockFromItem(((ItemStack) result).getItem());
+			tryMake(world, pos, resultBlock.getDefaultState());
+		}
+
+		if (result instanceof FluidStack) {
+			Block resultBlock =((FluidStack)result).getFluid().getBlock();
+			tryMake(world, pos, resultBlock.getDefaultState());
+		}
+
 	}
 
 	private void tryMake(World world, BlockPos pos, IBlockState state) {

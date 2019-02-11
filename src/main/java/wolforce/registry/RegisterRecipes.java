@@ -36,15 +36,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -58,7 +55,6 @@ import wolforce.Main;
 import wolforce.Util;
 import wolforce.items.ItemLoot;
 import wolforce.items.ItemMystDust;
-import wolforce.recipes.Irio;
 import wolforce.recipes.RecipeCoring;
 import wolforce.recipes.RecipeCrushing;
 import wolforce.recipes.RecipeFreezer;
@@ -75,37 +71,68 @@ public class RegisterRecipes {
 
 	@SubscribeEvent
 	public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
-
 		File recipesFile = new File(HwellConfig.recipeFileLocation);
 
+		// if file does not exist, write default file
 		if (!recipesFile.exists())
 			try {
 				writeRecipesFile(HwellConfig.recipeFileLocation);
 			} catch (IOException e) {
-				System.err.println("Could not initialise the Recipes File!!");
-				return;
+				throw new RuntimeException("Could not initialise the Recipes File!! Game will crash.");
 			}
-		JsonObject recipes = null;
-
+		JsonObject recipes = null, defaultRecipes = null;
+		boolean errored = false;
 		try {
 			recipes = Util.readJson(HwellConfig.recipeFileLocation).getAsJsonObject();
 		} catch (Exception e) {
-			System.err.println("Could not read the Recipes File! Defaulting all recipes.");
-			try {
-				recipes = Util.readJson("/assets/hwell/" + INNER_RECIPES_FILE, true).getAsJsonObject();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			System.err.println("Error while reading the Recipes File! Defaulting all recipes.");
+			errored = true;
 		}
-		RecipeSeparator.initRecipes(recipes.get("separator_recipes").getAsJsonArray());
-		RecipeFreezer.initRecipes(recipes.get("freezer_recipes").getAsJsonArray());
-		RecipePuller.initRecipes();
+		try {
+			defaultRecipes = Util.readJson("/assets/hwell/" + INNER_RECIPES_FILE, true).getAsJsonObject();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		if (errored || recipes == null)
+			recipes = defaultRecipes;
+
+		String recipeName = "separator_recipes";
+		RecipeSeparator.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonArray());
+
+		recipeName = "freezer_recipes";
+		RecipeFreezer.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonArray());
+
+		recipeName = "puller_recipes";
+		RecipePuller.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonArray());
+
+		recipeName = "crushing_recipes";
+		// RecipeCrushing.initRecipes((recipes.has(recipeName) ? recipes :
+		// defaultRecipes).get(recipeName).getAsJsonArray());
 		RecipeCrushing.initRecipes();
-		RecipeTube.initRecipes();
+
+		recipeName = "tube_recipes";
+		RecipeTube.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonArray());
+
+		recipeName = "grinding_recipes";
+		// RecipeGrinding.initRecipes((recipes.has(recipeName) ? recipes :
+		// defaultRecipes).get(recipeName).getAsJsonArray());
 		RecipeGrinding.initRecipes();
+
+		recipeName = "coring_recipes";
+		// RecipeCoring.initRecipes((recipes.has(recipeName) ? recipes :
+		// defaultRecipes).get(recipeName).getAsJsonArray());
 		RecipeCoring.initRecipes();
+
+		recipeName = "myst_dust_recipes";
+		// ItemMystDust.initRecipes((recipes.has(recipeName) ? recipes :
+		// defaultRecipes).get(recipeName).getAsJsonArray());
 		ItemMystDust.initRecipes();
+
+		recipeName = "repairing_paste_recipes";
+		// RecipeRepairingPaste.initRecipes((recipes.has(recipeName) ? recipes :
+		// defaultRecipes).get(recipeName).getAsJsonArray());
 		RecipeRepairingPaste.initRecipes();
+
 		Main.initShards();
 		ItemLoot.setLootTables();
 
@@ -152,4 +179,7 @@ public class RegisterRecipes {
 		out.close();
 	}
 
+	public static interface HwellRecipe {
+
+	}
 }

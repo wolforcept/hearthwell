@@ -43,8 +43,7 @@ public interface BlockEnergyConsumer extends BlockWithDescription {
 		int loss = (int) Math.max(0, .01 * pos2.distanceSq(pos) - 1);
 
 		if (provider.hasEnergy(world, pos2, energy + loss)) {
-			provider.consume(world, pos2, energy + loss);
-			return true;
+			return provider.tryConsume(world, pos2, energy + loss);
 		}
 		return false;
 	}

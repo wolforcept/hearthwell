@@ -18,7 +18,6 @@ import wolforce.Util;
 import wolforce.Util.BlockWithMeta;
 import wolforce.blocks.BlockLightCollector;
 import wolforce.blocks.base.BlockEnergyConsumer;
-import wolforce.items.ItemShard;
 import wolforce.recipes.RecipePuller;
 
 public class TilePuller extends TileEntity implements ITickable {
@@ -52,8 +51,8 @@ public class TilePuller extends TileEntity implements ITickable {
 					{ null, "PB", null }, //
 			} };
 
-	int cooldown = 0;
 	static final int MAX_COOLDOWN = HwellConfig.pullerDelay;
+	int cooldown = MAX_COOLDOWN;
 
 	@Override
 	public void update() {
@@ -63,11 +62,6 @@ public class TilePuller extends TileEntity implements ITickable {
 
 		if (cooldown > 0) {
 			cooldown -= 5;
-			return;
-		}
-
-		// ENERGY CONSUMPTION
-		if (!BlockEnergyConsumer.tryConsume(world, pos, Main.puller.getEnergyConsumption())) {
 			return;
 		}
 
@@ -81,19 +75,23 @@ public class TilePuller extends TileEntity implements ITickable {
 
 		// get shard in liquid
 		List<EntityItem> entityList = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.up()));
-		List<ItemShard> shardsInLiquid = new LinkedList<>();
+		List<ItemStack> filtersInLiquid = new LinkedList<>();
 		if (!entityList.isEmpty()) {
 			for (EntityItem entityItem : entityList) {
-				if (entityItem.getItem().getItem() instanceof ItemShard)
-					shardsInLiquid.add((ItemShard) entityItem.getItem().getItem());
+				if (RecipePuller.isFilter(entityItem.getItem()))
+					filtersInLiquid.add(entityItem.getItem());
 			}
 		}
 
 		if (Util.isMultiblockBuilt(world, pos, EnumFacing.EAST, multiblock, table)) {
 			// ItemShard shard = ((ItemShard) );
-			ItemStack result = RecipePuller.getRandomPull(shardsInLiquid);
+			ItemStack result = RecipePuller.getRandomPull(filtersInLiquid);
 			if (Util.isValid(result)) {
 
+				// ENERGY CONSUMPTION
+				if (!BlockEnergyConsumer.tryConsume(world, pos, Main.puller.getEnergyConsumption())) {
+					return;
+				}
 				cooldown = MAX_COOLDOWN - 50 * getNrExtraLayers(table);
 				Util.spawnItem(world, pos, result, 0, .4, 0);
 			}

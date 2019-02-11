@@ -10,12 +10,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import wolforce.fluids.BlockLiquidSouls;
+import wolforce.items.ItemLoot;
 import wolforce.recipes.RecipeRepairingPaste;
 
 @Mod.EventBusSubscriber
@@ -56,24 +58,25 @@ public class HwellEvents {
 	// }
 
 	@SubscribeEvent // (priority = EventPriority.NORMAL, receiveCanceled = true)
-	public static void onEvent(PlayerTickEvent event) {
-		if (event.phase == TickEvent.Phase.END && !event.player.world.isRemote) {
-			if (event.player.getHeldItem(EnumHand.OFF_HAND).getItem().equals(Main.repairing_paste)) {
-				ItemStack stack = event.player.getHeldItem(EnumHand.MAIN_HAND);
-				ItemStack paste = event.player.getHeldItem(EnumHand.OFF_HAND);
-				if (timeConstraint(event.player) && stack.isItemDamaged() && RecipeRepairingPaste.isRepairable(stack.getItem())) {
-					paste.damageItem(1, event.player);
-					stack.damageItem(-1, event.player);
-				}
-			}
+	public static void onEvent(ItemExpireEvent event) {
+		if (event.getEntityItem().getItem().getItem() instanceof ItemLoot) {
+			ItemLoot.entityItemExpired(event);
 		}
-		if (event.phase == TickEvent.Phase.END && event.player.world.isRemote)
-			motion(event.player);
 	}
 
-	private static boolean timeConstraint(EntityPlayer player) {
-		String str = (player.getEntityWorld().getTotalWorldTime() + "");
-		return str.charAt(str.length() - 2) == '0';
+	public static void onEvent(PlayerTickEvent event) {
+//		if (event.phase == TickEvent.Phase.END && !event.player.world.isRemote) {
+//			if (event.player.getHeldItem(EnumHand.OFF_HAND).getItem().equals(Main.repairing_paste)) {
+//				ItemStack stack = event.player.getHeldItem(EnumHand.MAIN_HAND);
+//				ItemStack paste = event.player.getHeldItem(EnumHand.OFF_HAND);
+//				if (timeConstraint(event.player) && stack.isItemDamaged() && RecipeRepairingPaste.isRepairable(stack.getItem())) {
+//					paste.damageItem(1, event.player);
+//					stack.damageItem(-1, event.player);
+//				}
+//			}
+//		}
+		if (event.phase == TickEvent.Phase.END && event.player.world.isRemote)
+			motion(event.player);
 	}
 
 	@SubscribeEvent // (priority = EventPriority.NORMAL, receiveCanceled = true)

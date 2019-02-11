@@ -20,6 +20,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import wolforce.HwellConfig;
 import wolforce.Util;
 import wolforce.blocks.base.BlockEnergyConsumer;
@@ -47,15 +48,20 @@ public class BlockSeparator extends Block implements BlockEnergyConsumer, ITileE
 			float hitX, float hitY, float hitZ) {
 		if (!world.isRemote) {
 			TileSeparator tile = (TileSeparator) world.getTileEntity(pos);
-			IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
+			ItemStackHandler itemHandler = tile.inventory;
+			// IItemHandler itemHandler =
+			// tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
 			ItemStack held = player.getHeldItem(hand);
 			if (!player.isSneaking()) {
 				if (itemHandler.getStackInSlot(0).equals(ItemStack.EMPTY)) {
 					// TA VAZIO
 					if (!held.isEmpty()) {
 						// VAMOS POR
-						itemHandler.insertItem(0, new ItemStack(held.getItem(), 1, held.getMetadata()), false);
-						held.shrink(1);
+						// itemHandler.insertItem(0, new ItemStack(held.getItem(), 1,
+						// held.getMetadata()), false);
+						// held.shrink(1);
+						itemHandler.insertItem(0, held.copy(), false);
+						held.setCount(0);
 						tile.markDirty();
 					}
 				} else {
@@ -165,8 +171,8 @@ public class BlockSeparator extends Block implements BlockEnergyConsumer, ITileE
 
 	@Override
 	public String[] getDescription() {
-		return new String[] { "Separates items into its components.",
-				"Consumes " + getEnergyConsumption() + " energy per operation.", "Requires a multiblock Structure."  };
+		return new String[] { "Separates items into its components.", "Consumes " + getEnergyConsumption() + " energy per operation.",
+				"Requires a multiblock Structure." };
 	}
 
 	@Override

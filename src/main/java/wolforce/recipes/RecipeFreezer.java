@@ -66,7 +66,6 @@
 
 package wolforce.recipes;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 
 import com.google.gson.JsonArray;
@@ -75,48 +74,31 @@ import com.google.gson.JsonObject;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import wolforce.Util;
 
 public class RecipeFreezer {
 
-	public static final LinkedList<RecipeFreezer> recipes = new LinkedList<>();
-
-	// public static void initRecipes(JsonArray recipesJson) {
-	// recipes = new HashMap<>();
-	// for (JsonElement e : recipesJson) {
-	// readAndAddRecipe(e.getAsJsonObject());
-	// }
-	// }
-	//
-	// private static void readAndAddRecipe(JsonObject o) {
-	// ItemStack input =
-	// ShapedRecipes.deserializeItem(o.get("input").getAsJsonObject(), true);
-	// ItemStack output1 =
-	// ShapedRecipes.deserializeItem(o.get("output1").getAsJsonObject(), true);
-	// ItemStack output2 =
-	// ShapedRecipes.deserializeItem(o.get("output2").getAsJsonObject(), true);
-	// if (!o.has("output3")) {
-	// addRecipe(new Irio(input), new RecipeSeparator(output1, output2));
-	// } else {
-	// ItemStack output3 =
-	// ShapedRecipes.deserializeItem(o.get("output3").getAsJsonObject(), true);
-	// addRecipe(new Irio(input), new RecipeSeparator(output1, output2, output3));
-	// }
-	// }
+	public static LinkedList<RecipeFreezer> recipes;
 
 	public static void initRecipes(JsonArray recipesJson) {
-		put(FluidRegistry.WATER, 0, new Block[] { Blocks.SNOW, Blocks.ICE });
-		put(FluidRegistry.LAVA, 0, new Block[] { Blocks.OBSIDIAN });
+		recipes = new LinkedList<>();
+		for (JsonElement e : recipesJson) {
+			recipes.add(readRecipe(e.getAsJsonObject()));
+		}
 	}
 
-	private static void put(Fluid fluid, int meta, Block[] blocks) {
-		recipes.add(new RecipeFreezer(new FluidStack(fluid, Fluid.BUCKET_VOLUME), meta, blocks));
+	private static RecipeFreezer readRecipe(JsonObject o) {
+		FluidStack input = new FluidStack(FluidRegistry.getFluid(o.get("input").getAsString()), 1000);
+		JsonArray outputArray = o.get("outputs").getAsJsonArray();
+		ItemStack[] outputs = new ItemStack[outputArray.size()];
+		for (int i = 0; i < outputArray.size(); i++) {
+			JsonObject output = outputArray.get(i).getAsJsonObject();
+			outputs[i] = ShapedRecipes.deserializeItem(output, true);
+		}
+		return new RecipeFreezer(input, outputs);
 	}
 
 	///////////////////////////////////////////////////////////////////////
@@ -126,9 +108,8 @@ public class RecipeFreezer {
 			return null;
 
 		for (RecipeFreezer r : recipes) {
-			if (r.fluidIn.getFluid().equals(Util.getFluidFromBlock(stateIn))) {
-				if (r.metaIn == -1 || stateIn.getBlock().getMetaFromState(stateIn) == r.metaIn)
-					return r.blocksOut[(int) (Math.random() * r.blocksOut.length)];
+			if (r.fluidIn.getFluid().equals(FluidRegistry.lookupFluidForBlock(stateIn.getBlock()))) {
+				return Block.getBlockFromItem(r.blocksOut[(int) (Math.random() * r.blocksOut.length)].getItem());
 			}
 		}
 
@@ -137,9 +118,8 @@ public class RecipeFreezer {
 
 	public static boolean hasResult(IBlockState stateIn) {
 		for (RecipeFreezer r : recipes) {
-			if (r.fluidIn.getFluid().equals(Util.getFluidFromBlock(stateIn))) {
-				if (r.metaIn == -1 || stateIn.getBlock().getMetaFromState(stateIn) == r.metaIn)
-					return true;
+			if (r.fluidIn.getFluid().equals(FluidRegistry.lookupFluidForBlock(stateIn.getBlock()))) {
+				return true;
 			}
 		}
 		return false;
@@ -148,12 +128,10 @@ public class RecipeFreezer {
 	///////////////////////////////////////////////////////////////////////
 
 	public FluidStack fluidIn;
-	public int metaIn;
-	public Block[] blocksOut;
+	public ItemStack[] blocksOut;
 
-	public RecipeFreezer(FluidStack fluid, int meta, Block[] blocks) {
+	public RecipeFreezer(FluidStack fluid, ItemStack[] blocks) {
 		this.fluidIn = fluid;
-		this.metaIn = meta;
 		this.blocksOut = blocks;
 	}
 

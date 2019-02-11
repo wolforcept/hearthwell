@@ -1,5 +1,6 @@
 package wolforce.blocks;
 
+import net.minecraft.block.BlockStone;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
@@ -30,13 +31,21 @@ public class BlockGeneratorHeat extends BlockMachineBase implements BlockEnergyP
 	}
 
 	@Override
-	public void consume(World world, BlockPos pos, int energyDecrease) {
+	public boolean tryConsume(World world, BlockPos pos, int energyDecrease) {
 		int energy = world.getBlockState(pos).getValue(TEMP);
 		int newEnergy = energy - energyDecrease / E - 1;
-		world.setBlockState(pos, getDefaultState().withProperty(TEMP, newEnergy));
-		if (Math.random() < .01) {
-			world.setBlockState(pos.down(), Blocks.OBSIDIAN.getDefaultState());
+		if (newEnergy >= 0) {
+			world.setBlockState(pos, getDefaultState().withProperty(TEMP, newEnergy));
+			if (Math.random() < .01) {
+				if (world.getBlockState(pos.down()).getBlock().getMetaFromState(world.getBlockState(pos.down())) == 0)
+					world.setBlockState(pos.down(), Blocks.OBSIDIAN.getDefaultState());
+				else
+					world.setBlockState(pos.down(),
+							Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE));
+			}
+			return true;
 		}
+		return false;
 	}
 	// BLOCK STATES
 

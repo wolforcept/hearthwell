@@ -22,6 +22,7 @@ import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootTable;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.common.util.FakePlayerFactory;
+import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import wolforce.HwellConfig;
 import wolforce.Main;
 import wolforce.MyItem;
@@ -76,16 +77,19 @@ public class ItemLoot extends MyItem {
 					motionZ = dc.motionZ;
 				}
 
-				@Override
-				public void onRemovedFromWorld() {
-					if (!world.isRemote && getAge() > lifespan) {
-						world.playSound(null, getPosition(), SoundEvents.BLOCK_LAVA_POP, SoundCategory.BLOCKS, 1, 1);
-						for (ItemStack itemstack : lootList) {
-							Util.spawnItem(world, getPositionVector(), itemstack, Math.random() * .2 - .1, Math.random() * .1,
-									Math.random() * .2 - .1);
-						}
-					}
-				}
+				// @Override
+				// public void onRemovedFromWorld() {
+				// if (!world.isRemote && age >= lifespan) {
+				// world.playSound(null, getPosition(), SoundEvents.BLOCK_LAVA_POP,
+				// SoundCategory.BLOCKS, 1, 1);
+				// for (ItemStack itemstack : lootList) {
+				// Util.spawnItem(world, getPositionVector(), itemstack, Math.random() * .2 -
+				// .1, Math.random() * .1,
+				// Math.random() * .2 - .1);
+				// }
+				// }
+				// }
+
 			};
 		}
 		return null;
@@ -100,6 +104,17 @@ public class ItemLoot extends MyItem {
 			playerIn.dropItem(itemstack, false);
 		}
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, ItemStack.EMPTY);
+	}
+
+	public static void entityItemExpired(ItemExpireEvent event) {
+		EntityItem entity = event.getEntityItem();
+		if (!entity.world.isRemote) {
+			entity.world.playSound(null, entity.getPosition(), SoundEvents.BLOCK_LAVA_POP, SoundCategory.BLOCKS, 1, 1);
+			for (ItemStack itemstack : ((ItemLoot) entity.getItem().getItem()).getLoot(entity.world, entity)) {
+				Util.spawnItem(entity.world, entity.getPositionVector(), itemstack, Math.random() * .2 - .1, Math.random() * .1,
+						Math.random() * .2 - .1);
+			}
+		}
 	}
 
 	private List<ItemStack> getLoot(World world, Entity location) {

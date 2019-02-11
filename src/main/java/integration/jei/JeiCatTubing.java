@@ -2,6 +2,7 @@ package integration.jei;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
@@ -10,6 +11,7 @@ import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.item.ItemStack;
@@ -17,7 +19,7 @@ import net.minecraft.util.ResourceLocation;
 import wolforce.Hwell;
 import wolforce.Main;
 import wolforce.Util;
-import wolforce.recipes.RecipeFreezer;
+import wolforce.recipes.RecipeTube;
 
 public class JeiCatTubing implements IRecipeCategory {
 
@@ -64,20 +66,21 @@ public class JeiCatTubing implements IRecipeCategory {
 	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipe, IIngredients ingredients) {
 
 		IGuiItemStackGroup stacks = recipeLayout.getItemStacks();
-		stacks.set(ingredients);
-		//
 		// // the tube block
-		// stacks.init(0, true, 8, 32);
-		// stacks.set(0, new ItemStack(Main.furnace_tube));
-		//
+		stacks.init(0, true, 8, 32);
 		// // in
-		// stacks.init(1, true, 8, 64);
-		// stacks.set(1, new ItemStack(recipe.in));
-		//
+		stacks.init(1, true, 8, 64);
 		// // out
-		// stacks.init(2, false, 44, 64);
+		if (!ingredients.getOutputs(VanillaTypes.ITEM).isEmpty())
+			stacks.init(2, false, 44, 64);
+		stacks.set(ingredients);
+
+		if (!ingredients.getOutputs(VanillaTypes.FLUID).isEmpty()) {
+			recipeLayout.getFluidStacks().init(0, false, 45, 65);
+			recipeLayout.getFluidStacks().set(ingredients);
+		}
 		// stacks.set(2, new ItemStack(recipe.out));
-		// // stacks.set(ingredients);
+		// stacks.set(ingredients);
 		//
 		// FluidStack fluid = Util.vanillaFluidBlockToFluidStack(recipe.out);
 		// if (fluid != null) {
@@ -89,15 +92,24 @@ public class JeiCatTubing implements IRecipeCategory {
 
 	public static Collection<?> getAllRecipes() {
 		LinkedList<IRecipeWrapper> recipeWrappers = new LinkedList<>();
-		for (RecipeFreezer recipe : RecipeFreezer.recipes) {
+		for (final RecipeTube recipe : RecipeTube.recipes) {
 			IRecipeWrapper recipeWrapper = new IRecipeWrapper() {
 
 				@Override
 				public void getIngredients(IIngredients ingredients) {
-					// TODO ingredients.setInputLists(Block.class, Main.furnace_tube);
-					// Util.setIngredients(ingredients, new Block[] { , in }, new Block[] { out });
+
+					List<ItemStack> inputs = Util.listOfOne(new ItemStack(Main.furnace_tube));
+					inputs.add(recipe.in);
+					ingredients.setInputs(VanillaTypes.ITEM, inputs);
+
+					if (Util.isValid(recipe.out))
+						ingredients.setOutput(VanillaTypes.ITEM, recipe.out);
+					if (recipe.outFluid != null)
+						ingredients.setOutput(VanillaTypes.FLUID, recipe.outFluid);
+
 				}
 			};
+			recipeWrappers.add(recipeWrapper);
 		}
 		return recipeWrappers;
 	}

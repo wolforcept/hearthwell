@@ -50,23 +50,33 @@ public class RecipeSeparator {
 		recipes.put(stack, recipeGrinder);
 	}
 
+	//
+
+	//
+
 	public static Set<Entry<Irio, RecipeSeparator>> getRecipes() {
 		return recipes.entrySet();
 	}
 
-	//
-
-	//
-
 	public static ItemStack[] getResult(ItemStack itemStack) {
 		RecipeSeparator result = recipes.get(new Irio(itemStack.getItem()));
 		if (result != null)
-			return new ItemStack[] { result.left, result.right, result.back };
+			return new ItemStack[] { result.left.copy(), result.right.copy(), result.back.copy() };
 		result = recipes.get(new Irio(itemStack.getItem(), itemStack.getMetadata()));
 		if (result != null)
-			return new ItemStack[] { result.left, result.right, result.back };
+			return new ItemStack[] { result.left.copy(), result.right.copy(), result.back.copy() };
 		return null;
 	}
+
+	//
+
+	//
+
+	//
+
+	//
+
+	//
 
 	public final ItemStack left, right, back;
 

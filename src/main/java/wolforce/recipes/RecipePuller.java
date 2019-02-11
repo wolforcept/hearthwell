@@ -1,84 +1,96 @@
 package wolforce.recipes;
 
-import static net.minecraft.init.Blocks.COAL_ORE;
-import static net.minecraft.init.Blocks.DIAMOND_ORE;
-import static net.minecraft.init.Blocks.EMERALD_ORE;
-import static net.minecraft.init.Blocks.GOLD_ORE;
-import static net.minecraft.init.Blocks.IRON_ORE;
-import static net.minecraft.init.Blocks.LAPIS_ORE;
-import static net.minecraft.init.Blocks.REDSTONE_ORE;
-
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.minecraft.block.Block;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 import net.minecraft.item.ItemStack;
-import wolforce.Main;
-import wolforce.items.ItemShard;
+import net.minecraft.item.crafting.ShapedRecipes;
 
 public class RecipePuller {
 
-	static RecipePuller[] recipes;
+	static LinkedList<RecipePuller> recipes;
+	static HashSet<ItemStack> filters;
 
-	public static void initRecipes() {
-		recipes = new RecipePuller[] { //
-
-				new RecipePuller(COAL_ORE, 0.3, Main.shard_c), //
-				new RecipePuller(IRON_ORE, 0.25, Main.shard_fe), //
-				// sum .55
-
-				new RecipePuller(GOLD_ORE, 0.08, Main.shard_au), //
-				new RecipePuller(REDSTONE_ORE, 0.08, Main.shard_p), //
-				new RecipePuller(Main.quartz_ore, 0.08, Main.shard_ca), //
-				new RecipePuller(Main.glowstone_ore, 0.08, Main.shard_au), //
-				new RecipePuller(LAPIS_ORE, 0.08, Main.shard_o), //
-				// .55 + .4 = .95
-
-				new RecipePuller(DIAMOND_ORE, 0.025, Main.shard_o), //
-				new RecipePuller(EMERALD_ORE, 0.025, Main.shard_n), //
-				// .95 + .5 = 1
-		};
+	public static void initRecipes(JsonArray recipesJson) {
+		float totalProb = 0;
+		for (JsonElement e : recipesJson) {
+			totalProb += getProb(e.getAsJsonObject());
+		}
+		recipes = new LinkedList<>();
+		filters = new HashSet<>();
+		for (JsonElement e : recipesJson) {
+			recipes.add(readRecipe(e.getAsJsonObject(), totalProb));
+		}
 	}
 
-	public static ItemStack getRandomPull(List<ItemShard> shardsInLiquid) {
-		if (shardsInLiquid != null && !shardsInLiquid.isEmpty() && Math.random() < .5) {
+	private static float getProb(JsonObject o) {
+		return o.get("probability").getAsFloat();
+	}
+
+	private static RecipePuller readRecipe(JsonObject o, float totalProb) {
+
+		ItemStack output = ShapedRecipes.deserializeItem(o.get("output").getAsJsonObject(), true);
+		double prob = o.get("probability").getAsFloat() / totalProb;
+		ItemStack filter = ShapedRecipes.deserializeItem(o.get("filter").getAsJsonObject(), true);
+		filters.add(filter);
+		return new RecipePuller(output, prob, filter);
+	}
+
+	public static ItemStack getRandomPull(List<ItemStack> stacksInLiquid) {
+		if (stacksInLiquid != null && !stacksInLiquid.isEmpty() && Math.random() < Math.max(.75, .4 + stacksInLiquid.size() * .1)) {
 			LinkedList<RecipePuller> preferredRecipes = new LinkedList<>();
-			for (ItemShard shardInLiquid : shardsInLiquid) {
+			for (ItemStack stackInLiquid : stacksInLiquid) {
 				for (RecipePuller recipe : recipes) {
-					if (recipe.shard.equals(shardInLiquid) && !preferredRecipes.contains(recipe)) {
+					if (recipe.filter.getItem().equals(stackInLiquid.getItem()) && !preferredRecipes.contains(recipe)) {
 						preferredRecipes.add(recipe);
 					}
 				}
 			}
-			if (!preferredRecipes.isEmpty())
-				return new ItemStack(//
-						preferredRecipes.get(//
-								(int) (preferredRecipes.size() * Math.random())//
-						).block, //
-						1 + (int) (Math.random() * 2));
+			if (!preferredRecipes.isEmpty()) {
+				ItemStack randomPreferedStack = preferredRecipes.get((int) (preferredRecipes.size() * Math.random())).output.copy();
+				randomPreferedStack.setCount(1 + (int) (Math.random() * 2));
+				return randomPreferedStack;
+			}
 		}
 		double rand = Math.random();
-		for (int i = 0; i < recipes.length; i++) {
-			rand -= recipes[i].prob;
-			if (rand <= 0)
-				return new ItemStack(recipes[i].block, 1 + (int) (Math.random() * 2));
+		for (RecipePuller recipe : recipes) {
+			rand -= recipe.prob;
+			if (rand <= 0) {
+				ItemStack randomStack = recipe.output.copy();
+				randomStack.setCount(1 + (int) (Math.random() * 2));
+				return randomStack;
+			}
 		}
 		return ItemStack.EMPTY;
 	}
 
-	//
-
-	//
-
-	//
-
-	private Block block;
-	private double prob;
-	private ItemShard shard;
-
-	public RecipePuller(Block block, double prob, ItemShard shard) {
-		this.block = block;
-		this.prob = prob;
-		this.shard = shard;
+	public static boolean isFilter(ItemStack possible) {
+		for (ItemStack filter : filters) {
+			if (possible.getItem().equals(filter.getItem()) && possible.getMetadata() == filter.getMetadata())
+				return true;
+		}
+		return false;
 	}
+
+	//
+
+	//
+
+	//
+
+	private ItemStack output;
+	private double prob;
+	private ItemStack filter;
+
+	public RecipePuller(ItemStack output, double prob, ItemStack filter) {
+		this.output = output;
+		this.prob = prob;
+		this.filter = filter;
+	}
+
 }

@@ -457,14 +457,6 @@ public class Util {
 		return world.getBlockState(pos).getBlock();
 	}
 
-	public static Fluid getFluidFromBlock(IBlockState stateIn) {
-		if (stateIn.getMaterial() == Material.WATER)
-			return FluidRegistry.WATER;
-		if (stateIn.getMaterial() == Material.WATER)
-			return FluidRegistry.WATER;
-		return FluidRegistry.getFluid(stateIn.getBlock().getRegistryName().getResourcePath());
-	}
-
 	public static JsonElement readJson(String resource, boolean... internal) throws IOException {
 		Gson gson = new Gson();
 

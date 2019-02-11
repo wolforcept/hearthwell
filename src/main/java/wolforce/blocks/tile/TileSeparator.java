@@ -58,7 +58,7 @@ public class TileSeparator extends TileEntity implements ITickable {
 
 	//
 
-	private ItemStackHandler inventory = new ItemStackHandler(1);
+	public ItemStackHandler inventory = new ItemStackHandler(1);
 	int charge = 0;
 
 	@Override
@@ -98,7 +98,7 @@ public class TileSeparator extends TileEntity implements ITickable {
 	}
 
 	private void done(EnumFacing facing) {
-		ItemStack[] result = RecipeSeparator.getResult(inventory.extractItem(0, 64, false));
+		ItemStack[] result = RecipeSeparator.getResult(inventory.extractItem(0, 1, false));
 		markDirty();
 
 		BlockPos leftPos = pos.offset(facing.rotateYCCW()).offset(facing).offset(EnumFacing.DOWN);
@@ -144,6 +144,8 @@ public class TileSeparator extends TileEntity implements ITickable {
 
 	@Override
 	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+//		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && inventory.getStackInSlot(0).equals(ItemStack.EMPTY))
+//			return false;
 		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
 	}
 

@@ -2,12 +2,15 @@ package wolforce.items.tools;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Enchantments;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
@@ -15,6 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import wolforce.Main;
 import wolforce.MyItem;
 import wolforce.Util;
@@ -28,6 +32,14 @@ public class ItemDisplacer extends MyItem {
 		this.powered = powered;
 		setMaxStackSize(1);
 		setMaxDamage(64);
+	}
+
+	@Override
+	public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
+		if (this.powered) {
+			stack.addEnchantment(Enchantments.SILK_TOUCH, 1);
+		}
+		return super.initCapabilities(stack, nbt);
 	}
 
 	@Override

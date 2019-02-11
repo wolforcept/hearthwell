@@ -13,7 +13,9 @@ public class TesrPickerHolder extends TileEntitySpecialRenderer<TilePickerHolder
 
 	@Override
 	public void render(TilePickerHolder te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		IItemHandler itemh = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
+		// IItemHandler itemh =
+		// te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
+		// EnumFacing.NORTH);
 
 		// double debug1 = .01 * Util.getNrForDebugFromHand(te.getWorld(), x, y, z);
 		// double debug2 = 45.0 / 2 * Util.getNrForDebugFromHand2(te.getWorld(), x, y,
@@ -22,7 +24,7 @@ public class TesrPickerHolder extends TileEntitySpecialRenderer<TilePickerHolder
 		if (UtilClient.canRenderTESR(te)) {
 			for (int i = 0; i < te.nSlots; i++) {
 
-				ItemStack stack = itemh.getStackInSlot(i);
+				ItemStack stack = te.inventory.getStackInSlot(i);
 				if (!Util.isValid(stack))
 					continue;
 

@@ -117,16 +117,20 @@ public class TilePickerHolder extends TileEntity {
 		inventory.deserializeNBT(compound.getCompoundTag("inventory"));
 	}
 
-	@Override
-	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
-	}
-
-	@Nullable
-	@Override
-	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T) inventory : super.getCapability(capability, facing);
-	}
+	// @Override
+	// public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing
+	// facing) {
+	// return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ||
+	// super.hasCapability(capability, facing);
+	// }
+	//
+	// @Nullable
+	// @Override
+	// public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing
+	// facing) {
+	// return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T)
+	// inventory : super.getCapability(capability, facing);
+	// }
 
 	//
 
@@ -142,14 +146,14 @@ public class TilePickerHolder extends TileEntity {
 	public void markDirty() {
 		world.markBlockRangeForRenderUpdate(pos, pos);
 		world.notifyBlockUpdate(pos, getState(), getState(), 3);
-		world.scheduleBlockUpdate(pos, this.getBlockType(), 0, 0);
+		world.scheduleBlockUpdate(pos, Main.picker_holder, 0, 0);
 		super.markDirty();
 	}
 
 	@Override
 	@Nullable
 	public SPacketUpdateTileEntity getUpdatePacket() {
-		return new SPacketUpdateTileEntity(this.pos, 3, this.getUpdateTag());
+		return new SPacketUpdateTileEntity(this.pos, -1, this.getUpdateTag());
 	}
 
 	@Override
@@ -159,7 +163,6 @@ public class TilePickerHolder extends TileEntity {
 
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-		super.onDataPacket(net, pkt);
 		handleUpdateTag(pkt.getNbtCompound());
 	}
 }

@@ -7,5 +7,5 @@ public interface BlockEnergyProvider {
 
 	boolean hasEnergy(World world, BlockPos pos, int energy);
 
-	void consume(World world, BlockPos pos, int energy);
+	boolean tryConsume(World world, BlockPos pos, int energy);
 }

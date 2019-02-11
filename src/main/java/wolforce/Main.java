@@ -12,16 +12,21 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -84,6 +89,7 @@ import wolforce.items.tools.MyDagger;
 import wolforce.items.tools.MyPickaxe;
 import wolforce.items.tools.MyShovel;
 import wolforce.items.tools.MySword;
+import wolforce.recipes.RecipeRepairingPaste;
 
 public class Main {
 
@@ -295,7 +301,8 @@ public class Main {
 		};
 		items.add(fuel_dust_tiny);
 
-		asul_machine_case = new MyBlock("asul_machine_case", Material.ROCK).setHarvest("pickaxe", -1);
+		asul_machine_case = new MyBlock("asul_machine_case", Material.ROCK).setHarvest("pickaxe", -1).setResistance(1f)
+				.setHardness(1f);
 		blocks.add(asul_machine_case);
 		asul_ingot = new MyItem("asul_ingot");
 		items.add(asul_ingot);
@@ -604,8 +611,27 @@ public class Main {
 		mutation_paste_block = new MyBlock("mutation_paste_block", Material.GRASS).setHardness(1f).setResistance(1f);
 		blocks.add(mutation_paste_block);
 		repairing_paste = new MyItem("repairing_paste", new String[] {
-				"Place it on your left hand to slowly repair items on your right hand.", "Can repair up to 500 damage." })
-						.setMaxStackSize(1).setMaxDamage(500);
+				"Place it on your left hand to slowly repair items on your right hand.", "Can repair up to 500 damage." }) {
+			@Override
+			public void onUpdate(ItemStack paste, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+				super.onUpdate(paste, worldIn, entityIn, itemSlot, isSelected);
+				if (entityIn instanceof EntityPlayer && itemSlot == EntityEquipmentSlot.OFFHAND.getSlotIndex()) {
+					EntityPlayer player = (EntityPlayer) entityIn;
+					if (player.getHeldItem(EnumHand.OFF_HAND).getItem().equals(Main.repairing_paste)) {
+						ItemStack stack = player.getHeldItem(EnumHand.MAIN_HAND);
+						if (timeConstraint(player) && stack.isItemDamaged() && RecipeRepairingPaste.isRepairable(stack.getItem())) {
+							paste.damageItem(1, player);
+							stack.damageItem(-1, player);
+						}
+					}
+				}
+			}
+
+			private boolean timeConstraint(EntityPlayer player) {
+				String str = (player.getEntityWorld().getTotalWorldTime() + "");
+				return str.charAt(str.length() - 2) == '0';
+			}
+		}.setMaxStackSize(1).setMaxDamage(500);
 		items.add(repairing_paste);
 		raw_repairing_paste = new MyItem("raw_repairing_paste");
 		items.add(raw_repairing_paste);
@@ -786,14 +812,18 @@ public class Main {
 
 		OreDictionary.registerOre("logWood", myst_log);
 		OreDictionary.registerOre("plankWood", myst_planks);
+		OreDictionary.registerOre("oreGlowstone", glowstone_ore);
+		OreDictionary.registerOre("oreQuartz", quartz_ore);
 
-		{
-			ItemStack item;
-			item = new ItemStack(Main.empowered_displacer);
-			item.addEnchantment(Enchantments.SILK_TOUCH, 1);
-			GameRegistry.addShapedRecipe(Util.res("empowered_displacer"), Util.res("hwell"), item,
-					new Object[] { "A  ", " B ", "  C", 'A', Items.DIAMOND, 'B', obsidian_displacer, 'C', soulsteel_ingot });
-		}
+		// {
+		// ItemStack item;
+		// item = new ItemStack(Main.empowered_displacer);
+		// item.addEnchantment(Enchantments.SILK_TOUCH, 1);
+		// GameRegistry.addShapedRecipe(Util.res("empowered_displacer"),
+		// Util.res("hwell"), item,
+		// new Object[] { "A ", " B ", " C", 'A', Items.DIAMOND, 'B',
+		// obsidian_displacer, 'C', soulsteel_ingot });
+		// }
 	}
 
 	//

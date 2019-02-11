@@ -1,5 +1,6 @@
 package integration.jei;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -79,12 +80,9 @@ public class JeiCatFreezing implements IRecipeCategory<IRecipeWrapper> {
 
 				@Override
 				public void getIngredients(IIngredients ingredients) {
-					ingredients.setInputLists(VanillaTypes.FLUID, Util.listOfOne(Util.listOfOne(recipe.fluidIn)));
-					ingredients.setInputLists(VanillaTypes.ITEM, Util.listOfOne(Util.listOfOne(new ItemStack(Main.freezer))));
-					ingredients.setOutputs(VanillaTypes.ITEM, Util.toItemStackList(recipe.blocksOut));
-					// ingredients.setInput(ItemStack.class, Main.freezer);
-					// ingredients.setInput(FluidStack.class, recipe.fluidIn);
-					// ingredients.setOutputs(Block.class, Arrays.<Block>asList(recipe.blocksOut));
+					ingredients.setInputs(VanillaTypes.FLUID, Util.listOfOne(recipe.fluidIn));
+					ingredients.setInputs(VanillaTypes.ITEM, Util.listOfOne(new ItemStack(Main.freezer)));
+					ingredients.setOutputs(VanillaTypes.ITEM, Arrays.asList(recipe.blocksOut));
 				}
 			};
 			recipeWrappers.add(recipeWrapper);
