@@ -106,31 +106,24 @@ public class RegisterRecipes {
 		RecipePuller.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonArray());
 
 		recipeName = "crushing_recipes";
-		// RecipeCrushing.initRecipes((recipes.has(recipeName) ? recipes :
-		// defaultRecipes).get(recipeName).getAsJsonArray());
-		RecipeCrushing.initRecipes();
+		RecipeCrushing.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonArray());
 
 		recipeName = "tube_recipes";
 		RecipeTube.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonArray());
 
 		recipeName = "grinding_recipes";
 		RecipeGrinding.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonArray());
-		RecipeGrinding.initRecipes();
+
+		recipeName = "repairing_paste_recipes";
+		RecipeRepairingPaste.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonArray());
 
 		recipeName = "coring_recipes";
-		// RecipeCoring.initRecipes((recipes.has(recipeName) ? recipes :
-		// defaultRecipes).get(recipeName).getAsJsonArray());
-		RecipeCoring.initRecipes();
+		RecipeCoring.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonObject());
 
 		recipeName = "myst_dust_recipes";
 		// ItemMystDust.initRecipes((recipes.has(recipeName) ? recipes :
 		// defaultRecipes).get(recipeName).getAsJsonArray());
 		ItemMystDust.initRecipes();
-
-		recipeName = "repairing_paste_recipes";
-		// RecipeRepairingPaste.initRecipes((recipes.has(recipeName) ? recipes :
-		// defaultRecipes).get(recipeName).getAsJsonArray());
-		RecipeRepairingPaste.initRecipes();
 
 		Main.initShards();
 		ItemLoot.setLootTables();

@@ -13,24 +13,23 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.client.FMLClientHandler;
 import wolforce.blocks.simplevariants.MySlab;
 import wolforce.blocks.simplevariants.MyStairs;
 import wolforce.recipes.Irio;
@@ -472,5 +471,15 @@ public class Util {
 
 	public static boolean clientIsDaytime(World world) {
 		return world.getWorldTime() < 12550 || world.getWorldTime() > 23300;
+	}
+
+	public static Irio readJsonIrio(JsonObject o) {
+		if (!o.has("data")) {
+			o.addProperty("data", 0);
+			ItemStack input = ShapedRecipes.deserializeItem(o, true);
+			return new Irio(input.getItem());
+		}
+		ItemStack input = ShapedRecipes.deserializeItem(o, true);
+		return new Irio(input.getItem(), input.getMetadata());
 	}
 }

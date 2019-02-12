@@ -15,11 +15,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
@@ -125,7 +123,6 @@ public class Main {
 	public static Item heavy_shears, leaf_mesh;
 	public static Item crystal, crystal_nether, crystal_bowl, crystal_bowl_water;
 	public static Item obsidian_displacer, empowered_displacer;
-	public static Item loot_base;
 	public static Item metaldiamond, crystal_catalyst, soul_dust, raw_soulsteel, soulsteel_ingot, mutation_paste, raw_repairing_paste,
 			repairing_paste;
 	public static Item soulsteel_sword, soulsteel_dagger, soulsteel_pickaxe, soulsteel_axe, soulsteel_shovel, soulsteel_hoe;
@@ -135,8 +132,8 @@ public class Main {
 			myst_dust_picker_h, myst_dust_picker_p, myst_dust_picker_n;
 	public static ItemShard shard_fe, shard_au, shard_o, shard_c, shard_h, shard_ca, shard_p, shard_n;
 	public static ItemGrindingWheel grinding_wheel_iron, grinding_wheel_diamond, grinding_wheel_crystal;
-	public static ItemLoot loot_blaze, loot_creeper, loot_enderman, loot_ghast, loot_shulker, loot_skeleton, loot_slime, loot_spider,
-			loot_witch, loot_wither, loot_zombie;
+	public static ItemLoot loot_base, loot_blaze, loot_creeper, loot_enderman, loot_ghast, loot_shulker, loot_skeleton, loot_slime,
+			loot_spider, loot_witch, loot_wither, loot_zombie;
 
 	//
 	//
@@ -164,7 +161,7 @@ public class Main {
 			smooth_azurite, scorch_grit, scorch_glass, fullgrass_block, metaldiamond_block;
 	public static Block freezer, generator_heat;
 	public static Block fertilizer_block;
-	public static Block compressed_clay, compressed_wool, weeping_block;
+	public static Block compressed_clay, compressed_wool, weeping_block, skin_block;
 	public static Block mystic_iron_block, soulsteel_block;
 	public static Block mutation_paste_block;
 	public static BlockNourisher nourisher;
@@ -175,7 +172,7 @@ public class Main {
 	public static Block precision_grinder_flint, precision_grinder_iron, precision_grinder_diamond, precision_grinder_crystal,
 			precision_grinder_empty;
 	public static Block heat_block;
-	public static Block burst_seed_stone, burst_seed_sand, burst_seed_dirt, burst_seed_snow, burst_seed_netherrack;
+	public static Block burst_seed_stone, burst_seed_sand, burst_seed_dirt, burst_seed_snow, burst_seed_netherrack, burst_seed_crystal;
 	public static Block totem_enderman, totem_zombie, totem_skeleton, totem_creeper;
 	public static Block separator;
 	public static BlockProducer producer;
@@ -241,30 +238,41 @@ public class Main {
 		blocks.add(quartz_ore);
 		glowstone_ore = new MyBlock("glowstone_ore", Material.ROCK);
 		blocks.add(glowstone_ore);
+		// LootTableList.ENTITIES_BLAZE, //
+		// LootTableList.ENTITIES_CREEPER, //
+		// LootTableList.ENTITIES_ENDERMAN, //
+		// LootTableList.ENTITIES_GHAST, //
+		// LootTableList.ENTITIES_SHULKER, //
+		// LootTableList.ENTITIES_SKELETON, //
+		// LootTableList.ENTITIES_SLIME, //
+		// LootTableList.ENTITIES_SPIDER, //
+		// LootTableList.ENTITIES_WITCH, //
+		// LootTableList.ENTITIES_WITHER_SKELETON, //
+		// LootTableList.ENTITIES_ZOMBIE,//
 
-		loot_base = new ItemLoot("loot_base", "Produced in a Loot Kit Producer.");
+		loot_base = new ItemLoot("loot_base", -1, "Produced in a Loot Kit Producer.");
 		items.add(loot_base);
-		loot_blaze = new ItemLoot("loot_blaze");
+		loot_blaze = new ItemLoot("loot_blaze", 0);
 		items.add(loot_blaze);
-		loot_creeper = new ItemLoot("loot_creeper");
+		loot_creeper = new ItemLoot("loot_creeper", 1);
 		items.add(loot_creeper);
-		loot_enderman = new ItemLoot("loot_enderman");
+		loot_enderman = new ItemLoot("loot_enderman", 2);
 		items.add(loot_enderman);
-		loot_ghast = new ItemLoot("loot_ghast");
+		loot_ghast = new ItemLoot("loot_ghast", 3);
 		items.add(loot_ghast);
-		loot_shulker = new ItemLoot("loot_shulker");
+		loot_shulker = new ItemLoot("loot_shulker", 4);
 		items.add(loot_shulker);
-		loot_skeleton = new ItemLoot("loot_skeleton");
+		loot_skeleton = new ItemLoot("loot_skeleton", 5);
 		items.add(loot_skeleton);
-		loot_slime = new ItemLoot("loot_slime");
+		loot_slime = new ItemLoot("loot_slime", 6);
 		items.add(loot_slime);
-		loot_spider = new ItemLoot("loot_spider");
+		loot_spider = new ItemLoot("loot_spider", 7);
 		items.add(loot_spider);
-		loot_witch = new ItemLoot("loot_witch");
+		loot_witch = new ItemLoot("loot_witch", 8);
 		items.add(loot_witch);
-		loot_wither = new ItemLoot("loot_wither");
+		loot_wither = new ItemLoot("loot_wither", 9);
 		items.add(loot_wither);
-		loot_zombie = new ItemLoot("loot_zombie");
+		loot_zombie = new ItemLoot("loot_zombie", 10);
 		items.add(loot_zombie);
 
 		producer = new BlockProducer("producer");
@@ -397,9 +405,14 @@ public class Main {
 
 		compressed_clay = new MyBlock("compressed_clay", Material.CLAY).setHardness(.5f).setResistance(2);
 		blocks.add(compressed_clay);
-
 		compressed_wool = new MyBlock("compressed_wool", Material.CLAY).setHardness(.5f).setResistance(2);
 		blocks.add(compressed_wool);
+		skin_block = new MyBlock("skin_block", Material.CARPET).setHardness(.5f).setResistance(2);
+		blocks.add(skin_block);
+		weeping_block = new MyBlock("weeping_block", Material.CLAY);
+		blocks.add(weeping_block);
+		fertilizer_block = new MyBlock("fertilizer_block", Material.GOURD);
+		blocks.add(fertilizer_block);
 
 		citrinic_stone = new MyBlock("citrinic_stone", Material.ROCK)//
 				.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
@@ -451,6 +464,9 @@ public class Main {
 		burst_seed_netherrack = new BlockBurstSeed("burst_seed_netherrack", //
 				Material.ROCK, Blocks.NETHERRACK, "shovel", SoundType.STONE);
 		blocks.add(burst_seed_netherrack);
+		burst_seed_crystal = new BlockBurstSeed("burst_seed_crystal", //
+				Material.ROCK, new ItemStack(crystal), "pickaxe", SoundType.GLASS);
+		blocks.add(burst_seed_crystal);
 
 		obsidian_displacer = new ItemDisplacer("obsidian_displacer", false, "Pops obsidian and glass right off",
 				"at the expense of some hunger");
@@ -477,12 +493,6 @@ public class Main {
 
 		core_heat = new BlockCore("core_heat", false);
 		blocks.add(core_heat);
-
-		weeping_block = new MyBlock("weeping_block", Material.CLAY);
-		blocks.add(weeping_block);
-
-		fertilizer_block = new MyBlock("fertilizer_block", Material.GOURD);
-		blocks.add(fertilizer_block);
 
 		picking_table = new BlockPickingTable("picking_table");
 		blocks.add(picking_table);

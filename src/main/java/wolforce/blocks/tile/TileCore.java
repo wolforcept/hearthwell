@@ -70,8 +70,8 @@ public class TileCore extends TileEntity implements ITickable {
 					}
 				}
 				if (charge == MAX_CHARGE - 1) {
-					System.out.println(result.result.meta);
-					world.setBlockState(pos, result.result.getState(), 2 | 4); // im quite sure its a block
+//					System.out.println(result.result.getMetadata());
+					world.setBlockState(pos, new Irio(result.result).getState(), 2 | 4); // im quite sure its a block
 					return; // don't want to keep checking other touches
 				} else {
 					charge++;

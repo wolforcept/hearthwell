@@ -1,15 +1,13 @@
 package wolforce.items;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -41,58 +39,19 @@ public class ItemLoot extends MyItem {
 	// loot_wither
 	// loot_zombie
 
-	private ResourceLocation lootTable = null;
-	private Item[] basic_loot;
+	private static ResourceLocation[] easyLootTables;
+	private static ResourceLocation[] lootTables;
+	private final int lootTableIndex;
 
-	public ItemLoot(String name, String... lore) {
+	public ItemLoot(String name, int lootTableIndex, String... lore) {
 		super(name, lore);
+		this.lootTableIndex = lootTableIndex;
 		setMaxStackSize(1);
-		basic_loot = new Item[] {
-				// from most probable to least
-				Items.ROTTEN_FLESH, Items.BONE, Items.GUNPOWDER, Items.STRING, Items.ENDER_PEARL }; //
-		// Items.POTATO, Items.POISONOUS_POTATO, //
-		// Items.MUTTON, Items.BEEF, Items.LEATHER, //
-		// Items.RABBIT, Items.RABBIT_HIDE, //
-		// Items.EGG, Items.FISH, //
-		// Items.BOWL, Items.WOODEN_HOE, Items.WOODEN_AXE, //
-		// Items.DRAGON_BREATH, Items.RABBIT_FOOT, Items.CARROT };
 	}
 
 	@Override
-	public boolean hasCustomEntity(ItemStack stack) {
-		return true;
-	}
-
-	@Override
-	public Entity createEntity(World world, Entity location, ItemStack itemstack) {
-		if (location instanceof EntityItem) {
-			final EntityItem dc = (EntityItem) location;
-			final List<ItemStack> lootList = getLoot(world, location);
-			return new EntityItem(world, dc.posX, dc.posY, dc.posZ, dc.getItem()) {
-				{
-					lifespan = HwellConfig.lootTimeToHatch;
-					setPickupDelay(40);
-					motionX = dc.motionX;
-					motionY = dc.motionY;
-					motionZ = dc.motionZ;
-				}
-
-				// @Override
-				// public void onRemovedFromWorld() {
-				// if (!world.isRemote && age >= lifespan) {
-				// world.playSound(null, getPosition(), SoundEvents.BLOCK_LAVA_POP,
-				// SoundCategory.BLOCKS, 1, 1);
-				// for (ItemStack itemstack : lootList) {
-				// Util.spawnItem(world, getPositionVector(), itemstack, Math.random() * .2 -
-				// .1, Math.random() * .1,
-				// Math.random() * .2 - .1);
-				// }
-				// }
-				// }
-
-			};
-		}
-		return null;
+	public int getEntityLifespan(ItemStack itemStack, World world) {
+		return HwellConfig.lootTimeToHatch;
 	}
 
 	@Override
@@ -122,40 +81,60 @@ public class ItemLoot extends MyItem {
 			return null;
 		Random rand = new Random();
 		List<ItemStack> lootList;
-		if (lootTable == null) {
-			lootList = new LinkedList<>();
-			int n = (int) (Math.random() * 2);
-			for (int i = 0; i < n; i++) {
-				int index = (int) (new Random().nextGaussian() * basic_loot.length / 2);
-				if (index < 0 || index >= basic_loot.length)
-					index = (int) (Math.random() * basic_loot.length);
-				lootList.add(new ItemStack(basic_loot[index], (int) (Math.random() * 2)));
+
+		LootContext.Builder lootcontext = location instanceof EntityPlayer ? //
+				(new LootContext.Builder((WorldServer) world)).withPlayer((EntityPlayer) location) : //
+				(new LootContext.Builder((WorldServer) world)).withPlayer(FakePlayerFactory.getMinecraft((WorldServer) world));
+
+		if (lootTableIndex < 0) {
+			if (rand.nextDouble() < .75) {
+				// NORMAL LOOT 75% of the time
+				ResourceLocation lootTable = easyLootTables[(int) (Math.random() * easyLootTables.length)];
+				LootTable loottable = world.getLootTableManager().getLootTableFromLocation(lootTable);
+				lootList = loottable.generateLootForPools(rand, lootcontext.build());
+				return lootList;
+			} else {
+				// BETTER LOOT 25% of the time
+				ResourceLocation lootTable = lootTables[(int) (Math.random() * lootTables.length)];
+				LootTable loottable = world.getLootTableManager().getLootTableFromLocation(lootTable);
+				lootList = loottable.generateLootForPools(rand, lootcontext.build());
+				return lootList;
 			}
 		} else {
+			ResourceLocation lootTable = lootTables[lootTableIndex];
 			LootTable loottable = world.getLootTableManager().getLootTableFromLocation(lootTable);
-			LootContext.Builder lootcontext$builder = location instanceof EntityPlayer ? //
-					(new LootContext.Builder((WorldServer) world)).withPlayer((EntityPlayer) location) : //
-					(new LootContext.Builder((WorldServer) world)).withPlayer(FakePlayerFactory.getMinecraft((WorldServer) world));
-
-			lootList = loottable.generateLootForPools(rand, lootcontext$builder.build());
-			lootList.addAll(loottable.generateLootForPools(rand, lootcontext$builder.build()));
-			lootList.addAll(loottable.generateLootForPools(rand, lootcontext$builder.build()));
-			lootList.addAll(loottable.generateLootForPools(rand, lootcontext$builder.build()));
+			lootList = loottable.generateLootForPools(rand, lootcontext.build());
+			lootList.addAll(loottable.generateLootForPools(rand, lootcontext.build()));
+			lootList.addAll(loottable.generateLootForPools(rand, lootcontext.build()));
+			lootList.addAll(loottable.generateLootForPools(rand, lootcontext.build()));
+			return lootList;
 		}
-		return lootList;
 	}
 
 	public static void setLootTables() {
-		Main.loot_blaze.lootTable = LootTableList.ENTITIES_BLAZE;
-		Main.loot_creeper.lootTable = LootTableList.ENTITIES_CREEPER;
-		Main.loot_enderman.lootTable = LootTableList.ENTITIES_ENDERMAN;
-		Main.loot_ghast.lootTable = LootTableList.ENTITIES_GHAST;
-		Main.loot_shulker.lootTable = LootTableList.ENTITIES_SHULKER;
-		Main.loot_skeleton.lootTable = LootTableList.ENTITIES_SKELETON;
-		Main.loot_slime.lootTable = LootTableList.ENTITIES_SLIME;
-		Main.loot_spider.lootTable = LootTableList.ENTITIES_SPIDER;
-		Main.loot_witch.lootTable = LootTableList.ENTITIES_WITCH;
-		Main.loot_wither.lootTable = LootTableList.ENTITIES_WITHER_SKELETON;
-		Main.loot_zombie.lootTable = LootTableList.ENTITIES_ZOMBIE;
+		lootTables = new ResourceLocation[] { //
+				LootTableList.ENTITIES_BLAZE, //
+				LootTableList.ENTITIES_CREEPER, //
+				LootTableList.ENTITIES_ENDERMAN, //
+				LootTableList.ENTITIES_GHAST, //
+				LootTableList.ENTITIES_SHULKER, //
+				LootTableList.ENTITIES_SKELETON, //
+				LootTableList.ENTITIES_SLIME, //
+				LootTableList.ENTITIES_SPIDER, //
+				LootTableList.ENTITIES_WITCH, //
+				LootTableList.ENTITIES_WITHER_SKELETON, //
+				LootTableList.ENTITIES_ZOMBIE,//
+		};
+		easyLootTables = new ResourceLocation[] { //
+				LootTableList.ENTITIES_ZOMBIE, LootTableList.ENTITIES_ZOMBIE, //
+				LootTableList.ENTITIES_ZOMBIE, LootTableList.ENTITIES_ZOMBIE, //
+				LootTableList.ENTITIES_SKELETON, LootTableList.ENTITIES_SKELETON, //
+				LootTableList.ENTITIES_SKELETON, LootTableList.ENTITIES_SKELETON, //
+				LootTableList.ENTITIES_CREEPER, LootTableList.ENTITIES_CREEPER, //
+				LootTableList.ENTITIES_CREEPER, LootTableList.ENTITIES_CREEPER, //
+				LootTableList.ENTITIES_SPIDER, LootTableList.ENTITIES_SPIDER, //
+				LootTableList.ENTITIES_SPIDER, LootTableList.ENTITIES_SPIDER, //
+				LootTableList.ENTITIES_ENDERMAN, //
+		};
 	}
 }

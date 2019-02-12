@@ -1,19 +1,599 @@
 {
-	"grinding_recipes": [
-		{	
-			"POSSIBLE_WHEELS": ["iron", "diamond", "crystal"],
-			"WARNING": "IF THE INPUT HAS NO data, ALL BLOCKS OF DIFFERENT METADATA WILL BE CONSIDERED",
-			
-			"input": { "item": "minecraft:coal_ore" },
-			"wheels": ["diamond"],
-			"output": { "item": "minecraft:coal", "data": 0}
+	"coring_recipes": {
+		"core_stone": {
+			"shard_c" : {
+				"output": { "item": "minecraft:coal_block" },
+				"inputs": [{ "item": "minecraft:log" },{ "item": "minecraft:log2" }]
+			},
+			"shard_fe" : {
+				"output": { "item": "minecraft:iron_block" },
+				"inputs": [{ "item": "minecraft:cobblestone" },{ "item": "minecraft:stone" },{ "item": "minecraft:sandstone" }]
+			},
+			"shard_au" : {
+				"output": { "item": "minecraft:gold_block" },
+				"inputs": [{ "item": "minecraft:iron_block" }]
+			},
+			"shard_h" : {
+				"output": { "item": "minecraft:soul_sand" },
+				"inputs": [{ "item": "minecraft:quartz_block" }]
+			},
+			"shard_o" : {
+				"output": { "item": "hwell:compressed_clay" },
+				"inputs": [{ "item": "minecraft:air" }]
+			},
+			"shard_ca" : {
+				"output": { "item": "minecraft:bone_block" },
+				"inputs": [{ "item": "minecraft:glass" },{ "item": "minecraft:stained_glass" }]
+			},
+			"shard_p" : {
+				"output": { "item": "minecraft:redstone_block" },
+				"inputs": [{ "item": "minecraft:netherrack" },{ "item": "minecraft:magma" }]
+			},
+			"shard_n" : {
+				"output": { "item": "hwell:mutation_paste_block" },
+				"inputs": [{ "item": "hwell:fertile_soil" }]
+			}
 		},
-		{	
-			"POSSIBLE_WHEELS": ["iron", "diamond", "crystal"],
+		"core_heat": {
+			"shard_c" : {
+				"output": { "item": "minecraft:tnt" },
+				"inputs": [{ "item": "minecraft:hardened_clay" },{ "item": "minecraft:stained_hardened_clay" }]
+			},
+			"shard_fe" : {
+				"output": { "item": "minecraft:nether_brick" },
+				"inputs": [{ "item": "minecraft:iron_block" }]
+			},
+			"shard_au" : {
+				"output": { "item": "minecraft:glowstone" },
+				"inputs": [{ "item": "minecraft:gold_block" }]
+			},
+			"shard_h" : {
+				"output": { "item": "minecraft:netherrack" },
+				"inputs": [{ "item": "minecraft:coal_block" }]
+			},
+			"shard_o" : {
+				"output": { "item": "minecraft:sea_lantern" },
+				"inputs": [{ "item": "minecraft:snow" }]
+			},
+			"shard_ca" : {
+				"output": { "item": "minecraft:quartz_block", "data": 0 },
+				"inputs": [{ "item": "minecraft:snow" }]
+			},
+			"shard_p" : {
+				"output": { "item": "minecraft:magma" },
+				"inputs": [{ "item": "minecraft:netherrack" },{ "item": "minecraft:nether_brick" }]
+			},
+			"shard_n" : {
+				"output": { "item": "minecraft:emerald_block" },
+				"inputs": [{ "item": "minecraft:diamond_block" }]
+			}
+		},
+		"core_green": {
+			"shard_c" : {
+				"output": { "item": "minecraft:mycelium" },
+				"inputs": [{ "item": "minecraft:brown_mushroom_block" }, { "item": "minecraft:red_mushroom_block" }]
+			},
+			"shard_fe" : {
+				"output": { "item": "minecraft:melon_block" },
+				"inputs": [{ "item": "hwell:fertilizer_block" }]
+			},
+			"shard_au" : {
+				"output": { "item": "minecraft:pumpkin" },
+				"inputs": [{ "item": "hwell:fertilizer_block" }]
+			},
+			"shard_h" : {
+				"output": { "item": "minecraft:slime" },
+				"inputs": [{ "item": "minecraft:mossy_cobblestone" }]
+			},
+			"shard_o" : {
+				"output": { "item": "minecraft:lapis_block" },
+				"inputs": [{ "item": "minecraft:prismarine" }]
+			},
+			"shard_ca" : {
+				"output": { "item": "hwell:compressed_wool" },
+				"inputs": [{ "item": "minecraft:air" }]
+			},
+			"shard_p" : {
+				"output": { "item": "hwell:skin_block" },
+				"inputs": [{ "item": "minecraft:wool" }]
+			},
+			"shard_n" : {
+				"output": { "item": "minecraft:prismarine", "data": 0 },
+				"inputs": [{ "item": "minecraft:ice" },{ "item": "minecraft:packed_ice" }]
+			}
+		},
+		"core_sentient": {
+			"shard_c" : {
+				"output": { "item": "minecraft:dirt", "data": 2 },
+				"inputs": [{ "item": "minecraft:cobblestone" }]
+			},
+			"shard_fe" : {
+				"output": { "item": "hwell:metaldiamond_block" },
+				"inputs": [{ "item": "minecraft:diamond_block" }]
+			},
+			"shard_au" : {
+				"output": { "item": "minecraft:end_stone" },
+				"inputs": [{ "item": "minecraft:glowstone" }]
+			},
+			"shard_h" : {
+				"output": { "item": "minecraft:purpur_block" },
+				"inputs": [{ "item": "minecraft:end_stone" }]
+			},
+			"shard_o" : {
+				"output": { "item": "minecraft:diamond_block" },
+				"inputs": [{ "item": "minecraft:redstone_block" }]
+			},
+			"shard_ca" : {
+				"output": { "item": "hwell:weeping_block" },
+				"inputs": [{ "item": "minecraft:red_nether_brick" }]
+			},
+			"shard_p" : {
+				"output": { "item": "minecraft:nether_wart_block" },
+				"inputs": [{ "item": "minecraft:brown_mushroom_block" }, { "item": "minecraft:red_mushroom_block" }]
+			},
+			"shard_n" : {
+				"output": { "item": "minecraft:emerald_block" },
+				"inputs": [{ "item": "minecraft:diamond_block" }]
+			}
+		}
+	}
+	
+	,
+	
+	"grinding_recipes": [
+		{
+			"WARNING": "IF THE >INPUT< HAS NO data, ALL BLOCKS OF DIFFERENT METADATA WILL BE CONSIDERED",
+			"SO_BE_CAREFUL": "IF YOU DONT WANT THAT TO HAPPEN PUT data=0 ON THE INPUT",
+
 			
-			"input": { "item": "minecraft:planks"},
-			"wheels": ["iron", "diamond"],
-			"output": { "item": "minecraft:coal", "data": 1}
+			"input": { "item": "minecraft:stone" },
+			"wheels": [ "iron", "diamond" ],
+			"output": { "item": "minecraft:cobblestone", "count": 1 }
+		},
+		{
+			"input": { "item": "minecraft:cobblestone" },
+			"wheels": [ "iron", "diamond" ],
+			"output": { "item": "minecraft:gravel", "count": 1 }
+		},
+		{
+			"input": { "item": "minecraft:gravel" },
+			"wheels": [ "iron", "diamond" ],
+			"output": { "item": "minecraft:sand", "count": 1, "data": 0 }
+		},
+		{
+			"input": { "item": "minecraft:log", "data": 0 },
+			"wheels": [ "iron", "diamond" ],
+			"output": { "item": "minecraft:planks", "count": 6, "data": 0 }
+		},
+		{
+			"input": { "item": "minecraft:log", "data": 1 },
+			"wheels": [ "iron", "diamond" ],
+			"output": { "item": "minecraft:planks", "count": 6, "data": 1 }
+		},
+		{
+			"input": { "item": "minecraft:log", "data": 2 },
+			"wheels": [ "iron", "diamond" ],
+			"output": { "item": "minecraft:planks", "count": 6, "data": 2 }
+		},
+		{
+			"input": { "item": "minecraft:log", "data": 3 },
+			"wheels": [ "iron", "diamond" ],
+			"output": { "item": "minecraft:planks", "count": 6, "data": 3 }
+		},
+		{
+			"input": { "item": "minecraft:log2", "data": 0 },
+			"wheels": [ "iron", "diamond" ],
+			"output": { "item": "minecraft:planks", "count": 6, "data": 4 }
+		},
+		{
+			"input": { "item": "minecraft:log2", "data": 1 },
+			"wheels": [ "iron", "diamond" ],
+			"output": { "item": "minecraft:planks", "count": 6, "data": 5 }
+		},
+		{
+			"input": { "item": "hwell:myst_log" },
+			"wheels": [ "iron", "diamond" ],
+			"output": { "item": "hwell:myst_planks", "count": 6 }
+		},
+		{
+			"input": { "item": "minecraft:bone_block" },
+			"wheels": [ "iron", "diamond" ],
+			"output": { "item": "minecraft:bone", "count": 1 }
+		},
+		{
+			"input": { "item": "minecraft:melon_block" },
+			"wheels": [ "iron", "diamond" ],
+			"output": { "item": "minecraft:melon", "count": 9 }
+		},
+		{
+			"input": { "item": "minecraft:leather_helmet" },
+			"wheels": [ "iron", "diamond" ],
+			"output": { "item": "minecraft:leather", "count": 5 }
+		},
+		{
+			"input": { "item": "minecraft:leather_chestplate" },
+			"wheels": [ "iron", "diamond" ],
+			"output": { "item": "minecraft:leather", "count": 8 }
+		},
+		{
+			"input": { "item": "minecraft:leather_leggings" },
+			"wheels": [ "iron", "diamond" ],
+			"output": { "item": "minecraft:leather", "count": 7 }
+		},
+		{
+			"input": { "item": "minecraft:leather_boots" },
+			"wheels": [ "iron", "diamond" ],
+			"output": { "item": "minecraft:leather", "count": 4 }
+		},
+		{
+			"input": { "item": "hwell:glowstone_ore" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:glowstone_dust", "count": 2 }
+		},
+		{
+			"input": { "item": "hwell:quartz_ore" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:quartz", "count": 2 }
+		},
+		{
+			"input": { "item": "minecraft:iron_ingot" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_nugget", "count": 9 }
+		},
+		{
+			"input": { "item": "minecraft:bucket" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_ingot", "count": 3 }
+		},
+		{
+			"input": { "item": "minecraft:minecart" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_ingot", "count": 5 }
+		},
+		{
+			"input": { "item": "minecraft:shield" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_ingot", "count": 1 }
+		},
+		{
+			"input": { "item": "minecraft:iron_door" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_ingot", "count": 2 }
+		},
+		{
+			"input": { "item": "minecraft:iron_horse_armor" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_ingot", "count": 5 }
+		},
+		{
+			"input": { "item": "minecraft:shears" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_ingot", "count": 2 }
+		},
+		{
+			"input": { "item": "minecraft:iron_pickaxe" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_ingot", "count": 3 }
+		},
+		{
+			"input": { "item": "minecraft:iron_shovel" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_ingot", "count": 1 }
+		},
+		{
+			"input": { "item": "minecraft:iron_sword" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_ingot", "count": 2 }
+		},
+		{
+			"input": { "item": "minecraft:iron_axe" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_ingot", "count": 3 }
+		},
+		{
+			"input": { "item": "minecraft:iron_hoe" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_ingot", "count": 2 }
+		},
+		{
+			"input": { "item": "minecraft:iron_boots" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_ingot", "count": 4 }
+		},
+		{
+			"input": { "item": "minecraft:iron_chestplate" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_ingot", "count": 8 }
+		},
+		{
+			"input": { "item": "minecraft:iron_helmet" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_ingot", "count": 5 }
+		},
+		{
+			"input": { "item": "minecraft:iron_leggings" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_ingot", "count": 7 }
+		},
+		{
+			"input": { "item": "minecraft:activator_rail" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_ingot", "count": 1 }
+		},
+		{
+			"input": { "item": "minecraft:detector_rail" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_ingot", "count": 1 }
+		},
+		{
+			"input": { "item": "minecraft:rail" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_nugget", "count": 3 }
+		},
+		{
+			"input": { "item": "minecraft:heavy_weighted_pressure_plate" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_ingot", "count": 2 }
+		},
+		{
+			"input": { "item": "minecraft:hopper" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_ingot", "count": 5 }
+		},
+		{
+			"input": { "item": "minecraft:iron_bars" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_nugget", "count": 3 }
+		},
+		{
+			"input": { "item": "minecraft:iron_ore" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_nugget", "count": 12 }
+		},
+		{
+			"input": { "item": "minecraft:iron_block" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_ingot", "count": 9 }
+		},
+		{
+			"input": { "item": "minecraft:iron_trapdoor" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_ingot", "count": 4 }
+		},
+		{
+			"input": { "item": "minecraft:anvil" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:iron_ingot", "count": 31 }
+		},
+		{
+			"input": { "item": "minecraft:gold_ingot" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:gold_nugget", "count": 9 }
+		},
+		{
+			"input": { "item": "minecraft:golden_horse_armor" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:gold_ingot", "count": 5 }
+		},
+		{
+			"input": { "item": "minecraft:golden_pickaxe" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:gold_ingot", "count": 3 }
+		},
+		{
+			"input": { "item": "minecraft:golden_shovel" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:gold_ingot", "count": 1 }
+		},
+		{
+			"input": { "item": "minecraft:golden_sword" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:gold_ingot", "count": 2 }
+		},
+		{
+			"input": { "item": "minecraft:golden_axe" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:gold_ingot", "count": 3 }
+		},
+		{
+			"input": { "item": "minecraft:golden_hoe" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:gold_ingot", "count": 2 }
+		},
+		{
+			"input": { "item": "minecraft:golden_boots" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:gold_ingot", "count": 4 }
+		},
+		{
+			"input": { "item": "minecraft:golden_chestplate" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:gold_ingot", "count": 8 }
+		},
+		{
+			"input": { "item": "minecraft:golden_helmet" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:gold_ingot", "count": 5 }
+		},
+		{
+			"input": { "item": "minecraft:golden_leggings" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:gold_ingot", "count": 7 }
+		},
+		{
+			"input": { "item": "minecraft:golden_rail" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:gold_ingot", "count": 1 }
+		},
+		{
+			"input": { "item": "minecraft:light_weighted_pressure_plate" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:gold_ingot", "count": 2 }
+		},
+		{
+			"input": { "item": "minecraft:gold_ore" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:gold_nugget", "count": 12 }
+		},
+		{
+			"input": { "item": "minecraft:gold_block" },
+			"wheels": [ "diamond" ],
+			"output": { "item": "minecraft:gold_ingot", "count": 9 }
+		},
+		{
+			"input": { "item": "minecraft:glowstone" },
+			"wheels": [ "crystal" ],
+			"output": { "item": "minecraft:glowstone_dust", "count": 4 }
+		},
+		{
+			"input": { "item": "minecraft:quartz_block" },
+			"wheels": [ "crystal" ],
+			"output": { "item": "minecraft:quartz", "count": 4 }
+		},
+		{
+			"input": { "item": "minecraft:brick_block" },
+			"wheels": [ "crystal" ],
+			"output": { "item": "minecraft:brick", "count": 4 }
+		},
+		{
+			"input": { "item": "minecraft:prismarine", "data": 0 },
+			"wheels": [ "crystal" ],
+			"output": { "item": "minecraft:prismarine_shard", "count": 4 }
+		},
+		{
+			"input": { "item": "minecraft:prismarine", "data": 1 },
+			"wheels": [ "crystal" ],
+			"output": { "item": "minecraft:prismarine_shard", "count": 9 }
+		},
+		{
+			"input": { "item": "minecraft:prismarine", "data": 2 },
+			"wheels": [ "crystal" ],
+			"output": { "item": "minecraft:prismarine_shard", "count": 8 }
+		},
+		{
+			"input": { "item": "minecraft:wool" },
+			"wheels": [ "crystal" ],
+			"output": { "item": "minecraft:string", "count": 4 }
+		},
+		{
+			"input": { "item": "minecraft:wheat" },
+			"wheels": [ "crystal" ],
+			"output": { "item": "hwell:wheat_flour", "count": 1 }
+		}
+	]
+	
+	,
+	
+	"crushing_recipes": [
+		{
+			"WARNING": "IF THE >INPUT< HAS NO data, ALL BLOCKS OF DIFFERENT METADATA WILL BE CONSIDERED",
+			"SO_BE_CAREFUL": "IF YOU DONT WANT THAT TO HAPPEN PUT data=0 ON THE INPUT",
+
+			"input": { "item": "minecraft:cobblestone", "data": 0 },
+			"possible_outputs": [
+				{ "out": { "item": "hwell:dust" , "count": 2 } }
+			]
+		},
+		{
+			"input": { "item": "minecraft:stone"},
+			"possible_outputs": [
+				{ "out": { "item": "hwell:dust" , "count": 2 } }
+			]
+		},
+		{
+			"input": { "item": "minecraft:sandstone"},
+			"possible_outputs": [
+				{ "out": { "item": "hwell:dust" , "count": 2 } }
+			]
+		},
+		{
+			"input": { "item": "hwell:heavy_nugget", "data": 0 },
+			"possible_outputs": [
+				{ "out": { "item": "hwell:dust" , "count": 2 } }
+			]
+		},
+		{
+			"input": { "item": "hwell:heavy_nugget", "data": 0 },
+			"possible_outputs": [
+				{ "out": { "item": "hwell:fuel_dust" , "count": 2 } }
+			]
+		},
+		{
+			"input": { "item": "hwell:myst_rod", "data": 0 },
+			"possible_outputs": [
+				{ "out": { "item": "hwell:myst_dust" , "count": 2 } }
+			]
+		},
+		{
+			"input": { "item": "minecraft:gravel", "data": 0 },
+			"possible_outputs": [
+				{ "out": { "item": "minecraft:flint" , "count": 1 }, "probability": 0.6 },
+				{ "out": { "item": "minecraft:flint" , "count": 2 }, "probability": 0.3 }
+			]
+		},
+		{
+			"input": { "item": "minecraft:clay", "data": 0 },
+			"possible_outputs": [
+				{ "out": { "item": "minecraft:clay_ball" , "count": 4 } }
+			]
+		},
+		{
+			"input": { "item": "minecraft:soul_sand", "data": 0 },
+			"possible_outputs": [
+				{ "out": { "item": "hwell:soul_dust" , "count": 4 } }
+			]
+		},
+		{
+			"input": { "item": "minecraft:tallgrass", "data": 1},
+			"possible_outputs": [
+				{ "out": { "item": "minecraft:wheat_seeds" }, "probability": 0.75 }
+			]
+		},
+		{
+			"input": { "item": "hwell:citrinic_sand", "data": 0 },
+			"possible_outputs": [
+				{ "out": { "item": "hwell:salt", "count": 2 }, "probability": 0.5 },
+				{ "out": { "item": "hwell:salt", "count": 1 }, "probability": 0.25 },
+				{ "out": { "item": "hwell:salt", "count": 3 }, "probability": 0.25 }
+			]
+		},
+		{
+			"input": { "item": "minecraft:tallgrass", "data": 1},
+			"possible_outputs": [
+				{ "out": { "item": "minecraft:wheat_seeds" }, "probability": 0.75 }
+			]
+		},
+		{
+			"input": { "item": "hwell:crystal", "data": 0 },
+			"possible_outputs": [
+				{ "out": { "item": "hwell:shard_ca" }, "probability": 0.125 },
+				{ "out": { "item": "hwell:shard_c" }, "probability": 0.125 },
+				{ "out": { "item": "hwell:shard_h" }, "probability": 0.125 },
+				{ "out": { "item": "hwell:shard_o" }, "probability": 0.125 },
+				{ "out": { "item": "hwell:shard_fe" }, "probability": 0.125 },
+				{ "out": { "item": "hwell:shard_n" }, "probability": 0.125 },
+				{ "out": { "item": "hwell:shard_p" }, "probability": 0.125 },
+				{ "out": { "item": "hwell:shard_au" }, "probability": 0.125 }
+			]
+		},
+		{
+			"input": { "item": "hwell:crystal_nether", "data": 0 },
+			"possible_outputs": [
+				{ "out": { "item": "hwell:shard_ca" }, "probability": 0.125 },
+				{ "out": { "item": "hwell:shard_c" }, "probability": 0.125 },
+				{ "out": { "item": "hwell:shard_h" }, "probability": 0.125 },
+				{ "out": { "item": "hwell:shard_o" }, "probability": 0.125 },
+				{ "out": { "item": "hwell:shard_fe" }, "probability": 0.125 },
+				{ "out": { "item": "hwell:shard_n" }, "probability": 0.125 },
+				{ "out": { "item": "hwell:shard_p" }, "probability": 0.125 },
+				{ "out": { "item": "hwell:shard_au" }, "probability": 0.125 }
+			]
+		},
+		{
+			"input": { "item": "minecraft:ladder", "data": 0 },
+			"possible_outputs": [
+				{ "out": { "item": "minecraft:stick", "count": 2} }
+			]
 		}
 	]
 	
@@ -115,6 +695,10 @@
 		{	
 			"input": { "item": "minecraft:cactus" },
 			"output_fluid": "water"
+		},
+		{	
+			"input": { "item": "minecraft:cobblestone" },
+			"output_fluid": "lava"
 		},
 		{	
 			"input": { "item": "minecraft:stone", "data":0 },
@@ -239,5 +823,56 @@
 			"output1": { "item": "minecraft:iron_ingot", "count": 4 },
 			"output2": { "item": "minecraft:redstone" }
 		}
+	]
+	
+	,
+
+	"repairing_paste_recipes" : [
+		{ "item": "minecraft:wooden_pickaxe" }, { "item": "minecraft:wooden_axe" }, { "item": "minecraft:wooden_hoe" },
+		{ "item": "minecraft:wooden_shovel" }, { "item": "minecraft:wooden_shovel" },
+
+		{ "item": "minecraft:iron_pickaxe" }, { "item": "minecraft:iron_axe" },	{ "item": "minecraft:iron_hoe" },
+		{ "item": "minecraft:iron_shovel" }, { "item": "minecraft:iron_shovel" },
+
+		{ "item": "minecraft:diamond_pickaxe" }, { "item": "minecraft:diamond_axe" }, { "item": "minecraft:diamond_hoe" },
+		{ "item": "minecraft:diamond_shovel" }, { "item": "minecraft:diamond_shovel" },
+
+		{ "item": "minecraft:golden_pickaxe" }, { "item": "minecraft:golden_axe" }, { "item": "minecraft:golden_hoe" },
+		{ "item": "minecraft:golden_shovel" }, { "item": "minecraft:golden_shovel" },
+
+		{ "item": "minecraft:leather_helmet" }, { "item": "minecraft:leather_chestplate" },
+		{ "item": "minecraft:leather_leggings" }, { "item": "minecraft:leather_boots" },
+		
+		{ "item": "minecraft:iron_helmet" }, { "item": "minecraft:iron_chestplate" },
+		{ "item": "minecraft:iron_leggings" }, { "item": "minecraft:iron_boots" },
+		
+		{ "item": "minecraft:diamond_helmet" }, { "item": "minecraft:diamond_chestplate" },
+		{ "item": "minecraft:diamond_leggings" }, { "item": "minecraft:diamond_boots" },
+
+		{ "item": "minecraft:golden_helmet" }, { "item": "minecraft:golden_chestplate" },
+		{ "item": "minecraft:golden_leggings" }, { "item": "minecraft:golden_boots" },
+
+		{ "item": "minecraft:shears" },
+		{ "item": "minecraft:bow" },
+
+		{ "item": "hwell:repairing_paste" },
+		{ "item": "hwell:obsidian_displacer" },
+		{ "item": "hwell:empowered_displacer" },
+		{ "item": "hwell:soulsteel_pickaxe" }, { "item": "hwell:soulsteel_axe" }, { "item": "hwell:soulsteel_shovel" },
+		{ "item": "hwell:soulsteel_sword" }, { "item": "hwell:soulsteel_dagger" },
+		
+		{ "item": "hwell:soulsteel_helmet" }, { "item": "hwell:soulsteel_chest" },
+		{ "item": "hwell:soulsteel_legs" }, { "item": "hwell:soulsteel_boots" },
+
+		{ "item": "hwell:myst_dust_picker_au" }, { "item": "hwell:myst_dust_picker_c" },
+		{ "item": "hwell:myst_dust_picker_ca" }, { "item": "hwell:myst_dust_picker_fe" },
+		{ "item": "hwell:myst_dust_picker_h" }, { "item": "hwell:myst_dust_picker_o" },
+		{ "item": "hwell:myst_dust_picker_n" }, { "item": "hwell:myst_dust_picker_p" },
+
+		{ "item": "hwell:mystic_iron_pickaxe" }, { "item": "hwell:mystic_iron_axe" }, { "item": "hwell:mystic_iron_shovel" },
+		{ "item": "hwell:mystic_iron_sword" }, { "item": "hwell:mystic_iron_dagger" },
+
+		{ "item": "hwell:mystic_iron_helmet" }, { "item": "hwell:mystic_iron_chest" },
+		{ "item": "hwell:mystic_iron_legs" }, { "item": "hwell:mystic_iron_boots" }
 	]
 }

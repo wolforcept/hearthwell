@@ -1,8 +1,5 @@
 package integration.jei;
 
-import static net.minecraft.init.Blocks.BROWN_MUSHROOM_BLOCK;
-import static net.minecraft.init.Blocks.RED_MUSHROOM_BLOCK;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -109,10 +106,12 @@ public class JeiCatCoring<T extends JeiRecCoring> implements IRecipeCategory<Jei
 			System.out.println("added jei core " + core.getLocalizedName() + " recipe: " + recipe);
 			list.add(recipe);
 		}
-		// SPECIAL CASE
-		if (core == Main.core_green)
-			list.add(new JeiRecCoring(core, Main.shard_p, new Irio[] { new Irio(Main.fertilizer_block) },
-					new Irio[] { new Irio(BROWN_MUSHROOM_BLOCK), new Irio(RED_MUSHROOM_BLOCK) }));
+		// // SPECIAL CASE
+		// if (core == Main.core_green)
+		// list.add(new JeiRecCoring(core, Main.shard_p, new Irio[] { new
+		// Irio(Main.fertilizer_block) },
+		// new Irio[] { new Irio(BROWN_MUSHROOM_BLOCK), new Irio(RED_MUSHROOM_BLOCK)
+		// }));
 		return list;
 	}
 
@@ -123,11 +122,11 @@ public class JeiCatCoring<T extends JeiRecCoring> implements IRecipeCategory<Jei
 		private List<ItemStack> coretype;
 		private List<ItemStack> out;
 
-		public JeiRecCoring(Block coretype, Item shard, Irio[] consumes, Irio result) {
-			this(coretype, shard, consumes, new Irio[] { result });
+		public JeiRecCoring(Block coretype, Item shard, Irio[] consumes, ItemStack result) {
+			this(coretype, shard, consumes, new ItemStack[] { result });
 		}
 
-		public JeiRecCoring(Block coretype, Item shard, Irio[] consumes, Irio[] result) {
+		public JeiRecCoring(Block coretype, Item shard, Irio[] consumes, ItemStack[] result) {
 			this.coretype = new LinkedList<>();
 			this.coretype.add(new ItemStack(coretype));
 			this.shard = new LinkedList<>();
@@ -138,8 +137,8 @@ public class JeiCatCoring<T extends JeiRecCoring> implements IRecipeCategory<Jei
 				this.consumes.add(irio.stack());
 
 			this.out = new LinkedList<>();
-			for (Irio irio : result)
-				this.out.add(irio.stack());
+			for (ItemStack r : result)
+				this.out.add(r);
 		}
 
 		@Override
