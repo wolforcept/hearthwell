@@ -1,0 +1,28 @@
+{
+    "name": "Coring Mechanic",
+    "icon": "hwell:core_stone",
+    "category": "crafting_mechanics",
+    "pages": [
+        {
+            "type": "text",
+            "text": "This is a test entry, but it should show up!"
+        },
+		{
+            "type": "spotlight",
+            "title": "Stone Core",
+            "item": "hwell:core_stone"
+        },
+		{
+            "type": "crafting",
+			"title": "Base Cores",
+            "recipe": "hwell:core_stone",
+            "recipe2": "hwell:core_heat"
+        },
+		{
+            "type": "crafting",
+			"title": "Base Cores",
+            "recipe": "hwell:core_green",
+            "recipe2": "hwell:core_sentient"
+        }
+    ]
+}
