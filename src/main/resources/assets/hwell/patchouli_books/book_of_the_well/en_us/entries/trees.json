@@ -1,0 +1,33 @@
+{
+    "name": "Hearth Trees",
+    "icon": "hwell:myst_fertilizer",
+    "category": "introduction",
+    "sortnum": 6,
+    "pages": [
+        	{	
+        	"type": "spotlight",
+            "title": "Mysterious Trees",
+            "item": "hwell:myst_fertilizer",
+            "link_recipe": true,
+            "text": "Use this fertilizer on a regular sapling to have the chance to grow a Mysterious Tree. $(br2)Mysterious Trees can be harvested for a number of useful resources."
+        },
+		{
+            "type": "crafting",
+			"title": "Fertilizer and Trees ",
+			"text": "Trees can be grown from any placed sapling. The mysterious leaves are used for crafting.",
+			"recipe": "hwell:myst_fertilizer"		
+        },
+	    {
+            "type": "crafting",
+			"title": "Planks and Leaves",
+			"recipe": "hwell:myst_planks",
+			"recipe2": "hwell:leaf_mesh"
+		},
+		{
+            "type": "crafting",
+			"title": "Planks and Leaves",
+			"recipe": "hwell:myst_planks_slab",
+			"recipe2": "hwell:myst_planks_stairs"
+		}
+    ]
+}

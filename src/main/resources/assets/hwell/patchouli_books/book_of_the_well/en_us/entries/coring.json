@@ -5,12 +5,7 @@
     "pages": [
         {
             "type": "text",
-            "text": "This is a test entry, but it should show up!"
-        },
-		{
-            "type": "spotlight",
-            "title": "Stone Core",
-            "item": "hwell:core_stone"
+            "text": "Cores transform into resources. Activate them with a shard, and then place catalyst blocks nearby. Particle effects will tell you it's working. Sometimes, the catalyst blocks will dislodge, and have to be replaced."
         },
 		{
             "type": "crafting",
@@ -23,6 +18,13 @@
 			"title": "Base Cores",
             "recipe": "hwell:core_green",
             "recipe2": "hwell:core_sentient"
+        },
+        {
+        	"type": "spotlight",
+            "title": "Heat Core",
+            "item": "hwell:core_heat",
+            "text": "The Heat Core is a bit different. Craft a Heat Block and light it on fire with a Flint and Steel to transform it into a Heat Core."
         }
+            
     ]
 }

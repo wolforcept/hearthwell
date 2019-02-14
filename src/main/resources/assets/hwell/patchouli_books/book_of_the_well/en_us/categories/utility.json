@@ -1,0 +1,6 @@
+{
+	"name": "Utility Blocks",
+	"description": "These blocks provide utility when placed in the world.",
+	"icon": "hwell:picking_table",
+	"sortnum": 4
+}
