@@ -1,5 +1,6 @@
 {
 	"name": "Introduction",
-	"description": "Introductions",
-	"icon": "hwell:myst_dust"
+	"description": "Welcome to Hearth Well",
+	"icon": "hwell:myst_dust",
+	"sortnum": -1
 }

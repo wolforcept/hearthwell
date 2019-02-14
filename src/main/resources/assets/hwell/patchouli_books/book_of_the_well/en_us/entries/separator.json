@@ -1,0 +1,35 @@
+{
+    "name": "Separator",
+    "icon": "hwell:separator",
+    "category": "machines",
+    "pages": [
+		{
+            "type": "crafting",
+            "title": "Separator",            
+			"text": "The Separator is a multi-block machine which separates items into their components. It requires 100 per operation.",
+            "recipe": "hwell:separator"
+        },
+		{
+            "type": "multiblock",
+            "name": "Separator",
+            "multiblock": {
+                "pattern": [
+					[ " C ", "   ", " C "],
+					[ " A ", "   ", " A "],
+					[ "PH ", "PPS", "PH "],
+					[ "H_H", "_L0", "H_H"]
+                ],
+                "mapping": {
+                    "H": "hwell:heat_block",
+					"S": "hwell:separator",
+					"A": "hwell:furnace_tube",
+					"C": "hwell:light_collector",
+                    "P": "hwell:heavy_protection_block",
+					"0": "hwell:heavy_protection_block",
+                    "L": "hwell:fluid_liquid_souls"
+                }
+            }
+		}
+
+    ]
+}

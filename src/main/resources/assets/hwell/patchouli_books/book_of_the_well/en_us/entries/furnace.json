@@ -1,0 +1,38 @@
+{
+    "name": "Heat Furnace",
+    "icon": "hwell:heat_furnace",
+    "category": "machines",
+    "pages": [
+		{
+            "type": "crafting",
+            "title": "Heat Furnace",            
+			"text": "The Heat Furnace is a multi-block machine which instantly smelts items at no cost. Throw the items into the furnace. Water on top may require replacing.",
+            "recipe": "hwell:heat_furnace"
+        },
+		{
+            "type": "multiblock",
+            "name": "Heat Furnace",
+            "multiblock": {
+                "pattern": [
+					["        ", "HPPPPPPH", "HWWWWWWH", "HPPPPPPH", "        "],
+					["  H  H  ", "HPHPPHPH", " AAAAAS ", "HPHPPHPH", "  H  H  "],
+					["  H  H  ", "HPLPPLPH", "HLLLLLL0", "HPLPPLPH", "  H  H  "]
+						
+						
+						
+						
+                ],
+                "mapping": {
+                    "H": "hwell:heat_block",
+					"S": "hwell:heat_furnace",
+					"A": "hwell:furnace_tube",
+                    "P": "hwell:protection_block",
+					"0": "hwell:heat_block",
+                    "L": "minecraft:lava",
+					"W": "minecraft:water"
+                }
+            }
+		}
+
+    ]
+}
