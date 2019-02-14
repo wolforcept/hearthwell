@@ -1,0 +1,33 @@
+{
+    "name": "Crystal Creation",
+    "icon": "hwell:crystal",
+    "category": "introduction",
+    "sortnum": 8,
+    "pages": [
+        	{	
+        	"type": "spotlight",
+            "title": "Crystals",
+            "item": "hwell:crystal",
+            "link_recipe": true,
+            "text": "These crystals are mysterious and fragile. They shine with myriad colours. $(br2)Let's drop something heavy on them, or throw them into the depths of hell."
+        },
+		{
+            "type": "smelting",
+			"title": "Semlting Crystals",
+			"text": "Smelt a mysterious compound to create these crystals.",
+			"recipe": "hwell:leaf_mesh"		
+        },
+	    {
+            "type": "crafting",
+			"title": "Crystals",
+			"recipe": "hwell:crystal",
+			"recipe2": "hwell:crystal_nether_block"
+		},
+		{
+            "type": "crafting",
+			"title": "Utility Crystals",
+			"recipe": "hwell:crystal_bowl",
+			"recipe2": "hwell:crystal_catalyst"
+		}
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "name": "Hearth Alloys",
+    "icon": "hwell:asul_ingot",
+    "category": "introduction",
+    "sortnum": 10,
+    "pages": [
+    	{	
+        	"type": "spotlight",
+            "title": "Mystery Metals",
+            "item": "hwell:asul_ingot",
+            "link_recipe": true,
+            "text": "By creating a mixture of raw materials, and then subjecting it to the rays of an Amplifying Tube, it's possible to create a new alloy."
+        },
+		{
+            "type": "smelting",
+			"title": "Semlting Crystals",
+			"text": "Smelt a mysterious compound to create these crystals.",
+			"recipe": "hwell:leaf_mesh"		
+        },
+	    {
+            "type": "crafting",
+			"title": "Raw Asul",
+			"recipe": "hwell:raw_asul_block",
+			"recipe2": "hwell:asul_block"
+		},
+		{
+            "type": "crafting",
+			"title": "Utility Crystals",
+			"recipe": "hwell:crystal_bowl",
+			"recipe2": "hwell:crystal_catalyst"
+		}
+    ]
+}

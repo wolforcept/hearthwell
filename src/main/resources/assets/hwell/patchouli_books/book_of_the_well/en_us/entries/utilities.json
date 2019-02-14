@@ -1,0 +1,63 @@
+{
+    "name": "Utility Blocks",
+    "icon": "hwell:furnace_tube",
+    "category": "utility",
+    "pages": [
+        {
+            "type": "text",
+            "text": "This is a test entry, but it should show up!"
+        },
+		{
+            "type": "crafting",
+			"title": "Amplifying Tube",
+			"text": "This item, when stacked two or higher, with view of the sun, will convert blocks beneath it into other blocks.",
+			"recipe": "hwell:furnace_tube"
+        },
+		{
+            "type": "crafting",
+			"title": "Crushing Block",
+			"text": "This item, when placed in the world, falls like sand, and will crush entities beneath it into various dusts.",
+			"recipe": "hwell:crushing_block"
+        },
+		{
+            "type": "crafting",
+			"title": "Gravity Block",
+			"text": "This item affects entities in an area, drawing them near. A powered version responds to redstone.",
+			"recipe": "hwell:gravity_block"
+		 },	
+		{
+            "type": "crafting",
+			"title": "Gravity Blocks",
+			"text": "There's a mini one, too.",
+			"recipe": "hwell:gravity_block_mini",
+			"recipe2": "hwell:gravity_powered_block"
+		 },
+ 		{
+            "type": "crafting",
+			"title": "Dust Picking",
+			"text": "The picking table allows you to create shards on demand, rather than randomly via crushing crystals. Requires mysterious dust.",
+			"recipe": "hwell:picking_table"
+		 },
+		  		{
+            "type": "crafting",
+			"title": "Dust Picking",
+			"text": "Picking wands determine which shard is picked.",
+			"recipe": "hwell:myst_dust_picker_ca"
+		 },
+		 {
+            "type": "crafting",
+			"title": "Dust Picking",
+			"text": "There's a rack to store your wands. Shift-Right-Clicking stores wands, Right clicking cycles through stored wands.",
+			"recipe": "hwell:picker_holder"
+		 },
+		  {
+            "type": "crafting",
+			"title": "Collecting Light",
+			"text": "This block collects daylight, and needs a clear view of the sky. When broken, it can drop glowstone and Imprisoned Light",
+			"recipe": "hwell:light_collector"
+		 }
+			
+       
+        
+    ]
+}

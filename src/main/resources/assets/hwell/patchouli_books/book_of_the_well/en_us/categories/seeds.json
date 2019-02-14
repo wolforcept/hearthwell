@@ -1,0 +1,6 @@
+{
+	"name": "Burst Seeds",
+	"description": "These blocks explode, scattering a large amount of the related resource around. What a mess.",
+	"icon": "hwell:burst_seed_crystal",
+	"sortnum": 6
+}
