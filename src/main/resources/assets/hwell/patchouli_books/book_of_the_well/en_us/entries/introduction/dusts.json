@@ -1,0 +1,40 @@
+{
+    "name": "Hearth Dusts",
+    "icon": "hwell:myst_dust",
+    "category": "introduction",
+    "sortnum": 4,
+    "pages": [
+        	{	
+        	"type": "spotlight",
+            "title": "Mysterious Dust",
+            "item": "hwell:myst_dust",
+            "link_recipe": true,
+            "text": "Fill an empty rod with mystery, then crush it. $(br2)Alternatively, right click a grass block with another mysterious dust, and wait to harvest the mysterious grass that grows."
+        },
+		{
+            "type": "crafting",
+			"title": "Mysterious Blocks",
+			"text": "Dusts can be crafted into blocks, for further processing and crafting.",
+			"recipe": "hwell:myst_dust_block"		
+        },
+	    {
+            "type": "crafting",
+			"title": "Stone Dust",
+			"recipe": "hwell:dust"
+		},
+	    {
+            "type": "crush",
+			"name": "Stone Dust",
+			"recipe": "hwell:dust",
+			"input1": "hwell:crushing_block",
+			"input2": "minecraft:cobblestone",
+			"output": "hwell:dust",
+			"text": "Toss your items on the ground, and place the crushing block in the world above them. It will fall, like sand, and crush what's below."
+		},
+	    {
+            "type": "smelting",
+			"text": "Crush stone into dust. When crafted into a block, it can be smelted into glass in a furnace.",
+			"recipe2": "hwell:dust_block"
+			}
+    ]
+}

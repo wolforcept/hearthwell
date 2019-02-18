@@ -1,6 +1,7 @@
 package wolforce;
 
 import java.awt.Color;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Random;
@@ -60,8 +61,8 @@ import wolforce.blocks.BlockProducer;
 import wolforce.blocks.BlockPuller;
 import wolforce.blocks.BlockSeparator;
 import wolforce.blocks.BlockSlabLamp;
+import wolforce.blocks.BlockStatue;
 import wolforce.blocks.BlockStoneDust;
-import wolforce.blocks.BlockTotem;
 import wolforce.blocks.BlockTube;
 import wolforce.blocks.simplevariants.MyGlass;
 import wolforce.blocks.simplevariants.MyLog;
@@ -88,6 +89,7 @@ import wolforce.items.tools.MyPickaxe;
 import wolforce.items.tools.MyShovel;
 import wolforce.items.tools.MySword;
 import wolforce.recipes.RecipeRepairingPaste;
+import wolforce.registry.RegisterRecipes;
 
 public class Main {
 
@@ -172,7 +174,8 @@ public class Main {
 	public static Block precision_grinder_flint, precision_grinder_iron, precision_grinder_diamond, precision_grinder_crystal,
 			precision_grinder_empty;
 	public static Block heat_block;
-	public static Block burst_seed_stone, burst_seed_sand, burst_seed_dirt, burst_seed_snow, burst_seed_netherrack, burst_seed_crystal;
+	public static Block burst_seed_stone, burst_seed_sand, burst_seed_dirt, burst_seed_snow, burst_seed_netherrack, burst_seed_quartz,
+			burst_seed_prismarine, burst_seed_crystal;
 	public static Block totem_enderman, totem_zombie, totem_skeleton, totem_creeper;
 	public static Block separator;
 	public static BlockProducer producer;
@@ -207,6 +210,7 @@ public class Main {
 	// SHARDS
 
 	public static Item[] shards;
+	public static HashMap<String, BlockCore> custom_cores;
 
 	public static void initShards() {
 		shards = new Item[] { shard_ca, shard_c, shard_au, shard_fe, shard_o, shard_h };
@@ -323,8 +327,6 @@ public class Main {
 
 		crushing_block = new BlockCrushing("crushing_block");
 		blocks.add(crushing_block);
-		core_stone = new BlockCore("core_stone", true);
-		blocks.add(core_stone);
 		heavy_shears = new ItemHeavyShears("heavy_shears");
 		items.add(heavy_shears);
 		gravity_block = new BlockGravity("gravity_block", true);
@@ -337,6 +339,15 @@ public class Main {
 		blocks.add(antigravity_block);
 		antigravity_powered_block = new BlockAntiGravity("antigravity_powered_block", false);
 		blocks.add(antigravity_powered_block);
+
+		core_stone = new BlockCore("core_stone", true);
+		blocks.add(core_stone);
+		core_heat = new BlockCore("core_heat", false);
+		blocks.add(core_heat);
+		core_green = new BlockCore("core_green", false);
+		blocks.add(core_green);
+		core_sentient = new BlockCore("core_sentient", false);
+		blocks.add(core_sentient);
 
 		dust = new MyItem("dust");
 		items.add(dust);
@@ -464,6 +475,12 @@ public class Main {
 		burst_seed_netherrack = new BlockBurstSeed("burst_seed_netherrack", //
 				Material.ROCK, Blocks.NETHERRACK, "shovel", SoundType.STONE);
 		blocks.add(burst_seed_netherrack);
+		burst_seed_quartz = new BlockBurstSeed("burst_seed_quartz", //
+				Material.ROCK, Blocks.QUARTZ_BLOCK, "pickaxe", SoundType.STONE);
+		blocks.add(burst_seed_quartz);
+		burst_seed_prismarine = new BlockBurstSeed("burst_seed_prismarine", //
+				Material.ROCK, Blocks.PRISMARINE, "pickaxe", SoundType.STONE);
+		blocks.add(burst_seed_prismarine);
 		burst_seed_crystal = new BlockBurstSeed("burst_seed_crystal", //
 				Material.ROCK, new ItemStack(crystal), "pickaxe", SoundType.GLASS);
 		blocks.add(burst_seed_crystal);
@@ -490,9 +507,6 @@ public class Main {
 
 		heat_block = new BlockHeat("heat_block");
 		blocks.add(heat_block);
-
-		core_heat = new BlockCore("core_heat", false);
-		blocks.add(core_heat);
 
 		picking_table = new BlockPickingTable("picking_table");
 		blocks.add(picking_table);
@@ -599,12 +613,6 @@ public class Main {
 				mystic_iron_ingot, 20);
 		items.add(mystic_iron_boots);
 
-		core_green = new BlockCore("core_green", false);
-		blocks.add(core_green);
-
-		core_sentient = new BlockCore("core_sentient", false);
-		blocks.add(core_sentient);
-
 		// TIER 3
 		crystal_catalyst = new MyItem("crystal_catalyst");
 		items.add(crystal_catalyst);
@@ -702,14 +710,14 @@ public class Main {
 		rod_blaze_1 = new ItemEmptyRod("rod_blaze_1", ItemEmptyRod.RodType.BLAZE, rod_blaze_2);
 		items.add(rod_blaze_1);
 
-		totem_enderman = new BlockTotem("totem_enderman");
-		blocks.add(totem_enderman);
-		totem_zombie = new BlockTotem("totem_zombie");
-		blocks.add(totem_zombie);
-		totem_skeleton = new BlockTotem("totem_skeleton");
-		blocks.add(totem_skeleton);
-		totem_creeper = new BlockTotem("totem_creeper");
-		blocks.add(totem_creeper);
+		// totem_enderman = new BlockTotem("totem_enderman");
+		// blocks.add(totem_enderman);
+		// totem_zombie = new BlockStatue("totem_zombie");
+		// blocks.add(totem_zombie);
+		// totem_skeleton = new BlockTotem("totem_skeleton");
+		// blocks.add(totem_skeleton);
+		// totem_creeper = new BlockTotem("totem_creeper");
+		// blocks.add(totem_creeper);
 		// totem_ = new BlockTotem("totem_");
 		// blocks.add(totem_);
 
@@ -752,6 +760,8 @@ public class Main {
 			// THESE ARE DEALT SEPARATLY
 		}
 
+		RegisterRecipes.createNewCores();
+
 		// blocks.sort(new Comparator<Block>() {
 		// @Override
 		// public int compare(Block o1, Block o2) {
@@ -767,6 +777,8 @@ public class Main {
 		// o1.getUnlocalizedName().compareToIgnoreCase(o2.getUnlocalizedName());
 		// }
 		// });
+
+		//
 
 		//
 
@@ -828,17 +840,6 @@ public class Main {
 		OreDictionary.registerOre("oreGlowstone", glowstone_ore);
 		OreDictionary.registerOre("oreQuartz", quartz_ore);
 
-		// {
-		// ItemStack item;
-		// item = new ItemStack(Main.empowered_displacer);
-		// item.addEnchantment(Enchantments.SILK_TOUCH, 1);
-		// GameRegistry.addShapedRecipe(Util.res("empowered_displacer"),
-		// Util.res("hwell"), item,
-		// new Object[] { "A ", " B ", " C", 'A', Items.DIAMOND, 'B',
-		// obsidian_displacer, 'C', soulsteel_ingot });
-		// }
 	}
-
-	//
 
 }

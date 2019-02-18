@@ -165,6 +165,8 @@ tile.burst_seed_stone.name=Stone Burst Seed
 tile.burst_seed_sand.name=Sand Burst Seed
 tile.burst_seed_snow.name=Snow Burst Seed
 tile.burst_seed_netherrack.name=Netherrack Burst Seed
+tile.burst_seed_quartz.name=Quartz Burst Seed
+tile.burst_seed_prismarine.name=Prismarine Burst Seed
 tile.burst_seed_crystal.name=Crystal Burst Seed
 
 tile.protection_block.name=Protection Block

@@ -1,0 +1,14 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+	"ABA",
+    " A " ],
+  "key": {
+    "A": [{ "item": "minecraft:quartz_block" }],
+	"B": [{ "item": "hwell:shard_n" }]
+  },
+  "result": {
+    "item": "hwell:burst_seed_quartz"
+  }
+}

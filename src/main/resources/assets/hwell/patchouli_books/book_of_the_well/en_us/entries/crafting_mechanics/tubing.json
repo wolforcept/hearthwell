@@ -1,0 +1,33 @@
+{
+    "name": "Amplifying Tube Mechanic",
+    "icon": "hwell:furnace_tube",
+    "category": "crafting_mechanics",
+    "pages": [
+        {
+            "type": "text",
+            "text": "The Amplifying Tube, when stacked 2 tall, up to 8 tall, will transform a block below it."
+        },
+        { 	"type": "tube",
+	        "name": "Making Lava",
+	        "input1": "hwell:furnace_tube",
+	        "input2": "minecraft:cobblestone",
+	        "output": "minecraft:lava_bucket",
+	        "text": "Any type of stone, cobblestone or sandstone can be turned into lava."
+        },        
+        { 	"type": "tube",
+	        "name": "Making Water",
+	        "input1": "hwell:furnace_tube",
+	        "input2": "minecraft:leaves",
+	        "output": "minecraft:water_bucket",
+	        "text": "Any type of leaves, ice or cactus can be turned into water."
+        },
+        { 	"type": "tube",
+	        "name": "Making Water",
+	        "input1": "hwell:furnace_tube",
+	        "input2": "hwell:myst_dust_block",
+	        "output": "hwell:fluid_liquid_souls",
+	        "text": "A block of mysterious dust can be transformed into Fluid Souls. Do not be alarmed."
+        }
+            
+    ]
+}

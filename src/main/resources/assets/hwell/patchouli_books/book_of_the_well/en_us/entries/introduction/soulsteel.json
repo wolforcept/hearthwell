@@ -1,0 +1,58 @@
+{
+    "name": "Soulsteel Processing",
+    "icon": "hwell:soulsteel_ingot",
+    "category": "introduction",
+    "sortnum": 14,
+    "pages": [
+    	{	
+        	"type": "spotlight",
+            "title": "Soulsteel Metal",
+            "item": "hwell:soulsteel_ingot",
+            "link_recipe": true,
+            "text": "Soulsteel is a strong material, with high enchantability.The first step to getting soulsteel is preparing the raw ingredients. This chapter covers the process from start to finish."
+        },   
+        { 	"type": "crush",
+	        "name": "Getting Soul Dust",
+			"recipe": "hwell:soul_dust",
+			"input1": "hwell:crushing_block",
+			"input2": "minecraft:soul_sand",
+			"output": "hwell:soul_dust",
+	        "text": "Soul dust is required for making Raw Soulsteel."
+        },
+        { 
+	        "type": "core",
+	        "name": "Metaldiamond",
+	        "input1": "hwell:core_sentient",
+	        "input2": "hwell:shard_fe",
+	        "input3": "minecraft:diamond_block",
+	        "output": "hwell:metaldiamond_block",
+	        "text": "Metaldiamond is used in crafting, and requires a Diamond Block catalyst."
+        },
+	    {
+            "type": "crafting",
+			"title": "Raw Soulsteel",
+			"recipe": "hwell:metaldiamond",
+			"recipe2": "hwell:raw_soulsteel_ingot",
+			"text": "Craft a Raw Soulsteel Ingot, which is then smelted."
+		},  
+	    {
+            "type": "smelting",
+			"text": "The Raw Soulsteel, souls trapped inside, must be fed into a furnace to reach it's final form. $(br2)Soulsteel can be crafted into all the well-known armor and weapon pieces.",
+			"recipe2": "hwell:raw_soulsteel"
+		},
+	    {
+            "type": "crafting",
+			"title": "Soulsteel Tools and Weaponds",
+			"recipe": "hwell:soulsteel_sword",
+			"recipe2": "hwell:soulsteel_Chest",
+			"text": "Soulsteel items can be enchanted."
+		},
+		{
+            "type": "crafting",
+			"title": "Soulsteel Tools and Weaponds",
+			"recipe": "hwell:dust_picker_au",
+			"recipe2": "hwell:empowered_displacer",
+			"text": "Soulsteel is used to craft various tools and machines in Hearth Well."
+		}  
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "name": "Hearth Fuels",
+    "icon": "minecraft:furnace",
+    "category": "introduction",
+    "sortnum": 2,
+    "pages": [
+		{
+            "type": "crafting",
+			"title": "Heavy Nuggets",
+			"text": "Heavy Nuggets can be crushed into fuel.",
+			"recipe": "hwell:heavy_nugget"		
+        },
+        {
+            "type": "crafting",
+			"title": "Heavy Fuel",
+			"text": "Smelts 4 items, or 1 item per fuel.",
+			"recipe": "hwell:fuel_dust",
+			"recipe2": "hwell:fuel_dust_tiny"
+        }
+			]
+}

@@ -43,8 +43,8 @@ public class BlockMystBush extends BlockBush {
 	}
 
 	@Override
-	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state,
-			@Nullable TileEntity te, ItemStack toolused) {
+	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te,
+			ItemStack toolused) {
 		if (!worldIn.isRemote) {
 			spawnAsEntity(worldIn, pos, new ItemStack(Main.myst_dust, getDropQuantity(state), 0));
 		} else {
@@ -53,10 +53,9 @@ public class BlockMystBush extends BlockBush {
 	}
 
 	private int getDropQuantity(IBlockState state) {
-		int n = (int) (Math.random() * 3);
-		if (state.getBlock() == Main.myst_bush_big && Math.random() > .75)
-			n++;
-		return n;
+		if (state.getBlock() == Main.myst_bush_big)
+			return 1 + (int) (Math.random() * 3);
+		return (int) (Math.random() * 2);
 	}
 
 	@Override

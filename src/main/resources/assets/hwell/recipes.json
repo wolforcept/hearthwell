@@ -1,4 +1,8 @@
 {
+	"version": "0.1.1"
+	
+	,
+	
 	"coring_recipes": {
 		"core_stone": {
 			"shard_c" : {
@@ -137,6 +141,18 @@
 			}
 		}
 	}
+	
+	,
+	
+	"seed_of_life_recipes": [
+		{ "WARNING": "IF NO META IS DEFINED ALL BLOCKS OF THE SAME META WILL BE TARGETED",
+		  "item": "minecraft:stone" },
+		{ "item": "minecraft:cobblestone" },
+		{ "item": "minecraft:dirt" },
+		{ "item": "minecraft:sand" },
+		{ "item": "minecraft:sandstone" },
+		{ "item": "minecraft:grass" }
+	]
 	
 	,
 	

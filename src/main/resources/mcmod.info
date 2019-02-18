@@ -1,16 +1,14 @@
-[
-{
-  "modid": "hwell",
-  "name": "Hearth Well",
-  "description": "A mod about making minecraft items from other minecraft items.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
-  "authorList": ["Wolforce"],
-  "credits": "Minecraft and Forge",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": []
-}
-]
+[{
+    "modid": "hwell",
+    "name": "Hearth Well",
+    "description": "A mod about making minecraft items from other minecraft items.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://minecraft.curseforge.com/projects/hearth-well",
+    "updateUrl": "",
+    "authorList": ["Wolforce"],
+    "credits": "Minecraft and Forge",
+    "logoFile": "logo.png",
+    "screenshots": ["everything.jpg"],
+    "dependencies": []
+}]

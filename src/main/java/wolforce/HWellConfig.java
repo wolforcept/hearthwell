@@ -28,6 +28,8 @@ public class HwellConfig {
 	public static int energyConsumptionPuller = 100;
 	@Config.Comment({ "Puller Delay Between pulls (default: 3000)" })
 	public static int pullerDelay = 3000;
+	@Config.Comment({ "Puller chance to get a filtered item (default: 0.5)" })
+	public static double pullerChanceToGetFilteredPull = 0.5;
 
 	// GRINDER
 	@Config.Comment({ "Grinder Energy Consumption per Operation (default: 100)" })

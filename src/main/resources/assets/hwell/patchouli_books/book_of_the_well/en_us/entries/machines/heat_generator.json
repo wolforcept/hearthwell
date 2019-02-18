@@ -1,0 +1,16 @@
+{
+    "name": "Heat Generator",
+    "icon": "hwell:generator_heat",
+    "category": "machines",
+    "pages": [
+        {
+            "type": "text",
+            "text": "The Heat Generator is the sole 'Energy' generation block in Hearth Well. Some machines will require Energy to run. Place it directly over lava."
+        },
+		{
+            "type": "crafting",
+            "title": "Heat Generator",
+            "recipe": "hwell:generator_heat"
+        }
+    ]
+}

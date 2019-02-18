@@ -1,9 +1,15 @@
 package wolforce.registry;
 
+import java.util.Map.Entry;
+
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.Fluid;
@@ -14,11 +20,15 @@ import net.minecraftforge.fml.relauncher.Side;
 import wolforce.Hwell;
 import wolforce.Main;
 import wolforce.blocks.BlockBox;
+import wolforce.blocks.BlockCore;
 import wolforce.blocks.tile.TilePickerHolder;
 import wolforce.blocks.tile.TileSeparator;
-import wolforce.client.CustomStateMapper;
+import wolforce.blocks.tile.TileStatue;
+import wolforce.client.CustomBoxStateMapper;
+import wolforce.client.CustomCoreStateMapper;
 import wolforce.client.TesrPickerHolder;
 import wolforce.client.TesrSeparator;
+import wolforce.client.TesrStatue;
 
 @Mod.EventBusSubscriber(modid = Hwell.MODID, value = Side.CLIENT)
 public class RegisterModels {
@@ -27,15 +37,24 @@ public class RegisterModels {
 	public static void registerModels(ModelRegistryEvent event) {
 
 		for (Item item : Main.items) {
-			regItemResourceLocation(item);
+			ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
 		}
 
 		for (Block block : Main.blocks) {
-			regItemBlockResourceLocation(block);
+			Item itemBlock = Item.getItemFromBlock(block);
+			ModelLoader.setCustomModelResourceLocation(itemBlock, 0,
+					new ModelResourceLocation(itemBlock.getRegistryName(), "inventory"));
 		}
 
 		for (BlockBox box : Main.boxes) {
-			regBoxResourceLocation(box);
+			CustomBoxStateMapper mapper = new CustomBoxStateMapper(box.block.getRegistryName(), box.hasAxis, box.isCore(box.block));
+			customRegisterRenders(box, box.block.getRegistryName(), mapper);
+		}
+
+		for (Entry<String, BlockCore> entry : Main.custom_cores.entrySet()) {
+			BlockCore core = entry.getValue();
+			CustomCoreStateMapper mapper = new CustomCoreStateMapper(new ResourceLocation("hwell", "core_custom"));
+			customRegisterRenders(core, new ResourceLocation("hwell", "core_custom"), mapper);
 		}
 
 		// FLUIDS
@@ -44,31 +63,18 @@ public class RegisterModels {
 		// TESRS
 		ClientRegistry.bindTileEntitySpecialRenderer(TileSeparator.class, new TesrSeparator());
 		ClientRegistry.bindTileEntitySpecialRenderer(TilePickerHolder.class, new TesrPickerHolder());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileStatue.class, new TesrStatue());
+
 	}
 
-	private static void regItemResourceLocation(Item item) {
-		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
-	}
+	// CUSTOM REGISTER RENDERS:
 
-	private static void regItemBlockResourceLocation(Block block) {
+	private static void customRegisterRenders(Block block, ResourceLocation resourceLocation, IStateMapper mapper) {
 		Item itemBlock = Item.getItemFromBlock(block);
-		ModelLoader.setCustomModelResourceLocation(itemBlock, 0, new ModelResourceLocation(itemBlock.getRegistryName(), "inventory"));
-	}
-
-	// CUSTOM BOX REGISTER RENDERS:
-
-	private static void regBoxResourceLocation(BlockBox box) {
-		Item item = Item.getItemFromBlock(box);
-		ModelLoader.setCustomModelResourceLocation(item, 0, getModelRes(box, "inventory"));
-		mapBoxBlock(box);
-	}
-
-	private static void mapBoxBlock(BlockBox box) {
-		ModelLoader.setCustomStateMapper(box, new CustomStateMapper(box.block.getRegistryName(), box.hasAxis, box.isCore(box.block)));
-	}
-
-	private static ModelResourceLocation getModelRes(BlockBox box, String variant) {
-		return new ModelResourceLocation(box.block.getRegistryName(), variant);
+		// register ITEM render
+		ModelLoader.setCustomModelResourceLocation(itemBlock, 0, new ModelResourceLocation(resourceLocation, "inventory"));
+		// register BLOCK render
+		ModelLoader.setCustomStateMapper(block, mapper);
 	}
 
 	// MAP FLUIDS

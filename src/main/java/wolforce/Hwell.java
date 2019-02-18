@@ -1,6 +1,7 @@
 package wolforce;
 
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,6 +19,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import wolforce.blocks.BlockBox;
+import wolforce.blocks.BlockCore;
 import wolforce.blocks.base.BlockWithDescription;
 
 @Mod(modid = Hwell.MODID, name = Hwell.NAME, version = Hwell.VERSION)
@@ -30,7 +32,7 @@ public class Hwell {
 
 	public static final String MODID = "hwell";
 	public static final String NAME = "Hearth Well";
-	public static final String VERSION = "1.0";
+	public static final String VERSION = "0.1.1";
 	public static final Logger logger = LogManager.getLogger(NAME);
 
 	@EventHandler
@@ -46,7 +48,7 @@ public class Hwell {
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event) {
 		for (Item item : Main.items) {
-			event.getRegistry().registerAll(item);
+			event.getRegistry().register(item);
 		}
 	}
 
@@ -56,6 +58,10 @@ public class Hwell {
 			event.getRegistry().register(b);
 		for (BlockBox box : Main.boxes) {
 			event.getRegistry().register(box);
+		}
+		for (Entry<String, BlockCore> entry : Main.custom_cores.entrySet()) {
+			BlockCore core = entry.getValue();
+			event.getRegistry().register(core);
 		}
 	}
 
@@ -92,6 +98,20 @@ public class Hwell {
 
 			};
 			item.setRegistryName(box.getRegistryName());
+			event.getRegistry().register(item);
+		}
+
+		for (
+
+		Entry<String, BlockCore> entry : Main.custom_cores.entrySet()) {
+			BlockCore core = entry.getValue();
+			Item item = new ItemBlock(core) {
+				@Override
+				public String getItemStackDisplayName(ItemStack stack) {
+					return core.getLocalizedName();
+				}
+			};
+			item.setRegistryName(core.getRegistryName());
 			event.getRegistry().register(item);
 		}
 	}

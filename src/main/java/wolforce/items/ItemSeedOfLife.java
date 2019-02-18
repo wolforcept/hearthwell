@@ -18,6 +18,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import wolforce.Main;
 import wolforce.MyItem;
+import wolforce.recipes.RecipeSeedOfLife;
 
 public class ItemSeedOfLife extends MyItem {
 
@@ -116,12 +117,7 @@ public class ItemSeedOfLife extends MyItem {
 
 	private boolean canTransform(World world, BlockPos pos) {
 		IBlockState state = world.getBlockState(pos);
-		return state.getBlock().equals(Blocks.STONE) || //
-				state.getBlock().equals(Blocks.COBBLESTONE) || //
-				state.getBlock().equals(Blocks.DIRT) || //
-				state.getBlock().equals(Blocks.SAND) || //
-				state.getBlock().equals(Blocks.SANDSTONE) || //
-				state.getBlock().equals(Blocks.GRASS);
+		return RecipeSeedOfLife.getResult(state.getBlock(), state.getBlock().getMetaFromState(state));
 	}
 
 	private void transform(World world, BlockPos pos, float prob, float grassProbability) {

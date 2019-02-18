@@ -35,14 +35,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map.Entry;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
@@ -53,6 +59,7 @@ import wolforce.Hwell;
 import wolforce.HwellConfig;
 import wolforce.Main;
 import wolforce.Util;
+import wolforce.blocks.BlockCore;
 import wolforce.items.ItemLoot;
 import wolforce.items.ItemMystDust;
 import wolforce.recipes.RecipeCoring;
@@ -61,6 +68,7 @@ import wolforce.recipes.RecipeFreezer;
 import wolforce.recipes.RecipeGrinding;
 import wolforce.recipes.RecipePuller;
 import wolforce.recipes.RecipeRepairingPaste;
+import wolforce.recipes.RecipeSeedOfLife;
 import wolforce.recipes.RecipeSeparator;
 import wolforce.recipes.RecipeTube;
 
@@ -68,9 +76,60 @@ import wolforce.recipes.RecipeTube;
 public class RegisterRecipes {
 
 	private static final String INNER_RECIPES_FILE = "recipes.json";
+	public static boolean old_version_recipes_file = false;
+	public static boolean errored_recipes_file = false;
+
+	// MUST REGISTER CORE BLOCKS BEFORE EVERYTHING ELSE (MARTELADA)
+
+	public static void createNewCores() {
+		Main.custom_cores = new HashMap<String, BlockCore>();
+
+		try {
+			File recipesFile = new File(HwellConfig.recipeFileLocation);
+			if (!recipesFile.exists())
+				return;
+			JsonObject recipeJson = Util.readJson(HwellConfig.recipeFileLocation).getAsJsonObject();
+
+			if (!recipeJson.has("coring_recipes"))
+				return;
+
+			for (Entry<String, JsonElement> entry : recipeJson.getAsJsonObject("coring_recipes").entrySet()) {
+				String nameid = entry.getKey();
+				if (RecipeCoring.getNormalCoreBlock(nameid) != null)
+					continue;
+				JsonObject recipes = entry.getValue().getAsJsonObject();
+				final String localizedName = recipes.get("name").getAsString();
+				final String colorString1 = recipes.get("base_color").getAsString();
+				final String colorString2 = recipes.get("border_color").getAsString();
+				BlockCore newCore = new BlockCore(nameid, false, colorString1, colorString2) {
+					@Override
+					public String getLocalizedName() {
+						return localizedName;
+					}
+				};
+				System.out.println("created new core with registry name <" + nameid + "> and localized name <" + localizedName + ">.");
+				Main.custom_cores.put(nameid, newCore);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	//
+
+	//
+
+	//
+
+	//
+
+	//
 
 	@SubscribeEvent
 	public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
+
 		File recipesFile = new File(HwellConfig.recipeFileLocation);
 
 		// if file does not exist, write default file
@@ -81,20 +140,23 @@ public class RegisterRecipes {
 				throw new RuntimeException("Could not initialise the Recipes File!! Game will crash.");
 			}
 		JsonObject recipes = null, defaultRecipes = null;
-		boolean errored = false;
 		try {
 			recipes = Util.readJson(HwellConfig.recipeFileLocation).getAsJsonObject();
 		} catch (Exception e) {
 			System.err.println("Error while reading the Recipes File! Defaulting all recipes.");
-			errored = true;
+			errored_recipes_file = true;
 		}
 		try {
 			defaultRecipes = Util.readJson("/assets/hwell/" + INNER_RECIPES_FILE, true).getAsJsonObject();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		if (errored || recipes == null)
+		if (errored_recipes_file || recipes == null)
 			recipes = defaultRecipes;
+
+		if (!recipes.has("version") || !recipes.get("version").getAsString().equals(defaultRecipes.get("version").getAsString())) {
+			old_version_recipes_file = true;
+		}
 
 		String recipeName = "separator_recipes";
 		RecipeSeparator.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonArray());
@@ -119,6 +181,9 @@ public class RegisterRecipes {
 
 		recipeName = "coring_recipes";
 		RecipeCoring.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonObject());
+
+		recipeName = "seed_of_life_recipes";
+		RecipeSeedOfLife.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonArray());
 
 		recipeName = "myst_dust_recipes";
 		// ItemMystDust.initRecipes((recipes.has(recipeName) ? recipes :

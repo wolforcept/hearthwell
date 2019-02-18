@@ -1,0 +1,14 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+	"ABA",
+    " A " ],
+  "key": {
+    "A": [{ "item": "minecraft:prismarine" }],
+	"B": [{ "item": "hwell:shard_o" }]
+  },
+  "result": {
+    "item": "hwell:burst_seed_prismarine"
+  }
+}

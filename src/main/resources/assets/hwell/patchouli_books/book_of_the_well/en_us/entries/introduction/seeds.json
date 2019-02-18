@@ -1,0 +1,28 @@
+{
+    "name": "Burst Seeds",
+    "icon": "hwell:burst_seed_crystal",
+    "category": "seeds",
+    "pages": [
+		{
+            "type": "crafting",
+			"title": "Burst Seeds",
+			"text": "Dirt and Sand seeds",
+			"recipe": "hwell:burst_seed_dirt",
+			"recipe2": "hwell:burst_seed_sand"
+        },
+         {
+            "type": "crafting",
+			"title": "Burst Seeds",
+			"text": "Stone and Netherrack seeds",
+			"recipe": "hwell:burst_seed_stone",
+			"recipe2": "hwell:burst_seed_netherrack"
+        }, 
+        {
+            "type": "crafting",
+			"title": "Burst Seeds",
+			"text": "Snow and Crystal seeds",
+			"recipe": "hwell:burst_seed_snow",
+			"recipe2": "hwell:burst_seed_crystal"
+		}
+	]
+}

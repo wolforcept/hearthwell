@@ -1,5 +1,7 @@
 package integration.jei;
 
+import java.util.Map.Entry;
+
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
@@ -8,7 +10,9 @@ import mezz.jei.api.ingredients.IIngredientRegistry;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.minecraft.item.ItemStack;
+import wolforce.Hwell;
 import wolforce.Main;
+import wolforce.blocks.BlockCore;
 
 @JEIPlugin
 public class JeiIntegration implements IModPlugin {
@@ -42,6 +46,11 @@ public class JeiIntegration implements IModPlugin {
 		reg.addRecipes(JeiCatCoring.getAllRecipes(Main.core_heat), JeiCatCoring.UID_CORING_HEAT);
 		reg.addRecipes(JeiCatCoring.getAllRecipes(Main.core_green), JeiCatCoring.UID_CORING_GREEN);
 		reg.addRecipes(JeiCatCoring.getAllRecipes(Main.core_sentient), JeiCatCoring.UID_CORING_SENTIENT);
+
+		for (Entry<String, BlockCore> entry : Main.custom_cores.entrySet()) {
+			BlockCore core = entry.getValue();
+			reg.addRecipes(JeiCatCoring.getAllRecipes(core), Hwell.MODID + ".coring." + core.getRegistryName().getResourcePath());
+		}
 		reg.addRecipes(JeiCatCrushing.getAllRecipes(), JeiCatCrushing.UID_CRUSHING);
 		reg.addRecipes(JeiCatGrinding.getAllRecipes(), JeiCatGrinding.UID_GRINDING);
 		reg.addRecipes(JeiCatSeparating.getAllRecipes(), JeiCatSeparating.UID_SEPARATOR);

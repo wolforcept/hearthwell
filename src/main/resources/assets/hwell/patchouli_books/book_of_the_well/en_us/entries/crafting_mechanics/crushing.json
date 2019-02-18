@@ -1,0 +1,30 @@
+{
+    "name": "Crushing Mechanic",
+    "icon": "hwell:crushing_block",
+    "category": "crafting_mechanics",
+    "pages": [
+        {
+            "type": "text",
+            "text": "Crushing converts entities into dusts, or crystals into shards."
+        },
+	    {
+            "type": "crush",
+			"name": "Stone Dust",
+			"recipe": "hwell:dust",
+			"input1": "hwell:crushing_block",
+			"input2": "minecraft:cobblestone",
+			"output": "hwell:dust",
+			"text": "Toss your items on the ground, and place the crushing block in the world above them. It will fall, like sand, and crush what's below."
+		},
+		{
+           	"type": "crush",
+			"name": "Shards",
+			"recipe": "hwell:shard_c",
+			"input1": "hwell:crushing_block",
+			"input2": "hwell:crystal",
+			"output": "hwell:shard_c",
+			"text":"Crushing a crystal results in a random shard."
+        }
+            
+    ]
+}

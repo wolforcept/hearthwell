@@ -10,6 +10,7 @@ import com.google.gson.JsonObject;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
+import wolforce.HwellConfig;
 
 public class RecipePuller {
 
@@ -42,7 +43,7 @@ public class RecipePuller {
 	}
 
 	public static ItemStack getRandomPull(List<ItemStack> stacksInLiquid) {
-		if (stacksInLiquid != null && !stacksInLiquid.isEmpty() && Math.random() < Math.max(.75, .4 + stacksInLiquid.size() * .1)) {
+		if (stacksInLiquid != null && !stacksInLiquid.isEmpty() && Math.random() < HwellConfig.pullerChanceToGetFilteredPull) {
 			LinkedList<RecipePuller> preferredRecipes = new LinkedList<>();
 			for (ItemStack stackInLiquid : stacksInLiquid) {
 				for (RecipePuller recipe : recipes) {

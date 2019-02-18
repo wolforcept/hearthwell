@@ -1,0 +1,39 @@
+{
+    "name": "Coring Mechanic",
+    "icon": "hwell:core_stone",
+    "category": "crafting_mechanics",
+    "pages": [
+        {
+            "type": "text",
+            "text": "Cores transform into resources. Activate them with a shard, and then place catalyst blocks nearby. Particle effects will tell you it's working. Sometimes, the catalyst blocks will dislodge, and have to be replaced."
+        },
+        { 
+	        "type": "core",
+	        "name": "Coring 101",
+	        "input1": "minecraft:stone",
+	        "input2": "hwell:crystal",
+	        "input3": "minecraft:grass",
+	        "output": "minecraft:sand",
+	        "text": ""      
+        },
+		{
+            "type": "crafting",
+			"title": "Base Cores",
+            "recipe": "hwell:core_stone",
+            "recipe2": "hwell:core_heat"
+        },
+		{
+            "type": "crafting",
+			"title": "Base Cores",
+            "recipe": "hwell:core_green",
+            "recipe2": "hwell:core_sentient"
+        },
+        {
+        	"type": "spotlight",
+            "title": "Heat Core",
+            "item": "hwell:core_heat",
+            "text": "The Heat Core is a bit different. Craft a Heat Block and light it on fire with a Flint and Steel to transform it into a Heat Core."
+        }
+            
+    ]
+}

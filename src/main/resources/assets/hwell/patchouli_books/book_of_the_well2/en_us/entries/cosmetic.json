@@ -1,0 +1,62 @@
+{
+    "name": "Cosmetic Blocks",
+    "icon": "hwell:moonstone",
+    "category": "introduction",
+    "sortnum": 12,
+    "pages": [
+    	{	
+        	"type": "spotlight",
+            "title": "Semi-Cosmetic Blocks",
+            "item": "hwell:moonstone",
+            "link_recipe": true,
+            "text": "These blocks look pretty, and are useful, too. Some can even be smelted and refined.$(br2)Slabs will always be placed according to the block that was right clicked. If the layer is sneaking, they will be placed with opposite facing."
+        },
+        {
+            "type": "crafting",
+			"title": "",
+			"recipe": "hwell:moonstone",
+			"recipe2": "hwell:moonstone_bricks"
+		},        
+		{
+            "type": "crafting",
+			"title": "",
+			"recipe": "hwell:moonstone_slab",
+			"recipe2": "hwell:moonstone_stairs"
+		},
+		{
+        	"type": "crafting",
+			"test": "etc...",
+			"recipe": "hwell:moonstone_bricks_slab",
+			"recipe2": "hwell:moonstone_bricks_stairs"
+		},
+	    {
+            "type": "crafting",
+			"title": "",
+			"recipe": "hwell:citrinic_stone",
+			"recipe2": "hwell:white_block"
+		},
+	    {
+            "type": "crafting",
+			"title": "",
+			"recipe": "hwell:azurite",
+			"recipe2": "hwell:onyx"
+		},
+
+	    {
+            "type": "crafting",
+			"title": "",
+			"recipe2": "hwell:scorch_grit",
+			"recipe": "hwell:fullgrass_block"
+		},
+		{
+            "type": "smelting",
+			"text": "",
+			"recipe": "hwell:scorch_grit"		
+        },
+		{
+            "type": "smelting",
+			"text": "",
+			"recipe": "hwell:citrinic_stone"		
+        }
+    ]
+}

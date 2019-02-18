@@ -5,9 +5,11 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockGrass;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
@@ -28,6 +30,27 @@ public class RecipeCoring {
 		initCoreRecipes(Main.core_green, recipesJson.get("core_green").getAsJsonObject());
 		initCoreRecipes(Main.core_sentient, recipesJson.get("core_sentient").getAsJsonObject());
 
+		for (Entry<String, JsonElement> entry : recipesJson.entrySet()) {
+			String nameid = entry.getKey();
+			if (getNormalCoreBlock(nameid) != null)
+				continue;
+			BlockCore core = Main.custom_cores.get(nameid);
+			initCoreRecipes(core, recipesJson.getAsJsonObject(nameid));
+		}
+	}
+
+	public static BlockCore getNormalCoreBlock(String nameid) {
+		switch (nameid) {
+		case "core_stone":
+			return Main.core_stone;
+		case "core_heat":
+			return Main.core_heat;
+		case "core_green":
+			return Main.core_green;
+		case "core_sentient":
+			return Main.core_sentient;
+		}
+		return null;
 	}
 
 	private static void initCoreRecipes(BlockCore core, JsonObject recipesJson) {
@@ -36,11 +59,13 @@ public class RecipeCoring {
 		ItemShard[] shardsI = { Main.shard_c, Main.shard_fe, Main.shard_au, Main.shard_h, Main.shard_o, Main.shard_ca, Main.shard_p,
 				Main.shard_n };
 		for (int i = 0; i < shardsS.length; i++) {
-			JsonObject shard = recipesJson.get(shardsS[i]).getAsJsonObject();
-			map.put(shardsI[i], new RecipeCoring(//
-					readOutput(shard.get("output").getAsJsonObject()), //
-					readBlocks(shard.get("inputs").getAsJsonArray())//
-			));
+			if (recipesJson.has(shardsS[i])) {
+				JsonObject shard = recipesJson.get(shardsS[i]).getAsJsonObject();
+				map.put(shardsI[i], new RecipeCoring(//
+						readOutput(shard.get("output").getAsJsonObject()), //
+						readBlocks(shard.get("inputs").getAsJsonArray())//
+				));
+			}
 		}
 		recipeLists.put(core, map);
 	}
@@ -132,8 +157,10 @@ public class RecipeCoring {
 	//
 
 	public static RecipeCoring getResult(Block coreBlock, Item shard) {
-		if (coreBlock != stone && coreBlock != heat && coreBlock != green && coreBlock != senti)
-			throw new RuntimeException(coreBlock.getUnlocalizedName() + " is not a valid core");
+		// if (coreBlock != stone && coreBlock != heat && coreBlock != green &&
+		// coreBlock != senti)
+		// throw new RuntimeException(coreBlock.getUnlocalizedName() + " is not a valid
+		// core");
 		// SPECIAL CASE
 		// if (coreBlock == green && shard == Main.shard_p)
 		// return new RecipeCoring(new Irio(Math.random() < .5 ? BROWN_MUSHROOM_BLOCK :

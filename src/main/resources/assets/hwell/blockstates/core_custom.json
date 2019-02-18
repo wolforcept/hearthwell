@@ -1,0 +1,22 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "texture": "hwell:blocks/core_custom"
+    },
+    "model": "hwell:core_custom"
+  },
+  "variants": {
+    "type": {
+      "core_base": { },
+      "core_ca": { "submodel": "hwell:core_sharded_ca"  },
+      "core_c":  { "submodel": "hwell:core_sharded_c"  },
+      "core_au": { "submodel": "hwell:core_sharded_au"  },
+      "core_fe": { "submodel": "hwell:core_sharded_fe"  },
+      "core_o":  { "submodel": "hwell:core_sharded_o"  },
+      "core_p":  { "submodel": "hwell:core_sharded_p"  },
+      "core_n":  { "submodel": "hwell:core_sharded_n"  },
+      "core_h":  { "submodel": "hwell:core_sharded_h" }
+    }
+  }
+}

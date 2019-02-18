@@ -1,0 +1,43 @@
+{
+    "name": "Heavy Things",
+    "icon": "hwell:heavy_ingot",
+    "category": "introduction",
+    "pages": [
+		{
+            "type": "crafting",
+			"title": "Heavy Ingots",
+			"text": "Heavy Ingots, a base item used in crafting.",
+			"recipe": "hwell:heavy_mesh"		
+        },
+        {
+            "type": "smelting",
+			"title": "Heavy Ingots",
+			"text": "Heavy Ingots, a base item used in crafting.",
+			"recipe": "hwell:heavy_mesh"
+        },
+		{
+            "type": "crafting",
+			"title": "Crushing Block",
+			"text": "This item, when placed in the world, falls like sand, and will crush entities beneath it into various dusts.",
+			"recipe": "hwell:crushing_block"
+    	},
+ 		{
+            "type": "crafting",
+			"title": "Heavy Shears",
+			"text": "A worse version of the Shears.",
+			"recipe": "hwell:heavy_shears"			
+        },
+    	{	
+        	"type": "spotlight",
+            "title": "Empty Rod",
+            "item": "hwell:empty_rod",
+            "link_recipe": true,
+            "text": "Hold this rod in your hand and right click to draw some mysterious essense from yourself. $(br2) Try holding blaze powder, or mysterious dust in your other hand."
+        },
+ 		{
+            "type": "crafting",
+			"title": " ",
+			"recipe": "hwell:empty_rod"			
+        }
+    ]
+}

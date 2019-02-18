@@ -1,13 +1,22 @@
 {
-    "variants": {
-		"type=core_base": { "model": "hwell:core_heat" },
-		"type=core_ca": { "model": "hwell:core_heat_ca" },
-		"type=core_c": { "model": "hwell:core_heat_c" },
-		"type=core_au": { "model": "hwell:core_heat_au" },
-		"type=core_fe": { "model": "hwell:core_heat_fe" },
-		"type=core_h": { "model": "hwell:core_heat_h" },
-		"type=core_n": { "model": "hwell:core_heat_n" },
-		"type=core_p": { "model": "hwell:core_heat_p" },
-		"type=core_o": { "model": "hwell:core_heat_o" }
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "texture": "hwell:blocks/core_heat"
+    },
+    "model": "hwell:core_heat"
+  },
+  "variants": {
+    "type": {
+      "core_base": { },
+      "core_ca": { "submodel": "hwell:core_sharded_ca"  },
+      "core_c":  { "submodel": "hwell:core_sharded_c"  },
+      "core_au": { "submodel": "hwell:core_sharded_au"  },
+      "core_fe": { "submodel": "hwell:core_sharded_fe"  },
+      "core_o":  { "submodel": "hwell:core_sharded_o"  },
+      "core_p":  { "submodel": "hwell:core_sharded_p"  },
+      "core_n":  { "submodel": "hwell:core_sharded_n"  },
+      "core_h":  { "submodel": "hwell:core_sharded_h" }
     }
+  }
 }
