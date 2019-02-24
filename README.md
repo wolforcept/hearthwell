@@ -1,6 +1,6 @@
 # Hearth Well
 
-[![Hearth Well]](https://wolforcept.github.io/hearthwell/docs/everything.jpg)](https://wolforcept.github.io/hearthwell/)
+[![Hearth Well](https://wolforcept.github.io/hearthwell/docs/everything.jpg)](https://wolforcept.github.io/hearthwell/)
 
 ##### A minecraft mod about never leaving your base.
 Through many new crafting mechanics, a progression system, and the building of machines and multiblocks, everything will be available!
