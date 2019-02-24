@@ -10,6 +10,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 // @Config.LangKey("hwell.config.title")
 public class HwellConfig {
 
+	@Config.Comment({ "Are the recipes config able? (default: false)" })
+	public static boolean customRecipesEnabled = false;
+
 	@Config.Comment({ "Where the base recipes file is located (default: config/hwell_recipes.json)" })
 	public static String recipeFileLocation = "config/hwell_recipes.json";
 
@@ -21,7 +24,14 @@ public class HwellConfig {
 			+ "This should always be false except for debugging (default: false)" })
 	public static boolean isAutomaticMultiblocks = false;
 
+	@Config.Comment({ "Allow Entities to travel to the nether (Players, mobs and animals, items, etc) (default: false)" })
+	public static boolean allowEntitiesToTravelToTheNether = false;
+
 	// ----------------------------------------
+
+	// Setter
+	@Config.Comment({ "Setter Base Range (default: 4)" })
+	public static int setterBaseRange = 4;
 
 	// PULLER
 	@Config.Comment({ "Puller Energy Consumption per Operation (default: 100)" })
@@ -68,6 +78,12 @@ public class HwellConfig {
 	@Config.Comment({ "Range of Mini Gravity Block? (default: 1)" })
 	@Config.RangeInt(min = 1, max = 16)
 	public static int gravityBlockDistanceMini = 1;
+
+	// BOXER
+	@Config.Comment({ "Number of boxes a boxer spawns (default: 32)" })
+	@Config.RangeInt(min = 1, max = 64)
+	public static int nrOfBoxesSpawned = 32;
+
 	// ----------------------------------------
 
 	// TUBES
