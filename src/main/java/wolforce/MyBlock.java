@@ -13,8 +13,7 @@ public class MyBlock extends Block {
 
 	public MyBlock(String name, Material mat, boolean tickRandomly) {
 		super(mat);
-		setUnlocalizedName(name);
-		setRegistryName(name);
+		Util.setReg(this, name);
 		setTickRandomly(tickRandomly);
 	}
 

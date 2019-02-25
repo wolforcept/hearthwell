@@ -26,8 +26,7 @@ public class BlockPickerHolder extends Block implements ITileEntityProvider {
 
 	public BlockPickerHolder(String name) {
 		super(Material.WOOD);
-		setUnlocalizedName(name);
-		setRegistryName(name);
+		Util.setReg(this, name);
 		setHardness(2);
 		setHarvestLevel("pickaxe", -1);
 	}
@@ -35,12 +34,14 @@ public class BlockPickerHolder extends Block implements ITileEntityProvider {
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side,
 			float hitX, float hitY, float hitZ) {
-		if (world.isRemote)
-			return true;
+
+		if (world.isRemote || hand != EnumHand.MAIN_HAND)
+			return false;
+
 		TilePickerHolder tile = (TilePickerHolder) world.getTileEntity(pos);
 		ItemStack stackHeld = player.getHeldItem(hand);
 
-		if (stackHeld.equals(ItemStack.EMPTY) && !tile.isEmpty() && !player.isSneaking()) {
+		if (!Util.isValid(stackHeld) && !tile.isEmpty() && !player.isSneaking()) {
 			// has nothing in hand, takes the first picker
 			player.setHeldItem(hand, tile.takeNext(0));
 			tile.markDirty();
@@ -52,6 +53,7 @@ public class BlockPickerHolder extends Block implements ITileEntityProvider {
 			return false;
 
 		if (player.isSneaking()) {
+
 			// sneaking = JUST INSERT
 			if (tile.canInsert(stackHeld)) {
 				tile.insert(stackHeld);
@@ -59,9 +61,11 @@ public class BlockPickerHolder extends Block implements ITileEntityProvider {
 				tile.markDirty();
 				return true;
 			}
+
 		} else {
 			// not sneaking = SWAP WITH THE NEXT
 			if (tile.canInsert(stackHeld) && !tile.isEmpty()) {
+
 				player.setHeldItem(hand, tile.swap(stackHeld));
 				tile.markDirty();
 				return true;

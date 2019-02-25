@@ -28,6 +28,11 @@ public class JeiIntegration implements IModPlugin {
 		reg.addRecipeCategories(new JeiCatCoring(helpers, Main.core_heat));
 		reg.addRecipeCategories(new JeiCatCoring(helpers, Main.core_green));
 		reg.addRecipeCategories(new JeiCatCoring(helpers, Main.core_sentient));
+		for (Entry<String, BlockCore> entry : Main.custom_cores.entrySet()) {
+			BlockCore core = entry.getValue();
+			reg.addRecipeCategories(new JeiCatCoring(helpers, core));
+		}
+
 		reg.addRecipeCategories(new JeiCatCrushing<>(helpers));
 		reg.addRecipeCategories(new JeiCatGrinding<>(helpers));
 		reg.addRecipeCategories(new JeiCatSeparating<>(helpers));
@@ -46,11 +51,11 @@ public class JeiIntegration implements IModPlugin {
 		reg.addRecipes(JeiCatCoring.getAllRecipes(Main.core_heat), JeiCatCoring.UID_CORING_HEAT);
 		reg.addRecipes(JeiCatCoring.getAllRecipes(Main.core_green), JeiCatCoring.UID_CORING_GREEN);
 		reg.addRecipes(JeiCatCoring.getAllRecipes(Main.core_sentient), JeiCatCoring.UID_CORING_SENTIENT);
-
 		for (Entry<String, BlockCore> entry : Main.custom_cores.entrySet()) {
 			BlockCore core = entry.getValue();
-			reg.addRecipes(JeiCatCoring.getAllRecipes(core), Hwell.MODID + ".coring." + core.getRegistryName().getResourcePath());
+			reg.addRecipes(JeiCatCoring.getAllRecipes(core), JeiCatCoring.makeCustomCoreUID(core));
 		}
+
 		reg.addRecipes(JeiCatCrushing.getAllRecipes(), JeiCatCrushing.UID_CRUSHING);
 		reg.addRecipes(JeiCatGrinding.getAllRecipes(), JeiCatGrinding.UID_GRINDING);
 		reg.addRecipes(JeiCatSeparating.getAllRecipes(), JeiCatSeparating.UID_SEPARATOR);

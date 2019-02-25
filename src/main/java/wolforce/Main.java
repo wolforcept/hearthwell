@@ -13,8 +13,6 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -23,9 +21,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -37,6 +33,7 @@ import wolforce.blocks.BlockAntiGravity;
 import wolforce.blocks.BlockBox;
 import wolforce.blocks.BlockBoxer;
 import wolforce.blocks.BlockBurstSeed;
+import wolforce.blocks.BlockCharger;
 import wolforce.blocks.BlockCore;
 import wolforce.blocks.BlockCrushing;
 import wolforce.blocks.BlockDust;
@@ -60,8 +57,8 @@ import wolforce.blocks.BlockPrecisionGrinderEmpty;
 import wolforce.blocks.BlockProducer;
 import wolforce.blocks.BlockPuller;
 import wolforce.blocks.BlockSeparator;
+import wolforce.blocks.BlockSetter;
 import wolforce.blocks.BlockSlabLamp;
-import wolforce.blocks.BlockStatue;
 import wolforce.blocks.BlockStoneDust;
 import wolforce.blocks.BlockTube;
 import wolforce.blocks.simplevariants.MyGlass;
@@ -77,7 +74,9 @@ import wolforce.items.ItemLockedLight;
 import wolforce.items.ItemLoot;
 import wolforce.items.ItemMystDust;
 import wolforce.items.ItemMystFertilizer;
+import wolforce.items.ItemPowerCrystal;
 import wolforce.items.ItemRawSoulsteel;
+import wolforce.items.ItemRepairingPaste;
 import wolforce.items.ItemSeedOfLife;
 import wolforce.items.ItemShard;
 import wolforce.items.tools.ItemDisplacer;
@@ -88,7 +87,6 @@ import wolforce.items.tools.MyDagger;
 import wolforce.items.tools.MyPickaxe;
 import wolforce.items.tools.MyShovel;
 import wolforce.items.tools.MySword;
-import wolforce.recipes.RecipeRepairingPaste;
 import wolforce.registry.RegisterRecipes;
 
 public class Main {
@@ -136,6 +134,7 @@ public class Main {
 	public static ItemGrindingWheel grinding_wheel_iron, grinding_wheel_diamond, grinding_wheel_crystal;
 	public static ItemLoot loot_base, loot_blaze, loot_creeper, loot_enderman, loot_ghast, loot_shulker, loot_skeleton, loot_slime,
 			loot_spider, loot_witch, loot_wither, loot_zombie;
+	public static ItemPowerCrystal power_crystal;
 
 	//
 	//
@@ -157,7 +156,7 @@ public class Main {
 	public static Block raw_asul_block, asul_block;
 	public static Block asul_machine_case;
 	public static Block light_collector;
-	public static Block stabiliser;
+	public static Block stabiliser_light, stabiliser, stabiliser_heavy;
 	public static Block picking_table, picker_holder;
 	public static Block white_block, moonstone, moonstone_bricks, citrinic_stone, citrinic_sand, onyx, smooth_onyx, azurite,
 			smooth_azurite, scorch_grit, scorch_glass, fullgrass_block, metaldiamond_block;
@@ -167,6 +166,7 @@ public class Main {
 	public static Block mystic_iron_block, soulsteel_block;
 	public static Block mutation_paste_block;
 	public static BlockNourisher nourisher;
+	public static BlockSetter setter;
 	public static BlockCore core_stone, core_heat, core_green, core_sentient;
 	public static Block slab_lamp;
 	public static Block furnace_tube, heat_furnace;
@@ -180,6 +180,7 @@ public class Main {
 	public static Block separator;
 	public static BlockProducer producer;
 	public static BlockPuller puller;
+	public static BlockCharger charger;
 
 	//
 
@@ -225,6 +226,11 @@ public class Main {
 	//
 	//
 	//
+	//
+	//
+	//
+	//
+	//
 
 	public static void preInit(FMLPreInitializationEvent event) {
 
@@ -242,6 +248,7 @@ public class Main {
 		blocks.add(quartz_ore);
 		glowstone_ore = new MyBlock("glowstone_ore", Material.ROCK);
 		blocks.add(glowstone_ore);
+
 		// LootTableList.ENTITIES_BLAZE, //
 		// LootTableList.ENTITIES_CREEPER, //
 		// LootTableList.ENTITIES_ENDERMAN, //
@@ -253,7 +260,6 @@ public class Main {
 		// LootTableList.ENTITIES_WITCH, //
 		// LootTableList.ENTITIES_WITHER_SKELETON, //
 		// LootTableList.ENTITIES_ZOMBIE,//
-
 		loot_base = new ItemLoot("loot_base", -1, "Produced in a Loot Kit Producer.");
 		items.add(loot_base);
 		loot_blaze = new ItemLoot("loot_blaze", 0);
@@ -482,11 +488,11 @@ public class Main {
 				Material.ROCK, Blocks.PRISMARINE, "pickaxe", SoundType.STONE);
 		blocks.add(burst_seed_prismarine);
 		burst_seed_crystal = new BlockBurstSeed("burst_seed_crystal", //
-				Material.ROCK, new ItemStack(crystal), "pickaxe", SoundType.GLASS);
+				Material.ROCK, crystal_block, "pickaxe", SoundType.GLASS);
 		blocks.add(burst_seed_crystal);
 
-		obsidian_displacer = new ItemDisplacer("obsidian_displacer", false, "Pops obsidian and glass right off",
-				"at the expense of some hunger");
+		obsidian_displacer = new ItemDisplacer("obsidian_displacer", false, "Pops obsidian right off",
+				"at the expense of some hunger.", "Also works on glass and ice.");
 		items.add(obsidian_displacer);
 		empowered_displacer = new ItemDisplacer("empowered_displacer", true, "Pops almost everything right off!");
 		items.add(empowered_displacer);
@@ -494,9 +500,17 @@ public class Main {
 		blocks.add(freezer);
 		nourisher = new BlockNourisher("nourisher");
 		blocks.add(nourisher);
+		setter = new BlockSetter("setter");
+		blocks.add(setter);
 
 		generator_heat = new BlockGeneratorHeat("generator_heat");
 		blocks.add(generator_heat);
+
+		power_crystal = new ItemPowerCrystal("power_crystal");
+		items.add(power_crystal);
+
+		charger = new BlockCharger("charger");
+		blocks.add(charger);
 
 		// TIER 2
 
@@ -628,31 +642,8 @@ public class Main {
 		items.add(mutation_paste);
 		mutation_paste_block = new MyBlock("mutation_paste_block", Material.GRASS).setHardness(1f).setResistance(1f);
 		blocks.add(mutation_paste_block);
-		repairing_paste = new MyItem("repairing_paste", new String[] {
-				"Place it on your left hand to slowly repair items on your right hand.", "Can repair up to 500 damage." }) {
-			@Override
-			public void onUpdate(ItemStack paste, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-				super.onUpdate(paste, worldIn, entityIn, itemSlot, isSelected);
-				if (worldIn.isRemote)
-					return;
-				if (entityIn instanceof EntityPlayer
-						&& ((EntityPlayer) entityIn).getHeldItemOffhand().getItem().equals(Main.repairing_paste)) {
-					EntityPlayer player = (EntityPlayer) entityIn;
-					if (player.getHeldItem(EnumHand.OFF_HAND).getItem().equals(Main.repairing_paste)) {
-						ItemStack stack = player.getHeldItem(EnumHand.MAIN_HAND);
-						if (timeConstraint(player) && stack.isItemDamaged() && RecipeRepairingPaste.isRepairable(stack.getItem())) {
-							paste.damageItem(1, player);
-							stack.damageItem(-1, player);
-						}
-					}
-				}
-			}
-
-			private boolean timeConstraint(EntityPlayer player) {
-				String str = (player.getEntityWorld().getTotalWorldTime() + "");
-				return str.charAt(str.length() - 2) == '0';
-			}
-		}.setMaxStackSize(1).setMaxDamage(500);
+		repairing_paste = new ItemRepairingPaste("repairing_paste", new String[] {
+				"Place it on your left hand to slowly repair items on your right hand.", "Can repair up to 500 damage." });
 		items.add(repairing_paste);
 		raw_repairing_paste = new MyItem("raw_repairing_paste");
 		items.add(raw_repairing_paste);
@@ -684,8 +675,12 @@ public class Main {
 				soulsteel_ingot, 20);
 		items.add(soulsteel_boots);
 
+		stabiliser_light = new MyBlock("stabiliser_light", Material.ROCK).setHarvest("pickaxe", -1).setHardness(1).setResistance(1);
+		blocks.add(stabiliser_light);
 		stabiliser = new MyBlock("stabiliser", Material.ROCK).setHarvest("pickaxe", -1).setHardness(1).setResistance(1);
 		blocks.add(stabiliser);
+		stabiliser_heavy = new MyBlock("stabiliser_heavy", Material.ROCK).setHarvest("pickaxe", -1).setHardness(1).setResistance(1);
+		blocks.add(stabiliser_heavy);
 
 		separator = new BlockSeparator("separator");
 		blocks.add(separator);
@@ -808,6 +803,11 @@ public class Main {
 		for (Item item : items) {
 			item.setCreativeTab(creativeTab);
 		}
+
+		//
+
+		//
+
 	}
 
 	/*
@@ -831,6 +831,7 @@ public class Main {
 				Class clazz = ((ITileEntityProvider) block).createNewTileEntity(null, 0).getClass();
 				if (!loaded.contains(clazz)) {
 					GameRegistry.registerTileEntity(clazz, new ResourceLocation(Hwell.MODID + ":tile_" + block.getUnlocalizedName()));
+					System.out.println("registered tile entity tile_" + block.getUnlocalizedName());
 					loaded.add(clazz);
 				}
 			}

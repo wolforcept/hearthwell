@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import wolforce.Main;
 import wolforce.MyBlock;
 import wolforce.UnjoinableEntityItem;
+import wolforce.Util;
 
 public class BlockBurstSeed extends MyBlock {
 
@@ -27,12 +28,12 @@ public class BlockBurstSeed extends MyBlock {
 	private SoundType sound;
 
 	public BlockBurstSeed(String name, Material mat, Block block, String tool, SoundType sound) {
-		this(name, mat, new ItemStack(block), tool, sound);
-	}
-
-	public BlockBurstSeed(String name, Material mat, ItemStack item, String tool, SoundType sound) {
+		// this(name, mat, new ItemStack(block), tool, sound);
+		// }
+		// public BlockBurstSeed(String name, Material mat, ItemStack item, String tool,
+		// SoundType sound) {
 		super(name, mat, true);
-		this.itemStack = item;
+		this.itemStack = new ItemStack(block);
 		this.sound = sound;
 		setResistance(2f);
 		setHardness(2f);
@@ -56,6 +57,8 @@ public class BlockBurstSeed extends MyBlock {
 
 		world.setBlockToAir(pos);
 		int n = (int) (Math.random() * 32) + 32;
+		if (Util.equalExceptAmount(itemStack, new ItemStack(Main.crystal_block)))
+			n = (int) (Math.random() * 10) + 10;
 		for (int i = 0; i < n; i++) {
 			Entity newEntity = new UnjoinableEntityItem(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(itemStack.getItem()),
 					40);

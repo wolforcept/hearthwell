@@ -2,6 +2,7 @@
     "name": "Amplifying Tube Mechanic",
     "icon": "hwell:furnace_tube",
     "category": "crafting_mechanics",
+    "sortnum": 2,
     "pages": [
         {
             "type": "text",
@@ -13,7 +14,24 @@
 	        "input2": "minecraft:cobblestone",
 	        "output": "minecraft:lava_bucket",
 	        "text": "Any type of stone, cobblestone or sandstone can be turned into lava."
-        },        
+        },    
+        {
+            
+            "type": "multiblock",
+            "name": "Making Lava",
+            "multiblock": {
+                "pattern": [
+                    [ "A"],
+                    [ "A"],
+                    [ "0"]
+                ],
+                "mapping": {
+                    "A": "hwell:furnace_tube",
+                    "0": "minecraft:cobblestone"
+                }
+            }
+        
+        },    
         { 	"type": "tube",
 	        "name": "Making Water",
 	        "input1": "hwell:furnace_tube",

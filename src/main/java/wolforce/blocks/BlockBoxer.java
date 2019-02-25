@@ -6,6 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import wolforce.HwellConfig;
+import wolforce.Util;
 import wolforce.blocks.base.BlockEnergyConsumer;
 import wolforce.blocks.tile.TileBoxer;
 
@@ -13,8 +14,7 @@ public class BlockBoxer extends Block implements ITileEntityProvider, BlockEnerg
 
 	public BlockBoxer(String name) {
 		super(Material.ROCK);
-		setUnlocalizedName(name);
-		setRegistryName(name);
+		Util.setReg(this, name);
 		setHardness(2);
 		setHarvestLevel("pickaxe", -1);
 	}
@@ -28,7 +28,7 @@ public class BlockBoxer extends Block implements ITileEntityProvider, BlockEnerg
 
 	@Override
 	public int getEnergyConsumption() {
-		return HwellConfig.energyConsumptionGrinder;
+		return HwellConfig.grinderConsumption;
 	}
 
 	@Override

@@ -1,0 +1,36 @@
+{
+    "name": "Block Puller",
+    "icon": "hwell:puller",
+    "category": "crafting_mechanics",
+    "sortnum": 16,
+    "pages": [
+		{
+            "type": "crafting",
+            "title": "Block Puller",            
+			"text": "A multiblock structure that pulls ores from the... well, from nothing really. The higher you build it, the faster it pulls. Requires 100 Energy per Operation.",
+            "recipe": "hwell:puller"
+        },
+		{
+            "type": "multiblock",
+            "name": "Puller",
+            "multiblock": {
+                "pattern": [
+					[ " C ", "   ", " C "],
+					[ " A ", "   ", " A "],
+					[ "PH ", "PPS", "PH "],
+					[ "H_H", "_L0", "H_H"]
+                ],
+                "mapping": {
+                    "H": "hwell:heat_block",
+					"S": "hwell:separator",
+					"A": "hwell:furnace_tube",
+					"C": "hwell:light_collector",
+                    "P": "hwell:heavy_protection_block",
+					"0": "hwell:heavy_protection_block",
+                    "L": "hwell:fluid_liquid_souls"
+                }
+            }
+		}
+
+    ]
+}

@@ -5,7 +5,7 @@
 	"ABA",
     " A " ],
   "key": {
-    "A": [{ "item": "minecraft:prismarine" }],
+    "A": [{ "item": "minecraft:prismarine", "data": 0 }],
 	"B": [{ "item": "hwell:shard_o" }]
   },
   "result": {

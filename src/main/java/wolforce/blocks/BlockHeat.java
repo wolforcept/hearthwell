@@ -19,8 +19,7 @@ public class BlockHeat extends Block {
 
 	public BlockHeat(String name) {
 		super(Material.CLAY);
-		setUnlocalizedName(name);
-		setRegistryName(name);
+		Util.setReg(this, name);
 		setHardness(2);
 		setResistance(.5f);
 		setHarvestLevel("pickaxe", -1);

@@ -13,8 +13,7 @@ public class MyItem extends Item {
 	private String[] lore;
 
 	public MyItem(String name, String... lore) {
-		setUnlocalizedName(name);
-		setRegistryName(name);
+		Util.setReg(this, name);
 		// setMaxStackSize(64);
 		this.lore = lore;
 	}

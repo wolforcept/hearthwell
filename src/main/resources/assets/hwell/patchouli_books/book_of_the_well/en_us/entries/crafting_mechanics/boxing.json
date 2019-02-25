@@ -1,0 +1,20 @@
+{
+    "name": "Boxing",
+    "icon": "hwell:boxer",
+    "category": "crafting_mechanics",
+    "sortnum": 24,
+    "pages": [
+        { 	"type": "crafting",
+	        "name": "Boxing",
+            "recipe": "hwell:boxer",
+            "text": "The Block Boxer creates a variety of decorative blocks, consuming the block placed on top of it and 100 energy per operation. Requires redstone."
+        }, 
+        {   
+            "type": "spotlight",
+            "title": "Boxes",
+            "item": "hwell:diamond_block_box",
+            "link_recipe": true,
+            "text": "One block returns a stack of decorative boxes."
+        }
+    ]
+}

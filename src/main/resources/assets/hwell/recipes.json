@@ -610,6 +610,12 @@
 			"possible_outputs": [
 				{ "out": { "item": "minecraft:stick", "count": 2} }
 			]
+		},
+		{
+			"input": { "item": "hwell:locked_light" },
+			"possible_outputs": [
+				{ "out": { "item": "minecraft:glowstone_dust", "count": 1}, "probability": 0.5 }
+			]
 		}
 	]
 	

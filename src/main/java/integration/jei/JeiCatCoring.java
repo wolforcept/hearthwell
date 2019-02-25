@@ -33,6 +33,10 @@ public class JeiCatCoring<T extends JeiRecCoring> implements IRecipeCategory<Jei
 	public static final String UID_CORING_GREEN = Hwell.MODID + ".coring.green";
 	public static final String UID_CORING_SENTIENT = Hwell.MODID + ".coring.sentient";
 
+	public static String makeCustomCoreUID(BlockCore core) {
+		return Hwell.MODID + ".coring." + core.getRegistryName().getResourcePath();
+	}
+
 	static final ResourceLocation TEX = Util.res("textures/gui/coring.png");
 	static IDrawableStatic back;
 
@@ -56,7 +60,13 @@ public class JeiCatCoring<T extends JeiRecCoring> implements IRecipeCategory<Jei
 			return UID_CORING_HEAT;
 		if (core == Main.core_green)
 			return UID_CORING_GREEN;
-		return UID_CORING_SENTIENT;
+		if (core == Main.core_sentient)
+			return UID_CORING_SENTIENT;
+		for (Entry<String, BlockCore> entry : Main.custom_cores.entrySet()) {
+			if (entry.getValue().equals(core))
+				return makeCustomCoreUID(core);
+		}
+		return "";
 	}
 
 	@Override

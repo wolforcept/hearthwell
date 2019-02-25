@@ -18,8 +18,7 @@ public class MyArmor extends ItemArmor {
 		this.fileName = fileName;
 		this.enchantability = enchantability;
 		this.repairIngot = new ItemStack(repairIngot);
-		setRegistryName(name);
-		setUnlocalizedName(name);
+		Util.setReg(this, name);
 		setMaxStackSize(1);
 	}
 

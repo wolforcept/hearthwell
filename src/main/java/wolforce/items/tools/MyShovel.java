@@ -12,8 +12,7 @@ public class MyShovel extends ItemSpade {
 	public MyShovel(String name, ToolMaterial mat, Item repairIngot) {
 		super(mat);
 		this.repairIngot = new ItemStack(repairIngot);
-		setRegistryName(name);
-		setUnlocalizedName(name);
+		Util.setReg(this, name);
 		setMaxStackSize(1);
 	}
 

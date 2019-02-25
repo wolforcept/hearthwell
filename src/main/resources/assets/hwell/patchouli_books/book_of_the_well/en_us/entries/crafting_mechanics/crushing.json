@@ -2,6 +2,7 @@
     "name": "Crushing Mechanic",
     "icon": "hwell:crushing_block",
     "category": "crafting_mechanics",
+    "sortnum": 0,
     "pages": [
         {
             "type": "text",
@@ -24,7 +25,63 @@
 			"input2": "hwell:crystal",
 			"output": "hwell:shard_c",
 			"text":"Crushing a crystal results in a random shard."
+        },
+        {
+            "type": "crush",
+            "name": "Myst Dust",
+            "recipe": "hwell:myst_dust",
+            "input1": "hwell:crushing_block",
+            "input2": "hwell:myst_rod",
+            "output": "hwell:myst_dust",
+            "text":"The crushing block can create mysterious dust from a filled Myst Rod."
+        },        
+        {
+            "type": "crush",
+            "name": "Soul Dust",
+            "recipe": "hwell:soul_dust",
+            "input1": "hwell:crushing_block",
+            "input2": "minecraft:soul_sand",
+            "output": "hwell:soul_dust",
+            "text":"Soul Dust is created from crushed Soul Sand, and used in recipes."
+        },
+            {
+            "type": "crush",
+            "name": "Salt",
+            "recipe": "hwell:salt",
+            "input1": "hwell:crushing_block",
+            "input2": "hwell:citrinic_sand",
+            "output": "hwell:salt",
+            "text":"White Brackish Stone is salty."
+        },            
+        {
+            "type": "crush",
+            "name": "Fuel Dust",
+            "recipe": "hwell:fuel_dust",
+            "input1": "hwell:crushing_block",
+            "input2": "hwell:heavy_nugget",
+            "output": "hwell:fuel_dust",
+            "text":"Fuel Dust can be used to smelt 4 items in a furnace."
+        },
+        {
+            "type": "crush",
+            "name": "Seeds",
+            "recipe": "minecraft:wheat_seeds",
+            "input1": "hwell:crushing_block",
+            "input2": "minecraft:tallgrass",
+            "output": "minecraft:wheat_seeds",
+            "text":"A seedy place?"
+        },        
+        {
+            "type": "crush",
+            "name": "Flint",
+            "recipe": "minecraft:flint",
+            "input1": "hwell:crushing_block",
+            "input2": "minecraft:gravel",
+            "output": "minecraft:flint",
+            "text":"A way to obtain flint through crushing."
         }
+            
+            
             
     ]
 }

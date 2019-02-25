@@ -12,8 +12,7 @@ public class MyAxe extends ItemAxe {
 	public MyAxe(String name, ToolMaterial mat, Item repairIngot, float attackSpeed) {
 		super(mat, mat.getAttackDamage() + 3, attackSpeed);
 		this.repairIngot = new ItemStack(repairIngot);
-		setRegistryName(name);
-		setUnlocalizedName(name);
+		Util.setReg(this, name);
 		setMaxStackSize(1);
 	}
 

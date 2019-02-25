@@ -25,7 +25,7 @@ public class BlockSpawnerBase extends BlockMachineBase implements ITileEntityPro
 
 	@Override
 	public int getEnergyConsumption() {
-		return HwellConfig.energyConsumptionGrinder;
+		return HwellConfig.grinderConsumption;
 	}
 
 	@Override

@@ -11,14 +11,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import wolforce.Util;
 import wolforce.recipes.RecipeCrushing;
 
 public class BlockCrushing extends BlockFalling {
 
 	public BlockCrushing(String name) {
 		super();
-		setUnlocalizedName(name);
-		setRegistryName(name);
+		Util.setReg(this, name);
 		setSoundType(SoundType.STONE);
 		setHardness(1f);
 		setHarvestLevel("pickaxe", -1);

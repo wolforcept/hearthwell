@@ -2,13 +2,16 @@ package wolforce.blocks.simplevariants;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
+import wolforce.Util;
 
 public class MyStairs extends BlockStairs {
 
 	public MyStairs(Block fullblock) {
 		super(fullblock.getDefaultState());
-		setUnlocalizedName(fullblock.getRegistryName().getResourcePath() + "_stairs");
-		setRegistryName(fullblock.getRegistryName().getResourcePath() + "_stairs");
+
+		String name = fullblock.getRegistryName().getResourcePath() + "_stairs";
+		Util.setReg(this, name);
+
 		this.useNeighborBrightness = true;
 		this.fullBlock = false;
 		this.setLightOpacity(255);

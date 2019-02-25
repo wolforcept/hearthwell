@@ -1,0 +1,46 @@
+{
+    "name": "Precision Grinding",
+    "icon": "hwell:precision_grinder_empty",
+    "category": "crafting_mechanics",
+    "sortnum": 8,
+    "pages": [
+        {
+            "type": "text",
+            "text": "A multiblock structure that allows you to grind your materials into other ones. Requires a Grinding Wheel to be inserted, but not all operations are available for every grinding wheel. Be careful not to grind big stacks of materials or the grinder can jam and the grinding wheel can jump out."
+        },
+        { 	"type": "crafting",
+	        "name": "Precision Grinding",
+            "recipe": "hwell:precision_grinder_empty",
+	        "text": "The Precision Grinder can be used as an early form of resource multiplication as it will slightly increase the yield of mined ores. Requires 100 Energy per Operation."
+        },    
+        {
+            
+            "type": "multiblock",
+            "name": "Precision Grinder",
+            "multiblock": {
+                "pattern": [
+                    [ " "],
+                    [ " "],
+                    [ "0"]
+                ],
+                "mapping": {
+                    "A": "hwell:furnace_tube",
+                    "0": "minecraft:cobblestone"
+                }
+            }
+        
+        },    
+        {   "type": "crafting",
+            "name": "Grinding Wheels",
+            "recipe": "hwell:grinding_wheel_iron",
+            "recipe2": "hwell:grinding_wheel_diamond",
+            "text": "Precision Grinder Wheels"
+        },
+        {   "type": "crafting",
+            "name": "Grinding Wheels",
+            "recipe": "hwell:grinding_wheel_crystal",
+            "text": "Precision Grinder Wheels. Check JEI for uses, not all operations are available for every grinding wheel"
+        } 
+            
+    ]
+}

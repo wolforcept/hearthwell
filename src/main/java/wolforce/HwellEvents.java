@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -23,9 +24,12 @@ import wolforce.registry.RegisterRecipes;
 @Mod.EventBusSubscriber
 public class HwellEvents {
 
-	// @SubscribeEvent
-	// public static void makeCrystalPassPortals(EntityTravelToDimensionEvent event)
-	// {
+	@SubscribeEvent
+	public static void preventNether(EntityTravelToDimensionEvent event) {
+		if (!HwellConfig.allowEntitiesToTravelToTheNether)
+			event.setCanceled(true);
+	}
+	
 	//
 	// if (!(event.getEntity() instanceof EntityItem))
 	// return;

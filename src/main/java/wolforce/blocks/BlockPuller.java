@@ -6,6 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import wolforce.HwellConfig;
+import wolforce.Util;
 import wolforce.blocks.base.BlockEnergyConsumer;
 import wolforce.blocks.tile.TilePuller;
 
@@ -13,8 +14,7 @@ public class BlockPuller extends Block implements ITileEntityProvider, BlockEner
 
 	public BlockPuller(String name) {
 		super(Material.ROCK);
-		setUnlocalizedName(name);
-		setRegistryName(name);
+		Util.setReg(this, name);
 		setHardness(2);
 		setHarvestLevel("pickaxe", -1);
 	}
@@ -30,7 +30,7 @@ public class BlockPuller extends Block implements ITileEntityProvider, BlockEner
 
 	@Override
 	public int getEnergyConsumption() {
-		return HwellConfig.energyConsumptionPuller;
+		return HwellConfig.pullerConsumption;
 	}
 
 	@Override

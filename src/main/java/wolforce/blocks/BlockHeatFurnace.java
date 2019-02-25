@@ -11,6 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import wolforce.Util;
 import wolforce.blocks.base.BlockWithDescription;
 import wolforce.blocks.tile.TileHeatFurnace;
 
@@ -20,8 +21,7 @@ public class BlockHeatFurnace extends Block implements ITileEntityProvider, Bloc
 
 	public BlockHeatFurnace(String name) {
 		super(Material.IRON);
-		setUnlocalizedName(name);
-		setRegistryName(name);
+		Util.setReg(this, name);
 		setHardness(2);
 		setHarvestLevel("pickaxe", -1);
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));

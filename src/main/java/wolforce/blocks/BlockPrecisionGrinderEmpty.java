@@ -16,6 +16,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import wolforce.Util;
 import wolforce.blocks.base.BlockWithDescription;
 import wolforce.items.ItemGrindingWheel;
 
@@ -25,8 +26,7 @@ public class BlockPrecisionGrinderEmpty extends Block implements BlockWithDescri
 
 	public BlockPrecisionGrinderEmpty(String name) {
 		super(Material.IRON);
-		setUnlocalizedName(name);
-		setRegistryName(name);
+		Util.setReg(this, name);
 		setHardness(2);
 		setHarvestLevel("pickaxe", -1);
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));

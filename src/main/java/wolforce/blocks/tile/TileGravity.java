@@ -16,7 +16,7 @@ public class TileGravity extends TileEntity implements ITickable {
 		if (world.getBlockState(pos).getBlock() == Main.gravity_block || world.getBlockState(pos).getBlock() == Main.gravity_block_mini
 				|| world.isBlockPowered(pos)) {
 			int dist = world.getBlockState(pos).getBlock() == Main.gravity_block_mini ? //
-					HwellConfig.gravityBlockDistanceMini : HwellConfig.gravityBlockDistance;
+					HwellConfig.gravityBlockRangeMini : HwellConfig.gravityBlockRange;
 			List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class,
 					new AxisAlignedBB(pos.add(-dist, -dist, -dist), pos.add(dist + 1, dist + 1, dist + 1)));
 			for (EntityItem entityItem : items) {

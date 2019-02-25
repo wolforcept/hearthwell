@@ -3,12 +3,12 @@ package wolforce.items;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
+import wolforce.Util;
 
 public class ItemHeavyShears extends ItemShears {
 
 	public ItemHeavyShears(String name) {
-		setUnlocalizedName(name);
-		setRegistryName(name);
+		Util.setReg(this, name);
 		setMaxStackSize(1);
         setMaxDamage(120);
 	}

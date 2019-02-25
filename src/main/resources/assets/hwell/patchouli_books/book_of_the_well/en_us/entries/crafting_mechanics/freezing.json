@@ -1,0 +1,29 @@
+{
+    "name": "Freezing",
+    "icon": "hwell:freezer",
+    "category": "crafting_mechanics",
+    "sortnum": 10,
+    "pages": [
+        {
+            "type": "text",
+            "text": "The Freezer. Will freeze water into snow or ice, and lava into obsidian. Has 5 radius and consumes 30 energy per operation."
+        },
+        { 	"type": "crafting",
+	        "name": "Freezer",
+            "recipe": "hwell:freezer",
+	        "text": ""
+        },    
+        {   "type": "crafting",
+            "name": "Grinding Wheels",
+            "recipe": "hwell:grinding_wheel_iron",
+            "recipe2": "hwell:grinding_wheel_diamond",
+            "text": "Precision Grinder Wheels"
+        },
+        {   "type": "crafting",
+            "name": "Grinding Wheels",
+            "recipe": "hwell:grinding_wheel_crystal",
+            "text": "Precision Grinder Wheels. Check JEI for uses, not all operations are available for every grinding wheel"
+        } 
+            
+    ]
+}

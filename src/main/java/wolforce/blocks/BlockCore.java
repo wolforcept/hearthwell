@@ -1,28 +1,22 @@
 package wolforce.blocks;
 
-import org.lwjgl.util.Color;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import wolforce.Main;
+import wolforce.Util;
 import wolforce.blocks.tile.TileCore;
 import wolforce.recipes.RecipeCoring;
 
@@ -30,8 +24,7 @@ public class BlockCore extends Block implements ITileEntityProvider {
 
 	public static PropertyEnum TYPE = PropertyEnum.create("type", CoreType.class);
 	private boolean isToRegister;
-	public IBlockColor coreColor;
-	public IItemColor coreItemColor;
+	public int color1, color2;
 
 	public BlockCore(String name, boolean isToRegister) {
 		this(name, isToRegister, null, null);
@@ -40,35 +33,14 @@ public class BlockCore extends Block implements ITileEntityProvider {
 	public BlockCore(String name, boolean isToRegister, String colorString1, String colorString2) {
 		super(Material.CLAY);
 		this.isToRegister = isToRegister;
-		setUnlocalizedName(name);
-		setRegistryName(name);
+		Util.setReg(this, name);
 		setHardness(2);
 		setHarvestLevel("pickaxe", -1);
 		setDefaultState(blockState.getBaseState().withProperty(TYPE, CoreType.core_base));
 
 		if (colorString1 != null && colorString2 != null) {
-			final int color1 = Integer.parseInt(colorString1, 16);
-			final int color2 = Integer.parseInt(colorString2, 16);
-			this.coreColor = new IBlockColor() {
-
-				@Override
-				public int colorMultiplier(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) {
-					if (tintIndex == 0)
-						return color1;
-					else
-						return color2;
-				}
-			};
-			coreItemColor = new IItemColor() {
-				
-				@Override
-				public int colorMultiplier(ItemStack stack, int tintIndex) {
-					if (tintIndex == 0)
-						return color1;
-					else
-						return color2;
-				}
-			};
+			color1 = Integer.parseInt(colorString1, 16);
+			color2 = Integer.parseInt(colorString2, 16);
 		}
 	}
 

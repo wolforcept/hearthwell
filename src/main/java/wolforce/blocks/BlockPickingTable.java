@@ -27,8 +27,7 @@ public class BlockPickingTable extends Block {
 
 	public BlockPickingTable(String name) {
 		super(Material.WOOD);
-		setUnlocalizedName(name);
-		setRegistryName(name);
+		Util.setReg(this, name);
 		setHardness(2);
 		setHarvestLevel("axe", -1);
 		setDefaultState(getDefaultState().withProperty(FILLING, 0));

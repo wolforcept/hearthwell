@@ -53,6 +53,10 @@ public class Irio {
 		// meta == ((Irio) obj).meta);
 	}
 
+	public boolean equals(ItemStack stack) {
+		return equals(new Irio(stack));
+	}
+
 	@Override
 	public int hashCode() {
 		if (meta == -1)
@@ -61,7 +65,9 @@ public class Irio {
 	}
 
 	public ItemStack stack() {
-		return new ItemStack(item, 1, meta);
+		if (meta >= 0)
+			return new ItemStack(item, 1, meta);
+		return new ItemStack(item);
 	}
 
 	/**

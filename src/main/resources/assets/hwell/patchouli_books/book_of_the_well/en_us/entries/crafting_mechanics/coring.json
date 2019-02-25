@@ -2,6 +2,7 @@
     "name": "Coring Mechanic",
     "icon": "hwell:core_stone",
     "category": "crafting_mechanics",
+    "sortnum": 4,
     "pages": [
         {
             "type": "text",
@@ -10,7 +11,7 @@
         { 
 	        "type": "core",
 	        "name": "Coring 101",
-	        "input1": "minecraft:stone",
+	        "input1": "hwell:core_stone",
 	        "input2": "hwell:crystal",
 	        "input3": "minecraft:grass",
 	        "output": "minecraft:sand",

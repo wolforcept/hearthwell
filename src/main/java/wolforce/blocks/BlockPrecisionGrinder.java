@@ -10,6 +10,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -36,8 +37,7 @@ public class BlockPrecisionGrinder extends Block implements ITileEntityProvider,
 	public BlockPrecisionGrinder(String name, ItemGrindingWheel grindingWheel) {
 		super(Material.IRON);
 		this.grindingWheel = grindingWheel;
-		setUnlocalizedName(name);
-		setRegistryName(name);
+		Util.setReg(this, name);
 		setHardness(2);
 		setHarvestLevel("pickaxe", -1);
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
@@ -57,11 +57,21 @@ public class BlockPrecisionGrinder extends Block implements ITileEntityProvider,
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
 			EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (!player.isSneaking())
-			return false;
+
 		EnumFacing prevfacing = world.getBlockState(pos).getValue(FACING);
-		world.setBlockState(pos,
-				Main.precision_grinder_empty.getDefaultState().withProperty(BlockPrecisionGrinder.FACING, prevfacing));
+
+		Item held = player.getHeldItem(hand).getItem();
+		IBlockState nextState = Main.precision_grinder_empty.getDefaultState();
+		if (held instanceof ItemGrindingWheel) {
+			if (held == Main.grinding_wheel_crystal)
+				nextState = Main.precision_grinder_crystal.getDefaultState();
+			if (held == Main.grinding_wheel_iron)
+				nextState = Main.precision_grinder_iron.getDefaultState();
+			if (held == Main.grinding_wheel_diamond)
+				nextState = Main.precision_grinder_diamond.getDefaultState();
+			player.setHeldItem(hand, ItemStack.EMPTY);
+		}
+		world.setBlockState(pos, nextState.withProperty(BlockPrecisionGrinder.FACING, prevfacing));
 		if (!world.isRemote)
 			Util.spawnItem(world, pos.offset(facing), new ItemStack(grindingWheel));
 		return true;
@@ -136,7 +146,7 @@ public class BlockPrecisionGrinder extends Block implements ITileEntityProvider,
 
 	@Override
 	public int getEnergyConsumption() {
-		return HwellConfig.energyConsumptionGrinder;
+		return HwellConfig.grinderConsumption;
 	}
 
 	@Override

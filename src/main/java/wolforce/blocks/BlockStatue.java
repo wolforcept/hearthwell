@@ -28,8 +28,7 @@ public class BlockStatue extends Block implements ITileEntityProvider {
 
 	public BlockStatue(String name) {
 		super(Material.WOOD);
-		setUnlocalizedName(name);
-		setRegistryName(name);
+		Util.setReg(this, name);
 		setHardness(2);
 		setHarvestLevel("pickaxe", -1);
 	}

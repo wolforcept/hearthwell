@@ -4,6 +4,7 @@ import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import wolforce.Util;
 
 public class MyLog extends BlockLog {
 
@@ -11,8 +12,7 @@ public class MyLog extends BlockLog {
 		super();
 		this.setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
 
-		setUnlocalizedName(name);
-		setRegistryName(name);
+		Util.setReg(this, name);
 		setHardness(1.8f);
 	}
 

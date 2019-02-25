@@ -51,7 +51,7 @@ public class ItemLoot extends MyItem {
 
 	@Override
 	public int getEntityLifespan(ItemStack itemStack, World world) {
-		return HwellConfig.lootTimeToHatch;
+		return HwellConfig.producerTimeToHatch;
 	}
 
 	@Override

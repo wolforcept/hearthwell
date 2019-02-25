@@ -12,14 +12,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import wolforce.Main;
+import wolforce.Util;
 
 public class ItemCrystalBowlWater extends ItemBucketMilk {
 
 	private String[] lore;
 
 	public ItemCrystalBowlWater(String name, String... lore) {
-		setUnlocalizedName(name);
-		setRegistryName(name);
+		Util.setReg(this, name);
 		this.lore = lore;
 		this.setMaxStackSize(16);
 	}

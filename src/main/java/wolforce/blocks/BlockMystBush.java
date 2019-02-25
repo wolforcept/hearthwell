@@ -17,6 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import wolforce.Main;
+import wolforce.Util;
 
 public class BlockMystBush extends BlockBush {
 
@@ -25,8 +26,7 @@ public class BlockMystBush extends BlockBush {
 
 	public BlockMystBush(String name) {
 		super();
-		setUnlocalizedName(name);
-		setRegistryName(name);
+		Util.setReg(this, name);
 		setHardness(0.0F);
 		setSoundType(SoundType.PLANT);
 		setLightLevel(.1f);

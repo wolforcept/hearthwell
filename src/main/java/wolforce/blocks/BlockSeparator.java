@@ -35,8 +35,7 @@ public class BlockSeparator extends Block implements BlockEnergyConsumer, ITileE
 
 	public BlockSeparator(String name) {
 		super(Material.ROCK);
-		setUnlocalizedName(name);
-		setRegistryName(name);
+		Util.setReg(this, name);
 		setHardness(2);
 		setHarvestLevel("pickaxe", -1);
 
@@ -177,7 +176,7 @@ public class BlockSeparator extends Block implements BlockEnergyConsumer, ITileE
 
 	@Override
 	public int getEnergyConsumption() {
-		return HwellConfig.energyConsumptionSeparator;
+		return HwellConfig.separatorConsumption;
 	}
 
 }

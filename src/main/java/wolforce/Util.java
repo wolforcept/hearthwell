@@ -19,6 +19,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
@@ -36,12 +37,30 @@ import wolforce.recipes.Irio;
 
 public class Util {
 
+	public static void setReg(Block block, String name) {
+		block.setUnlocalizedName(Hwell.MODID + "." + name);
+		block.setRegistryName(Util.res(name));
+	}
+
+	public static void setReg(Item block, String name) {
+		block.setUnlocalizedName(Hwell.MODID + "." + name);
+		block.setRegistryName(Util.res(name));
+	}
+
+	// ITEMSTACKS
 	public static boolean isValid(ItemStack stack) {
-		return stack != null && !stack.isEmpty();
+		return stack != null && stack.getCount() > 0 && !stack.isEmpty() && !stack.getItem().equals(Items.AIR);
 	}
 
 	public static boolean canBeStacked(ItemStack stack1, ItemStack stack2) {
 		return ItemStack.areItemsEqual(stack1, stack2) && ItemStack.areItemStackTagsEqual(stack1, stack2);
+	}
+
+	public static boolean equalExceptAmount(ItemStack stack1, ItemStack stack2) {
+		return ItemStack.areItemStacksEqual(//
+				new ItemStack(stack1.getItem(), 1, stack1.getMetadata()), //
+				new ItemStack(stack2.getItem(), 1, stack2.getMetadata())//
+		);
 	}
 
 	// SPAWN ITEMS

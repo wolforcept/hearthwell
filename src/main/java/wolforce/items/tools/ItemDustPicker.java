@@ -14,6 +14,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import wolforce.Main;
+import wolforce.Util;
 import wolforce.blocks.BlockPickerHolder;
 
 public class ItemDustPicker extends ItemTool {
@@ -23,8 +24,7 @@ public class ItemDustPicker extends ItemTool {
 	public ItemDustPicker(String name, Item shard) {
 		super(0, 0, ToolMaterial.IRON, new HashSet<Block>());
 		this.shard = shard;
-		setUnlocalizedName(name);
-		setRegistryName(name);
+		Util.setReg(this, name);
 		setMaxDamage(64);
 	}
 

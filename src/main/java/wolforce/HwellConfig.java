@@ -27,114 +27,109 @@ public class HwellConfig {
 	@Config.Comment({ "Allow Entities to travel to the nether (Players, mobs and animals, items, etc) (default: false)" })
 	public static boolean allowEntitiesToTravelToTheNether = false;
 
+	//
+
+	@Config.Comment({ "Max range that Power Providers (Power Crystals) will provide power to machines. (default: 10)" })
+	public static int powerMaxRange = 10;
+
+	@Config.Comment({ "Do Power Crystals drop when they become empty? (default: true)" })
+	public static boolean powerCrystalDrops = true;
+
 	// ----------------------------------------
 
-	// Setter
+	// NOURISHER
+	@Config.Comment({ "Charger Cooldown in ticks (default: 100)" })
+	public static int nourisherCooldown = 100;
+
+	@Config.Comment({ "Nourisher Power Consumption (default: 5)" })
+	public static int nourisherConsumption = 5;
+
+	@Config.Comment({ "Nourisher Range (default: 4)" })
+	public static int nourisherRange = 4;
+
+	@Config.Comment({ "Does the Nourisher only work on normal crops or on all Growables (sapplings and other)? (default: true)" })
+	public static boolean nourisherOnlyGrowCrops = true;
+
+	// CHARGER
+	@Config.Comment({ "Charger Cooldown in ticks (default: 20)" })
+	public static int chargerCooldown = 20;
+
+	// SETTER
 	@Config.Comment({ "Setter Base Range (default: 4)" })
 	public static int setterBaseRange = 4;
 
+	@Config.Comment({ "Setter Power Consumption (default: 15)" })
+	public static int setterConsumption = 15;
+
 	// PULLER
-	@Config.Comment({ "Puller Energy Consumption per Operation (default: 100)" })
-	public static int energyConsumptionPuller = 100;
+	@Config.Comment({ "Puller Power Consumption per Operation (default: 100)" })
+	public static int pullerConsumption = 50;
 	@Config.Comment({ "Puller Delay Between pulls (default: 3000)" })
 	public static int pullerDelay = 3000;
 	@Config.Comment({ "Puller chance to get a filtered item (default: 0.5)" })
 	public static double pullerChanceToGetFilteredPull = 0.5;
 
 	// GRINDER
-	@Config.Comment({ "Grinder Energy Consumption per Operation (default: 100)" })
-	public static int energyConsumptionGrinder = 100;
+	@Config.Comment({ "Grinder Power Consumption per Operation (default: 100)" })
+	public static int grinderConsumption = 12;
 
 	// SEPARATOR
-	@Config.Comment({ "Separator Energy Consumption per Operation (default: 100)" })
-	public static int energyConsumptionSeparator = 100;
+	@Config.Comment({ "Separator Power Consumption per Operation (default: 100)" })
+	public static int separatorConsumption = 25;
 
 	// FREEZER
-	@Config.Comment({ "Freezer Energy Consumption per Operation  (default: 30)" })
-	public static int energyConsumptionFreezer = 30;
+	@Config.Comment({ "Freezer Power Consumption per Operation  (default: 30)" })
+	public static int freezerConsumption = 5;
 
 	@Config.Comment({ "Range of freezer? (default: 5)" })
 	@Config.RangeInt(min = 1, max = 16)
 	public static int freezerRange = 5;
 
 	@Config.Comment({ "Does freezer only work in night time? (default: true)" })
-	public static boolean isFreezerRequiredToBeNight = true;
+	public static boolean freezerIsRequiredToBeNight = true;
 
-	// LOOT
+	// LOOT KIT PRODUCER
 	@Config.Comment({ "Number of ticks that a loot kit need to hatch. 20 ticks = 1 second. (default: 600)" })
 	@Config.RangeInt(min = 40, max = 16000)
-	public static int lootTimeToHatch = 600;
+	public static int producerTimeToHatch = 600;
+
+	@Config.Comment({ "Charger Cooldown in ticks (default: 100)" })
+	public static int producerConsumption = 25;
 
 	// // HEAT FURNACE
-	// @Config.Comment({ "Heat Furnace Energy Consumption per Operation (default:
+	// @Config.Comment({ "Heat Furnace Power Consumption per Operation (default:
 	// 100)" })
 	// public static int energyConsumptionFurnace = 100;
 
 	// GRAVITY
 	@Config.Comment({ "Range of Gravity Block? (default: 5)" })
 	@Config.RangeInt(min = 1, max = 16)
-	public static int gravityBlockDistance = 5;
+	public static int gravityBlockRange = 5;
 
 	@Config.Comment({ "Range of Mini Gravity Block? (default: 1)" })
-	@Config.RangeInt(min = 1, max = 16)
-	public static int gravityBlockDistanceMini = 1;
+	@Config.RangeInt(min = 2, max = 16)
+	public static int gravityBlockRangeMini = 2;
 
 	// BOXER
 	@Config.Comment({ "Number of boxes a boxer spawns (default: 32)" })
 	@Config.RangeInt(min = 1, max = 64)
-	public static int nrOfBoxesSpawned = 32;
+	public static int boxerNrOfBoxesSpawned = 32;
 
 	// ----------------------------------------
 
 	// TUBES
 	@Config.Comment({ "Is tube required to see sky? (default: true)" })
-	public static boolean isTubeRequiredToSeeSky = true;
+	public static boolean tubeIsRequiredToSeeSky = true;
 
 	@Config.Comment({ "Does tube only work in day time? (default: true)" })
-	public static boolean isTubeRequiredToBeDay = true;
+	public static boolean tubeIsRequiredToBeDay = true;
 
 	// LIGHT COLLECTOR
 	@Config.Comment({ "Is light collector required to see sky? (default: true)" })
-	public static boolean isLightCollectorRequiredToSeeSky = true;
+	public static boolean lightCollectorIsRequiredToSeeSky = true;
 
 	@Config.Comment({ "Does Light Collector only work in day time? (default: true)" })
-	public static boolean isLightCollectorRequiredToBeDay = true;
-
-	// @Config.Comment({ "General settings" })
-	// public static General general = new General();
-	//
-	// @Config.Comment({ "Liquid settings" })
-	// public static Liquid liquid = new Liquid();
-	//
-	// @Config.Comment({ "Crafting settings" })
-	// public static Crafting crafting = new Crafting();
-	//
-	//
-	// public static class General {
-	// @Config.Comment("Water based liquids causing nausea when swam in [default:
-	// true]")
-	// public boolean liquidsCausesNausea = true;
-	//
-	// @Config.Comment("Makes liquid ore have a 1 in X chance of drying into an ore
-	// block (higher = less chance) [default: 64]")
-	// @Config.RangeInt(min = 6, max = 640)
-	// public int oreChance = 64;
-	// }
-	//
-	// public static class Liquid {
-	// @Config.Comment("The time liquid dirt types take to solidify [default: 220]")
-	// @Config.RangeInt(min = 6, max = 640)
-	// public int dirtSolidifyTime = 220;
-	// }
-	//
-	// public static class Crafting {
-	// @Config.Comment("Enable crafting buckets with ice [default: true]")
-	// public boolean enableCraftingWithIce = true;
-	// }
-
-	//
-	// WHAT IS THIS
-	//
+	public static boolean lightCollectorIsRequiredToBeDay = true;
 
 	@Mod.EventBusSubscriber(modid = Hwell.MODID)
 	private static class EventHandler {
@@ -147,70 +142,3 @@ public class HwellConfig {
 		}
 	}
 }
-
-// THIS BECOMES:
-
-// # Configuration file
-//
-// everything {
-//
-// ##########################################################################################################
-// # general
-// #--------------------------------------------------------------------------------------------------------#
-// # General settings
-// ##########################################################################################################
-//
-// general {
-// # Water based liquids causing nausea when swam in [default: true]
-// B:liquidsCausesNausea=true
-//
-// # Makes liquid ore have a 1 in X chance of drying into an ore block (higher =
-// less chance) [default: 64]
-// # Min: 6
-// # Max: 640
-// I:oreChance=64
-// }
-//
-// ##########################################################################################################
-// # liquid
-// #--------------------------------------------------------------------------------------------------------#
-// # Liquid settings
-// ##########################################################################################################
-//
-// liquid {
-// # The time liquid dirt types take to solidify [default: 220]
-// # Min: 6
-// # Max: 640
-// I:dirtSolidifyTime=220
-// }
-//
-// ##########################################################################################################
-// # crafting
-// #--------------------------------------------------------------------------------------------------------#
-// # Crafting settings
-// ##########################################################################################################
-//
-// crafting {
-// # Enable crafting buckets with ice [default: true]
-// B:enableCraftingWithIce=true
-// }
-//
-// }
-//
-//
-// "hearth well configuration settings" {
-//
-// general {
-// B:liquidsCausesNausea=true
-// I:oreChance=64
-// }
-//
-// liquid {
-// I:dirtSolidifyTime=220
-// }
-//
-// crafting {
-// B:enableCraftingWithIce=true
-// }
-//
-// }

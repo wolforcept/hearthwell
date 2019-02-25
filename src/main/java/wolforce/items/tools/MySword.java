@@ -20,8 +20,7 @@ public class MySword extends ItemSword {
 		super(mat);
 		this.repairIngot = new ItemStack(repairIngot);
 		this.attackSpeed = attackSpeed;
-		setRegistryName(name);
-		setUnlocalizedName(name);
+		Util.setReg(this, name);
 		setMaxStackSize(1);
 	}
 

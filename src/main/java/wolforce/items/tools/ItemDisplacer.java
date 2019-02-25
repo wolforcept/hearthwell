@@ -141,6 +141,9 @@ public class ItemDisplacer extends MyItem {
 				state.getBlock().equals(Blocks.GLASS_PANE) || //
 				state.getBlock().equals(Blocks.STAINED_GLASS) || //
 				state.getBlock().equals(Blocks.STAINED_GLASS_PANE) || //
+				state.getBlock().equals(Blocks.ICE) || //
+				state.getBlock().equals(Blocks.FROSTED_ICE) || //
+				state.getBlock().equals(Blocks.PACKED_ICE) || //
 				(powered && // when powered can also silk harvest and shear
 						(state.getBlock().canSilkHarvest(world, pos, world.getBlockState(pos), player)
 								|| state.getBlock() instanceof IShearable));

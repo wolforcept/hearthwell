@@ -57,11 +57,11 @@ public class TileCore extends TileEntity implements ITickable {
 			if (hasResult(result, state)) {
 				// at this point the core will certainly charge
 				// (charges faster with more blocks surrounding it)
-				particlesandsounds(pos1);
+				particles(pos1);
 				// if (charge % 10 == 0)
 				// System.out.println(charge);
 				if (Math.random() < .015) {
-					if (!world.getBlockState(pos1.down()).getBlock().equals(Main.stabiliser) || Math.random() < .2) {
+					if (isToDrop(pos1)) {
 						// remove and drop the block on that pos1
 						ItemStack drop = getSilkTouchDrop(world.getBlockState(pos1));
 						world.notifyBlockUpdate(pos1, state, Blocks.AIR.getDefaultState(), 1 | 2);
@@ -70,7 +70,7 @@ public class TileCore extends TileEntity implements ITickable {
 					}
 				}
 				if (charge == MAX_CHARGE - 1) {
-//					System.out.println(result.result.getMetadata());
+					// System.out.println(result.result.getMetadata());
 					world.setBlockState(pos, new Irio(result.result).getState(), 2 | 4); // im quite sure its a block
 					return; // don't want to keep checking other touches
 				} else {
@@ -82,6 +82,17 @@ public class TileCore extends TileEntity implements ITickable {
 		}
 	}
 
+	private boolean isToDrop(BlockPos pos1) {
+		Block under = world.getBlockState(pos1.down()).getBlock();
+		if (under.equals(Main.stabiliser_heavy))
+			return false;
+		if (under.equals(Main.stabiliser))
+			return Math.random() < .66;
+		if (under.equals(Main.stabiliser_light))
+			return Math.random() < .33;
+		return false;
+	}
+
 	private boolean hasResult(RecipeCoring result, IBlockState state) {
 		if (Arrays.asList(result.consumes).contains(new Irio(state.getBlock())))
 			return true;
@@ -90,7 +101,7 @@ public class TileCore extends TileEntity implements ITickable {
 		return false;
 	}
 
-	private void particlesandsounds(BlockPos pos) {
+	private void particles(BlockPos pos) {
 		// world.playSound(x, y, z, new SoundEv, category, volume, pitch,
 		// distanceDelay);
 		((WorldServer) world).spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, // particleType,

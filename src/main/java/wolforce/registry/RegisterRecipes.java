@@ -46,6 +46,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.RegistryEvent.Register;
@@ -66,6 +67,7 @@ import wolforce.recipes.RecipeCoring;
 import wolforce.recipes.RecipeCrushing;
 import wolforce.recipes.RecipeFreezer;
 import wolforce.recipes.RecipeGrinding;
+import wolforce.recipes.RecipePowerCrystal;
 import wolforce.recipes.RecipePuller;
 import wolforce.recipes.RecipeRepairingPaste;
 import wolforce.recipes.RecipeSeedOfLife;
@@ -83,6 +85,9 @@ public class RegisterRecipes {
 
 	public static void createNewCores() {
 		Main.custom_cores = new HashMap<String, BlockCore>();
+
+		if (!HwellConfig.customRecipesEnabled)
+			return;
 
 		try {
 			File recipesFile = new File(HwellConfig.recipeFileLocation);
@@ -130,18 +135,23 @@ public class RegisterRecipes {
 	@SubscribeEvent
 	public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
 
+		RecipePowerCrystal.init();
+		
 		File recipesFile = new File(HwellConfig.recipeFileLocation);
 
 		// if file does not exist, write default file
-		if (!recipesFile.exists())
+		if (!recipesFile.exists() && HwellConfig.customRecipesEnabled)
 			try {
 				writeRecipesFile(HwellConfig.recipeFileLocation);
 			} catch (IOException e) {
 				throw new RuntimeException("Could not initialise the Recipes File!! Game will crash.");
 			}
+		if (!HwellConfig.customRecipesEnabled && recipesFile.exists())
+			recipesFile.delete();
 		JsonObject recipes = null, defaultRecipes = null;
 		try {
-			recipes = Util.readJson(HwellConfig.recipeFileLocation).getAsJsonObject();
+			if (HwellConfig.customRecipesEnabled)
+				recipes = Util.readJson(HwellConfig.recipeFileLocation).getAsJsonObject();
 		} catch (Exception e) {
 			System.err.println("Error while reading the Recipes File! Defaulting all recipes.");
 			errored_recipes_file = true;
@@ -151,7 +161,7 @@ public class RegisterRecipes {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		if (errored_recipes_file || recipes == null)
+		if (errored_recipes_file || recipes == null || !HwellConfig.customRecipesEnabled)
 			recipes = defaultRecipes;
 
 		if (!recipes.has("version") || !recipes.get("version").getAsString().equals(defaultRecipes.get("version").getAsString())) {
@@ -207,7 +217,7 @@ public class RegisterRecipes {
 		GameRegistry.addSmelting(raw_soulsteel, new ItemStack(soulsteel_ingot), 1f);
 		GameRegistry.addSmelting(raw_repairing_paste, new ItemStack(repairing_paste), 1f);
 		GameRegistry.addSmelting(wheat_flour, new ItemStack(Items.BREAD), 1f);
-
+		
 		GameRegistry.addShapedRecipe(Util.res("producer." + producer.getRegistryName().getResourcePath()), Util.res("hwell.producer"),
 				new ItemStack(Main.producer), //
 				"ABA", "MCM", "MYM", //
@@ -216,6 +226,10 @@ public class RegisterRecipes {
 				'M', metaldiamond_block, //
 				'C', asul_machine_case, //
 				'Y', crystal_block);
+
+		event.getRegistry().register(new RecipePowerCrystal().setRegistryName(Util.res("hwell:recipe_power_crystal")));
+		
+//		event.getRegistry().register(new Recipe);
 	}
 
 	private static void writeRecipesFile(String destination) throws IOException {

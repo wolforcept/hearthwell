@@ -5,20 +5,20 @@ import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import wolforce.Main;
+import wolforce.Util;
 
 public class BlockBox extends BlockRotatedPillar {
 
 	public final Block block;
 	public final boolean hasAxis;
-	
+
 	public BlockBox(Block block, boolean hasAxis) {
 		super(Material.CLAY);
 		this.block = block;
 		this.hasAxis = hasAxis;
 
 		String name = "box_" + block.getRegistryName().getResourcePath();
-		setUnlocalizedName(name);
-		setRegistryName(name);
+		Util.setReg(this, name);
 
 		setHardness(.25f);
 		setResistance(2f);

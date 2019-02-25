@@ -6,6 +6,8 @@ import javax.annotation.Nullable;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
@@ -35,7 +37,20 @@ public class RegisterColors {
 
 		for (Entry<String, BlockCore> entry : Main.custom_cores.entrySet()) {
 			BlockCore core = entry.getValue();
-			event.getBlockColors().registerBlockColorHandler(core.coreColor, core);
+			final int color1 = core.color1;
+			final int color2 = core.color2;
+
+			IBlockColor color = new IBlockColor() {
+
+				@Override
+				public int colorMultiplier(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) {
+					if (tintIndex == 0)
+						return color1;
+					else
+						return color2;
+				}
+			};
+			event.getBlockColors().registerBlockColorHandler(color, core);
 		}
 	}
 
@@ -44,7 +59,20 @@ public class RegisterColors {
 	public static void registerColors(ColorHandlerEvent.Item event) {
 		for (Entry<String, BlockCore> entry : Main.custom_cores.entrySet()) {
 			BlockCore core = entry.getValue();
-			event.getItemColors().registerItemColorHandler(core.coreItemColor, core);
+			final int color1 = core.color1;
+			final int color2 = core.color2;
+			IItemColor color = new IItemColor() {
+
+				@Override
+				public int colorMultiplier(ItemStack stack, int tintIndex) {
+					if (tintIndex == 0)
+						return color1;
+					else
+						return color2;
+				}
+			};
+
+			event.getItemColors().registerItemColorHandler(color, core);
 		}
 	}
 }

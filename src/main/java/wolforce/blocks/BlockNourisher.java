@@ -3,6 +3,7 @@ package wolforce.blocks;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import wolforce.HwellConfig;
 import wolforce.blocks.base.BlockEnergyConsumer;
 import wolforce.blocks.base.BlockMachineBase;
 import wolforce.blocks.tile.TileNourisher;
@@ -25,6 +26,6 @@ public class BlockNourisher extends BlockMachineBase implements ITileEntityProvi
 
 	@Override
 	public int getEnergyConsumption() {
-		return 50;
+		return HwellConfig.nourisherConsumption;
 	}
 }
