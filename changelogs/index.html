@@ -1,0 +1,94 @@
+
+<!-- saved from url=(0037)http://wolforce.no-ip.org/hearthwell/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-gb">
+
+<link href="./docs/css" rel="stylesheet">
+<style>
+body{
+	padding-left: 5%;
+	padding-right: 5%;
+	margin-left:50px
+}
+h1, h2, h3{
+	font-family: 'PT Sans', sans-serif;
+}
+a, p, table{
+	font-family: 'Open Sans', sans-serif;
+}
+table {
+	width: 100%;
+	border-spacing: 25px;
+} 
+table {
+	margin: 0 auto;
+}
+.coring {
+	border-spacing: 0px;
+	border-collapse: collapse;
+}
+.coring td{
+	border: 1px solid #000;
+	padding: 8px;
+}
+.coring .titles,.titles td{
+	border: 0;
+}
+</style>
+<title>Hearth Well</title></head>
+
+<body>
+
+<object style="border:0;padding=0;" width="500" height="50px" type="text/html" data="navbar.html"></object>
+
+<h2>0.2</h2>
+
+<h3>[ NEW STUFF ]</h3>
+<p>Update: to enable the hwell_recipes.json file and to be able to change recipes, you must now enable "customRecipesEnabled" in the config!
+</p>
+<p>Added a new machine block, the Setter. When an item passes through its range, the setter will try to place that block down.<br>
+ - It has a default range of 4 blocks, which can be increased and decreased by placing Moonstone or Azurite (or Smooth Azurite) blocks in the remaining 5 blocks that surround it (each Moonstone and Azurite Block moves change range by 1).<br>
+ - The range may also be moved further away, in the same direction, by placing Crystal Blocks the same way (each Crystal Block moves changes range by 2).<br>
+ - The Setter requires 15 energy per operation.<br>
+ - The default range may be changed in the config.<br>
+</p>
+<p>Added two new Stabiliser blocks, and tweaked the existing one's recipe.<br>
+ - There are now three stabilisers: the Light Stabiliser, the Stabiliser and the Heavy Stabiliser;<br>
+ - They will prevent blocks near cores from dropping by 33%, 66% and 100% respectively.<br>
+</p>
+<p>Added a new source of Power: the Power Crystal<br>
+ - Requires 3 parts to craft: the Nucleous, the Relay and the Screen.<br>
+ - Possible Nuclei: Snow block, Mysterious Rod, Blaze Rod<br>
+ - Possible Relays: Stone, Azurite, Moonstone, Soulsteel Block<br>
+ - Possible Screens: Glass, Crystal, Nether Crystal<br>
+ - Can be crafted with different materials for each part, so has crafting combinations<br>
+ - Can be right clicked in the world to place them. Will provide power for nearby machines.<br>
+ - The Power Crystals have three traits: power, range and purity.<br>
+ - Power simply means more total Power available. Range is also simply the range at which a Power Crystal can deliver power.<br>
+ - Purity affects power lost by distance. More purity means less power lost when charging a machine from a distance.<br>
+ - Different parts affect the traits differently.<br>
+</p>
+<p>Added a new block: the Charger<br>
+ - Charges Power Crystals.<br>
+ - Requires a Multiblock Structure.<br>
+ - Right click to insert the crystal, then throw items with Potency into the machine and the potency will be extracted and inserted into the crystal.<br>
+ - Some items might not be fully consumed. The unpotent remainder will be spat out from the top of the charger.<br>
+</p>
+<p>Added configuration for the Nourisher: energy consumption, range, cooldown and target selection;<br>
+Changed Boxer no longer requires redstone to work. Instead, a redstone signal will prevent it from working.<br>
+Changed many default power consumptions to reflect changes in power usage.<br>
+Changed the Loot Kit Producer to require energy.<br>
+</p>
+<h3>[ BALANCE ]</h3>
+<p>Misterious Bushes now grow much slower near other Mysterious Bushes<br>
+Reduced number of boxes a boxer spawns to 32. This may be changed in the config.<br>
+ALL Entities will now, by default, be prevented from traveling to the nether by any means. This may be changed in the config.<br>
+</p>
+<h3>[ BUG FIXES ]</h3>
+<p>Fixed a bug with the Dust Picker Holder where sometimes a player was unable to retrieve dust pickers. (FINALLY!!)<br>
+Fixed bad localization when interacting with other mods.<br>
+</p>
+
+
+</p>
+</body></html>
