@@ -24,7 +24,7 @@ public class BlockBurstSeed extends MyBlock {
 
 	private static final double F = 1 / 16f;
 	private static final AxisAlignedBB colbox = new AxisAlignedBB(4 * F, 0, 4 * F, 12 * F, 8 * F, 12 * F);
-	private ItemStack itemStack;
+	public ItemStack stack;
 	private SoundType sound;
 
 	public BlockBurstSeed(String name, Material mat, Block block, String tool, SoundType sound) {
@@ -33,7 +33,7 @@ public class BlockBurstSeed extends MyBlock {
 		// public BlockBurstSeed(String name, Material mat, ItemStack item, String tool,
 		// SoundType sound) {
 		super(name, mat, true);
-		this.itemStack = new ItemStack(block);
+		this.stack = new ItemStack(block);
 		this.sound = sound;
 		setResistance(2f);
 		setHardness(2f);
@@ -57,10 +57,10 @@ public class BlockBurstSeed extends MyBlock {
 
 		world.setBlockToAir(pos);
 		int n = (int) (Math.random() * 32) + 32;
-		if (Util.equalExceptAmount(itemStack, new ItemStack(Main.crystal_block)))
+		if (Util.equalExceptAmount(stack, new ItemStack(Main.crystal_block)))
 			n = (int) (Math.random() * 10) + 10;
 		for (int i = 0; i < n; i++) {
-			Entity newEntity = new UnjoinableEntityItem(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(itemStack.getItem()),
+			Entity newEntity = new UnjoinableEntityItem(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(stack.getItem()),
 					40);
 			newEntity.addVelocity(Math.random() * 2 - 1, Math.random(), Math.random() * 2 - 1);
 			world.spawnEntity(newEntity);
@@ -69,7 +69,7 @@ public class BlockBurstSeed extends MyBlock {
 
 	@Override
 	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
-		if (itemStack.getItem().equals(Main.crystal))
+		if (stack.getItem().equals(Main.crystal))
 			return layer == BlockRenderLayer.TRANSLUCENT;
 		return super.canRenderInLayer(state, layer);
 	}

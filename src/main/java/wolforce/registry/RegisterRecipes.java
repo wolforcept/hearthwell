@@ -80,6 +80,7 @@ public class RegisterRecipes {
 
 	// MUST REGISTER CORE BLOCKS BEFORE EVERYTHING ELSE (MARTELADA)
 
+	// PRE INIT
 	public static void createNewCores() {
 		Main.custom_cores = new HashMap<String, BlockCore>();
 
@@ -131,6 +132,9 @@ public class RegisterRecipes {
 
 	@SubscribeEvent
 	public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
+
+		// fix for burst seeds of hearthwell materials
+		Main.burst_seed_crystal.stack = new ItemStack(Main.crystal_block);
 
 		File recipesFile = new File(HwellConfig.recipeFileLocation);
 

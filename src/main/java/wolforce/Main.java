@@ -174,8 +174,8 @@ public class Main {
 	public static Block precision_grinder_flint, precision_grinder_iron, precision_grinder_diamond, precision_grinder_crystal,
 			precision_grinder_empty;
 	public static Block heat_block;
-	public static Block burst_seed_stone, burst_seed_sand, burst_seed_dirt, burst_seed_snow, burst_seed_netherrack, burst_seed_quartz,
-			burst_seed_prismarine, burst_seed_crystal;
+	public static BlockBurstSeed burst_seed_stone, burst_seed_sand, burst_seed_dirt, burst_seed_snow, burst_seed_netherrack,
+			burst_seed_quartz, burst_seed_prismarine, burst_seed_crystal;
 	public static Block totem_enderman, totem_zombie, totem_skeleton, totem_creeper;
 	public static Block separator;
 	public static BlockProducer producer;

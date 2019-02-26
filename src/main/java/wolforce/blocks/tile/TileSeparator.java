@@ -17,11 +17,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import wolforce.HwellConfig;
 import wolforce.Main;
 import wolforce.Util;
 import wolforce.Util.BlockWithMeta;
 import wolforce.blocks.BlockLightCollector;
 import wolforce.blocks.BlockSeparator;
+import wolforce.blocks.base.BlockEnergyConsumer;
 import wolforce.recipes.RecipeSeparator;
 
 public class TileSeparator extends TileEntity implements ITickable {
@@ -98,6 +100,10 @@ public class TileSeparator extends TileEntity implements ITickable {
 	}
 
 	private void done(EnumFacing facing) {
+
+		if (!BlockEnergyConsumer.tryConsume(world, pos, HwellConfig.separatorConsumption))
+			return;
+
 		ItemStack[] result = RecipeSeparator.getResult(inventory.extractItem(0, 1, false));
 		markDirty();
 
@@ -144,8 +150,9 @@ public class TileSeparator extends TileEntity implements ITickable {
 
 	@Override
 	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-//		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && inventory.getStackInSlot(0).equals(ItemStack.EMPTY))
-//			return false;
+		// if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY &&
+		// inventory.getStackInSlot(0).equals(ItemStack.EMPTY))
+		// return false;
 		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
 	}
 
