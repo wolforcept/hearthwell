@@ -39,7 +39,6 @@ import wolforce.blocks.BlockCrushing;
 import wolforce.blocks.BlockDust;
 import wolforce.blocks.BlockFertileSoil;
 import wolforce.blocks.BlockFreezer;
-import wolforce.blocks.BlockGeneratorHeat;
 import wolforce.blocks.BlockGravity;
 import wolforce.blocks.BlockGravityMini;
 import wolforce.blocks.BlockGroundShovel;
@@ -160,8 +159,9 @@ public class Main {
 	public static Block picking_table, picker_holder;
 	public static Block white_block, moonstone, moonstone_bricks, citrinic_stone, citrinic_sand, onyx, smooth_onyx, azurite,
 			smooth_azurite, scorch_grit, scorch_glass, fullgrass_block, metaldiamond_block;
-	public static Block freezer, generator_heat;
+	public static Block freezer;
 	public static Block fertilizer_block;
+	// public static Block generator_heat;
 	public static Block compressed_clay, compressed_wool, weeping_block, skin_block;
 	public static Block mystic_iron_block, soulsteel_block;
 	public static Block mutation_paste_block;
@@ -503,8 +503,8 @@ public class Main {
 		setter = new BlockSetter("setter");
 		blocks.add(setter);
 
-		generator_heat = new BlockGeneratorHeat("generator_heat");
-		blocks.add(generator_heat);
+		// generator_heat = new BlockGeneratorHeat("generator_heat");
+		// blocks.add(generator_heat);
 
 		power_crystal = new ItemPowerCrystal("power_crystal");
 		items.add(power_crystal);

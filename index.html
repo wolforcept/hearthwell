@@ -49,7 +49,7 @@ table {
 		
 		<td style="padding-left:32px">
 			<h1>Hearth Well - A Minecraft Mod by Wolforce</h1>
-			<p><a href="https://minecraft.curseforge.com/projects/hearth-well/files">Download Hearth Well (coming soon for Minecraft 1.12)</a></p>
+			<p><a href="https://minecraft.curseforge.com/projects/hearth-well/files">Download Hearth Well for Minecraft 1.12</a></p>
 			<p>A minecraft mod about never leaving your house,<br>
 			but, through the building of machines, making every available item anyway.</p>
 			<p>Also includes several lifestyle convenience, design enrichment and simply fun <br>
@@ -129,19 +129,68 @@ through the mod, and will give you a general idea of how most crafting mechanics
 <hr>
 
 <table>
-	<tbody><tr>
-		<td>
-			<p>The Generator Block: With a simple lava source beneath it, this block will generate energy required to power your other machines.</p>
-			<p>Produces and holds up to 120 energy in a radius of 10 blocks. The lava might not last forever though.</p>
-		</td>
-		<td>
-			<p>The Freezer. Will freeze water into snow or ice, and lava into obsidian.</p>
-			<p>Has 5 radius and consumes 30 energy per operation.</p>
+	<tbody>
+	<tr>
+		<td align="center" colspan=2>
+			<p>The Power Crystal. Will provide energy to nearby machines.<br>
+			Right click to place it in the world. Will eventually need to be charged in a charger.</p>
 		</td>
 	</tr>
 	<tr>
-		<td align="center">
-			<img src="./docs/generator.png" width="256px">
+		<td>
+			<p>
+			Power Crystals require 3 parts to craft: the Nucleous, the Relay and the Screen.<br>
+			 - Possible Nuclei: Snow block, Mysterious Rod, Blaze Rod<br>
+			 - Possible Relays: Stone, Azurite, Moonstone, Soulsteel Block<br>
+			 - Possible Screens: Glass, Crystal, Nether Crystal<br>
+		</td><td>
+			 The different parts will change the 3 traits: power, range and purity.<br>
+			 - Power simply means more total Power available.<br>
+			 - Range is also simply the range at which a Power Crystal can deliver power.<br>
+			 - Purity affects power lost by distance. More purity means less power lost when charging a machine from a distance.
+			</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" colspan=2>
+			<img src="./docs/power_crystals.gif">
+		</td>
+	</tr>
+</tbody></table>
+
+<hr>
+
+<table>
+	<tbody>
+	<tr>
+		<td>
+			<p>
+			The charger will charge Power Crystals that are in it.<br>
+			Right click with a Power Crystal to insert it into the Charger.<br>
+			Then throw items into it that can charge power crystals.<br>
+			Some items will be consumed, others will have an output from the top.<br>
+			Items that can charge a crystal:<br>
+			 - Mysterious Dust<br>
+			 - Mysterious Leaves<br>
+			 - Mysterious rod<br>
+			 - Bucket of Liquid Souls<br>
+			 - Crystal Catalyst<br>
+			 - Locked Light<br>
+			</p>
+		</td>
+		<td align="center" colspan=2>
+			<img src="./docs/charger.gif" width=512>
+		</td>
+	</tr>
+</tbody></table>
+
+<hr>
+
+<table>
+	<tbody><tr>
+		<td>
+			<p>The Freezer. Will freeze water into snow or ice, and lava into obsidian.</p>
+			<p>Has 5 radius and consumes 30 energy per operation.</p>
 		</td>
 		<td align="center">
 			<img src="./docs/freezer.png" width="256px">

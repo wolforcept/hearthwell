@@ -213,6 +213,7 @@ tile.hwell.separator.name=Separator
 tile.hwell.freezer.name=Freezer
 tile.hwell.charger.name=Charger
 tile.hwell.generator_heat.name=Heat Generator
+tile.hwell.setter.name=Block Setter
 tile.hwell.light_collector.name=Light Collector
 
 tile.hwell.core_stone.name=Rock Core

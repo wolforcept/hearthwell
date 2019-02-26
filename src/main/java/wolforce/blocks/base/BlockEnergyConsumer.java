@@ -21,7 +21,8 @@ public interface BlockEnergyConsumer extends BlockWithDescription {
 
 		Vec3d min = new Vec3d(pos.getX() - MAX_ENERGY_DISTANCE, pos.getY() - MAX_ENERGY_DISTANCE, pos.getZ() - MAX_ENERGY_DISTANCE);
 		Vec3d max = new Vec3d(pos.getX() + MAX_ENERGY_DISTANCE, pos.getY() + MAX_ENERGY_DISTANCE, pos.getZ() + MAX_ENERGY_DISTANCE);
-		List<EntityPower> entities = world.getEntitiesWithinAABB(EntityPower.class, new AxisAlignedBB(min, max));
+		List<EntityPower> entities = world.getEntitiesWithinAABB(EntityPower.class,
+				new AxisAlignedBB(min.x, min.y, min.z, max.x, max.y, max.z));
 		// System.out.println("SEARCHING FOR ENERGY PROVIDERS");
 		// System.out.println(world.isRemote + "->" + entities.size());
 		for (EntityPower e : entities) {

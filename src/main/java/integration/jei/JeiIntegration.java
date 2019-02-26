@@ -67,6 +67,9 @@ public class JeiIntegration implements IModPlugin {
 		reg.addIngredientInfo(new ItemStack(Main.core_heat), VanillaTypes.ITEM,
 				"Obtained by right clicking a HeatBlock with a flint and steel.", "Just be careful...");
 
+		// reg.addRecipeCatalyst(Main.core_stone, JeiCatCoring.UID_CORING_STONE);
+
+		// reg.addRecipes(recipes, "");
 	}
 
 	// TODO Add enchantment to JEI Obsidian displacer

@@ -1,14 +1,24 @@
 package wolforce.recipes;
 
+import java.util.LinkedList;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
+import wolforce.HwellConfig;
 import wolforce.Main;
 import wolforce.Util;
 import wolforce.items.ItemPowerCrystal;
@@ -45,33 +55,62 @@ public class RecipePowerCrystal implements IRecipe {
 	}
 
 	private ResourceLocation name;
-	private static ItemAndVals[] nucleousList;
-	private static ItemAndVals[] relayList;
-	private static ItemAndVals[] screenList;
+	private static LinkedList<ItemAndVals> nucleousRecipes;
+	private static LinkedList<ItemAndVals> relayRecipes;
+	private static LinkedList<ItemAndVals> screenRecipes;
 	private static boolean innited = false;
 
 	public static boolean isInnited() {
 		return innited;
 	}
 
-	public static void init() {
-		nucleousList = new ItemAndVals[] { //
-				new ItemAndVals(Main.myst_rod, "Mysterious", 250, 2, .90f), //
-				new ItemAndVals(Items.BLAZE_ROD, "Blaze", 1000, 3, .98f), //
-		};
-
-		relayList = new ItemAndVals[] { //
-				new ItemAndVals(Main.azurite, "Azurite", 500, 1, .90f), //
-				new ItemAndVals(Main.moonstone, "Moonstone", 100, 2, .98f), //
-		};
-
-		screenList = new ItemAndVals[] { //
-				new ItemAndVals(Main.crystal, "Crystal", 0, -2, .90f), //
-				new ItemAndVals(Main.crystal_nether, "Nether", 0, -1, .98f), //
-		};
-
+	public static void initRecipes(JsonObject recipesJson) {
+		nucleousRecipes = new LinkedList<>();
+		for (JsonElement e : recipesJson.get("nucleous").getAsJsonArray()) {
+			ItemAndVals rec = readRecipe(e.getAsJsonObject());
+			nucleousRecipes.add(rec);
+		}
+		relayRecipes = new LinkedList<>();
+		for (JsonElement e : recipesJson.get("relay").getAsJsonArray()) {
+			ItemAndVals rec = readRecipe(e.getAsJsonObject());
+			relayRecipes.add(rec);
+		}
+		screenRecipes = new LinkedList<>();
+		for (JsonElement e : recipesJson.get("screen").getAsJsonArray()) {
+			ItemAndVals rec = readRecipe(e.getAsJsonObject());
+			screenRecipes.add(rec);
+		}
 		innited = true;
 	}
+
+	private static ItemAndVals readRecipe(JsonObject o) {
+		ItemStack item = ShapedRecipes.deserializeItem(o.getAsJsonObject("item"), false);
+		String name = o.get("name").getAsString();
+		int power = o.get("power").getAsInt();
+		int range = o.get("range").getAsInt();
+		float purity = o.get("purity").getAsFloat();
+		return new ItemAndVals(item, name, power, range, purity);
+
+	}
+
+	// public static void init() {
+	// nucleousList = new ItemAndVals[] { //
+	// new ItemAndVals(Main.myst_rod, "Mysterious", 250, 2, .90f), //
+	// new ItemAndVals(Items.BLAZE_ROD, "Blaze", 1000, 3, .98f), //
+	// };
+	//
+	// relayList = new ItemAndVals[] { //
+	// new ItemAndVals(Main.azurite, "Azurite", 500, 1, .90f), //
+	// new ItemAndVals(Main.moonstone, "Moonstone", 100, 2, .98f), //
+	// };
+	//
+	// screenList = new ItemAndVals[] { //
+	// new ItemAndVals(Main.crystal, "Crystal", 0, -2, .90f), //
+	// new ItemAndVals(Main.crystal_nether, "Nether", 0, -1, .98f), //
+	// };
+	//
+	// innited = true;
+	// }
 
 	@Override
 	public IRecipe setRegistryName(ResourceLocation name) {
@@ -108,7 +147,7 @@ public class RecipePowerCrystal implements IRecipe {
 	}
 
 	private boolean isNucleous(ItemStack stack) {
-		for (ItemAndVals itemAndVals : nucleousList) {
+		for (ItemAndVals itemAndVals : nucleousRecipes) {
 			if (Util.equalExceptAmount(itemAndVals.stack, stack))
 				return true;
 		}
@@ -116,7 +155,7 @@ public class RecipePowerCrystal implements IRecipe {
 	}
 
 	private boolean isRelay(ItemStack stack) {
-		for (ItemAndVals itemAndVals : relayList) {
+		for (ItemAndVals itemAndVals : relayRecipes) {
 			if (Util.equalExceptAmount(itemAndVals.stack, stack))
 				return true;
 		}
@@ -124,7 +163,7 @@ public class RecipePowerCrystal implements IRecipe {
 	}
 
 	private boolean isScreen(ItemStack stack) {
-		for (ItemAndVals itemAndVals : screenList) {
+		for (ItemAndVals itemAndVals : screenRecipes) {
 			if (Util.equalExceptAmount(itemAndVals.stack, stack))
 				return true;
 		}
@@ -144,7 +183,7 @@ public class RecipePowerCrystal implements IRecipe {
 			newstack.setTagCompound(new NBTTagCompound());
 
 		NBTTagCompound nbt = new NBTTagCompound();
-		ItemPowerCrystal.setNBT(nbt, 0, 0, 0);
+		ItemPowerCrystal.setHwellNBT(nbt, 0, 0, 0);
 		nbt.setString("comment", "test");
 		newstack.getTagCompound().setTag("hwell", nbt);
 		return newstack;
@@ -158,7 +197,7 @@ public class RecipePowerCrystal implements IRecipe {
 			newstack.setTagCompound(new NBTTagCompound());
 
 		NBTTagCompound nbt = new NBTTagCompound();
-		ItemPowerCrystal.setNBT(nbt, getNucIndex(inv), getRelayIndex(inv), getScreenIndex(inv));
+		ItemPowerCrystal.setHwellNBT(nbt, getNucIndex(inv), getRelayIndex(inv), getScreenIndex(inv));
 		newstack.getTagCompound().setTag("hwell", nbt);
 		return newstack;
 	}
@@ -166,7 +205,7 @@ public class RecipePowerCrystal implements IRecipe {
 	private int getNucIndex(InventoryCrafting inv) {
 		ItemStack stack = inv.getStackInSlot(4);
 		int i = 0;
-		for (ItemAndVals itemAndVals : nucleousList) {
+		for (ItemAndVals itemAndVals : nucleousRecipes) {
 			if (ItemStack.areItemStacksEqual(itemAndVals.stack, stack))
 				return i;
 			i++;
@@ -177,7 +216,7 @@ public class RecipePowerCrystal implements IRecipe {
 	private int getRelayIndex(InventoryCrafting inv) {
 		ItemStack stack = inv.getStackInSlot(1);
 		int i = 0;
-		for (ItemAndVals itemAndVals : relayList) {
+		for (ItemAndVals itemAndVals : relayRecipes) {
 			if (ItemStack.areItemStacksEqual(itemAndVals.stack, stack))
 				return i;
 			i++;
@@ -188,7 +227,7 @@ public class RecipePowerCrystal implements IRecipe {
 	private int getScreenIndex(InventoryCrafting inv) {
 		ItemStack stack = inv.getStackInSlot(0);
 		int i = 0;
-		for (ItemAndVals itemAndVals : screenList) {
+		for (ItemAndVals itemAndVals : screenRecipes) {
 			if (ItemStack.areItemStacksEqual(itemAndVals.stack, stack))
 				return i;
 			i++;
@@ -198,7 +237,7 @@ public class RecipePowerCrystal implements IRecipe {
 
 	public static ItemAndVals getNucleous(int nucleousIndex) {
 		int i = 0;
-		for (ItemAndVals itemAndVals : nucleousList) {
+		for (ItemAndVals itemAndVals : nucleousRecipes) {
 			if (i == nucleousIndex)
 				return itemAndVals;
 			i++;
@@ -208,7 +247,7 @@ public class RecipePowerCrystal implements IRecipe {
 
 	public static ItemAndVals getRelay(int relayIndex) {
 		int i = 0;
-		for (ItemAndVals itemAndVals : relayList) {
+		for (ItemAndVals itemAndVals : relayRecipes) {
 			if (i == relayIndex)
 				return itemAndVals;
 			i++;
@@ -218,7 +257,7 @@ public class RecipePowerCrystal implements IRecipe {
 
 	public static ItemAndVals getScreen(int screenIndex) {
 		int i = 0;
-		for (ItemAndVals itemAndVals : screenList) {
+		for (ItemAndVals itemAndVals : screenRecipes) {
 			if (i == screenIndex)
 				return itemAndVals;
 			i++;
@@ -237,7 +276,7 @@ public class RecipePowerCrystal implements IRecipe {
 		ItemAndVals nucleous = getNucleous(nucleousIndex);
 		ItemAndVals relay = getRelay(relayIndex);
 		ItemAndVals screen = getScreen(screenIndex);
-		return nucleous.range + relay.range + screen.range;
+		return Math.min(HwellConfig.powerMaxRange, nucleous.range + relay.range + screen.range);
 	}
 
 	public static float calcPurity(int nucleousIndex, int relayIndex, int screenIndex) {

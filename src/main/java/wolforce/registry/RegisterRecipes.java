@@ -36,20 +36,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map.Entry;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
@@ -63,6 +59,7 @@ import wolforce.Util;
 import wolforce.blocks.BlockCore;
 import wolforce.items.ItemLoot;
 import wolforce.items.ItemMystDust;
+import wolforce.recipes.RecipeCharger;
 import wolforce.recipes.RecipeCoring;
 import wolforce.recipes.RecipeCrushing;
 import wolforce.recipes.RecipeFreezer;
@@ -135,8 +132,6 @@ public class RegisterRecipes {
 	@SubscribeEvent
 	public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
 
-		RecipePowerCrystal.init();
-		
 		File recipesFile = new File(HwellConfig.recipeFileLocation);
 
 		// if file does not exist, write default file
@@ -168,7 +163,13 @@ public class RegisterRecipes {
 			old_version_recipes_file = true;
 		}
 
-		String recipeName = "separator_recipes";
+		String recipeName = "power_crystal_recipes";
+		RecipePowerCrystal.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonObject());
+
+		recipeName = "charger_recipes";
+		RecipeCharger.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonArray());
+
+		recipeName = "separator_recipes";
 		RecipeSeparator.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonArray());
 
 		recipeName = "freezer_recipes";
@@ -217,7 +218,7 @@ public class RegisterRecipes {
 		GameRegistry.addSmelting(raw_soulsteel, new ItemStack(soulsteel_ingot), 1f);
 		GameRegistry.addSmelting(raw_repairing_paste, new ItemStack(repairing_paste), 1f);
 		GameRegistry.addSmelting(wheat_flour, new ItemStack(Items.BREAD), 1f);
-		
+
 		GameRegistry.addShapedRecipe(Util.res("producer." + producer.getRegistryName().getResourcePath()), Util.res("hwell.producer"),
 				new ItemStack(Main.producer), //
 				"ABA", "MCM", "MYM", //
@@ -228,8 +229,8 @@ public class RegisterRecipes {
 				'Y', crystal_block);
 
 		event.getRegistry().register(new RecipePowerCrystal().setRegistryName(Util.res("hwell:recipe_power_crystal")));
-		
-//		event.getRegistry().register(new Recipe);
+
+		// event.getRegistry().register(new Recipe);
 	}
 
 	private static void writeRecipesFile(String destination) throws IOException {

@@ -20,7 +20,7 @@ import wolforce.items.ItemPowerCrystal;
 
 public class EntityPower extends Entity {
 
-	private static final AxisAlignedBB colbox = new AxisAlignedBB(new Vec3d(0, -1, 0), new Vec3d(1, 1, 1));
+	private static final AxisAlignedBB colbox = new AxisAlignedBB(0.0, -1.0, 0.0, 1.0, 1.0, 1.0);
 
 	private static final DataParameter<Integer> POWER = EntityDataManager.<Integer>createKey(EntityPower.class,
 			DataSerializers.VARINT);
@@ -50,10 +50,14 @@ public class EntityPower extends Entity {
 	}
 
 	public boolean hasEnergy(int _energy, float erange) {
+		if (erange > range)
+			return false;
 		return getPower() >= calcEnergy(_energy, erange);
 	}
 
 	public boolean tryConsume(int _energy, float erange) {
+		if (erange > range)
+			return false;
 		int energy = calcEnergy(_energy, erange);
 		if (getPower() >= energy) {
 			decreasePower(energy);
@@ -94,7 +98,7 @@ public class EntityPower extends Entity {
 		// if (Math.random() < .1)
 		// power--;
 
-		if (getPower() <= 0 && HwellConfig.powerCrystalDrops && !isDead)
+		if (getPower() <= 0 && HwellConfig.powerCrystalDropsWhenEmpty && !isDead)
 			pop();
 
 		setCustomNameTag(customName + getPower());

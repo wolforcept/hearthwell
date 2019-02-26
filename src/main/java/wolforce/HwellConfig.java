@@ -33,7 +33,7 @@ public class HwellConfig {
 	public static int powerMaxRange = 10;
 
 	@Config.Comment({ "Do Power Crystals drop when they become empty? (default: true)" })
-	public static boolean powerCrystalDrops = true;
+	public static boolean powerCrystalDropsWhenEmpty = true;
 
 	// ----------------------------------------
 
@@ -107,8 +107,8 @@ public class HwellConfig {
 	public static int gravityBlockRange = 5;
 
 	@Config.Comment({ "Range of Mini Gravity Block? (default: 1)" })
-	@Config.RangeInt(min = 2, max = 16)
-	public static int gravityBlockRangeMini = 2;
+	@Config.RangeInt(min = 1, max = 16)
+	public static int gravityBlockRangeMini = 1;
 
 	// BOXER
 	@Config.Comment({ "Number of boxes a boxer spawns (default: 32)" })

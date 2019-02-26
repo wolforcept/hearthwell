@@ -1,25 +1,81 @@
 package wolforce.recipes;
 
+import java.util.LinkedList;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.UniversalBucket;
 import wolforce.Main;
+import wolforce.Util;
 
 public class RecipeCharger {
 
+	private static LinkedList<RecipeCharger> recipes;
+
+	public static void initRecipes(JsonArray recipesJson) {
+		recipes = new LinkedList<>();
+		for (JsonElement e : recipesJson) {
+			RecipeCharger rec = readRecipe(e.getAsJsonObject());
+			if (rec != null)
+				recipes.add(rec);
+		}
+	}
+
+	private static RecipeCharger readRecipe(JsonObject o) {
+		if (o.has("special_liquid_souls_bucket_recipe")) {
+			if (o.get("special_liquid_souls_bucket_recipe").getAsBoolean()) {
+				return new RecipeCharger(//
+						FluidUtil.getFilledBucket(new FluidStack(Main.liquid_souls, 1000)), //
+						new ItemStack(Items.BUCKET), //
+						o.get("power").getAsInt());
+			}
+			return null;
+		}
+		ItemStack input = ShapedRecipes.deserializeItem(o.getAsJsonObject("input"), true);
+		ItemStack output = o.has("output") ? ShapedRecipes.deserializeItem(o.getAsJsonObject("output"), true) : null;
+		int power = o.get("power").getAsInt();
+		return new RecipeCharger(input, output, power);
+	}
+
 	public static int getResult(ItemStack stack) {
-		if (stack.getItem() == Main.myst_dust)
-			return 10;
-		if (stack.getItem() == Items.LAVA_BUCKET)
-			return 100;
+		for (RecipeCharger recipeCharger : recipes) {
+			if (Util.equalExceptAmount(stack, recipeCharger.input)) {
+				return recipeCharger.power;
+			}
+		}
 		return 0;
 	}
 
 	public static ItemStack getSpit(ItemStack stack) {
-		if (stack.getItem() == Items.LAVA_BUCKET)
-			return new ItemStack(Items.BUCKET);
-		if (stack.getItem() == Main.myst_dust)
-			return new ItemStack(Main.dust);
+		for (RecipeCharger recipeCharger : recipes) {
+			if (Util.equalExceptAmount(stack, recipeCharger.input)) {
+				return recipeCharger.output.copy();
+			}
+		}
 		return null;
+	}
+
+	//
+
+	//
+
+	//
+
+	final ItemStack input;
+	final ItemStack output;
+	final int power;
+
+	public RecipeCharger(ItemStack input, ItemStack output, int power) {
+		this.input = input;
+		this.output = output;
+		this.power = power;
 	}
 
 }

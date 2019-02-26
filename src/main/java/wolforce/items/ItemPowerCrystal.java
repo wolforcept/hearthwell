@@ -87,7 +87,7 @@ public class ItemPowerCrystal extends MyItem {
 			tooltip.add("Range: " + rng);
 			tooltip.add("Purity: " + (pur + "").substring(2, Math.min(4, (pur + "").length())) + "%");
 
-			tooltip.add(stack.getTagCompound() + "");
+			// tooltip.add(stack.getTagCompound() + "");
 		}
 	}
 
@@ -128,18 +128,19 @@ public class ItemPowerCrystal extends MyItem {
 	// return null;
 	// }
 
-	public static ItemStack setStackNBT(ItemStack stack) {
-		return setStackNBT(stack, 0, 0, 0);
-	}
+	// public static ItemStack setStackNBT(ItemStack stack) {
+	// return setStackNBT(stack, 0, 0, 0);
+	// }
 
-	public static ItemStack setStackNBT(ItemStack stack, int nuc, int rel, int scr) {
-		NBTTagCompound nbt = new NBTTagCompound();
-		setNBT(nbt, nuc, rel, scr);
-		stack.setTagCompound(nbt);
-		return stack;
-	}
+	// public static ItemStack setStackNBT(ItemStack stack, int nuc, int rel, int
+	// scr) {
+	// NBTTagCompound nbt = new NBTTagCompound();
+	// setNBT(nbt, nuc, rel, scr);
+	// stack.setTagCompound(nbt);
+	// return stack;
+	// }
 
-	public static void setNBT(NBTTagCompound nbt, int nuc, int rel, int scr) {
+	public static void setHwellNBT(NBTTagCompound nbt, int nuc, int rel, int scr) {
 		int pow = RecipePowerCrystal.calcPower(nuc, rel, scr);
 		int rng = RecipePowerCrystal.calcRange(nuc, rel, scr);
 		float pur = RecipePowerCrystal.calcPurity(nuc, rel, scr);

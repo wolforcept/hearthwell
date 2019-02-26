@@ -9,6 +9,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -82,6 +83,16 @@ public class TileCharger extends TileEntity implements ITickable {
 			return;
 
 		ItemStack powerCrystal = inventory.getStackInSlot(0);
+
+		NBTTagCompound nbt = powerCrystal.getTagCompound() == null ? new NBTTagCompound() : powerCrystal.getTagCompound();
+		if (!nbt.hasKey("hwell"))
+			nbt.setTag("hwell", new NBTTagCompound());
+		NBTTagCompound hwellnbt = nbt.getCompoundTag("hwell");
+		ItemPowerCrystal.setHwellNBT(hwellnbt, 0, 0, 0);
+
+		ItemPowerCrystal.getMaxPower(nbt);
+		ItemPowerCrystal.getPower(nbt);
+
 		if (powerCrystal != null) {
 			HashMap<String, BlockWithMeta> table = new HashMap<>();
 			table.put("ON", new BlockWithMeta(Main.smooth_onyx));
