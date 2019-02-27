@@ -9,6 +9,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.DimensionType;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -26,10 +28,10 @@ public class HwellEvents {
 
 	@SubscribeEvent
 	public static void preventNether(EntityTravelToDimensionEvent event) {
-		if (!HwellConfig.allowEntitiesToTravelToTheNether)
+		if (!HwellConfig.allowEntitiesToTravelToTheNether && event.getDimension() == DimensionType.NETHER.getId())
 			event.setCanceled(true);
 	}
-	
+
 	//
 	// if (!(event.getEntity() instanceof EntityItem))
 	// return;

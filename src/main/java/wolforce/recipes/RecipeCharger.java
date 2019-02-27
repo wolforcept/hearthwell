@@ -23,8 +23,10 @@ public class RecipeCharger {
 		recipes = new LinkedList<>();
 		for (JsonElement e : recipesJson) {
 			RecipeCharger rec = readRecipe(e.getAsJsonObject());
-			if (rec != null)
+			if (rec != null) {
 				recipes.add(rec);
+				System.out.println(rec);
+			}
 		}
 	}
 
@@ -38,8 +40,8 @@ public class RecipeCharger {
 			}
 			return null;
 		}
-		ItemStack input = ShapedRecipes.deserializeItem(o.getAsJsonObject("input"), true);
-		ItemStack output = o.has("output") ? ShapedRecipes.deserializeItem(o.getAsJsonObject("output"), true) : null;
+		ItemStack input = ShapedRecipes.deserializeItem(o.getAsJsonObject("input"), false);
+		ItemStack output = o.has("output") ? ShapedRecipes.deserializeItem(o.getAsJsonObject("output"), false) : null;
 		int power = o.get("power").getAsInt();
 		return new RecipeCharger(input, output, power);
 	}
@@ -56,7 +58,7 @@ public class RecipeCharger {
 	public static ItemStack getSpit(ItemStack stack) {
 		for (RecipeCharger recipeCharger : recipes) {
 			if (Util.equalExceptAmount(stack, recipeCharger.input)) {
-				return recipeCharger.output.copy();
+				return recipeCharger.output != null ? recipeCharger.output.copy() : null;
 			}
 		}
 		return null;
@@ -76,6 +78,11 @@ public class RecipeCharger {
 		this.input = input;
 		this.output = output;
 		this.power = power;
+	}
+
+	@Override
+	public String toString() {
+		return "(" + power + ")" + input + " -> " + output;
 	}
 
 }

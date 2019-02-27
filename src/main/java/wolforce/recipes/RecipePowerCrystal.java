@@ -265,11 +265,15 @@ public class RecipePowerCrystal implements IRecipe {
 		return null;
 	}
 
-	public static int calcPower(int nucleousIndex, int relayIndex, int screenIndex) {
+	public static int calcMaxPower(int nucleousIndex, int relayIndex, int screenIndex) {
 		ItemAndVals nucleous = getNucleous(nucleousIndex);
 		ItemAndVals relay = getRelay(relayIndex);
 		ItemAndVals screen = getScreen(screenIndex);
 		return nucleous.power + relay.power + screen.power;
+	}
+
+	public static int calcPower(int maxpower) {
+		return Math.max(maxpower / 4, Math.min(maxpower, 100));
 	}
 
 	public static int calcRange(int nucleousIndex, int relayIndex, int screenIndex) {

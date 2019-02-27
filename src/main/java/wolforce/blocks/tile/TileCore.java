@@ -60,7 +60,7 @@ public class TileCore extends TileEntity implements ITickable {
 				particles(pos1);
 				// if (charge % 10 == 0)
 				// System.out.println(charge);
-				if (Math.random() < .015) {
+				if (Math.random() < .03) {
 					if (isToDrop(pos1)) {
 						// remove and drop the block on that pos1
 						ItemStack drop = getSilkTouchDrop(world.getBlockState(pos1));
@@ -87,10 +87,10 @@ public class TileCore extends TileEntity implements ITickable {
 		if (under.equals(Main.stabiliser_heavy))
 			return false;
 		if (under.equals(Main.stabiliser))
-			return Math.random() < .66;
+			return Math.random() < .333;
 		if (under.equals(Main.stabiliser_light))
-			return Math.random() < .33;
-		return false;
+			return Math.random() < .666;
+		return true;
 	}
 
 	private boolean hasResult(RecipeCoring result, IBlockState state) {

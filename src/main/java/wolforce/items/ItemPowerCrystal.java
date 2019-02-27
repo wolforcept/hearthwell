@@ -141,10 +141,11 @@ public class ItemPowerCrystal extends MyItem {
 	// }
 
 	public static void setHwellNBT(NBTTagCompound nbt, int nuc, int rel, int scr) {
-		int pow = RecipePowerCrystal.calcPower(nuc, rel, scr);
+		int max = RecipePowerCrystal.calcMaxPower(nuc, rel, scr);
+		int pow = RecipePowerCrystal.calcPower(max);
 		int rng = RecipePowerCrystal.calcRange(nuc, rel, scr);
 		float pur = RecipePowerCrystal.calcPurity(nuc, rel, scr);
-		setNBT(nbt, nuc, rel, scr, pow, pow, rng, pur);
+		setNBT(nbt, nuc, rel, scr, pow, max, rng, pur);
 	}
 
 	public static void setNBT(NBTTagCompound nbt, int nuc, int rel, int scr, int pow, int max, int rng, float pur) {

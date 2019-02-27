@@ -84,14 +84,15 @@ public class TileCharger extends TileEntity implements ITickable {
 
 		ItemStack powerCrystal = inventory.getStackInSlot(0);
 
-		NBTTagCompound nbt = powerCrystal.getTagCompound() == null ? new NBTTagCompound() : powerCrystal.getTagCompound();
-		if (!nbt.hasKey("hwell"))
-			nbt.setTag("hwell", new NBTTagCompound());
-		NBTTagCompound hwellnbt = nbt.getCompoundTag("hwell");
-		ItemPowerCrystal.setHwellNBT(hwellnbt, 0, 0, 0);
-
-		ItemPowerCrystal.getMaxPower(nbt);
-		ItemPowerCrystal.getPower(nbt);
+		// NBTTagCompound nbt = powerCrystal.getTagCompound() == null ? new
+		// NBTTagCompound() : powerCrystal.getTagCompound();
+		// if (!nbt.hasKey("hwell"))
+		// nbt.setTag("hwell", new NBTTagCompound());
+		// NBTTagCompound hwellnbt = nbt.getCompoundTag("hwell");
+		// ItemPowerCrystal.setHwellNBT(hwellnbt, 0, 0, 0);
+		//
+		// ItemPowerCrystal.getMaxPower(nbt);
+		// ItemPowerCrystal.getPower(nbt);
 
 		if (powerCrystal != null) {
 			HashMap<String, BlockWithMeta> table = new HashMap<>();

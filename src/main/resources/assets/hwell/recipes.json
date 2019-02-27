@@ -6,58 +6,108 @@
 	"power_crystal_recipes": {
 		"nucleous": [
 			{
-				"item": { "item": "minecraft:snow", "data": 0 },
+				"item": { "item": "minecraft:snowball", "data": 0 },
 				"name": "Cold",
-				"power": 0, "range": 1, "purity": 0.68
+				"power": 10, "range": 1, "purity": 0.68
+			},
+			{
+				"item": { "item": "minecraft:diamond", "data": 0 },
+				"name": "Shiny",
+				"power": 275, "range": 4, "purity": 0.76
 			},
 			{
 				"item": { "item": "hwell:myst_rod" },
 				"name": "Mysterious",
-				"power": 0, "range": 2, "purity": 0.99
+				"power": 45, "range": 2, "purity": 0.99
 			},
 			{
 				"item": { "item": "minecraft:blaze_rod" },
-				"name": "Blaze",
-				"power": 0, "range": 3, "purity": 1.0
+				"name": "Fiery",
+				"power": 0, "range": 2, "purity": 1.0
+			},
+			{
+				"item": { "item": "hwell:crystal_catalyst" },
+				"name": "Essential",
+				"power": 180, "range": 2, "purity": .93
+			},
+			{
+				"item": { "item": "hwell:locked_light" },
+				"name": "Lux",
+				"power": 225, "range": 0, "purity": .93
 			}
 		],
 		"relay": [
 			{
 				"item": { "item": "minecraft:stone", "data": 0 },
-				"name": "Mysterious",
-				"power": 100, "range": 4, "purity": 0.67
+				"name": "Rocky",
+				"power": 20, "range": 3, "purity": 0.67
+			},
+			{
+				"item": { "item": "minecraft:quartz_block", "data": 0 },
+				"name": "Quartz",
+				"power": 250, "range": 4, "purity": 0.85
+			},
+			{
+				"item": { "item": "minecraft:redstone_block" },
+				"name": "Powered",
+				"power": 1000, "range": 6, "purity": 0.85
+			},
+			{
+				"item": { "item": "minecraft:end_stone"},
+				"name": "Ender",
+				"power": 2500, "range": 3, "purity": 0.91
 			},
 			{
 				"item": { "item": "hwell:moonstone" },
-				"name": "Moonstone",
-				"power": 500, "range": 4, "purity": 0.99
+				"name": "Moon",
+				"power": 1500, "range": 4, "purity": 0.99
 			},
 			{
 				"item": { "item": "hwell:smooth_azurite" },
-				"name": "Azurite",
-				"power": 800, "range": 5, "purity": 0.9
+				"name": "Azure",
+				"power": 1800, "range": 2, "purity": 0.85
+			},
+			{
+				"item": { "item": "minecraft:lapis_block" },
+				"name": "Azure",
+				"power": 1900, "range": 3, "purity": 0.81
+			},
+			{
+				"item": { "item": "hwell:mystic_iron_block" },
+				"name": "Ferrum",
+				"power": 2500, "range": 3, "purity": 0.98
 			},
 			{
 				"item": { "item": "hwell:soulsteel_block" },
-				"name": "Soulsteel",
-				"power": 3000, "range": 1, "purity": 0.98
+				"name": "Souls",
+				"power": 7500, "range": 1, "purity": 0.98
 			}
 		],
 		"screen": [
 			{
 				"item": { "item": "minecraft:glass" },
-				"name": "Glass",
-				"power": 50, "range": -1, "purity": .93
+				"name": "Transparent",
+				"power": 35, "range": -1, "purity": .83
 			},
 			{
-				"item": { "item": "hwell:crystal" },
+				"item": { "item": "minecraft:packed_ice" },
+				"name": "Icy",
+				"power": 350, "range": 1, "purity": .87
+			},
+			{
+				"item": { "item": "hwell:crystal_block" },
 				"name": "Crystal",
-				"power": 80, "range": 2, "purity": .93
+				"power": 220, "range": 2, "purity": .97
 			},
 			{
-				"item": { "item": "hwell:crystal_nether" },
+				"item": { "item": "hwell:scorch_glass" },
+				"name": "Scorched",
+				"power": 135, "range": 3, "purity": .91
+			},
+			{
+				"item": { "item": "hwell:crystal_nether_block" },
 				"name": "Nether",
-				"power": 100, "range": 1, "purity": .97
+				"power": 350, "range": 1, "purity": .91
 			}
 		]
 	}
@@ -67,7 +117,7 @@
 	"charger_recipes": [
 		{
 			"special_liquid_souls_bucket_recipe": true,
-			"power": 100
+			"power": 120
 		},
 		{
 			"input": { "item": "hwell:myst_dust" },
@@ -76,20 +126,40 @@
 		},
 		{
 			"input": { "item": "hwell:myst_leaves" },
-			"power": 5
+			"power": 20
 		},
 		{
 			"input": { "item": "hwell:myst_rod" },
 			"output": { "item": "hwell:empty_rod" },
-			"power": 50	
+			"power": 175	
 		},
 		{
 			"input": { "item": "hwell:crystal_catalyst" },
-			"power": 120
+			"power": 220
+		},
+		{
+			"input": { "item": "hwell:seed_of_life" },
+			"power": 320
+		},
+		{
+			"input": { "item": "minecraft:glowstone_dust" },
+			"power": 220
 		},
 		{
 			"input": { "item": "hwell:locked_light" },
-			"power": 80
+			"power": 480
+		},
+		{
+			"input": { "item": "minecraft:tnt" },
+			"power": 280
+		},
+		{
+			"input": { "item": "minecraft:coal", "data": 0 },
+			"power": 35
+		},
+		{
+			"input": { "item": "minecraft:experience_bottle" },
+			"power": 450
 		}
 	]
 	
