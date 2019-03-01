@@ -66,6 +66,7 @@ public class JeiIntegration implements IModPlugin {
 				"Obtained by throwing a crystal into the nether portal.");
 		reg.addIngredientInfo(new ItemStack(Main.core_heat), VanillaTypes.ITEM,
 				"Obtained by right clicking a HeatBlock with a flint and steel.", "Just be careful...");
+		reg.addIngredientInfo(new ItemStack(Main.empty_rod), VanillaTypes.ITEM, "Hold right click to use.");
 
 		// reg.addRecipeCatalyst(Main.core_stone, JeiCatCoring.UID_CORING_STONE);
 

@@ -10,6 +10,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import wolforce.HwellConfig;
 import wolforce.Main;
 import wolforce.MyItem;
 import wolforce.Util;
@@ -23,13 +24,13 @@ public class ItemMystFertilizer extends MyItem {
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing,
-			float hitX, float hitY, float hitZ) {
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX,
+			float hitY, float hitZ) {
 
 		ItemStack heldItem = player.getHeldItem(hand);
 		if (!world.isRemote) {
 			Block block = world.getBlockState(pos).getBlock();
-			if ( block == Blocks.SAPLING) {
+			if (block == Blocks.SAPLING) {
 				if (Util.isValid(heldItem) && heldItem.getItem() == Main.myst_fertilizer) {
 					if (!player.capabilities.isCreativeMode)
 						heldItem.shrink(1);
@@ -38,11 +39,9 @@ public class ItemMystFertilizer extends MyItem {
 						int treeHeight = (int) (4 + Math.random() * 4);
 						for (int i = 0; i < treeHeight; i++) {
 							world.setBlockState(pos.add(0, i, 0),
-									i == treeHeight - 1 ? Main.myst_leaves.getDefaultState()
-											: Main.myst_log.getDefaultState());
+									i == treeHeight - 1 ? Main.myst_leaves.getDefaultState() : Main.myst_log.getDefaultState());
 							if (i > 1)
-								makeLeavesPlane(world, pos.add(0, i, 0),
-										Math.abs((double) (treeHeight - 2) / 2.0 - (double) (i - 2)));
+								makeLeavesPlane(world, pos.add(0, i, 0), Math.abs((double) (treeHeight - 2) / 2.0 - (double) (i - 2)));
 						}
 					}
 					return EnumActionResult.SUCCESS;
@@ -66,7 +65,7 @@ public class ItemMystFertilizer extends MyItem {
 	}
 
 	private boolean canMakeTree(World world, BlockPos pos) {
-		return world.getHeight(pos.getX(), pos.getZ()) == pos.getY();
+		return world.canSeeSky(pos) || !HwellConfig.mystSaplingRequireSky;
 	}
 
 }

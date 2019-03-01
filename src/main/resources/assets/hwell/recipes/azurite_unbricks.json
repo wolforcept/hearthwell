@@ -1,4 +1,7 @@
-{ "type": "minecraft:crafting_shaped",
-  "pattern": ["AA","AA"],
-  "key": {"A": [{"item": "hwell:azurite_bricks"}]},
-  "result": { "item": "hwell:azurite", "count": 4 }}
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "hwell:azurite_bricks" }
+  ],
+  "result": { "item": "hwell:azurite", "count": 1 }
+}

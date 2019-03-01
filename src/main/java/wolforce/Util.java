@@ -17,12 +17,16 @@ import com.google.gson.JsonObject;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.ResourceLocation;
@@ -500,5 +504,15 @@ public class Util {
 		}
 		ItemStack input = ShapedRecipes.deserializeItem(o, true);
 		return new Irio(input.getItem(), input.getMetadata());
+	}
+
+	public static boolean hasEnchantment(ItemStack stack, Enchantment ench) {
+		if (!stack.isItemEnchanted())
+			return false;
+		NBTTagList enchs = stack.getEnchantmentTagList();
+		for (NBTBase nbtBase : enchs)
+			if (((NBTTagCompound) nbtBase).getShort("id") == ench.getEnchantmentID(ench))
+				return true;
+		return false;
 	}
 }

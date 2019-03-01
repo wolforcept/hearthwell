@@ -116,7 +116,11 @@ public class HwellConfig {
 	public static int boxerNrOfBoxesSpawned = 32;
 
 	// ----------------------------------------
-
+	
+	// MYST FERTILIZER
+	@Config.Comment({ "Is myst fertilizer required to see sky? (default: true)" })
+	public static boolean mystSaplingRequireSky = true;
+	
 	// TUBES
 	@Config.Comment({ "Is tube required to see sky? (default: true)" })
 	public static boolean tubeIsRequiredToSeeSky = true;

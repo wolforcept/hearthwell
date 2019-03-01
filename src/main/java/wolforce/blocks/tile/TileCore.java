@@ -87,9 +87,9 @@ public class TileCore extends TileEntity implements ITickable {
 		if (under.equals(Main.stabiliser_heavy))
 			return false;
 		if (under.equals(Main.stabiliser))
-			return Math.random() < .333;
+			return Math.random() < .25;
 		if (under.equals(Main.stabiliser_light))
-			return Math.random() < .666;
+			return Math.random() < .5;
 		return true;
 	}
 

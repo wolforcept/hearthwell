@@ -42,18 +42,15 @@ public class BlockLightCollector extends MyBlock {
 	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
 		super.getDrops(drops, world, pos, state, fortune);
 		switch (state.getValue(CHARGE)) {
-		case 1:
-			drops.add(new ItemStack(Items.GLOWSTONE_DUST));
-			break;
 		case 2:
-			drops.add(new ItemStack(Items.GLOWSTONE_DUST, 2));
+			if (Math.random() < .5)
+				drops.add(new ItemStack(Items.GLOWSTONE_DUST, 1));
 			break;
 		case 3:
 			drops.add(new ItemStack(Main.locked_light));
 			break;
 		default:
 		}
-
 	}
 
 	// BLOCK STATES

@@ -99,11 +99,13 @@ public class ItemPowerCrystal extends MyItem {
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer p, EnumHand handIn) {
 
 		// FIRST CHECK IF LOOKING AT A CHARGER
-		RayTraceResult raytraceresult = this.rayTrace(worldIn, p, false);
-		if (raytraceresult != null && raytraceresult.typeOfHit == RayTraceResult.Type.BLOCK) {
-			// System.out.println(worldIn.getBlockState(raytraceresult.getBlockPos()).getBlock());
-			if (worldIn.getBlockState(raytraceresult.getBlockPos()).getBlock() == Main.charger)
-				return new ActionResult<ItemStack>(EnumActionResult.PASS, p.getHeldItem(handIn));
+		if (!p.isSneaking()) {
+			RayTraceResult raytraceresult = this.rayTrace(worldIn, p, false);
+			if (raytraceresult != null && raytraceresult.typeOfHit == RayTraceResult.Type.BLOCK) {
+				// System.out.println(worldIn.getBlockState(raytraceresult.getBlockPos()).getBlock());
+				if (worldIn.getBlockState(raytraceresult.getBlockPos()).getBlock() == Main.charger)
+					return new ActionResult<ItemStack>(EnumActionResult.PASS, p.getHeldItem(handIn));
+			}
 		}
 
 		if (worldIn.isRemote)
@@ -112,8 +114,10 @@ public class ItemPowerCrystal extends MyItem {
 		Vec3d v = p.getLookVec();
 
 		EntityPower e = new EntityPower(worldIn, //
-				p.posX + v.x, p.posY + .5, p.posZ + v.z, //
-				0, .5, 0);
+				p.posX + v.x, p.posY + .5, p.posZ + v.z);
+		// EntityPower e = new EntityPower(worldIn, //
+		// p.posX + v.x, p.posY + .5, p.posZ + v.z, //
+		// 0, .5, 0);
 		e.setLateEntityNBT(p.getHeldItem(handIn).getTagCompound());
 		p.getEntityWorld().spawnEntity(e);
 

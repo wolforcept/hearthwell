@@ -8,11 +8,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import wolforce.HwellConfig;
 import wolforce.Main;
 import wolforce.Util;
@@ -37,10 +40,12 @@ public class EntityPower extends Entity {
 		super(worldIn);
 	}
 
-	public EntityPower(World world, double x, double y, double z, double vx, double vy, double vz) {
+	// public EntityPower(World world, double x, double y, double z, double vx,
+	// double vy, double vz) {
+	public EntityPower(World world, double x, double y, double z) {
 		this(world);
 		setPosition(x, y, z);
-		addVelocity(vx, vy, vz);
+		// addVelocity(vx, vy, vz);
 	}
 
 	@Override
@@ -74,29 +79,37 @@ public class EntityPower extends Entity {
 		return _energy + (int) (lossPerRange * erange);
 	}
 
-	boolean isMovingUp = true;
+	// boolean isMovingUp = true;
 
 	private String customName = "";
 
 	@Override
 	public void onEntityUpdate() {
-		super.onEntityUpdate();
-		if (isMovingUp) {
-			move(MoverType.SELF, 0, motionY, 0);
-			motionY *= .7;
-			// if (motionX < .001)
-			// motionX = 0;
-			if (motionY < .001) {
-				motionY = 0;
-				isMovingUp = false;
-			}
-			// if (motionZ < .001)
-			// motionZ = 0;
-		}
+		this.world.profiler.startSection("entityBaseTick");
+		this.prevDistanceWalkedModified = this.distanceWalkedModified;
+		this.prevPosX = this.posX;
+		this.prevPosY = this.posY;
+		this.prevPosZ = this.posZ;
+		this.prevRotationPitch = this.rotationPitch;
+		this.prevRotationYaw = this.rotationYaw;
+		this.firstUpdate = false;
+		this.world.profiler.endSection();
+
 		if (world.isRemote)
 			return;
-		// if (Math.random() < .1)
-		// power--;
+
+		// if (isAirBorne) {
+		// // System.out.println("EntityPower.onEntityUpdate(" + motionY + ")");
+		// // move(MoverType.SELF, 0, vY, 0);
+		// // vY *= .7;
+		// move(MoverType.SELF, 0, motionY, 0);
+		// motionY *= .7;
+		// // setPosition(posX, posY + vY, posZ);
+		// if (motionY < .01) {
+		// motionY = 0;
+		// isAirBorne = false;
+		// }
+		// }
 
 		if (getPower() <= 0 && HwellConfig.powerCrystalDropsWhenEmpty && !isDead)
 			pop();

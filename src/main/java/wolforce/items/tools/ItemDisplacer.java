@@ -36,7 +36,7 @@ public class ItemDisplacer extends MyItem {
 
 	@Override
 	public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
-		if (this.powered) {
+		if (this.powered && !Util.hasEnchantment(stack, Enchantments.SILK_TOUCH)) {
 			stack.addEnchantment(Enchantments.SILK_TOUCH, 1);
 		}
 		return super.initCapabilities(stack, nbt);
