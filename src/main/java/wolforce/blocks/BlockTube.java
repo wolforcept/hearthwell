@@ -16,6 +16,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
 import wolforce.HwellConfig;
 import wolforce.Main;
 import wolforce.Util;
@@ -85,7 +87,13 @@ public class BlockTube extends MyLog {
 	private boolean isPossible(int nTubes, World world, BlockPos pos) {
 		return nTubes > 0 && nTubes <= 8 && //
 				(world.canBlockSeeSky(pos.up(nTubes)) || !HwellConfig.tubeIsRequiredToSeeSky) && //
-				(world.isDaytime() || !HwellConfig.tubeIsRequiredToBeDay);
+				(isDay(world) || !HwellConfig.tubeIsRequiredToBeDay);
+	}
+
+	private boolean isDay(World world) {
+		if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
+			return Util.clientIsDaytime(world);
+		return world.isDaytime();
 	}
 
 	/**

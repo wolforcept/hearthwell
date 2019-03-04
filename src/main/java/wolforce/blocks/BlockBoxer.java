@@ -1,16 +1,16 @@
 package wolforce.blocks;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import wolforce.HwellConfig;
 import wolforce.Util;
 import wolforce.blocks.base.BlockEnergyConsumer;
+import wolforce.blocks.base.HasTE;
 import wolforce.blocks.tile.TileBoxer;
 
-public class BlockBoxer extends Block implements ITileEntityProvider, BlockEnergyConsumer {
+public class BlockBoxer extends Block implements HasTE, BlockEnergyConsumer {
 
 	public BlockBoxer(String name) {
 		super(Material.ROCK);

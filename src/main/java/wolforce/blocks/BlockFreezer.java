@@ -25,7 +25,7 @@ public class BlockFreezer extends BlockMachineBase implements BlockEnergyConsume
 
 	@Override
 	public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
-		if (world.isRemote)
+		if (world.isRemote || world.isBlockPowered(pos))
 			return;
 		if (!world.isDaytime() || !HwellConfig.freezerIsRequiredToBeNight) {
 

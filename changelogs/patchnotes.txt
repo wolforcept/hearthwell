@@ -1,82 +1,5 @@
-<!DOCTYPE html>
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<meta http-equiv="Content-Language" content="en-gb">
-<link rel="icon" href="../docs/hearthwell.png">
-<link href="../stylesheet.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Oxygen+Mono" rel="stylesheet">
-<title>Hearth Well</title></head>
-<style>
-
-code {
-	font-family: 'Oxygen Mono', monospace;
-	font-size: 16px;
-}
-.title {
-	font-size: 28px;
-	font-weight: bold;
-	color: ##ffbb00;
-}
-.title2 {
-	font-size: 18px;
-	font-weight: bold;
-	color: #3355DD;
-}
-.ddd {
-	font-weight: bold;
-	color: #339955;
-}
-.chg {
-	font-weight: bold;
-	color: #F19E0E;
-}
-.rmv {
-	font-weight: bold;
-	color: #DD5533;
-}
-.fxd {
-	font-weight: bold;
-	color: #883399;
-}
-.discord {
-	font-weight: bold !important;
-	color: #666666 !important; 
-}
-.bolden {
-	font-weight: bold;
-}
-pre {
- white-space: pre-wrap;       /* css-3 */
- white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
- white-space: -pre-wrap;      /* Opera 4-6 */
- white-space: -o-pre-wrap;    /* Opera 7 */
- word-wrap: break-word;       /* Internet Explorer 5.5+ */
-}
-</style>
-<body>
-<object style="border:0;padding=0;" width="1000" height="50px" type="text/html" data="../navbar.html"></object>
-
-<h1>Patch Notes</h1>
-<hr>
-
-<pre>
-  <code id="main">
-{0.2.1}
-
-discstart
-Hello @everyone!
-Hearth Well 0.2 is out now, and with it some more documentation!
-Along the new stuff is:
- - A new Power System, composed by the Power Crystals and the Charger Multi-block to charge them when they deplete. Power Crystals have different parts that require different ingredients, its a dynamic recipe. Power Crystals also have traits, like range and purity.
- - A new block placer called Setter, that will place items that fly past it, with configurable range in game.
- - 3 improved stabilisers, including one that really does its job well.
- - Many fixes and new tweakable recipes!
-
-Curseforge: https://minecraft.curseforge.com/projects/hearth-well
-Changelog: https://wolforcept.github.io/hearthwell/changelogs/
-Documentation:  https://wolforcept.github.io/hearthwell/
-discend
-
-[ BALANCE ]
+//0.2.1
+[New Stuff]
 Added a way to prevent the Gravity, Anti-Gravity, Separator, Puller, Nourisher and Charger machines from working by applying a redstone signal.
  - To prevent a Charger from working, a redstone signal can also be applied to the surrounding 4 Gravity Blocks.
  - To prevent a Puller from working, a redstone signal can also be applied to the Surrounding 9 Heat Blocks.
@@ -92,23 +15,25 @@ Changed the amount of glowstone that light collectors drop.
 Changed the default range of the freezer to 2, down from 5.
 Changed Dust Pickers Anvil Repair Materials to also include Soulsteel.
 Removed the Powered Gravity and Powered Anti-Gravity Blocks.
-[ BUG FIXES ]
 Fixed displacer getting tons of silk touch enchantments. (Maybe should've left that in.)
 
+
 <hr>
-{0.2}
 
-discstart
-Hey @everyone!
-"Small" update to Hearth Well but a huge difference to modpacks!
-Now you can add your Custom Core Blocks, and even customize two colors of them!
-Tweaked mysterious bushes to be more valuable when full grown.
-added a config to change the probability of a puller filter pulling filtered items (default is 50%).
-added quartz and prismarine burst seeds.
-Don't forget to delete your recipes JSON config file.
-https://minecraft.curseforge.com/projects/hearth-well
-discend
+Hello @everyone 
+Hearth Well 0.2 is out now, and with it some more documentation!
+Along the new stuff is:
+ - A new Power System, composed by the Power Crystals and the Charger Multi-block to charge them when they deplete. Power Crystals have different parts that require different ingredients, its a dynamic recipe. Power Crystals also have traits, like range and purity.
+ - A new block placer called Setter, that will place items that fly past it, with configurable range in game.
+ - 3 improved stabilisers, including one that really does its job well.
+ - Many fixes and new tweakable recipes!
 
+Curseforge: https://minecraft.curseforge.com/projects/hearth-well
+Changelog: https://wolforcept.github.io/hearthwell/changelogs/
+Documentation:  https://wolforcept.github.io/hearthwell/
+
+
+// 0.2
 [ NEW STUFF ]
 Update: to enable the hwell_recipes.json file and to be able to change recipes, you must now enable "customRecipesEnabled" in the config!
 Added a new machine block, the Setter. When an item passes through its range, the setter will try to place that block down.
@@ -144,55 +69,40 @@ ALL Entities will now, by default, be prevented from traveling to the nether by 
 Fixed a bug with the Dust Picker Holder where sometimes a player was unable to retrieve dust pickers. (FINALLY!!)
 Fixed bad localization when interacting with other mods.
 
-<hr>
-{0.1.1}
 
-[ NEW STUFF ]
-Update: Now you can add your Custom Core Blocks, and even customize two colors of them!
-Changed mysterious bushes to be more valuable when full grown
-Added a config to change the probability of a puller filter pulling filtered items (default is 50%)
-Added quartz and prismarine burst seeds
 
-<hr>
-{0.1}
 
-[ NEW STUFF ]
-Hearth Well successfully runs on servers now
-Added particles to blocks being consumed by core blocks (or maybe fixed, idk)
-Added particles to tubes when they are correctly placed and have a correct recipe
+
+
+
+
+
+
+// 0.1.1
+Now you can add your Custom Core Blocks, and even customize two colors of them!
+tweaked mysterious bushes to be more valuable when full grown
+added a config to change the probability of a puller filter pulling filtered items (default is 50%)
+added quartz and prismarine burst seeds
+
+
+
+
+
+
+
+
+// 0.1
+hearth well successfully runs on servers now
+added particles to blocks being consumed by core blocks (or maybe fixed, idk)
+added particles to tubes when they are correctly placed and have a correct recipe
 loot kits left on the ground will now hatch after a specified ammount of time (default is half a minute)
-Added a config json file with many recipes
-Added a Block of Skin Hide
+added a config json file with many recipes
+added a Block of Skin Hide
 greatly decreased overall tube recipe speed, particularly in higher tube counts
-[ BUG FIXES ]
-Fixed separator weird item interaction
-Fixed range of gravity blocks being one less to the positive directions
-Fixed some unlocalized names
-Fixed the wrong name in the info file
+fixed separator weird item interaction
+fixed range of gravity blocks being one less to the positive directions
+fixed some unlocalized names
+fixed the wrong name in the info file
 leaves are now not leaves. (they are just normal blocks, this fixes weird leaf behaviour for now)
-Fixed Heat Furnaces ignoring metadata
-Fixed core blocks not accepting consumable blocks from all 6 directions
-  </code>
-</pre>
-
-<script>
-	var doc = document.getElementById("main");
-	var inner = doc.innerHTML;
-
-	inner = inner.replace(/(Update:|Hearth Well)/g, '<span class="bolden">$1</span>');
-	inner = inner.replace(/(Added)/g, '<span class="ddd">$1</span>');
-	inner = inner.replace(/(Changed)/g, '<span class="chg">$1</span>');
-	inner = inner.replace(/(Removed)/g, '<span class="rmv">$1</span>');
-	inner = inner.replace(/(Fixed)/g, '<span class="fxd">$1</span>');
-	inner = inner.replace(/( - )/g, ' • ');
-	
-	inner = inner.replace(/(\[)/g, '<span class="title2">['); 
-	inner = inner.replace(/(\])/g, ']</span>');
-	inner = inner.replace(/(\{([A-Z\. a-z0-9])+\})+/g, '<span class="title">$1</span>');
-	inner = inner.replace(/discstart/g, '<span class="discord">'); 
-	inner = inner.replace(/discend/g, '</span>');
-	
-	doc.innerHTML = inner;
-</script>
-</body>
-</html>
+fixed Heat Furnaces ignoring metadata
+fixed core blocks not accepting consumable blocks from all 6 directions

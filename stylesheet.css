@@ -1,0 +1,28 @@
+body{
+	padding-left: 5%;
+	padding-right: 5%;
+}
+h1, h2, h3{
+	font-family: 'PT Sans', sans-serif;
+}
+a, p, table, object{
+	font-family: 'Open Sans', sans-serif;
+}
+table {
+	width: 100%;
+	border-spacing: 25px;
+} 
+table {
+	margin: 0 auto;
+}
+.coring {
+	border-spacing: 0px;
+	border-collapse: collapse;
+}
+.coring td{
+	border: 1px solid #000;
+	padding: 8px;
+}
+.coring .titles,.titles td{
+	border: 0;
+}

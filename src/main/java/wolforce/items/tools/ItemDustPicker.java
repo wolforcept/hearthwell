@@ -5,6 +5,7 @@ import java.util.HashSet;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
@@ -25,7 +26,7 @@ public class ItemDustPicker extends ItemTool {
 		super(0, 0, ToolMaterial.IRON, new HashSet<Block>());
 		this.shard = shard;
 		Util.setReg(this, name);
-		setMaxDamage(64);
+		setMaxDamage(128);
 	}
 
 	@Override
@@ -35,7 +36,7 @@ public class ItemDustPicker extends ItemTool {
 
 	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-		return repair.getItem() == Main.heavy_ingot;
+		return repair.getItem() == Main.heavy_ingot || repair.getItem() == Main.soulsteel_ingot;
 	}
 
 	@Override

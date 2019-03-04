@@ -1,7 +1,6 @@
 package wolforce.blocks;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -17,10 +16,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import wolforce.Main;
 import wolforce.Util;
+import wolforce.blocks.base.HasTE;
 import wolforce.blocks.tile.TileCore;
 import wolforce.recipes.RecipeCoring;
 
-public class BlockCore extends Block implements ITileEntityProvider {
+public class BlockCore extends Block implements HasTE {
 
 	public static PropertyEnum TYPE = PropertyEnum.create("type", CoreType.class);
 	private boolean isToRegister;
@@ -113,6 +113,11 @@ public class BlockCore extends Block implements ITileEntityProvider {
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		return new TileCore();
+	}
+
+	@Override
+	public boolean isToRegister() {
+		return isToRegister;
 	}
 
 	// BLOCK STATES

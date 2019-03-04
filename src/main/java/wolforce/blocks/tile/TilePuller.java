@@ -1,6 +1,7 @@
 package wolforce.blocks.tile;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -57,7 +58,7 @@ public class TilePuller extends TileEntity implements ITickable {
 	@Override
 	public void update() {
 
-		if (world.isRemote)
+		if (world.isRemote || isPowered())
 			return;
 
 		if (cooldown > 0) {
@@ -96,6 +97,16 @@ public class TilePuller extends TileEntity implements ITickable {
 				Util.spawnItem(world, pos, result, 0, .4, 0);
 			}
 		}
+	}
+
+	private boolean isPowered() {
+		for (int dx = -1; dx <= 1; dx++) {
+			for (int dz = -1; dz <= 1; dz++) {
+				if (world.isBlockPowered(new BlockPos(pos.getX() + dx, pos.getY() - 1, pos.getZ() + dz)))
+					return true;
+			}
+		}
+		return world.isBlockPowered(pos);
 	}
 
 	private int getNrExtraLayers(HashMap<String, BlockWithMeta> table) {

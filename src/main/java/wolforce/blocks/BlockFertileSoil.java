@@ -1,7 +1,6 @@
 package wolforce.blocks;
 
 import net.minecraft.block.BlockSapling;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -13,9 +12,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import wolforce.MyBlock;
 import wolforce.blocks.base.BlockWithDescription;
+import wolforce.blocks.base.HasTE;
 import wolforce.blocks.tile.TileFertileSoil;
 
-public class BlockFertileSoil extends MyBlock implements ITileEntityProvider, BlockWithDescription {
+public class BlockFertileSoil extends MyBlock implements HasTE, BlockWithDescription {
 
 	public BlockFertileSoil(String name) {
 		super(name, Material.GRASS, true);

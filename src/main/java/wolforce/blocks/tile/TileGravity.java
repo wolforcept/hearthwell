@@ -13,22 +13,22 @@ public class TileGravity extends TileEntity implements ITickable {
 
 	@Override
 	public void update() {
-		if (world.getBlockState(pos).getBlock() == Main.gravity_block || world.getBlockState(pos).getBlock() == Main.gravity_block_mini
-				|| world.isBlockPowered(pos)) {
-			int dist = world.getBlockState(pos).getBlock() == Main.gravity_block_mini ? //
-					HwellConfig.gravityBlockRangeMini : HwellConfig.gravityBlockRange;
-			List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class,
-					new AxisAlignedBB(pos.add(-dist, -dist, -dist), pos.add(dist + 1, dist + 1, dist + 1)));
-			for (EntityItem entityItem : items) {
-				entityItem.motionX += .01 * (pos.getX() + .5 - entityItem.posX);
-				entityItem.motionY += .01 * (pos.getY() - entityItem.posY);
-				entityItem.motionZ += .01 * (pos.getZ() + .5 - entityItem.posZ);
-				entityItem.setNoDespawn();
-				// double dir = Math.atan2(entityItem.posZ - pos.getZ(), entityItem.posX -
-				// pos.getX());
-				// entityItem.posX += Math.cos(dir);
-				// entityItem.posY += Math.sin(dir);
-			}
+		if (world.isRemote || world.isBlockPowered(pos))
+			return;
+
+		int dist = world.getBlockState(pos).getBlock() == Main.gravity_block_mini ? //
+				HwellConfig.gravityBlockRangeMini : HwellConfig.gravityBlockRange;
+		List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class,
+				new AxisAlignedBB(pos.add(-dist, -dist, -dist), pos.add(dist + 1, dist + 1, dist + 1)));
+		for (EntityItem entityItem : items) {
+			entityItem.motionX += .01 * (pos.getX() + .5 - entityItem.posX);
+			entityItem.motionY += .01 * (pos.getY() - entityItem.posY);
+			entityItem.motionZ += .01 * (pos.getZ() + .5 - entityItem.posZ);
+			entityItem.setNoDespawn();
+			// double dir = Math.atan2(entityItem.posZ - pos.getZ(), entityItem.posX -
+			// pos.getX());
+			// entityItem.posX += Math.cos(dir);
+			// entityItem.posY += Math.sin(dir);
 		}
 	}
 

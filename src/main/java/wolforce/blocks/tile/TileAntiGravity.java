@@ -16,28 +16,27 @@ public class TileAntiGravity extends TileEntity implements ITickable {
 
 	@Override
 	public void update() {
-		if (world.getBlockState(pos).getBlock() == Main.antigravity_block || world.isBlockPowered(pos)) {
-			List<Entity> entities = world.getEntitiesWithinAABB(Entity.class,
-					new AxisAlignedBB(pos.add(-5, -5, -5), pos.add(5, 5, 5)));
-			for (Entity e : entities) {
 
-				if (e instanceof EntityPlayer && ((EntityPlayer) e).isCreative())
-					continue;
+		if (world.isBlockPowered(pos))
+			return;
 
-				e.addVelocity(0, .08, 0);
+		List<EntityPlayer> entities = world.getEntitiesWithinAABB(EntityPlayer.class,
+				new AxisAlignedBB(pos.add(-5, -5, -5), pos.add(5, 5, 5)));
+		for (EntityPlayer e : entities) {
 
-				if (e instanceof EntityPlayer) {
+			if (e instanceof EntityPlayer && ((EntityPlayer) e).isCreative())
+				continue;
 
-					EntityPlayer player = (EntityPlayer) e;
-					if (e.isSneaking()) {
-						Vec3d look = player.getLookVec();
-						e.addVelocity(speed * look.x, speed * look.y, speed * look.z);
-					} else {
-						e.motionX = e.motionY = e.motionZ = 0;
-					}
-				}
-				e.fallDistance = 0;
+			e.addVelocity(0, .08, 0);
+
+			EntityPlayer player = (EntityPlayer) e;
+			if (e.isSneaking()) {
+				Vec3d look = player.getLookVec();
+				e.addVelocity(speed * look.x, speed * look.y, speed * look.z);
+			} else {
+				e.motionX = e.motionY = e.motionZ = 0;
 			}
+			e.fallDistance = 0;
 		}
 	}
 

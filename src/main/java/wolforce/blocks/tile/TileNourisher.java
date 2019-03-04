@@ -21,7 +21,7 @@ public class TileNourisher extends TileEntity implements ITickable {
 
 	@Override
 	public void update() {
-		if (world.isRemote)
+		if (world.isRemote || world.isBlockPowered(pos))
 			return;
 
 		if (cooldown > 0) {

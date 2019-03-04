@@ -66,7 +66,7 @@ public class TileSeparator extends TileEntity implements ITickable {
 	@Override
 	public void update() {
 
-		if (world.isRemote)
+		if (world.isRemote || world.isBlockPowered(pos) || world.isBlockPowered(pos.down()))
 			return;
 
 		if (!Util.isValid(inventory.getStackInSlot(0)))

@@ -3,7 +3,6 @@ package wolforce.blocks;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,10 +15,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import wolforce.Util;
+import wolforce.blocks.base.HasTE;
 import wolforce.blocks.tile.TilePickerHolder;
 import wolforce.items.tools.ItemDustPicker;
 
-public class BlockPickerHolder extends Block implements ITileEntityProvider {
+public class BlockPickerHolder extends Block implements HasTE {
 
 	private final static double F = 1.0 / 16.0;
 	protected static final AxisAlignedBB aabb = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 16 * F, 16 * F, 16 * F);

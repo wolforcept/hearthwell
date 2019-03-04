@@ -1,41 +1,26 @@
 package wolforce.blocks;
 
-import java.util.List;
 import java.util.Random;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLog;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import wolforce.HwellConfig;
 import wolforce.Main;
 import wolforce.Util;
 import wolforce.blocks.base.BlockEnergyConsumer;
-import wolforce.blocks.base.BlockWithDescription;
+import wolforce.blocks.base.HasTE;
 import wolforce.blocks.tile.TileSetter;
-import wolforce.items.ItemGrindingWheel;
-import wolforce.recipes.RecipeTube;
 
-public class BlockSetter extends Block implements ITileEntityProvider, BlockEnergyConsumer {
+public class BlockSetter extends Block implements HasTE, BlockEnergyConsumer {
 
 	public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.<EnumFacing>create("facing", EnumFacing.class);
 

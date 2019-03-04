@@ -3,7 +3,6 @@ package wolforce.blocks;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -24,10 +23,11 @@ import wolforce.HwellConfig;
 import wolforce.Main;
 import wolforce.Util;
 import wolforce.blocks.base.BlockEnergyConsumer;
+import wolforce.blocks.base.HasTE;
 import wolforce.blocks.tile.TilePrecisionGrinder;
 import wolforce.items.ItemGrindingWheel;
 
-public class BlockPrecisionGrinder extends Block implements ITileEntityProvider, BlockEnergyConsumer {
+public class BlockPrecisionGrinder extends Block implements HasTE, BlockEnergyConsumer {
 
 	private final static double F = 1.0 / 16.0;
 	protected static final AxisAlignedBB aabb = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 12.0 * F, 1.0D);

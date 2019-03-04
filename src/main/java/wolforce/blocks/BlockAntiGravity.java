@@ -1,18 +1,15 @@
 package wolforce.blocks;
 
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import wolforce.blocks.base.BlockMachineBase;
+import wolforce.blocks.base.HasTE;
 import wolforce.blocks.tile.TileAntiGravity;
 
-public class BlockAntiGravity extends BlockMachineBase implements ITileEntityProvider {
+public class BlockAntiGravity extends BlockMachineBase implements HasTE {
 
-	private boolean isTileToRegister;
-
-	public BlockAntiGravity(String name, boolean isTileToRegister) {
+	public BlockAntiGravity(String name) {
 		super(name);
-		this.isTileToRegister = isTileToRegister;
 	}
 
 	@Override

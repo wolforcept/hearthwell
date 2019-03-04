@@ -67,7 +67,7 @@ public class TileCharger extends TileEntity implements ITickable {
 	@Override
 	public void update() {
 
-		if (world.isRemote)
+		if (world.isRemote || isPowered())
 			return;
 
 		if (cooldown > 0) {
@@ -114,6 +114,14 @@ public class TileCharger extends TileEntity implements ITickable {
 				}
 			}
 		}
+	}
+
+	private boolean isPowered() {
+		for (EnumFacing facing : EnumFacing.HORIZONTALS) {
+			if (world.isBlockPowered(pos.offset(facing)))
+				return true;
+		}
+		return world.isBlockPowered(pos);
 	}
 
 	private int tryConsume(ItemStack powerCrystal, ItemStack stack) {

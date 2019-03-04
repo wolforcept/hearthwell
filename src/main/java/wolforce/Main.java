@@ -60,6 +60,7 @@ import wolforce.blocks.BlockSetter;
 import wolforce.blocks.BlockSlabLamp;
 import wolforce.blocks.BlockStoneDust;
 import wolforce.blocks.BlockTube;
+import wolforce.blocks.base.HasTE;
 import wolforce.blocks.simplevariants.MyGlass;
 import wolforce.blocks.simplevariants.MyLog;
 import wolforce.fluids.BlockLiquidSouls;
@@ -149,8 +150,8 @@ public class Main {
 	public static Block myst_bush, myst_bush_big;
 	public static Block myst_dust_block;
 	public static Block dust_block;
-	public static Block dismantler, crushing_block, gravity_block, gravity_block_mini, gravity_powered_block, antigravity_block,
-			antigravity_powered_block;
+	public static Block dismantler, crushing_block, gravity_block, gravity_block_mini, /* gravity_powered_block, */ antigravity_block
+	/* , antigravity_powered_block */;
 	public static Block myst_log, myst_planks, myst_leaves;
 	public static Block raw_asul_block, asul_block;
 	public static Block asul_machine_case;
@@ -335,16 +336,12 @@ public class Main {
 		blocks.add(crushing_block);
 		heavy_shears = new ItemHeavyShears("heavy_shears");
 		items.add(heavy_shears);
-		gravity_block = new BlockGravity("gravity_block", true);
+		gravity_block = new BlockGravity("gravity_block");
 		blocks.add(gravity_block);
-		gravity_block_mini = new BlockGravityMini("gravity_block_mini", false);
+		gravity_block_mini = new BlockGravityMini("gravity_block_mini");
 		blocks.add(gravity_block_mini);
-		gravity_powered_block = new BlockGravity("gravity_powered_block", false);
-		blocks.add(gravity_powered_block);
-		antigravity_block = new BlockAntiGravity("antigravity_block", true);
+		antigravity_block = new BlockAntiGravity("antigravity_block");
 		blocks.add(antigravity_block);
-		antigravity_powered_block = new BlockAntiGravity("antigravity_powered_block", false);
-		blocks.add(antigravity_powered_block);
 
 		core_stone = new BlockCore("core_stone", true);
 		blocks.add(core_stone);
@@ -743,10 +740,9 @@ public class Main {
 				asul_block, soulsteel_block, mystic_iron_block, heavy_block, metaldiamond_block, //
 				crystal_block, crystal_nether_block, //
 				core_stone, core_heat, core_green, core_sentient, //
-				crushing_block, boxer, producer, //
 				compressed_clay, compressed_wool, mutation_paste_block, //
 				protection_block, heavy_protection_block, //
-				gravity_block, gravity_powered_block, antigravity_block, Main.antigravity_powered_block,//
+				// crushing_block,gravity_block, antigravity_block, boxer, producer,//
 		};
 		boxes = new BlockBox[blocksToBox.length];
 		for (int i = 0; i < blocksToBox.length; i++) {
@@ -823,7 +819,9 @@ public class Main {
 
 		HashSet<Class> loaded = new HashSet<>();
 		for (Block block : blocks)
-			if (block instanceof ITileEntityProvider) {
+			if (block instanceof HasTE) {
+				if (!((HasTE) block).isToRegister())
+					continue;
 				// && ((IEntity) block).isToRegister() //
 				// && GameRegistry.findRegistry(((IEntity) block).getTileEntityClass()) ==
 				// null

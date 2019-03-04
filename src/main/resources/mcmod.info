@@ -10,5 +10,5 @@
     "credits": "Minecraft and Forge",
     "logoFile": "logo.png",
     "screenshots": ["everything.jpg"],
-    "dependencies": []
+    "dependencies": [patchouli]
 }]

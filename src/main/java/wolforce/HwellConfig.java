@@ -37,6 +37,10 @@ public class HwellConfig {
 
 	// ----------------------------------------
 
+	// PICKING TABLE
+	@Config.Comment({ "Chance that you will get a shard in a picking table. (default: .333)" })
+	public static double pickingTableChance = .333;
+
 	// NOURISHER
 	@Config.Comment({ "Charger Cooldown in ticks (default: 100)" })
 	public static int nourisherCooldown = 100;
@@ -83,7 +87,7 @@ public class HwellConfig {
 
 	@Config.Comment({ "Range of freezer? (default: 5)" })
 	@Config.RangeInt(min = 1, max = 16)
-	public static int freezerRange = 5;
+	public static int freezerRange = 2;
 
 	@Config.Comment({ "Does freezer only work in night time? (default: true)" })
 	public static boolean freezerIsRequiredToBeNight = true;
@@ -116,11 +120,11 @@ public class HwellConfig {
 	public static int boxerNrOfBoxesSpawned = 32;
 
 	// ----------------------------------------
-	
+
 	// MYST FERTILIZER
 	@Config.Comment({ "Is myst fertilizer required to see sky? (default: true)" })
 	public static boolean mystSaplingRequireSky = true;
-	
+
 	// TUBES
 	@Config.Comment({ "Is tube required to see sky? (default: true)" })
 	public static boolean tubeIsRequiredToSeeSky = true;

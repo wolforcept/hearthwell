@@ -1,7 +1,6 @@
 package wolforce.blocks;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -13,9 +12,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import wolforce.Util;
 import wolforce.blocks.base.BlockWithDescription;
+import wolforce.blocks.base.HasTE;
 import wolforce.blocks.tile.TileHeatFurnace;
 
-public class BlockHeatFurnace extends Block implements ITileEntityProvider, BlockWithDescription {
+public class BlockHeatFurnace extends Block implements HasTE, BlockWithDescription {
 
 	public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.<EnumFacing>create("facing", EnumFacing.class);
 
