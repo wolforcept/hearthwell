@@ -179,12 +179,12 @@ Fixed core blocks not accepting consumable blocks from all 6 directions
 	var doc = document.getElementById("main");
 	var inner = doc.innerHTML;
 
-	inner = inner.replace(/(Update:|Hearth Well)/g, '<span class="bolden">$1</span>');
+	inner = inner.replace(/(Update:|Hearth Well| - )/g, '<span class="bolden">$1</span>');
 	inner = inner.replace(/(Added)/g, '<span class="ddd">$1</span>');
 	inner = inner.replace(/(Changed)/g, '<span class="chg">$1</span>');
 	inner = inner.replace(/(Removed)/g, '<span class="rmv">$1</span>');
 	inner = inner.replace(/(Fixed)/g, '<span class="fxd">$1</span>');
-	inner = inner.replace(/( - )/g, ' • ');
+	inner = inner.replace(/(Fixed)/g, '<span class="fxd">$1</span>');
 	
 	inner = inner.replace(/(\[)/g, '<span class="title2">['); 
 	inner = inner.replace(/(\])/g, ']</span>');
