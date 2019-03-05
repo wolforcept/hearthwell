@@ -783,7 +783,6 @@ public class Main {
 		};
 		liquid_souls = new Fluid("liquid_souls", Util.res("liquid_souls"), Util.res("liquid_souls_flowing"), Color.white);
 		FluidRegistry.addBucketForFluid(liquid_souls);
-		// FluidRegistry.registerFluid(liquid_souls);
 
 		liquid_souls_block = new BlockLiquidSouls(liquid_souls, material_liquid_souls);
 		blocks.add(liquid_souls_block);

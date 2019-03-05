@@ -77,6 +77,7 @@ public class RegisterRecipes {
 	private static final String INNER_RECIPES_FILE = "recipes.json";
 	public static boolean old_version_recipes_file = false;
 	public static boolean errored_recipes_file = false;
+	public static IRecipe recipePowerCrystal;
 
 	// MUST REGISTER CORE BLOCKS BEFORE EVERYTHING ELSE (MARTELADA)
 
@@ -232,8 +233,8 @@ public class RegisterRecipes {
 				'C', asul_machine_case, //
 				'Y', crystal_block);
 
-		event.getRegistry().register(new RecipePowerCrystal().setRegistryName(Util.res("hwell:recipe_power_crystal")));
-
+		recipePowerCrystal = new RecipePowerCrystal().setRegistryName(Util.res("hwell:recipe_power_crystal"));
+		event.getRegistry().register(recipePowerCrystal);
 		// event.getRegistry().register(new Recipe);
 	}
 

@@ -236,6 +236,16 @@ tile.hwell.totem_creeper.name=Creeper Totem
 tile.hwell.totem_skeleton.name=Skeleton Totem
 tile.hwell.totem_enderman.name=Enderman Totem
 
-tile.hwell.hwell.fluid_liquid_souls=Liquid Souls
+tile.fluid_liquid_souls=Liquid Souls
+tile.hwell.fluid_liquid_souls=Liquid Souls
+
+fluid.liquid_souls=Liquid Souls
 fluid.hwell.liquid_souls=Liquid Souls
+
+fluid.liquid_souls.name=Liquid Souls
+fluid.hwell.liquid_souls.name=Liquid Souls
+
+Liquid Souls.name=Liquid Souls
+hwell.Liquid Souls.name=Liquid Souls
+
 itemGroup.hwell=Hearth Well

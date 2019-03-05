@@ -9,10 +9,15 @@ import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.IIngredientRegistry;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
+import mezz.jei.plugins.vanilla.crafting.CraftingRecipeCategory;
+import mezz.jei.runtime.JeiHelpers;
 import net.minecraft.item.ItemStack;
 import wolforce.Hwell;
 import wolforce.Main;
+import wolforce.Util;
 import wolforce.blocks.BlockCore;
+import wolforce.registry.RegisterRecipes;
 
 @JEIPlugin
 public class JeiIntegration implements IModPlugin {
@@ -68,6 +73,8 @@ public class JeiIntegration implements IModPlugin {
 				"Obtained by right clicking a HeatBlock with a flint and steel.", "Just be careful...");
 		reg.addIngredientInfo(new ItemStack(Main.empty_rod), VanillaTypes.ITEM, "Hold right click to use.");
 
+		System.out.println("AAAAAAAAAAAAAA" + RegisterRecipes.recipePowerCrystal);
+		reg.addRecipes(Util.listOfOne(RegisterRecipes.recipePowerCrystal), VanillaRecipeCategoryUid.CRAFTING);
 		// reg.addRecipeCatalyst(Main.core_stone, JeiCatCoring.UID_CORING_STONE);
 
 		// reg.addRecipes(recipes, "");
