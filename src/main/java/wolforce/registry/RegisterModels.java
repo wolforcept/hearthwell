@@ -28,12 +28,14 @@ import wolforce.blocks.tile.TileCharger;
 import wolforce.blocks.tile.TilePickerHolder;
 import wolforce.blocks.tile.TileSeparator;
 import wolforce.blocks.tile.TileStatue;
+import wolforce.blocks.tile.TileTray;
 import wolforce.client.CustomBoxStateMapper;
 import wolforce.client.CustomCoreStateMapper;
 import wolforce.client.TesrCharger;
 import wolforce.client.TesrPickerHolder;
 import wolforce.client.TesrSeparator;
 import wolforce.client.TesrStatue;
+import wolforce.client.TesrTray;
 import wolforce.client.models.power.RenderPower;
 import wolforce.entities.EntityPower;
 
@@ -116,6 +118,7 @@ public class RegisterModels {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileCharger.class, new TesrCharger());
 		ClientRegistry.bindTileEntitySpecialRenderer(TilePickerHolder.class, new TesrPickerHolder());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileStatue.class, new TesrStatue());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileTray.class, new TesrTray());
 
 	}
 

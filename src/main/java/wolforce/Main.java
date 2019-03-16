@@ -59,6 +59,7 @@ import wolforce.blocks.BlockSeparator;
 import wolforce.blocks.BlockSetter;
 import wolforce.blocks.BlockSlabLamp;
 import wolforce.blocks.BlockStoneDust;
+import wolforce.blocks.BlockTray;
 import wolforce.blocks.BlockTube;
 import wolforce.blocks.base.HasTE;
 import wolforce.blocks.simplevariants.MyGlass;
@@ -182,6 +183,7 @@ public class Main {
 	public static BlockProducer producer;
 	public static BlockPuller puller;
 	public static BlockCharger charger;
+	public static BlockTray tray;
 
 	//
 
@@ -508,6 +510,9 @@ public class Main {
 
 		charger = new BlockCharger("charger");
 		blocks.add(charger);
+
+		tray = new BlockTray("tray");
+		blocks.add(tray);
 
 		// TIER 2
 

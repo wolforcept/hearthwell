@@ -1,4 +1,4 @@
-package wolforce.blocks;
+package wolforce.blocks.base;
 
 import net.minecraft.item.Item;
 
