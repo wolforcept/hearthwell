@@ -46,35 +46,62 @@ public class BlockTray extends Block implements HasTE, BlockWithDescription {
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side,
 			float hitX, float hitY, float hitZ) {
+
+		if (player.isSneaking())
+			return false;
+
+		if (side != world.getBlockState(pos).getValue(FACING))
+			return false;
+
 		TileTray tile = (TileTray) world.getTileEntity(pos);
-		ItemStack stack = tile.inventory.getStackInSlot(0);
+
+		int dx = hitX < .333 ? 0 : hitX < .666 ? 1 : 2;
+		int dy = hitY < .333 ? 0 : hitY < .666 ? 1 : 2;
+		int dz = hitZ < .333 ? 0 : hitZ < .666 ? 1 : 2;
+
+		int index = dx + 3 * dz;
+		if (side == EnumFacing.NORTH)
+			index = dx + 3 * dy;
+		if (side == EnumFacing.SOUTH)
+			index = dx + 3 * dy;
+		if (side == EnumFacing.WEST)
+			index = dz + 3 * dy;
+		if (side == EnumFacing.EAST)
+			index = dz + 3 * dy;
+
+		if (index < 0 || index > 8)
+			return false;
+
+		ItemStack stack = tile.inventory.getStackInSlot(index);
 
 		// IF THERE IS SOMETHING INSIDE
 		if (Util.isValid(stack)) {
 			if (!world.isRemote) {
-				Util.spawnItem(world, pos.down(), tile.inventory.extractItem(0, 64, false));
+				Util.spawnItem(world, pos, tile.inventory.extractItem(index, 64, false));
 				tile.markDirty();
 			}
 			return true;
 		}
 
 		// IF EMPTY LETS TRY INSERT
-		ItemStack held = player.getHeldItem(hand);
-		if (!Util.isValid(held))
+		ItemStack stackToInsert = player.getHeldItem(hand).copy();
+		stackToInsert.setCount(1);
+		player.getHeldItem(hand).shrink(1);
+
+		if (!Util.isValid(stackToInsert))
 			return false;
 
 		if (!world.isRemote) {
-			tile.inventory.setStackInSlot(0, held);
+			tile.inventory.setStackInSlot(index, stackToInsert);
 			tile.markDirty();
 		}
-		player.setHeldItem(hand, ItemStack.EMPTY);
-		return true;
 
+		return true;
 	}
 
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-		if (worldIn.isRemote) {
+		if (!worldIn.isRemote) {
 			TileTray tile = (TileTray) worldIn.getTileEntity(pos);
 			for (int i = 0; i < tile.inventory.getSlots(); i++) {
 				Util.spawnItem(worldIn, pos, tile.inventory.extractItem(i, 64, false));

@@ -1,8 +1,0 @@
-{
-    "parent": "hwell:block/slab_base_side",
-    "textures": {
-        "particle": "hwell:blocks/zurite",
-        "0": "hwell:blocks/zurite",
-        "1": "hwell:blocks/zurite"
-    }
-}

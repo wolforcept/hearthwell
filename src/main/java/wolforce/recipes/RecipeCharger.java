@@ -17,7 +17,7 @@ import wolforce.Util;
 
 public class RecipeCharger {
 
-	private static LinkedList<RecipeCharger> recipes;
+	public static LinkedList<RecipeCharger> recipes;
 
 	public static void initRecipes(JsonArray recipesJson) {
 		recipes = new LinkedList<>();

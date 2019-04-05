@@ -215,6 +215,8 @@ tile.hwell.charger.name=Charger
 tile.hwell.generator_heat.name=Heat Generator
 tile.hwell.setter.name=Block Setter
 tile.hwell.light_collector.name=Light Collector
+tile.hwell.tray.name=Tray
+tile.hwell.former.name=Former
 
 tile.hwell.core_stone.name=Rock Core
 tile.hwell.core_heat.name=Warm Core

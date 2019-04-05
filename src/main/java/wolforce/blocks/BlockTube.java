@@ -86,8 +86,8 @@ public class BlockTube extends MyLog {
 
 	private boolean isPossible(int nTubes, World world, BlockPos pos) {
 		return nTubes > 0 && nTubes <= 8 && //
-				(world.canBlockSeeSky(pos.up(nTubes)) || !HwellConfig.tubeIsRequiredToSeeSky) && //
-				(isDay(world) || !HwellConfig.tubeIsRequiredToBeDay);
+				(world.canBlockSeeSky(pos.up(nTubes)) || !HwellConfig.other.tubeIsRequiredToSeeSky) && //
+				(isDay(world) || !HwellConfig.other.tubeIsRequiredToBeDay);
 	}
 
 	private boolean isDay(World world) {

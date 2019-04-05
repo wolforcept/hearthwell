@@ -52,7 +52,7 @@ public class BlockPickingTable extends Block implements HasTE {
 			}
 		} else if (hand.getItem() instanceof ItemDustPicker) {
 			hand.damageItem(1, playerIn);
-			if (!world.isRemote && Math.random() < HwellConfig.pickingTableChance)
+			if (!world.isRemote && Math.random() < HwellConfig.other.pickingTableChance)
 				Util.spawnItem(world, pos, new ItemStack(((ItemDustPicker) hand.getItem()).shard, 1));
 			IBlockState newstate = reduce(state);
 			world.setBlockState(pos, newstate);

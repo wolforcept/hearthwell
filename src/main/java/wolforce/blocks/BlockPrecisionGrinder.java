@@ -146,7 +146,7 @@ public class BlockPrecisionGrinder extends Block implements HasTE, BlockEnergyCo
 
 	@Override
 	public int getEnergyConsumption() {
-		return HwellConfig.grinderConsumption;
+		return HwellConfig.machines.grinderConsumption;
 	}
 
 	@Override

@@ -73,7 +73,7 @@ public class EntityPower extends Entity {
 
 	private int calcEnergy(int _energy, float erange) {
 		float lossTotal = _energy / purity;
-		float lossPerRange = (lossTotal - _energy) / HwellConfig.powerMaxRange;
+		float lossPerRange = (lossTotal - _energy) / HwellConfig.power.powerMaxRange;
 		// System.out.println(_energy + " with " + erange + " -> " + (_energy + (int)
 		// (lossPerRange * erange)));
 		return _energy + (int) (lossPerRange * erange);
@@ -111,7 +111,7 @@ public class EntityPower extends Entity {
 		// }
 		// }
 
-		if (getPower() <= 0 && HwellConfig.powerCrystalDropsWhenEmpty && !isDead)
+		if (getPower() <= 0 && HwellConfig.power.powerCrystalDropsWhenEmpty && !isDead)
 			pop();
 
 		setCustomNameTag(customName + getPower());

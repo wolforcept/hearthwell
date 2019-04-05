@@ -6,6 +6,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentString;
@@ -21,6 +22,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import wolforce.fluids.BlockLiquidSouls;
 import wolforce.items.ItemLoot;
+import wolforce.recipes.RecipeNetherPortal;
 import wolforce.registry.RegisterRecipes;
 
 @Mod.EventBusSubscriber
@@ -28,13 +30,18 @@ public class HwellEvents {
 
 	@SubscribeEvent
 	public static void preventNether(EntityTravelToDimensionEvent event) {
-		if (!HwellConfig.allowEntitiesToTravelToTheNether && event.getDimension() == DimensionType.NETHER.getId())
+
+		if (!(event.getEntity() instanceof EntityItem)) {
+			ItemStack newItemStack = RecipeNetherPortal.getOutput(((EntityItem) event.getEntity()).getItem());
+			if (Util.isValid(newItemStack)) {
+				event.setCanceled(true);
+			}
+		}
+
+		if (!HwellConfig.general.allowEntitiesToTravelToTheNether && event.getDimension() == DimensionType.NETHER.getId())
 			event.setCanceled(true);
 	}
 
-	//
-	// if (!(event.getEntity() instanceof EntityItem))
-	// return;
 	//
 	// if (event.getDimension() == DimensionType.NETHER.getId()) {
 	// EntityItem entityItem = (EntityItem) event.getEntity();

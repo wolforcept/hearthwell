@@ -55,9 +55,9 @@ public class RecipePowerCrystal implements IRecipe {
 	}
 
 	private ResourceLocation name;
-	private static LinkedList<ItemAndVals> nucleousRecipes;
-	private static LinkedList<ItemAndVals> relayRecipes;
-	private static LinkedList<ItemAndVals> screenRecipes;
+	public static LinkedList<ItemAndVals> nucleousRecipes;
+	public static LinkedList<ItemAndVals> relayRecipes;
+	public static LinkedList<ItemAndVals> screenRecipes;
 	private static boolean innited = false;
 
 	public static boolean isInnited() {
@@ -183,9 +183,11 @@ public class RecipePowerCrystal implements IRecipe {
 			newstack.setTagCompound(new NBTTagCompound());
 
 		NBTTagCompound nbt = new NBTTagCompound();
-		ItemPowerCrystal.setHwellNBT(nbt, 0, 0, 0);
-		nbt.setString("comment", "test");
+		ItemPowerCrystal.setHwellNBT(nbt, 2, 2, 2);
+		// nbt.setString("comment", "test");
 		newstack.getTagCompound().setTag("hwell", nbt);
+		// System.out.println("AAAAAAAAAAAAAAAAAAADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+		// WHYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
 		return newstack;
 	}
 
@@ -206,7 +208,7 @@ public class RecipePowerCrystal implements IRecipe {
 		ItemStack stack = inv.getStackInSlot(4);
 		int i = 0;
 		for (ItemAndVals itemAndVals : nucleousRecipes) {
-			if (ItemStack.areItemStacksEqual(itemAndVals.stack, stack))
+			if (Util.equalExceptAmount(itemAndVals.stack, stack))
 				return i;
 			i++;
 		}
@@ -217,7 +219,7 @@ public class RecipePowerCrystal implements IRecipe {
 		ItemStack stack = inv.getStackInSlot(1);
 		int i = 0;
 		for (ItemAndVals itemAndVals : relayRecipes) {
-			if (ItemStack.areItemStacksEqual(itemAndVals.stack, stack))
+			if (Util.equalExceptAmount(itemAndVals.stack, stack))
 				return i;
 			i++;
 		}
@@ -228,7 +230,7 @@ public class RecipePowerCrystal implements IRecipe {
 		ItemStack stack = inv.getStackInSlot(0);
 		int i = 0;
 		for (ItemAndVals itemAndVals : screenRecipes) {
-			if (ItemStack.areItemStacksEqual(itemAndVals.stack, stack))
+			if (Util.equalExceptAmount(itemAndVals.stack, stack))
 				return i;
 			i++;
 		}
@@ -280,7 +282,7 @@ public class RecipePowerCrystal implements IRecipe {
 		ItemAndVals nucleous = getNucleous(nucleousIndex);
 		ItemAndVals relay = getRelay(relayIndex);
 		ItemAndVals screen = getScreen(screenIndex);
-		return Math.min(HwellConfig.powerMaxRange, nucleous.range + relay.range + screen.range);
+		return Math.min(HwellConfig.power.powerMaxRange, nucleous.range + relay.range + screen.range);
 	}
 
 	public static float calcPurity(int nucleousIndex, int relayIndex, int screenIndex) {

@@ -57,11 +57,10 @@ public class BlockBurstSeed extends MyBlock {
 
 		world.setBlockToAir(pos);
 		int n = (int) (Math.random() * 32) + 32;
-		if (Util.equalExceptAmount(stack, new ItemStack(Main.crystal_block)))
+		if (stack.getItem().equals(new ItemStack(Main.crystal_block).getItem()))
 			n = (int) (Math.random() * 10) + 10;
 		for (int i = 0; i < n; i++) {
-			Entity newEntity = new UnjoinableEntityItem(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(stack.getItem()),
-					40);
+			Entity newEntity = new UnjoinableEntityItem(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(stack.getItem()), 40);
 			newEntity.addVelocity(Math.random() * 2 - 1, Math.random(), Math.random() * 2 - 1);
 			world.spawnEntity(newEntity);
 		}
@@ -69,7 +68,7 @@ public class BlockBurstSeed extends MyBlock {
 
 	@Override
 	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
-		if (stack.getItem().equals(Main.crystal))
+		if (stack.getItem().equals(new ItemStack(Main.crystal_block).getItem()))
 			return layer == BlockRenderLayer.TRANSLUCENT;
 		return super.canRenderInLayer(state, layer);
 	}

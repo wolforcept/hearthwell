@@ -85,9 +85,12 @@ public class ItemPowerCrystal extends MyItem {
 
 			tooltip.add("Power: " + pow + "/" + max);
 			tooltip.add("Range: " + rng);
-			tooltip.add("Purity: " + (pur + "").substring(2, Math.min(4, (pur + "").length())) + "%");
+			if (pur == 1)
+				tooltip.add("Purity: 100%");
+			else
+				tooltip.add("Purity: " + (pur + "").substring(2, Math.min(4, (pur + "").length())) + "%");
 
-			// tooltip.add(stack.getTagCompound() + "");
+			tooltip.add(stack.getTagCompound() + "");
 		}
 	}
 

@@ -11,7 +11,7 @@ import net.minecraft.item.crafting.ShapedRecipes;
 
 public class RecipeRepairingPaste {
 
-	static HashSet<Item> items;
+	public static HashSet<Item> items;
 
 	public static void initRecipes(JsonArray recipesJson) {
 		items = new HashSet<>();

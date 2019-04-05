@@ -61,10 +61,7 @@ public class Util {
 	}
 
 	public static boolean equalExceptAmount(ItemStack stack1, ItemStack stack2) {
-		return ItemStack.areItemStacksEqual(//
-				new ItemStack(stack1.getItem(), 1, stack1.getMetadata()), //
-				new ItemStack(stack2.getItem(), 1, stack2.getMetadata())//
-		);
+		return stack1.getItem() == stack2.getItem() && stack1.getMetadata() == stack2.getMetadata();
 	}
 
 	// SPAWN ITEMS
@@ -241,7 +238,7 @@ public class Util {
 		boolean isCorrect = tableEntry.block == state.getBlock()
 				&& hasCorrectMeta(tableEntry.block, tableEntry.meta, tableEntry.block.getMetaFromState(state), tableEntry.inverse);
 
-		if (!isCorrect && HwellConfig.isAutomaticMultiblocks) {
+		if (!isCorrect && HwellConfig.general.isAutomaticMultiblocks) {
 			// ----------------------------------
 			if (tableEntry.meta != -1)
 				world.setBlockState(realPos.subtract(thispos), tableEntry.block

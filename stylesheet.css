@@ -13,6 +13,10 @@ h1, h2, h3{
 a, p, table, object{
 	font-family: 'Open Sans', sans-serif;
 }
+
+.bold{
+	font-weight: bold;
+}
 table {
 	width: 100%;
 	border-spacing: 25px;

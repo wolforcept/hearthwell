@@ -1,4 +1,0 @@
-{
-    "parent": "block/stairs",
-    "textures": { "bottom": "hwell:blocks/zurite", "top": "hwell:blocks/zurite", "side": "hwell:blocks/zurite" }
-}

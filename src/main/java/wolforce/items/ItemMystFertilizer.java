@@ -65,7 +65,7 @@ public class ItemMystFertilizer extends MyItem {
 	}
 
 	private boolean canMakeTree(World world, BlockPos pos) {
-		return world.canSeeSky(pos) || !HwellConfig.mystSaplingRequireSky;
+		return world.canSeeSky(pos) || !HwellConfig.other.mystSaplingRequireSky;
 	}
 
 }

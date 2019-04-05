@@ -17,7 +17,6 @@ public class TileNourisher extends TileEntity implements ITickable {
 
 	private static final String COOLDOWN = "cooldown";
 	private int cooldown = 0;
-	final int range = HwellConfig.nourisherRange;
 
 	@Override
 	public void update() {
@@ -43,7 +42,7 @@ public class TileNourisher extends TileEntity implements ITickable {
 				((BlockCrops) Util.blockAt(world, posy)).grow(world, posy, world.getBlockState(posy));
 			}
 		}
-		cooldown = HwellConfig.nourisherCooldown;
+		cooldown = HwellConfig.machines.nourisherCooldown;
 	}
 
 	private BlockPos getRandomPos() {
@@ -65,8 +64,8 @@ public class TileNourisher extends TileEntity implements ITickable {
 			BlockPos posy = pos.add(0, y, 0);
 			if (Util.blockAt(world, posy) instanceof IGrowable
 					&& ((IGrowable) Util.blockAt(world, posy)).canGrow(world, posy, world.getBlockState(posy), world.isRemote))
-				if(Util.blockAt(world, posy) instanceof BlockCrops || !HwellConfig.nourisherOnlyGrowCrops)
-				return true;
+				if (Util.blockAt(world, posy) instanceof BlockCrops || !HwellConfig.machines.nourisherOnlyGrowCrops)
+					return true;
 		}
 		return false;
 	}

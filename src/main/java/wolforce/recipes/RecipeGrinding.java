@@ -23,7 +23,7 @@ import wolforce.items.ItemGrindingWheel;
 
 public class RecipeGrinding {
 
-	private static HashMap<Irio, RecipeGrinding> recipes;
+	public static HashMap<Irio, RecipeGrinding> recipes;
 
 	public static void initRecipes(JsonArray recipesJson) {
 		recipes = new HashMap<>();
@@ -42,7 +42,7 @@ public class RecipeGrinding {
 		return new RecipeGrinding(output, wheels);
 	}
 
-	private static ItemGrindingWheel getWheelOf(String wheelString) {
+	public static ItemGrindingWheel getWheelOf(String wheelString) {
 		switch (wheelString) {
 		case "iron":
 			return Main.grinding_wheel_iron;

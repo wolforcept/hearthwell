@@ -101,7 +101,7 @@ public class TileSeparator extends TileEntity implements ITickable {
 
 	private void done(EnumFacing facing) {
 
-		if (!BlockEnergyConsumer.tryConsume(world, pos, HwellConfig.separatorConsumption))
+		if (!BlockEnergyConsumer.tryConsume(world, pos, HwellConfig.machines.separatorConsumption))
 			return;
 
 		ItemStack[] result = RecipeSeparator.getResult(inventory.extractItem(0, 1, false));

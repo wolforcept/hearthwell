@@ -85,14 +85,14 @@ public class RegisterRecipes {
 	public static void createNewCores() {
 		Main.custom_cores = new HashMap<String, BlockCore>();
 
-		if (!HwellConfig.customRecipesEnabled)
+		if (!HwellConfig.meta.customRecipesEnabled)
 			return;
 
 		try {
-			File recipesFile = new File(HwellConfig.recipeFileLocation);
+			File recipesFile = new File(HwellConfig.meta.recipeFileLocation);
 			if (!recipesFile.exists())
 				return;
-			JsonObject recipeJson = Util.readJson(HwellConfig.recipeFileLocation).getAsJsonObject();
+			JsonObject recipeJson = Util.readJson(HwellConfig.meta.recipeFileLocation).getAsJsonObject();
 
 			if (!recipeJson.has("coring_recipes"))
 				return;
@@ -137,21 +137,21 @@ public class RegisterRecipes {
 		// fix for burst seeds of hearthwell materials
 		Main.burst_seed_crystal.stack = new ItemStack(Main.crystal_block);
 
-		File recipesFile = new File(HwellConfig.recipeFileLocation);
+		File recipesFile = new File(HwellConfig.meta.recipeFileLocation);
 
 		// if file does not exist, write default file
-		if (!recipesFile.exists() && HwellConfig.customRecipesEnabled)
+		if (!recipesFile.exists() && HwellConfig.meta.customRecipesEnabled)
 			try {
-				writeRecipesFile(HwellConfig.recipeFileLocation);
+				writeRecipesFile(HwellConfig.meta.recipeFileLocation);
 			} catch (IOException e) {
 				throw new RuntimeException("Could not initialise the Recipes File!! Game will crash.");
 			}
-		if (!HwellConfig.customRecipesEnabled && recipesFile.exists())
+		if (!HwellConfig.meta.customRecipesEnabled && recipesFile.exists())
 			recipesFile.delete();
 		JsonObject recipes = null, defaultRecipes = null;
 		try {
-			if (HwellConfig.customRecipesEnabled)
-				recipes = Util.readJson(HwellConfig.recipeFileLocation).getAsJsonObject();
+			if (HwellConfig.meta.customRecipesEnabled)
+				recipes = Util.readJson(HwellConfig.meta.recipeFileLocation).getAsJsonObject();
 		} catch (Exception e) {
 			System.err.println("Error while reading the Recipes File! Defaulting all recipes.");
 			errored_recipes_file = true;
@@ -161,7 +161,7 @@ public class RegisterRecipes {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		if (errored_recipes_file || recipes == null || !HwellConfig.customRecipesEnabled)
+		if (errored_recipes_file || recipes == null || !HwellConfig.meta.customRecipesEnabled)
 			recipes = defaultRecipes;
 
 		if (!recipes.has("version") || !recipes.get("version").getAsString().equals(defaultRecipes.get("version").getAsString())) {

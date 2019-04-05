@@ -55,4 +55,38 @@ public class TileTray extends TileEntity {
 		inventory.deserializeNBT(compound.getCompoundTag("inventory"));
 	}
 
+	//
+
+	//
+
+	// UPDATING VIA NET
+
+	private IBlockState getState() {
+		return world.getBlockState(pos);
+	}
+
+	@Override
+	public void markDirty() {
+		world.markBlockRangeForRenderUpdate(pos, pos);
+		world.notifyBlockUpdate(pos, getState(), getState(), 3);
+		world.scheduleBlockUpdate(pos, this.getBlockType(), 0, 0);
+		super.markDirty();
+	}
+
+	@Override
+	@Nullable
+	public SPacketUpdateTileEntity getUpdatePacket() {
+		return new SPacketUpdateTileEntity(this.pos, 3, this.getUpdateTag());
+	}
+
+	@Override
+	public NBTTagCompound getUpdateTag() {
+		return this.writeToNBT(new NBTTagCompound());
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+		super.onDataPacket(net, pkt);
+		handleUpdateTag(pkt.getNbtCompound());
+	}
 }

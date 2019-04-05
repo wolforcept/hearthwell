@@ -108,7 +108,7 @@ public class TileCharger extends TileEntity implements ITickable {
 				for (EntityItem entityItem : entities) {
 					int powerGained = tryConsume(powerCrystal, entityItem.getItem());
 					if (powerGained > 0) {
-						cooldown = HwellConfig.chargerCooldown;
+						cooldown = HwellConfig.machines.chargerCooldown;
 						return;
 					}
 				}

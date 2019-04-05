@@ -57,11 +57,11 @@ public class RecipeTube {
 	// 1000));
 	// }
 
-	private static void put(ItemStack in, ItemStack out) {
+	public static void put(ItemStack in, ItemStack out) {
 		recipes.add(new RecipeTube(in, out, null));
 	}
 
-	private static void put(ItemStack in, FluidStack out) {
+	public static void put(ItemStack in, FluidStack out) {
 		recipes.add(new RecipeTube(in, null, out));
 	}
 

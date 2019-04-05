@@ -26,6 +26,6 @@ public class BlockNourisher extends BlockMachineBase implements HasTE, BlockEner
 
 	@Override
 	public int getEnergyConsumption() {
-		return HwellConfig.nourisherConsumption;
+		return HwellConfig.machines.nourisherConsumption;
 	}
 }

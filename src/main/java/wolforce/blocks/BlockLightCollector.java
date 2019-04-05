@@ -30,8 +30,8 @@ public class BlockLightCollector extends MyBlock {
 
 	@Override
 	public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
-		if (/**/(world.isDaytime() || !HwellConfig.lightCollectorIsRequiredToBeDay) && //
-				(world.canBlockSeeSky(pos.up()) || !HwellConfig.lightCollectorIsRequiredToSeeSky)) {
+		if (/**/(world.isDaytime() || !HwellConfig.other.lightCollectorIsRequiredToBeDay) && //
+				(world.canBlockSeeSky(pos.up()) || !HwellConfig.other.lightCollectorIsRequiredToSeeSky)) {
 			int curr = state.getValue(CHARGE);
 			if (curr < 3)
 				world.setBlockState(pos, getDefaultState().withProperty(CHARGE, curr + 1));

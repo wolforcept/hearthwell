@@ -24,7 +24,7 @@ import wolforce.Util;
 
 public class RecipeCrushing {
 
-	private static HashMap<Irio, RecipeCrushing[]> recipes;
+	public static HashMap<Irio, RecipeCrushing[]> recipes;
 
 	public static void initRecipes(JsonArray recipesJson) {
 		recipes = new HashMap<>();
@@ -145,7 +145,7 @@ public class RecipeCrushing {
 	public final ItemStack stack;
 	public final double probability;
 
-	private RecipeCrushing(ItemStack stack, double probability) {
+	public RecipeCrushing(ItemStack stack, double probability) {
 		this.stack = stack;
 		this.probability = probability;
 	}

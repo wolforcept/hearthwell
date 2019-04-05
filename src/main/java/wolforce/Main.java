@@ -44,6 +44,7 @@ import wolforce.blocks.BlockGravityMini;
 import wolforce.blocks.BlockGroundShovel;
 import wolforce.blocks.BlockHeat;
 import wolforce.blocks.BlockHeatFurnace;
+import wolforce.blocks.BlockFormer;
 import wolforce.blocks.BlockLightCollector;
 import wolforce.blocks.BlockMystBush;
 import wolforce.blocks.BlockMystGrass;
@@ -153,6 +154,7 @@ public class Main {
 	public static Block dust_block;
 	public static Block dismantler, crushing_block, gravity_block, gravity_block_mini, /* gravity_powered_block, */ antigravity_block
 	/* , antigravity_powered_block */;
+	public static Block former;
 	public static Block myst_log, myst_planks, myst_leaves;
 	public static Block raw_asul_block, asul_block;
 	public static Block asul_machine_case;
@@ -344,6 +346,8 @@ public class Main {
 		blocks.add(gravity_block_mini);
 		antigravity_block = new BlockAntiGravity("antigravity_block");
 		blocks.add(antigravity_block);
+		former = new BlockFormer("former");
+		blocks.add(former);
 
 		core_stone = new BlockCore("core_stone", true);
 		blocks.add(core_stone);

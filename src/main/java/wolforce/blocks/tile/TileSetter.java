@@ -1,5 +1,6 @@
 package wolforce.blocks.tile;
 
+import java.util.HashSet;
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -7,6 +8,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemStack;
@@ -23,6 +25,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import wolforce.HwellConfig;
 import wolforce.Main;
 import wolforce.Util;
+import wolforce.blocks.BlockFormer;
 import wolforce.blocks.BlockSetter;
 import wolforce.blocks.base.BlockEnergyConsumer;
 
@@ -36,26 +39,32 @@ public class TileSetter extends TileEntity implements ITickable {
 		EnumFacing facing = world.getBlockState(pos).getValue(BlockSetter.FACING);
 		int extraRange = BlockSetter.getExtraRange(world, pos, facing);
 		int start = BlockSetter.getStart(world, pos, facing);
-		BlockPos[] poss = new BlockPos[HwellConfig.setterBaseRange + extraRange];
+		BlockPos[] poss = new BlockPos[HwellConfig.machines.setterBaseRange + extraRange];
+
 		for (int i = 0; i < poss.length; i++) {
 			poss[i] = pos.offset(facing, start + i);
 		}
-		for (BlockPos pos : poss)
-			setAnEntityItem(pos);
+
+		HashSet<Item> filter = BlockFormer.isFiltering(world, pos);
+
+		for (BlockPos pos2 : poss)
+			setAnEntityItem(pos, pos2, filter);
 
 	}
 
-	private void setAnEntityItem(BlockPos pos) {
+	private void setAnEntityItem(BlockPos setterPos, BlockPos pos, HashSet<Item> filter) {
 		List<EntityItem> entities = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos));
 		for (EntityItem entityItem : entities) {
 			if (!Util.isValid(entityItem.getItem()) || !world.isAirBlock(pos))
 				continue;
-			Block block = Block.getBlockFromItem(entityItem.getItem().getItem());
-			if (block != null && block != Blocks.AIR
-					&& BlockEnergyConsumer.tryConsume(world, pos, Main.setter.getEnergyConsumption())) {
-				world.setBlockState(pos, block.getStateFromMeta(entityItem.getItem().getMetadata()));
-				entityItem.getItem().grow(-1);
-				return;
+			if (filter.isEmpty() || filter.contains(entityItem.getItem().getItem())) {
+				Block block = Block.getBlockFromItem(entityItem.getItem().getItem());
+				if (block != null && block != Blocks.AIR
+						&& BlockEnergyConsumer.tryConsume(world, setterPos, Main.setter.getEnergyConsumption())) {
+					world.setBlockState(pos, block.getStateFromMeta(entityItem.getItem().getMetadata()));
+					entityItem.getItem().grow(-1);
+					return;
+				}
 			}
 		}
 	}

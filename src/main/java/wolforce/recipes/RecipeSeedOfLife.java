@@ -14,7 +14,7 @@ import wolforce.Util;
 
 public class RecipeSeedOfLife {
 
-	static LinkedList<Irio> blocks;
+	public static LinkedList<Irio> blocks;
 
 	public static void initRecipes(JsonArray recipesJson) {
 		blocks = new LinkedList<>();

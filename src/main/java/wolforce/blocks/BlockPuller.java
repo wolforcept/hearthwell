@@ -30,7 +30,7 @@ public class BlockPuller extends Block implements HasTE, BlockEnergyConsumer {
 
 	@Override
 	public int getEnergyConsumption() {
-		return HwellConfig.pullerConsumption;
+		return HwellConfig.machines.pullerConsumption;
 	}
 
 	@Override

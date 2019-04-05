@@ -15,7 +15,7 @@ import net.minecraft.item.crafting.ShapedRecipes;
 //@ZenRegister
 public class RecipeSeparator {
 
-	private static HashMap<Irio, RecipeSeparator> recipes;
+	public static HashMap<Irio, RecipeSeparator> recipes;
 
 	public static void initRecipes(JsonArray recipesJson) {
 		recipes = new HashMap<>();

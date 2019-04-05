@@ -103,10 +103,10 @@ public class BlockCore extends Block implements HasTE {
 
 	}
 
-	@Override
-	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
-		return layer == BlockRenderLayer.TRANSLUCENT;
-	}
+	// @Override
+	// public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
+	// return layer == BlockRenderLayer.TRANSLUCENT;
+	// }
 
 	// TILE ENTITIES
 

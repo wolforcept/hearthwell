@@ -34,6 +34,6 @@ public class BlockProducer extends MyBlock implements BlockEnergyConsumer {
 
 	@Override
 	public int getEnergyConsumption() {
-		return HwellConfig.producerConsumption;
+		return HwellConfig.machines.producerConsumption;
 	}
 }

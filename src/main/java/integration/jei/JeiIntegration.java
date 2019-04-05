@@ -73,7 +73,7 @@ public class JeiIntegration implements IModPlugin {
 				"Obtained by right clicking a HeatBlock with a flint and steel.", "Just be careful...");
 		reg.addIngredientInfo(new ItemStack(Main.empty_rod), VanillaTypes.ITEM, "Hold right click to use.");
 
-		System.out.println("AAAAAAAAAAAAAA" + RegisterRecipes.recipePowerCrystal);
+		// System.out.println("AAAAAAAAAAAAAA" + RegisterRecipes.recipePowerCrystal);
 		reg.addRecipes(Util.listOfOne(RegisterRecipes.recipePowerCrystal), VanillaRecipeCategoryUid.CRAFTING);
 		// reg.addRecipeCatalyst(Main.core_stone, JeiCatCoring.UID_CORING_STONE);
 

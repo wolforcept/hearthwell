@@ -176,7 +176,7 @@ public class BlockSeparator extends Block implements BlockEnergyConsumer, HasTE 
 
 	@Override
 	public int getEnergyConsumption() {
-		return HwellConfig.separatorConsumption;
+		return HwellConfig.machines.separatorConsumption;
 	}
 
 }

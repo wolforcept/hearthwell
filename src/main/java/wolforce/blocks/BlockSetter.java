@@ -49,7 +49,7 @@ public class BlockSetter extends Block implements HasTE, BlockEnergyConsumer {
 		EnumFacing facing = stateIn.getValue(FACING);
 		int extraRange = getExtraRange(worldIn, _pos, facing);
 		int start = getStart(worldIn, _pos, facing);
-		for (int i = start; i < start + HwellConfig.setterBaseRange + extraRange; i++) {
+		for (int i = start; i < start + HwellConfig.machines.setterBaseRange + extraRange; i++) {
 			BlockPos pos = _pos.offset(facing, i);
 			worldIn.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, pos.getX() + Math.random(), pos.getY() + (Math.random()),
 					pos.getZ() + Math.random(), 0, -.02 - Math.random() * .2, 0);
@@ -82,7 +82,7 @@ public class BlockSetter extends Block implements HasTE, BlockEnergyConsumer {
 			if (block.equals(Main.azurite) || block.equals(Main.smooth_azurite))
 				range--;
 		}
-		return Math.max(range, -HwellConfig.setterBaseRange + 1);
+		return Math.max(range, -HwellConfig.machines.setterBaseRange + 1);
 	}
 
 	private BlockPos[] getBlockPoss(EnumFacing facing, int start, int range) {
@@ -112,7 +112,7 @@ public class BlockSetter extends Block implements HasTE, BlockEnergyConsumer {
 
 	@Override
 	public int getEnergyConsumption() {
-		return HwellConfig.setterConsumption;
+		return HwellConfig.machines.setterConsumption;
 	}
 
 	@Override

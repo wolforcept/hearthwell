@@ -52,7 +52,7 @@ public class TilePuller extends TileEntity implements ITickable {
 					{ null, "PB", null }, //
 			} };
 
-	static final int MAX_COOLDOWN = HwellConfig.pullerDelay;
+	static final int MAX_COOLDOWN = HwellConfig.machines.pullerDelay;
 	int cooldown = MAX_COOLDOWN;
 
 	@Override

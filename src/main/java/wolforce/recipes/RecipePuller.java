@@ -14,7 +14,7 @@ import wolforce.HwellConfig;
 
 public class RecipePuller {
 
-	static LinkedList<RecipePuller> recipes;
+	public static LinkedList<RecipePuller> recipes;
 	static HashSet<ItemStack> filters;
 
 	public static void initRecipes(JsonArray recipesJson) {
@@ -43,7 +43,8 @@ public class RecipePuller {
 	}
 
 	public static ItemStack getRandomPull(List<ItemStack> stacksInLiquid) {
-		if (stacksInLiquid != null && !stacksInLiquid.isEmpty() && Math.random() < HwellConfig.pullerChanceToGetFilteredPull) {
+		if (stacksInLiquid != null && !stacksInLiquid.isEmpty()
+				&& Math.random() < HwellConfig.machines.pullerChanceToGetFilteredPull) {
 			LinkedList<RecipePuller> preferredRecipes = new LinkedList<>();
 			for (ItemStack stackInLiquid : stacksInLiquid) {
 				for (RecipePuller recipe : recipes) {

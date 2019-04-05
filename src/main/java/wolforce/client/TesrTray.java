@@ -15,6 +15,7 @@ import wolforce.Main;
 import wolforce.Util;
 import wolforce.UtilClient;
 import wolforce.blocks.BlockSeparator;
+import wolforce.blocks.BlockTray;
 import wolforce.blocks.tile.TileCharger;
 import wolforce.blocks.tile.TileTray;
 
@@ -22,33 +23,77 @@ public class TesrTray extends TileEntitySpecialRenderer<TileTray> {
 
 	@Override
 	public void render(TileTray te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		UtilClient.simpleRenderItem(te.getWorld(), new ItemStack(Main.antigravity_block), te.getPos().getX(), te.getPos().getY(),
-				te.getPos().getZ(), true);
+
 		for (int i = 0; i < 9; i++) {
-
-			int dx2d = i % 3;
-			int dy2d = i / 3;
-
-			double dx = dx2d * .333;
-			double dy = 0;
-			double dz = dy2d * .333;
-
 			ItemStack stack = te.inventory.getStackInSlot(i);
+
 			if (Util.isValid(stack) && UtilClient.canRenderTESR(te)) {
-				UtilClient.renderItem(0, 0, te.getWorld(), stack, x + dx, y + dy, z + dz);
+
+				boolean isBlock = Block.getBlockFromItem(stack.getItem()) != Blocks.AIR;
+
+				double margin = (isBlock ? 2.1 : 1.0) / 16.0;
+
+				double scaleX = isBlock ? 1 : .5;
+				double scaleY = isBlock ? 1 : .5;
+				double scaleZ = isBlock ? 1 : .5;
+
+				int dx2d = i % 3;
+				int dy2d = i / 3;
+
+				double dx = 0;
+				double dy = 0;
+				double dz = 0;
+
+				double rotation1 = 0;
+				double rotation2 = 0;
+				double rotation3 = 0;
+
+				EnumFacing side = te.getWorld().getBlockState(te.getPos()).getValue(BlockTray.FACING);
+
+				if (side == EnumFacing.UP || side == EnumFacing.DOWN) {
+					dx = (dx2d - 1) * .333;
+					dz = (dy2d - 1) * .333;
+					rotation1 = 90;
+					// if (isBlock)
+					// scaleZ = .1;
+					if (side == EnumFacing.UP)
+						dy = margin;
+					if (side == EnumFacing.DOWN)
+						dy = 1 - margin;
+				}
+
+				// double dddd = ((double) UtilClient.getNrForDebugFromHand(te.getWorld(),
+				// te.getPos())) / 100.0;
+				if (side == EnumFacing.NORTH || side == EnumFacing.SOUTH) {
+					dx = (dx2d - 1) * .333;
+					dy = .17 + (dy2d) * .333;
+					// if (isBlock)
+					// scaleZ = .1;
+				}
+				if (side == EnumFacing.NORTH)
+					dz = +.5 - margin;
+				if (side == EnumFacing.SOUTH)
+					dz = -.5 + margin;
+
+				if (side == EnumFacing.WEST || side == EnumFacing.EAST) {
+					dz = (dx2d - 1) * .333;
+					dy = .17 + dy2d * .333;
+					// if (isBlock)
+					// scaleX = .1;
+					// else
+					// if (!isBlock)
+					rotation2 = 90;
+				}
+				if (side == EnumFacing.WEST)
+					dx = .5 - margin;
+				if (side == EnumFacing.EAST)
+					dx = -.5 + margin;
+
+				UtilClient.renderItem(0, 0, te.getWorld(), stack, //
+						x + dx, y + dy, z + dz, //
+						rotation1, rotation2, rotation3, //
+						scaleX, scaleY, scaleZ);
 			}
-		}
-
-		ItemStack stack = te.inventory.getStackInSlot(0);
-
-		if (Util.isValid(stack) && UtilClient.canRenderTESR(te)) {
-			EnumFacing facing = te.getWorld().getBlockState(te.getPos()).getValue(BlockSeparator.FACING);
-			double d = .25;
-			double dx = facing == EnumFacing.WEST ? d : (facing == EnumFacing.EAST ? -d : 0);
-			double dz = facing == EnumFacing.NORTH ? d : (facing == EnumFacing.SOUTH ? -d : 0);
-			double ryy = facing == NORTH ? 180 : facing == SOUTH ? 0 : facing == WEST ? 90 : 270;
-			double sy = Block.getBlockFromItem(stack.getItem()).equals(Blocks.AIR) ? 1 : .125;
-			UtilClient.renderItem(0, 0, te.getWorld(), stack, x + dx, y + .125, z + dz, 90, 0, ryy, 1, 1, sy);
 		}
 	}
 }

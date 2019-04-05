@@ -25,7 +25,7 @@ public class BlockSpawnerBase extends BlockMachineBase implements HasTE, BlockEn
 
 	@Override
 	public int getEnergyConsumption() {
-		return HwellConfig.grinderConsumption;
+		return HwellConfig.machines.grinderConsumption;
 	}
 
 	@Override
