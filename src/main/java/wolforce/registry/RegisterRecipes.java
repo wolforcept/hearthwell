@@ -64,6 +64,7 @@ import wolforce.recipes.RecipeCoring;
 import wolforce.recipes.RecipeCrushing;
 import wolforce.recipes.RecipeFreezer;
 import wolforce.recipes.RecipeGrinding;
+import wolforce.recipes.RecipeNetherPortal;
 import wolforce.recipes.RecipePowerCrystal;
 import wolforce.recipes.RecipePuller;
 import wolforce.recipes.RecipeRepairingPaste;
@@ -173,7 +174,10 @@ public class RegisterRecipes {
 
 		recipeName = "charger_recipes";
 		RecipeCharger.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonArray());
-
+		
+		recipeName = "nether_portal_recipes";
+		RecipeNetherPortal.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonArray());
+		
 		recipeName = "separator_recipes";
 		RecipeSeparator.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonArray());
 

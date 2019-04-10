@@ -22,9 +22,12 @@ import wolforce.recipes.RecipeSeedOfLife;
 
 public class ItemSeedOfLife extends MyItem {
 
-	public ItemSeedOfLife(String name, String... lore) {
-		super(name, lore);
+	final int seedIndex;
+
+	public ItemSeedOfLife(String name, String lore, int seedIndex) {
+		super(name, lore + " Radius: " + radius[seedIndex]);
 		setMaxStackSize(1);
+		this.seedIndex = seedIndex;
 	}
 
 	@Override
@@ -76,18 +79,20 @@ public class ItemSeedOfLife extends MyItem {
 			return stack;
 
 		// FROM THIS POINT FORWARD THE TREE WILL BE MADE AND THE ITEM IS LOST
-
-		world.setBlockState(pos, Main.fertile_soil.getDefaultState());
-		world.setBlockState(pos.up(), Blocks.SAPLING.getDefaultState());
+		// world.setBlockState(pos, Main.fertile_soil.getDefaultState());
+		// world.setBlockState(pos.up(), Blocks.SAPLING.getDefaultState());
+		world.setBlockState(pos, center_block[seedIndex]);
+		world.setBlockState(pos.up(), center_top_block[seedIndex]);
 		world.playSound(null, entityLiving.getPosition(), SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1, 1);
 
 		// makeTree(world, pos.up());
 
 		// ON THE SERVER ONLY, CHANGE THE GROUND AROUND IT
 		if (!world.isRemote) {
-			for (int dx = -3; dx <= 3; dx++) {
-				for (int dz = -3; dz <= 3; dz++) {
-					float dist = 1 - (float) Math.hypot(dx, dz) / 4f;
+			int r = radius[seedIndex];
+			for (int dx = -r; dx <= r; dx++) {
+				for (int dz = -r; dz <= r; dz++) {
+					float dist = 1f - (float) Math.hypot(dx, dz) / (r * 1.333f);
 					BlockPos dpos = pos.add(dx, 0, dz);
 					if (!world.isAirBlock(dpos)) {
 						if (world.isAirBlock(dpos.up())) {
@@ -122,13 +127,66 @@ public class ItemSeedOfLife extends MyItem {
 
 	private void transform(World world, BlockPos pos, float prob, float grassProbability) {
 		if (Math.random() < prob && canTransform(world, pos)) {
-			world.setBlockState(pos,
-					Math.random() < grassProbability ? Blocks.GRASS.getDefaultState() : Blocks.DIRT.getDefaultState());
+			IBlockState other_block = less_probable_blocks[seedIndex][(int) (less_probable_blocks[seedIndex].length * Math.random())];
+			world.setBlockState(pos, Math.random() < grassProbability ? probable_block[seedIndex] : other_block);
 			if (Math.random() < .5) {
-				world.setBlockState(pos.up(), Blocks.TALLGRASS.getDefaultState().withProperty(Blocks.TALLGRASS.TYPE,
-						Math.random() < .75 ? BlockTallGrass.EnumType.GRASS : BlockTallGrass.EnumType.FERN));
+				IBlockState top_block = top_blocks[seedIndex][(int) (top_blocks[seedIndex].length * Math.random())];
+				world.setBlockState(pos.up(), top_block);
 			}
 		}
+	}
+
+	public static final int radius[] = { 3, 10, 5 };
+	static IBlockState[] center_block, center_top_block, probable_block;
+	static IBlockState[][] less_probable_blocks;
+	static IBlockState[][] top_blocks;
+
+	public static void init() {
+
+		center_block = new IBlockState[] { //
+				Main.fertile_soil.getDefaultState(), //
+				Main.crystal_nether_block.getDefaultState(), //
+				Blocks.END_STONE.getDefaultState(), //
+		};
+
+		center_top_block = new IBlockState[] { //
+				Blocks.SAPLING.getDefaultState(), //
+				Blocks.AIR.getDefaultState(), //
+				Blocks.CHORUS_FLOWER.getDefaultState(), //
+		};
+
+		probable_block = new IBlockState[] { //
+				Blocks.GRASS.getDefaultState(), //
+				Blocks.NETHERRACK.getDefaultState(), //
+				Blocks.END_STONE.getDefaultState(), //
+		};
+
+		less_probable_blocks = new IBlockState[][] { //
+				{ //
+						Blocks.DIRT.getDefaultState() //
+				}, { //
+						Main.scorch_grit.getDefaultState(), //
+						Blocks.GRAVEL.getDefaultState(),//
+				}, { //
+						Blocks.PURPUR_BLOCK.getDefaultState(), //
+						Main.moonstone.getDefaultState(),//
+				} //
+		};
+
+		top_blocks = new IBlockState[][] { //
+				{ //
+						Blocks.TALLGRASS.getDefaultState().withProperty(Blocks.TALLGRASS.TYPE, BlockTallGrass.EnumType.FERN), //
+						Blocks.TALLGRASS.getDefaultState().withProperty(Blocks.TALLGRASS.TYPE, BlockTallGrass.EnumType.GRASS), //
+				}, //
+				{ //
+						Blocks.GLOWSTONE.getDefaultState(), //
+						Blocks.REDSTONE_WIRE.getDefaultState(), //
+						Blocks.FIRE.getDefaultState(), //
+				}, //
+				{ //
+						Blocks.AIR.getDefaultState(), //
+				}, //
+		};
 	}
 
 }

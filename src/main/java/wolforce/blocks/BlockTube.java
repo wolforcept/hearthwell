@@ -7,6 +7,7 @@ import net.minecraft.block.BlockDaylightDetector;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -91,6 +92,8 @@ public class BlockTube extends MyLog {
 	}
 
 	private boolean isDay(World world) {
+		if (world instanceof WorldClient)
+			System.out.println(((WorldClient) world).getWorldTime());
 		if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
 			return Util.clientIsDaytime(world);
 		return world.isDaytime();

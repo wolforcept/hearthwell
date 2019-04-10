@@ -34,7 +34,7 @@ public class BlockFormer extends MyBlock implements BlockEnergyConsumer {
 
 	@Override
 	public void randomTick(World world, BlockPos _pos, IBlockState state, Random random) {
-		if (world.isRemote)
+		if (world.isRemote || world.isBlockPowered(_pos))
 			return;
 
 		if (!BlockEnergyConsumer.tryConsume(world, _pos, getEnergyConsumption()))
@@ -130,23 +130,6 @@ public class BlockFormer extends MyBlock implements BlockEnergyConsumer {
 	@Override
 	public int getEnergyConsumption() {
 		return HwellConfig.machines.formerConsumption;
-	}
-
-	public static HashSet<Item> isFiltering(World world, BlockPos pos) {
-		HashSet<Item> filters = new HashSet<Item>();
-		for (EnumFacing face : EnumFacing.VALUES) {
-			BlockPos pos2 = pos.offset(face);
-			if (world.getBlockState(pos2).getBlock() instanceof BlockTray) {
-				ItemStackHandler inv = ((TileTray) world.getTileEntity(pos2)).inventory;
-				for (int i = 0; i < 9; i++) {
-					ItemStack slot = inv.getStackInSlot(i);
-					if (Util.isValid(slot)) {
-						filters.add(slot.getItem());
-					}
-				}
-			}
-		}
-		return filters;
 	}
 
 }

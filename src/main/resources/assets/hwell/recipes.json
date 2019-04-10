@@ -3,6 +3,14 @@
 	
 	,
 	
+	"nether_portal_recipes": [
+		{
+			"input": { "item": "hwell:crystal"},
+			"output": { "item": "hwell:crystal_nether"}
+		}
+	]
+	,
+	
 	"power_crystal_recipes": {
 		"nucleous": [
 			{

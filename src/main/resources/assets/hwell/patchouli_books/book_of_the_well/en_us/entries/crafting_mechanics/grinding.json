@@ -11,25 +11,31 @@
         { 	"type": "crafting",
 	        "name": "Precision Grinding",
             "recipe": "hwell:precision_grinder_empty",
-	        "text": "The Precision Grinder can be used as an early form of resource multiplication as it will slightly increase the yield of mined ores. Requires 100 Energy per Operation."
-        },    
+	        "text": "The Precision Grinder can be used as an early form of resource multiplication as it will slightly increase the yield of mined ores. Requires some energy per operation."
+        },
         {
             
             "type": "multiblock",
             "name": "Precision Grinder",
             "multiblock": {
                 "pattern": [
-                    [ " "],
-                    [ " "],
-                    [ "0"]
+					[ " P ", "PL ", " P "],
+					[ " P ", "P  ", " P "],
+					[ "HLH", "P0P", "HPH"]
                 ],
                 "mapping": {
-                    "A": "hwell:furnace_tube",
-                    "0": "minecraft:cobblestone"
+                    "H": "hwell:heavy_block",
+                    "P": "hwell:protection_block",
+					"L": "hwell:slab_lamp",
+					"0": "hwell:precision_grinder_iron"
                 }
             }
         
-        },    
+        },
+        {
+            "type": "text",
+            "text": "$(br2)$(br)Set the grinder red part facing the lower lamp, which is on the right side if the entrance.$(br2)Remember to shift place the lamp on the ground so that it is placed upside down."
+        },		
         {   "type": "crafting",
             "name": "Grinding Wheels",
             "recipe": "hwell:grinding_wheel_iron",

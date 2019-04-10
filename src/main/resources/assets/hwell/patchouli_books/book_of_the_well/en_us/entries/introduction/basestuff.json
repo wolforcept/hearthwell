@@ -33,6 +33,12 @@
             "item": "hwell:empty_rod",
             "link_recipe": true,
             "text": "Hold this rod in your hand and right click to draw some mysterious essense from yourself. $(br2) Try holding blaze powder, or mysterious dust in your other hand."
+        },
+ 		{
+            "type": "crafting",
+			"title": "",
+			"text": "",
+			"recipe": "hwell:empty_rod"			
         }
     ]
 }

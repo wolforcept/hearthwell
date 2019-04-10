@@ -85,7 +85,7 @@ public class RecipePuller {
 
 	//
 
-	private ItemStack output;
+	public ItemStack output;
 	private double prob;
 	private ItemStack filter;
 

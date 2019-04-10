@@ -70,9 +70,9 @@ public class RecipeCharger {
 
 	//
 
-	final ItemStack input;
-	final ItemStack output;
-	final int power;
+	public final ItemStack input;
+	public final ItemStack output;
+	public final int power;
 
 	public RecipeCharger(ItemStack input, ItemStack output, int power) {
 		this.input = input;

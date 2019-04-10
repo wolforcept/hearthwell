@@ -22,16 +22,21 @@ public class RecipeNetherPortal {
 		for (JsonElement e : recipesJson) {
 			JsonObject o = e.getAsJsonObject();
 			ItemStack input = ShapedRecipes.deserializeItem(o.get("input").getAsJsonObject(), true);
-			ItemStack output = ShapedRecipes.deserializeItem(o.get("output1").getAsJsonObject(), true);
+			ItemStack output = ShapedRecipes.deserializeItem(o.get("output").getAsJsonObject(), true);
 			recipes.add(new RecipeNetherPortal(input, output));
 		}
 	}
 
-	public static ItemStack getOutput(ItemStack item) {
+	public static ItemStack getOutput(ItemStack in) {
+		for (RecipeNetherPortal recipe : recipes) {
+			if (Util.equalExceptAmount(recipe.input, in)) {
+				return recipe.output;
+			}
+		}
 		return null;
 	}
 
-	private final ItemStack input;
+	public final ItemStack input;
 	private final ItemStack output;
 
 	public RecipeNetherPortal(ItemStack input, ItemStack output) {

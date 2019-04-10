@@ -1,7 +1,11 @@
 package wolforce.blocks.tile;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockSapling;
+import net.minecraft.block.IGrowable;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 
@@ -12,8 +16,8 @@ public class TileFertileSoil extends TileEntity implements ITickable {
 		if (world.isRemote || Math.random() > .01)
 			return;
 		Block block = world.getBlockState(pos.up()).getBlock();
-		if (block instanceof BlockSapling) {
-			((BlockSapling) block).grow(world, pos.up(), world.getBlockState(pos.up()), world.rand);
+		if (block instanceof IGrowable) {
+			((IGrowable) block).grow(world, world.rand, pos.up(), world.getBlockState(pos.up()));
 		}
 	}
 

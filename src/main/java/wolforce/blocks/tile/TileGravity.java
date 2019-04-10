@@ -10,7 +10,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import wolforce.HwellConfig;
 import wolforce.Main;
-import wolforce.blocks.BlockFormer;
+import wolforce.blocks.BlockTray;
 
 public class TileGravity extends TileEntity implements ITickable {
 
@@ -19,15 +19,15 @@ public class TileGravity extends TileEntity implements ITickable {
 		if (world.isBlockPowered(pos))
 			return;
 
-		HashSet<Item> filter = BlockFormer.isFiltering(world, pos);
-		System.out.println(filter);
+		HashSet<Item> filter = new HashSet<Item>();
+		boolean isBlackList = BlockTray.getFilter(world, pos, filter);
 
 		int dist = world.getBlockState(pos).getBlock() == Main.gravity_block_mini ? //
 				HwellConfig.machines.gravityBlockRangeMini : HwellConfig.machines.gravityBlockRange;
 		List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class,
 				new AxisAlignedBB(pos.add(-dist, -dist, -dist), pos.add(dist + 1, dist + 1, dist + 1)));
 		for (EntityItem entityItem : items) {
-			if (filter.isEmpty() || filter.contains(entityItem.getItem().getItem())) {
+			if (BlockTray.isItemAble(filter, entityItem.getItem().getItem(), isBlackList)) {
 				entityItem.motionX += .01 * (pos.getX() + .5 - entityItem.posX);
 				entityItem.motionY += .01 * (pos.getY() - entityItem.posY);
 				entityItem.motionZ += .01 * (pos.getZ() + .5 - entityItem.posZ);

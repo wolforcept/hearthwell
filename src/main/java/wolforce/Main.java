@@ -117,7 +117,7 @@ public class Main {
 	public static Item mystic_iron_sword, mystic_iron_dagger, mystic_iron_pickaxe, mystic_iron_axe, mystic_iron_shovel,
 			mystic_iron_hoe;
 	public static Item mystic_iron_helmet, mystic_iron_chest, mystic_iron_legs, mystic_iron_boots;
-	public static Item seed_of_life;
+	public static Item seed_of_life, seed_of_the_nether, seed_of_the_end;
 	public static Item wheat_flour, salt;
 	public static Item dust;
 	public static Item myst_dust, myst_fertilizer;
@@ -295,8 +295,6 @@ public class Main {
 		puller = new BlockPuller("puller");
 		blocks.add(puller);
 
-		seed_of_life = new ItemSeedOfLife("seed_of_life", "Right-click on the ground to breed life!");
-		items.add(seed_of_life);
 		fertile_soil = new BlockFertileSoil("fertile_soil");
 		blocks.add(fertile_soil);
 
@@ -468,6 +466,13 @@ public class Main {
 		blocks.add(fullgrass_block);
 		scorch_glass = new MyGlass("scorch_glass");
 		blocks.add(scorch_glass);
+
+		seed_of_life = new ItemSeedOfLife("seed_of_life", "Right-click on the ground to breed life!", 0);
+		items.add(seed_of_life);
+		seed_of_the_nether = new ItemSeedOfLife("seed_of_the_nether", "Right-click on the ground to sprout the nether!", 1);
+		items.add(seed_of_the_nether);
+		seed_of_the_end = new ItemSeedOfLife("seed_of_the_end", "Right-click on the ground to sprout the end!", 2);
+		items.add(seed_of_the_end);
 
 		burst_seed_stone = new BlockBurstSeed("burst_seed_stone", //
 				Material.ROCK, Blocks.STONE, "pickaxe", SoundType.STONE);
@@ -825,6 +830,8 @@ public class Main {
 
 	public static void init(FMLInitializationEvent event) {
 
+		ItemSeedOfLife.init();
+
 		HashSet<Class> loaded = new HashSet<>();
 		for (Block block : blocks)
 			if (block instanceof HasTE) {
@@ -847,6 +854,8 @@ public class Main {
 		OreDictionary.registerOre("oreGlowstone", glowstone_ore);
 		OreDictionary.registerOre("oreQuartz", quartz_ore);
 
+		new WorldTypeBarrenEarth();
+		// GameRegistry.registerWorldGenerator(new MyWorldType(), 1);
 	}
 
 }

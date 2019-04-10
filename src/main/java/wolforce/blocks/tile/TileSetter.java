@@ -4,29 +4,19 @@ import java.util.HashSet;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemSeeds;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.util.FakePlayerFactory;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import wolforce.HwellConfig;
 import wolforce.Main;
 import wolforce.Util;
-import wolforce.blocks.BlockFormer;
 import wolforce.blocks.BlockSetter;
+import wolforce.blocks.BlockTray;
 import wolforce.blocks.base.BlockEnergyConsumer;
 
 public class TileSetter extends TileEntity implements ITickable {
@@ -45,19 +35,20 @@ public class TileSetter extends TileEntity implements ITickable {
 			poss[i] = pos.offset(facing, start + i);
 		}
 
-		HashSet<Item> filter = BlockFormer.isFiltering(world, pos);
+		HashSet<Item> filter = new HashSet<Item>();
+		boolean isBlackList = BlockTray.getFilter(world, pos, filter);
 
 		for (BlockPos pos2 : poss)
-			setAnEntityItem(pos, pos2, filter);
+			setOneEntityItemInPos(pos, pos2, filter, isBlackList);
 
 	}
 
-	private void setAnEntityItem(BlockPos setterPos, BlockPos pos, HashSet<Item> filter) {
+	private void setOneEntityItemInPos(BlockPos setterPos, BlockPos pos, HashSet<Item> filter, boolean isBlackList) {
 		List<EntityItem> entities = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos));
 		for (EntityItem entityItem : entities) {
 			if (!Util.isValid(entityItem.getItem()) || !world.isAirBlock(pos))
 				continue;
-			if (filter.isEmpty() || filter.contains(entityItem.getItem().getItem())) {
+			if (BlockTray.isItemAble(filter, entityItem.getItem().getItem(), isBlackList)) {
 				Block block = Block.getBlockFromItem(entityItem.getItem().getItem());
 				if (block != null && block != Blocks.AIR
 						&& BlockEnergyConsumer.tryConsume(world, setterPos, Main.setter.getEnergyConsumption())) {

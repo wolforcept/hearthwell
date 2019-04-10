@@ -1,25 +1,37 @@
 package wolforce;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagString;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.DimensionType;
-import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import wolforce.fluids.BlockLiquidSouls;
 import wolforce.items.ItemLoot;
 import wolforce.recipes.RecipeNetherPortal;
@@ -28,13 +40,77 @@ import wolforce.registry.RegisterRecipes;
 @Mod.EventBusSubscriber
 public class HwellEvents {
 
-	@SubscribeEvent
-	public static void preventNether(EntityTravelToDimensionEvent event) {
+	private static HashSet<String> prayers = new HashSet();
 
-		if (!(event.getEntity() instanceof EntityItem)) {
-			ItemStack newItemStack = RecipeNetherPortal.getOutput(((EntityItem) event.getEntity()).getItem());
+	@SubscribeEvent
+	public static void checkChatForBook(ServerChatEvent event) {
+		if (lastChatIsValid(event.getMessage())) {
+			final String username = event.getUsername();
+			prayers.add(username);
+			new Thread() {
+				public void run() {
+					try {
+						Thread.sleep(5000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					prayers.remove(username);
+				};
+			}.start();
+		}
+	}
+
+	@SubscribeEvent
+	public static void requestBook(RightClickItem event) {
+		EntityPlayer player = event.getEntityPlayer();
+		if (!player.getEntityWorld().isRemote && //
+				player.isSneaking() && player.rotationPitch == -90 && //
+				player.getHeldItemMainhand().getItem() == Item.getItemFromBlock(Blocks.WOODEN_PRESSURE_PLATE) && //
+				player.getHeldItemOffhand().getItem() == Item.getItemFromBlock(Blocks.WOODEN_PRESSURE_PLATE) && //
+				player.getHeldItemMainhand().getCount() == 1 && //
+				player.getHeldItemOffhand().getCount() == 1 && //
+				Item.getByNameOrId("patchouli:guide_book") != null && //
+				prayers.contains(player.getName())//
+		) {
+
+			player.getHeldItemMainhand().shrink(1);
+			player.getHeldItemOffhand().shrink(1);
+
+			NBTTagCompound nbt = new NBTTagCompound();
+			nbt.setString("patchouli:book", "hwell:book_of_the_well");
+			ItemStack book = new ItemStack(Item.getByNameOrId("patchouli:guide_book"), 1, 0, nbt);
+			book.setTagInfo("patchouli:book", new NBTTagString("hwell:book_of_the_well"));
+			player.setHeldItem(EnumHand.MAIN_HAND, book);
+
+			prayers.remove(player.getName());
+			if (!player.getEntityWorld().isRemote) {
+				player.getEntityWorld().addWeatherEffect(
+						new EntityLightningBolt(player.getEntityWorld(), player.posX, player.posY, player.posZ, false));
+			}
+		}
+	}
+
+	private static boolean lastChatIsValid(String string) {
+		if (string == null)
+			return false;
+		String s = string.toLowerCase();
+		return s.length() > 30 && s.contains("poor") && s.contains("please") && s.contains("send") && s.contains("book")
+				&& s.contains("gods");
+		// gods please send a book to your poor servant
+	}
+
+	@SubscribeEvent
+	public static void travelToDim(EntityTravelToDimensionEvent event) {
+
+		if ((event.getEntity() instanceof EntityItem)) {
+			EntityItem entityItem = (EntityItem) event.getEntity();
+			ItemStack newItemStack = RecipeNetherPortal.getOutput(entityItem.getItem()).copy();
 			if (Util.isValid(newItemStack)) {
 				event.setCanceled(true);
+				newItemStack.setCount(entityItem.getItem().getCount() * newItemStack.getCount());
+				System.out.println("HwellEvents.preventNether()");
+				entityItem.setItem(newItemStack);
+				// spawnInPlaceOf(newItemStack, entityItem);
 			}
 		}
 
@@ -42,32 +118,15 @@ public class HwellEvents {
 			event.setCanceled(true);
 	}
 
-	//
-	// if (event.getDimension() == DimensionType.NETHER.getId()) {
-	// EntityItem entityItem = (EntityItem) event.getEntity();
-	// if (entityItem.getItem().getItem() == Main.crystal) {
-	// entityItem.setItem(new ItemStack(Main.crystal_nether,
-	// entityItem.getItem().getCount()));
-	// }
-	// if (entityItem.getItem().getItem() ==
-	// Item.getItemFromBlock(Main.crystal_block)) {
-	// entityItem.setItem(new ItemStack(Main.crystal_nether_block,
-	// entityItem.getItem().getCount()));
-	// }
-	// }
-	//
-	// if (event.getDimension() == DimensionType.OVERWORLD.getId()) {
-	// EntityItem entityItem = (EntityItem) event.getEntity();
-	// if (entityItem.getItem().getItem() == Main.crystal_nether) {
-	// entityItem.setItem(new ItemStack(Main.crystal,
-	// entityItem.getItem().getCount()));
-	// }
-	// if (entityItem.getItem().getItem() ==
-	// Item.getItemFromBlock(Main.crystal_nether_block)) {
-	// entityItem.setItem(new ItemStack(Main.crystal_block,
-	// entityItem.getItem().getCount()));
-	// }
-	// }
+	// private static void spawnInPlaceOf(ItemStack newItemStack, EntityItem
+	// entityItem) {
+	// EntityItem newEntity = new EntityItem(entityItem.world, entityItem.posX,
+	// entityItem.posY, entityItem.posZ, newItemStack);
+	// newEntity.motionX = entityItem.motionX;
+	// newEntity.motionY = entityItem.motionY;
+	// newEntity.motionZ = entityItem.motionZ;
+	// entityItem.setDead();
+	// entityItem.world.spawnEntity(newEntity);
 	// }
 
 	@SubscribeEvent // (priority = EventPriority.NORMAL, receiveCanceled = true)

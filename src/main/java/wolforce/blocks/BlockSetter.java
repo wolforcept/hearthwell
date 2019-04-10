@@ -85,10 +85,6 @@ public class BlockSetter extends Block implements HasTE, BlockEnergyConsumer {
 		return Math.max(range, -HwellConfig.machines.setterBaseRange + 1);
 	}
 
-	private BlockPos[] getBlockPoss(EnumFacing facing, int start, int range) {
-		return null;
-	}
-
 	//
 
 	//
@@ -117,7 +113,7 @@ public class BlockSetter extends Block implements HasTE, BlockEnergyConsumer {
 
 	@Override
 	public String[] getDescription() {
-		return new String[] { "Consumes 5 Energy per Operation.", "Requires a multiblock Structure." };
+		return new String[] { "Consumes 5 Energy per Operation." };
 	}
 
 	// TILE ENTITY

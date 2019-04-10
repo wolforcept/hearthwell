@@ -1,0 +1,14 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " H ",
+    "GCG",
+    " O "  ],
+  "key": {
+    "H": [{ "item": "hwell:shard_c" }],
+	"G": [{ "item": "hwell:scorch_grit", "data": 0 }],
+	"C": [{ "item": "minecraft:coal_block" }],
+	"O": [{ "item": "hwell:shard_p" }]
+  },
+  "result": { "item": "hwell:seed_of_the_nether" }
+}

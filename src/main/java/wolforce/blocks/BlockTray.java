@@ -1,13 +1,18 @@
 package wolforce.blocks;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -16,6 +21,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.items.ItemStackHandler;
 import wolforce.Main;
 import wolforce.Util;
 import wolforce.blocks.base.BlockWithDescription;
@@ -35,12 +41,14 @@ public class BlockTray extends Block implements HasTE, BlockWithDescription {
 	protected static final AxisAlignedBB AABB_WEST = new AxisAlignedBB(13 * F, 0, 0, 1, 1, 1);
 
 	public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.<EnumFacing>create("facing", EnumFacing.class);
+	public static final PropertyBool ISBLACK = PropertyBool.create("isblack");
 
 	public BlockTray(String name) {
 		super(Material.WOOD);
 		Util.setReg(this, name);
 		setHardness(2);
 		setHarvestLevel("axe", -1);
+		setDefaultState(this.blockState.getBaseState().withProperty(ISBLACK, false).withProperty(FACING, EnumFacing.UP));
 	}
 
 	@Override
@@ -50,8 +58,10 @@ public class BlockTray extends Block implements HasTE, BlockWithDescription {
 		if (player.isSneaking())
 			return false;
 
-		if (side != world.getBlockState(pos).getValue(FACING))
-			return false;
+		if (side != world.getBlockState(pos).getValue(FACING)) {
+			changeIsBlack(world, pos);
+			return true;
+		}
 
 		TileTray tile = (TileTray) world.getTileEntity(pos);
 
@@ -88,8 +98,10 @@ public class BlockTray extends Block implements HasTE, BlockWithDescription {
 		stackToInsert.setCount(1);
 		player.getHeldItem(hand).shrink(1);
 
-		if (!Util.isValid(stackToInsert))
-			return false;
+		if (!Util.isValid(stackToInsert)) {
+			changeIsBlack(world, pos);
+			return true;
+		}
 
 		if (!world.isRemote) {
 			tile.inventory.setStackInSlot(index, stackToInsert);
@@ -97,6 +109,15 @@ public class BlockTray extends Block implements HasTE, BlockWithDescription {
 		}
 
 		return true;
+	}
+
+	private void changeIsBlack(World world, BlockPos pos) {
+		ItemStackHandler oldInv = ((TileTray) world.getTileEntity(pos)).inventory;
+		EnumFacing facing = world.getBlockState(pos).getValue(FACING);
+		boolean isblack = world.getBlockState(pos).getValue(ISBLACK);
+		IBlockState newstate = world.getBlockState(pos).withProperty(ISBLACK, !isblack).withProperty(FACING, facing);
+		world.setBlockState(pos, newstate);
+		((TileTray) world.getTileEntity(pos)).inventory = oldInv;
 	}
 
 	@Override
@@ -108,6 +129,42 @@ public class BlockTray extends Block implements HasTE, BlockWithDescription {
 			}
 		}
 		super.breakBlock(worldIn, pos, state);
+	}
+
+	public static boolean getFilter(World world, BlockPos pos, HashSet<Item> filters) {
+		boolean isBlackList = true;
+		TESTALL: for (EnumFacing face : EnumFacing.VALUES) {
+			BlockPos pos2 = pos.offset(face);
+			if (world.getBlockState(pos2).getBlock() instanceof BlockTray) {
+				if (!isBlackList(world, pos2)) {
+					isBlackList = false;
+					break TESTALL;
+				}
+			}
+		}
+		for (EnumFacing face : EnumFacing.VALUES) {
+			BlockPos pos2 = pos.offset(face);
+			if (world.getBlockState(pos2).getBlock() instanceof BlockTray) {
+				if (isBlackList(world, pos2) != isBlackList)
+					continue;
+				ItemStackHandler inv = ((TileTray) world.getTileEntity(pos2)).inventory;
+				for (int i = 0; i < 9; i++) {
+					ItemStack slot = inv.getStackInSlot(i);
+					if (Util.isValid(slot)) {
+						filters.add(slot.getItem());
+					}
+				}
+			}
+		}
+		return isBlackList;
+	}
+
+	private static boolean isBlackList(World world, BlockPos pos) {
+		return world.getBlockState(pos).getValue(ISBLACK);
+	}
+
+	public static boolean isItemAble(HashSet<Item> filter, Item item, boolean isBlackList) {
+		return filter.isEmpty() || (isBlackList != filter.contains(item));
 	}
 
 	//
@@ -194,17 +251,20 @@ public class BlockTray extends Block implements HasTE, BlockWithDescription {
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, FACING);
+		return new BlockStateContainer(this, FACING, ISBLACK);
 	}
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(FACING, EnumFacing.values()[meta]);
+		return this.getDefaultState().withProperty(FACING, EnumFacing.values()[meta & 7]).withProperty(ISBLACK, (meta & 8) > 0);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return ((EnumFacing) state.getValue(FACING)).ordinal();
+		int meta = ((EnumFacing) state.getValue(FACING)).ordinal();
+		if (state.getValue(ISBLACK))
+			meta |= 8;
+		return meta;
 	}
 
 	//
@@ -220,7 +280,9 @@ public class BlockTray extends Block implements HasTE, BlockWithDescription {
 
 	@Override
 	public String[] getDescription() {
-		return new String[] { "Small Item Tray that holds up to 9 Items.", "Also serves as a filter to some blocks." };
+		return new String[] { "Small Item Tray that holds up to 9 Items.",
+				"Also serves as a white list filter to gravity and setter blocks.",
+				"Will change to a black filter when right clicked with an empty hand." };
 	}
 
 }

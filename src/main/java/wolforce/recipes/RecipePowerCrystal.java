@@ -7,6 +7,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -26,6 +27,7 @@ import wolforce.items.ItemPowerCrystal;
 public class RecipePowerCrystal implements IRecipe {
 
 	public static class ItemAndVals {
+		public static final ItemAndVals invalid = new ItemAndVals(Blocks.AIR, "invalid", 0, 0, 0);
 		public ItemStack stack;
 		public int power;
 		public int range;
@@ -244,7 +246,7 @@ public class RecipePowerCrystal implements IRecipe {
 				return itemAndVals;
 			i++;
 		}
-		return null;
+		return ItemAndVals.invalid;
 	}
 
 	public static ItemAndVals getRelay(int relayIndex) {
@@ -254,7 +256,7 @@ public class RecipePowerCrystal implements IRecipe {
 				return itemAndVals;
 			i++;
 		}
-		return null;
+		return ItemAndVals.invalid;
 	}
 
 	public static ItemAndVals getScreen(int screenIndex) {
@@ -264,7 +266,7 @@ public class RecipePowerCrystal implements IRecipe {
 				return itemAndVals;
 			i++;
 		}
-		return null;
+		return ItemAndVals.invalid;
 	}
 
 	public static int calcMaxPower(int nucleousIndex, int relayIndex, int screenIndex) {

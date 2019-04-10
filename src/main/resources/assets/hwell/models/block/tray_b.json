@@ -1,7 +1,9 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"3": "hwell:blocks/tray"
+		"1": "hwell:blocks/tray_b",
+		"3": "hwell:blocks/tray",
+		"particle": "hwell:blocks/tray_b"
 	},
 	"elements": [
 		{
@@ -64,7 +66,7 @@
 				"east": {"uv": [0, 0, 14, 1], "texture": "#3"},
 				"south": {"uv": [0, 0, 14, 1], "texture": "#3"},
 				"west": {"uv": [0, 0, 14, 1], "texture": "#3"},
-				"up": {"uv": [1, 1, 15, 15], "texture": "#3"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#1"},
 				"down": {"uv": [1, 1, 15, 15], "texture": "#3"}
 			}
 		}

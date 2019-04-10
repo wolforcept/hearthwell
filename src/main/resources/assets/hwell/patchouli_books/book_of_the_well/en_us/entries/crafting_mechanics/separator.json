@@ -7,7 +7,7 @@
 		{
             "type": "crafting",
             "title": "Separator",            
-			"text": "A multiblock structure that allows you to divide complex constructions into its components. The components will exit the machine in the various outputs. Requires 100 Energy per Operation.",
+			"text": "A multiblock structure that allows you to divide complex constructions into its components. The components will exit the machine in the various outputs. Requires some energy per operation.",
             "recipe": "hwell:separator"
         },
 		{

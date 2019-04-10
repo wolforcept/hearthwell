@@ -1,21 +1,17 @@
 package hwell;
 
-import java.util.LinkedList;
+import java.util.Iterator;
 
 import crafttweaker.annotations.ZenDoc;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.liquid.ILiquidStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
-import mezz.jei.plugins.vanilla.ingredients.fluid.FluidStackHelper;
-import crafttweaker.api.item.IItemStack;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
+import wolforce.Util;
 import wolforce.items.ItemGrindingWheel;
 import wolforce.recipes.Irio;
 import wolforce.recipes.RecipeCharger;
@@ -82,8 +78,8 @@ public class CT {
 
 	@ZenDoc("Add a recipe for the Freezer. If there is more than one output, a random output will be selected.")
 	@ZenMethod
-	public static void addFreezerRecipe(ILiquidStack input, ItemStack[] outputs) {
-		RecipeFreezer.recipes.add(new RecipeFreezer(is(input), outputs));
+	public static void addFreezerRecipe(ILiquidStack input, IItemStack[] outputs) {
+		RecipeFreezer.recipes.add(new RecipeFreezer(is(input), is(outputs)));
 	}
 
 	@ZenDoc("Add a recipe for the Grinder. The grinding wheel names are: \"iron\", \"diamond\" and \"crystal\".")
@@ -131,13 +127,13 @@ public class CT {
 
 	@ZenDoc("Add a recipe for the Separator that outputs only two items.")
 	@ZenMethod
-	public static void addSeparatorSeparator(IItemStack input, IItemStack leftOutput, IItemStack rightOutput) {
+	public static void addSeparatorRecipe(IItemStack input, IItemStack leftOutput, IItemStack rightOutput) {
 		RecipeSeparator.recipes.put(new Irio(is(input)), new RecipeSeparator(is(leftOutput), is(rightOutput)));
 	}
 
 	@ZenDoc("Add a recipe for the Separator that outputs all three items.")
 	@ZenMethod
-	public static void addSeparatorSeparator(IItemStack input, IItemStack leftOutput, IItemStack rightOutput, IItemStack backOutput) {
+	public static void addSeparatorRecipe(IItemStack input, IItemStack leftOutput, IItemStack rightOutput, IItemStack backOutput) {
 		RecipeSeparator.recipes.put(new Irio(is(input)), new RecipeSeparator(is(leftOutput), is(rightOutput), is(backOutput)));
 	}
 
@@ -159,9 +155,141 @@ public class CT {
 		RecipePowerCrystal.screenRecipes.add(new ItemAndVals(is(item), name, power, range, purity));
 	}
 
-	@ZenDoc("Add a new transformation recipe through the nether portal.")
+	@ZenDoc("Add a new transformation recipe through the nether portal. It is not possible to change the number of items this way. 1 to 1 transformations only.")
 	@ZenMethod
 	public static void addNetherPortalRecipe(IItemStack input, IItemStack output) {
 		RecipeNetherPortal.recipes.add(new RecipeNetherPortal(is(input), is(output)));
+	}
+
+	//
+
+	//
+
+	//
+
+	@ZenDoc("Remove a recipe for the Charger.")
+	@ZenMethod
+	public static void removeChargerRecipe(IItemStack input) {
+		for (Iterator<RecipeCharger> it = RecipeCharger.recipes.iterator(); it.hasNext();) {
+			RecipeCharger recipe = (RecipeCharger) it.next();
+			if (Util.equalExceptAmount(recipe.input, is(input))) {
+				it.remove();
+				return;
+			}
+		}
+	}
+
+	@ZenDoc("Remove a recipe for the Crushing Block.")
+	@ZenMethod
+	public static void removeCrushingBlockRecipe(IItemStack input) {
+		RecipeCrushing.recipes.remove(new Irio(is(input)));
+	}
+
+	@ZenDoc("Remove a recipe for the Freezer.")
+	@ZenMethod
+	public static void removeFreezerRecipe(ILiquidStack input) {
+		for (Iterator<RecipeFreezer> it = RecipeFreezer.recipes.iterator(); it.hasNext();) {
+			RecipeFreezer recipe = (RecipeFreezer) it.next();
+			if (recipe.fluidIn.isFluidEqual(is(input))) {
+				it.remove();
+				return;
+			}
+		}
+	}
+
+	@ZenDoc("Remove a recipe for the Grinder.")
+	@ZenMethod
+	public static void removeGrinderRecipe(IItemStack input) {
+		RecipeGrinding.recipes.remove(new Irio(is(input)));
+	}
+
+	@ZenDoc("Remove a recipe for the Puller.")
+	@ZenMethod
+	public static void removePullerRecipe(IItemStack output) {
+		for (Iterator<RecipePuller> it = RecipePuller.recipes.iterator(); it.hasNext();) {
+			RecipePuller recipe = (RecipePuller) it.next();
+			if (Util.equalExceptAmount(recipe.output, is(output))) {
+				it.remove();
+				return;
+			}
+		}
+	}
+
+	@ZenDoc("Remove a new item that has durability that the Repairing Paste can repair.")
+	@ZenMethod
+	public static void removeRepairingPasteRecipe(IItemStack input) {
+		RecipeRepairingPaste.items.remove(is(input).getItem());
+	}
+
+	@ZenDoc("Remove a new block for the Seed of Life to be right clicked on.")
+	@ZenMethod
+	public static void removeSeedOfLifeRecipe(IItemStack input) {
+		RecipeSeedOfLife.blocks.remove(new Irio(is(input)));
+	}
+
+	@ZenDoc("Remove a recipe for the Tube.")
+	@ZenMethod
+	public static void removeTubeRecipe(IItemStack input) {
+		for (Iterator<RecipeTube> it = RecipeTube.recipes.iterator(); it.hasNext();) {
+			RecipeTube recipe = (RecipeTube) it.next();
+			if (Util.equalExceptAmount(recipe.in, is(input))) {
+				it.remove();
+				return;
+			}
+		}
+	}
+
+	@ZenDoc("Remove a recipe for the Separator.")
+	@ZenMethod
+	public static void removeSeparatorRecipe(IItemStack input) {
+		RecipeSeparator.recipes.remove(new Irio(is(input)));
+	}
+
+	@ZenDoc("Remove a Nucleous Item.")
+	@ZenMethod
+	public static void removePowerCrystalNucleous(IItemStack item) {
+		for (Iterator<ItemAndVals> it = RecipePowerCrystal.nucleousRecipes.iterator(); it.hasNext();) {
+			ItemAndVals recipe = (ItemAndVals) it.next();
+			if (Util.equalExceptAmount(recipe.stack, is(item))) {
+				it.remove();
+				return;
+			}
+		}
+	}
+
+	@ZenDoc("Remove a Relay Item.")
+	@ZenMethod
+	public static void removePowerCrystalRelay(IItemStack item) {
+		for (Iterator<ItemAndVals> it = RecipePowerCrystal.relayRecipes.iterator(); it.hasNext();) {
+			ItemAndVals recipe = (ItemAndVals) it.next();
+			if (Util.equalExceptAmount(recipe.stack, is(item))) {
+				it.remove();
+				return;
+			}
+		}
+	}
+
+	@ZenDoc("Remove a Screen Item.")
+	@ZenMethod
+	public static void removePowerCrystalScreen(IItemStack item) {
+		for (Iterator<ItemAndVals> it = RecipePowerCrystal.screenRecipes.iterator(); it.hasNext();) {
+			ItemAndVals recipe = (ItemAndVals) it.next();
+			if (Util.equalExceptAmount(recipe.stack, is(item))) {
+				it.remove();
+				return;
+			}
+		}
+	}
+
+	@ZenDoc("Remove a nether portal transformation recipe.")
+	@ZenMethod
+	public static void removeNetherPortalRecipe(IItemStack input) {
+		for (Iterator<RecipeNetherPortal> it = RecipeNetherPortal.recipes.iterator(); it.hasNext();) {
+			RecipeNetherPortal recipe = (RecipeNetherPortal) it.next();
+			if (Util.equalExceptAmount(recipe.input, is(input))) {
+				it.remove();
+				return;
+			}
+		}
 	}
 }
