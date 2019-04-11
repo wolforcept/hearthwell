@@ -2,8 +2,8 @@ package wolforce.blocks;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import wolforce.blocks.base.BlockMachineBase;
-import wolforce.blocks.base.HasTE;
+import wolforce.base.BlockMachineBase;
+import wolforce.base.HasTE;
 import wolforce.blocks.tile.TileGravity;
 
 public class BlockGravity extends BlockMachineBase implements HasTE {

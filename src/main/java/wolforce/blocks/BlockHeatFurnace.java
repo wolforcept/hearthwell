@@ -11,8 +11,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import wolforce.Util;
-import wolforce.blocks.base.BlockWithDescription;
-import wolforce.blocks.base.HasTE;
+import wolforce.base.BlockWithDescription;
+import wolforce.base.HasTE;
 import wolforce.blocks.tile.TileHeatFurnace;
 
 public class BlockHeatFurnace extends Block implements HasTE, BlockWithDescription {

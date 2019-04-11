@@ -7,6 +7,8 @@ import static wolforce.Main.citrinic_stone;
 import static wolforce.Main.compressed_clay;
 import static wolforce.Main.crystal_block;
 import static wolforce.Main.dust_block;
+import static wolforce.Main.gaseous_glass;
+import static wolforce.Main.gaseous_sand;
 import static wolforce.Main.glowstone_ore;
 import static wolforce.Main.heavy_ingot;
 import static wolforce.Main.heavy_mesh;
@@ -174,10 +176,10 @@ public class RegisterRecipes {
 
 		recipeName = "charger_recipes";
 		RecipeCharger.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonArray());
-		
+
 		recipeName = "nether_portal_recipes";
 		RecipeNetherPortal.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonArray());
-		
+
 		recipeName = "separator_recipes";
 		RecipeSeparator.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonArray());
 
@@ -220,6 +222,7 @@ public class RegisterRecipes {
 		GameRegistry.addSmelting(leaf_mesh, new ItemStack(crystal_block, 1), .5f);
 		GameRegistry.addSmelting(compressed_clay, new ItemStack(Blocks.HARDENED_CLAY, 9), 0f);
 		GameRegistry.addSmelting(scorch_grit, new ItemStack(scorch_glass), 0f);
+		GameRegistry.addSmelting(gaseous_sand, new ItemStack(gaseous_glass), 0f);
 		GameRegistry.addSmelting(azurite, new ItemStack(smooth_azurite), 0f);
 		GameRegistry.addSmelting(citrinic_stone, new ItemStack(citrinic_sand), 0f);
 		GameRegistry.addSmelting(onyx, new ItemStack(smooth_onyx), 0f);

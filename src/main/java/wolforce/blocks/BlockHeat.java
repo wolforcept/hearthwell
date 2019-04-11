@@ -12,6 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import wolforce.HwellConfig;
 import wolforce.Main;
 import wolforce.Util;
 
@@ -29,7 +30,11 @@ public class BlockHeat extends Block {
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand,
 			EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (playerIn.getHeldItem(hand).getItem().equals(Items.FLINT_AND_STEEL)) {
-			worldIn.createExplosion(playerIn, pos.getX(), pos.getY(), pos.getZ(), 1, true);
+			if (HwellConfig.other.heat_blocks_explode) {
+				worldIn.createExplosion(playerIn, pos.getX(), pos.getY(), pos.getZ(), 1, true);
+			} else {
+				worldIn.setBlockState(pos, Main.core_heat.getDefaultState());
+			}
 			playerIn.getHeldItem(hand).damageItem(1, playerIn);
 			return true;
 		}

@@ -17,8 +17,8 @@ import wolforce.HwellConfig;
 import wolforce.Main;
 import wolforce.Util;
 import wolforce.Util.BlockWithMeta;
+import wolforce.base.BlockEnergyConsumer;
 import wolforce.blocks.BlockLightCollector;
-import wolforce.blocks.base.BlockEnergyConsumer;
 import wolforce.recipes.RecipePuller;
 
 public class TilePuller extends TileEntity implements ITickable {

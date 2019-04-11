@@ -8,8 +8,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import wolforce.HwellConfig;
-import wolforce.blocks.base.BlockEnergyConsumer;
-import wolforce.blocks.base.BlockMachineBase;
+import wolforce.base.BlockEnergyConsumer;
+import wolforce.base.BlockMachineBase;
 import wolforce.recipes.RecipeFreezer;
 
 public class BlockFreezer extends BlockMachineBase implements BlockEnergyConsumer {

@@ -1,0 +1,16 @@
+{
+    "name": "Filtering",
+    "icon": "hwell:tray",
+    "category": "other_mechanics",
+    "sortnum": 0,
+    "pages": [
+        { 	"type": "spotlight",
+            "item": "hwell:tray",
+            "text": "The Tray is a small block that is capable of holding up to 9 items. It may be placed in the world facing any direction, providing a simple way of storing items. Use right click to insert or remove items.$(br2)The Tray also works as a filter for blocks like the Gravity Block and the Setter."
+        },
+		{ 	"type": "crafting",
+            "recipe": "hwell:tray",
+            "text": "To filter items, place a Tray adjacent to the block you wish to filter. Then choose between Black Listing (darker background) and White Listing (lighter background) and insert items into it."
+        }
+    ]
+}

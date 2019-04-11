@@ -13,7 +13,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import wolforce.Main;
-import wolforce.MyBlock;
+import wolforce.base.MyBlock;
 
 public class BlockMystGrass extends MyBlock {
 

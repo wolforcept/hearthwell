@@ -9,9 +9,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import wolforce.HwellConfig;
 import wolforce.Main;
-import wolforce.MyBlock;
 import wolforce.Util;
-import wolforce.blocks.base.BlockEnergyConsumer;
+import wolforce.base.BlockEnergyConsumer;
+import wolforce.base.MyBlock;
 
 public class BlockProducer extends MyBlock implements BlockEnergyConsumer {
 

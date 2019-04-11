@@ -35,8 +35,9 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import wolforce.blocks.simplevariants.MySlab;
-import wolforce.blocks.simplevariants.MyStairs;
+import wolforce.base.MyBlock;
+import wolforce.base.MySlab;
+import wolforce.base.MyStairs;
 import wolforce.recipes.Irio;
 
 public class Util {
@@ -487,10 +488,6 @@ public class Util {
 		JsonElement je = gson.fromJson(reader, JsonElement.class);
 		return je;
 		// }
-	}
-
-	public static boolean clientIsDaytime(World world) {
-		return world.getWorldTime() < 12550 || world.getWorldTime() > 23300;
 	}
 
 	public static Irio readJsonIrio(JsonObject o) {

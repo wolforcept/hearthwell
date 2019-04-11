@@ -14,7 +14,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import wolforce.Main;
-import wolforce.MyItem;
+import wolforce.base.MyItem;
 import wolforce.blocks.BlockCharger;
 import wolforce.entities.EntityPower;
 import wolforce.recipes.RecipePowerCrystal;
@@ -90,7 +90,7 @@ public class ItemPowerCrystal extends MyItem {
 			else
 				tooltip.add("Purity: " + (pur + "").substring(2, Math.min(4, (pur + "").length())) + "%");
 
-			tooltip.add(stack.getTagCompound() + "");
+			// tooltip.add(stack.getTagCompound() + "");
 		}
 	}
 

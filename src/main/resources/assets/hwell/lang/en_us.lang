@@ -233,6 +233,8 @@ tile.hwell.raw_asul_block.name=Raw Asul Block
 tile.hwell.asul_block.name=Asul Block
 tile.hwell.scorch_grit.name=Scorch Grit
 tile.hwell.scorch_glass.name=Scorch Glass
+tile.hwell.gaseous_glass.name=Gaseous Glass
+tile.hwell.gaseous_sand.name=Gaseous Sand
 tile.hwell.metaldiamond_block.name=Metaldiamond Block
 
 tile.hwell.totem_zombie.name=Zombie Totem

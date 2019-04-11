@@ -20,8 +20,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import wolforce.Main;
-import wolforce.MyItem;
 import wolforce.Util;
+import wolforce.base.MyItem;
 
 public class ItemDisplacer extends MyItem {
 

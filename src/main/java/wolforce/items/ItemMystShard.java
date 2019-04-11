@@ -1,6 +1,6 @@
 package wolforce.items;
 
-import wolforce.MyItem;
+import wolforce.base.MyItem;
 
 public class ItemMystShard extends MyItem {
 

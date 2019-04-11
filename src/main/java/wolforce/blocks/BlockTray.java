@@ -24,8 +24,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 import wolforce.Main;
 import wolforce.Util;
-import wolforce.blocks.base.BlockWithDescription;
-import wolforce.blocks.base.HasTE;
+import wolforce.base.BlockWithDescription;
+import wolforce.base.HasTE;
 import wolforce.blocks.tile.TileCharger;
 import wolforce.blocks.tile.TileTray;
 

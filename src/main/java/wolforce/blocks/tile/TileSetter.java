@@ -15,9 +15,9 @@ import net.minecraft.util.math.BlockPos;
 import wolforce.HwellConfig;
 import wolforce.Main;
 import wolforce.Util;
+import wolforce.base.BlockEnergyConsumer;
 import wolforce.blocks.BlockSetter;
 import wolforce.blocks.BlockTray;
-import wolforce.blocks.base.BlockEnergyConsumer;
 
 public class TileSetter extends TileEntity implements ITickable {
 

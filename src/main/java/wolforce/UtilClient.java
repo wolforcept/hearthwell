@@ -1,6 +1,7 @@
 package wolforce;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.entity.player.EntityPlayer;
@@ -94,5 +95,9 @@ public class UtilClient {
 			return false;
 		World world = te.getWorld();
 		return world != null && world.isBlockLoaded(te.getPos()) && !world.getBlockState(te.getPos()).getBlock().equals(Blocks.AIR);
+	}
+
+	public static boolean clientIsDaytime(World world) {
+		return world.getWorldTime() < 12550 || world.getWorldTime() > 23300;
 	}
 }

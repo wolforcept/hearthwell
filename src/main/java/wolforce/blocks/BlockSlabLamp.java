@@ -1,7 +1,7 @@
 package wolforce.blocks;
 
 import net.minecraft.block.material.Material;
-import wolforce.blocks.simplevariants.MySlab;
+import wolforce.base.MySlab;
 
 public class BlockSlabLamp extends MySlab {
 

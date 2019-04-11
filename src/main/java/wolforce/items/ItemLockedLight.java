@@ -8,7 +8,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import wolforce.Main;
-import wolforce.MyItem;
+import wolforce.base.MyItem;
 import wolforce.blocks.BlockLightCollector;
 
 public class ItemLockedLight extends MyItem {

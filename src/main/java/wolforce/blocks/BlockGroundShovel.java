@@ -2,7 +2,7 @@ package wolforce.blocks;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import wolforce.MyBlock;
+import wolforce.base.MyBlock;
 
 public class BlockGroundShovel extends MyBlock {
 

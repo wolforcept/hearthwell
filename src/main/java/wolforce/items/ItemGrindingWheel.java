@@ -1,7 +1,7 @@
 package wolforce.items;
 
 import net.minecraft.block.Block;
-import wolforce.MyItem;
+import wolforce.base.MyItem;
 
 public class ItemGrindingWheel extends MyItem {
 

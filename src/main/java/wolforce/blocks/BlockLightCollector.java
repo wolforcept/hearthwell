@@ -2,6 +2,7 @@ package wolforce.blocks;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
@@ -14,7 +15,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import wolforce.HwellConfig;
 import wolforce.Main;
-import wolforce.MyBlock;
+import wolforce.base.MyBlock;
 
 public class BlockLightCollector extends MyBlock {
 
@@ -26,6 +27,11 @@ public class BlockLightCollector extends MyBlock {
 		setResistance(.5f);
 		setDefaultState(getDefaultState().withProperty(CHARGE, 0));
 		setTickRandomly(true);
+	}
+
+	@Override
+	public int getLightValue(IBlockState state) {
+		return state.getValue(CHARGE) * 5;
 	}
 
 	@Override

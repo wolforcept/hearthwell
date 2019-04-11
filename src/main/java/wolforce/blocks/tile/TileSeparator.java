@@ -21,9 +21,9 @@ import wolforce.HwellConfig;
 import wolforce.Main;
 import wolforce.Util;
 import wolforce.Util.BlockWithMeta;
+import wolforce.base.BlockEnergyConsumer;
 import wolforce.blocks.BlockLightCollector;
 import wolforce.blocks.BlockSeparator;
-import wolforce.blocks.base.BlockEnergyConsumer;
 import wolforce.recipes.RecipeSeparator;
 
 public class TileSeparator extends TileEntity implements ITickable {

@@ -15,7 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import wolforce.Util;
-import wolforce.blocks.base.HasTE;
+import wolforce.base.HasTE;
 import wolforce.blocks.tile.TilePickerHolder;
 import wolforce.items.tools.ItemDustPicker;
 

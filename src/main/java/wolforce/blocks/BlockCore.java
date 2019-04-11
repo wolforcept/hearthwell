@@ -16,7 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import wolforce.Main;
 import wolforce.Util;
-import wolforce.blocks.base.HasTE;
+import wolforce.base.HasTE;
 import wolforce.blocks.tile.TileCore;
 import wolforce.recipes.RecipeCoring;
 

@@ -1,0 +1,38 @@
+{
+    "name": "Core Stabilizing",
+    "icon": "hwell:stabiliser",
+    "category": "core_mechanics",
+    "sortnum": 30,
+    "pages": [
+        {
+            "type": "spotlight",
+			"item": "hwell:stabiliser",
+			"text": "These useful blocks prevent the cores from breaking too much its catalyst blocks. Just place one beneath a block that is next to a core (and not beneath the core itself) and you will notice a big difference immediately."
+		},
+		{
+            "type": "multiblock",
+            "name": "Separator",
+            "multiblock": {
+                "pattern": [
+					[ "B0", " B"],
+					[ "S ", " S"]
+                ],
+                "mapping": {
+                    "0": "hwell:core_stone",
+                    "S": "hwell:stabiliser_heavy",
+					"B": "minecraft:cobblestone"
+                }
+            }
+		},
+		{
+			"type": "crafting",
+			"recipe": "hwell:stabiliser_light",
+			"text": "There are three tiers of Core Stabilisers, the Heavy being the most useful one, as it prevents breaking completely."
+		},
+	    {
+            "type": "crafting",
+			"recipe": "hwell:stabiliser",
+			"recipe2": "hwell:stabiliser_heavy"
+		}   
+    ]
+}

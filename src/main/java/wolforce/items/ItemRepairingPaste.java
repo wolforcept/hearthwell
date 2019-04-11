@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import wolforce.Main;
-import wolforce.MyItem;
+import wolforce.base.MyItem;
 import wolforce.recipes.RecipeRepairingPaste;
 
 public class ItemRepairingPaste extends MyItem {

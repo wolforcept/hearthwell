@@ -17,9 +17,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 import wolforce.HwellConfig;
-import wolforce.MyBlock;
 import wolforce.Util;
-import wolforce.blocks.base.BlockEnergyConsumer;
+import wolforce.base.BlockEnergyConsumer;
+import wolforce.base.MyBlock;
 import wolforce.blocks.tile.TileTray;
 
 public class BlockFormer extends MyBlock implements BlockEnergyConsumer {

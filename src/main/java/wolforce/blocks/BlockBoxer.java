@@ -6,8 +6,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import wolforce.HwellConfig;
 import wolforce.Util;
-import wolforce.blocks.base.BlockEnergyConsumer;
-import wolforce.blocks.base.HasTE;
+import wolforce.base.BlockEnergyConsumer;
+import wolforce.base.HasTE;
 import wolforce.blocks.tile.TileBoxer;
 
 public class BlockBoxer extends Block implements HasTE, BlockEnergyConsumer {

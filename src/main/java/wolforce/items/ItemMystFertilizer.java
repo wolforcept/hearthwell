@@ -12,8 +12,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import wolforce.HwellConfig;
 import wolforce.Main;
-import wolforce.MyItem;
 import wolforce.Util;
+import wolforce.base.MyItem;
 
 public class ItemMystFertilizer extends MyItem {
 

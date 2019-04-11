@@ -23,8 +23,8 @@ import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import wolforce.HwellConfig;
 import wolforce.Main;
-import wolforce.MyItem;
 import wolforce.Util;
+import wolforce.base.MyItem;
 
 public class ItemLoot extends MyItem {
 

@@ -160,6 +160,10 @@ public class HwellConfig {
 		// PICKING TABLE
 		@Comment({ "Chance that you will get a shard in a picking table. (default: .333)" })
 		public double pickingTableChance = .333;
+
+		// PICKING TABLE
+		@Comment({ "If heat blocks explode with flint and steel. Otherwise they will just transform peacefully. (default: true)" })
+		public boolean heat_blocks_explode = true;
 	}
 
 	@SubscribeEvent

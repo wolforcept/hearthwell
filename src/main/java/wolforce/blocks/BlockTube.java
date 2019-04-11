@@ -3,11 +3,8 @@ package wolforce.blocks;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDaylightDetector;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -16,13 +13,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import wolforce.HwellConfig;
 import wolforce.Main;
-import wolforce.Util;
-import wolforce.blocks.simplevariants.MyLog;
+import wolforce.UtilClient;
+import wolforce.base.MyLog;
 import wolforce.recipes.RecipeTube;
 
 public class BlockTube extends MyLog {
@@ -37,7 +33,7 @@ public class BlockTube extends MyLog {
 
 	@Override
 	public void randomDisplayTick(IBlockState state, World world, BlockPos _pos, Random rand) {
-		if (state.getValue(BlockLog.LOG_AXIS) != BlockLog.EnumAxis.Y || !Util.clientIsDaytime(world))
+		if (state.getValue(BlockLog.LOG_AXIS) != BlockLog.EnumAxis.Y || !UtilClient.clientIsDaytime(world))
 			return;
 		BlockPos bot = getBlockUnderTube(world, _pos);
 		int nTubes = getNrOfTubesOnTop(world, bot);
@@ -92,10 +88,11 @@ public class BlockTube extends MyLog {
 	}
 
 	private boolean isDay(World world) {
-		if (world instanceof WorldClient)
-			System.out.println(((WorldClient) world).getWorldTime());
 		if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
-			return Util.clientIsDaytime(world);
+			return UtilClient.clientIsDaytime(world);
+		// System.out.println(((WorldClient) world).getWorldTime());
+		// if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
+		// return Util.clientIsDaytime(world);
 		return world.isDaytime();
 	}
 

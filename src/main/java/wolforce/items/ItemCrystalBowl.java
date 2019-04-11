@@ -14,7 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import wolforce.Main;
-import wolforce.MyItem;
+import wolforce.base.MyItem;
 
 public class ItemCrystalBowl extends MyItem {
 

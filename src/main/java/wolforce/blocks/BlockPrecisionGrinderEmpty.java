@@ -17,7 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import wolforce.Util;
-import wolforce.blocks.base.BlockWithDescription;
+import wolforce.base.BlockWithDescription;
 import wolforce.items.ItemGrindingWheel;
 
 public class BlockPrecisionGrinderEmpty extends Block implements BlockWithDescription {

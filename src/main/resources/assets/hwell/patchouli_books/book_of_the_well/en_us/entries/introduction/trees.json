@@ -2,7 +2,7 @@
     "name": "Hearth Trees",
     "icon": "hwell:myst_fertilizer",
     "category": "introduction",
-    "sortnum": 6,
+    "sortnum": 30,
     "pages": [
         	{	
         	"type": "spotlight",

@@ -1,0 +1,65 @@
+{
+    "name": "Ore Puller",
+    "icon": "hwell:puller",
+    "category": "multiblocks",
+    "sortnum": 50,
+    "pages": [
+		{
+            "type": "crafting",
+            "title": "Block Puller",            
+			"text": "A multiblock structure that pulls ores from the... well, from nothing really. The higher you build it, the faster it pulls. Requires some energy per operation.",
+            "recipe": "hwell:puller"
+        },
+		{
+            "type": "multiblock",
+            "name": "Puller",
+            "multiblock": {
+                "pattern": [
+					[ "C C", "   ", "C C"],
+					[ "A A", "   ", "A A"],
+					[ "HHH", "HLH", "HHH"],
+					[ "PPP", "P0P", "PPP"],
+					[ " P ", "PAP", " P "]
+                ],
+                "mapping": {
+                    "H": "hwell:heat_block",
+					"0": "hwell:puller",
+					"A": "hwell:furnace_tube",
+					"C": "hwell:light_collector",
+                    "P": "hwell:heavy_protection_block",
+                    "L": "hwell:fluid_liquid_souls"
+                }
+            }
+		},
+		{
+            "type": "text",
+            "text": "$(br2)Adding more lines equal to the lowest one, as seen on the right, will make the puller pull faster."
+        },
+		{
+            "type": "multiblock",
+            "name": "Puller",
+            "multiblock": {
+                "pattern": [
+					[ "C C", "   ", "C C"],
+					[ "A A", "   ", "A A"],
+					[ "HHH", "HLH", "HHH"],
+					[ "PPP", "P0P", "PPP"],
+					[ " P ", "PAP", " P "],
+					[ " P ", "PAP", " P "],
+					[ " P ", "PAP", " P "],
+					[ " P ", "PAP", " P "]
+
+                ],
+                "mapping": {
+                    "H": "hwell:heat_block",
+					"0": "hwell:puller",
+					"A": "hwell:furnace_tube",
+					"C": "hwell:light_collector",
+                    "P": "hwell:heavy_protection_block",
+                    "L": "hwell:fluid_liquid_souls"
+                }
+            }
+		}
+
+    ]
+}

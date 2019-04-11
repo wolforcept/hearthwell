@@ -2,7 +2,7 @@
     "name": "Hearth Alloys",
     "icon": "hwell:asul_ingot",
     "category": "introduction",
-    "sortnum": 10,
+    "sortnum": 50,
     "pages": [
     	{	
         	"type": "spotlight",

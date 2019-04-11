@@ -13,7 +13,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import wolforce.Main;
-import wolforce.MyItem;
+import wolforce.base.MyItem;
 
 public class ItemEmptyRod extends MyItem {
 

@@ -1,0 +1,39 @@
+{
+    "name": "Loot Kit Producer",
+    "icon": "hwell:boxer",
+    "category": "other_machines",
+    "sortnum": 70,
+    "pages": [
+        { 	"type": "spotlight",
+            "item": "hwell:producer",
+            "text": "The Loot Kit Producer creates loot kits that, when left alone in the floor or right clicked, hatch into precious random mob loot.$(br)The Loot Kit Producer will spawn loot kits directly above it, randomly, and requires a large amount of energy. It may be turned off by providing a redstone signal."
+        },
+		{ 	"type": "crafting",
+            "recipe": "hwell:producer.producer",
+            "text": "But if you need some specific loot you can always craft the Mob Specific Loot Kits, which will hatch into that mob's specific loot."
+        },
+		{ 	"type": "crafting",
+            "recipe": "hwell:loot_blaze",
+            "recipe2": "hwell:loot_creeper"
+        },
+		{ 	"type": "crafting",
+            "recipe": "hwell:loot_enderman",
+            "recipe2": "hwell:loot_ghast"
+        },
+		{ 	"type": "crafting",
+            "recipe": "hwell:loot_shulker",
+            "recipe2": "hwell:loot_skeleton"
+        },
+		{ 	"type": "crafting",
+            "recipe": "hwell:loot_blaze",
+            "recipe2": "hwell:loot_slime"
+        },
+		{ 	"type": "crafting",
+            "recipe": "hwell:loot_spider",
+            "recipe2": "hwell:loot_zombie"
+        },
+		{ 	"type": "crafting",
+            "recipe": "hwell:loot_wither"
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "name": "Former",
+    "icon": "hwell:former",
+    "category": "other_machines",
+    "sortnum": 20,
+    "pages": [
+        {
+            "type": "text",
+            "text": "The Former is a machine that will create a solid stone island beneath it. Requiring some energy to run, it will create stone blocks where previously there was air beneath it.$(br2)The small island that is created beneath will slowly expand to bigger proportions, unless you break the blocks or stop the Former with a redstone signal."
+        },
+		{
+            "type": "crafting",
+            "title": "Former",            
+			"text": "",
+            "recipe": "hwell:former"
+        },
+		{ 	"type": "image",
+	        "title": "Former",
+	        "border": true,
+            "images": [ "hwell:textures/gui/former.png" ],
+            "text": "The Island created by the Former."
+        },
+		{
+            "type": "text",
+            "text": "The Former can be used as a way to generate stone to mine, or as a way to provide a solid ground in void environments.$(br2)It will always run, making the island bigger and bigger as it can. Remember that if you dig into the island created by the Former when it is not running, it will try to fill it up again when turned on."
+        } 
+    ]
+}

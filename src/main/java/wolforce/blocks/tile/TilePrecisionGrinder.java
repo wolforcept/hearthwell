@@ -16,9 +16,9 @@ import net.minecraft.util.math.BlockPos;
 import wolforce.Main;
 import wolforce.Util;
 import wolforce.Util.BlockWithMeta;
+import wolforce.base.BlockEnergyConsumer;
 import wolforce.blocks.BlockPrecisionGrinder;
 import wolforce.blocks.BlockPrecisionGrinderEmpty;
-import wolforce.blocks.base.BlockEnergyConsumer;
 import wolforce.items.ItemGrindingWheel;
 import wolforce.recipes.RecipeGrinding;
 

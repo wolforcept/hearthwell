@@ -1,0 +1,55 @@
+{
+    "name": "Heat Furnace",
+    "icon": "hwell:heat_furnace",
+    "category": "multiblocks",
+    "sortnum": 30,
+    "pages": [
+		{
+            "type": "crafting",
+            "title": "Heat Furnace",            
+			"text": "A multiblock structure that will cook and smelt without delay or consumption of materials. It will, however, sometimes consume some water from the top. Requires 100 Energy per Operation.",
+            "recipe": "hwell:heat_furnace"
+        },
+		{
+            "type": "multiblock",
+            "name": "Heat Furnace",
+            "multiblock": {
+                "pattern": [
+					["        ", "HPPPPPPH", "HWWWWWWH", "HPPPPPPH", "        "],
+					["  H  H  ", "HPHPPHPH", " AAAAAS ", "HPHPPHPH", "  H  H  "],
+					["  H  H  ", "HPLPPLPH", "HLLLLLL0", "HPLPPLPH", "  H  H  "]
+                ],
+                "mapping": {
+                    "H": "hwell:heat_block",
+					"S": "hwell:heat_furnace",
+					"A": "hwell:furnace_tube",
+                    "P": "hwell:protection_block",
+					"0": "hwell:heat_block",
+                    "L": "minecraft:lava",
+					"W": "minecraft:water"
+                }
+            }
+		},
+		{
+            "type": "text",
+            "text": "Remember that the lowest line of the furnace tube only requires lava in the middle row, as show on the right."
+        },
+		{
+            "type": "multiblock",
+            "name": "Heat Furnace",
+            "multiblock": {
+                "pattern": [
+					["  H  H  ", "HP PP PH", "HLLLLLL0", "HP PP PH", "  H  H  "]
+                ],
+                "mapping": {
+                    "H": "hwell:heat_block",
+					"S": "hwell:heat_furnace",
+					"A": "hwell:furnace_tube",
+                    "P": "hwell:protection_block",
+					"0": "hwell:heat_block",
+                    "L": "minecraft:lava"
+                }
+            }
+		}
+    ]
+}

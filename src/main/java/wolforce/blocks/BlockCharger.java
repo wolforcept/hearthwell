@@ -12,8 +12,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import wolforce.Main;
 import wolforce.Util;
-import wolforce.blocks.base.BlockWithDescription;
-import wolforce.blocks.base.HasTE;
+import wolforce.base.BlockWithDescription;
+import wolforce.base.HasTE;
 import wolforce.blocks.tile.TileCharger;
 
 public class BlockCharger extends Block implements HasTE, BlockWithDescription {
@@ -57,7 +57,7 @@ public class BlockCharger extends Block implements HasTE, BlockWithDescription {
 
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-		if (worldIn.isRemote) {
+		if (!worldIn.isRemote) {
 			TileCharger tile = (TileCharger) worldIn.getTileEntity(pos);
 			Util.spawnItem(worldIn, pos, tile.inventory.extractItem(0, 1, false));
 		}

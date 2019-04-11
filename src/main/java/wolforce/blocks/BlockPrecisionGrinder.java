@@ -22,8 +22,8 @@ import net.minecraft.world.World;
 import wolforce.HwellConfig;
 import wolforce.Main;
 import wolforce.Util;
-import wolforce.blocks.base.BlockEnergyConsumer;
-import wolforce.blocks.base.HasTE;
+import wolforce.base.BlockEnergyConsumer;
+import wolforce.base.HasTE;
 import wolforce.blocks.tile.TilePrecisionGrinder;
 import wolforce.items.ItemGrindingWheel;
 

@@ -1,0 +1,18 @@
+{
+    "name": "Gravity Block",
+    "icon": "hwell:gravity_block",
+    "category": "other_machines",
+    "sortnum": 10,
+    "pages": [
+        {
+            "type": "text",
+            "text": "Gravity blocks pull item entities towards them.$(br2)A tray may be added to any side of a gravity block to either white list or black list items that are pulled by the gravity block."
+        },
+		{
+            "type": "crafting",
+            "title": "Gravity Block",            
+			"text": "",
+            "recipe": "hwell:gravity_block"
+        }            
+    ]
+}

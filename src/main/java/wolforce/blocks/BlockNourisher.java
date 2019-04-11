@@ -3,9 +3,9 @@ package wolforce.blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import wolforce.HwellConfig;
-import wolforce.blocks.base.BlockEnergyConsumer;
-import wolforce.blocks.base.BlockMachineBase;
-import wolforce.blocks.base.HasTE;
+import wolforce.base.BlockEnergyConsumer;
+import wolforce.base.BlockMachineBase;
+import wolforce.base.HasTE;
 import wolforce.blocks.tile.TileNourisher;
 
 public class BlockNourisher extends BlockMachineBase implements HasTE, BlockEnergyConsumer {

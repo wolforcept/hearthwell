@@ -15,9 +15,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
-import wolforce.MyBlock;
-import wolforce.blocks.base.BlockWithDescription;
-import wolforce.blocks.base.HasTE;
+import wolforce.base.BlockWithDescription;
+import wolforce.base.HasTE;
+import wolforce.base.MyBlock;
 import wolforce.blocks.tile.TileFertileSoil;
 
 public class BlockFertileSoil extends MyBlock implements HasTE, BlockWithDescription {

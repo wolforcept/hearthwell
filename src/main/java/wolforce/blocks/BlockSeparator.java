@@ -22,8 +22,8 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import wolforce.HwellConfig;
 import wolforce.Util;
-import wolforce.blocks.base.BlockEnergyConsumer;
-import wolforce.blocks.base.HasTE;
+import wolforce.base.BlockEnergyConsumer;
+import wolforce.base.HasTE;
 import wolforce.blocks.tile.TileSeparator;
 
 public class BlockSeparator extends Block implements BlockEnergyConsumer, HasTE {

@@ -2,7 +2,7 @@
     "name": "Hearth Dusts",
     "icon": "hwell:myst_dust",
     "category": "introduction",
-    "sortnum": 4,
+    "sortnum": 20,
     "pages": [
         	{	
         	"type": "spotlight",

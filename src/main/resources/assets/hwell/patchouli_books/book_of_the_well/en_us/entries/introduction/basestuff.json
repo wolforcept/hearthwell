@@ -2,6 +2,7 @@
     "name": "Heavy Things",
     "icon": "hwell:heavy_ingot",
     "category": "introduction",
+    "sortnum": 0,
     "pages": [
 		{
             "type": "crafting",

@@ -4,7 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import wolforce.MyItem;
+import wolforce.base.MyItem;
 
 public class ItemShard extends MyItem {
 

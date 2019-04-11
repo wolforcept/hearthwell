@@ -8,9 +8,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import wolforce.blocks.base.BlockWithDescription;
+import wolforce.base.BlockWithDescription;
+import wolforce.base.MyFalling;
 
-public class BlockStoneDust extends BlockDust implements BlockWithDescription {
+public class BlockStoneDust extends MyFalling implements BlockWithDescription {
 
 	public BlockStoneDust(String name) {
 		super(name);

@@ -17,9 +17,9 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import wolforce.Hwell;
 import wolforce.Main;
 import wolforce.Util;
+import wolforce.base.BlockWithDescription;
 import wolforce.blocks.BlockBox;
 import wolforce.blocks.BlockCore;
-import wolforce.blocks.base.BlockWithDescription;
 import wolforce.entities.EntityPower;
 
 @Mod.EventBusSubscriber(modid = Hwell.MODID)

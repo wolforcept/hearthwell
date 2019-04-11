@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import wolforce.HwellConfig;
 import wolforce.Main;
 import wolforce.Util;
-import wolforce.blocks.base.BlockEnergyConsumer;
+import wolforce.base.BlockEnergyConsumer;
 
 public class TileNourisher extends TileEntity implements ITickable {
 
