@@ -56,8 +56,8 @@ item.hwell.soul_dust.name=Soul Dust
 item.hwell.raw_repairing_paste.name=Raw Repairing Paste
 item.hwell.repairing_paste.name=Repairing Paste
 item.hwell.seed_of_life.name=Seed of Life
-item.hwell.seed_of_the_nether.name=Seed of the End
-item.hwell.seed_of_the_end.name=Seed of the Nether
+item.hwell.seed_of_the_nether.name=Seed of the Nether
+item.hwell.seed_of_the_end.name=Seed of the End
 item.hwell.wheat_flour.name=Wheat Flour
 
 item.hwell.raw_mystic_iron.name=Raw Mystic Iron

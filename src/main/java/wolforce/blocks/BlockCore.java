@@ -23,16 +23,16 @@ import wolforce.recipes.RecipeCoring;
 public class BlockCore extends Block implements HasTE {
 
 	public static PropertyEnum TYPE = PropertyEnum.create("type", CoreType.class);
-	private boolean isToRegister;
+	private boolean isToRegisterTileEntity;
 	public int color1, color2;
 
 	public BlockCore(String name, boolean isToRegister) {
 		this(name, isToRegister, null, null);
 	}
 
-	public BlockCore(String name, boolean isToRegister, String colorString1, String colorString2) {
+	public BlockCore(String name, boolean isToRegisterTileEntity, String colorString1, String colorString2) {
 		super(Material.CLAY);
-		this.isToRegister = isToRegister;
+		this.isToRegisterTileEntity = isToRegisterTileEntity;
 		Util.setReg(this, name);
 		setHardness(2);
 		setHarvestLevel("pickaxe", -1);
@@ -103,10 +103,10 @@ public class BlockCore extends Block implements HasTE {
 
 	}
 
-	// @Override
-	// public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
-	// return layer == BlockRenderLayer.TRANSLUCENT;
-	// }
+	@Override
+	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
+		return layer == BlockRenderLayer.TRANSLUCENT;
+	}
 
 	// TILE ENTITIES
 
@@ -116,8 +116,8 @@ public class BlockCore extends Block implements HasTE {
 	}
 
 	@Override
-	public boolean isToRegister() {
-		return isToRegister;
+	public boolean isToRegisterTileEntity() {
+		return isToRegisterTileEntity;
 	}
 
 	// BLOCK STATES

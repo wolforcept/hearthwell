@@ -5,9 +5,9 @@
     "sortnum": 30,
     "pages": [
 		{
-            "type": "crafting",
+            "type": "text",
             "title": "Heat Furnace",            
-			"text": "A multiblock structure that will cook and smelt without delay or consumption of materials. It will, however, sometimes consume some water from the top. Requires 100 Energy per Operation.",
+			"text": "A multiblock structure that will cook and smelt without delay or consumption of materials or energy. It will, however, sometimes consume some water from the top.$(br)To use the Heat Furnace throw the items you want to smelt into the front part of the furnace, and they will instantly come out the other side already smelted. The bigger the stack you throw, the bigger the probability to consume water.",
             "recipe": "hwell:heat_furnace"
         },
 		{
@@ -31,12 +31,28 @@
             }
 		},
 		{
-            "type": "text",
-            "text": "Remember that the lowest line of the furnace tube only requires lava in the middle row, as show on the right."
-        },
+            "type": "multiblock",
+            "name": "Heat Furnace",
+			"text": "The lowest line of the furnace tube only requires lava in the middle row, as show on the right.",
+            "multiblock": {
+                "pattern": [
+					["  H  H  ", "HPHPPHPH", " AAAAAS ", "HPHPPHPH", "  H  H  "],
+					["  H  H  ", "HPLPPLPH", "HLLLLLL0", "HPLPPLPH", "  H  H  "]
+                ],
+                "mapping": {
+                    "H": "hwell:heat_block",
+					"S": "hwell:heat_furnace",
+					"A": "hwell:furnace_tube",
+                    "P": "hwell:protection_block",
+					"0": "hwell:heat_block",
+                    "L": "minecraft:lava"
+                }
+            }
+		},
 		{
             "type": "multiblock",
             "name": "Heat Furnace",
+			"text": "The tubes must be horizontally placed and pointing towards the Heat Furnace block.",
             "multiblock": {
                 "pattern": [
 					["  H  H  ", "HP PP PH", "HLLLLLL0", "HP PP PH", "  H  H  "]

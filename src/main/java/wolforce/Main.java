@@ -842,7 +842,7 @@ public class Main {
 		HashSet<Class> loaded = new HashSet<>();
 		for (Block block : blocks)
 			if (block instanceof HasTE) {
-				if (!((HasTE) block).isToRegister())
+				if (!((HasTE) block).isToRegisterTileEntity())
 					continue;
 				// && ((IEntity) block).isToRegister() //
 				// && GameRegistry.findRegistry(((IEntity) block).getTileEntityClass()) ==

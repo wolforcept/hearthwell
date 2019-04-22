@@ -10,6 +10,8 @@ import com.google.gson.JsonObject;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
@@ -178,11 +180,15 @@ public class RecipeCoring {
 		if (_result == null)
 			throw new RuntimeException("RESULT OF CORING IS NULL");
 		result = _result;
-		consumes = new Irio[_consumes.length + 1];
-		for (int i = 0; i < _consumes.length; i++) {
-			consumes[i] = _consumes[i];
+		if (_consumes.length == 1 && _consumes[0].item == Items.AIR) {
+			consumes = new Irio[] { new Irio(Blocks.AIR) };
+		} else {
+			consumes = new Irio[_consumes.length + 1];
+			for (int i = 0; i < _consumes.length; i++) {
+				consumes[i] = _consumes[i];
+			}
+			consumes[_consumes.length] = new Irio(result);
 		}
-		consumes[_consumes.length] = new Irio(result);
 	}
 
 	private Irio i(Block block) {

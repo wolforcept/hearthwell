@@ -1,11 +1,16 @@
 package wolforce.items;
 
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import wolforce.Main;
+import wolforce.Util;
 import wolforce.base.MyItem;
 import wolforce.recipes.RecipeRepairingPaste;
 
@@ -38,5 +43,10 @@ public class ItemRepairingPaste extends MyItem {
 	private boolean timeConstraint(EntityPlayer player) {
 		String str = (player.getEntityWorld().getTotalWorldTime() + "");
 		return str.charAt(str.length() - 2) == '0';
+	}
+
+	@Override
+	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+		return false;
 	}
 }

@@ -6,8 +6,7 @@ import net.minecraft.item.ItemStack;
 public class HwellTab extends CreativeTabs {
 
 	public HwellTab() {
-		super(-1, "GodKeepers");
-		// TODO Auto-generated constructor stub
+		super(-1, "Hearth Well");
 	}
 
 	@Override

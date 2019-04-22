@@ -19,7 +19,7 @@ public class BlockGravityMini extends BlockGravity {
 	}
 
 	@Override
-	public boolean isToRegister() {
+	public boolean isToRegisterTileEntity() {
 		return false;
 	}
 

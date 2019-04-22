@@ -4,7 +4,7 @@ import net.minecraft.block.ITileEntityProvider;
 
 public interface HasTE extends ITileEntityProvider {
 
-	default boolean isToRegister() {
+	default boolean isToRegisterTileEntity() {
 		return true;
 	}
 }

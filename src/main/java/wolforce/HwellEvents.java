@@ -104,11 +104,11 @@ public class HwellEvents {
 
 		if ((event.getEntity() instanceof EntityItem)) {
 			EntityItem entityItem = (EntityItem) event.getEntity();
-			ItemStack newItemStack = RecipeNetherPortal.getOutput(entityItem.getItem()).copy();
-			if (Util.isValid(newItemStack)) {
+			ItemStack stackThrown = RecipeNetherPortal.getOutput(entityItem.getItem());
+			if (Util.isValid(stackThrown)) {
 				event.setCanceled(true);
+				ItemStack newItemStack = stackThrown.copy();
 				newItemStack.setCount(entityItem.getItem().getCount() * newItemStack.getCount());
-				System.out.println("HwellEvents.preventNether()");
 				entityItem.setItem(newItemStack);
 				// spawnInPlaceOf(newItemStack, entityItem);
 			}
