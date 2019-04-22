@@ -1,10 +1,65 @@
-<html>
-	<head>
-		<script src="perlin.js"></script>
-		<script src="seedrandom.js"></script>
-		<script src="game.js"></script>
-	</head>
-	<body>
-		<canvas id="board" style="border:1px solid #d3d3d3;"></canvas>
-	</body>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-gb">
+<link href="../stylesheet.css" rel="stylesheet">
+<title>Hearth Well Reference</title></head>
+<style>
+
+code {
+	font-family: 'Oxygen Mono', monospace;
+	font-size: 16px;
+}
+.title {
+	font-size: 28px;
+	font-weight: bold;
+	color: ##ffbb00;
+}
+.title2 {
+	font-size: 18px;
+	font-weight: bold;
+	color: #3355DD;
+}
+.ddd {
+	font-weight: bold;
+	color: #339955;
+}
+.chg {
+	font-weight: bold;
+	color: #F19E0E;
+}
+.rmv {
+	font-weight: bold;
+	color: #DD5533;
+}
+.fxd {
+	font-weight: bold;
+	color: #883399;
+}
+.discord {
+	font-weight: bold !important;
+	color: #666666 !important; 
+}
+.bolden {
+	font-weight: bold;
+}
+pre {
+ white-space: pre-wrap;       /* css-3 */
+ white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+ white-space: -pre-wrap;      /* Opera 4-6 */
+ white-space: -o-pre-wrap;    /* Opera 7 */
+ word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+</style>
+<script src="perlin.js"></script>
+<script src="seedrandom.js"></script>
+<script src="game.js"></script>
+</head>
+<body>
+	<h1>Mover</h1>
+	<p>The objective of the game is to move the green square to the blue position using the Card Queue. You may add and remove cards to the card queue while the simulation is not running. At any time you may start the simulation and the cards will be executed in order in a closed loop.</p>
+	<p>The first direction faced is EAST.</p>
+
+	<canvas id="board" style="border:1px solid #d3d3d3;"></canvas>
+	
+	<p>This game was made by Miguel Torres as a semi-labyrinth procedural generation test and a mapping sequence mathematical test.</p>
+</body>
 </html>
