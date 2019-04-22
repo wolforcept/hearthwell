@@ -163,7 +163,7 @@ function mouseup(e){
 		return;
 	}
 	if(my > S*H + BUTTON_H){
-		if(chosen.length < 8 && !started){
+		if(chosen.length <= 8 && !started){
 			i = Math.floor(mx / CARDS_S);
 			chosen.splice(i,1);
 			draw();
