@@ -169,7 +169,7 @@ public class Main {
 	public static Block freezer;
 	public static Block fertilizer_block;
 	// public static Block generator_heat;
-	public static Block compressed_clay, compressed_wool, weeping_block, skin_block;
+	public static Block compressed_clay, compressed_wool, weeping_block, skin_block, plumage_block;
 	public static Block mystic_iron_block, soulsteel_block;
 	public static Block mutation_paste_block;
 	public static BlockNourisher nourisher;
@@ -181,8 +181,8 @@ public class Main {
 	public static Block precision_grinder_flint, precision_grinder_iron, precision_grinder_diamond, precision_grinder_crystal,
 			precision_grinder_empty;
 	public static Block heat_block;
-	public static BlockBurstSeed burst_seed_stone, burst_seed_sand, burst_seed_dirt, burst_seed_snow, burst_seed_netherrack,
-			burst_seed_quartz, burst_seed_prismarine, burst_seed_crystal;
+	public static BlockBurstSeed burst_seed_stone, burst_seed_cobblestone, burst_seed_gravel, burst_seed_endstone, burst_seed_sand,
+			burst_seed_dirt, burst_seed_snow, burst_seed_netherrack, burst_seed_quartz, burst_seed_prismarine, burst_seed_crystal;
 	public static Block totem_enderman, totem_zombie, totem_skeleton, totem_creeper;
 	public static Block separator;
 	public static BlockProducer producer;
@@ -305,7 +305,11 @@ public class Main {
 		items.add(heavy_mesh);
 		heavy_ingot = new MyItem("heavy_ingot");
 		items.add(heavy_ingot);
-		heavy_block = new MyBlock("heavy_block", Material.IRON).setResistance(2.5f).setHardness(1.6f);
+		heavy_block = new MyBlock("heavy_block", Material.IRON) {
+			{
+				setSoundType(SoundType.METAL);
+			}
+		}.setResistance(2.5f).setHardness(1.6f);
 		heavy_block.setHarvestLevel("pickaxe", -1);
 		blocks.add(heavy_block);
 		heavy_nugget = new MyItem("heavy_nugget", "Crush to make fuel dust.");
@@ -385,7 +389,11 @@ public class Main {
 
 		myst_log = new MyLog("myst_log");
 		blocks.add(myst_log);
-		myst_planks = new MyBlock("myst_planks", Material.WOOD).setHardness(1.5f).setHarvest("axe", -1);
+		myst_planks = new MyBlock("myst_planks", Material.WOOD) {
+			{
+				setSoundType(SoundType.WOOD);
+			}
+		}.setHardness(1.5f).setHarvest("axe", -1);
 		blocks.add(myst_planks);
 		myst_leaves = new BlockMystLeaves("myst_leaves");
 		blocks.add(myst_leaves);
@@ -428,18 +436,39 @@ public class Main {
 		blocks.add(compressed_clay);
 		compressed_wool = new MyBlock("compressed_wool", Material.CLAY).setHardness(.5f).setResistance(2);
 		blocks.add(compressed_wool);
-		skin_block = new MyBlock("skin_block", Material.CARPET).setHardness(.5f).setResistance(2);
+		skin_block = new MyBlock("skin_block", Material.CARPET) {
+			{
+				setSoundType(SoundType.SNOW);
+			}
+		}.setHardness(.5f).setResistance(2);
 		blocks.add(skin_block);
-		weeping_block = new MyBlock("weeping_block", Material.CLAY);
+		plumage_block = new MyBlock("plumage_block", Material.CLOTH) {
+			{
+				setSoundType(SoundType.CLOTH);
+			}
+		}.setHardness(.5f).setResistance(2);
+		blocks.add(plumage_block);
+		weeping_block = new MyBlock("weeping_block", Material.CLAY) {
+			{
+				setSoundType(SoundType.SAND);
+			}
+		};
 		blocks.add(weeping_block);
-		fertilizer_block = new MyBlock("fertilizer_block", Material.GOURD);
+		fertilizer_block = new MyBlock("fertilizer_block", Material.GOURD) {
+			{
+				setSoundType(SoundType.GROUND);
+			}
+		};
 		blocks.add(fertilizer_block);
 
 		citrinic_stone = new MyBlock("citrinic_stone", Material.ROCK)//
 				.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
 		blocks.add(citrinic_stone);
-		citrinic_sand = new MyBlock("citrinic_sand", Material.SAND)//
-				.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
+		citrinic_sand = new MyBlock("citrinic_sand", Material.SAND) {
+			{
+				setSoundType(SoundType.SAND);
+			}
+		}.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
 		blocks.add(citrinic_sand);
 		azurite = new MyBlock("azurite", Material.ROCK)//
 				.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
@@ -502,6 +531,15 @@ public class Main {
 		burst_seed_prismarine = new BlockBurstSeed("burst_seed_prismarine", //
 				Material.ROCK, Blocks.PRISMARINE, "pickaxe", SoundType.STONE);
 		blocks.add(burst_seed_prismarine);
+		burst_seed_cobblestone = new BlockBurstSeed("burst_seed_cobblestone", //
+				Material.ROCK, Blocks.COBBLESTONE, "pickaxe", SoundType.STONE);
+		blocks.add(burst_seed_cobblestone);
+		burst_seed_gravel = new BlockBurstSeed("burst_seed_gravel", //
+				Material.ROCK, Blocks.GRAVEL, "pickaxe", SoundType.GROUND);
+		blocks.add(burst_seed_gravel);
+		burst_seed_endstone = new BlockBurstSeed("burst_seed_endstone", //
+				Material.ROCK, Blocks.END_STONE, "pickaxe", SoundType.STONE);
+		blocks.add(burst_seed_endstone);
 		burst_seed_crystal = new BlockBurstSeed("burst_seed_crystal", //
 				Material.ROCK, crystal_block, "pickaxe", SoundType.GLASS);
 		blocks.add(burst_seed_crystal);
@@ -560,9 +598,17 @@ public class Main {
 		myst_dust_picker_n = new ItemDustPicker("myst_dust_picker_n", shard_n);
 		items.add(myst_dust_picker_n);
 
-		protection_block = new MyBlock("protection_block", Material.IRON).setHardness(1.5f).setResistance(2f);
+		protection_block = new MyBlock("protection_block", Material.IRON) {
+			{
+				setSoundType(SoundType.METAL);
+			}
+		}.setHardness(2.5f).setResistance(30000f);
 		blocks.add(protection_block);
-		heavy_protection_block = new MyBlock("heavy_protection_block", Material.IRON).setHardness(3f).setResistance(4f);
+		heavy_protection_block = new MyBlock("heavy_protection_block", Material.IRON) {
+			{
+				setSoundType(SoundType.METAL);
+			}
+		}.setHardness(3.5f).setResistance(30000f);
 		blocks.add(heavy_protection_block);
 		heat_furnace = new BlockHeatFurnace("heat_furnace");
 		blocks.add(heat_furnace);
@@ -616,7 +662,11 @@ public class Main {
 		items.add(raw_mystic_iron);
 		mystic_iron_ingot = new MyItem("mystic_iron_ingot");
 		items.add(mystic_iron_ingot);
-		mystic_iron_block = new MyBlock("mystic_iron_block", Material.CLAY).setHardness(.55f);
+		mystic_iron_block = new MyBlock("mystic_iron_block", Material.CLAY) {
+			{
+				setSoundType(SoundType.METAL);
+			}
+		}.setHardness(.55f);
 		blocks.add(mystic_iron_block);
 
 		mystic_iron_sword = new MySword("mystic_iron_sword", material_tool_mystic_iron, mystic_iron_ingot, -2.4000000953674316);
@@ -658,14 +708,22 @@ public class Main {
 		items.add(soulsteel_ingot);
 		mutation_paste = new MyItem("mutation_paste");
 		items.add(mutation_paste);
-		mutation_paste_block = new MyBlock("mutation_paste_block", Material.GRASS).setHardness(1f).setResistance(1f);
+		mutation_paste_block = new MyBlock("mutation_paste_block", Material.GRASS) {
+			{
+				setSoundType(SoundType.GROUND);
+			}
+		}.setHardness(1f).setResistance(1f);
 		blocks.add(mutation_paste_block);
 		repairing_paste = new ItemRepairingPaste("repairing_paste", new String[] {
 				"Place it on your left hand to slowly repair items on your right hand.", "Can repair up to 500 damage." });
 		items.add(repairing_paste);
 		raw_repairing_paste = new MyItem("raw_repairing_paste");
 		items.add(raw_repairing_paste);
-		soulsteel_block = new MyBlock("soulsteel_block", Material.CLAY).setHardness(.55f);
+		soulsteel_block = new MyBlock("soulsteel_block", Material.CLAY) {
+			{
+				setSoundType(SoundType.METAL);
+			}
+		}.setHardness(.55f);
 		blocks.add(soulsteel_block);
 
 		soulsteel_sword = new MySword("soulsteel_sword", material_tool_soulsteel, soulsteel_ingot, -2.4000000953674316);
@@ -740,7 +798,11 @@ public class Main {
 
 		//
 
-		metaldiamond_block = new MyBlock("metaldiamond_block", Material.IRON).setHardness(3).setResistance(3);
+		metaldiamond_block = new MyBlock("metaldiamond_block", Material.IRON) {
+			{
+				setSoundType(SoundType.METAL);
+			}
+		}.setHardness(3).setResistance(3);
 		blocks.add(metaldiamond_block);
 
 		// tiles = new HashMap<>();

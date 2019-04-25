@@ -12,7 +12,13 @@
 		{
             "type": "crafting",
             "title": "Bursting Seeds",            
-            "recipe": "hwell:burst_seed_stone",
+            "recipe": "hwell:burst_seed_cobblestone",
+			"recipe2": "hwell:burst_seed_stone"
+		},
+		{
+            "type": "crafting",
+            "title": "Bursting Seeds",            
+            "recipe": "hwell:burst_seed_gravel",
 			"recipe2": "hwell:burst_seed_sand"
 		},
 		{
@@ -30,8 +36,13 @@
 		{
             "type": "crafting",
             "title": "Bursting Seeds",            
-            "recipe": "hwell:burst_seed_prismarine",
-			"recipe2": "hwell:burst_seed_crystal"
+            "recipe": "hwell:burst_seed_endstone",
+			"recipe2": "hwell:burst_seed_prismarine"
+        },
+		{
+            "type": "crafting",
+            "title": "Bursting Seeds",            
+            "recipe": "hwell:burst_seed_crystal"
         }
 	]
 }

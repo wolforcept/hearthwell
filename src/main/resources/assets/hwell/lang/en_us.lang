@@ -169,6 +169,9 @@ tile.hwell.burst_seed_snow.name=Snow Burst Seed
 tile.hwell.burst_seed_netherrack.name=Netherrack Burst Seed
 tile.hwell.burst_seed_quartz.name=Quartz Burst Seed
 tile.hwell.burst_seed_prismarine.name=Prismarine Burst Seed
+tile.hwell.burst_seed_cobblestone.name=Cobblestone Burst Seed
+tile.hwell.burst_seed_endstone.name=End Stone Burst Seed
+tile.hwell.burst_seed_gravel.name=Gravel Burst Seed
 tile.hwell.burst_seed_crystal.name=Crystal Burst Seed
 
 tile.hwell.protection_block.name=Protection Block
@@ -181,6 +184,7 @@ tile.hwell.stabiliser_heavy.name=Heavy Core Stabilizer
 tile.hwell.compressed_clay.name=Compressed Clay
 tile.hwell.compressed_wool.name=Compressed Wool
 tile.hwell.skin_block.name=Block of Skin Hide
+tile.hwell.plumage_block.name=Plumage Block
 tile.hwell.fertilizer_block.name=Fertilizer Block
 
 tile.hwell.moonstone.name=Moonstone

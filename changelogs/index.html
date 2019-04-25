@@ -60,16 +60,26 @@ pre {
   <code id="main">
   
 {0.3.1}
-discstart11th of April, 2019
+discstart25th of April, 2019
 
 Small bugfix patchdiscend
 
+[ NEW STUFF]
+Added a new Plumage Block.
+Added a couple more burst seeds (Cobblestone, Gravel and Endstone).
+Added a more detailed explanation of the Heat Furnace to the Hearth Well book.
+Added a chance for the Fertile Soil to change dirt to grass around it.
+
+[ BALANCE ]
+Increased the time it takes to break protection blocks and increased their resistance further.
+Changed the breaking sounds of a lot blocks.
+
 [ BUG FIXES ]
 Re-Added core transparency to fix custom cores.
-Added a more detailed explanation of the Heat Furnace to the Hearth Well book.
 Removed coring possibility to use result blocks as catalyst blocks when air is one of the possibilities. This improves clarification.
 Removed the possibility of enchanting Repairing Paste.
 Fixed crashes when throwing items into the nether portal.
+
 
 <hr>
 {0.3}
@@ -245,8 +255,9 @@ Fixed core blocks not accepting consumable blocks from all 6 directions
 	inner = inner.replace(/(Update:|Hearth Well| - )/g, '<span class="bolden">$1</span>');
 	inner = inner.replace(/(Added)/g, '<span class="ddd">$1</span>');
 	inner = inner.replace(/(Changed)/g, '<span class="chg">$1</span>');
+	inner = inner.replace(/(Increased)/g, '<span class="chg">$1</span>');
+	inner = inner.replace(/(Decreased)/g, '<span class="chg">$1</span>');
 	inner = inner.replace(/(Removed)/g, '<span class="rmv">$1</span>');
-	inner = inner.replace(/(Fixed)/g, '<span class="fxd">$1</span>');
 	inner = inner.replace(/(Fixed)/g, '<span class="fxd">$1</span>');
 	
 	inner = inner.replace(/(\[)/g, '<span class="title2">['); 

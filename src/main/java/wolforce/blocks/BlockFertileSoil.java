@@ -49,7 +49,7 @@ public class BlockFertileSoil extends MyBlock implements HasTE, BlockWithDescrip
 			return;
 		LinkedList<BlockPos> nearDirtBlocks = new LinkedList<>();
 		for (int[] xyz : blocksnear) {
-			BlockPos pos = new BlockPos(xyz[0], xyz[1], xyz[2]);
+			BlockPos pos = new BlockPos(_pos.getX() + xyz[0], _pos.getY() + xyz[1], _pos.getZ() + xyz[2]);
 			if (world.getBlockState(pos).getBlock() == Blocks.DIRT) {
 				nearDirtBlocks.add(pos);
 			}
