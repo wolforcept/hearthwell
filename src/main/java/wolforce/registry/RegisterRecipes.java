@@ -10,6 +10,8 @@ import static wolforce.Main.dust_block;
 import static wolforce.Main.gaseous_glass;
 import static wolforce.Main.gaseous_sand;
 import static wolforce.Main.glowstone_ore;
+import static wolforce.Main.hamburger;
+import static wolforce.Main.hamburger_cooked;
 import static wolforce.Main.heavy_ingot;
 import static wolforce.Main.heavy_mesh;
 import static wolforce.Main.leaf_mesh;
@@ -43,6 +45,8 @@ import java.util.Map.Entry;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -58,6 +62,7 @@ import wolforce.Hwell;
 import wolforce.HwellConfig;
 import wolforce.Main;
 import wolforce.Util;
+import wolforce.base.MyBlock;
 import wolforce.blocks.BlockCore;
 import wolforce.items.ItemLoot;
 import wolforce.items.ItemMystDust;
@@ -81,12 +86,20 @@ public class RegisterRecipes {
 	public static boolean old_version_recipes_file = false;
 	public static boolean errored_recipes_file = false;
 	public static IRecipe recipePowerCrystal;
+	public static String recipenr = "unknown";
 
 	// MUST REGISTER CORE BLOCKS BEFORE EVERYTHING ELSE (MARTELADA)
 
 	// PRE INIT
 	public static void createNewCores() {
 		Main.custom_cores = new HashMap<String, BlockCore>();
+		Main.custom_grafts = new HashMap<>();
+		Main.graft_costs = new HashMap<>();
+		Main.graft_costs.put(Main.core_stone, 100);
+		Main.graft_costs.put(Main.core_anima, 750);
+		Main.graft_costs.put(Main.core_heat, 300);
+		Main.graft_costs.put(Main.core_green, 500);
+		Main.graft_costs.put(Main.core_sentient, 1000);
 
 		if (!HwellConfig.meta.customRecipesEnabled)
 			return;
@@ -108,6 +121,7 @@ public class RegisterRecipes {
 				final String localizedName = recipes.get("name").getAsString();
 				final String colorString1 = recipes.get("base_color").getAsString();
 				final String colorString2 = recipes.get("border_color").getAsString();
+				final int graftCost = recipes.get("graft_cost").getAsInt();
 				BlockCore newCore = new BlockCore(nameid, false, colorString1, colorString2) {
 					@Override
 					public String getLocalizedName() {
@@ -116,6 +130,23 @@ public class RegisterRecipes {
 				};
 				System.out.println("created new core with registry name <" + nameid + "> and localized name <" + localizedName + ">.");
 				Main.custom_cores.put(nameid, newCore);
+
+				String temp = "" + localizedName;
+				if (localizedName.endsWith(" Core"))
+					temp = localizedName.substring(0, localizedName.indexOf(" Core"));
+				if (localizedName.endsWith(" core"))
+					temp = localizedName.substring(0, localizedName.indexOf(" core"));
+				temp += " Graft";
+				final String graftLoc = "" + temp;
+				Block newGraft = new MyBlock("graft_" + nameid, Material.ROCK) {
+					@Override
+					public String getLocalizedName() {
+						return graftLoc;
+					}
+				}.setHarvest("pickaxe", -1).setResistance(2).setHardness(2);
+				Main.custom_grafts.put(newCore, newGraft);
+				Main.graft_costs.put(newCore, graftCost);
+
 			}
 
 		} catch (IOException e) {
@@ -170,6 +201,8 @@ public class RegisterRecipes {
 		if (!recipes.has("version") || !recipes.get("version").getAsString().equals(defaultRecipes.get("version").getAsString())) {
 			old_version_recipes_file = true;
 		}
+
+		recipenr = defaultRecipes.get("version").getAsString();
 
 		String recipeName = "power_crystal_recipes";
 		RecipePowerCrystal.initRecipes((recipes.has(recipeName) ? recipes : defaultRecipes).get(recipeName).getAsJsonObject());
@@ -230,6 +263,7 @@ public class RegisterRecipes {
 		GameRegistry.addSmelting(raw_soulsteel, new ItemStack(soulsteel_ingot), 1f);
 		GameRegistry.addSmelting(raw_repairing_paste, new ItemStack(repairing_paste), 1f);
 		GameRegistry.addSmelting(wheat_flour, new ItemStack(Items.BREAD), 1f);
+		GameRegistry.addSmelting(hamburger, new ItemStack(hamburger_cooked), 1f);
 
 		GameRegistry.addShapedRecipe(Util.res("producer." + producer.getRegistryName().getResourcePath()), Util.res("hwell.producer"),
 				new ItemStack(Main.producer), //

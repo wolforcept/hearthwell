@@ -1,0 +1,6 @@
+{
+	"variants": {														 
+		"filled=false": { "model": "hwell:grafting_tray" },
+		"filled=true": { "model": "hwell:grafting_tray_filled" }
+	}
+}

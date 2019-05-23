@@ -3,7 +3,6 @@ package wolforce.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
 import wolforce.Main;
 import wolforce.Util;
 

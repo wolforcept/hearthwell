@@ -21,13 +21,19 @@
             "type": "crafting",
 			"title": "Base Cores",
             "recipe": "hwell:core_stone",
-            "recipe2": "hwell:core_heat"
+            "recipe2": "hwell:inert_seed"
         },
 		{
             "type": "crafting",
 			"title": "Base Cores",
             "recipe": "hwell:core_green",
             "recipe2": "hwell:core_sentient"
+        },
+        {
+        	"type": "spotlight",
+            "title": "Anima Core",
+            "item": "hwell:core_anima",
+            "text": "The Anima Core has to be grown from Inert Seeds. Simply place the seeds on the ground and stay near them and they will grow. If you go away from them they will slowly regress to its Inert state. The more players near an Inert Seed, the faster it will grow."
         },
         {
         	"type": "spotlight",

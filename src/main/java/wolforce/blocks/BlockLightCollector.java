@@ -2,7 +2,6 @@ package wolforce.blocks;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
@@ -42,6 +41,16 @@ public class BlockLightCollector extends MyBlock {
 			if (curr < 3)
 				world.setBlockState(pos, getDefaultState().withProperty(CHARGE, curr + 1));
 		}
+	}
+
+	@Override
+	public int getComparatorInputOverride(IBlockState state, World worldIn, BlockPos pos) {
+		return state.getValue(CHARGE) * 5;
+	}
+
+	@Override
+	public boolean hasComparatorInputOverride(IBlockState state) {
+		return true;
 	}
 
 	@Override

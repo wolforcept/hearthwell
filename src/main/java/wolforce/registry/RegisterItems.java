@@ -15,5 +15,8 @@ public class RegisterItems {
 		for (Item item : Main.items) {
 			event.getRegistry().register(item);
 		}
+
+		RegisterOreDict.registerItems();
+
 	}
 }

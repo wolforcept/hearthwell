@@ -2,9 +2,6 @@ package wolforce.client;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 import wolforce.Util;
 import wolforce.UtilClient;
 import wolforce.blocks.tile.TilePickerHolder;

@@ -1,12 +1,5 @@
 package wolforce.items;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.DimensionType;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.ITeleporter;
-import wolforce.Main;
 import wolforce.base.MyItem;
 
 public class ItemCrystal extends MyItem {

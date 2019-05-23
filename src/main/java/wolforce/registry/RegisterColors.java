@@ -36,9 +36,9 @@ public class RegisterColors {
 		event.getBlockColors().registerBlockColorHandler(grassBlockColor, Main.fullgrass_block);
 
 		for (Entry<String, BlockCore> entry : Main.custom_cores.entrySet()) {
-			BlockCore core = entry.getValue();
-			final int color1 = core.color1;
-			final int color2 = core.color2;
+			BlockCore customCore = entry.getValue();
+			final int color1 = customCore.color1;
+			final int color2 = customCore.color2;
 
 			IBlockColor color = new IBlockColor() {
 
@@ -50,7 +50,8 @@ public class RegisterColors {
 						return color2;
 				}
 			};
-			event.getBlockColors().registerBlockColorHandler(color, core);
+			event.getBlockColors().registerBlockColorHandler(color, customCore);
+			event.getBlockColors().registerBlockColorHandler(color, Main.custom_grafts.get(customCore));
 		}
 	}
 
@@ -58,9 +59,9 @@ public class RegisterColors {
 	@SubscribeEvent
 	public static void registerColors(ColorHandlerEvent.Item event) {
 		for (Entry<String, BlockCore> entry : Main.custom_cores.entrySet()) {
-			BlockCore core = entry.getValue();
-			final int color1 = core.color1;
-			final int color2 = core.color2;
+			BlockCore customCore = entry.getValue();
+			final int color1 = customCore.color1;
+			final int color2 = customCore.color2;
 			IItemColor color = new IItemColor() {
 
 				@Override
@@ -72,7 +73,8 @@ public class RegisterColors {
 				}
 			};
 
-			event.getItemColors().registerItemColorHandler(color, core);
+			event.getItemColors().registerItemColorHandler(color, customCore);
+			event.getItemColors().registerItemColorHandler(color, Main.custom_grafts.get(customCore));
 		}
 	}
 }

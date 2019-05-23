@@ -17,7 +17,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import wolforce.Main;
 import wolforce.UnjoinableEntityItem;
-import wolforce.Util;
 import wolforce.base.MyBlock;
 
 public class BlockBurstSeed extends MyBlock {

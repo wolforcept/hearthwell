@@ -1,22 +1,13 @@
 package wolforce.client;
 
-import static net.minecraft.util.EnumFacing.NORTH;
-import static net.minecraft.util.EnumFacing.SOUTH;
-import static net.minecraft.util.EnumFacing.WEST;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import wolforce.Main;
 import wolforce.Util;
 import wolforce.UtilClient;
-import wolforce.blocks.BlockSeparator;
 import wolforce.blocks.BlockTray;
-import wolforce.blocks.tile.TileCharger;
 import wolforce.blocks.tile.TileTray;
 
 public class TesrTray extends TileEntitySpecialRenderer<TileTray> {

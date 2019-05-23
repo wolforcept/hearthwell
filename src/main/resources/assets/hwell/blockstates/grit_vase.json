@@ -1,0 +1,10 @@
+{
+	"variants": {														 
+		"size=0": { "model": "hwell:grit_vase" },
+		"size=1": { "model": "hwell:grit_vase" },
+		"size=2": { "model": "hwell:grit_vase" },
+		"size=3": { "model": "hwell:grit_vase" },
+		"size=4": { "model": "hwell:grit_vase" },
+		"size=5": { "model": "hwell:grit_vase" }
+	}
+}

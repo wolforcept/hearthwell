@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "hwell:pearl_block" }
+        ]
+    }
+}

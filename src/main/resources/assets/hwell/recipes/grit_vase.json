@@ -1,0 +1,12 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+	"ABA",
+    "AAA" ],
+  "key": {
+	"A": [{ "item": "hwell:onyx" }],
+    "B": [{ "item": "hwell:scorch_grit" }]
+  },
+  "result": { "item": "hwell:grit_vase" }
+}

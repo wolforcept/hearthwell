@@ -10,10 +10,10 @@ import mezz.jei.api.ingredients.IIngredientRegistry;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
-import mezz.jei.plugins.vanilla.crafting.CraftingRecipeCategory;
-import mezz.jei.runtime.JeiHelpers;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import wolforce.Hwell;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagString;
 import wolforce.Main;
 import wolforce.Util;
 import wolforce.blocks.BlockCore;
@@ -30,6 +30,7 @@ public class JeiIntegration implements IModPlugin {
 		final IJeiHelpers helpers = reg.getJeiHelpers();
 
 		reg.addRecipeCategories(new JeiCatCoring(helpers, Main.core_stone));
+		reg.addRecipeCategories(new JeiCatCoring(helpers, Main.core_anima));
 		reg.addRecipeCategories(new JeiCatCoring(helpers, Main.core_heat));
 		reg.addRecipeCategories(new JeiCatCoring(helpers, Main.core_green));
 		reg.addRecipeCategories(new JeiCatCoring(helpers, Main.core_sentient));
@@ -53,6 +54,7 @@ public class JeiIntegration implements IModPlugin {
 		IJeiHelpers jeiHelpers = reg.getJeiHelpers();
 
 		reg.addRecipes(JeiCatCoring.getAllRecipes(Main.core_stone), JeiCatCoring.UID_CORING_STONE);
+		reg.addRecipes(JeiCatCoring.getAllRecipes(Main.core_anima), JeiCatCoring.UID_CORING_ANIMA);
 		reg.addRecipes(JeiCatCoring.getAllRecipes(Main.core_heat), JeiCatCoring.UID_CORING_HEAT);
 		reg.addRecipes(JeiCatCoring.getAllRecipes(Main.core_green), JeiCatCoring.UID_CORING_GREEN);
 		reg.addRecipes(JeiCatCoring.getAllRecipes(Main.core_sentient), JeiCatCoring.UID_CORING_SENTIENT);
@@ -70,31 +72,22 @@ public class JeiIntegration implements IModPlugin {
 		reg.addIngredientInfo(new ItemStack(Main.crystal_nether), VanillaTypes.ITEM,
 				"Obtained by throwing a crystal into the nether portal.");
 		reg.addIngredientInfo(new ItemStack(Main.core_heat), VanillaTypes.ITEM,
-				"Obtained by right clicking a HeatBlock with a flint and steel.", "Just be careful...");
+				"Obtained by right clicking a Heat Block with a flint and steel.", "Just be careful...");
 		reg.addIngredientInfo(new ItemStack(Main.empty_rod), VanillaTypes.ITEM, "Hold right click to use.");
 
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setString("patchouli:book", "hwell:book_of_the_well");
+		ItemStack book = new ItemStack(Item.getByNameOrId("patchouli:guide_book"), 1, 0, nbt);
+		book.setTagInfo("patchouli:book", new NBTTagString("hwell:book_of_the_well"));
+		reg.addIngredientInfo(book, VanillaTypes.ITEM, "To get this item you need two wooden pressure plates, one on each hand. "
+				+ "Then say a heartfelt prayer to the gods containing the words \"poor\", \"please\", \"send\", \"book\", \"gods\". "
+				+ "Quickly after that, while looking directly up, smash the pressure plates together with right click!");
 		// System.out.println("AAAAAAAAAAAAAA" + RegisterRecipes.recipePowerCrystal);
 		reg.addRecipes(Util.listOfOne(RegisterRecipes.recipePowerCrystal), VanillaRecipeCategoryUid.CRAFTING);
 		// reg.addRecipeCatalyst(Main.core_stone, JeiCatCoring.UID_CORING_STONE);
 
 		// reg.addRecipes(recipes, "");
 	}
-
-	// TODO Add enchantment to JEI Obsidian displacer
-	// @Override
-	// public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
-	// IModPlugin.super.onRuntimeAvailable(jeiRuntime);
-	//
-	// List<ItemStack> removeThese = new LinkedList<>();
-	// removeThese.add(new ItemStack(Main.empowered_displacer));
-	// ingReg.removeIngredientsAtRuntime(VanillaTypes.ITEM, removeThese);
-	//
-	// List<ItemStack> addThese = new LinkedList<>();
-	// ItemStack item = new ItemStack(Main.empowered_displacer);
-	// item.addEnchantment(Enchantments.SILK_TOUCH, 1);
-	// addThese.add(item);
-	// ingReg.addIngredientsAtRuntime(VanillaTypes.ITEM, addThese);
-	// }
 
 	// public static String translateToLocal(String key) {
 	// if (I18n.canTranslate(key))

@@ -7,7 +7,7 @@
   "key": {
 	"S": [{ "item": "hwell:shard_p" }],
 	"M": [{ "item": "hwell:asul_machine_case" }],
-	"O": [{ "item": "hwell:onyx" }],
+	"O": [{ "item": "hwell:smooth_onyx" }],
 	"C": [{ "item": "hwell:crystal" }],
 	"T": [{ "item": "hwell:furnace_tube" }]
   },

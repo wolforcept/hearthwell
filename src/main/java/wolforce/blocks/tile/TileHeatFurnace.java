@@ -93,7 +93,7 @@ public class TileHeatFurnace extends TileEntity implements ITickable {
 							result.getMetadata());
 					Util.spawnItem(world, newpos, itemToSpawn, facing);
 					entityItem.setDead();
-					if (Math.random() < .05 * entityItem.getItem().getCount())
+					if (Math.random() < .000244 * entityItem.getItem().getCount() * entityItem.getItem().getCount())
 						deleteSomeWater(pos, facing);
 				}
 			}

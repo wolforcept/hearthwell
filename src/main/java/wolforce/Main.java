@@ -20,6 +20,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.EnumHelper;
@@ -28,7 +29,6 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
 import wolforce.base.HasTE;
 import wolforce.base.MyBlock;
 import wolforce.base.MyFalling;
@@ -38,6 +38,7 @@ import wolforce.base.MyLog;
 import wolforce.blocks.BlockAntiGravity;
 import wolforce.blocks.BlockBox;
 import wolforce.blocks.BlockBoxer;
+import wolforce.blocks.BlockBranch;
 import wolforce.blocks.BlockBurstSeed;
 import wolforce.blocks.BlockCharger;
 import wolforce.blocks.BlockCore;
@@ -46,11 +47,15 @@ import wolforce.blocks.BlockFertileSoil;
 import wolforce.blocks.BlockFormer;
 import wolforce.blocks.BlockFreezer;
 import wolforce.blocks.BlockGaseous;
+import wolforce.blocks.BlockGaseousFrame;
+import wolforce.blocks.BlockGraftingTray;
 import wolforce.blocks.BlockGravity;
 import wolforce.blocks.BlockGravityMini;
+import wolforce.blocks.BlockGritVase;
 import wolforce.blocks.BlockGroundShovel;
 import wolforce.blocks.BlockHeat;
 import wolforce.blocks.BlockHeatFurnace;
+import wolforce.blocks.BlockInertSeed;
 import wolforce.blocks.BlockLightCollector;
 import wolforce.blocks.BlockMystBush;
 import wolforce.blocks.BlockMystGrass;
@@ -69,6 +74,7 @@ import wolforce.blocks.BlockStoneDust;
 import wolforce.blocks.BlockTray;
 import wolforce.blocks.BlockTube;
 import wolforce.fluids.BlockLiquidSouls;
+import wolforce.items.ItemBranch;
 import wolforce.items.ItemCrystal;
 import wolforce.items.ItemCrystalBowl;
 import wolforce.items.ItemCrystalBowlWater;
@@ -84,6 +90,7 @@ import wolforce.items.ItemRawSoulsteel;
 import wolforce.items.ItemRepairingPaste;
 import wolforce.items.ItemSeedOfLife;
 import wolforce.items.ItemShard;
+import wolforce.items.MyFood;
 import wolforce.items.tools.ItemDisplacer;
 import wolforce.items.tools.ItemDustPicker;
 import wolforce.items.tools.MyArmor;
@@ -121,7 +128,7 @@ public class Main {
 			mystic_iron_hoe;
 	public static Item mystic_iron_helmet, mystic_iron_chest, mystic_iron_legs, mystic_iron_boots;
 	public static Item seed_of_life, seed_of_the_nether, seed_of_the_end;
-	public static Item wheat_flour, salt;
+	public static Item wheat_flour, salt, hamburger, hamburger_cooked;
 	public static Item dust;
 	public static Item myst_dust, myst_fertilizer;
 	public static Item heavy_mesh, heavy_ingot, heavy_nugget, fuel_dust, fuel_dust_tiny;
@@ -138,8 +145,9 @@ public class Main {
 	public static ItemShard shard_fe, shard_au, shard_o, shard_c, shard_h, shard_ca, shard_p, shard_n;
 	public static ItemGrindingWheel grinding_wheel_iron, grinding_wheel_diamond, grinding_wheel_crystal;
 	public static ItemLoot loot_base, loot_blaze, loot_creeper, loot_enderman, loot_ghast, loot_shulker, loot_skeleton, loot_slime,
-			loot_spider, loot_witch, loot_wither, loot_zombie;
+			loot_spider, loot_witch, loot_wither, loot_zombie, loot_guardian;
 	public static ItemPowerCrystal power_crystal;
+	public static ItemBlock branch_item;
 
 	//
 	//
@@ -158,23 +166,30 @@ public class Main {
 	public static Block dismantler, crushing_block, gravity_block, gravity_block_mini, /* gravity_powered_block, */ antigravity_block
 	/* , antigravity_powered_block */;
 	public static Block former;
-	public static Block myst_log, myst_planks, myst_leaves;
+	public static Block myst_log, myst_leaves;
+	public static MyBlock myst_planks;
 	public static Block raw_asul_block, asul_block;
 	public static Block asul_machine_case;
 	public static Block light_collector;
 	public static Block stabiliser_light, stabiliser, stabiliser_heavy;
 	public static Block picking_table, picker_holder;
-	public static Block white_block, moonstone, moonstone_bricks, citrinic_stone, citrinic_sand, onyx, smooth_onyx, azurite,
-			smooth_azurite, scorch_grit, scorch_glass, gaseous_sand, gaseous_glass, fullgrass_block, metaldiamond_block;
+	public static MyBlock white_block, moonstone, moonstone_bricks, citrinic_stone, citrinic_sand, onyx, smooth_onyx, azurite,
+			smooth_azurite, scorch_grit, scorch_glass, gaseous_glass, fullgrass_block, metaldiamond_block;
+	public static MyFalling gaseous_sand;
+	public static Block gaseous_frame;
+	public static Block grit_vase;
 	public static Block freezer;
 	public static Block fertilizer_block;
+	public static Block grafting_tray;
 	// public static Block generator_heat;
-	public static Block compressed_clay, compressed_wool, weeping_block, skin_block, plumage_block;
+	public static Block compressed_clay, compressed_wool, ink_block, pearl_block, weeping_block, skin_block, plumage_block, meat_block;
 	public static Block mystic_iron_block, soulsteel_block;
 	public static Block mutation_paste_block;
 	public static BlockNourisher nourisher;
 	public static BlockSetter setter;
-	public static BlockCore core_stone, core_heat, core_green, core_sentient;
+	public static BlockCore core_stone, core_anima, core_heat, core_green, core_sentient;
+	public static Block graft_stone, graft_anima, graft_heat, graft_green, graft_sentient;
+	public static Block inert_seed;
 	public static Block slab_lamp;
 	public static Block furnace_tube, heat_furnace;
 	public static Block protection_block, heavy_protection_block;
@@ -189,6 +204,7 @@ public class Main {
 	public static BlockPuller puller;
 	public static BlockCharger charger;
 	public static BlockTray tray;
+	public static Block branch;
 
 	//
 
@@ -220,6 +236,8 @@ public class Main {
 
 	public static Item[] shards;
 	public static HashMap<String, BlockCore> custom_cores;
+	public static HashMap<BlockCore, Block> custom_grafts;
+	public static HashMap<BlockCore, Integer> graft_costs;
 
 	public static void initShards() {
 		shards = new Item[] { shard_ca, shard_c, shard_au, shard_fe, shard_o, shard_h };
@@ -252,9 +270,9 @@ public class Main {
 		items = new LinkedList<>();
 		blocks = new LinkedList<>();
 
-		quartz_ore = new MyBlock("quartz_ore", Material.ROCK);
+		quartz_ore = new MyBlock("quartz_ore", Material.ROCK).setHarvest("pickaxe", 2).setHardness(1).setResistance(2);
 		blocks.add(quartz_ore);
-		glowstone_ore = new MyBlock("glowstone_ore", Material.ROCK);
+		glowstone_ore = new MyBlock("glowstone_ore", Material.ROCK).setHarvest("pickaxe", 2).setHardness(1).setResistance(2);
 		blocks.add(glowstone_ore);
 
 		// LootTableList.ENTITIES_BLAZE, //
@@ -268,6 +286,7 @@ public class Main {
 		// LootTableList.ENTITIES_WITCH, //
 		// LootTableList.ENTITIES_WITHER_SKELETON, //
 		// LootTableList.ENTITIES_ZOMBIE,//
+		// LootTableList.ENTITIES_GUARDIAN,//
 		loot_base = new ItemLoot("loot_base", -1, "Produced in a Loot Kit Producer.");
 		items.add(loot_base);
 		loot_blaze = new ItemLoot("loot_blaze", 0);
@@ -292,6 +311,8 @@ public class Main {
 		items.add(loot_wither);
 		loot_zombie = new ItemLoot("loot_zombie", 10);
 		items.add(loot_zombie);
+		loot_guardian = new ItemLoot("loot_guardian", 11);
+		items.add(loot_guardian);
 
 		producer = new BlockProducer("producer");
 		blocks.add(producer);
@@ -354,14 +375,30 @@ public class Main {
 		former = new BlockFormer("former");
 		blocks.add(former);
 
+		inert_seed = new BlockInertSeed("inert_seed");
+		blocks.add(inert_seed);
+
 		core_stone = new BlockCore("core_stone", true);
 		blocks.add(core_stone);
+		core_anima = new BlockCore("core_anima", true);
+		blocks.add(core_anima);
 		core_heat = new BlockCore("core_heat", false);
 		blocks.add(core_heat);
 		core_green = new BlockCore("core_green", false);
 		blocks.add(core_green);
 		core_sentient = new BlockCore("core_sentient", false);
 		blocks.add(core_sentient);
+
+		graft_stone = new MyBlock("graft_stone", Material.ROCK).setHarvest("pickaxe", -1).setResistance(2).setHardness(2);
+		blocks.add(graft_stone);
+		graft_anima = new MyBlock("graft_anima", Material.ROCK).setHarvest("pickaxe", -1).setResistance(2).setHardness(2);
+		blocks.add(graft_anima);
+		graft_heat = new MyBlock("graft_heat", Material.ROCK).setHarvest("pickaxe", -1).setResistance(2).setHardness(2);
+		blocks.add(graft_heat);
+		graft_green = new MyBlock("graft_green", Material.ROCK).setHarvest("pickaxe", -1).setResistance(2).setHardness(2);
+		blocks.add(graft_green);
+		graft_sentient = new MyBlock("graft_sentient", Material.ROCK).setHarvest("pickaxe", -1).setResistance(2).setHardness(2);
+		blocks.add(graft_sentient);
 
 		dust = new MyItem("dust");
 		items.add(dust);
@@ -415,6 +452,14 @@ public class Main {
 		items.add(wheat_flour);
 		salt = new MyItem("salt");
 		items.add(salt);
+		hamburger = new MyFood("hamburger", 2, 0.3f, 20);
+		items.add(hamburger);
+		hamburger_cooked = new MyFood("hamburger_cooked", 6, 1.5f);
+		items.add(hamburger_cooked);
+
+		grafting_tray = new BlockGraftingTray("grafting_tray");
+		blocks.add(grafting_tray);
+
 		shard_c = new ItemShard("shard_c");
 		items.add(shard_c);
 		shard_fe = new ItemShard("shard_fe");
@@ -434,41 +479,28 @@ public class Main {
 
 		compressed_clay = new MyBlock("compressed_clay", Material.CLAY).setHardness(.5f).setResistance(2);
 		blocks.add(compressed_clay);
-		compressed_wool = new MyBlock("compressed_wool", Material.CLAY).setHardness(.5f).setResistance(2);
+		compressed_wool = new MyBlock("compressed_wool", Material.CLOTH).setSound(SoundType.CLOTH).setHardness(.5f).setResistance(2);
 		blocks.add(compressed_wool);
-		skin_block = new MyBlock("skin_block", Material.CARPET) {
-			{
-				setSoundType(SoundType.SNOW);
-			}
-		}.setHardness(.5f).setResistance(2);
+		skin_block = new MyBlock("skin_block", Material.CARPET).setSound(SoundType.SNOW).setHardness(.5f).setResistance(2);
 		blocks.add(skin_block);
-		plumage_block = new MyBlock("plumage_block", Material.CLOTH) {
-			{
-				setSoundType(SoundType.CLOTH);
-			}
-		}.setHardness(.5f).setResistance(2);
+		plumage_block = new MyBlock("plumage_block", Material.CLOTH).setSound(SoundType.CLOTH).setHardness(.5f).setResistance(2);
 		blocks.add(plumage_block);
-		weeping_block = new MyBlock("weeping_block", Material.CLAY) {
-			{
-				setSoundType(SoundType.SAND);
-			}
-		};
+		ink_block = new MyBlock("ink_block", Material.SPONGE).setSound(SoundType.SLIME).setHardness(.5f).setResistance(2);
+		blocks.add(ink_block);
+		pearl_block = new MyBlock("pearl_block", Material.GLASS).setSound(SoundType.GLASS).setHardness(.5f).setResistance(2);
+		blocks.add(pearl_block);
+		weeping_block = new MyBlock("weeping_block", Material.CLAY).setSound(SoundType.SAND).setHardness(.5f).setResistance(2);
 		blocks.add(weeping_block);
-		fertilizer_block = new MyBlock("fertilizer_block", Material.GOURD) {
-			{
-				setSoundType(SoundType.GROUND);
-			}
-		};
+		fertilizer_block = new MyBlock("fertilizer_block", Material.GOURD).setSound(SoundType.GROUND).setHardness(.5f)
+				.setResistance(2);
 		blocks.add(fertilizer_block);
+		meat_block = new MyBlock("meat_block", Material.SPONGE).setSound(SoundType.SLIME).setHardness(.5f).setResistance(2);
+		blocks.add(meat_block);
 
 		citrinic_stone = new MyBlock("citrinic_stone", Material.ROCK)//
 				.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
 		blocks.add(citrinic_stone);
-		citrinic_sand = new MyBlock("citrinic_sand", Material.SAND) {
-			{
-				setSoundType(SoundType.SAND);
-			}
-		}.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
+		citrinic_sand = new MyBlock("citrinic_sand", Material.ROCK).setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
 		blocks.add(citrinic_sand);
 		azurite = new MyBlock("azurite", Material.ROCK)//
 				.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
@@ -481,27 +513,37 @@ public class Main {
 				.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
 		blocks.add(moonstone);
 		onyx = new MyBlock("onyx", Material.ROCK)//
-				.setHarvest("pickaxe", 0).setHardness(2).setResistance(10);
+				.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
 		blocks.add(onyx);
 		smooth_onyx = new MyBlock("smooth_onyx", Material.ROCK)//
 				.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
 		blocks.add(smooth_onyx);
-		blocks.addAll(Util.makeVariants((MyBlock) citrinic_stone, (MyBlock) citrinic_sand, (MyBlock) azurite, (MyBlock) smooth_azurite,
-				(MyBlock) moonstone, (MyBlock) onyx, (MyBlock) smooth_onyx, (MyBlock) myst_planks));
+		blocks.addAll(
+				Util.makeVariants(citrinic_stone, citrinic_sand, azurite, smooth_azurite, moonstone, onyx, smooth_onyx, myst_planks));
 
 		white_block = new MyBlock("white_block", Material.ROCK)//
 				.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
 		blocks.add(white_block);
-		scorch_grit = new BlockGroundShovel("scorch_grit").setLightLevel(.5f);
+		scorch_grit = new BlockGroundShovel("scorch_grit").setLight(.5f);
 		blocks.add(scorch_grit);
 		fullgrass_block = new BlockGroundShovel("fullgrass_block");
 		blocks.add(fullgrass_block);
-		scorch_glass = new MyGlass("scorch_glass").setLightLevel(.8f);
+		scorch_glass = new MyGlass("scorch_glass").setLight(.8f);
 		blocks.add(scorch_glass);
 		gaseous_glass = new BlockGaseous.Glass("gaseous_glass");
 		blocks.add(gaseous_glass);
 		gaseous_sand = new BlockGaseous.Sand("gaseous_sand");
 		blocks.add(gaseous_sand);
+
+		gaseous_frame = new BlockGaseousFrame("gaseous_frame");
+		blocks.add(gaseous_frame);
+
+		grit_vase = new BlockGritVase("grit_vase");
+		blocks.add(grit_vase);
+
+		branch = new BlockBranch("branch");
+		blocks.add(branch);
+		branch_item = new ItemBranch(branch, "branch", "Collected from Breaking Trees that grow on Grit Vases.");
 
 		seed_of_life = new ItemSeedOfLife("seed_of_life", "Right-click on the ground to breed life!", 0);
 		items.add(seed_of_life);
@@ -708,11 +750,8 @@ public class Main {
 		items.add(soulsteel_ingot);
 		mutation_paste = new MyItem("mutation_paste");
 		items.add(mutation_paste);
-		mutation_paste_block = new MyBlock("mutation_paste_block", Material.GRASS) {
-			{
-				setSoundType(SoundType.GROUND);
-			}
-		}.setHardness(1f).setResistance(1f);
+		mutation_paste_block = new MyBlock("mutation_paste_block", Material.GRASS)//
+				.setSound(SoundType.GROUND).setHardness(1f).setResistance(1f);
 		blocks.add(mutation_paste_block);
 		repairing_paste = new ItemRepairingPaste("repairing_paste", new String[] {
 				"Place it on your left hand to slowly repair items on your right hand.", "Can repair up to 500 damage." });
@@ -783,7 +822,7 @@ public class Main {
 
 		// totem_enderman = new BlockTotem("totem_enderman");
 		// blocks.add(totem_enderman);
-		// totem_zombie = new BlockStatue("totem_zombie");
+		// totem_zombie = new BlockTotem("totem_zombie");
 		// blocks.add(totem_zombie);
 		// totem_skeleton = new BlockTotem("totem_skeleton");
 		// blocks.add(totem_skeleton);
@@ -805,10 +844,6 @@ public class Main {
 		}.setHardness(3).setResistance(3);
 		blocks.add(metaldiamond_block);
 
-		// tiles = new HashMap<>();
-		// tiles.put("tile_core", TileCore.class);
-		// tiles.put("tile_gravity_block", TileGravity.class);
-
 		boxer = new BlockBoxer("boxer");
 		blocks.add(boxer);
 		Block[] blocksToBox = new Block[] {
@@ -822,7 +857,7 @@ public class Main {
 				// HWELL
 				asul_block, soulsteel_block, mystic_iron_block, heavy_block, metaldiamond_block, //
 				crystal_block, crystal_nether_block, //
-				core_stone, core_heat, core_green, core_sentient, //
+				core_stone, inert_seed, core_heat, core_green, core_sentient, //
 				compressed_clay, compressed_wool, mutation_paste_block, //
 				protection_block, heavy_protection_block, //
 				// crushing_block,gravity_block, antigravity_block, boxer, producer,//
@@ -918,12 +953,7 @@ public class Main {
 				}
 			}
 
-		OreDictionary.registerOre("logWood", myst_log);
-		OreDictionary.registerOre("plankWood", myst_planks);
-		OreDictionary.registerOre("oreGlowstone", glowstone_ore);
-		OreDictionary.registerOre("oreQuartz", quartz_ore);
-
-		new WorldTypeBarrenEarth();
+		// new WorldTypeBarrenEarth();
 		// GameRegistry.registerWorldGenerator(new MyWorldType(), 1);
 	}
 

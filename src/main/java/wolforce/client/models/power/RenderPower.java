@@ -1,8 +1,5 @@
 package wolforce.client.models.power;
 
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;

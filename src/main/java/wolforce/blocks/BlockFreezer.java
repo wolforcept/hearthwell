@@ -42,7 +42,7 @@ public class BlockFreezer extends BlockMachineBase implements BlockEnergyConsume
 			world.setBlockState(//
 					nearBlocks.get(randomIndex), //
 					RecipeFreezer.getResult(//
-							world.getBlockState(nearBlocks.get(randomIndex))//
+							world, pos, world.getBlockState(nearBlocks.get(randomIndex))//
 					).getDefaultState()//
 			);
 
@@ -60,7 +60,7 @@ public class BlockFreezer extends BlockMachineBase implements BlockEnergyConsume
 					// if (!world.isRemote && RecipeFreezer.hasResult(state))//
 					// !state.equals(Blocks.AIR.getDefaultState()))
 					// System.out.println(state + " > " + RecipeFreezer.hasResult(state));
-					if (RecipeFreezer.hasResult(state))
+					if (RecipeFreezer.hasResult(world, pos, state))
 						list.add(thispos);
 				}
 			}

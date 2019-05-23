@@ -1,17 +1,11 @@
 package wolforce.client.models;
 
-import net.minecraft.client.model.IMultipassModel;
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelBoat;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderBoat;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
-import wolforce.entities.EntityPower;
 
 public abstract class MyRender<T extends Entity> extends Render<T> {
 

@@ -9,7 +9,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockGrass;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -28,6 +27,7 @@ public class RecipeCoring {
 	public static void initRecipes(JsonObject recipesJson) {
 
 		initCoreRecipes(Main.core_stone, recipesJson.get("core_stone").getAsJsonObject());
+		initCoreRecipes(Main.core_anima, recipesJson.get("core_anima").getAsJsonObject());
 		initCoreRecipes(Main.core_heat, recipesJson.get("core_heat").getAsJsonObject());
 		initCoreRecipes(Main.core_green, recipesJson.get("core_green").getAsJsonObject());
 		initCoreRecipes(Main.core_sentient, recipesJson.get("core_sentient").getAsJsonObject());
@@ -45,6 +45,8 @@ public class RecipeCoring {
 		switch (nameid) {
 		case "core_stone":
 			return Main.core_stone;
+		case "core_anima":
+			return Main.core_anima;
 		case "core_heat":
 			return Main.core_heat;
 		case "core_green":

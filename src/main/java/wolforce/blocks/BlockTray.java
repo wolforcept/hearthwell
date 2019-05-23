@@ -1,11 +1,9 @@
 package wolforce.blocks;
 
 import java.util.HashSet;
-import java.util.LinkedList;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -22,11 +20,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
-import wolforce.Main;
 import wolforce.Util;
 import wolforce.base.BlockWithDescription;
 import wolforce.base.HasTE;
-import wolforce.blocks.tile.TileCharger;
 import wolforce.blocks.tile.TileTray;
 
 public class BlockTray extends Block implements HasTE, BlockWithDescription {

@@ -2,8 +2,6 @@ package wolforce;
 
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Config.Comment;
-import net.minecraftforge.common.config.Config.RequiresWorldRestart;
-import net.minecraftforge.common.config.Config.Type;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -29,6 +27,12 @@ public class HwellConfig {
 		@Config.RequiresMcRestart
 		@Comment({ "Where the base recipes file is located (default: config/hwell_recipes.json)" })
 		public String recipeFileLocation = "config/hwell_recipes.json";
+		
+		@Config.RequiresMcRestart
+		@Comment({ "Particles Id for Hearth Well start at this number (default: 291)" })
+		public int particleIdStart = 291;
+		
+		
 
 		// @Comment({ "If this is true, when failing to read the recipes file,
 		// the file will be (default: config/hwell_recipes.json)" })
@@ -42,7 +46,9 @@ public class HwellConfig {
 
 		@Comment({ "Allow Entities to travel to the nether (Players, mobs and animals, items, etc) (default: false)" })
 		public boolean allowEntitiesToTravelToTheNether = false;
-
+		
+		@Comment({ "Allow player to perform the Book Ritual (default: true)" })
+		public boolean book_ritual_enabled = true;
 	}
 
 	public static class Power {

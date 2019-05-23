@@ -7,7 +7,7 @@
     "model": "hwell:core_sentient"
   },
   "variants": {
-    "type": {
+    "shard": {
       "core_base": { },
       "core_ca": { "submodel": "hwell:core_sharded_ca"  },
       "core_c":  { "submodel": "hwell:core_sharded_c"  },

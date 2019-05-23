@@ -34,7 +34,7 @@ public class ItemEmptyRod extends MyItem {
 			@Override
 			public ItemStack onItemUseFinish(EntityPlayer player, ItemStack stack, ItemStack hand2, Item nextItem) {
 				player.playSound(SoundEvents.ENTITY_WITCH_DRINK, 1f, 1f);
-				player.attackEntityFrom(DamageSource.MAGIC, 2);
+				player.attackEntityFrom(DamageSource.MAGIC, 1);
 				return new ItemStack(nextItem);
 			}
 		},

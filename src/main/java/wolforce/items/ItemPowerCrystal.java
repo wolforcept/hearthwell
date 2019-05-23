@@ -9,13 +9,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import wolforce.Main;
 import wolforce.base.MyItem;
-import wolforce.blocks.BlockCharger;
 import wolforce.entities.EntityPower;
 import wolforce.recipes.RecipePowerCrystal;
 

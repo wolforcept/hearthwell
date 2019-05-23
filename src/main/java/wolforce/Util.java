@@ -509,4 +509,17 @@ public class Util {
 				return true;
 		return false;
 	}
+
+	public static boolean timeConstraint(long totalWorldTime, int n) {
+		String str = (totalWorldTime + "");
+		return str.charAt(str.length() - n) == '0';
+	}
+
+	public static boolean equalNBT(ItemStack stack1, ItemStack stack2) {
+		if (!stack1.hasTagCompound() && !stack2.hasTagCompound())
+			return true;
+		if (stack1.hasTagCompound() != stack2.hasTagCompound())
+			return false;
+		return stack1.getTagCompound().equals(stack2.getTagCompound());
+	}
 }

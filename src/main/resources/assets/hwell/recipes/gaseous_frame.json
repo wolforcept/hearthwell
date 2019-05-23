@@ -1,0 +1,4 @@
+{ "type": "minecraft:crafting_shaped",
+  "pattern": [ "ABA", "BBB", "ABA" ],
+  "key": { "A": [{"item": "hwell:gaseous_glass"}], "B": [{"item": "hwell:heavy_ingot"}] },
+  "result": { "item": "hwell:gaseous_frame", "count": 4 }}

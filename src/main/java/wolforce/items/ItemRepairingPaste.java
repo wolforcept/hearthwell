@@ -3,12 +3,9 @@ package wolforce.items;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import wolforce.Main;
 import wolforce.Util;
 import wolforce.base.MyItem;
@@ -32,17 +29,13 @@ public class ItemRepairingPaste extends MyItem {
 			EntityPlayer player = (EntityPlayer) entityIn;
 			if (player.getHeldItem(EnumHand.OFF_HAND).getItem().equals(Main.repairing_paste)) {
 				ItemStack stack = player.getHeldItem(EnumHand.MAIN_HAND);
-				if (timeConstraint(player) && stack.isItemDamaged() && RecipeRepairingPaste.isRepairable(stack.getItem())) {
+				if (Util.timeConstraint(player.getEntityWorld().getTotalWorldTime(), 2) && stack.isItemDamaged()
+						&& RecipeRepairingPaste.isRepairable(stack.getItem())) {
 					paste.damageItem(1, player);
 					stack.damageItem(-1, player);
 				}
 			}
 		}
-	}
-
-	private boolean timeConstraint(EntityPlayer player) {
-		String str = (player.getEntityWorld().getTotalWorldTime() + "");
-		return str.charAt(str.length() - 2) == '0';
 	}
 
 	@Override

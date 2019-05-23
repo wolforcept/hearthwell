@@ -1,5 +1,5 @@
 {
-	"version": "0.2.1"
+	"version": "0.4"
 	
 	,
 	
@@ -36,12 +36,12 @@
 			{
 				"item": { "item": "hwell:crystal_catalyst" },
 				"name": "Essential",
-				"power": 180, "range": 2, "purity": .93
+				"power": 180, "range": 2, "purity": 0.93
 			},
 			{
 				"item": { "item": "hwell:locked_light" },
 				"name": "Lux",
-				"power": 225, "range": 0, "purity": .93
+				"power": 225, "range": 0, "purity": 0.93
 			}
 		],
 		"relay": [
@@ -95,27 +95,27 @@
 			{
 				"item": { "item": "minecraft:glass" },
 				"name": "Transparent",
-				"power": 35, "range": -1, "purity": .83
+				"power": 35, "range": -1, "purity": 0.83
 			},
 			{
 				"item": { "item": "minecraft:packed_ice" },
 				"name": "Icy",
-				"power": 350, "range": 1, "purity": .87
+				"power": 350, "range": 1, "purity": 0.87
 			},
 			{
 				"item": { "item": "hwell:crystal_block" },
 				"name": "Crystal",
-				"power": 220, "range": 2, "purity": .97
+				"power": 220, "range": 2, "purity": 0.97
 			},
 			{
 				"item": { "item": "hwell:scorch_glass" },
 				"name": "Scorched",
-				"power": 135, "range": 3, "purity": .91
+				"power": 135, "range": 3, "purity": 0.91
 			},
 			{
 				"item": { "item": "hwell:crystal_nether_block" },
 				"name": "Nether",
-				"power": 350, "range": 1, "purity": .91
+				"power": 350, "range": 1, "purity": 0.91
 			}
 		]
 	}
@@ -206,6 +206,40 @@
 			"shard_n" : {
 				"output": { "item": "hwell:mutation_paste_block" },
 				"inputs": [{ "item": "hwell:fertile_soil" }]
+			}
+		},
+		"core_anima": {
+			"shard_c" : {
+				"output": { "item": "hwell:ink_block" },
+				"inputs": [{ "item": "minecraft:cobblestone" }]
+			},
+			"shard_fe" : {
+				"output": { "item": "hwell:compressed_wool" },
+				"inputs": [{ "item": "minecraft:cobblestone" }]
+			},
+			"shard_au" : {
+				"output": { "item": "minecraft:cobblestone" },
+				"inputs": [{ "item": "minecraft:cobblestone" }]
+			},
+			"shard_h" : {
+				"output": { "item": "hwell:meat_block" },
+				"inputs": [{ "item": "hwell:skin_block" }]
+			},
+			"shard_o" : {
+				"output": { "item": "minecraft:cobblestone" },
+				"inputs": [{ "item": "minecraft:cobblestone" }]
+			},
+			"shard_ca" : {
+				"output": { "item": "hwell:plumage_block" },
+				"inputs": [{ "item": "hwell:compressed_wool" }]
+			},
+			"shard_p" : {
+				"output": { "item": "hwell:skin_block" },
+				"inputs": [{ "item": "minecraft:cobblestone" }]
+			},
+			"shard_n" : {
+				"output": { "item": "minecraft:slime" },
+				"inputs": [{ "item": "hwell:ink_block" }]
 			}
 		},
 		"core_heat": {
@@ -785,6 +819,18 @@
 			"input": { "item": "hwell:locked_light" },
 			"possible_outputs": [
 				{ "out": { "item": "minecraft:glowstone_dust", "count": 1}, "probability": 0.5 }
+			]
+		},
+		{
+			"input": { "item": "hwell:locked_light" },
+			"possible_outputs": [
+				{ "out": { "item": "minecraft:glowstone_dust", "count": 1}, "probability": 0.5 }
+			]
+		},
+		{
+			"input": { "item": "hwell:meat_block" },
+			"possible_outputs": [
+				{ "out": { "item": "hwell:hamburger"} }
 			]
 		}
 	]

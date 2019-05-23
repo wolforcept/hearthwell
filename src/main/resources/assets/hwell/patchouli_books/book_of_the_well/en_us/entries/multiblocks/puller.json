@@ -11,6 +11,10 @@
             "recipe": "hwell:puller"
         },
 		{
+            "type": "text",
+			"text": "By dropping different shards inside the liquid you can try and filter the ores that are pulled. Different shards will pull different ores, but remember that no filter is 100% effective! Test with different shards to learn the items that are filtered."
+        },
+		{
             "type": "multiblock",
             "name": "Puller",
             "multiblock": {

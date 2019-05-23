@@ -7,6 +7,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -22,7 +23,89 @@ import wolforce.recipes.RecipeCoring;
 
 public class BlockCore extends Block implements HasTE {
 
-	public static PropertyEnum TYPE = PropertyEnum.create("type", CoreType.class);
+	public static boolean isCore(ItemStack stack) {
+
+		ItemStack stack2 = new ItemStack(Main.core_stone);
+		if (stack.getItem() == stack2.getItem())
+			return true;
+
+		stack2 = new ItemStack(Main.core_anima);
+		if (stack.getItem() == stack2.getItem())
+			return true;
+
+		stack2 = new ItemStack(Main.core_heat);
+		if (stack.getItem() == stack2.getItem())
+			return true;
+
+		stack2 = new ItemStack(Main.core_green);
+		if (stack.getItem() == stack2.getItem())
+			return true;
+
+		stack2 = new ItemStack(Main.core_sentient);
+		if (stack.getItem() == stack2.getItem())
+			return true;
+
+		for (BlockCore customcore : Main.custom_cores.values()) {
+			stack2 = new ItemStack(customcore);
+			if (stack.getItem() == stack2.getItem())
+				return true;
+		}
+
+		return false;
+	}
+
+	public static BlockCore getCore(ItemStack stack) {
+		if (!Util.isValid(stack))
+			return null;
+
+		ItemStack stack2 = new ItemStack(Main.core_stone);
+		if (stack.getItem() == stack2.getItem())
+			return Main.core_stone;
+
+		stack2 = new ItemStack(Main.core_anima);
+		if (stack.getItem() == stack2.getItem())
+			return Main.core_anima;
+
+		stack2 = new ItemStack(Main.core_heat);
+		if (stack.getItem() == stack2.getItem())
+			return Main.core_heat;
+
+		stack2 = new ItemStack(Main.core_green);
+		if (stack.getItem() == stack2.getItem())
+			return Main.core_green;
+
+		stack2 = new ItemStack(Main.core_sentient);
+		if (stack.getItem() == stack2.getItem())
+			return Main.core_sentient;
+
+		for (BlockCore customcore : Main.custom_cores.values()) {
+			stack2 = new ItemStack(customcore);
+			if (stack.getItem() == stack2.getItem())
+				return customcore;
+		}
+
+		return null;
+	}
+
+	public static Block getGraft(Block coreBlock) {
+		if (coreBlock == Main.core_stone)
+			return Main.graft_stone;
+		if (coreBlock == Main.core_anima)
+			return Main.graft_anima;
+		if (coreBlock == Main.core_heat)
+			return Main.graft_heat;
+		if (coreBlock == Main.core_green)
+			return Main.graft_green;
+		if (coreBlock == Main.core_sentient)
+			return Main.graft_sentient;
+
+		if (Main.custom_grafts.containsKey(coreBlock))
+			return Main.custom_grafts.get(coreBlock);
+
+		return null;
+	}
+
+	public static PropertyEnum SHARD = PropertyEnum.create("shard", CoreType.class);
 	private boolean isToRegisterTileEntity;
 	public int color1, color2;
 
@@ -36,7 +119,7 @@ public class BlockCore extends Block implements HasTE {
 		Util.setReg(this, name);
 		setHardness(2);
 		setHarvestLevel("pickaxe", -1);
-		setDefaultState(blockState.getBaseState().withProperty(TYPE, CoreType.core_base));
+		setDefaultState(blockState.getBaseState().withProperty(SHARD, CoreType.core_base));
 
 		if (colorString1 != null && colorString2 != null) {
 			color1 = Integer.parseInt(colorString1, 16);
@@ -48,7 +131,7 @@ public class BlockCore extends Block implements HasTE {
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand enumhand,
 			EnumFacing facing, float hitX, float hitY, float hitZ) {
 
-		if (state.getProperties().get(TYPE) != CoreType.core_base)
+		if (state.getProperties().get(SHARD) != CoreType.core_base)
 			return false;
 
 		Item hand = playerIn.getHeldItem(enumhand).getItem();
@@ -67,7 +150,7 @@ public class BlockCore extends Block implements HasTE {
 	}
 
 	private void set(World world, BlockPos pos, CoreType coretype) {
-		world.setBlockState(pos, getDefaultState().withProperty(TYPE, coretype));
+		world.setBlockState(pos, getDefaultState().withProperty(SHARD, coretype));
 	}
 
 	public static enum CoreType implements IStringSerializable {
@@ -103,6 +186,12 @@ public class BlockCore extends Block implements HasTE {
 
 	}
 
+	//
+
+	//
+
+	// VISUALS
+
 	@Override
 	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
 		return layer == BlockRenderLayer.TRANSLUCENT;
@@ -124,17 +213,17 @@ public class BlockCore extends Block implements HasTE {
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, TYPE);
+		return new BlockStateContainer(this, SHARD);
 	}
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(TYPE, CoreType.values()[meta]);
+		return this.getDefaultState().withProperty(SHARD, CoreType.values()[meta]);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return ((Enum<CoreType>) state.getValue(TYPE)).ordinal();
+		return ((Enum<CoreType>) state.getValue(SHARD)).ordinal();
 	}
 
 }

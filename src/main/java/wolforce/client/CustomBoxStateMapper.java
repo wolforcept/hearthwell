@@ -20,7 +20,7 @@ public class CustomBoxStateMapper extends StateMapperBase {
 	@Override
 	protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
 		if (isCore)
-			return new ModelResourceLocation(res, "type=core_base");
+			return new ModelResourceLocation(res, "shard=core_base");
 		if (hasAxis)
 			return new ModelResourceLocation(res, getPropertyString(state.getProperties()));
 		return new ModelResourceLocation(res, "normal");

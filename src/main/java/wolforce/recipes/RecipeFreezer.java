@@ -76,6 +76,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.fluids.BlockFluidBase;
+import net.minecraftforge.fluids.BlockFluidClassic;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -103,12 +108,14 @@ public class RecipeFreezer {
 
 	///////////////////////////////////////////////////////////////////////
 
-	public static Block getResult(IBlockState stateIn) {
-		if (stateIn == null || !hasResult(stateIn))
+	public static Block getResult(World world, BlockPos pos, IBlockState state) {
+		if (state == null || !hasResult(world, pos, state))
 			return null;
 
+		Fluid fluid = FluidRegistry.lookupFluidForBlock(state.getBlock());
+
 		for (RecipeFreezer r : recipes) {
-			if (r.fluidIn.getFluid().equals(FluidRegistry.lookupFluidForBlock(stateIn.getBlock()))) {
+			if (r.fluidIn.getFluid().equals(fluid)) {
 				return Block.getBlockFromItem(r.blocksOut[(int) (Math.random() * r.blocksOut.length)].getItem());
 			}
 		}
@@ -116,10 +123,21 @@ public class RecipeFreezer {
 		return null;
 	}
 
-	public static boolean hasResult(IBlockState stateIn) {
+	public static boolean hasResult(World world, BlockPos pos, IBlockState state) {
 		for (RecipeFreezer r : recipes) {
-			if (r.fluidIn.getFluid().equals(FluidRegistry.lookupFluidForBlock(stateIn.getBlock()))) {
-				return true;
+			Fluid fluid = FluidRegistry.lookupFluidForBlock(state.getBlock());
+			// System.out.println(fluid.getName() + " " + r.fluidIn.getFluid().getName());
+			// if (r.fluidIn.getFluid().equals(fluid)) {
+			if (r.fluidIn.getFluid().equals(fluid)) {
+				
+				Block block = fluid.getBlock();
+				if (block instanceof BlockFluidClassic && ((BlockFluidClassic) block).isSourceBlock(world, pos))
+					return true;
+				
+				if (state.getProperties().containsKey(BlockFluidBase.LEVEL) && state.getValue(BlockFluidBase.LEVEL) == 0) {
+					return true;
+				}
+
 			}
 		}
 		return false;

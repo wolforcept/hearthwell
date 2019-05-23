@@ -16,7 +16,7 @@
                 "pattern": [
 					[ " P ", "PL ", " P "],
 					[ " P ", "P  ", " P "],
-					[ "HLH", "P0P", "HPH"]
+					[ "HPH", "P0P", "HLH"]
                 ],
                 "mapping": {
                     "H": "hwell:heavy_block",

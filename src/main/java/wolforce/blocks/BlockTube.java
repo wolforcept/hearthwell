@@ -75,10 +75,11 @@ public class BlockTube extends MyLog {
 
 	private void tryMake(World world, BlockPos pos, IBlockState state) {
 		int nTubes = getNrOfTubesOnTop(world, pos);
-		if (/**/isPossible(nTubes, world, pos) && //
-				Math.random() < (.2 + nTubes * .1) //
-		)
+		if (isPossible(nTubes, world, pos) && Math.random() < (.2 + nTubes * .1)) {
+
 			world.setBlockState(pos, state);
+			world.scheduleBlockUpdate(pos, state.getBlock(), 0, 0);
+		}
 	}
 
 	private boolean isPossible(int nTubes, World world, BlockPos pos) {

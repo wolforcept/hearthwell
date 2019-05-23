@@ -1,7 +1,6 @@
 package wolforce;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.entity.player.EntityPlayer;
@@ -74,6 +73,10 @@ public class UtilClient {
 			return stack.getCount();
 
 		return 0;
+	}
+
+	public static int getNrForDebugFromHand2(World world, BlockPos pos) {
+		return getNrForDebugFromHand2(world, pos.getX(), pos.getY(), pos.getZ());
 	}
 
 	public static int getNrForDebugFromHand2(World world, double x, double y, double z) {

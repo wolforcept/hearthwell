@@ -4,12 +4,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityBat;
-import net.minecraft.init.MobEffects;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import wolforce.Util;
 import wolforce.UtilClient;
-import wolforce.blocks.tile.TilePickerHolder;
 import wolforce.blocks.tile.TileStatue;
 
 public class TesrStatue extends TileEntitySpecialRenderer<TileStatue> {

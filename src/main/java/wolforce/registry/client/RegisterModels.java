@@ -1,4 +1,4 @@
-package wolforce.registry;
+package wolforce.registry.client;
 
 import java.util.Map.Entry;
 
@@ -24,14 +24,22 @@ import wolforce.Main;
 import wolforce.Util;
 import wolforce.blocks.BlockBox;
 import wolforce.blocks.BlockCore;
+import wolforce.blocks.tile.TileBranch;
 import wolforce.blocks.tile.TileCharger;
+import wolforce.blocks.tile.TileGraftingTray;
+import wolforce.blocks.tile.TileGritVase;
+import wolforce.blocks.tile.TileInertSeed;
 import wolforce.blocks.tile.TilePickerHolder;
 import wolforce.blocks.tile.TileSeparator;
 import wolforce.blocks.tile.TileStatue;
 import wolforce.blocks.tile.TileTray;
 import wolforce.client.CustomBoxStateMapper;
 import wolforce.client.CustomCoreStateMapper;
+import wolforce.client.TesrBranch;
 import wolforce.client.TesrCharger;
+import wolforce.client.TesrGraftingTray;
+import wolforce.client.TesrGritVase;
+import wolforce.client.TesrInertSeed;
 import wolforce.client.TesrPickerHolder;
 import wolforce.client.TesrSeparator;
 import wolforce.client.TesrStatue;
@@ -108,6 +116,10 @@ public class RegisterModels {
 			BlockCore core = entry.getValue();
 			CustomCoreStateMapper mapper = new CustomCoreStateMapper(new ResourceLocation("hwell", "core_custom"));
 			customRegisterRenders(core, new ResourceLocation("hwell", "core_custom"), mapper);
+
+			CustomCoreStateMapper mapperGraft = new CustomCoreStateMapper(new ResourceLocation("hwell", "graft_custom"));
+			Block graft = Main.custom_grafts.get(core);
+			customRegisterRenders(graft, new ResourceLocation("hwell", "graft_custom"), mapperGraft);
 		}
 
 		// FLUIDS
@@ -119,6 +131,10 @@ public class RegisterModels {
 		ClientRegistry.bindTileEntitySpecialRenderer(TilePickerHolder.class, new TesrPickerHolder());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileStatue.class, new TesrStatue());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileTray.class, new TesrTray());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileGritVase.class, new TesrGritVase());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileInertSeed.class, new TesrInertSeed());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileGraftingTray.class, new TesrGraftingTray());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileBranch.class, new TesrBranch());
 
 	}
 

@@ -45,7 +45,7 @@
 	        "border": true,
             "images": [ "hwell:textures/gui/power_crystal.png" ],
             "text": "A power crystal in the world",
-			"whentypeisentity" : {
+			"when_type_is_entity" : {
 				"type": "entity",
 				"entity": "hwell:entity_power",
 				"name": "Power Crystal",

@@ -1,14 +1,11 @@
 package wolforce.recipes;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
 import wolforce.Util;

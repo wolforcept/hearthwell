@@ -29,6 +29,7 @@ import wolforce.recipes.RecipeCoring;
 public class JeiCatCoring<T extends JeiRecCoring> implements IRecipeCategory<JeiRecCoring> {
 
 	public static final String UID_CORING_STONE = Hwell.MODID + ".coring.stone";
+	public static final String UID_CORING_ANIMA = Hwell.MODID + ".coring.anima";
 	public static final String UID_CORING_HEAT = Hwell.MODID + ".coring.heat";
 	public static final String UID_CORING_GREEN = Hwell.MODID + ".coring.green";
 	public static final String UID_CORING_SENTIENT = Hwell.MODID + ".coring.sentient";
@@ -56,6 +57,8 @@ public class JeiCatCoring<T extends JeiRecCoring> implements IRecipeCategory<Jei
 	public String getUid() {
 		if (core == Main.core_stone)
 			return UID_CORING_STONE;
+		if (core == Main.core_anima)
+			return UID_CORING_ANIMA;
 		if (core == Main.core_heat)
 			return UID_CORING_HEAT;
 		if (core == Main.core_green)

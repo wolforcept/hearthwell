@@ -2,13 +2,10 @@ package wolforce.base;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import wolforce.entities.EntityPower;
 
 public interface BlockEnergyConsumer extends BlockWithDescription {

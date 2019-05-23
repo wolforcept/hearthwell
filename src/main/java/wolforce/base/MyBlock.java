@@ -1,6 +1,7 @@
 package wolforce.base;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import wolforce.Util;
 
@@ -37,6 +38,16 @@ public class MyBlock extends Block {
 	public MyBlock setResistance(float resistance) {
 		super.setResistance(resistance);
 		this.resistance = resistance;
+		return this;
+	}
+
+	public MyBlock setSound(SoundType sound) {
+		setSoundType(sound);
+		return this;
+	}
+
+	public MyBlock setLight(float light) {
+		setLightLevel(light);
 		return this;
 	}
 }

@@ -46,6 +46,9 @@ item.hwell.rod_myst_1.name=33% Soul Filled Rod
 item.hwell.rod_myst_2.name=66% Soul Filled Rod
 item.hwell.crystal_catalyst.name=Crystal Catalyst
 item.hwell.salt.name=Salt
+item.hwell.hamburger.name=Hamburger
+item.hwell.hamburger_cooked.name=Cooked Hamburger
+item.hwell.branch.name=Branch
 
 item.hwell.metaldiamond.name=Metaldiamond
 item.hwell.raw_soulsteel.name=Raw Soulsteel
@@ -82,7 +85,6 @@ item.hwell.soulsteel_chest.name=Soulsteel Chestplate
 item.hwell.soulsteel_legs.name=Soulsteel Leggings
 item.hwell.soulsteel_boots.name=Soulsteel Boots
 
-
 item.hwell.loot_base.name=Loot Kit Base
 item.hwell.loot_blaze.name=Blaze Loot Kit
 item.hwell.loot_creeper.name=Creeper Loot Kit
@@ -95,6 +97,7 @@ item.hwell.loot_slime.name=Slime Loot Kit
 item.hwell.loot_witch.name=Witch Loot Kit
 item.hwell.loot_wither.name=Wither Skeleton Loot Kit
 item.hwell.loot_zombie.name=Zombie Loot Kit
+item.hwell.loot_guardian.name=Guardian Loot Kit
 
 item.hwell.mutation_paste.name=Mutation Paste
 tile.hwell.mutation_paste_block.name=Mutation Paste Block
@@ -122,7 +125,6 @@ tile.hwell.myst_planks_slab.name=Mysterious Wood Slab
 tile.hwell.myst_planks_stairs.name=Mysterious Wood Stairs
 
 tile.hwell.asul_machine_case.name=Asul Machine Case
-
 
 tile.hwell.moonstone_slab.name=Moonstone Slab
 tile.hwell.moonstone_stairs.name=Moonstone Stairs
@@ -181,11 +183,16 @@ tile.hwell.heat_block.name=Heat Block
 tile.hwell.stabiliser_light.name=Light Core Stabilizer
 tile.hwell.stabiliser.name=Medium Core Stabilizer
 tile.hwell.stabiliser_heavy.name=Heavy Core Stabilizer
+
 tile.hwell.compressed_clay.name=Compressed Clay
 tile.hwell.compressed_wool.name=Compressed Wool
 tile.hwell.skin_block.name=Block of Skin Hide
 tile.hwell.plumage_block.name=Plumage Block
 tile.hwell.fertilizer_block.name=Fertilizer Block
+tile.hwell.weeping_block.name=Weeping Block
+tile.hwell.meat_block.name=Meat Block
+tile.hwell.ink_block.name=Ink Block
+tile.hwell.pearl_block.name=Pearl Block
 
 tile.hwell.moonstone.name=Moonstone
 tile.hwell.onyx.name=Onyx
@@ -223,13 +230,21 @@ tile.hwell.setter.name=Block Setter
 tile.hwell.light_collector.name=Light Collector
 tile.hwell.tray.name=Tray
 tile.hwell.former.name=Former
+tile.hwell.grafting_tray.name=Grafting Tray
+
+tile.hwell.inert_seed.name=Inert seed
 
 tile.hwell.core_stone.name=Rock Core
+tile.hwell.core_anima.name=Anima Core
 tile.hwell.core_heat.name=Warm Core
 tile.hwell.core_green.name=Verdant Core
 tile.hwell.core_sentient.name=Sentient Core
 
-tile.hwell.weeping_block.name=Weeping Block
+tile.hwell.graft_stone.name=Rock Graft
+tile.hwell.graft_anima.name=Anima Graft
+tile.hwell.graft_heat.name=Warm Graft
+tile.hwell.graft_green.name=Verdant Graft
+tile.hwell.graft_sentient.name=Sentient Graft
 
 tile.hwell.mystic_iron_block.name=Mystic Iron Block
 tile.hwell.soulsteel_block.name=Soulsteel Block
@@ -239,7 +254,10 @@ tile.hwell.scorch_grit.name=Scorch Grit
 tile.hwell.scorch_glass.name=Scorch Glass
 tile.hwell.gaseous_glass.name=Gaseous Glass
 tile.hwell.gaseous_sand.name=Gaseous Sand
+tile.hwell.gaseous_frame.name=Gaseous Frame
 tile.hwell.metaldiamond_block.name=Metaldiamond Block
+
+tile.hwell.grit_vase.name=Grit Vase
 
 tile.hwell.totem_zombie.name=Zombie Totem
 tile.hwell.totem_creeper.name=Creeper Totem

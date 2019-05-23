@@ -1,6 +1,5 @@
 package wolforce;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -19,19 +18,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.DimensionType;
+import net.minecraft.world.World;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import wolforce.fluids.BlockLiquidSouls;
 import wolforce.items.ItemLoot;
 import wolforce.recipes.RecipeNetherPortal;
@@ -60,11 +57,17 @@ public class HwellEvents {
 		}
 	}
 
+	// please gods send a book to your poor servant
 	@SubscribeEvent
 	public static void requestBook(RightClickItem event) {
+
+		if (event.getHand() != EnumHand.MAIN_HAND)
+			return;
+
 		EntityPlayer player = event.getEntityPlayer();
 		if (!player.getEntityWorld().isRemote && //
-				player.isSneaking() && player.rotationPitch == -90 && //
+				HwellConfig.general.book_ritual_enabled && //
+				player.rotationPitch <= -80 && //
 				player.getHeldItemMainhand().getItem() == Item.getItemFromBlock(Blocks.WOODEN_PRESSURE_PLATE) && //
 				player.getHeldItemOffhand().getItem() == Item.getItemFromBlock(Blocks.WOODEN_PRESSURE_PLATE) && //
 				player.getHeldItemMainhand().getCount() == 1 && //
@@ -80,12 +83,13 @@ public class HwellEvents {
 			nbt.setString("patchouli:book", "hwell:book_of_the_well");
 			ItemStack book = new ItemStack(Item.getByNameOrId("patchouli:guide_book"), 1, 0, nbt);
 			book.setTagInfo("patchouli:book", new NBTTagString("hwell:book_of_the_well"));
+			System.out.println(player.getHeldItemMainhand());
 			player.setHeldItem(EnumHand.MAIN_HAND, book);
 
 			prayers.remove(player.getName());
-			if (!player.getEntityWorld().isRemote) {
-				player.getEntityWorld().addWeatherEffect(
-						new EntityLightningBolt(player.getEntityWorld(), player.posX, player.posY, player.posZ, false));
+			World world = player.getEntityWorld();
+			if (!world.isRemote) {
+				world.addWeatherEffect(new EntityLightningBolt(world, player.posX, player.posY, player.posZ, true));
 			}
 		}
 	}
@@ -135,8 +139,9 @@ public class HwellEvents {
 			event.player.sendMessage(new TextComponentString("HEARTH WELL WARNING - SERVER RECIPES FILE IS CORRUPTED!"));
 
 		if (!event.player.getEntityWorld().isRemote && RegisterRecipes.old_version_recipes_file)
-			event.player.sendMessage(
-					new TextComponentString("HEARTH WELL WARNING - SERVER RECIPES FILE MAY NOT BE COMPATIBLE WITH THIS VERSION!"));
+			event.player.sendMessage(new TextComponentString(
+					"HEARTH WELL WARNING - SERVER RECIPES FILE MAY NOT BE COMPATIBLE WITH THIS VERSION! (Should be "
+							+ RegisterRecipes.recipenr + " )"));
 	}
 
 	@SubscribeEvent // (priority = EventPriority.NORMAL, receiveCanceled = true)

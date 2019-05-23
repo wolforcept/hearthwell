@@ -9,9 +9,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import wolforce.Main;
 import wolforce.Util;
@@ -37,7 +39,7 @@ public class TileCore extends TileEntity implements ITickable {
 			return;
 
 		Block coreBlock = (Block) world.getBlockState(pos).getBlock();
-		BlockCore.CoreType coreType = (BlockCore.CoreType) world.getBlockState(pos).getValue(BlockCore.TYPE);
+		BlockCore.CoreType coreType = (BlockCore.CoreType) world.getBlockState(pos).getValue(BlockCore.SHARD);
 
 		if (coreType == BlockCore.CoreType.core_base)
 			return;
@@ -69,15 +71,27 @@ public class TileCore extends TileEntity implements ITickable {
 						Util.spawnItem(world, pos1, drop);
 					}
 				}
-				if (charge == MAX_CHARGE - 1) {
+				if (charge >= (int) ((MAX_CHARGE - 1) * getStabReduction(pos1))) {
 					// System.out.println(result.result.getMetadata());
-					world.setBlockState(pos, new Irio(result.result).getState(), 2 | 4); // im quite sure its a block
+					IBlockState newBlock = new Irio(result.result).getState();
+					changeGrafts(world, pos, BlockCore.getGraft(coreBlock), newBlock);
+					world.setBlockState(pos, newBlock, 2 | 4); // im quite sure its a block
 					return; // don't want to keep checking other touches
 				} else {
 					charge++;
 					markDirty();
 				}
 
+			}
+		}
+	}
+
+	private void changeGrafts(World world, BlockPos pos, Block core, IBlockState newBlock) {
+		for (EnumFacing facing : EnumFacing.VALUES) {
+			BlockPos pos2 = pos.offset(facing);
+			if (world.getBlockState(pos2).getBlock() == core) {
+				world.setBlockState(pos2, newBlock);
+				changeGrafts(world, pos2, core, newBlock);
 			}
 		}
 	}
@@ -91,6 +105,17 @@ public class TileCore extends TileEntity implements ITickable {
 		if (under.equals(Main.stabiliser_light))
 			return Math.random() < .5;
 		return true;
+	}
+
+	private float getStabReduction(BlockPos pos1) {
+		Block under = world.getBlockState(pos1.down()).getBlock();
+		if (under.equals(Main.stabiliser_light))
+			return .75f;
+		if (under.equals(Main.stabiliser))
+			return .625f;
+		if (under.equals(Main.stabiliser_heavy))
+			return .5f;
+		return 1;
 	}
 
 	private boolean hasResult(RecipeCoring result, IBlockState state) {

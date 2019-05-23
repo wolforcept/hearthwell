@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -22,7 +21,6 @@ import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import wolforce.HwellConfig;
-import wolforce.Main;
 import wolforce.Util;
 import wolforce.base.MyItem;
 
@@ -123,8 +121,10 @@ public class ItemLoot extends MyItem {
 				LootTableList.ENTITIES_SPIDER, //
 				LootTableList.ENTITIES_WITCH, //
 				LootTableList.ENTITIES_WITHER_SKELETON, //
-				LootTableList.ENTITIES_ZOMBIE,//
+				LootTableList.ENTITIES_ZOMBIE, //
+				LootTableList.ENTITIES_GUARDIAN //
 		};
+
 		easyLootTables = new ResourceLocation[] { //
 				LootTableList.ENTITIES_ZOMBIE, LootTableList.ENTITIES_ZOMBIE, //
 				LootTableList.ENTITIES_ZOMBIE, LootTableList.ENTITIES_ZOMBIE, //
