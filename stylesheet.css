@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Bree+Serif|Lato|Martel|Montserrat|Open+Sans|Oxygen|Raleway|Roboto&display=swap');
+
+/*
+font-family: 'Bree Serif', serif;
+font-family: 'Martel', serif;
+font-family: 'Lato', sans-serif;
+font-family: 'Roboto', sans-serif;
+font-family: 'Raleway', sans-serif;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Open Sans', sans-serif;
+*/
+
 body{
 	background-color: #EEEEEE;
 	padding-left: 5%;
@@ -8,7 +20,7 @@ body{
 	background-color: #FFF;
 }
 h1, h2, h3{
-	font-family: 'PT Sans', sans-serif;
+	font-family: 'Raleway', sans-serif;
 }
 a, p, table, object{
 	font-family: 'Open Sans', sans-serif;
@@ -34,4 +46,51 @@ table {
 }
 .coring .titles,.titles td{
 	border: 0;
+}
+
+/**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**/
+
+code {
+	font-family: 'Oxygen Mono', monospace;
+	font-size: 16px;
+}
+.title {
+	font-size: 28px;
+	font-weight: bold;
+	color: ##ffbb00;
+}
+.title2 {
+	font-size: 18px;
+	font-weight: bold;
+	color: #3355DD;
+}
+.ddd {
+	font-weight: bold;
+	color: #339955;
+}
+.chg {
+	font-weight: bold;
+	color: #F19E0E;
+}
+.rmv {
+	font-weight: bold;
+	color: #DD5533;
+}
+.fxd {
+	font-weight: bold;
+	color: #883399;
+}
+.discord {
+	font-weight: bold !important;
+	color: #666666 !important; 
+}
+.bolden {
+	font-weight: bold;
+}
+pre {
+ white-space: pre-wrap;       /* css-3 */
+ white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+ white-space: -pre-wrap;      /* Opera 4-6 */
+ white-space: -o-pre-wrap;    /* Opera 7 */
+ word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }

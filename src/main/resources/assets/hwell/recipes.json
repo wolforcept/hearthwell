@@ -211,23 +211,15 @@
 		"core_anima": {
 			"shard_c" : {
 				"output": { "item": "hwell:ink_block" },
-				"inputs": [{ "item": "minecraft:cobblestone" }]
+				"inputs": [{ "item": "minecraft:coal_block" }]
 			},
 			"shard_fe" : {
 				"output": { "item": "hwell:compressed_wool" },
-				"inputs": [{ "item": "minecraft:cobblestone" }]
-			},
-			"shard_au" : {
-				"output": { "item": "minecraft:cobblestone" },
-				"inputs": [{ "item": "minecraft:cobblestone" }]
+				"inputs": [{ "item": "minecraft:air" }]
 			},
 			"shard_h" : {
 				"output": { "item": "hwell:meat_block" },
 				"inputs": [{ "item": "hwell:skin_block" }]
-			},
-			"shard_o" : {
-				"output": { "item": "minecraft:cobblestone" },
-				"inputs": [{ "item": "minecraft:cobblestone" }]
 			},
 			"shard_ca" : {
 				"output": { "item": "hwell:plumage_block" },
@@ -235,7 +227,7 @@
 			},
 			"shard_p" : {
 				"output": { "item": "hwell:skin_block" },
-				"inputs": [{ "item": "minecraft:cobblestone" }]
+				"inputs": [{ "item": "hwell:compressed_wool" }]
 			},
 			"shard_n" : {
 				"output": { "item": "minecraft:slime" },
@@ -289,21 +281,9 @@
 				"output": { "item": "minecraft:pumpkin" },
 				"inputs": [{ "item": "hwell:fertilizer_block" }]
 			},
-			"shard_h" : {
-				"output": { "item": "minecraft:slime" },
-				"inputs": [{ "item": "minecraft:mossy_cobblestone" }]
-			},
 			"shard_o" : {
 				"output": { "item": "minecraft:lapis_block" },
 				"inputs": [{ "item": "minecraft:prismarine" }]
-			},
-			"shard_ca" : {
-				"output": { "item": "hwell:compressed_wool" },
-				"inputs": [{ "item": "minecraft:air" }]
-			},
-			"shard_p" : {
-				"output": { "item": "hwell:skin_block" },
-				"inputs": [{ "item": "minecraft:wool" }]
 			},
 			"shard_n" : {
 				"output": { "item": "minecraft:prismarine", "data": 0 },

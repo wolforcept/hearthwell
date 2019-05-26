@@ -1,0 +1,11 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["ABA", "CEC" ],
+  "key": {
+    "A": [{ "item": "minecraft:redstone" }],
+    "B": [{ "item": "minecraft:glowstone" }],
+    "C": [{ "item": "hwell:asul_ingot" }],
+    "E": [{ "item": "hwell:stabiliser_light" }]
+  },
+  "result": { "item": "hwell:stabiliser" }
+}

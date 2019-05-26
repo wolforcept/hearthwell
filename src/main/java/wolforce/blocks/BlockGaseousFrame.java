@@ -28,6 +28,7 @@ public class BlockGaseousFrame extends Block {
 		super(Material.GLASS);
 		Util.setReg(this, name);
 		setDefaultState(blockState.getBaseState().withProperty(PASSABLE, false));
+		setHarvestLevel("pickaxe", -1);
 	}
 
 	@Override

@@ -71,6 +71,8 @@ public class JeiIntegration implements IModPlugin {
 
 		reg.addIngredientInfo(new ItemStack(Main.crystal_nether), VanillaTypes.ITEM,
 				"Obtained by throwing a crystal into the nether portal.");
+		reg.addIngredientInfo(new ItemStack(Main.core_anima), VanillaTypes.ITEM,
+				"Obtained by growing an Inert Seed.", "You must stay near it.");
 		reg.addIngredientInfo(new ItemStack(Main.core_heat), VanillaTypes.ITEM,
 				"Obtained by right clicking a Heat Block with a flint and steel.", "Just be careful...");
 		reg.addIngredientInfo(new ItemStack(Main.empty_rod), VanillaTypes.ITEM, "Hold right click to use.");

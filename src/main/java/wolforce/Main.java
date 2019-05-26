@@ -535,7 +535,7 @@ public class Main {
 		gaseous_sand = new BlockGaseous.Sand("gaseous_sand");
 		blocks.add(gaseous_sand);
 
-		gaseous_frame = new BlockGaseousFrame("gaseous_frame");
+		gaseous_frame = new BlockGaseousFrame("gaseous_frame").setHardness(0.5f).setResistance(10);
 		blocks.add(gaseous_frame);
 
 		grit_vase = new BlockGritVase("grit_vase");
@@ -860,6 +860,7 @@ public class Main {
 				core_stone, inert_seed, core_heat, core_green, core_sentient, //
 				compressed_clay, compressed_wool, mutation_paste_block, //
 				protection_block, heavy_protection_block, //
+				graft_stone, graft_anima, graft_heat, graft_green, graft_sentient
 				// crushing_block,gravity_block, antigravity_block, boxer, producer,//
 		};
 		boxes = new BlockBox[blocksToBox.length];

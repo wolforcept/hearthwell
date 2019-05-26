@@ -3,5 +3,5 @@
   "ingredients": [
     { "item": "hwell:ink_block" }
   ],
-  "result": { "item": "minecraft:ink_sac", "data": 14, "count": 9 }
+  "result": { "item": "minecraft:dye", "data": 0, "count": 9 }
 }
