@@ -22,6 +22,10 @@ public class TesrGritVase extends TileEntitySpecialRenderer<TileGritVase> {
 	@Override
 	public void render(TileGritVase te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
 
+		if (te == null || te.getWorld().getBlockState(te.getPos()) == null || //
+				!te.getWorld().getBlockState(te.getPos()).getPropertyKeys().contains(BlockGritVase.SIZE))
+			return;
+
 		int size = te.getWorld().getBlockState(te.getPos()).getValue(BlockGritVase.SIZE);
 		if (size == 0)
 			return;
