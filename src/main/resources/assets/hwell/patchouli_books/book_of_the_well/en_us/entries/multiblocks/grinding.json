@@ -46,7 +46,11 @@
             "name": "Grinding Wheels",
             "recipe": "hwell:grinding_wheel_crystal",
             "text": "Precision Grinder Wheels. Check JEI for uses, not all operations are available for every grinding wheel"
-        } 
+        } ,
+		{
+			"type": "text",
+			"text": "Materials Required:$(br)$(li)1 Precision Grinder Block$(li)4 Heavy Blocks$(li)10 Protection Blocks$(li)2 Slab Lamps$(li)1 Grinding Wheel"
+		}
             
     ]
 }

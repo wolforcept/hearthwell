@@ -24,8 +24,8 @@ public class ItemMystFertilizer extends MyItem {
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX,
-			float hitY, float hitZ) {
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing,
+			float hitX, float hitY, float hitZ) {
 
 		ItemStack heldItem = player.getHeldItem(hand);
 		if (!world.isRemote) {
@@ -39,9 +39,11 @@ public class ItemMystFertilizer extends MyItem {
 						int treeHeight = (int) (4 + Math.random() * 4);
 						for (int i = 0; i < treeHeight; i++) {
 							world.setBlockState(pos.add(0, i, 0),
-									i == treeHeight - 1 ? Main.myst_leaves.getDefaultState() : Main.myst_log.getDefaultState());
+									i == treeHeight - 1 ? Main.myst_leaves.getDefaultState()
+											: Main.myst_log.getDefaultState());
 							if (i > 1)
-								makeLeavesPlane(world, pos.add(0, i, 0), Math.abs((double) (treeHeight - 2) / 2.0 - (double) (i - 2)));
+								makeLeavesPlane(world, pos.add(0, i, 0),
+										Math.abs((double) (treeHeight - 2) / 2.0 - (double) (i - 2)));
 						}
 					}
 					return EnumActionResult.SUCCESS;

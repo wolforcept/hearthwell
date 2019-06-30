@@ -421,7 +421,7 @@ public class Main {
 		myst_bush_big = new BlockMystBush("myst_bush_big");
 		blocks.add(myst_bush_big);
 
-		myst_fertilizer = new ItemMystFertilizer("myst_fertilizer", "When used on any sappling, a Mysterious Tree grows.");
+		myst_fertilizer = new ItemMystFertilizer("myst_fertilizer", "When used on any sappling, a Mysterious Tree grows.", "Requires open sky above it.");
 		items.add(myst_fertilizer);
 
 		myst_log = new MyLog("myst_log");

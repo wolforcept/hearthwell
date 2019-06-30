@@ -66,6 +66,10 @@
                     "L": "minecraft:lava"
                 }
             }
+		},
+		{
+			"type": "text",
+			"text": "Materials Required:$(br)$(li)1 Heat Furnace Block$(li)28 Heat Blocks$(li)28 Protection Blocks$(li)6 Buckets of Water$(li)5 Amplifying Tubes$(li)6 Buckets of Lava"
 		}
     ]
 }

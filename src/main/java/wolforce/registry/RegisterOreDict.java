@@ -23,6 +23,7 @@ import static wolforce.Main.mystic_iron_block;
 import static wolforce.Main.mystic_iron_ingot;
 import static wolforce.Main.onyx;
 import static wolforce.Main.quartz_ore;
+import static wolforce.Main.salt;
 import static wolforce.Main.smooth_azurite;
 import static wolforce.Main.smooth_onyx;
 import static wolforce.Main.soulsteel_block;
@@ -70,6 +71,8 @@ public class RegisterOreDict {
 	}
 
 	public static void registerItems() {
+		OreDictionary.registerOre("dustSalt", salt);
+
 		OreDictionary.registerOre("ingotHeavy", heavy_ingot);
 		OreDictionary.registerOre("nuggetHeavy", heavy_nugget);
 

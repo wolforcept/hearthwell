@@ -3,11 +3,15 @@ package wolforce.blocks;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLog;
+import net.minecraft.block.BlockRotatedPillar;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -17,23 +21,26 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import wolforce.HwellConfig;
 import wolforce.Main;
+import wolforce.Util;
 import wolforce.UtilClient;
-import wolforce.base.MyLog;
 import wolforce.recipes.RecipeTube;
 
-public class BlockTube extends MyLog {
+public class BlockTube extends BlockRotatedPillar {
 
 	public BlockTube(String name) {
-		super(name);
+		super(Material.ROCK);
+		Util.setReg(this, name);
+		setHardness(1.8f);
 		setTickRandomly(true);
 		setHardness(2);
 		setResistance(2);
 		setHarvestLevel("pickaxe", -1);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(AXIS, Axis.Y));
 	}
 
 	@Override
 	public void randomDisplayTick(IBlockState state, World world, BlockPos _pos, Random rand) {
-		if (state.getValue(BlockLog.LOG_AXIS) != BlockLog.EnumAxis.Y || !UtilClient.clientIsDaytime(world))
+		if (state.getValue(AXIS) != Axis.Y || !UtilClient.clientIsDaytime(world))
 			return;
 		BlockPos bot = getBlockUnderTube(world, _pos);
 		int nTubes = getNrOfTubesOnTop(world, bot);
@@ -47,7 +54,7 @@ public class BlockTube extends MyLog {
 
 	@Override
 	public void randomTick(World world, BlockPos _pos, IBlockState state, Random random) {
-		if (state.getValue(BlockLog.LOG_AXIS) != BlockLog.EnumAxis.Y)
+		if (state.getValue(AXIS) != Axis.Y)
 			return;
 
 		BlockPos bot = getBlockUnderTube(world, _pos);
@@ -104,7 +111,7 @@ public class BlockTube extends MyLog {
 		int n = 0;
 		BlockPos currentPos = pos.up();
 		while (world.getBlockState(currentPos).getBlock() == Main.furnace_tube
-				&& world.getBlockState(currentPos).getValue(BlockLog.LOG_AXIS) == BlockLog.EnumAxis.Y && n < 10) {
+				&& world.getBlockState(currentPos).getValue(AXIS) == Axis.Y && n < 10) {
 			n++;
 			currentPos = currentPos.up();
 		}
@@ -117,7 +124,8 @@ public class BlockTube extends MyLog {
 	}
 
 	@Override
-	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
+			EnumFacing side) {
 		IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
 		Block block = iblockstate.getBlock();
 
@@ -134,5 +142,62 @@ public class BlockTube extends MyLog {
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;
+	}
+
+	@Override
+	public boolean isFlammable(IBlockAccess world, BlockPos pos, EnumFacing face) {
+		return false;
+	}
+
+	//
+
+	//
+
+	//
+
+	/**
+	 * Convert the given metadata into a BlockState for this Block
+	 */
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		IBlockState state = this.getDefaultState();
+
+		switch (meta & 0b1100) {
+		case 0b0000:
+			state = state.withProperty(AXIS, Axis.Y);
+			break;
+
+		case 0b0100:
+			state = state.withProperty(AXIS, Axis.X);
+			break;
+
+		case 0b1000:
+			state = state.withProperty(AXIS, Axis.Z);
+			break;
+		}
+
+		return state;
+	}
+
+	/**
+	 * Convert the BlockState into the correct metadata value
+	 */
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		switch ((Axis) state.getValue(AXIS)) {
+		case X:
+			return 0b0100;
+		case Y:
+			return 0b0000;
+		case Z:
+			return 0b1000;
+		default:
+			return 0b1100;
+		}
+	}
+
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] { AXIS });
 	}
 }

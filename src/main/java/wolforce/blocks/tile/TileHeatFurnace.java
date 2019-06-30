@@ -3,7 +3,6 @@ package wolforce.blocks.tile;
 import java.util.HashMap;
 import java.util.List;
 
-import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
@@ -18,10 +17,9 @@ import wolforce.Main;
 import wolforce.Util;
 import wolforce.Util.BlockWithMeta;
 import wolforce.blocks.BlockHeatFurnace;
+import wolforce.blocks.BlockTube;
 
 public class TileHeatFurnace extends TileEntity implements ITickable {
-
-	private static final int MAX_CHARGE = 500;
 
 	String[][][] multiblock = new String[][][] { //
 			{ //
@@ -69,10 +67,10 @@ public class TileHeatFurnace extends TileEntity implements ITickable {
 			table.put("PB", new BlockWithMeta(Main.protection_block));
 			table.put("EB", new BlockWithMeta(Main.heat_block));
 			table.put("HB", new BlockWithMeta(Main.heat_block));
-			BlockLog.EnumAxis axis = facing == EnumFacing.NORTH || facing == EnumFacing.SOUTH ? BlockLog.EnumAxis.Z
-					: BlockLog.EnumAxis.X;
-			table.put("FT", new BlockWithMeta(Main.furnace_tube,
-					Main.furnace_tube.getMetaFromState(Main.furnace_tube.getDefaultState().withProperty(BlockLog.LOG_AXIS, axis))));
+			EnumFacing.Axis axis = facing == EnumFacing.NORTH || facing == EnumFacing.SOUTH ? EnumFacing.Axis.Z
+					: EnumFacing.Axis.X;
+			table.put("FT", new BlockWithMeta(Main.furnace_tube, Main.furnace_tube
+					.getMetaFromState(Main.furnace_tube.getDefaultState().withProperty(BlockTube.AXIS, axis))));
 			table.put("W0", new BlockWithMeta(Blocks.WATER, 0));
 			table.put("L0", new BlockWithMeta(Blocks.LAVA, 0));
 			table.put("L1", new BlockWithMeta(Blocks.LAVA));
@@ -80,7 +78,7 @@ public class TileHeatFurnace extends TileEntity implements ITickable {
 
 			if (Util.isMultiblockBuilt(world, pos, facing, multiblock, table)) {
 				EntityItem entityItem = entities.get(0);
-				ItemStack result = FurnaceRecipes.instance().getSmeltingResult(new ItemStack(entityItem.getItem().getItem()));
+				ItemStack result = FurnaceRecipes.instance().getSmeltingResult(entityItem.getItem().copy()).copy();
 				if (Util.isValid(result)) {
 
 					// if (!BlockEnergyConsumer.tryConsume(world, pos,
@@ -89,8 +87,8 @@ public class TileHeatFurnace extends TileEntity implements ITickable {
 					// }
 
 					BlockPos newpos = pos.offset(facing, 6);
-					ItemStack itemToSpawn = new ItemStack(result.getItem(), result.getCount() * entityItem.getItem().getCount(),
-							result.getMetadata());
+					ItemStack itemToSpawn = new ItemStack(result.getItem(),
+							result.getCount() * entityItem.getItem().getCount(), result.getMetadata());
 					Util.spawnItem(world, newpos, itemToSpawn, facing);
 					entityItem.setDead();
 					if (Math.random() < .000244 * entityItem.getItem().getCount() * entityItem.getItem().getCount())

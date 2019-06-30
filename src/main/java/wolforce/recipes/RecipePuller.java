@@ -11,6 +11,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
 import wolforce.HwellConfig;
+import wolforce.Util;
 
 public class RecipePuller {
 
@@ -48,7 +49,7 @@ public class RecipePuller {
 			LinkedList<RecipePuller> preferredRecipes = new LinkedList<>();
 			for (ItemStack stackInLiquid : stacksInLiquid) {
 				for (RecipePuller recipe : recipes) {
-					if (recipe.filter.getItem().equals(stackInLiquid.getItem()) && !preferredRecipes.contains(recipe)) {
+					if (Util.equalExceptAmount(recipe.filter, stackInLiquid) && !preferredRecipes.contains(recipe)) {
 						preferredRecipes.add(recipe);
 					}
 				}

@@ -6,6 +6,7 @@ import crafttweaker.annotations.ZenDoc;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.liquid.ILiquidStack;
+
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -133,8 +134,10 @@ public class CT {
 
 	@ZenDoc("Add a recipe for the Separator that outputs all three items.")
 	@ZenMethod
-	public static void addSeparatorRecipe(IItemStack input, IItemStack leftOutput, IItemStack rightOutput, IItemStack backOutput) {
-		RecipeSeparator.recipes.put(new Irio(is(input)), new RecipeSeparator(is(leftOutput), is(rightOutput), is(backOutput)));
+	public static void addSeparatorRecipe(IItemStack input, IItemStack leftOutput, IItemStack rightOutput,
+			IItemStack backOutput) {
+		RecipeSeparator.recipes.put(new Irio(is(input)),
+				new RecipeSeparator(is(leftOutput), is(rightOutput), is(backOutput)));
 	}
 
 	@ZenDoc("Add a new item to be used as a Nucleous in the Power Crystal Recipe.")

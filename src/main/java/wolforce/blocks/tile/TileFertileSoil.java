@@ -13,7 +13,9 @@ public class TileFertileSoil extends TileEntity implements ITickable {
 			return;
 		Block block = world.getBlockState(pos.up()).getBlock();
 		if (block instanceof IGrowable) {
-			((IGrowable) block).grow(world, world.rand, pos.up(), world.getBlockState(pos.up()));
+			if (((IGrowable) block).canGrow(world, pos.up(), world.getBlockState(pos.up()), world.isRemote)
+					&& world.isAirBlock(pos.up(2)))
+				((IGrowable) block).grow(world, world.rand, pos.up(), world.getBlockState(pos.up()));
 		}
 	}
 

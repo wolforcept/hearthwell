@@ -24,6 +24,7 @@ import wolforce.Util.BlockWithMeta;
 import wolforce.base.BlockEnergyConsumer;
 import wolforce.blocks.BlockLightCollector;
 import wolforce.blocks.BlockSeparator;
+import wolforce.blocks.BlockTube;
 import wolforce.recipes.RecipeSeparator;
 
 public class TileSeparator extends TileEntity implements ITickable {
@@ -84,7 +85,8 @@ public class TileSeparator extends TileEntity implements ITickable {
 			HashMap<String, BlockWithMeta> table = new HashMap<>();
 			table.put("PB", new BlockWithMeta(Main.heavy_protection_block));
 			table.put("HB", new BlockWithMeta(Main.heat_block));
-			table.put("FT", new BlockWithMeta(Main.furnace_tube));
+			table.put("FT", new BlockWithMeta(Main.furnace_tube, Main.furnace_tube.getMetaFromState(//
+					Main.furnace_tube.getDefaultState().withProperty(BlockTube.AXIS, EnumFacing.Axis.Y))));
 			int metaSource = Main.liquid_souls_block.getMetaFromState(Main.liquid_souls_block.getBlockState().getBaseState());
 			table.put("L0", new BlockWithMeta(Main.liquid_souls_block, metaSource));
 			table.put("L1", new BlockWithMeta(Main.liquid_souls_block, metaSource, true));

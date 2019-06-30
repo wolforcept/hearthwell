@@ -12,11 +12,12 @@
         },
 		{
             "type": "text",
-			"text": "By dropping different shards inside the liquid you can try and filter the ores that are pulled. Different shards will pull different ores, but remember that no filter is 100% effective! Test with different shards to learn the items that are filtered."
+			"text": "By dropping different shards inside the liquid you can try and filter the ores that are pulled. Different shards will pull different ores, but remember that no filter is 100% effective! Test with different shards to learn the items that are filtered.$(br2)A redstone signal to any of the 8 Heat Blocks will completely disable the puller."
         },
 		{
             "type": "multiblock",
             "name": "Puller",
+			"text": "Adding more lines equal to the lowest one, as seen on the right, will make the puller pull faster.",
             "multiblock": {
                 "pattern": [
 					[ "C C", "   ", "C C"],
@@ -36,10 +37,6 @@
             }
 		},
 		{
-            "type": "text",
-            "text": "$(br2)Adding more lines equal to the lowest one, as seen on the right, will make the puller pull faster."
-        },
-		{
             "type": "multiblock",
             "name": "Puller",
             "multiblock": {
@@ -63,7 +60,10 @@
                     "L": "hwell:fluid_liquid_souls"
                 }
             }
+		},
+		{
+			"type": "text",
+			"text": "Materials Required:$(br)$(li)1 Bucket of Liquid Souls$(li)1 Puller Block$(li)4 Light Collectors$(li)5 Amplifying Tubes$(li)8 Heat Blocks$(li)12 Heavy Protection Blocks+"
 		}
-
     ]
 }

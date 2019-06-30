@@ -35,6 +35,10 @@
         { 	"type": "crafting",
 	        "name": "Precision Grinding",
             "recipe": "hwell:charger"
-        }
+        },
+		{
+			"type": "text",
+			"text": "Materials Required:$(br)$(li)1 Charger Block$(li)4 Crystal Blocks$(li)12 Smooth Onyx Blocks$(li)9 Moonstone Blocks$(li)4 Mini Gravity Blocks"
+		}
 	]
 }

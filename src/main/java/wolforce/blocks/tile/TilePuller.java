@@ -18,6 +18,7 @@ import wolforce.Util;
 import wolforce.Util.BlockWithMeta;
 import wolforce.base.BlockEnergyConsumer;
 import wolforce.blocks.BlockLightCollector;
+import wolforce.blocks.BlockTube;
 import wolforce.recipes.RecipePuller;
 
 public class TilePuller extends TileEntity implements ITickable {
@@ -69,7 +70,8 @@ public class TilePuller extends TileEntity implements ITickable {
 		table.put("PB", new BlockWithMeta(Main.heavy_protection_block));
 		table.put("HB", new BlockWithMeta(Main.heat_block));
 		table.put("L0", new BlockWithMeta(Main.liquid_souls_block));
-		table.put("TU", new BlockWithMeta(Main.furnace_tube));
+		table.put("TU", new BlockWithMeta(Main.furnace_tube, Main.furnace_tube.getMetaFromState(//
+				Main.furnace_tube.getDefaultState().withProperty(BlockTube.AXIS, EnumFacing.Axis.Y))));
 		table.put("LC", new BlockWithMeta(Main.light_collector, Main.light_collector.getMetaFromState(//
 				Main.light_collector.getDefaultState().withProperty(BlockLightCollector.CHARGE, 3))));
 
@@ -101,7 +103,7 @@ public class TilePuller extends TileEntity implements ITickable {
 	private boolean isPowered() {
 		for (int dx = -1; dx <= 1; dx++) {
 			for (int dz = -1; dz <= 1; dz++) {
-				if (world.isBlockPowered(new BlockPos(pos.getX() + dx, pos.getY() - 1, pos.getZ() + dz)))
+				if (world.isBlockPowered(new BlockPos(pos.getX() + dx, pos.getY() + 1, pos.getZ() + dz)))
 					return true;
 			}
 		}
