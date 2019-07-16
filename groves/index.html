@@ -1,0 +1,66 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-gb">
+<link href="../stylesheet.css" rel="stylesheet">
+<link rel="icon" href="../docs/hearthwell.png">
+<title>Groves</title></head>
+<body>
+<object style="border:0;padding=0;" width="1000" height="50px" type="text/html" data="../navbar.html"></object>
+<hr>
+
+<h1>Groves</h1>
+
+<p class="discord">
+	Download this at <a href="https://www.curseforge.com/minecraft/mc-mods/groves">curseforge</a>.
+</p>
+
+<table style="border-spacing: 0">
+<td width="480px">
+	<h3>How it works:</h3>
+	<p>
+		This mod adds a simple customizable block called a grove.<br>
+		A grove can be placed anywhere and will, from time to time, check the surrounding area for specific blocks.<br>
+		If its requirements are satisfied, it may spawn entities or items on the ground.<br>
+		
+	</p>
+</td><td>
+	<img src="grove.png" width="512px">
+</td>
+</table>
+<h3>Crafttweaker</h3>
+<p>
+	This mod is designed around CraftTweaker.<br>
+	It adds a couple of simple methods to add custom groves and choose the blocks it requires.<br>
+	It requires two different scripts, one for creating the grove blocks, and another one to add the requirements and results.<br>
+</p>
+	<hr>
+	<p class="discord">groves file - requires a custom loader</p>
+	<code>
+	&nbsp;&nbsp;&nbsp;&nbsp;#loader groves<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;mods.groves.createGrove("Birch Grove", //name<br> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;16, // radius in blocks<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500, // nr of uses<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;200, // spawn cooldown in ticks<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 // total minumum value<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;);<br>
+	</code>
+	<br>
+	<hr>
+	<p class="discord">recipe file</p>
+	<code>
+	&nbsp;&nbsp;&nbsp;&nbsp;#modloaded minecraft<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;mods.groves.addBlock("Birch Grove", <minecraft:grass>, 1);<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;mods.groves.addBlock("Birch Grove", <minecraft:leaves:2>, 1);<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;mods.groves.addBlock("Birch Grove", <minecraft:log:2>, 2);<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;mods.groves.addStackSpawn("Birch Grove", <minecraft:leather>, 0.5);<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;mods.groves.addEntitySpawn("Birch Grove", "minecraft:donkey", 0.5);<br>
+	</code>
+	<br>
+	<hr>
+
+
+</body>
+</html>
