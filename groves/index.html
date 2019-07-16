@@ -33,7 +33,7 @@
 	It requires two different scripts, one for creating the grove blocks, and another one to add the requirements and results.<br>
 </p>
 	<hr>
-	<p class="discord">groves file - requires a custom loader</p>
+	<p class="discord">example groves file - requires a custom loader</p>
 	<code>
 	&nbsp;&nbsp;&nbsp;&nbsp;#loader groves<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -41,15 +41,18 @@
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;16, // radius in blocks<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500, // nr of uses<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;200, // spawn cooldown in ticks<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20000 // total minumum value<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20000, // total minumum value<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;00FFAA // grove color<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;);<br>
 	</code>
 	<br>
 	<hr>
-	<p class="discord">recipe file</p>
+	<p class="discord">example recipe file</p>
 	<code>
 	&nbsp;&nbsp;&nbsp;&nbsp;#modloaded minecraft<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;<br>
+	<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;mods.groves.addActivationItem("Birch Grove", &lt;minecraft:cobblestone&gt;);
+	<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;mods.groves.addBlock("Birch Grove", &lt;minecraft:grass&gt;, 1);<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;mods.groves.addBlock("Birch Grove", &lt;minecraft:leaves:2&gt;, 1);<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;mods.groves.addBlock("Birch Grove", &lt;minecraft:log:2&gt;, 2);<br>
