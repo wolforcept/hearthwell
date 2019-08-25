@@ -94,3 +94,12 @@ pre {
  white-space: -o-pre-wrap;    /* Opera 7 */
  word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
+
+.patron {
+	position: fixed;
+	right: 10px;
+	bottom: 10px;
+	width: 96px;
+	height: 96px;
+	margin: 0;
+}
