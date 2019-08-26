@@ -13,6 +13,7 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -22,7 +23,9 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -57,6 +60,7 @@ import wolforce.blocks.BlockHeat;
 import wolforce.blocks.BlockHeatFurnace;
 import wolforce.blocks.BlockInertSeed;
 import wolforce.blocks.BlockLightCollector;
+import wolforce.blocks.BlockMutator;
 import wolforce.blocks.BlockMystBush;
 import wolforce.blocks.BlockMystGrass;
 import wolforce.blocks.BlockMystLeaves;
@@ -99,7 +103,6 @@ import wolforce.items.tools.MyDagger;
 import wolforce.items.tools.MyPickaxe;
 import wolforce.items.tools.MyShovel;
 import wolforce.items.tools.MySword;
-import wolforce.registry.RegisterRecipes;
 
 public class Main {
 
@@ -135,19 +138,22 @@ public class Main {
 	public static Item heavy_shears, leaf_mesh;
 	public static Item crystal, crystal_nether, crystal_bowl, crystal_bowl_water;
 	public static Item obsidian_displacer, empowered_displacer;
-	public static Item metaldiamond, crystal_catalyst, soul_dust, raw_soulsteel, soulsteel_ingot, mutation_paste, raw_repairing_paste,
-			repairing_paste;
-	public static Item soulsteel_sword, soulsteel_dagger, soulsteel_pickaxe, soulsteel_axe, soulsteel_shovel, soulsteel_hoe;
+	public static Item metaldiamond, crystal_catalyst, soul_dust, raw_soulsteel, soulsteel_ingot, mutation_paste,
+			raw_repairing_paste, repairing_paste;
+	public static Item soulsteel_sword, soulsteel_dagger, soulsteel_pickaxe, soulsteel_axe, soulsteel_shovel,
+			soulsteel_hoe;
 	public static Item soulsteel_helmet, soulsteel_chest, soulsteel_legs, soulsteel_boots;
 	public static Item locked_light, empty_rod, myst_rod, rod_myst_1, rod_myst_2, rod_blaze_1, rod_blaze_2, rod_blaze_3;
-	public static Item myst_dust_picker_fe, myst_dust_picker_ca, myst_dust_picker_c, myst_dust_picker_o, myst_dust_picker_au,
-			myst_dust_picker_h, myst_dust_picker_p, myst_dust_picker_n;
+	public static Item myst_dust_picker_fe, myst_dust_picker_ca, myst_dust_picker_c, myst_dust_picker_o,
+			myst_dust_picker_au, myst_dust_picker_h, myst_dust_picker_p, myst_dust_picker_n;
 	public static ItemShard shard_fe, shard_au, shard_o, shard_c, shard_h, shard_ca, shard_p, shard_n;
 	public static ItemGrindingWheel grinding_wheel_iron, grinding_wheel_diamond, grinding_wheel_crystal;
-	public static ItemLoot loot_base, loot_blaze, loot_creeper, loot_enderman, loot_ghast, loot_shulker, loot_skeleton, loot_slime,
-			loot_spider, loot_witch, loot_wither, loot_zombie, loot_guardian;
+	public static ItemLoot loot_base, loot_blaze, loot_creeper, loot_enderman, loot_ghast, loot_shulker, loot_skeleton,
+			loot_slime, loot_spider, loot_witch, loot_wither, loot_zombie, loot_guardian;
 	public static ItemPowerCrystal power_crystal;
 	public static ItemBlock branch_item;
+
+	public static Item empty;
 
 	//
 	//
@@ -163,9 +169,10 @@ public class Main {
 	public static Block myst_bush, myst_bush_big;
 	public static Block myst_dust_block;
 	public static Block dust_block;
-	public static Block dismantler, crushing_block, gravity_block, gravity_block_mini, /* gravity_powered_block, */ antigravity_block
+	public static Block dismantler, crushing_block, gravity_block, gravity_block_mini,
+			/* gravity_powered_block, */ antigravity_block
 	/* , antigravity_powered_block */;
-	public static Block former;
+	public static BlockFormer former;
 	public static Block myst_log, myst_leaves;
 	public static MyBlock myst_planks;
 	public static Block raw_asul_block, asul_block;
@@ -173,8 +180,8 @@ public class Main {
 	public static Block light_collector;
 	public static Block stabiliser_light, stabiliser, stabiliser_heavy;
 	public static Block picking_table, picker_holder;
-	public static MyBlock white_block, moonstone, moonstone_bricks, citrinic_stone, citrinic_sand, onyx, smooth_onyx, azurite,
-			smooth_azurite, scorch_grit, scorch_glass, gaseous_glass, fullgrass_block, metaldiamond_block;
+	public static MyBlock white_block, moonstone, moonstone_bricks, citrinic_stone, citrinic_sand, onyx, smooth_onyx,
+			azurite, smooth_azurite, scorch_grit, scorch_glass, gaseous_glass, fullgrass_block, metaldiamond_block;
 	public static MyFalling gaseous_sand;
 	public static Block gaseous_frame;
 	public static Block grit_vase;
@@ -182,9 +189,10 @@ public class Main {
 	public static Block fertilizer_block;
 	public static Block grafting_tray;
 	// public static Block generator_heat;
-	public static Block compressed_clay, compressed_wool, ink_block, pearl_block, weeping_block, skin_block, plumage_block, meat_block;
+	public static Block compressed_clay, compressed_wool, ink_block, pearl_block, weeping_block, skin_block,
+			plumage_block, meat_block;
 	public static Block mystic_iron_block, soulsteel_block;
-	public static Block mutation_paste_block;
+	public static Block mutator, mutation_paste_block;
 	public static BlockNourisher nourisher;
 	public static BlockSetter setter;
 	public static BlockCore core_stone, core_anima, core_heat, core_green, core_sentient;
@@ -193,11 +201,12 @@ public class Main {
 	public static Block slab_lamp;
 	public static Block furnace_tube, heat_furnace;
 	public static Block protection_block, heavy_protection_block;
-	public static Block precision_grinder_flint, precision_grinder_iron, precision_grinder_diamond, precision_grinder_crystal,
-			precision_grinder_empty;
+	public static Block precision_grinder_flint, precision_grinder_iron, precision_grinder_diamond,
+			precision_grinder_crystal, precision_grinder_empty;
 	public static Block heat_block;
-	public static BlockBurstSeed burst_seed_stone, burst_seed_cobblestone, burst_seed_gravel, burst_seed_endstone, burst_seed_sand,
-			burst_seed_dirt, burst_seed_snow, burst_seed_netherrack, burst_seed_quartz, burst_seed_prismarine, burst_seed_crystal;
+	public static BlockBurstSeed burst_seed_stone, burst_seed_cobblestone, burst_seed_gravel, burst_seed_endstone,
+			burst_seed_sand, burst_seed_dirt, burst_seed_snow, burst_seed_netherrack, burst_seed_quartz,
+			burst_seed_prismarine, burst_seed_crystal;
 	public static Block totem_enderman, totem_zombie, totem_skeleton, totem_creeper;
 	public static Block separator;
 	public static BlockProducer producer;
@@ -260,10 +269,10 @@ public class Main {
 
 	public static void preInit(FMLPreInitializationEvent event) {
 
-		material_armor_mystic_iron = EnumHelper.addArmorMaterial("mysticIron", "mystic_iron", 10, new int[] { 2, 5, 6, 2 }, 25,
-				SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2);
-		material_armor_soulsteel = EnumHelper.addArmorMaterial("soulsteel", "soulsteel", 10, new int[] { 3, 6, 8, 3 }, 25,
-				SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2);
+		material_armor_mystic_iron = EnumHelper.addArmorMaterial("mysticIron", "mystic_iron", 10,
+				new int[] { 2, 5, 6, 2 }, 25, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2);
+		material_armor_soulsteel = EnumHelper.addArmorMaterial("soulsteel", "soulsteel", 10, new int[] { 3, 6, 8, 3 },
+				25, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2);
 		material_tool_mystic_iron = EnumHelper.addToolMaterial("mysticIron", 2, 425, 6, 2, 15);
 		material_tool_soulsteel = EnumHelper.addToolMaterial("soulsteel", 3, 1920, 8, 3, 20);
 
@@ -272,7 +281,8 @@ public class Main {
 
 		quartz_ore = new MyBlock("quartz_ore", Material.ROCK).setHarvest("pickaxe", 2).setHardness(1).setResistance(2);
 		blocks.add(quartz_ore);
-		glowstone_ore = new MyBlock("glowstone_ore", Material.ROCK).setHarvest("pickaxe", 2).setHardness(1).setResistance(2);
+		glowstone_ore = new MyBlock("glowstone_ore", Material.ROCK).setHarvest("pickaxe", 2).setHardness(1)
+				.setResistance(2);
 		blocks.add(glowstone_ore);
 
 		// LootTableList.ENTITIES_BLAZE, //
@@ -380,7 +390,7 @@ public class Main {
 
 		core_stone = new BlockCore("core_stone", true);
 		blocks.add(core_stone);
-		core_anima = new BlockCore("core_anima", true);
+		core_anima = new BlockCore("core_anima", false);
 		blocks.add(core_anima);
 		core_heat = new BlockCore("core_heat", false);
 		blocks.add(core_heat);
@@ -389,15 +399,19 @@ public class Main {
 		core_sentient = new BlockCore("core_sentient", false);
 		blocks.add(core_sentient);
 
-		graft_stone = new MyBlock("graft_stone", Material.ROCK).setHarvest("pickaxe", -1).setResistance(2).setHardness(2);
+		graft_stone = new MyBlock("graft_stone", Material.ROCK).setHarvest("pickaxe", -1).setResistance(2)
+				.setHardness(2);
 		blocks.add(graft_stone);
-		graft_anima = new MyBlock("graft_anima", Material.ROCK).setHarvest("pickaxe", -1).setResistance(2).setHardness(2);
+		graft_anima = new MyBlock("graft_anima", Material.ROCK).setHarvest("pickaxe", -1).setResistance(2)
+				.setHardness(2);
 		blocks.add(graft_anima);
 		graft_heat = new MyBlock("graft_heat", Material.ROCK).setHarvest("pickaxe", -1).setResistance(2).setHardness(2);
 		blocks.add(graft_heat);
-		graft_green = new MyBlock("graft_green", Material.ROCK).setHarvest("pickaxe", -1).setResistance(2).setHardness(2);
+		graft_green = new MyBlock("graft_green", Material.ROCK).setHarvest("pickaxe", -1).setResistance(2)
+				.setHardness(2);
 		blocks.add(graft_green);
-		graft_sentient = new MyBlock("graft_sentient", Material.ROCK).setHarvest("pickaxe", -1).setResistance(2).setHardness(2);
+		graft_sentient = new MyBlock("graft_sentient", Material.ROCK).setHarvest("pickaxe", -1).setResistance(2)
+				.setHardness(2);
 		blocks.add(graft_sentient);
 
 		dust = new MyItem("dust");
@@ -421,7 +435,8 @@ public class Main {
 		myst_bush_big = new BlockMystBush("myst_bush_big");
 		blocks.add(myst_bush_big);
 
-		myst_fertilizer = new ItemMystFertilizer("myst_fertilizer", "When used on any sappling, a Mysterious Tree grows.", "Requires open sky above it.");
+		myst_fertilizer = new ItemMystFertilizer("myst_fertilizer",
+				"When used on any sappling, a Mysterious Tree grows.", "Requires open sky above it.");
 		items.add(myst_fertilizer);
 
 		myst_log = new MyLog("myst_log");
@@ -479,28 +494,36 @@ public class Main {
 
 		compressed_clay = new MyBlock("compressed_clay", Material.CLAY).setHardness(.5f).setResistance(2);
 		blocks.add(compressed_clay);
-		compressed_wool = new MyBlock("compressed_wool", Material.CLOTH).setSound(SoundType.CLOTH).setHardness(.5f).setResistance(2);
+		compressed_wool = new MyBlock("compressed_wool", Material.CLOTH).setSound(SoundType.CLOTH).setHardness(.5f)
+				.setResistance(2);
 		blocks.add(compressed_wool);
-		skin_block = new MyBlock("skin_block", Material.CARPET).setSound(SoundType.SNOW).setHardness(.5f).setResistance(2);
+		skin_block = new MyBlock("skin_block", Material.CARPET).setSound(SoundType.SNOW).setHardness(.5f)
+				.setResistance(2);
 		blocks.add(skin_block);
-		plumage_block = new MyBlock("plumage_block", Material.CLOTH).setSound(SoundType.CLOTH).setHardness(.5f).setResistance(2);
+		plumage_block = new MyBlock("plumage_block", Material.CLOTH).setSound(SoundType.CLOTH).setHardness(.5f)
+				.setResistance(2);
 		blocks.add(plumage_block);
-		ink_block = new MyBlock("ink_block", Material.SPONGE).setSound(SoundType.SLIME).setHardness(.5f).setResistance(2);
+		ink_block = new MyBlock("ink_block", Material.SPONGE).setSound(SoundType.SLIME).setHardness(.5f)
+				.setResistance(2);
 		blocks.add(ink_block);
-		pearl_block = new MyBlock("pearl_block", Material.GLASS).setSound(SoundType.GLASS).setHardness(.5f).setResistance(2);
+		pearl_block = new MyBlock("pearl_block", Material.GLASS).setSound(SoundType.GLASS).setHardness(.5f)
+				.setResistance(2);
 		blocks.add(pearl_block);
-		weeping_block = new MyBlock("weeping_block", Material.CLAY).setSound(SoundType.SAND).setHardness(.5f).setResistance(2);
+		weeping_block = new MyBlock("weeping_block", Material.CLAY).setSound(SoundType.SAND).setHardness(.5f)
+				.setResistance(2);
 		blocks.add(weeping_block);
 		fertilizer_block = new MyBlock("fertilizer_block", Material.GOURD).setSound(SoundType.GROUND).setHardness(.5f)
 				.setResistance(2);
 		blocks.add(fertilizer_block);
-		meat_block = new MyBlock("meat_block", Material.SPONGE).setSound(SoundType.SLIME).setHardness(.5f).setResistance(2);
+		meat_block = new MyBlock("meat_block", Material.SPONGE).setSound(SoundType.SLIME).setHardness(.5f)
+				.setResistance(2);
 		blocks.add(meat_block);
 
 		citrinic_stone = new MyBlock("citrinic_stone", Material.ROCK)//
 				.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
 		blocks.add(citrinic_stone);
-		citrinic_sand = new MyBlock("citrinic_sand", Material.ROCK).setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
+		citrinic_sand = new MyBlock("citrinic_sand", Material.ROCK).setHarvest("pickaxe", 0).setHardness(1f)
+				.setResistance(10);
 		blocks.add(citrinic_sand);
 		azurite = new MyBlock("azurite", Material.ROCK)//
 				.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
@@ -518,8 +541,8 @@ public class Main {
 		smooth_onyx = new MyBlock("smooth_onyx", Material.ROCK)//
 				.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
 		blocks.add(smooth_onyx);
-		blocks.addAll(
-				Util.makeVariants(citrinic_stone, citrinic_sand, azurite, smooth_azurite, moonstone, onyx, smooth_onyx, myst_planks));
+		blocks.addAll(Util.makeVariants(citrinic_stone, citrinic_sand, azurite, smooth_azurite, moonstone, onyx,
+				smooth_onyx, myst_planks));
 
 		white_block = new MyBlock("white_block", Material.ROCK)//
 				.setHarvest("pickaxe", 0).setHardness(1f).setResistance(10);
@@ -547,7 +570,8 @@ public class Main {
 
 		seed_of_life = new ItemSeedOfLife("seed_of_life", "Right-click on the ground to breed life!", 0);
 		items.add(seed_of_life);
-		seed_of_the_nether = new ItemSeedOfLife("seed_of_the_nether", "Right-click on the ground to sprout the nether!", 1);
+		seed_of_the_nether = new ItemSeedOfLife("seed_of_the_nether", "Right-click on the ground to sprout the nether!",
+				1);
 		items.add(seed_of_the_nether);
 		seed_of_the_end = new ItemSeedOfLife("seed_of_the_end", "Right-click on the ground to sprout the end!", 2);
 		items.add(seed_of_the_end);
@@ -697,7 +721,8 @@ public class Main {
 
 		light_collector = new BlockLightCollector("light_collector");
 		blocks.add(light_collector);
-		locked_light = new ItemLockedLight("locked_light", "Drops from charged light collectors");
+		locked_light = new ItemLockedLight("locked_light", "Drops from charged light collectors",
+				"Right click a light collector to instantly fill it.");
 		items.add(locked_light);
 
 		raw_mystic_iron = new MyItem("raw_mystic_iron");
@@ -711,7 +736,8 @@ public class Main {
 		}.setHardness(.55f);
 		blocks.add(mystic_iron_block);
 
-		mystic_iron_sword = new MySword("mystic_iron_sword", material_tool_mystic_iron, mystic_iron_ingot, -2.4000000953674316);
+		mystic_iron_sword = new MySword("mystic_iron_sword", material_tool_mystic_iron, mystic_iron_ingot,
+				-2.4000000953674316);
 		items.add(mystic_iron_sword);
 		mystic_iron_dagger = new MyDagger("mystic_iron_dagger", material_tool_mystic_iron, mystic_iron_ingot,
 				-2.4000000953674316 / 3d);
@@ -724,17 +750,17 @@ public class Main {
 		items.add(mystic_iron_shovel);
 		// TODO mystic_iron_hoe;
 
-		mystic_iron_helmet = new MyArmor("mystic_iron_helmet", "mystic_iron", EntityEquipmentSlot.HEAD, material_armor_mystic_iron,
-				mystic_iron_ingot, 20);
+		mystic_iron_helmet = new MyArmor("mystic_iron_helmet", "mystic_iron", EntityEquipmentSlot.HEAD,
+				material_armor_mystic_iron, mystic_iron_ingot, 20);
 		items.add(mystic_iron_helmet);
-		mystic_iron_chest = new MyArmor("mystic_iron_chest", "mystic_iron", EntityEquipmentSlot.CHEST, material_armor_mystic_iron,
-				mystic_iron_ingot, 20);
+		mystic_iron_chest = new MyArmor("mystic_iron_chest", "mystic_iron", EntityEquipmentSlot.CHEST,
+				material_armor_mystic_iron, mystic_iron_ingot, 20);
 		items.add(mystic_iron_chest);
-		mystic_iron_legs = new MyArmor("mystic_iron_legs", "mystic_iron", EntityEquipmentSlot.LEGS, material_armor_mystic_iron,
-				mystic_iron_ingot, 20);
+		mystic_iron_legs = new MyArmor("mystic_iron_legs", "mystic_iron", EntityEquipmentSlot.LEGS,
+				material_armor_mystic_iron, mystic_iron_ingot, 20);
 		items.add(mystic_iron_legs);
-		mystic_iron_boots = new MyArmor("mystic_iron_boots", "mystic_iron", EntityEquipmentSlot.FEET, material_armor_mystic_iron,
-				mystic_iron_ingot, 20);
+		mystic_iron_boots = new MyArmor("mystic_iron_boots", "mystic_iron", EntityEquipmentSlot.FEET,
+				material_armor_mystic_iron, mystic_iron_ingot, 20);
 		items.add(mystic_iron_boots);
 
 		// TIER 3
@@ -753,8 +779,11 @@ public class Main {
 		mutation_paste_block = new MyBlock("mutation_paste_block", Material.GRASS)//
 				.setSound(SoundType.GROUND).setHardness(1f).setResistance(1f);
 		blocks.add(mutation_paste_block);
-		repairing_paste = new ItemRepairingPaste("repairing_paste", new String[] {
-				"Place it on your left hand to slowly repair items on your right hand.", "Can repair up to 500 damage." });
+		mutator = new BlockMutator("mutator");
+		blocks.add(mutator);
+		repairing_paste = new ItemRepairingPaste("repairing_paste",
+				new String[] { "Place it on your left hand to slowly repair items on your right hand.",
+						"Can repair up to 500 damage." });
 		items.add(repairing_paste);
 		raw_repairing_paste = new MyItem("raw_repairing_paste");
 		items.add(raw_repairing_paste);
@@ -767,7 +796,8 @@ public class Main {
 
 		soulsteel_sword = new MySword("soulsteel_sword", material_tool_soulsteel, soulsteel_ingot, -2.4000000953674316);
 		items.add(soulsteel_sword);
-		soulsteel_dagger = new MyDagger("soulsteel_dagger", material_tool_soulsteel, soulsteel_ingot, -2.4000000953674316 / 3d);
+		soulsteel_dagger = new MyDagger("soulsteel_dagger", material_tool_soulsteel, soulsteel_ingot,
+				-2.4000000953674316 / 3d);
 		items.add(soulsteel_dagger);
 		soulsteel_axe = new MyAxe("soulsteel_axe", material_tool_soulsteel, soulsteel_ingot, -3);
 		items.add(soulsteel_axe);
@@ -777,24 +807,26 @@ public class Main {
 		items.add(soulsteel_shovel);
 		// TODO soulsteel_hoe;
 
-		soulsteel_helmet = new MyArmor("soulsteel_helmet", "soulsteel", EntityEquipmentSlot.HEAD, material_armor_soulsteel,
-				soulsteel_ingot, 20);
+		soulsteel_helmet = new MyArmor("soulsteel_helmet", "soulsteel", EntityEquipmentSlot.HEAD,
+				material_armor_soulsteel, soulsteel_ingot, 20);
 		items.add(soulsteel_helmet);
-		soulsteel_chest = new MyArmor("soulsteel_chest", "soulsteel", EntityEquipmentSlot.CHEST, material_armor_soulsteel,
-				soulsteel_ingot, 20);
+		soulsteel_chest = new MyArmor("soulsteel_chest", "soulsteel", EntityEquipmentSlot.CHEST,
+				material_armor_soulsteel, soulsteel_ingot, 20);
 		items.add(soulsteel_chest);
 		soulsteel_legs = new MyArmor("soulsteel_legs", "soulsteel", EntityEquipmentSlot.LEGS, material_armor_soulsteel,
 				soulsteel_ingot, 20);
 		items.add(soulsteel_legs);
-		soulsteel_boots = new MyArmor("soulsteel_boots", "soulsteel", EntityEquipmentSlot.FEET, material_armor_soulsteel,
-				soulsteel_ingot, 20);
+		soulsteel_boots = new MyArmor("soulsteel_boots", "soulsteel", EntityEquipmentSlot.FEET,
+				material_armor_soulsteel, soulsteel_ingot, 20);
 		items.add(soulsteel_boots);
 
-		stabiliser_light = new MyBlock("stabiliser_light", Material.ROCK).setHarvest("pickaxe", -1).setHardness(1).setResistance(1);
+		stabiliser_light = new MyBlock("stabiliser_light", Material.ROCK).setHarvest("pickaxe", -1).setHardness(1)
+				.setResistance(1);
 		blocks.add(stabiliser_light);
 		stabiliser = new MyBlock("stabiliser", Material.ROCK).setHarvest("pickaxe", -1).setHardness(1).setResistance(1);
 		blocks.add(stabiliser);
-		stabiliser_heavy = new MyBlock("stabiliser_heavy", Material.ROCK).setHarvest("pickaxe", -1).setHardness(1).setResistance(1);
+		stabiliser_heavy = new MyBlock("stabiliser_heavy", Material.ROCK).setHarvest("pickaxe", -1).setHardness(1)
+				.setResistance(1);
 		blocks.add(stabiliser_heavy);
 
 		separator = new BlockSeparator("separator");
@@ -831,18 +863,34 @@ public class Main {
 		// totem_ = new BlockTotem("totem_");
 		// blocks.add(totem_);
 
-		//
-
-		//
-
-		//
-
 		metaldiamond_block = new MyBlock("metaldiamond_block", Material.IRON) {
 			{
 				setSoundType(SoundType.METAL);
 			}
 		}.setHardness(3).setResistance(3);
 		blocks.add(metaldiamond_block);
+
+		//
+
+		//
+
+		empty = new MyItem("empty") {
+			@Override
+			public Entity createEntity(World world, Entity location, ItemStack itemstack) {
+				return null;
+			}
+		};
+		items.add(empty);
+
+		//
+
+		//
+
+		//
+
+		//
+
+		//
 
 		boxer = new BlockBoxer("boxer");
 		blocks.add(boxer);
@@ -857,7 +905,7 @@ public class Main {
 				// HWELL
 				asul_block, soulsteel_block, mystic_iron_block, heavy_block, metaldiamond_block, //
 				crystal_block, crystal_nether_block, //
-				core_stone, inert_seed, core_heat, core_green, core_sentient, //
+				// core_stone, inert_seed, core_heat, core_green, core_sentient, //
 				compressed_clay, compressed_wool, mutation_paste_block, //
 				protection_block, heavy_protection_block, //
 				graft_stone, graft_anima, graft_heat, graft_green, graft_sentient
@@ -870,21 +918,26 @@ public class Main {
 			// THESE ARE DEALT SEPARATLY
 		}
 
-		RegisterRecipes.createNewCores();
+		Main.custom_cores = new HashMap<>();
+		Main.custom_grafts = new HashMap<>();
+		Main.graft_costs = new HashMap<>();
+		Main.graft_costs.put(Main.core_stone, 100);
+		Main.graft_costs.put(Main.core_anima, 750);
+		Main.graft_costs.put(Main.core_heat, 300);
+		Main.graft_costs.put(Main.core_green, 500);
+		Main.graft_costs.put(Main.core_sentient, 1000);
 
 		// blocks.sort(new Comparator<Block>() {
 		// @Override
 		// public int compare(Block o1, Block o2) {
-		// return
-		// o1.getUnlocalizedName().compareToIgnoreCase(o2.getUnlocalizedName());
+		// return o1.getUnlocalizedName().compareToIgnoreCase(o2.getUnlocalizedName());
 		// }
 		// });
 		//
 		// items.sort(new Comparator<Item>() {
 		// @Override
 		// public int compare(Item o1, Item o2) {
-		// return
-		// o1.getUnlocalizedName().compareToIgnoreCase(o2.getUnlocalizedName());
+		// return o1.getUnlocalizedName().compareToIgnoreCase(o2.getUnlocalizedName());
 		// }
 		// });
 
@@ -900,7 +953,8 @@ public class Main {
 			}
 
 		};
-		liquid_souls = new Fluid("liquid_souls", Util.res("liquid_souls"), Util.res("liquid_souls_flowing"), Color.white);
+		liquid_souls = new Fluid("liquid_souls", Util.res("liquid_souls"), Util.res("liquid_souls_flowing"),
+				Color.white);
 		FluidRegistry.addBucketForFluid(liquid_souls);
 
 		liquid_souls_block = new BlockLiquidSouls(liquid_souls, material_liquid_souls);
@@ -937,7 +991,7 @@ public class Main {
 
 		ItemSeedOfLife.init();
 
-		HashSet<Class> loaded = new HashSet<>();
+		HashSet<Class<? extends TileEntity>> loaded = new HashSet<>();
 		for (Block block : blocks)
 			if (block instanceof HasTE) {
 				if (!((HasTE) block).isToRegisterTileEntity())
@@ -946,9 +1000,11 @@ public class Main {
 				// && GameRegistry.findRegistry(((IEntity) block).getTileEntityClass()) ==
 				// null
 				// //
-				Class clazz = ((ITileEntityProvider) block).createNewTileEntity(null, 0).getClass();
+				Class<? extends TileEntity> clazz = ((ITileEntityProvider) block).createNewTileEntity(null, 0)
+						.getClass();
 				if (!loaded.contains(clazz)) {
-					GameRegistry.registerTileEntity(clazz, new ResourceLocation(Hwell.MODID + ":tile_" + block.getUnlocalizedName()));
+					GameRegistry.registerTileEntity(clazz,
+							new ResourceLocation(Hwell.MODID + ":tile_" + block.getUnlocalizedName()));
 					System.out.println("registered tile entity tile_" + block.getUnlocalizedName());
 					loaded.add(clazz);
 				}

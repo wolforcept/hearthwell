@@ -129,12 +129,13 @@ public class RecipeFreezer {
 			// System.out.println(fluid.getName() + " " + r.fluidIn.getFluid().getName());
 			// if (r.fluidIn.getFluid().equals(fluid)) {
 			if (r.fluidIn.getFluid().equals(fluid)) {
-				
+
 				Block block = fluid.getBlock();
 				if (block instanceof BlockFluidClassic && ((BlockFluidClassic) block).isSourceBlock(world, pos))
 					return true;
-				
-				if (state.getProperties().containsKey(BlockFluidBase.LEVEL) && state.getValue(BlockFluidBase.LEVEL) == 0) {
+
+				if (state.getProperties().containsKey(BlockFluidBase.LEVEL)
+						&& state.getValue(BlockFluidBase.LEVEL) == 0) {
 					return true;
 				}
 
@@ -150,6 +151,7 @@ public class RecipeFreezer {
 
 	public RecipeFreezer(FluidStack fluid, ItemStack[] blocks) {
 		this.fluidIn = fluid;
+		this.fluidIn.amount = 1000;
 		this.blocksOut = blocks;
 	}
 

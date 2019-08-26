@@ -6,17 +6,17 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
@@ -38,7 +38,6 @@ import net.minecraftforge.fluids.FluidStack;
 import wolforce.base.MyBlock;
 import wolforce.base.MySlab;
 import wolforce.base.MyStairs;
-import wolforce.recipes.Irio;
 
 public class Util {
 
@@ -62,7 +61,10 @@ public class Util {
 	}
 
 	public static boolean equalExceptAmount(ItemStack stack1, ItemStack stack2) {
-		return stack1.getItem() == stack2.getItem() && stack1.getMetadata() == stack2.getMetadata();
+		return stack1.getItem() == stack2.getItem() && stack1.getMetadata() == stack2.getMetadata() && ( //
+		/*    */(!stack1.hasTagCompound() && !stack2.hasTagCompound()) || //
+				(stack1.getTagCompound().equals(stack2.getTagCompound())) //
+		);
 	}
 
 	// SPAWN ITEMS
@@ -162,6 +164,10 @@ public class Util {
 		return new ResourceLocation(Hwell.MODID, string);
 	}
 
+	public static ResourceLocation resMC(String string) {
+		return new ResourceLocation("minecraft", string);
+	}
+
 	//
 
 	public static BlockPos[] getBlocksTouching(World world, BlockPos pos) {
@@ -222,8 +228,9 @@ public class Util {
 		// return false;
 	}
 
-	private static boolean checkPos(World world, BlockPos realPos, BlockPos centre, EnumFacing facing, String mbs, int x, int y, int z,
-			HashMap<String, BlockWithMeta> table) {
+	@SuppressWarnings("deprecation")
+	private static boolean checkPos(World world, BlockPos realPos, BlockPos centre, EnumFacing facing, String mbs,
+			int x, int y, int z, HashMap<String, BlockWithMeta> table) {
 
 		BlockPos thispos = centre.subtract(new BlockPos(x, y, z));
 		if (facing == EnumFacing.EAST)
@@ -236,14 +243,16 @@ public class Util {
 		BlockWithMeta tableEntry = table.get(mbs);
 		IBlockState state = world.getBlockState(realPos.subtract(thispos));
 
-		boolean isCorrect = tableEntry.block == state.getBlock()
-				&& hasCorrectMeta(tableEntry.block, tableEntry.meta, tableEntry.block.getMetaFromState(state), tableEntry.inverse);
+		boolean isCorrect = tableEntry.block == state.getBlock() && hasCorrectMeta(tableEntry.block, tableEntry.meta,
+				tableEntry.block.getMetaFromState(state), tableEntry.inverse);
 
 		if (!isCorrect && HwellConfig.general.isAutomaticMultiblocks) {
 			// ----------------------------------
 			if (tableEntry.meta != -1)
-				world.setBlockState(realPos.subtract(thispos), tableEntry.block
-						.getStateFromMeta(tableEntry.inverse ? (tableEntry.meta != 0 ? 0 : tableEntry.meta) : tableEntry.meta), 2);
+				world.setBlockState(realPos.subtract(thispos),
+						tableEntry.block.getStateFromMeta(
+								tableEntry.inverse ? (tableEntry.meta != 0 ? 0 : tableEntry.meta) : tableEntry.meta),
+						2);
 			else
 				world.setBlockState(realPos.subtract(thispos), tableEntry.block.getDefaultState(), 2);
 			return true;
@@ -311,9 +320,10 @@ public class Util {
 		return listOfOne(new ItemStack(block));
 	}
 
-	public static Irio toIrio(IBlockState blockState) {
-		return new Irio(blockState.getBlock(), blockState.getBlock().getMetaFromState(blockState));
-	}
+	// public static Irio toIrio(IBlockState blockState) {
+	// return new Irio(blockState.getBlock(),
+	// blockState.getBlock().getMetaFromState(blockState));
+	// }
 
 	public static boolean isVanillaFluid(Block in) {
 		return in == Blocks.WATER || in == Blocks.FLOWING_WATER || in == Blocks.LAVA || in == Blocks.FLOWING_LAVA;
@@ -376,20 +386,21 @@ public class Util {
 	// ingredients.setOutputs(ItemStack.class, outList);
 	// }
 
-	private static <T> String toStringed(Collection<T> inList, ToStringer<T>... toStringer) {
-		String s = "";
-		for (T t : inList) {
-			if (toStringer.length > 0)
-				s += toStringer[0].toString(t) + ", ";
-			else
-				s += t.toString() + ", ";
-		}
-		return s.substring(0, s.length() - 3);
-	}
+	// private static <T> String toStringed(Collection<T> inList, ToStringer<T>...
+	// toStringer) {
+	// String s = "";
+	// for (T t : inList) {
+	// if (toStringer.length > 0)
+	// s += toStringer[0].toString(t) + ", ";
+	// else
+	// s += t.toString() + ", ";
+	// }
+	// return s.substring(0, s.length() - 3);
+	// }
 
-	private interface ToStringer<T> {
-		String toString(T t);
-	}
+	// private interface ToStringer<T> {
+	// String toString(T t);
+	// }
 
 	public static List<ItemStack> toItemStackList(Block[] blocks) {
 		List<ItemStack> list = new LinkedList<>();
@@ -416,63 +427,63 @@ public class Util {
 		}
 	}
 
-	private void makeTree(World world, BlockPos pos) {
-		IBlockState wood = Blocks.LOG.getDefaultState();
-		IBlockState leaf = Blocks.LEAVES.getDefaultState();
-		world.setBlockState(pos.up(0), wood);
-		world.setBlockState(pos.up(1), wood);
-		world.setBlockState(pos.up(2), wood);
-		world.setBlockState(pos.up(3), wood);
-		world.setBlockState(pos.up(4), wood);
-
-		// layer 2
-		for (int[] d : new int[][] { //
-				{ -2, -2 }, { -2, -1 }, { -2, 0 }, { -2, 1 }, { -2, 2 }, //
-				{ -1, -2 }, { -1, -1 }, { -1, 0 }, { -1, 1 }, { -1, 2 }, //
-				{ 0, -2 }, { 0, -1 }, { 0, 0 }, { 0, 1 }, { 0, 2 }, //
-				{ 1, -2 }, { 1, -1 }, { 1, 0 }, { 1, 1 }, { 1, 2 }, //
-				{ 2, -2 }, { 2, -1 }, { 2, 0 }, { 2, 1 }, { 2, 2 }, //
-		}) {
-			BlockPos dpos = pos.add(d[0], 2, d[1]);
-			if (world.isAirBlock(dpos))
-				world.setBlockState(dpos, leaf);
-		}
-
-		// layer 3
-		for (int[] d : new int[][] { //
-				{ -2, -1 }, { -2, 0 }, { -2, 1 }, //
-				{ -1, -2 }, { -1, -1 }, { -1, 0 }, { -1, 1 }, { -1, 2 }, //
-				{ 0, -2 }, { 0, -1 }, { 0, 1 }, { 0, 2 }, //
-				{ 1, -2 }, { 1, -1 }, { 1, 0 }, { 1, 1 }, { 1, 2 }, //
-				{ 2, -1 }, { 2, 0 }, { 2, 1 }, //
-		}) {
-			BlockPos dpos = pos.add(d[0], 3, d[1]);
-			if (world.isAirBlock(dpos))
-				world.setBlockState(dpos, leaf);
-		}
-
-		// layer 4
-		for (int[] d : new int[][] { //
-				{ -1, -1 }, { -1, 0 }, { -1, 1 }, //
-				{ 0, -1 }, /*       */ { 0, 1 }, //
-				{ 1, -1 }, { 1, 0 }, { 1, 1 }, //
-		}) {
-			BlockPos dpos = pos.add(d[0], 4, d[1]);
-			if (world.isAirBlock(dpos))
-				world.setBlockState(dpos, leaf);
-		}
-
-		// layer 5
-		for (int[] d : new int[][] { //
-				{ -1, 0 }, //
-				{ 0, -1 }, { 0, 0 }, { 0, 1 }, //
-				{ 1, 0 }, //
-		}) {
-			BlockPos dpos = pos.add(d[0], 5, d[1]);
-			if (world.isAirBlock(dpos))
-				world.setBlockState(dpos, leaf);
-		}
-	}
+	// private void makeTree(World world, BlockPos pos) {
+	// IBlockState wood = Blocks.LOG.getDefaultState();
+	// IBlockState leaf = Blocks.LEAVES.getDefaultState();
+	// world.setBlockState(pos.up(0), wood);
+	// world.setBlockState(pos.up(1), wood);
+	// world.setBlockState(pos.up(2), wood);
+	// world.setBlockState(pos.up(3), wood);
+	// world.setBlockState(pos.up(4), wood);
+	//
+	// // layer 2
+	// for (int[] d : new int[][] { //
+	// { -2, -2 }, { -2, -1 }, { -2, 0 }, { -2, 1 }, { -2, 2 }, //
+	// { -1, -2 }, { -1, -1 }, { -1, 0 }, { -1, 1 }, { -1, 2 }, //
+	// { 0, -2 }, { 0, -1 }, { 0, 0 }, { 0, 1 }, { 0, 2 }, //
+	// { 1, -2 }, { 1, -1 }, { 1, 0 }, { 1, 1 }, { 1, 2 }, //
+	// { 2, -2 }, { 2, -1 }, { 2, 0 }, { 2, 1 }, { 2, 2 }, //
+	// }) {
+	// BlockPos dpos = pos.add(d[0], 2, d[1]);
+	// if (world.isAirBlock(dpos))
+	// world.setBlockState(dpos, leaf);
+	// }
+	//
+	// // layer 3
+	// for (int[] d : new int[][] { //
+	// { -2, -1 }, { -2, 0 }, { -2, 1 }, //
+	// { -1, -2 }, { -1, -1 }, { -1, 0 }, { -1, 1 }, { -1, 2 }, //
+	// { 0, -2 }, { 0, -1 }, { 0, 1 }, { 0, 2 }, //
+	// { 1, -2 }, { 1, -1 }, { 1, 0 }, { 1, 1 }, { 1, 2 }, //
+	// { 2, -1 }, { 2, 0 }, { 2, 1 }, //
+	// }) {
+	// BlockPos dpos = pos.add(d[0], 3, d[1]);
+	// if (world.isAirBlock(dpos))
+	// world.setBlockState(dpos, leaf);
+	// }
+	//
+	// // layer 4
+	// for (int[] d : new int[][] { //
+	// { -1, -1 }, { -1, 0 }, { -1, 1 }, //
+	// { 0, -1 }, /* */ { 0, 1 }, //
+	// { 1, -1 }, { 1, 0 }, { 1, 1 }, //
+	// }) {
+	// BlockPos dpos = pos.add(d[0], 4, d[1]);
+	// if (world.isAirBlock(dpos))
+	// world.setBlockState(dpos, leaf);
+	// }
+	//
+	// // layer 5
+	// for (int[] d : new int[][] { //
+	// { -1, 0 }, //
+	// { 0, -1 }, { 0, 0 }, { 0, 1 }, //
+	// { 1, 0 }, //
+	// }) {
+	// BlockPos dpos = pos.add(d[0], 5, d[1]);
+	// if (world.isAirBlock(dpos))
+	// world.setBlockState(dpos, leaf);
+	// }
+	// }
 
 	public static Block blockAt(World world, BlockPos pos) {
 		return world.getBlockState(pos).getBlock();
@@ -490,22 +501,22 @@ public class Util {
 		// }
 	}
 
-	public static Irio readJsonIrio(JsonObject o) {
-		if (!o.has("data")) {
-			o.addProperty("data", 0);
-			ItemStack input = ShapedRecipes.deserializeItem(o, true);
-			return new Irio(input.getItem());
-		}
-		ItemStack input = ShapedRecipes.deserializeItem(o, true);
-		return new Irio(input.getItem(), input.getMetadata());
-	}
+	// public static Irio readJsonIrio(JsonObject o) {
+	// if (!o.has("data")) {
+	// o.addProperty("data", 0);
+	// ItemStack input = ShapedRecipes.deserializeItem(o, true);
+	// return new Irio(input.getItem());
+	// }
+	// ItemStack input = ShapedRecipes.deserializeItem(o, true);
+	// return new Irio(input.getItem(), input.getMetadata());
+	// }
 
 	public static boolean hasEnchantment(ItemStack stack, Enchantment ench) {
 		if (!stack.isItemEnchanted())
 			return false;
 		NBTTagList enchs = stack.getEnchantmentTagList();
 		for (NBTBase nbtBase : enchs)
-			if (((NBTTagCompound) nbtBase).getShort("id") == ench.getEnchantmentID(ench))
+			if (((NBTTagCompound) nbtBase).getShort("id") == Enchantment.getEnchantmentID(ench))
 				return true;
 		return false;
 	}
@@ -522,4 +533,41 @@ public class Util {
 			return false;
 		return stack1.getTagCompound().equals(stack2.getTagCompound());
 	}
+
+	public static EnumFacing sideOf(BlockPos pos, BlockPos fromPos) {
+		for (EnumFacing face : EnumFacing.VALUES) {
+			if (pos.offset(face).equals(fromPos)) {
+				return face;
+			}
+		}
+		return null;
+	}
+
+	public static ItemStack[] deserializeArrayOfItemStacks(JsonArray inputsArray) {
+		ItemStack[] ret = new ItemStack[inputsArray.size()];
+		for (int i = 0; i < ret.length; i++) {
+			ret[i] = ShapedRecipes.deserializeItem(inputsArray.get(i).getAsJsonObject(), true);
+		}
+		return ret;
+	}
+
+	public static void drawText(FontRenderer fontRenderer, String string, int x, int y, int color, boolean shadow) {
+		if (shadow)
+			fontRenderer.drawStringWithShadow(string, 1 + x, 1 + y, color);
+		else
+			fontRenderer.drawString(string, 1 + x, 1 + y, color);
+
+	}
+
+	public static void drawTextCentered(FontRenderer fontRenderer, String string, int x, int y, int w, int h, int color,
+			boolean shadow) {
+		int sw = fontRenderer.getStringWidth(string);
+		int sh = fontRenderer.getWordWrappedHeight(string, 9999999);
+		if (shadow)
+			fontRenderer.drawStringWithShadow(string, 1 + x + w / 2 - sw / 2, 1 + y + h / 2 - sh / 2, color);
+		else
+			fontRenderer.drawString(string, 1 + x + w / 2 - sw / 2, 1 + y + h / 2 - sh / 2, color);
+
+	}
+
 }

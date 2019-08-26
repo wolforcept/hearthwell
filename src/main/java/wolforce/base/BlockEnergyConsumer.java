@@ -6,6 +6,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import wolforce.Hwell;
 import wolforce.entities.EntityPower;
 
 public interface BlockEnergyConsumer extends BlockWithDescription {
@@ -16,8 +17,10 @@ public interface BlockEnergyConsumer extends BlockWithDescription {
 
 	static boolean tryConsume(World world, BlockPos pos, int energy) {
 
-		Vec3d min = new Vec3d(pos.getX() - MAX_ENERGY_DISTANCE, pos.getY() - MAX_ENERGY_DISTANCE, pos.getZ() - MAX_ENERGY_DISTANCE);
-		Vec3d max = new Vec3d(pos.getX() + MAX_ENERGY_DISTANCE, pos.getY() + MAX_ENERGY_DISTANCE, pos.getZ() + MAX_ENERGY_DISTANCE);
+		Vec3d min = new Vec3d(pos.getX() - MAX_ENERGY_DISTANCE, pos.getY() - MAX_ENERGY_DISTANCE,
+				pos.getZ() - MAX_ENERGY_DISTANCE);
+		Vec3d max = new Vec3d(pos.getX() + MAX_ENERGY_DISTANCE, pos.getY() + MAX_ENERGY_DISTANCE,
+				pos.getZ() + MAX_ENERGY_DISTANCE);
 		List<EntityPower> entities = world.getEntitiesWithinAABB(EntityPower.class,
 				new AxisAlignedBB(min.x, min.y, min.z, max.x, max.y, max.z));
 		// System.out.println("SEARCHING FOR ENERGY PROVIDERS");
@@ -64,7 +67,17 @@ public interface BlockEnergyConsumer extends BlockWithDescription {
 		// if (provider.hasEnergy(world, pos2, energy + loss)) {
 		// return provider.tryConsume(world, pos2, energy + loss);
 		// }
+		if (System.currentTimeMillis() > Hwell.nextAvailableNoEnergySound) {
+			playSoundNoEnergy(world, pos);
+			Hwell.nextAvailableNoEnergySound = System.currentTimeMillis() + 2000;
+		}
 		return false;
+	}
+
+	static void playSoundNoEnergy(World world, BlockPos pos) {
+		// if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
+		Hwell.proxy.playSoundNoEnergy(world, pos);
+
 	}
 
 }

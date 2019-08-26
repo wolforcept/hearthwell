@@ -33,8 +33,8 @@ public class BlockSetter extends Block implements HasTE, BlockEnergyConsumer {
 	}
 
 	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
-			int meta, EntityLivingBase placer) {
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY,
+			float hitZ, int meta, EntityLivingBase placer) {
 		if (placer.rotationPitch < -45)
 			return this.getDefaultState().withProperty(FACING, EnumFacing.DOWN);
 		if (placer.rotationPitch > 45)
@@ -51,10 +51,10 @@ public class BlockSetter extends Block implements HasTE, BlockEnergyConsumer {
 		int start = getStart(worldIn, _pos, facing);
 		for (int i = start; i < start + HwellConfig.machines.setterBaseRange + extraRange; i++) {
 			BlockPos pos = _pos.offset(facing, i);
-			worldIn.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, pos.getX() + Math.random(), pos.getY() + (Math.random()),
-					pos.getZ() + Math.random(), 0, -.02 - Math.random() * .2, 0);
-			worldIn.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, pos.getX() + Math.random(), pos.getY() + (Math.random()),
-					pos.getZ() + Math.random(), 0, -.02 - Math.random() * .2, 0);
+			worldIn.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, pos.getX() + Math.random(),
+					pos.getY() + (Math.random()), pos.getZ() + Math.random(), 0, -.02 - Math.random() * .2, 0);
+			worldIn.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, pos.getX() + Math.random(),
+					pos.getY() + (Math.random()), pos.getZ() + Math.random(), 0, -.02 - Math.random() * .2, 0);
 		}
 
 	}
@@ -71,7 +71,7 @@ public class BlockSetter extends Block implements HasTE, BlockEnergyConsumer {
 	}
 
 	public static int getExtraRange(World worldIn, BlockPos _pos, EnumFacing facing) {
-		BlockPos pos = _pos.offset(facing);
+		// BlockPos pos = _pos.offset(facing);
 		int range = 0;
 		for (EnumFacing f : EnumFacing.values()) {
 			if (f == facing)

@@ -29,22 +29,24 @@ import wolforce.blocks.tile.TileCharger;
 import wolforce.blocks.tile.TileGraftingTray;
 import wolforce.blocks.tile.TileGritVase;
 import wolforce.blocks.tile.TileInertSeed;
+import wolforce.blocks.tile.TileMutator;
 import wolforce.blocks.tile.TilePickerHolder;
 import wolforce.blocks.tile.TileSeparator;
 import wolforce.blocks.tile.TileStatue;
 import wolforce.blocks.tile.TileTray;
 import wolforce.client.CustomBoxStateMapper;
 import wolforce.client.CustomCoreStateMapper;
-import wolforce.client.TesrBranch;
-import wolforce.client.TesrCharger;
-import wolforce.client.TesrGraftingTray;
-import wolforce.client.TesrGritVase;
-import wolforce.client.TesrInertSeed;
-import wolforce.client.TesrPickerHolder;
-import wolforce.client.TesrSeparator;
-import wolforce.client.TesrStatue;
-import wolforce.client.TesrTray;
 import wolforce.client.models.power.RenderPower;
+import wolforce.client.tesr.TesrBranch;
+import wolforce.client.tesr.TesrCharger;
+import wolforce.client.tesr.TesrGraftingTray;
+import wolforce.client.tesr.TesrGritVase;
+import wolforce.client.tesr.TesrInertSeed;
+import wolforce.client.tesr.TesrMutator;
+import wolforce.client.tesr.TesrPickerHolder;
+import wolforce.client.tesr.TesrSeparator;
+import wolforce.client.tesr.TesrStatue;
+import wolforce.client.tesr.TesrTray;
 import wolforce.entities.EntityPower;
 
 @Mod.EventBusSubscriber(modid = Hwell.MODID, value = Side.CLIENT)
@@ -65,7 +67,8 @@ public class RegisterModels {
 
 		for (Item item : Main.items) {
 			// if (item != Main.power_crystal)
-			ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+			ModelLoader.setCustomModelResourceLocation(item, 0,
+					new ModelResourceLocation(item.getRegistryName(), "inventory"));
 		}
 
 		// ModelBakery.registerItemVariants(Main.power_crystal, new
@@ -108,7 +111,8 @@ public class RegisterModels {
 		}
 
 		for (BlockBox box : Main.boxes) {
-			CustomBoxStateMapper mapper = new CustomBoxStateMapper(box.block.getRegistryName(), box.hasAxis, box.isCore(box.block));
+			CustomBoxStateMapper mapper = new CustomBoxStateMapper(box.block.getRegistryName(), box.hasAxis,
+					box.isCore(box.block));
 			customRegisterRenders(box, box.block.getRegistryName(), mapper);
 		}
 
@@ -117,7 +121,8 @@ public class RegisterModels {
 			CustomCoreStateMapper mapper = new CustomCoreStateMapper(new ResourceLocation("hwell", "core_custom"));
 			customRegisterRenders(core, new ResourceLocation("hwell", "core_custom"), mapper);
 
-			CustomCoreStateMapper mapperGraft = new CustomCoreStateMapper(new ResourceLocation("hwell", "graft_custom"));
+			CustomCoreStateMapper mapperGraft = new CustomCoreStateMapper(
+					new ResourceLocation("hwell", "graft_custom"));
 			Block graft = Main.custom_grafts.get(core);
 			customRegisterRenders(graft, new ResourceLocation("hwell", "graft_custom"), mapperGraft);
 		}
@@ -135,6 +140,7 @@ public class RegisterModels {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileInertSeed.class, new TesrInertSeed());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileGraftingTray.class, new TesrGraftingTray());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileBranch.class, new TesrBranch());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileMutator.class, new TesrMutator());
 
 	}
 
@@ -143,7 +149,8 @@ public class RegisterModels {
 	private static void customRegisterRenders(Block block, ResourceLocation resourceLocation, IStateMapper mapper) {
 		Item itemBlock = Item.getItemFromBlock(block);
 		// register ITEM render
-		ModelLoader.setCustomModelResourceLocation(itemBlock, 0, new ModelResourceLocation(resourceLocation, "inventory"));
+		ModelLoader.setCustomModelResourceLocation(itemBlock, 0,
+				new ModelResourceLocation(resourceLocation, "inventory"));
 		// register BLOCK render
 		ModelLoader.setCustomStateMapper(block, mapper);
 	}

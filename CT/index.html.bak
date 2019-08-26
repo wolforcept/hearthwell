@@ -1,0 +1,130 @@
+
+<!-- saved from url=(0037)http://wolforce.no-ip.org/hearthwell/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-gb">
+
+<link href="../stylesheet.css" rel="stylesheet">
+<link rel="icon" href="../docs/hearthwell.png">
+<title>Hearth Well</title></head>
+
+<body>
+
+<object style="border:0;padding=0;" width="1000" height="50px" type="text/html" data="../navbar.html"></object>
+<object class="patron" type="text/html" data="patron.html"></object>
+
+<hr>
+
+<h1>CraftTweaker Documentation</h1>
+<p>
+Here are the various methods available to add in zen scripts.<br>
+All the methods are documented like seen below when doing <span class="bold">/ct dumpzs</span>.
+</p>
+
+<br>
+
+<p><span class="bold">mods.hwell.addCustomCore(String coreRegistryName, String coreLocalizedName, int graftCost, int base_color, int border_color);</span>
+<br>&nbsp&nbsp&nbsp&nbsp
+this method may only be called on files with <span class="bold">#loader hwell_core_recipes</span>
+<br>&nbsp&nbsp&nbsp&nbsp
+Add a recipe for the Charger.</p>
+
+<p><span class="bold">mods.hwell.addCustomCoreRecipe(String coreRegistryName, String shardRegName, IItemStack[] outputs, IItemStack[] inputs)</span><br>&nbsp&nbsp&nbsp&nbsp
+Add a recipe for a specific core. Will override existing recipes.</p>
+
+<br>
+
+<p><span class="bold">mods.hwell.addChargerRecipe(IItemStack input, int power)</span><br>&nbsp&nbsp&nbsp&nbsp
+Add a recipe for the Charger.</p>
+
+<p><span class="bold">mods.hwell.addChargerRecipe(IItemStack input, IItemStack output, int power)</span><br>&nbsp&nbsp&nbsp&nbsp
+Add a recipe for the Charger that outputs a byproduct from the top.</p>
+
+<p><span class="bold">mods.hwell.addCrushingBlockRecipe(IItemStack input, IItemStack[] outputs, double[] probabilities)</span><br>&nbsp&nbsp&nbsp&nbsp
+Add a recipe for the Crushing Block. The number of probabilities must be the same as the number of outputs. If the sum of the probabilities isn't 1, there is a chance for an output of nothing.</p>
+
+<p><span class="bold">mods.hwell.addFreezerRecipe(IFluidStack input, IItemStack[] outputs)</span><br>&nbsp&nbsp&nbsp&nbsp
+Add a recipe for the Freezer. If there is more than one output, a random output will be selected.</p>
+
+<p><span class="bold">mods.hwell.addGrinderRecipe(IItemStack input, IItemStack output, String[] grinding_wheel_names)</span><br>&nbsp&nbsp&nbsp&nbsp
+Add a recipe for the Grinder. The grinding wheel names are: "iron", "diamond" and "crystal".</p>
+
+<p><span class="bold">mods.hwell.addPullerRecipe(IItemStack output, double prob, IItemStack filter)</span><br>&nbsp&nbsp&nbsp&nbsp
+Add a recipe for the Puller. The probability will be dependent on the sum of all probabilities.
+A filter must be provided.</p>
+
+<!--p><span class="bold">mods.hwell.addRepairingPasteRecipe(IItemStack input)</span><br>&nbsp&nbsp&nbsp&nbsp
+Add a new item that has durability that the Repairing Paste can repair.</p-->
+
+<p><span class="bold">mods.hwell.addSeedOfLifeRecipe(IItemStack input)</span><br>&nbsp&nbsp&nbsp&nbsp
+Add a new block for the Seed of Life to be right clicked on.</p>
+
+<p><span class="bold">mods.hwell.addTubeRecipe(IItemStack input, FluidStack output)</span><br>&nbsp&nbsp&nbsp&nbsp
+Add a recipe for the Tube with a liquid output.</p>
+
+<p><span class="bold">mods.hwell.addTubeRecipe(IItemStack input, IItemStack output)</span><br>&nbsp&nbsp&nbsp&nbsp
+Add a recipe for the Tube with a solid block output.</p>
+
+<p><span class="bold">mods.hwell.addSeparatorSeparator(IItemStack input, IItemStack leftOutput, IItemStack rightOutput)</span><br>&nbsp&nbsp&nbsp&nbsp
+Add a recipe for the Separator that outputs only two items.</p>
+
+<p><span class="bold">mods.hwell.addSeparatorRecipe(IItemStack input, IItemStack leftOutput, IItemStack rightOutput, IItemStack backOutput)</span><br>&nbsp&nbsp&nbsp&nbsp
+Add a recipe for the Separator that outputs all three items.</p>
+
+<p><span class="bold">mods.hwell.addPowerCrystalNucleous(IItemStack item, String name, int power, int range, float purity)</span><br>&nbsp&nbsp&nbsp&nbsp
+Add a new item to be used as a Nucleous in the Power Crystal Recipe.</p>
+
+<p><span class="bold">mods.hwell.addPowerCrystalRelay(IItemStack item, String name, int power, int range, float purity)</span><br>&nbsp&nbsp&nbsp&nbsp
+Add a new item to be used as a Relay in the Power Crystal Recipe.</p>
+
+<p><span class="bold">mods.hwell.addPowerCrystalScreen(IItemStack item, String name, int power, int range, float purity)</span><br>&nbsp&nbsp&nbsp&nbsp
+Add a new item to be used as a Screen in the Power Crystal Recipe.</p>
+
+<p><span class="bold">mods.hwell.addNetherPortalRecipe(IItemStack input, IItemStack output)</span><br>&nbsp&nbsp&nbsp&nbsp
+Add a new transformation recipe through the nether portal. It is not possible to change the number of items this way. 1 to 1 transformations only.</p>
+
+
+<br><hr><br>
+
+
+<p><span class="bold">mods.hwell.removeChargerRecipe(IItemStack input)</span><br>&nbsp&nbsp&nbsp&nbsp
+Remove a recipe for the Charger.</p>
+
+<p><span class="bold">mods.hwell.removeCrushingBlockRecipe(IItemStack input)</span><br>&nbsp&nbsp&nbsp&nbsp
+Remove a recipe for the Crushing Block.</p>
+
+<p><span class="bold">mods.hwell.removeFreezerRecipe(IFluidStack input)</span><br>&nbsp&nbsp&nbsp&nbsp
+Remove a recipe for the Freezer.</p>
+
+<p><span class="bold">mods.hwell.removeGrinderRecipe(IItemStack input)</span><br>&nbsp&nbsp&nbsp&nbsp
+Remove a recipe for the Grinder.</p>
+
+<p><span class="bold">mods.hwell.removePullerRecipe(IItemStack output)</span><br>&nbsp&nbsp&nbsp&nbsp
+Remove a recipe for the Puller.</p>
+
+<p><span class="bold">mods.hwell.removeRepairingPasteRecipe(IItemStack input)</span><br>&nbsp&nbsp&nbsp&nbsp
+Remove a new item that has durability that the Repairing Paste can repair.</p>
+
+<p><span class="bold">mods.hwell.removeSeedOfLifeRecipe(IItemStack input)</span><br>&nbsp&nbsp&nbsp&nbsp
+Remove a new block for the Seed of Life to be right clicked on.</p>
+
+<p><span class="bold">mods.hwell.removeTubeRecipe(IItemStack input)</span><br>&nbsp&nbsp&nbsp&nbsp
+Remove a recipe for the Tube with a liquid output.</p>
+
+<p><span class="bold">mods.hwell.removeTubeRecipe(IItemStack input)</span><br>&nbsp&nbsp&nbsp&nbsp
+Remove a recipe for the Tube with a solid block output.</p>
+
+<p><span class="bold">mods.hwell.removeSeparatorSeparator(IItemStack input)</span><br>&nbsp&nbsp&nbsp&nbsp
+Remove a recipe for the Separator.</p>
+
+<p><span class="bold">mods.hwell.removePowerCrystalNucleous(IItemStack item)</span><br>&nbsp&nbsp&nbsp&nbsp
+Remove a Nucleous Item.</p>
+
+<p><span class="bold">mods.hwell.removePowerCrystalRelay(IItemStack item)</span><br>&nbsp&nbsp&nbsp&nbsp
+Remove a Relay Item.</p>
+
+<p><span class="bold">mods.hwell.removePowerCrystalScreen(IItemStack item)</span><br>&nbsp&nbsp&nbsp&nbsp
+Remove a Screen Item.</p>
+
+<p><span class="bold">mods.hwell.removeNetherPortalRecipe(IItemStack input)</span><br>&nbsp&nbsp&nbsp&nbsp
+Remove a nether portal transformation recipe.</p>
+</body></html>

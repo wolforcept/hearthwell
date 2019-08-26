@@ -73,26 +73,26 @@ public class TilePickerHolder extends TileEntity {
 		throw new RuntimeException("not a valid dustpicker: " + picker);
 	}
 
-	private ItemStack intToStack(int index) {
-		Item shard = Main.shards[index];
-		if (shard == Main.shard_c)
-			return new ItemStack(Main.myst_dust_picker_c);
-		if (shard == Main.shard_au)
-			return new ItemStack(Main.myst_dust_picker_au);
-		if (shard == Main.shard_ca)
-			return new ItemStack(Main.myst_dust_picker_ca);
-		if (shard == Main.shard_h)
-			return new ItemStack(Main.myst_dust_picker_h);
-		if (shard == Main.shard_fe)
-			return new ItemStack(Main.myst_dust_picker_fe);
-		if (shard == Main.shard_n)
-			return new ItemStack(Main.myst_dust_picker_n);
-		if (shard == Main.shard_o)
-			return new ItemStack(Main.myst_dust_picker_o);
-		if (shard == Main.shard_p)
-			return new ItemStack(Main.myst_dust_picker_p);
-		throw new RuntimeException("invalid picker index: " + index);
-	}
+	// private ItemStack intToStack(int index) {
+	// Item shard = Main.shards[index];
+	// if (shard == Main.shard_c)
+	// return new ItemStack(Main.myst_dust_picker_c);
+	// if (shard == Main.shard_au)
+	// return new ItemStack(Main.myst_dust_picker_au);
+	// if (shard == Main.shard_ca)
+	// return new ItemStack(Main.myst_dust_picker_ca);
+	// if (shard == Main.shard_h)
+	// return new ItemStack(Main.myst_dust_picker_h);
+	// if (shard == Main.shard_fe)
+	// return new ItemStack(Main.myst_dust_picker_fe);
+	// if (shard == Main.shard_n)
+	// return new ItemStack(Main.myst_dust_picker_n);
+	// if (shard == Main.shard_o)
+	// return new ItemStack(Main.myst_dust_picker_o);
+	// if (shard == Main.shard_p)
+	// return new ItemStack(Main.myst_dust_picker_p);
+	// throw new RuntimeException("invalid picker index: " + index);
+	// }
 
 	//
 

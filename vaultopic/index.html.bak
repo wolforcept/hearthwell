@@ -1,0 +1,52 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-gb">
+<link href="../stylesheet.css" rel="stylesheet">
+<link rel="icon" href="../docs/hearthwell.png">
+<title>Vaultopic</title></head>
+<body>
+<object style="border:0;padding=0;" width="1000" height="50px" type="text/html" data="../navbar.html"></object>
+<hr>
+
+<h1 class="title">Vaultopic</h1>
+<p>
+	Download the mod <a href="https://minecraft.curseforge.com/projects/vaultopic-early-inventory-management">here</a>.
+</p>
+<p>
+	Are you looking for the best Early Game Inventory Management Tool? Look no further, for Vaultopic has arrived!
+<br>
+	The Vaultopic Mod includes a couple of easily crafted items that help you manage your inventories.
+</p>
+
+<p>
+	The V.I.E.W. (Vaultopic Inventory Explorer Workbot) lets you search for items inside nearby inventories and will display them as you move around, even through walls.
+</p>
+<img src="anim1.gif" width="1120px">
+
+<br>
+<br>
+<br>
+<br>
+<hr>
+<br>
+<br>
+<br>
+
+<p>
+	The V.I.C.E. (Vaultopic Item Crafting Entity) will let you pull items from nearby inventories into a portable crafting table, with JEI integration.
+</p>
+<iframe width="1120" height="630" src="https://www.youtube.com/embed/IJDjj11Fsbc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<br>
+<br>
+<br>
+
+That said, the performance cost is exclusively in the moment you click the JEI plus button.
+I don't see it impacting the server a whole lot, but if any performance issues arrive, they will be looked at :)
+The mod was just created and released, not a whole lot of testing yet, hopefully someone will help me with that?
+The item itself does not hold any items, if you have space on your inventory when you close it the items that are still in the crafting space will go there, otherwise they'll be droped
+It has shift click functionality and it will also use any items still in the crafting space if it needs them.
+It will also use the items from the inventory first, and only then search nearby inventories
+
+Both the range is configurable, and the bigger the range the higher performance cost.
+
+</body>
+</html>

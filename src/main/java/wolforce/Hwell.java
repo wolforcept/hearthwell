@@ -22,13 +22,15 @@ public class Hwell {
 	@Instance(Hwell.MODID)
 	public static Hwell instance;
 
+	public static long nextAvailableNoEnergySound = 0;
+
 	static {
 		FluidRegistry.enableUniversalBucket();
 	}
 
 	public static final String MODID = "hwell";
 	public static final String NAME = "Hearth Well";
-	public static final String VERSION = "0.4.1";
+	public static final String VERSION = "0.5.1";
 	public static final Logger logger = LogManager.getLogger(NAME);
 
 	@SidedProxy(serverSide = "wolforce.ServerProxy", clientSide = "wolforce.client.ClientProxy")
@@ -52,6 +54,10 @@ public class Hwell {
 
 	public static interface IProxy {
 		void particle(World world, BlockPos pos, BlockPos pos2, Vec3d dir);
+
+		void playSoundNoEnergy(World world, BlockPos pos);
+
+		Object ee(Object payload);
 	}
 
 }

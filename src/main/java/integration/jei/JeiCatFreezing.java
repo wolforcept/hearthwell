@@ -1,66 +1,22 @@
 package integration.jei;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.LinkedList;
 
-import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.IJeiHelpers;
-import mezz.jei.api.gui.IDrawable;
-import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
-import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import wolforce.Hwell;
 import wolforce.Main;
 import wolforce.Util;
 import wolforce.recipes.RecipeFreezer;
 
-public class JeiCatFreezing implements IRecipeCategory<IRecipeWrapper> {
+public class JeiCatFreezing extends JeiCat {
 
-	public static final String UID_FREEZING = Hwell.MODID + ".freezing";
-
-	static final ResourceLocation TEX = Util.res("textures/gui/freezing.png");
-
-	static IDrawableStatic back;
-	static private IDrawable icon;
-
-	public JeiCatFreezing(IJeiHelpers helpers) {
-
-		final IGuiHelper gui = helpers.getGuiHelper();
-
-		back = gui.drawableBuilder(TEX, 0, 0, 98, 56).setTextureSize(98, 56).build();
-		icon = gui.createDrawableIngredient(new ItemStack(Main.freezer));
-	}
-
-	@Override
-	public String getUid() {
-		return UID_FREEZING;
-	}
-
-	@Override
-	public String getTitle() {
-		return "Freezer Recipes";
-	}
-
-	@Override
-	public IDrawable getIcon() {
-		return icon;
-	}
-
-	@Override
-	public String getModName() {
-		return Hwell.MODID;
-	}
-
-	@Override
-	public IDrawable getBackground() {
-		return back;
+	public JeiCatFreezing() {
+		super("Freezer Recipes", "freezing", 98, 56, Main.freezer);
 	}
 
 	@Override
@@ -73,7 +29,7 @@ public class JeiCatFreezing implements IRecipeCategory<IRecipeWrapper> {
 		recipeLayout.getFluidStacks().set(ingredients);
 	}
 
-	public static Collection<?> getAllRecipes() {
+	public LinkedList<IRecipeWrapper> getAllRecipes() {
 		LinkedList<IRecipeWrapper> recipeWrappers = new LinkedList<>();
 		for (final RecipeFreezer recipe : RecipeFreezer.recipes) {
 			IRecipeWrapper recipeWrapper = new IRecipeWrapper() {
@@ -82,7 +38,7 @@ public class JeiCatFreezing implements IRecipeCategory<IRecipeWrapper> {
 				public void getIngredients(IIngredients ingredients) {
 					ingredients.setInputs(VanillaTypes.FLUID, Util.listOfOne(recipe.fluidIn));
 					ingredients.setInputs(VanillaTypes.ITEM, Util.listOfOne(new ItemStack(Main.freezer)));
-					ingredients.setOutputs(VanillaTypes.ITEM, Arrays.asList(recipe.blocksOut));
+					ingredients.setOutputLists(VanillaTypes.ITEM, Util.listOfOne(Arrays.asList(recipe.blocksOut)));
 				}
 			};
 			recipeWrappers.add(recipeWrapper);

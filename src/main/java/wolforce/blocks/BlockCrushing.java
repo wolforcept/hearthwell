@@ -1,6 +1,5 @@
 package wolforce.blocks;
 
-import java.util.HashMap;
 import java.util.List;
 
 import net.minecraft.block.BlockFalling;
@@ -26,25 +25,32 @@ public class BlockCrushing extends BlockFalling {
 	}
 
 	@Override
-	public void onEndFalling(World worldIn, BlockPos pos, IBlockState p_176502_3_, IBlockState p_176502_4_) {
+	public void onEndFalling(World world, BlockPos pos, IBlockState p_176502_3_, IBlockState p_176502_4_) {
 
-		List<EntityItem> entities = worldIn.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos));
-		HashMap<ItemStack, Integer> results = new HashMap();
+		List<EntityItem> entities = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos));
+		// HashMap<ItemStack, Integer> results = new HashMap();
 		for (EntityItem entityItem : entities) {
-			Iterable<ItemStack> result = RecipeCrushing.getResult(entityItem.getItem());
-			if (result != null) {
-				entityItem.setDead();
-				BlockPos posAir = new BlockPos(pos);
-				for (EnumFacing face : EnumFacing.HORIZONTALS) {
-					if (worldIn.isAirBlock(pos.offset(face)))
-						posAir = pos.offset(face);
+			boolean willdead = false;
+			BlockPos posAir = getNearAirPos(world, pos);
+			for (int i = 0; i < entityItem.getItem().getCount(); i++) {
+				ItemStack result = RecipeCrushing.getSingleResult(entityItem.getItem());
+				if (result != null) {
+					Util.spawnItem(world, posAir, result.copy());
+					willdead = true;
 				}
-				
-				for (ItemStack itemStack : result) {
-					worldIn.spawnEntity(new EntityItem(worldIn, posAir.getX(), posAir.getY(), posAir.getZ(), itemStack));
-				}
+				// worldIn.spawnEntity(new EntityItem(worldIn, posAir.getX(), posAir.getY(),
+				// posAir.getZ(), itemStack));
 			}
+			if (willdead)
+				entityItem.setDead();
 		}
-
 	}
+
+	private BlockPos getNearAirPos(World world, BlockPos pos) {
+		for (EnumFacing face : EnumFacing.HORIZONTALS)
+			if (world.isAirBlock(pos.offset(face)))
+				return pos.offset(face);
+		return new BlockPos(pos);
+	}
+
 }

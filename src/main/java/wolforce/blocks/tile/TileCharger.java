@@ -60,7 +60,15 @@ public class TileCharger extends TileEntity implements ITickable {
 	//
 
 	private int cooldown = 0;
-	public ItemStackHandler inventory = new ItemStackHandler(1);
+	public ItemStackHandler inventory = new ItemStackHandler(1) {
+		@Override
+		public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+			if (stack.getItem() == Main.power_crystal)
+				return super.insertItem(slot, stack, simulate);
+			else
+				return stack.copy();
+		}
+	};
 
 	@Override
 	public void update() {
@@ -179,9 +187,11 @@ public class TileCharger extends TileEntity implements ITickable {
 		// if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY &&
 		// inventory.getStackInSlot(0).equals(ItemStack.EMPTY))
 		// return false;
-		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
+		return (facing == EnumFacing.UP && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+				|| super.hasCapability(capability, facing);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Nullable
 	@Override
 	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {

@@ -34,7 +34,7 @@ public class RecipeNetherPortal {
 	}
 
 	public final ItemStack input;
-	private final ItemStack output;
+	public final ItemStack output;
 
 	public RecipeNetherPortal(ItemStack input, ItemStack output) {
 		this.input = input;

@@ -1,0 +1,43 @@
+
+<!-- saved from url=(0037)http://wolforce.no-ip.org/hearthwell/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-gb">
+
+<link href="../stylesheet.css" rel="stylesheet">
+<link rel="icon" href="../docs/hearthwell.png">
+<title>Hearth Well</title></head>
+
+<body>
+
+<object style="border:0;padding=0;" width="1000" height="50px" type="text/html" data="../navbar.html"></object>
+<object class="patron" type="text/html" data="patron.html"></object>
+<hr>
+
+<table>
+	<tr>
+		<td>
+			<img src="screenshot.png">
+		</td>
+		
+		<td style="padding-left:32px">
+			<h1>aTV - animated Texture Viewer for Minecraft</h1>
+			<p><a href="https://github.com/wolforcept/hearthwell/raw/master/aTV/aTV.jar" target="_blank">Download aTV</a></p>
+			<p>
+			A micro java app to view Minecraft item and block animations when editing the image.<br>
+			Will automatically when you save. Does not read mcmeta files.<br>
+			To load a new image press load. Manually reloading is also possible by pressing the update button<br>
+			Double click the image to toggle between showing GUI and not showing GUI<br>
+			Right click the image to choose the desired image size;
+			</p>
+		</td>
+	</tr>
+</table>
+
+<hr>
+
+<h2>Demonstration</h2>
+<div class="bordered">
+	<img src="example.gif">
+</div>
+
+</body></html>

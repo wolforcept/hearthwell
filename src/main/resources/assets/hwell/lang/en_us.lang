@@ -100,6 +100,9 @@ item.hwell.loot_zombie.name=Zombie Loot Kit
 item.hwell.loot_guardian.name=Guardian Loot Kit
 
 item.hwell.mutation_paste.name=Mutation Paste
+
+item.hwell.empty.name=Nothing
+
 tile.hwell.mutation_paste_block.name=Mutation Paste Block
 
 tile.hwell.producer.name=Loot Kit Producer
@@ -231,6 +234,7 @@ tile.hwell.light_collector.name=Light Collector
 tile.hwell.tray.name=Tray
 tile.hwell.former.name=Former
 tile.hwell.grafting_tray.name=Grafting Tray
+tile.hwell.mutator.name=Mutator
 
 tile.hwell.inert_seed.name=Inert seed
 
@@ -245,6 +249,8 @@ tile.hwell.graft_anima.name=Anima Graft
 tile.hwell.graft_heat.name=Warm Graft
 tile.hwell.graft_green.name=Verdant Graft
 tile.hwell.graft_sentient.name=Sentient Graft
+
+tile.hwell.branch.name=Branch
 
 tile.hwell.mystic_iron_block.name=Mystic Iron Block
 tile.hwell.soulsteel_block.name=Soulsteel Block

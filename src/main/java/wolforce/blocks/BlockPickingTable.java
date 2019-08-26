@@ -38,10 +38,13 @@ public class BlockPickingTable extends Block implements HasTE {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand enumhand,
-			EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+			EnumHand enumhand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 
 		ItemStack hand = playerIn.getHeldItem(enumhand);
+
+		if (!Util.isValid(hand))
+			return false;
 
 		if (state.getValue(FILLING) == 0) {
 			if (hand.getItem() == Main.myst_dust) {
@@ -54,7 +57,7 @@ public class BlockPickingTable extends Block implements HasTE {
 			if (state.getValue(FILLING) == 0) {
 				return false;
 			}
-			
+
 			if (!world.isRemote && Math.random() < HwellConfig.other.pickingTableChance)
 				Util.spawnItem(world, pos, new ItemStack(((ItemDustPicker) hand.getItem()).shard, 1));
 			IBlockState newstate = reduce(state);

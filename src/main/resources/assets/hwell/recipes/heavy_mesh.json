@@ -1,4 +1,4 @@
-{ 
+{
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     [{
@@ -43,7 +43,9 @@
 	  "data": 1
 	},{
 	  "item": "hwell:myst_log"
-	}]
+	},
+	{ "type": "forge:ore_dict", "ore": "logWood" }
+	]
   ],
   "result": {
     "item": "hwell:heavy_mesh",

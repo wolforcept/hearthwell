@@ -1,0 +1,53 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    [{
+	  "item": "minecraft:stone",
+	  "data": 0
+	},{
+	  "item": "minecraft:stone",
+	  "data": 1
+	},{
+	  "item": "minecraft:stone",
+	  "data": 3
+	},{
+	  "item": "minecraft:stone",
+	  "data": 5
+	}],
+	
+	[{
+	  "item": "minecraft:coal",
+	  "data": 0
+	},{
+	  "item": "minecraft:coal",
+	  "data": 1
+	}]
+	
+	,[{
+	  "item": "minecraft:log",
+	  "data": 0
+	},{
+	  "item": "minecraft:log",
+	  "data": 1
+	},{
+	  "item": "minecraft:log",
+	  "data": 2
+	},{
+	  "item": "minecraft:log",
+	  "data": 3
+	},{
+	  "item": "minecraft:log2",
+	  "data": 0
+	},{
+	  "item": "minecraft:log2",
+	  "data": 1
+	},{
+	  "item": "hwell:myst_log"
+	}]
+  ],
+  "result": {
+    "item": "hwell:heavy_mesh",
+	"count": 2,
+    "data": 0
+  }
+}

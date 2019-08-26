@@ -3,12 +3,14 @@ package wolforce.registry;
 import java.util.List;
 import java.util.Map.Entry;
 
+import integration.jei.CT;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import wolforce.Hwell;
@@ -25,12 +27,14 @@ public class RegisterBlocks {
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
 
+		if (Loader.isModLoaded("crafttweaker"))
+			CT.registerBlocks(event);
+
 		for (Block b : Main.blocks)
 			event.getRegistry().register(b);
 
-		for (BlockBox box : Main.boxes) {
+		for (BlockBox box : Main.boxes)
 			event.getRegistry().register(box);
-		}
 
 		for (Entry<String, BlockCore> entry : Main.custom_cores.entrySet()) {
 			BlockCore core = entry.getValue();
@@ -48,15 +52,21 @@ public class RegisterBlocks {
 			if (block instanceof HasCustomItem) {
 				item = ((HasCustomItem) block).getCustomItem();
 			} else {
-				item = !(block instanceof BlockWithDescription) ? new ItemBlock(block) : //
-						new ItemBlock(block) {
-							public void addInformation(ItemStack stack, net.minecraft.world.World worldIn,
-									java.util.List<String> tooltip, net.minecraft.client.util.ITooltipFlag flagIn) {
-								for (String string : ((BlockWithDescription) block).getDescription()) {
-									tooltip.add(string);
-								}
-							};
+				if (Hwell.proxy.ee(block) != null)
+					item = new ItemBlock(block) {
+						public String getItemStackDisplayName(ItemStack stack) {
+							return (String) Hwell.proxy.ee(block);
 						};
+					};
+				else
+					item = !(block instanceof BlockWithDescription) ? new ItemBlock(block) : new ItemBlock(block) {
+						public void addInformation(ItemStack stack, net.minecraft.world.World worldIn,
+								java.util.List<String> tooltip, net.minecraft.client.util.ITooltipFlag flagIn) {
+							for (String string : ((BlockWithDescription) block).getDescription()) {
+								tooltip.add(string);
+							}
+						};
+					};
 			}
 			item.setUnlocalizedName(Util.res(block.getRegistryName().getResourcePath()).toString());
 			item.setRegistryName(Util.res(block.getRegistryName().getResourcePath()));

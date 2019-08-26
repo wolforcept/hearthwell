@@ -20,19 +20,17 @@ public class HwellConfig {
 
 	public static class Meta {
 
-		@Config.RequiresMcRestart
-		@Comment({ "Are the recipes config able? (default: false)" })
-		public boolean customRecipesEnabled = false;
+		// @Config.RequiresMcRestart
+		// @Comment({ "Are the recipes config able? (default: false)" })
+		// public boolean customRecipesEnabled = false;
+		// @Config.RequiresMcRestart
+		// @Comment({ "Where the base recipes file is located (default:
+		// config/hwell_recipes.json)" })
+		// public String recipeFileLocation = "config/hwell_recipes.json";
 
-		@Config.RequiresMcRestart
-		@Comment({ "Where the base recipes file is located (default: config/hwell_recipes.json)" })
-		public String recipeFileLocation = "config/hwell_recipes.json";
-		
 		@Config.RequiresMcRestart
 		@Comment({ "Particles Id for Hearth Well start at this number (default: 291)" })
 		public int particleIdStart = 291;
-		
-		
 
 		// @Comment({ "If this is true, when failing to read the recipes file,
 		// the file will be (default: config/hwell_recipes.json)" })
@@ -46,7 +44,7 @@ public class HwellConfig {
 
 		@Comment({ "Allow Entities to travel to the nether (Players, mobs and animals, items, etc) (default: false)" })
 		public boolean allowEntitiesToTravelToTheNether = false;
-		
+
 		@Comment({ "Allow player to perform the Book Ritual (default: true)" })
 		public boolean book_ritual_enabled = true;
 	}
@@ -74,7 +72,8 @@ public class HwellConfig {
 		@Comment({ "Nourisher Range (default: 4)" })
 		public int nourisherRange = 4;
 
-		@Comment({ "Does the Nourisher only work on normal crops or on all Growables (sapplings and other)? (default: true)" })
+		@Comment({
+				"Does the Nourisher only work on normal crops or on all Growables (sapplings and other)? (default: true)" })
 		public boolean nourisherOnlyGrowCrops = true;
 
 		// CHARGER
@@ -87,6 +86,16 @@ public class HwellConfig {
 
 		@Comment({ "Setter Power Consumption (default: 15)" })
 		public int setterConsumption = 15;
+
+		// MUTATOR
+		@Comment({ "Mutator Power Consumption (default: 4)" })
+		public int mutatorPowerConsumption = 4;
+
+		@Comment({ "Mutator Paste Value. (default: 1000)" })
+		public int mutatorPasteValue = 1000;
+
+		@Comment({ "Mutator Paste Consumption per item swap. MUST BE A DIVISOR OF THE PASTE VALUE (default: 200)" })
+		public int mutatorPasteConsumption = 200;
 
 		// PULLER
 		@Comment({ "Puller Power Consumption per Operation (default: 100)" })
@@ -168,7 +177,8 @@ public class HwellConfig {
 		public double pickingTableChance = .333;
 
 		// PICKING TABLE
-		@Comment({ "If heat blocks explode with flint and steel. Otherwise they will just transform peacefully. (default: true)" })
+		@Comment({
+				"If heat blocks explode with flint and steel. Otherwise they will just transform peacefully. (default: true)" })
 		public boolean heat_blocks_explode = true;
 	}
 

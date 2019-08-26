@@ -24,7 +24,6 @@ public class RecipeCharger {
 			RecipeCharger rec = readRecipe(e.getAsJsonObject());
 			if (rec != null) {
 				recipes.add(rec);
-				System.out.println(rec);
 			}
 		}
 	}

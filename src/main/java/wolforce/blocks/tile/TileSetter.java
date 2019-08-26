@@ -43,6 +43,7 @@ public class TileSetter extends TileEntity implements ITickable {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	private void setOneEntityItemInPos(BlockPos setterPos, BlockPos pos, HashSet<Item> filter, boolean isBlackList) {
 		List<EntityItem> entities = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos));
 		for (EntityItem entityItem : entities) {

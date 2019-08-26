@@ -63,7 +63,8 @@ public class TilePrecisionGrinder extends TileEntity implements ITickable {
 		EnumFacing facing = block.getValue(BlockPrecisionGrinder.FACING);
 
 		List<EntityItem> entities = world.getEntitiesWithinAABB(EntityItem.class, //
-				new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1.5, pos.getZ() + 1));
+				new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1.5,
+						pos.getZ() + 1));
 		if (entities.size() > 0) {
 			HashMap<String, BlockWithMeta> table = new HashMap<>();
 			table.put("PB", new BlockWithMeta(Main.protection_block));
@@ -74,28 +75,30 @@ public class TilePrecisionGrinder extends TileEntity implements ITickable {
 			if (Util.isMultiblockBuilt(world, pos, facing, multiblock, table)) {
 				ItemGrindingWheel gwheel = ((BlockPrecisionGrinder) block.getBlock()).grindingWheel;
 				EntityItem entityItem = entities.get(0);
-				ItemStack result = RecipeGrinding.getResult(gwheel, entityItem.getItem());
-				if (Util.isValid(result)) {
-					// ENERGY CONSUMPTION
-					if (!BlockEnergyConsumer.tryConsume(world, pos, grinder.getEnergyConsumption())) {
-						return;
-					}
-					output(result, facing);
-					entityItem.getItem().shrink(1);
+				ItemStack[] outputs = RecipeGrinding.getResult(gwheel, entityItem.getItem());
+
+				if (outputs == null || !BlockEnergyConsumer.tryConsume(world, pos, grinder.getEnergyConsumption())) {
 					cooldown = MAX_COOLDOWN;
-					double prob = Math.pow(entityItem.getItem().getCount(), 4) / 33333300.0;
-					if (entityItem.getItem().getCount() > 20 && Math.random() < prob)
-						popGrindingWheel(entityItem, gwheel, facing);
+					return;
 				}
+
+				spawnOutputs(outputs, facing);
+				entityItem.getItem().shrink(1);
+				cooldown = MAX_COOLDOWN;
+				double prob = Math.pow(entityItem.getItem().getCount(), 4) / 33333300.0;
+				if (entityItem.getItem().getCount() > 20 && Math.random() < prob)
+					popGrindingWheel(entityItem, gwheel, facing);
 			}
 		}
 	}
 
-	private void output(ItemStack result, EnumFacing facing) {
+	private void spawnOutputs(ItemStack[] outputs, EnumFacing facing) {
 		BlockPos newpos = pos.offset(facing);
-		EntityItem newentity = new EntityItem(world, newpos.getX() + .5, newpos.getY(), newpos.getZ() + .5,
-				new ItemStack(result.getItem(), result.getCount(), result.getMetadata()));
-		Util.spawnItem(world, newpos, result, facing);
+		// EntityItem newentity = new EntityItem(world, newpos.getX() + .5,
+		// newpos.getY(), newpos.getZ() + .5,
+		// new ItemStack(result.getItem(), result.getCount(), result.getMetadata()));
+		for (ItemStack stack : outputs)
+			Util.spawnItem(world, newpos, stack.copy(), facing);
 	}
 
 	private void popGrindingWheel(EntityItem entityItem, ItemGrindingWheel gwheel, EnumFacing facing) {

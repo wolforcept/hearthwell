@@ -32,11 +32,19 @@ public class BlockGaseousFrame extends Block {
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand,
-			EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote)
 			transform(worldIn, pos, !state.getValue(PASSABLE));
 		return true;
+	}
+
+	@Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		if (!worldIn.isRemote) {
+			if (worldIn.isBlockIndirectlyGettingPowered(fromPos) > 0)
+				transform(worldIn, pos, !state.getValue(PASSABLE));
+		}
 	}
 
 	private void transform(World world, BlockPos pos, boolean newValue) {
@@ -49,7 +57,8 @@ public class BlockGaseousFrame extends Block {
 	}
 
 	private boolean isPassable(IBlockState state) {
-		return state.getBlock() instanceof BlockGaseousFrame && state.getPropertyKeys().contains(PASSABLE) && state.getValue(PASSABLE);
+		return state.getBlock() instanceof BlockGaseousFrame && state.getPropertyKeys().contains(PASSABLE)
+				&& state.getValue(PASSABLE);
 	}
 
 	//
@@ -112,8 +121,10 @@ public class BlockGaseousFrame extends Block {
 		return false;
 	}
 
+	@SuppressWarnings("deprecation")
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
+			EnumFacing side) {
 		IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
 		Block block = iblockstate.getBlock();
 		return block == this ? false : super.shouldSideBeRendered(blockState, blockAccess, pos, side);

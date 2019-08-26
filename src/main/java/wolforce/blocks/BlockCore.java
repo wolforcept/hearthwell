@@ -19,6 +19,7 @@ import wolforce.Main;
 import wolforce.Util;
 import wolforce.base.HasTE;
 import wolforce.blocks.tile.TileCore;
+import wolforce.items.ItemShard;
 import wolforce.recipes.RecipeCoring;
 
 public class BlockCore extends Block implements HasTE {
@@ -105,15 +106,15 @@ public class BlockCore extends Block implements HasTE {
 		return null;
 	}
 
-	public static PropertyEnum SHARD = PropertyEnum.create("shard", CoreType.class);
+	public static PropertyEnum<CoreType> SHARD = PropertyEnum.create("shard", CoreType.class);
 	private boolean isToRegisterTileEntity;
 	public int color1, color2;
 
 	public BlockCore(String name, boolean isToRegister) {
-		this(name, isToRegister, null, null);
+		this(name, isToRegister, 0, 0);
 	}
 
-	public BlockCore(String name, boolean isToRegisterTileEntity, String colorString1, String colorString2) {
+	public BlockCore(String name, boolean isToRegisterTileEntity, int color1, int color2) {
 		super(Material.CLAY);
 		this.isToRegisterTileEntity = isToRegisterTileEntity;
 		Util.setReg(this, name);
@@ -121,22 +122,23 @@ public class BlockCore extends Block implements HasTE {
 		setHarvestLevel("pickaxe", -1);
 		setDefaultState(blockState.getBaseState().withProperty(SHARD, CoreType.core_base));
 
-		if (colorString1 != null && colorString2 != null) {
-			color1 = Integer.parseInt(colorString1, 16);
-			color2 = Integer.parseInt(colorString2, 16);
-		}
+		this.color1 = color1;
+		this.color2 = color2;
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand enumhand,
-			EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+			EnumHand enumhand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 
 		if (state.getProperties().get(SHARD) != CoreType.core_base)
 			return false;
 
 		Item hand = playerIn.getHeldItem(enumhand).getItem();
 
-		if (RecipeCoring.getResult(this, hand) == null)
+		if (!(hand instanceof ItemShard))
+			return false;
+
+		if (RecipeCoring.getResult(this, (ItemShard) hand) == null)
 			return false;
 
 		for (CoreType ctype : CoreType.values()) {
@@ -161,7 +163,7 @@ public class BlockCore extends Block implements HasTE {
 			return name();
 		}
 
-		public Item getShard() {
+		public ItemShard getShard() {
 			switch (this) {
 			case core_au:
 				return Main.shard_au;

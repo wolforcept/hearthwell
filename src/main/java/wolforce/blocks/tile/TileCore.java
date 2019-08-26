@@ -1,7 +1,5 @@
 package wolforce.blocks.tile;
 
-import java.util.Arrays;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -18,7 +16,6 @@ import net.minecraft.world.WorldServer;
 import wolforce.Main;
 import wolforce.Util;
 import wolforce.blocks.BlockCore;
-import wolforce.recipes.Irio;
 import wolforce.recipes.RecipeCoring;
 
 public class TileCore extends TileEntity implements ITickable {
@@ -41,10 +38,10 @@ public class TileCore extends TileEntity implements ITickable {
 		Block coreBlock = (Block) world.getBlockState(pos).getBlock();
 		BlockCore.CoreType coreType = (BlockCore.CoreType) world.getBlockState(pos).getValue(BlockCore.SHARD);
 
-		if (coreType == BlockCore.CoreType.core_base)
+		if (!(coreBlock instanceof BlockCore) || coreType == BlockCore.CoreType.core_base)
 			return;
 
-		RecipeCoring result = RecipeCoring.getResult(coreBlock, coreType.getShard());
+		RecipeCoring result = RecipeCoring.getResult((BlockCore) coreBlock, coreType.getShard());
 
 		if (result == null)
 			return;
@@ -56,7 +53,7 @@ public class TileCore extends TileEntity implements ITickable {
 			IBlockState state = world.getBlockState(pos1);
 
 			// check if there is a block to consume at pos1
-			if (hasResult(result, state)) {
+			if (result.canConsume(state)) {
 				// at this point the core will certainly charge
 				// (charges faster with more blocks surrounding it)
 				particles(pos1);
@@ -73,7 +70,7 @@ public class TileCore extends TileEntity implements ITickable {
 				}
 				if (charge >= (int) ((MAX_CHARGE - 1) * getStabReduction(pos1))) {
 					// System.out.println(result.result.getMetadata());
-					IBlockState newBlock = new Irio(result.result).getState();
+					IBlockState newBlock = result.getRandomResult().getDefaultState();
 					changeGrafts(world, pos, BlockCore.getGraft(coreBlock), newBlock);
 					world.setBlockState(pos, newBlock, 2 | 4); // im quite sure its a block
 					return; // don't want to keep checking other touches
@@ -116,14 +113,6 @@ public class TileCore extends TileEntity implements ITickable {
 		if (under.equals(Main.stabiliser_heavy))
 			return .5f;
 		return 1;
-	}
-
-	private boolean hasResult(RecipeCoring result, IBlockState state) {
-		if (Arrays.asList(result.consumes).contains(new Irio(state.getBlock())))
-			return true;
-		if (Arrays.asList(result.consumes).contains(new Irio(state)))
-			return true;
-		return false;
 	}
 
 	private void particles(BlockPos pos) {

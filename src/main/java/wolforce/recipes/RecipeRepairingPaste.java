@@ -2,24 +2,20 @@ package wolforce.recipes;
 
 import java.util.HashSet;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.ShapedRecipes;
 
 public class RecipeRepairingPaste {
 
-	public static HashSet<Item> items;
-
-	public static void initRecipes(JsonArray recipesJson) {
-		items = new HashSet<>();
-		for (JsonElement e : recipesJson) {
-			ItemStack stack = ShapedRecipes.deserializeItem(e.getAsJsonObject(), true);
-			items.add(stack.getItem());
-		}
-	}
+	// public static HashSet<Item> items;
+	//
+	// public static void initRecipes(JsonArray recipesJson) {
+	// items = new HashSet<>();
+	// for (JsonElement e : recipesJson) {
+	// ItemStack stack = ShapedRecipes.deserializeItem(e.getAsJsonObject(), true);
+	// items.add(stack.getItem());
+	// }
+	// }
 
 	// public static void initRecipes() {
 	// for (Item item : new Item[] { //
@@ -50,7 +46,11 @@ public class RecipeRepairingPaste {
 	// }
 	// }
 
-	public static boolean isRepairable(Item item) {
-		return items.contains(item);
+	public static HashSet<Item> items = new HashSet<>();
+
+	public static boolean isRepairable(ItemStack item) {
+		if (items.contains(item.getItem()))
+			return false;
+		return item.isItemStackDamageable();
 	}
 }

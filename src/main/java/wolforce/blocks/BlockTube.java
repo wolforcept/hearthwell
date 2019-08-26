@@ -123,6 +123,7 @@ public class BlockTube extends BlockRotatedPillar {
 		return layer == BlockRenderLayer.TRANSLUCENT;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
 			EnumFacing side) {
@@ -200,4 +201,5 @@ public class BlockTube extends BlockRotatedPillar {
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, new IProperty[] { AXIS });
 	}
+
 }

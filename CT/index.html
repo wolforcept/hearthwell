@@ -11,6 +11,7 @@
 
 <object style="border:0;padding=0;" width="1000" height="50px" type="text/html" data="../navbar.html"></object>
 <object class="patron" type="text/html" data="patron.html"></object>
+
 <hr>
 
 <h1>CraftTweaker Documentation</h1>
@@ -18,6 +19,19 @@
 Here are the various methods available to add in zen scripts.<br>
 All the methods are documented like seen below when doing <span class="bold">/ct dumpzs</span>.
 </p>
+
+<br>
+
+<p><span class="bold">mods.hwell.addCustomCore(String coreRegistryName, String coreLocalizedName, int graftCost, int base_color, int border_color);</span>
+<br>&nbsp&nbsp&nbsp&nbsp
+this method may only be called on files with <span class="bold">#loader hwell_core_recipes</span>
+<br>&nbsp&nbsp&nbsp&nbsp
+Add a recipe for the Charger.</p>
+
+<p><span class="bold">mods.hwell.addCustomCoreRecipe(String coreRegistryName, String shardRegName, IItemStack[] outputs, IItemStack[] inputs)</span><br>&nbsp&nbsp&nbsp&nbsp
+Add a recipe for a specific core. Will override existing recipes, if a recipe for that shard already exists.</p>
+
+<br>
 
 <p><span class="bold">mods.hwell.addChargerRecipe(IItemStack input, int power)</span><br>&nbsp&nbsp&nbsp&nbsp
 Add a recipe for the Charger.</p>
@@ -38,8 +52,8 @@ Add a recipe for the Grinder. The grinding wheel names are: "iron", "diamond" an
 Add a recipe for the Puller. The probability will be dependent on the sum of all probabilities.
 A filter must be provided.</p>
 
-<p><span class="bold">mods.hwell.addRepairingPasteRecipe(IItemStack input)</span><br>&nbsp&nbsp&nbsp&nbsp
-Add a new item that has durability that the Repairing Paste can repair.</p>
+<!--p><span class="bold">mods.hwell.addRepairingPasteRecipe(IItemStack input)</span><br>&nbsp&nbsp&nbsp&nbsp
+Add a new item that has durability that the Repairing Paste can repair.</p-->
 
 <p><span class="bold">mods.hwell.addSeedOfLifeRecipe(IItemStack input)</span><br>&nbsp&nbsp&nbsp&nbsp
 Add a new block for the Seed of Life to be right clicked on.</p>
@@ -69,16 +83,7 @@ Add a new item to be used as a Screen in the Power Crystal Recipe.</p>
 Add a new transformation recipe through the nether portal. It is not possible to change the number of items this way. 1 to 1 transformations only.</p>
 
 
-
-
-
-
-
-
-
-
-
-
+<br><hr><br>
 
 
 <p><span class="bold">mods.hwell.removeChargerRecipe(IItemStack input)</span><br>&nbsp&nbsp&nbsp&nbsp

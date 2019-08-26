@@ -1,39 +1,45 @@
 package wolforce.recipes;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map.Entry;
-import java.util.Set;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.ShapedRecipes;
 import wolforce.Main;
 import wolforce.Util;
 import wolforce.items.ItemGrindingWheel;
 
 public class RecipeGrinding {
 
-	public static HashMap<Irio, RecipeGrinding> recipes;
+	public static LinkedList<RecipeGrinding> recipes;
 
 	public static void initRecipes(JsonArray recipesJson) {
-		recipes = new HashMap<>();
-		for (JsonElement e : recipesJson) {
-			recipes.put(Util.readJsonIrio(e.getAsJsonObject().get("input").getAsJsonObject()), readRecipe(e.getAsJsonObject()));
-		}
+		recipes = new LinkedList<>();
+		for (JsonElement e : recipesJson)
+			readRecipe(e.getAsJsonObject());
+
 	}
 
-	private static RecipeGrinding readRecipe(JsonObject o) {
-		JsonArray wheelsArray = o.get("wheels").getAsJsonArray();
+	private static void readRecipe(JsonObject recipe) {
+
+		JsonArray inputsArray = recipe.get("inputs").getAsJsonArray();
+		JsonArray wheelsArray = recipe.get("wheels").getAsJsonArray();
+		JsonArray outputsArray = recipe.get("outputs").getAsJsonArray();
+
+		ItemStack[] inputs = Util.deserializeArrayOfItemStacks(inputsArray);
 		ItemGrindingWheel[] wheels = new ItemGrindingWheel[wheelsArray.size()];
+		ItemStack[] outputs = Util.deserializeArrayOfItemStacks(outputsArray);
+
 		for (int i = 0; i < wheels.length; i++) {
 			wheels[i] = getWheelOf(wheelsArray.get(i).getAsString());
 		}
-		ItemStack output = ShapedRecipes.deserializeItem(o.get("output").getAsJsonObject(), true);
-		return new RecipeGrinding(output, wheels);
+		// ItemStack output =
+		// ShapedRecipes.deserializeItem(o.get("output").getAsJsonObject(), true);
+		recipes.add(new RecipeGrinding(inputs, outputs, wheels));
 	}
 
 	public static ItemGrindingWheel getWheelOf(String wheelString) {
@@ -46,6 +52,86 @@ public class RecipeGrinding {
 			return Main.grinding_wheel_crystal;
 		}
 		return null;
+	}
+
+	public static void removeRecipe(ItemStack input) {
+		for (Iterator<RecipeGrinding> iterator = recipes.iterator(); iterator.hasNext();) {
+			RecipeGrinding recipe = (RecipeGrinding) iterator.next();
+			for (ItemStack stack : recipe.inputs) {
+				if (Util.equalExceptAmount(stack, input))
+					iterator.remove();
+			}
+		}
+	}
+
+	// private static void put(Irio stack, RecipeGrinding recipeGrinder) {
+	// recipes.put(stack, recipeGrinder);
+	// }
+
+	//
+
+	//
+
+	//
+
+	//
+
+	//
+
+	private static RecipeGrinding getRecipe(ItemGrindingWheel gwheel, ItemStack input) {
+		for (RecipeGrinding recipe : recipes) {
+			for (ItemStack stack : recipe.inputs) {
+				if (Util.equalExceptAmount(stack, input)) {
+					return recipe;
+				}
+			}
+		}
+		return null;
+	}
+
+	public static ItemStack[] getResult(ItemGrindingWheel gwheel, ItemStack itemStack) {
+
+		RecipeGrinding recipe = getRecipe(gwheel, itemStack);
+		if (recipe == null)
+			return null;
+
+		return recipe.outputs;
+
+		// RecipeGrinding result = recipes.get(new Irio(itemStack.getItem()));
+		// if (result != null && Arrays.asList(result.levels).contains(gwheel))
+		// return result.result.copy();
+		// result = recipes.get(new Irio(itemStack.getItem(), itemStack.getMetadata()));
+		// if (result != null && Arrays.asList(result.levels).contains(gwheel))
+		// return result.result.copy();
+		// return null;
+	}
+
+	public final ItemStack[] inputs;
+	public final ItemStack[] outputs;
+	public final ItemGrindingWheel[] wheels;
+
+	public RecipeGrinding(ItemStack input, ItemStack output, ItemGrindingWheel[] wheels) {
+		this(new ItemStack[] { input }, new ItemStack[] { output }, wheels);
+	}
+
+	public RecipeGrinding(ItemStack[] inputs, ItemStack[] outputs, ItemGrindingWheel... wheels) {
+		this.wheels = wheels;
+		this.inputs = inputs;
+		this.outputs = outputs;
+	}
+
+	public LinkedList<ItemStack> getWheelList() {
+		LinkedList<ItemStack> wheels = new LinkedList<>();
+		for (ItemGrindingWheel wheel : this.wheels) {
+			wheels.add(new ItemStack(wheel));
+		}
+		return wheels;
+	}
+
+	@Override
+	public String toString() {
+		return "RecipeGrinding [inputs=" + Arrays.toString(inputs) + ", outputs=" + Arrays.toString(outputs)
+				+ ", wheels=" + Arrays.toString(wheels) + "]";
 	}
 
 	// public static void initRecipes() {
@@ -202,39 +288,4 @@ public class RecipeGrinding {
 	//
 	// }
 
-	private static void put(Irio stack, RecipeGrinding recipeGrinder) {
-		recipes.put(stack, recipeGrinder);
-	}
-
-	//
-
-	//
-
-	//
-
-	//
-
-	//
-
-	public static ItemStack getResult(ItemGrindingWheel gwheel, ItemStack itemStack) {
-		RecipeGrinding result = recipes.get(new Irio(itemStack.getItem()));
-		if (result != null && Arrays.asList(result.levels).contains(gwheel))
-			return result.result.copy();
-		result = recipes.get(new Irio(itemStack.getItem(), itemStack.getMetadata()));
-		if (result != null && Arrays.asList(result.levels).contains(gwheel))
-			return result.result.copy();
-		return null;
-	}
-
-	public final ItemStack result;
-	public final ItemGrindingWheel[] levels;
-
-	public RecipeGrinding(ItemStack result, ItemGrindingWheel... levels) {
-		this.levels = levels;
-		this.result = result;
-	}
-
-	public static Set<Entry<Irio, RecipeGrinding>> getRecipeList() {
-		return recipes.entrySet();
-	}
 }

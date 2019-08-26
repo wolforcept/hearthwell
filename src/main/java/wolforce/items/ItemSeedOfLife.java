@@ -1,6 +1,5 @@
 package wolforce.items;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -48,7 +47,7 @@ public class ItemSeedOfLife extends MyItem {
 			return new ActionResult<>(EnumActionResult.FAIL, stack);
 
 		BlockPos pos = raytraceresult.getBlockPos();
-		Block block = world.getBlockState(pos).getBlock();
+		// Block block = world.getBlockState(pos).getBlock();
 
 		if (world.isBlockModifiable(player, pos) && canTransform(world, pos)) {
 			player.setActiveHand(hand);
@@ -127,7 +126,8 @@ public class ItemSeedOfLife extends MyItem {
 
 	private void transform(World world, BlockPos pos, float prob, float grassProbability) {
 		if (Math.random() < prob && canTransform(world, pos)) {
-			IBlockState other_block = less_probable_blocks[seedIndex][(int) (less_probable_blocks[seedIndex].length * Math.random())];
+			IBlockState other_block = less_probable_blocks[seedIndex][(int) (less_probable_blocks[seedIndex].length
+					* Math.random())];
 			world.setBlockState(pos, Math.random() < grassProbability ? probable_block[seedIndex] : other_block);
 			if (Math.random() < .5) {
 				IBlockState top_block = top_blocks[seedIndex][(int) (top_blocks[seedIndex].length * Math.random())];
@@ -175,8 +175,10 @@ public class ItemSeedOfLife extends MyItem {
 
 		top_blocks = new IBlockState[][] { //
 				{ //
-						Blocks.TALLGRASS.getDefaultState().withProperty(Blocks.TALLGRASS.TYPE, BlockTallGrass.EnumType.FERN), //
-						Blocks.TALLGRASS.getDefaultState().withProperty(Blocks.TALLGRASS.TYPE, BlockTallGrass.EnumType.GRASS), //
+						Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE,
+								BlockTallGrass.EnumType.FERN), //
+						Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE,
+								BlockTallGrass.EnumType.GRASS), //
 				}, //
 				{ //
 						Blocks.GLOWSTONE.getDefaultState(), //

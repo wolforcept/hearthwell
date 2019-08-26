@@ -30,7 +30,7 @@ public class ItemRepairingPaste extends MyItem {
 			if (player.getHeldItem(EnumHand.OFF_HAND).getItem().equals(Main.repairing_paste)) {
 				ItemStack stack = player.getHeldItem(EnumHand.MAIN_HAND);
 				if (Util.timeConstraint(player.getEntityWorld().getTotalWorldTime(), 2) && stack.isItemDamaged()
-						&& RecipeRepairingPaste.isRepairable(stack.getItem())) {
+						&& RecipeRepairingPaste.isRepairable(stack)) {
 					paste.damageItem(1, player);
 					stack.damageItem(-1, player);
 				}

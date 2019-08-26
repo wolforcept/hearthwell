@@ -1,0 +1,17 @@
+{
+    "variants": {
+        "haspaste=true,facing=up": { "model": "hwell:mutator" },
+        "haspaste=true,facing=down": { "model": "hwell:mutator" },
+        "haspaste=true,facing=north": { "model": "hwell:mutator" },
+        "haspaste=true,facing=south": { "model": "hwell:mutator", "y": 180 },
+        "haspaste=true,facing=west":  { "model": "hwell:mutator", "y": 270 },
+        "haspaste=true,facing=east":  { "model": "hwell:mutator", "y": 90 },
+		
+		"haspaste=false,facing=up": { "model": "hwell:mutator_empty" },
+        "haspaste=false,facing=down": { "model": "hwell:mutator_empty" },
+        "haspaste=false,facing=north": { "model": "hwell:mutator_empty" },
+        "haspaste=false,facing=south": { "model": "hwell:mutator_empty", "y": 180 },
+        "haspaste=false,facing=west":  { "model": "hwell:mutator_empty", "y": 270 },
+        "haspaste=false,facing=east":  { "model": "hwell:mutator_empty", "y": 90 }
+    }
+}

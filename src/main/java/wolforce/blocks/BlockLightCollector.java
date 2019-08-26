@@ -14,9 +14,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import wolforce.HwellConfig;
 import wolforce.Main;
+import wolforce.base.BlockWithDescription;
 import wolforce.base.MyBlock;
 
-public class BlockLightCollector extends MyBlock {
+public class BlockLightCollector extends MyBlock implements BlockWithDescription {
 
 	public static final PropertyInteger CHARGE = PropertyInteger.create("charge", 0, 3);
 
@@ -54,7 +55,8 @@ public class BlockLightCollector extends MyBlock {
 	}
 
 	@Override
-	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state,
+			int fortune) {
 		super.getDrops(drops, world, pos, state, fortune);
 		switch (state.getValue(CHARGE)) {
 		case 2:
@@ -83,5 +85,10 @@ public class BlockLightCollector extends MyBlock {
 	@Override
 	public int getMetaFromState(IBlockState state) {
 		return state.getValue(CHARGE);
+	}
+
+	@Override
+	public String[] getDescription() {
+		return new String[] {"Right click this block with an Imprisoned Light to instantly fill it."};
 	}
 }

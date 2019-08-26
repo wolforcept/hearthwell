@@ -43,8 +43,8 @@ public class BlockSeparator extends Block implements BlockEnergyConsumer, HasTE 
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side,
-			float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
+			EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote) {
 			TileSeparator tile = (TileSeparator) world.getTileEntity(pos);
 			ItemStackHandler itemHandler = tile.inventory;
@@ -68,13 +68,10 @@ public class BlockSeparator extends Block implements BlockEnergyConsumer, HasTE 
 					tile.markDirty();
 					// NAO TA VAZIO
 					if (held.isEmpty()) { // NAO TEM NADA NA MAO
-						// VAMOS TIRAR
+						// VAMOS TIRAR E POR NA MAO
 						player.setHeldItem(hand, itemToTake);
-
-					} else if (held.getItem().equals(itemToTake.getItem()) && held.getMetadata() == itemToTake.getMetadata()
-							&& held.getCount() < held.getItem().getItemStackLimit(held)) {
-						held.grow(1);
 					} else {
+						// VAMOS TIRAR E DEITAR PO CHAO
 						Util.spawnItem(world, pos, itemToTake);
 					}
 				}
@@ -112,8 +109,8 @@ public class BlockSeparator extends Block implements BlockEnergyConsumer, HasTE 
 
 	// BLOCK VISUALS
 
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
-			int meta, EntityLivingBase placer) {
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY,
+			float hitZ, int meta, EntityLivingBase placer) {
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
 	}
 
@@ -170,8 +167,8 @@ public class BlockSeparator extends Block implements BlockEnergyConsumer, HasTE 
 
 	@Override
 	public String[] getDescription() {
-		return new String[] { "Separates items into its components.", "Consumes " + getEnergyConsumption() + " energy per operation.",
-				"Requires a multiblock Structure." };
+		return new String[] { "Separates items into its components.",
+				"Consumes " + getEnergyConsumption() + " energy per operation.", "Requires a multiblock Structure." };
 	}
 
 	@Override

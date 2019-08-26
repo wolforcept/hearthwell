@@ -1,0 +1,39 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-gb">
+<link href="../stylesheet.css" rel="stylesheet">
+<link rel="icon" href="../docs/hearthwell.png">
+<title>Mechanics</title></head>
+<body>
+<object style="border:0;padding=0;" width="1000" height="50px" type="text/html" data="../navbar.html"></object>
+<hr>
+
+<h1>Mechanics - Crafting Ways</h1>
+
+<p class="discord">Mod created in colaboration with <a href="https://www.curseforge.com/members/al132mc/projects">al132mc</a>
+<br>Download this at <a href="https://www.curseforge.com/minecraft/mc-mods/mechanics-crafting-ways">curseforge</a>.</p>
+<p>
+	This mod adds some crafting mechanics to spice up modpacks.<br>
+	By itself, this mod adds almost nothing to the game, and must be configured to add recipes.<br>
+	All of the recipes are available through CraftTweaker.
+</p>
+<h3>Drying.</h3>
+<p>Similar to Drying Racks from Tinker's and Primal Core. Time will transform an item stack into another.<br>
+Example usage: <code>mods.mechanics.addDryingTableRecipe(&lt;contenttweaker:monster_strips&gt;, &lt;minecraft:dryed_monster_strips&gt;);</code>
+</p>
+<img src="dryingtable.png" width="512px">
+
+<h3>Hammering.</h3>
+<p>Martlets to crack drown blocks. Comes with 3 recipes (Stone to Cobblestone, Cobblestone to Gravel and Gravel to Sand) and two varieties, stone and iron.<br>
+Example usage: <code>mods.mechanics.addMartletRecipe(&lt;minecraft:sandstone:0&gt;, &lt;minecraft:sand:0&gt;);</code>
+</p>
+<img src="martlets.png" width="512px">
+
+<h3>Alloying.</h3>
+<p>The Alloy furnace requires a fuel to transform two item stacks into one.<br>
+Example usage: <code>mods.mechanics.addAlloyFurnaceRecipe(&lt;minecraft:iron_ingot&gt;, &lt;minecraft:gold_ingot&gt;, &lt;minecraft:diamond&gt;);</code>
+</p>
+<img src="alloyfurnace.png" width="512px">
+
+
+</body>
+</html>

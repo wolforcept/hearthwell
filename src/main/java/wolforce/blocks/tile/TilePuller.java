@@ -92,6 +92,8 @@ public class TilePuller extends TileEntity implements ITickable {
 
 				// ENERGY CONSUMPTION
 				if (!BlockEnergyConsumer.tryConsume(world, pos, Main.puller.getEnergyConsumption())) {
+					cooldown = MAX_COOLDOWN - 50 * getNrExtraLayers(table);
+					cooldown /= 2;
 					return;
 				}
 				cooldown = MAX_COOLDOWN - 50 * getNrExtraLayers(table);

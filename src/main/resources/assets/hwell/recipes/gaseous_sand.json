@@ -5,7 +5,10 @@
 	"ABA",
     "AAA" ],
   "key": {
-    "A": [{ "item": "minecraft:sand", "data": 0 },{ "item": "minecraft:sand", "data": 1 }],
+    "A": [
+		{ "item": "minecraft:sand", "data": 0 },
+		{ "item": "minecraft:sand", "data": 1 }
+	],
 	"B": [{ "item": "hwell:shard_h" }]
   },
   "result": { "item": "hwell:gaseous_sand", "count": 8 }

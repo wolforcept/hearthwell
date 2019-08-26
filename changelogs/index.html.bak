@@ -1,0 +1,331 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-gb">
+<link href="../stylesheet.css" rel="stylesheet">
+<link rel="icon" href="../docs/hearthwell.png">
+<title>Hearth Well Changelogs</title></head>
+<body>
+<object style="border:0;padding=0;" width="1000" height="50px" type="text/html" data="../navbar.html"></object>
+<hr>
+<h1>Patch History</h1>
+<pre><code id="main">{0.5}
+discstart25th of August, 2019
+
+Major update with new content.discend
+
+[ NEW STUFF ]
+Added a new machine, the Mutator, complete with redstone manipulation, inventory insertion and CraftTweaker integration.
+Added new JEI Integration for Mutator Recipes.
+Removed most mutation paste recipes, as the Mutator takes care of that now.
+Added new JEI Integration for Nether Portal Recipes.
+Added new JEI Integration for Puller Recipes.
+Added new JEI Integration for Charger Recipes.
+The Former now works much faster and is useful.
+Added a sound to all machines that are trying to work but have no energy.
+
+[ BALANCE ]
+Changed Gaseous Frames to react to redstone signal.
+Changed the output of Crushing Recipes to behave less erratically. They should now spawn closer to the crushing block and always at an empty location, but still with some random speed.
+Made repairing paste work with all items by default. You can still remove recipes with CraftTweaker.
+
+[ BUG FIXES ]
+Fixed filtered puller recipes having the wrong probability.
+Fixed the separator item wrong positioning in guis.
+
+[ OTHER ]
+<span class="chg">Massive overhaul</span> of the JEI integration system, that will allow me to much more easily integrate JEI in recipes in the future. You might also notice some changes in Recipe and Recipes Catalysts in already existing recipes.
+Removed the recipes json in favor of crafttweaker. 
+CraftTweaker Methods changed:
+	- Crushing Recipes can now have multiple inputs.
+	- Grinding Recipes can now have multiple inputs and outputs.
+
+<hr>
+{0.4.2}
+discstart30th of June, 2019
+
+Couple of bug fixes.discend
+
+[ NEW STUFF ]
+Added the ingredient block list for all the multiblock machines into the Book of the Well.
+Added Glass Bottles as an output of Charging a Power Crystal with EXP Bottles.
+Added Gravity Block's range to its item description.
+Added the sky access requirement to the Mysterious Fertilizer item description.
+
+[ BUG FIXES ]
+Added oredict "dustSalt" for salt
+Fixed Heat Furnace setting itself on fire.
+Fixed Heat Furnace ignoring item metadata.
+Fixed Puller ignoring filter metadata.
+Fixed Puller ignoring recipe metadata.
+Fixed Puller not being turned off by powering the 8 Heat Blocks.
+Fixed Puller not requiring vertical Amplifying Tubes.
+Fixed Separator not requiring vertical Amplifying Tubes.
+Fixed Fertile Soil spamming grows without checking for some conditions. This caused some crashes or bugs with different growables.
+Fixed more conflicting Mutation Paste recipes (Changed: Jungle Sapling and Brown Mushroom).
+
+
+<hr>
+{0.4.1}
+discstart26th of May, 2019
+
+Couple of bug and recipe fixes.discend
+
+[ NEW STUFF]
+Added Graft Boxes.
+
+[ BALANCE ]
+Increased the resistance and hardness of 
+Added an upgrade recipe for the Stabilizer and the Heavy Stabilizer.
+Changed some of the recipes of the Anima Core.
+Removed the duplicated Core recipes.
+
+[ BUG FIXES ]
+Added a JEI explanation on how to get the Anima Core.
+Fixed the broken Ink Block and Ink Sack recipes.
+
+<hr>
+{0.4}
+discstart23rd of May, 2019
+
+@mp-maker the `recipes.json` file was updated again (with a new crushing recipe: meat_block -> hamburger * 4) so you should either reset it (by deleting it/changing its name) or add risk the new recipes not being added.discend
+
+[ NEW STUFF]
+Added Mutation Paste recipes to transform Raw Meat items into other Raw Meat Items
+Added two new items, the Hamburger, which is a Raw Meat item, and the Cooked Hamburger, which can be obtained by cooking a Hamburger.
+Added a couple of new resource blocks: the Ink Block, the Plumage Block, the Pearl Block and the Meat Block, which can be crushed into Hamburgers.
+Added a new core, the Anima Core, mainly for blocks of drops of living entities.
+Added a new block, the Inert Seed, which when placed on the ground and standing near it, will grow into an Anima Core. The more players near it the faster it will grow.
+Changed some core recipes from other cores to the Anima Core and added recipes to Meat Block, Ink Block, Slime block, Compressed Wool and Plumage block to the Anima Core.
+Added the Grit Vase, which spawns a Block Breaking Tree when suplied with Mysterious Fertilizer.
+Added a new block, the Gaseous Frame, a block that becomes passable when right-clicked. It also makes passable every other Gaseous Frame connected to it.
+Added a comparator redstone output to Light Collectors
+Added a new loot kit, the Guardian Loot Kit
+Added a config to disable the Book Ritual.
+
+[ BALANCE ]
+Added a vertical recipe to the Amplifying Tube recipe.
+Changed the Onyx in the Charger recipe to Smooth Onyx.
+Changed the damage dealt by filling rods from 1 heart to half a heart.
+Removed the requirement of sneaking from the book ritual.
+Removed the damage from the lightning from the book ritual.
+Added a new feature to Stabilizers: they will also reduce the total time needed to turn a Core.
+Decreased the chance of the Heat Furnace consuming water for low count stacks.
+
+[ BUG FIXES ]
+Fixed the book not working on creative.
+Fixed the Freezer converting non source blocks
+Fixed Quartz Ore and Glowstone Ore being instantly broken.
+Fixed a couple of conflicting Mutation Paste recipes.
+Added Puller Filters description to the Book.
+Added OreDic for various blocks and ingots of metals.
+
+<hr>
+{0.3.1}
+discstart25th of April, 2019
+
+Small bugfix patchdiscend
+
+[ NEW STUFF]
+Added a new Plumage Block.
+Added a couple more burst seeds (Cobblestone, Gravel and Endstone).
+Added a more detailed explanation of the Heat Furnace to the Hearth Well book.
+Added a chance for the Fertile Soil to change dirt to grass around it.
+
+[ BALANCE ]
+Increased the time it takes to break protection blocks and increased their resistance further.
+Changed the breaking sounds of a lot blocks.
+
+[ BUG FIXES ]
+Re-Added core transparency to fix custom cores.
+Removed coring possibility to use result blocks as catalyst blocks when air is one of the possibilities. This improves clarification.
+Removed the possibility of enchanting Repairing Paste.
+Fixed crashes when throwing items into the nether portal.
+
+<hr>
+{0.3}
+discstart11th of April, 2019
+
+Hello @everyone!
+Hearth Well 0.3 is out, and is looking real close to 1.0.
+This patch finally adds definitive in-game documentation for everything I hope.
+The long awaited CraftTweaker support is out, except for the creation of custom cores. That may be coming in the future, all of this is still new. The CraftTweaker documentation is as almost everything else in the Github Page of Hearth Well: https://wolforcept.github.io/hearthwell/CT
+The config file was also revamped, it was way too messy. I am very sorry to all those that lost their configs, I think we can all agree that progress demanded it!
+Be sure to report any bugs found, and post your sugestions on Github or Discord!
+
+Curseforge: https://minecraft.curseforge.com/projects/hearth-well
+Changelog: https://wolforcept.github.io/hearthwell/changelogs/
+Documentation:  https://wolforcept.github.io/hearthwell/
+discend
+
+[ NEW STUFF ]
+Added CraftTweaker support.
+Added a complete in-game guide of the mod.
+Added the Tray block, a simple item tray that functions as a shelf or, when placed near a Gravity Block or a Setter, will act as a white list filter for those blocks.
+Added the Former block, a new machine made more towards the Skyblocker audience. The Former will slowly expand in a stone, flat surfaced, round and deep island around it.
+Added a simple way to get the Hearth Well Patchouli book. Basically you only need to get two wooden pressure plates, and place one on each hand. Then, while looking directly up and sneaking, say a prayer to the gods containing the words "poor", "please", "send", "book", "gods", and smash the pressure plates together with right click! If the gods are merciful they will send you a book explaining the concepts of the mod. 
+Added two new seeds: the Seed of the Nether and Seed of the End.
+Added the ability for Fertile Soil to sustain and grow Bushes. Useful for mod compatibility.
+Added a light value to the Scorch Glass.
+Added a light value to the light collectors when charged (duh). More charge = more light.
+Added: right click a light collector with an imprisoned light to automatically charge it, losing the imprisoned light.
+Added Gaseous Sand, a block with no hitbox.
+Added Gaseous Glass, a transparent block with no hitbox.
+Also Mysterious Leaves are now Leaves.
+
+[ BALANCE ]
+Added a chance for dirt near Fertilized Soil to transform into Grass.
+Changed the texture of the Scorch Glass.
+Changed the default option "powerCrystalDropsWhenEmpty" to false.
+Changed the organization of the configuration file. (It now has categories)
+
+[ BUG FIXES ]
+Fixed a bug where cores became translucent, maybe?
+Fixed a bug where the Power Crystals were not having the right traits.
+Fixed a bug where the setter was not getting powered.
+Fixed the Setter wrong description.
+Added a recipe to the Spider Loot Kit
+Fixed Amplifying Tubes creating particles at night in servers for the fourth time!!
+
+<hr>
+{0.2.1}
+discstart5th of March, 2019
+
+Small stabilisation patch, with a couple of bug fixes.
+Added a couple more documentation. Slow and steady.discend
+
+[ BALANCE ]
+Added a way to prevent the Gravity, Anti-Gravity, Separator, Puller, Nourisher and Charger machines from working by applying a redstone signal.
+ - To prevent a Charger from working, a redstone signal can also be applied to the surrounding 4 Gravity Blocks.
+ - To prevent a Puller from working, a redstone signal can also be applied to the Surrounding 9 Heat Blocks.
+ - To prevent a Separator from working, a redstone signal can also be applied to the Heat Block underneath.
+Added hopper support to the Dust Picking Table. Now hoppers can insert Mysterious Dust into the picking table, if it is empty.
+Changed how Dust Pickers work. Now they have more durability but will not always yield a result. In average the time spent should be shorter, but the tool has less actual durability.
+Changed the Anti-Gravity block to only affect players since when using various gravity blocks one can already lift items and this will fix a large amount of bugs and prevent other bugs with other mods entities.
+Changed the name of Core Stabilisers to Medium Core Stabilisers.
+Changed how much each stabilise... stabilises. Light stabilisers now have a 50% chance of preventing the drop of consumed blocks, and medium stabilisers a 75% chance.
+Changed recipe of onyx. Swapped stone for Cobblestone to make sense with other recipes.
+Changed recipe that turn a bricks block back into the block that created them to only need one block.
+Changed the amount of glowstone that light collectors drop.
+Changed the default range of the freezer to 2, down from 5.
+Changed Dust Pickers Anvil Repair Materials to also include Soulsteel.
+Removed the Powered Gravity and Powered Anti-Gravity Blocks.
+[ BUG FIXES ]
+Fixed displacer getting tons of silk touch enchantments. (Maybe should've left that in.)
+Fixed localization problem with liquid souls.
+
+<hr>
+{0.2}
+discstart27th of February, 2019
+
+Hello @everyone
+Hearth Well 0.2 is out now, and with it some more documentation!
+Along the new stuff is:
+ - A new Power System, composed by the Power Crystals and the Charger Multiblock to charge them when they deplete. Power Crystals have different parts that require different ingredients, its a dynamic recipe. Power Crystals also have traits, like range and purity.
+ - A new block placer called Setter, that will place items that fly past it, with configurable range in game.
+ - 3 improved stabilisers, including one that really does its job well.
+ - Many fixes and new tweakable recipes!
+
+Curseforge: https://minecraft.curseforge.com/projects/hearth-well
+Changelog: https://wolforcept.github.io/hearthwell/changelogs/
+Documentation:  https://wolforcept.github.io/hearthwell/
+discend
+
+[ NEW STUFF ]
+Update: to enable the hwell_recipes.json file and to be able to change recipes, you must now enable "customRecipesEnabled" in the config!
+Added a new machine block, the Setter. When an item passes through its range, the setter will try to place that block down.
+ - It has a default range of 4 blocks, which can be increased and decreased by placing Moonstone or Azurite (or Smooth Azurite) blocks in the remaining 5 blocks that surround it (each Moonstone and Azurite Block moves change range by 1).
+ - The range may also be moved further away, in the same direction, by placing Crystal Blocks the same way (each Crystal Block moves changes range by 2).
+ - The Setter requires 15 energy per operation.
+ - The default range may be changed in the config.
+Added two new Stabiliser blocks, and tweaked the existing one's recipe.
+ - There are now three stabilisers: the Light Stabiliser, the Stabiliser and the Heavy Stabiliser;
+ - They will prevent blocks near cores from dropping by 33%, 66% and 100% respectively.
+Added a new source of Power: the Power Crystal
+ - Can be right clicked in the world to place them. Will provide power for nearby machines.
+ - Requires 3 parts to craft: the Nucleous, the Relay and the Screen.
+ - Can be crafted with different materials for each part, so it has many crafting combinations.
+ - The Power Crystals have three traits: power, range and purity.
+ - Power simply means more total Power available. Range is also simply the range at which a Power Crystal can deliver power.
+ - Purity affects power lost by distance. More purity means less power lost when charging a machine from a distance.
+ - Different parts affect the traits differently.
+Added a new block: the Charger
+ - Charges Power Crystals.
+ - Requires a Multiblock Structure.
+ - Right click to insert the crystal, then throw items with Potency into the machine and the potency will be extracted and inserted into the crystal.
+ - Some items might not be fully consumed. The unpotent remainder will be spat out from the top of the charger.
+Added configuration for the Nourisher: energy consumption, range, cooldown and target selection;
+Changed Boxer no longer requires redstone to work. Instead, a redstone signal will prevent it from working.
+Changed many default power consumptions to reflect changes in power usage.
+Changed the Loot Kit Producer to require energy.
+[ BALANCE ]
+Mysterious Bushes now grow much slower near other Mysterious Bushes
+Reduced number of boxes a boxer spawns to 32. This may be changed in the config.
+ALL Entities will now, by default, be prevented from traveling to the nether by any means. This may be changed in the config.
+[ BUG FIXES ]
+Fixed a bug with the Dust Picker Holder where sometimes a player was unable to retrieve dust pickers. (FINALLY!!)
+Fixed bad localization when interacting with other mods.
+
+<hr>
+{0.1.1}
+discstart18th of February, 2019
+
+Hey @everyone!
+"Small" update to Hearth Well but a huge difference to modpacks!
+Now you can add your Custom Core Blocks, and even customize two colors of them!
+Tweaked mysterious bushes to be more valuable when full grown.
+added a config to change the probability of a puller filter pulling filtered items (default is 50%).
+added quartz and prismarine burst seeds.
+Don't forget to delete your recipes JSON config file.
+https://minecraft.curseforge.com/projects/hearth-well
+discend
+
+[ NEW STUFF ]
+Update: Now you can add your Custom Core Blocks, and even customize two colors of them!
+Changed mysterious bushes to be more valuable when full grown
+Added a config to change the probability of a puller filter pulling filtered items (default is 50%)
+Added quartz and prismarine burst seeds
+
+<hr>
+{0.1}
+discstart15th of February, 2019discend
+
+[ NEW STUFF ]
+Hearth Well successfully runs on servers now
+Added particles to blocks being consumed by core blocks (or maybe fixed, idk)
+Added particles to tubes when they are correctly placed and have a correct recipe
+loot kits left on the ground will now hatch after a specified ammount of time (default is half a minute)
+Added a config json file with many recipes
+Added a Block of Skin Hide
+greatly decreased overall tube recipe speed, particularly in higher tube counts
+[ BUG FIXES ]
+Fixed separator weird item interaction
+Fixed range of gravity blocks being one less to the positive directions
+Fixed some unlocalized names
+Fixed the wrong name in the info file
+leaves are now not leaves. (they are just normal blocks, this fixes weird leaf behaviour for now)
+Fixed Heat Furnaces ignoring metadata
+Fixed core blocks not accepting consumable blocks from all 6 directions
+  </code>
+</pre>
+
+<script>
+	var doc = document.getElementById("main");
+	var inner = doc.innerHTML;
+
+	inner = inner.replace(/(Update:|Hearth Well| - )/g, '<span class="bolden">$1</span>');
+	inner = inner.replace(/(Added)/g, '<span class="ddd">$1</span>');
+	inner = inner.replace(/(Changed)/g, '<span class="chg">$1</span>');
+	inner = inner.replace(/(Increased)/g, '<span class="chg">$1</span>');
+	inner = inner.replace(/(Decreased)/g, '<span class="chg">$1</span>');
+	inner = inner.replace(/(Removed)/g, '<span class="rmv">$1</span>');
+	inner = inner.replace(/(Fixed)/g, '<span class="fxd">$1</span>');
+	
+	inner = inner.replace(/(\[)/g, '<span class="title2">['); 
+	inner = inner.replace(/(\])/g, ']</span>');
+	inner = inner.replace(/(\{([A-Z\. a-z0-9])+\})+/g, '<span class="title">$1</span>');
+	inner = inner.replace(/discstart/g, '<span class="discord">'); 
+	inner = inner.replace(/discend/g, '</span>');
+	
+	doc.innerHTML = inner;
+</script>
+</body>
+</html>

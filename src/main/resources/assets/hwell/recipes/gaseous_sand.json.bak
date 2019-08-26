@@ -1,0 +1,16 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+	"ABA",
+    "AAA" ],
+  "key": {
+    "A": [
+		{ "item": "minecraft:sand", "data": 0 },
+		{ "item": "minecraft:sand", "data": 1 },
+		{ "type": "forge:ore_dict", "ore": "logWood" }
+	],
+	"B": [{ "item": "hwell:shard_h" }]
+  },
+  "result": { "item": "hwell:gaseous_sand", "count": 8 }
+}

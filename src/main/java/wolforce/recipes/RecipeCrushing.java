@@ -1,47 +1,129 @@
 package wolforce.recipes;
 
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
 import wolforce.Util;
 
 public class RecipeCrushing {
 
-	public static HashMap<Irio, RecipeCrushing[]> recipes;
+	public static LinkedList<RecipeCrushing> recipes;
 
 	public static void initRecipes(JsonArray recipesJson) {
-		recipes = new HashMap<>();
-		for (JsonElement e : recipesJson) {
-			recipes.put(Util.readJsonIrio(e.getAsJsonObject().get("input").getAsJsonObject()), //
-					readRecipe(e.getAsJsonObject().get("possible_outputs").getAsJsonArray()));
+
+		recipes = new LinkedList<>();
+
+		for (JsonElement e : recipesJson)
+			readRecipe(e.getAsJsonObject());
+	}
+
+	private static void readRecipe(JsonObject recipe) {
+
+		JsonArray inputsArray = recipe.get("inputs").getAsJsonArray();
+		JsonArray outputsArray = recipe.get("possible_outputs").getAsJsonArray();
+
+		ItemStack[] inputs = new ItemStack[inputsArray.size()];
+		ItemStack[] outputs = new ItemStack[outputsArray.size()];
+		double[] probs = new double[outputsArray.size()];
+
+		for (int i = 0; i < inputs.length; i++) {
+			JsonObject o = inputsArray.get(i).getAsJsonObject();
+			inputs[i] = ShapedRecipes.deserializeItem(o.getAsJsonObject(), false);
+		}
+
+		for (int i = 0; i < outputs.length; i++) {
+			JsonObject o = outputsArray.get(i).getAsJsonObject();
+			outputs[i] = ShapedRecipes.deserializeItem(o.get("out").getAsJsonObject(), true);
+			probs[i] = o.has("probability") ? o.get("probability").getAsDouble() : 1.0;
+		}
+		
+		recipes.add(new RecipeCrushing(inputs, outputs, probs));
+	}
+
+	public static void removeRecipe(ItemStack input) {
+		for (Iterator<RecipeCrushing> iterator = recipes.iterator(); iterator.hasNext();) {
+			RecipeCrushing recipe = (RecipeCrushing) iterator.next();
+			for (ItemStack stack : recipe.inputs) {
+				if (Util.equalExceptAmount(stack, input))
+					iterator.remove();
+			}
 		}
 	}
 
-	private static RecipeCrushing[] readRecipe(JsonArray array) {
-		RecipeCrushing[] possibleOutputs = new RecipeCrushing[array.size()];
-		for (int i = 0; i < possibleOutputs.length; i++) {
-			JsonObject o = array.get(i).getAsJsonObject();
-			possibleOutputs[i] = readPossible(o);
+	private static RecipeCrushing getRecipeFor(ItemStack input) {
+
+		for (RecipeCrushing recipe : recipes) {
+			for (ItemStack stack : recipe.inputs) {
+				if (Util.equalExceptAmount(input, stack)) {
+					return recipe;
+				}
+			}
 		}
-		return possibleOutputs;
+
+		return null;
 	}
 
-	private static RecipeCrushing readPossible(JsonObject o) {
-		ItemStack out = ShapedRecipes.deserializeItem(o.get("out").getAsJsonObject(), true);
-		double prob = o.has("probability") ? o.get("probability").getAsDouble() : 1.0;
-		return new RecipeCrushing(out, prob);
+	public static ItemStack getSingleResult(ItemStack input) {
+
+		RecipeCrushing recipe = getRecipeFor(input);
+
+		if (recipe == null)
+			return null;
+
+		double d = Math.random();
+		int i = 0;
+		while (true) {
+
+			if (i >= recipe.outputs.length)
+				return null;
+			if (d < recipe.probabilities[i])
+				return recipe.outputs[i].copy();
+			d -= recipe.probabilities[i];
+			i++;
+		}
 	}
+
+	//
+
+	public final ItemStack[] inputs;
+	public final ItemStack[] outputs;
+	public final double[] probabilities;
+
+	public RecipeCrushing(ItemStack inputs, ItemStack[] outputs, double[] probabilities) {
+		this(new ItemStack[] { inputs }, outputs, probabilities);
+	}
+
+	public RecipeCrushing(ItemStack[] inputs, ItemStack[] outputs, double[] probabilities) {
+		this.inputs = inputs;
+		this.outputs = outputs;
+		this.probabilities = probabilities;
+	}
+
+	// private RecipeCrushing(Item item) {
+	// this(new ItemStack(item, 1), 1.0);
+	// }
+	//
+	// private RecipeCrushing(Item item, int n) {
+	// this(new ItemStack(item, n), 1.0);
+	// }
+	//
+	// private RecipeCrushing(Item item, int n, double prob) {
+	// this(new ItemStack(item, n), prob);
+	// }
+	//
+	// private RecipeCrushing(Block block) {
+	// this(new ItemStack(block, 1), 1.0);
+	// }
+
+	// public static Set<Entry<ItemStack, RecipeCrushing[]>> getRecipeList() {
+	// return recipes.entrySet();
+	// }
 
 	// public static void initRecipes() {
 	// putRecipe(new Irio(Blocks.COBBLESTONE), new RecipeCrushing(Main.dust, 2));
@@ -94,73 +176,4 @@ public class RecipeCrushing {
 	// );
 	// }
 
-	private static void putRecipe(Irio irio, RecipeCrushing... recipeArray) {
-		recipes.put(irio, recipeArray);
-	}
-
-	public static Iterable<ItemStack> getResult(ItemStack itemstack) {
-
-		RecipeCrushing[] possible = getRecipeOf(itemstack);
-
-		if (possible != null) {
-			List list = new LinkedList<ItemStack>();
-			for (int i = 0; i < itemstack.getCount(); i++)
-				for (ItemStack singleresult : getSingleResult(possible))
-					list.add(singleresult.copy());
-			return list;
-		}
-		return null;
-	}
-
-	private static RecipeCrushing[] getRecipeOf(ItemStack itemstack) {
-		for (Entry<Irio, RecipeCrushing[]> recipe : recipes.entrySet()) {
-			if (recipe.getKey().equals(new Irio(itemstack)))
-				return recipe.getValue();
-		}
-		return null;
-	}
-
-	private static ItemStack[] getSingleResult(RecipeCrushing[] possible) {
-		double d = Math.random();
-		int i = 0;
-		while (true) {
-
-			if (i >= possible.length)
-				return new ItemStack[] {};
-			if (d < possible[i].probability)
-				return new ItemStack[] { possible[i].stack.copy() };
-			d -= possible[i].probability;
-			i++;
-		}
-	}
-
-	//
-
-	public final ItemStack stack;
-	public final double probability;
-
-	public RecipeCrushing(ItemStack stack, double probability) {
-		this.stack = stack;
-		this.probability = probability;
-	}
-
-	private RecipeCrushing(Item item) {
-		this(new ItemStack(item, 1), 1.0);
-	}
-
-	private RecipeCrushing(Item item, int n) {
-		this(new ItemStack(item, n), 1.0);
-	}
-
-	private RecipeCrushing(Item item, int n, double prob) {
-		this(new ItemStack(item, n), prob);
-	}
-
-	private RecipeCrushing(Block block) {
-		this(new ItemStack(block, 1), 1.0);
-	}
-
-	public static Set<Entry<Irio, RecipeCrushing[]>> getRecipeList() {
-		return recipes.entrySet();
-	}
 }

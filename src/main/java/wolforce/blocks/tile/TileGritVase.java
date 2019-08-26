@@ -65,7 +65,7 @@ public class TileGritVase extends TileEntity implements ITickable {
 			if (completeness >= 25) {
 
 				IBlockState iblockstate = world.getBlockState(current);
-				Block block = iblockstate.getBlock();
+				// Block block = iblockstate.getBlock();
 
 				// block.dropBlockAsItem(world, pos.down(), iblockstate, 0);
 				List<ItemStack> drops = iblockstate.getBlock().getDrops(world, pos, iblockstate, 0);
@@ -91,7 +91,8 @@ public class TileGritVase extends TileEntity implements ITickable {
 				for (int z = -size; z <= size; z++) {
 					BlockPos temp = pos.add(x, y, z);
 					if (!world.isAirBlock(temp)) {
-						if (BlockTray.isItemAble(filter, new ItemStack(world.getBlockState(temp).getBlock()).getItem(), isBlackList)) {
+						if (BlockTray.isItemAble(filter, new ItemStack(world.getBlockState(temp).getBlock()).getItem(),
+								isBlackList)) {
 
 							current = temp;
 							calcDir();

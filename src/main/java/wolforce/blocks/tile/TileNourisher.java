@@ -33,8 +33,10 @@ public class TileNourisher extends TileEntity implements ITickable {
 		if (pos == null)
 			return;
 
-		if (!BlockEnergyConsumer.tryConsume(world, pos, Main.nourisher.getEnergyConsumption()))
+		if (!BlockEnergyConsumer.tryConsume(world, pos, Main.nourisher.getEnergyConsumption())) {
+			cooldown = HwellConfig.machines.nourisherCooldown / 2;
 			return;
+		}
 
 		for (int y = 0; y <= 4; y++) {
 			BlockPos posy = pos.add(0, y, 0);
@@ -62,8 +64,8 @@ public class TileNourisher extends TileEntity implements ITickable {
 	private boolean isGrowableCropInXZ(BlockPos pos) {
 		for (int y = 0; y <= 4; y++) {
 			BlockPos posy = pos.add(0, y, 0);
-			if (Util.blockAt(world, posy) instanceof IGrowable
-					&& ((IGrowable) Util.blockAt(world, posy)).canGrow(world, posy, world.getBlockState(posy), world.isRemote))
+			if (Util.blockAt(world, posy) instanceof IGrowable && ((IGrowable) Util.blockAt(world, posy)).canGrow(world,
+					posy, world.getBlockState(posy), world.isRemote))
 				if (Util.blockAt(world, posy) instanceof BlockCrops || !HwellConfig.machines.nourisherOnlyGrowCrops)
 					return true;
 		}

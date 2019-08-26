@@ -87,7 +87,8 @@ public class TileSeparator extends TileEntity implements ITickable {
 			table.put("HB", new BlockWithMeta(Main.heat_block));
 			table.put("FT", new BlockWithMeta(Main.furnace_tube, Main.furnace_tube.getMetaFromState(//
 					Main.furnace_tube.getDefaultState().withProperty(BlockTube.AXIS, EnumFacing.Axis.Y))));
-			int metaSource = Main.liquid_souls_block.getMetaFromState(Main.liquid_souls_block.getBlockState().getBaseState());
+			int metaSource = Main.liquid_souls_block
+					.getMetaFromState(Main.liquid_souls_block.getBlockState().getBaseState());
 			table.put("L0", new BlockWithMeta(Main.liquid_souls_block, metaSource));
 			table.put("L1", new BlockWithMeta(Main.liquid_souls_block, metaSource, true));
 			table.put("LC", new BlockWithMeta(Main.light_collector, Main.light_collector.getMetaFromState(//
@@ -107,6 +108,9 @@ public class TileSeparator extends TileEntity implements ITickable {
 			return;
 
 		ItemStack[] result = RecipeSeparator.getResult(inventory.extractItem(0, 1, false));
+		if (result == null)
+			return;
+
 		markDirty();
 
 		BlockPos leftPos = pos.offset(facing.rotateYCCW()).offset(facing).offset(EnumFacing.DOWN);
@@ -158,10 +162,12 @@ public class TileSeparator extends TileEntity implements ITickable {
 		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Nullable
 	@Override
 	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T) inventory : super.getCapability(capability, facing);
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T) inventory
+				: super.getCapability(capability, facing);
 	}
 
 	//
