@@ -14,8 +14,14 @@
 				$('<h3 class="tablink" onclick="changeTab(event, \'' + data.name + '\')">Progression</h3>')
 					.appendTo(".tablinks");
 
-				$('<div class="tab" id="' + data.name + '">Hello</div>')
-					.appendTo("body");
+				var fs = require('fs');
+				var files = fs.readdirSync('/assets/photos/');
+				console.log(files);
+				// ####.forEach(element => {
+				// 	$('<div class="tab" id="' + data.name + '">Hello</div>')
+				// 		.appendTo("body");
+				// });
+
 
 			});
 		}
