@@ -8,21 +8,54 @@
 	<title>Hearth Well</title>
 </head>
 <style>
+	:root {
+		--size_left: 128px;
+	}
+
+	.tabs {
+		float: left;
+		height: 100%;
+		padding-right: 50px;
+	}
+
 	.tabs h3 {
 		border-top: solid 1px #CCC;
 		border-left: solid 1px #CCC;
 		border-bottom: solid 1px #999;
 		border-right: solid 1px #999;
-		float: left;
 		padding: 10px;
-		margin: 0 10 0px 0;
+		margin: 0 0 10px 0;
 	}
 
 	.tab {
+		left: var(--size_left);
 		margin-top: 50px;
-		clear: both;
+	}
+
+	.tablink {
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+
+	.tablink:hover {
+		background-color: #DDDDDD;
 	}
 </style>
+<script>
+	function changeTab(evt, name) {
+		var i, tab, tablinks;
+		tab = document.getElementsByClassName("tab");
+		for (i = 0; i < tab.length; i++) { tab[i].style.display = "none"; }
+		tablinks = document.getElementsByClassName("tablinks");
+		for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
+		}
+		document.getElementById(name).style.display = "block";
+		evt.currentTarget.className += " active";
+	}
+</script>
 
 <body>
 	{% include_relative navbar.html %}
@@ -63,15 +96,15 @@
 	</table>
 
 	<div class="tabs">
-		<h3>Introduction</h3>
-		<h3>Introduction</h3>
+		<h3 class="tablink" onclick="changeTab(event, 'introduction')">Introduction</h3>
+		<h3 class="tablink" onclick="changeTab(event, 'tab2')">Tab</h3>
 	</div>
 
 	<script>
 
 	</script>
 
-	<div class="tab" id="tab1">
+	<div class="tab" id="introduction">
 
 		<h2>Introduction</h2>
 		<p>
@@ -453,6 +486,9 @@
 
 	</div>
 
+	<div class="tab" id="tab2">
+		tab 2
+	</div>
 	<hr>
 
 	<h2>Other Blocks, Items and Mechanics</h2>
