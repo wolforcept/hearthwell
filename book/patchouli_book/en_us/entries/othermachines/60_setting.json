@@ -1,0 +1,27 @@
+{
+    "name": "Setter",
+    "icon": "hwell:setter",
+    "category": "other_machines",
+    "sortnum": 60,
+    "pages": [
+        {
+            "type": "text",
+            "text": "The Setter is a machine that will try to place blocks that are thrown into its affected range. When placing a Setter, some particles with indicate when its affected range lies.$(br2)Throw blocks into those positions, either by hand or with droppers, and the setter, if powered by enough energy, will place those blocks into place."
+        },
+		{
+            "type": "crafting",
+            "title": "The Setter",            
+			"text": "",
+            "recipe": "hwell:setter"
+        },{
+            "type": "text",
+            "text": "The range of the Setter can be altered by placing blocks around it. Placing moonstone will increase it, and Azurite or Smooth Azurite will shrink it. Placing crystal blocks near it will move forward the effective range, leaving some unaffected positions in front of the Setter.$(br2)The blocks that the Setter will place can be filtered with a Tray. The tray will either white list or black list the blocks that the setter may place."
+        },
+		{ 	"type": "image",
+	        "title": "The Setter",
+	        "border": true,
+            "images": [ "hwell:textures/gui/setter.png" ],
+            "text": "The default range of the Setter."
+        } 
+    ]
+}

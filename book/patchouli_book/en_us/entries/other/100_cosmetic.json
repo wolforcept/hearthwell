@@ -1,0 +1,74 @@
+{
+    "name": "Decorating",
+    "icon": "hwell:moonstone",
+    "category": "other",
+    "sortnum": 100,
+    "pages": [
+    	{	
+        	"type": "spotlight",
+            "title": "Semi-Cosmetic Blocks",
+            "item": "hwell:moonstone",
+            "link_recipe": true,
+            "text": "By applying the mysterious properties of the shards to everyday blocks, many different materials can be obtained. Blocks created this look pretty, and some are useful too. Others can be smelted to create smooth variants."
+        },
+		{
+            "type": "text",
+			"text": "Most of these blocks can be crafted into slabs and stairs, and into bricks which also can be crafted into slabs and stairs.$(br2)These slabs are somewhat different. Instead of placing them on the top side or bottom side of a block, you can place them vertically. They will always be placed on the block that was right clicked, unless pressing shift, which will make them be placed in the opposite side."
+        },
+	    {
+            "type": "crafting",
+			"title": "",
+			"recipe": "hwell:citrinic_stone",
+			"recipe2": "hwell:white_block"
+		},
+	    {
+            "type": "crafting",
+			"title": "",
+			"recipe": "hwell:azurite",
+			"recipe2": "hwell:onyx"
+		},
+
+	    {
+            "type": "crafting",
+			"title": "",
+			"recipe2": "hwell:scorch_grit",
+			"recipe": "hwell:fullgrass_block"
+		},
+		{
+            "type": "crafting",
+			"recipe": "hwell:gaseous_sand",
+			"recipe2": "hwell:moonstone"
+		},
+		{
+            "type": "smelting",
+			"recipe": "hwell:citrinic_stone",
+			"recipe2": "hwell:azurite"
+		},
+		{
+            "type": "smelting",
+			"recipe": "hwell:scorch_grit",	
+			"recipe2": "hwell:onyx"		
+        },
+		{
+            "type": "smelting",
+			"recipe": "hwell:gaseous_sand"
+        },
+        {
+            "type": "crafting",
+			"title": "",
+			"recipe": "hwell:moonstone_bricks"
+		},        
+		{
+            "type": "crafting",
+			"title": "",
+			"recipe": "hwell:moonstone_slab",
+			"recipe2": "hwell:moonstone_stairs"
+		},
+		{
+        	"type": "crafting",
+			"test": "etc...",
+			"recipe": "hwell:moonstone_bricks_slab",
+			"recipe2": "hwell:moonstone_bricks_stairs"
+		}
+    ]
+}

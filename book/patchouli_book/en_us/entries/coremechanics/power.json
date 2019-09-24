@@ -1,0 +1,57 @@
+{
+    "name": "Powering",
+    "icon": "hwell:power_crystal",
+    "category": "core_mechanics",
+    "sortnum": 40,
+    "pages": [
+        {
+            "type": "text",
+            "text": "The Power Crystal item has a variable recipe. This means that, for each part, a different item may be placed. The parts are:$(li)the Nucleous, in the center position$(li)the Relays, in the center top and bottom$(li)the Screen, on the sides$(br2)Test out different recipes and see what is the best one for your puropose."
+        },
+		{ 	"type": "image",
+	        "title": "Power Crystal",
+	        "border": false,
+            "images": [ "hwell:textures/gui/power_recipe.png" ],
+            "text": "The Power Crystal Recipe Layout."
+        },
+		{
+            "type": "text",
+            "text": "The Power Crystal has three traits:$(li)Power: the total power this crystal can contain. This may be recharged in the charger.$(li)Range: the range, in blocks, that this power crystal can deliver power to.$(li)Purity: the purity will determine the ammount of power wasted in air transmission when powering machines.$(br)Different items used in each of the three parts of the recipe will yield different traits."
+        },
+		{ 	"type": "image",
+	        "title": "Power Nucleous",
+	        "border": false,
+            "images": [ "hwell:textures/gui/power_nuclei.png" ],
+            "text": "Nucleous possibilities"
+        },
+		{ 	"type": "image",
+	        "title": "Power Relays",
+	        "border": false,
+            "images": [ "hwell:textures/gui/power_relays.png" ],
+            "text": "Relay possibilities"
+        },
+		{ 	"type": "image",
+	        "title": "Power Screens",
+	        "border": false,
+            "images": [ "hwell:textures/gui/power_screens.png" ],
+            "text": "Screen possibilities"
+        },
+		{
+            "type": "text",
+            "text": "List of possibilities:$(li)Nucleous: Snowball, Diamond, Mysterious Rod, Blaze Rod, Imprisoned Light and Shard Catalyst.$(li)Relay: Stone, Quartz Block, Redstone Block, Endstone, Moonstone, Lapis Lazuli Block, Smooth Azurite, Mystic Iron Block, Soulsteel Block$(li)Screen: Glass, Scorch Glass, Crystal Block, Nether Crystal Block and Packed Ice.$()$(br2)To place a power crystal in the world simply right click with it in your hand."
+        },
+		{ 	"type": "image",
+	        "title": "Power Crystal",
+	        "border": true,
+            "images": [ "hwell:textures/gui/power_crystal.png" ],
+            "text": "A power crystal in the world",
+			"when_type_is_entity" : {
+				"type": "entity",
+				"entity": "hwell:entity_power",
+				"name": "Power Crystal",
+				"text": "A power crystal in the world"
+			}
+        }
+		
+    ]
+}

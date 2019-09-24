@@ -1,0 +1,29 @@
+{
+    "name": "Displacers",
+    "icon": "hwell:obsidian_displacer",
+    "category": "introduction",
+    "sortnum": 60,
+    "pages": [
+		{
+            "type": "spotlight",
+			"item": "hwell:obsidian_displacer",	
+			"text": "The displacer is an important tool to grab Glass, Obsidian and Ice before from the world."
+        },
+		{
+            "type": "crafting",
+			"title": " ",
+			"recipe": "hwell:obsidian_displacer",	
+			"text": "Right click with it looking at the block you want to displace to pull with such strength the block will jump out of its place and be grabbable."
+        },
+		{
+            "type": "spotlight",
+			"item": "hwell:empowered_displacer",	
+			"text": "Later you may be able to craft the improved displacer, which has silk touch so it can displace almost any block."
+        },
+		{
+            "type": "crafting",
+			"title": " ",
+			"recipe": "hwell:empowered_displacer"		
+        }
+    ]
+}

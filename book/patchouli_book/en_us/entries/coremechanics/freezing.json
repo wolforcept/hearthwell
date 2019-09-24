@@ -1,0 +1,17 @@
+{
+    "name": "Freezing",
+    "icon": "hwell:freezer",
+    "category": "core_mechanics",
+    "sortnum": 70,
+    "pages": [
+        {
+            "type": "text",
+            "text": "The Freezer. Will freeze liquids around it into solids. Transforms water into snow or ice, and lava into obsidian. Consumes some energy per operation."
+        },
+        { 	"type": "crafting",
+	        "name": "Freezer",
+            "recipe": "hwell:freezer",
+	        "text": ""
+        }   
+    ]
+}

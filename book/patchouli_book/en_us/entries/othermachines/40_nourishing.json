@@ -1,0 +1,16 @@
+{
+    "name": "Nourisher",
+    "icon": "hwell:nourisher",
+    "category": "other_machines",
+    "sortnum": 40,
+    "pages": [
+        { 	"type": "spotlight",
+            "item": "hwell:nourisher",
+            "text": "Improve your farms with the Nourisher machine. It will, as long as you provide power, greatly increase the speed at which crops around it grow.$(br2)"
+        },
+		{ 	"type": "crafting",
+            "recipe": "hwell:nourisher",
+            "text": ""
+        }
+    ]
+}

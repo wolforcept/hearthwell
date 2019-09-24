@@ -1,0 +1,9 @@
+{
+	"name": "Book of the Well",
+	"subtitle": " ",
+	"version": 1,
+	"model": "hwell:book",
+	"book_texture": "patchouli:textures/gui/book_purple.png",
+	"show_progress": false,
+	"landing_text": "Welcome to the Hearth Well. The objectives of this mod are that you build the machines you need (and hopefully have fun doing it) to give purpose to your home space, and that everything is as simple as possible, without complex GUI's or numbers, while still having enough diversity to keep you engaged to progress through the mod."
+}

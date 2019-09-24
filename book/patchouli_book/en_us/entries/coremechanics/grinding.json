@@ -1,0 +1,52 @@
+{
+    "name": "Precision Grinding",
+    "icon": "hwell:precision_grinder_empty",
+    "category": "core_mechanics",
+    "sortnum": 60,
+    "pages": [
+        {
+            "type": "text",
+            "text": "A multiblock structure that allows you to grind your materials into other ones. Requires a Grinding Wheel to be inserted, but not all operations are available for every grinding wheel. Be careful not to grind big stacks of materials or the grinder can jam and the grinding wheel can jump out."
+        },
+        {
+            
+            "type": "multiblock",
+            "name": "Precision Grinder",
+            "multiblock": {
+                "pattern": [
+					[ " P ", "PL ", " P "],
+					[ " P ", "P  ", " P "],
+					[ "HPH", "P0P", "HLH"]
+                ],
+                "mapping": {
+                    "H": "hwell:heavy_block",
+                    "P": "hwell:protection_block",
+					"L": "hwell:slab_lamp",
+					"0": "hwell:precision_grinder_iron"
+                }
+            }
+        
+        },
+        { 	"type": "crafting",
+	        "name": "Precision Grinding",
+            "recipe": "hwell:precision_grinder_empty",
+	        "text": "The Precision Grinder can be used as an early form of resource multiplication as it will slightly increase the yield of mined ores. Requires some energy per operation."
+        },
+        {
+            "type": "text",
+            "text": "$(br2)$(br)Set the grinder red part facing the lower lamp, which is on the right side if the entrance.$(br2)Remember to shift place the lamp on the ground so that it is placed upside down."
+        },		
+        {   "type": "crafting",
+            "name": "Grinding Wheels",
+            "recipe": "hwell:grinding_wheel_iron",
+            "recipe2": "hwell:grinding_wheel_diamond",
+            "text": "Precision Grinder Wheels"
+        },
+        {   "type": "crafting",
+            "name": "Grinding Wheels",
+            "recipe": "hwell:grinding_wheel_crystal",
+            "text": "Precision Grinder Wheels. Check JEI for uses, not all operations are available for every grinding wheel"
+        } 
+            
+    ]
+}

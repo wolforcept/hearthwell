@@ -1,0 +1,6 @@
+{
+	"name": "Other Machines",
+	"description": "These are useful machines that produce different items. Machines that need energy but don't have it will emit a sound.",
+	"icon": "hwell:antigravity_block",
+	"sortnum": 2
+}

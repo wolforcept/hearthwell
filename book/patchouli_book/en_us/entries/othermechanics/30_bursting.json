@@ -1,0 +1,48 @@
+{
+    "name": "Bursting",
+    "icon": "hwell:burst_seed_dirt",
+    "category": "other_mechanics",
+    "sortnum": 30,
+    "pages": [
+        {
+            "type": "text",
+            "title": "Bursting Seeds",            
+			"text": "Burst Seeds are an easy way to multiply the resources you already have. After crafting one, place it on the ground. The seed will slowly build up pressure with the resources inside, and will eventually burst in usually ten times more resources than the ones used to create it. Be careful though, because the new resources will come out flying at high speeds and in all directions."
+        },
+		{
+            "type": "crafting",
+            "title": "Bursting Seeds",            
+            "recipe": "hwell:burst_seed_cobblestone",
+			"recipe2": "hwell:burst_seed_stone"
+		},
+		{
+            "type": "crafting",
+            "title": "Bursting Seeds",            
+            "recipe": "hwell:burst_seed_gravel",
+			"recipe2": "hwell:burst_seed_sand"
+		},
+		{
+            "type": "crafting",
+            "title": "Bursting Seeds",            
+            "recipe": "hwell:burst_seed_dirt",
+			"recipe2": "hwell:burst_seed_snow"
+        },
+		{
+            "type": "crafting",
+            "title": "Bursting Seeds",            
+            "recipe": "hwell:burst_seed_netherrack",
+			"recipe2": "hwell:burst_seed_quartz"
+        },
+		{
+            "type": "crafting",
+            "title": "Bursting Seeds",            
+            "recipe": "hwell:burst_seed_endstone",
+			"recipe2": "hwell:burst_seed_prismarine"
+        },
+		{
+            "type": "crafting",
+            "title": "Bursting Seeds",            
+            "recipe": "hwell:burst_seed_crystal"
+        }
+	]
+}

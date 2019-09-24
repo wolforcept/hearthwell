@@ -1,0 +1,19 @@
+{
+    "name": "Collecting Light",
+    "icon": "hwell:light_collector",
+    "category": "core_mechanics",
+    "sortnum": 80,
+    "pages": [
+        {
+            "type": "text",
+            "text": "To collect light, craft a Light Collector block and place it on the ground. If it is illuminated by the sun, it will slowly collect light and trap it inside, becoming charged and emitting light.$(br)After it is charged, you can break it to get the Imprisoned Light. Then you may place the Light Collector block again to restart the process."
+        },
+		{
+            "type": "crafting",
+            "title": "Light Collectors",            
+            "recipe": "hwell:light_collector",
+			"text": "If you need to, you may right click a Light Collector with an Imprisoned Light to automatically charge it, expending the Imprisoned Light. You can do this to all Light Collectors, even in dark environments, and with no direct view of the sky."
+        }
+            
+    ]
+}

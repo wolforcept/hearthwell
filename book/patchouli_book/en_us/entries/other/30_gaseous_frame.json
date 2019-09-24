@@ -1,0 +1,19 @@
+{
+    "name": "Gaseous Frame",
+    "icon": "hwell:gaseous_frame",
+    "category": "other",
+    "sortnum": 30,
+    "pages": [
+    	{	
+            "type": "spotlight",
+            "title": "Gaseous Frame",
+			"item": "hwell:gaseous_frame",
+			"text": "The Gaseous Frame is a solid block until right clicked, then it turns into a gaseous block that you can move through. It will also connect to any Gaseous Frames touching it, and transform them as well. It can be returned to normal with another right click."
+        },
+		{	
+            "type": "crafting",
+            "title": "Gaseous Frame",
+			"recipe": "hwell:gaseous_frame"
+        }
+    ]
+}

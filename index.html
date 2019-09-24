@@ -12,35 +12,42 @@
 		--size_left: 128px;
 	}
 
-	.tabs {
-		float: left;
-		height: 100%;
-		padding-right: 50px;
+	.tablinks {
+		border-top-color: #999999;
+		margin: 50px;
+		height: 44px;
 	}
 
-	.tabs h3 {
+	.tablinks h3 {
 		border-top: solid 1px #CCC;
 		border-left: solid 1px #CCC;
 		border-bottom: solid 1px #999;
 		border-right: solid 1px #999;
 		padding: 10px;
-		margin: 0 0 10px 0;
+		margin: 0 10px 0 0;
 	}
 
 	.tab {
-		left: var(--size_left);
-		margin-top: 50px;
+		/* left: var(--size_left); */
+		clear: both;
+		/* margin-top: 50px; */
+		display: none;
 	}
 
 	.tablink {
+		float: left;
 		-webkit-user-select: none;
 		-moz-user-select: none;
 		-ms-user-select: none;
 		user-select: none;
 	}
 
-	.tablink:hover {
+	.tablink.active {
 		background-color: #DDDDDD;
+	}
+
+	.tablink:hover {
+		background-color: #DDDDEE;
 	}
 </style>
 <script>
@@ -48,7 +55,7 @@
 		var i, tab, tablinks;
 		tab = document.getElementsByClassName("tab");
 		for (i = 0; i < tab.length; i++) { tab[i].style.display = "none"; }
-		tablinks = document.getElementsByClassName("tablinks");
+		tablinks = document.getElementsByClassName("tablink");
 		for (i = 0; i < tablinks.length; i++) {
 			tablinks[i].className = tablinks[i].className.replace(" active", "");
 		}
@@ -58,9 +65,8 @@
 </script>
 
 <body>
-	{% include_relative navbar.html %}
 	<object class="patron" type="text/html" data="patron.html"></object>
-	<object style="border:0; padding:0; width:100%" type="text/html" data="navbar.html"></object>
+	<object style="border:0; padding:0; width:100%; height: 100px;" type="text/html" data="navbar.html"></object>
 	<hr>
 	<table>
 		<tr>
@@ -95,16 +101,24 @@
 	</tr>
 	</table>
 
-	<div class="tabs">
-		<h3 class="tablink" onclick="changeTab(event, 'introduction')">Introduction</h3>
-		<h3 class="tablink" onclick="changeTab(event, 'tab2')">Tab</h3>
+	<div class="tablinks">
+		<h3 class="tablink active" onclick="changeTab(event, 'introduction')">Introduction</h3>
+		<h3 class="tablink" onclick="changeTab(event, 'progression')">Progression</h3>
+		<h3 class="tablink" onclick="changeTab(event, 'multiblocks')">Multi-Blocks</h3>
+		<h3 class="tablink" onclick="changeTab(event, 'other_machines')">Other Machines</h3>
+		<h3 class="tablink" onclick="changeTab(event, 'other_mechanics')">Other Mechanics</h3>
 	</div>
 
-	<script>
+	<!-- 
+		#### #  # ##### ###  #### 
+		 #   ## #   #   #  # #  # 
+		 #   # ##   #   ###  #  # 
+		#### #  #   #   #  # #### 
+	-->
+	<div class="tab" id="introduction" style="display: block">
 
-	</script>
 
-	<div class="tab" id="introduction">
+
 
 		<h2>Introduction</h2>
 		<p>
@@ -128,13 +142,21 @@
 
 		<img style="width: 100%" src="./docs/everything.jpg">
 
-		<br>
-		<br>
-		<h2>Main Progression</h2>
-		<p>In this page you will find most of the blocks and items required to progress
-			through the mod, and will give you a general idea of how most crafting mechanics work.<br>
-		</p>
+	</div>
 
+	<!-- 
+		#### ###  ####  ### ###  ####  ###  ### #### #### #  # 
+		#  # #  # #  # #    #  # #    ##   ##    #   #  # ## # 
+		#### ###  #  # #  # ###  ##     ##   ##  #   #  # # ## 
+		#    #  # ####  ##  #  # #### ###  ###  #### #### #  # 
+	-->
+	<div class="tab" id="progression">
+
+
+
+
+
+		<h2>Main Progression</h2>
 		<table>
 			<tr>
 				<td align="center" colspan=2>
@@ -404,7 +426,15 @@
 			</tr>
 		</table>
 
-		<hr>
+	</div>
+
+	<!-- 
+		## ## #  # #    ##### #### #    #    ####  ### #  #  ### 
+		# # # #  # #      #    #   #### #    #  # #    # #  ##   
+		#   # #  # #      #    #   #  # #    #  # #    ###    ## 
+		#   # #### ####   #   #### #### #### ####  ### # *# ###  
+	-->
+	<div class="tab" id="multiblocks">
 
 		<h1>The Multi-Block Machines</h1>
 
@@ -484,48 +514,98 @@
 			</tr>
 		</table>
 
+
 	</div>
 
-	<div class="tab" id="tab2">
-		tab 2
+	<!-- 
+		## ##  ##   ### #  # #### #  # ####  ### 
+		# # # #  # #    #  #  #   ## # #    ##   
+		#   # #### #    ####  #   # ## ##     ## 
+		#   # #  #  ### #  # #### #  # #### ###  
+	 -->
+	<div class="tab" id="other_machines">
+		<h2>Other Blocks, Items and Mechanics</h2>
+
+		<table>
+			<tr>
+				<td align="center">
+					<img src="./docs/grav.gif" height="100px">
+				</td>
+				<td>
+					<h3>The Gravity Block</h3>
+					<p>Will pull objects to it in an small area.<br>
+						Can stack with other Gravity Blocks to pull stronger, or to create a middle gravity point
+						between
+						various Gravity Blocks.
+						The gravity has a 5 block square radius (11x11 area) and consumes no energy.</p>
+				</td>
+			</tr>
+		</table>
+
+		<table>
+			<tr>
+				<td align="center">
+					<img src="./docs/antigrav.png">
+				</td>
+				<td>
+					<h3>The Anti Gravity Block</h3>
+					<p>Will create an area with a strong upwards force, similar to gravity
+						players will feel like they have little control over they body while walking.
+						Sneaking however, will allow them to thrust forward in the direction they pretend to go.<br>
+						Notice that if you overlap Anti Gravity Areas, the upwards force will be too strong for players
+						to
+						control.<br>
+						The anti gravity has a 5 block square radius (11x11 area) and consumes no energy.</p>
+				</td>
+			</tr>
+		</table>
+
 	</div>
-	<hr>
 
-	<h2>Other Blocks, Items and Mechanics</h2>
+	<!-- 
+		## ## ####  ### #  #  ##  #  # ####  ###  ### 
+		# # # #    #    #  # #  # ## #  #   #    ##   
+		#   # ##   #    #### #### # ##  #   #      ## 
+		#   # ####  ### #  # #  # #  # ####  ### ###  
+	 -->
+	<div class="tab" id="other_mechanics">
+		<h2>Other Blocks, Items and Mechanics</h2>
 
-	<table>
-		<tr>
-			<td align="center">
-				<img src="./docs/grav.gif" height="100px">
-			</td>
-			<td>
-				<h3>The Gravity Block</h3>
-				<p>Will pull objects to it in an small area.<br>
-					Can stack with other Gravity Blocks to pull stronger, or to create a middle gravity point between
-					various Gravity Blocks.
-					The gravity has a 5 block square radius (11x11 area) and consumes no energy.</p>
-			</td>
-		</tr>
-	</table>
+		<table>
+			<tr>
+				<td align="center">
+					<img src="./docs/grav.gif" height="100px">
+				</td>
+				<td>
+					<h3>Repairing Paste</h3>
+					<p>Will pull objects to it in an small area.<br>
+						Can stack with other Gravity Blocks to pull stronger, or to create a middle gravity point
+						between
+						various Gravity Blocks.
+						The gravity has a 5 block square radius (11x11 area) and consumes no energy.</p>
+				</td>
+			</tr>
+		</table>
 
-	<table>
-		<tr>
-			<td align="center">
-				<img src="./docs/antigrav.png">
-			</td>
-			<td>
-				<h3>The Anti Gravity Block</h3>
-				<p>Will create an area with a strong upwards force, similar to gravity
-					players will feel like they have little control over they body while walking.
-					Sneaking however, will allow them to thrust forward in the direction they pretend to go.<br>
-					Notice that if you overlap Anti Gravity Areas, the upwards force will be too strong for players to
-					control.<br>
-					The anti gravity has a 5 block square radius (11x11 area) and consumes no energy.</p>
-			</td>
-		</tr>
-	</table>
+		<table>
+			<tr>
+				<td align="center">
+					<img src="./docs/antigrav.png">
+				</td>
+				<td>
+					<h3>The Anti Gravity Block</h3>
+					<p>Will create an area with a strong upwards force, similar to gravity
+						players will feel like they have little control over they body while walking.
+						Sneaking however, will allow them to thrust forward in the direction they pretend to go.<br>
+						Notice that if you overlap Anti Gravity Areas, the upwards force will be too strong for players
+						to
+						control.<br>
+						The anti gravity has a 5 block square radius (11x11 area) and consumes no energy.</p>
+				</td>
+			</tr>
+		</table>
 
-	<hr>
+	</div>
 
 </body>
 

@@ -1,0 +1,108 @@
+//0.2.1
+[New Stuff]
+Added a way to prevent the Gravity, Anti-Gravity, Separator, Puller, Nourisher and Charger machines from working by applying a redstone signal.
+ - To prevent a Charger from working, a redstone signal can also be applied to the surrounding 4 Gravity Blocks.
+ - To prevent a Puller from working, a redstone signal can also be applied to the Surrounding 9 Heat Blocks.
+ - To prevent a Separator from working, a redstone signal can also be applied to the Heat Block underneath.
+Added hopper support to the Dust Picking Table. Now hoppers can insert Mysterious Dust into the picking table, if it is empty.
+Changed how Dust Pickers work. Now they have more durability but will not always yield a result. In average the time spent should be shorter, but the tool has less actual durability.
+Changed the Anti-Gravity block to only affect players since when using various gravity blocks one can already lift items and this will fix a large amount of bugs and prevent other bugs with other mods entities.
+Changed the name of Core Stabilisers to Medium Core Stabilisers.
+Changed how much each stabilise... stabilises. Light stabilisers now have a 50% chance of preventing the drop of consumed blocks, and medium stabilisers a 75% chance.
+Changed recipe of onyx. Swapped stone for Cobblestone to make sense with other recipes.
+Changed recipe that turn a bricks block back into the block that created them to only need one block.
+Changed the amount of glowstone that light collectors drop.
+Changed the default range of the freezer to 2, down from 5.
+Changed Dust Pickers Anvil Repair Materials to also include Soulsteel.
+Removed the Powered Gravity and Powered Anti-Gravity Blocks.
+Fixed displacer getting tons of silk touch enchantments. (Maybe should've left that in.)
+
+
+<hr>
+
+Hello @everyone 
+Hearth Well 0.2 is out now, and with it some more documentation!
+Along the new stuff is:
+ - A new Power System, composed by the Power Crystals and the Charger Multi-block to charge them when they deplete. Power Crystals have different parts that require different ingredients, its a dynamic recipe. Power Crystals also have traits, like range and purity.
+ - A new block placer called Setter, that will place items that fly past it, with configurable range in game.
+ - 3 improved stabilisers, including one that really does its job well.
+ - Many fixes and new tweakable recipes!
+
+Curseforge: https://minecraft.curseforge.com/projects/hearth-well
+Changelog: https://wolforcept.github.io/hearthwell/changelogs/
+Documentation:  https://wolforcept.github.io/hearthwell/
+
+
+// 0.2
+[ NEW STUFF ]
+Update: to enable the hwell_recipes.json file and to be able to change recipes, you must now enable "customRecipesEnabled" in the config!
+Added a new machine block, the Setter. When an item passes through its range, the setter will try to place that block down.
+ - It has a default range of 4 blocks, which can be increased and decreased by placing Moonstone or Azurite (or Smooth Azurite) blocks in the remaining 5 blocks that surround it (each Moonstone and Azurite Block moves change range by 1).
+ - The range may also be moved further away, in the same direction, by placing Crystal Blocks the same way (each Crystal Block moves changes range by 2).
+ - The Setter requires 15 energy per operation.
+ - The default range may be changed in the config.
+Added two new Stabiliser blocks, and tweaked the existing one's recipe.
+ - There are now three stabilisers: the Light Stabiliser, the Stabiliser and the Heavy Stabiliser;
+ - They will prevent blocks near cores from dropping by 33%, 66% and 100% respectively.
+Added a new source of Power: the Power Crystal
+ - Can be right clicked in the world to place them. Will provide power for nearby machines.
+ - Requires 3 parts to craft: the Nucleous, the Relay and the Screen.
+ - Can be crafted with different materials for each part, so it has many crafting combinations.
+ - The Power Crystals have three traits: power, range and purity.
+ - Power simply means more total Power available. Range is also simply the range at which a Power Crystal can deliver power.
+ - Purity affects power lost by distance. More purity means less power lost when charging a machine from a distance.
+ - Different parts affect the traits differently.
+Added a new block: the Charger
+ - Charges Power Crystals.
+ - Requires a Multiblock Structure.
+ - Right click to insert the crystal, then throw items with Potency into the machine and the potency will be extracted and inserted into the crystal.
+ - Some items might not be fully consumed. The unpotent remainder will be spat out from the top of the charger.
+Added configuration for the Nourisher: energy consumption, range, cooldown and target selection;
+Changed Boxer no longer requires redstone to work. Instead, a redstone signal will prevent it from working.
+Changed many default power consumptions to reflect changes in power usage.
+Changed the Loot Kit Producer to require energy.
+[ BALANCE ]
+Mysterious Bushes now grow much slower near other Mysterious Bushes
+Reduced number of boxes a boxer spawns to 32. This may be changed in the config.
+ALL Entities will now, by default, be prevented from traveling to the nether by any means. This may be changed in the config.
+[ BUG FIXES ]
+Fixed a bug with the Dust Picker Holder where sometimes a player was unable to retrieve dust pickers. (FINALLY!!)
+Fixed bad localization when interacting with other mods.
+
+
+
+
+
+
+
+
+
+
+// 0.1.1
+Now you can add your Custom Core Blocks, and even customize two colors of them!
+tweaked mysterious bushes to be more valuable when full grown
+added a config to change the probability of a puller filter pulling filtered items (default is 50%)
+added quartz and prismarine burst seeds
+
+
+
+
+
+
+
+
+// 0.1
+hearth well successfully runs on servers now
+added particles to blocks being consumed by core blocks (or maybe fixed, idk)
+added particles to tubes when they are correctly placed and have a correct recipe
+loot kits left on the ground will now hatch after a specified ammount of time (default is half a minute)
+added a config json file with many recipes
+added a Block of Skin Hide
+greatly decreased overall tube recipe speed, particularly in higher tube counts
+fixed separator weird item interaction
+fixed range of gravity blocks being one less to the positive directions
+fixed some unlocalized names
+fixed the wrong name in the info file
+leaves are now not leaves. (they are just normal blocks, this fixes weird leaf behaviour for now)
+fixed Heat Furnaces ignoring metadata
+fixed core blocks not accepting consumable blocks from all 6 directions

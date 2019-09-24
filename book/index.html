@@ -1,0 +1,44 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<meta http-equiv="Content-Language" content="en-gb">
+	<link href="../stylesheet.css" rel="stylesheet">
+	<link rel="icon" href="../docs/hearthwell.png">
+	<title>Book of the Well</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+		function category(path) {
+			$.getJSON("patchouli_book/en_us/categories/" + path + ".json", function (data) {
+				console.log(data);
+			});
+		}
+		category("introduction");
+		category("core_mechanics");
+	</script>
+</head>
+
+<body>
+	<object style="border:0;padding:0;width:100%" type="text/html" data="../navbar.html"></object>
+	<hr>
+	<h1>Book of the Well</h1>
+
+	<script>
+
+		function readTextFile(file) {
+			var rawFile = new XMLHttpRequest();
+			rawFile.open("GET", file, false);
+			rawFile.onreadystatechange = function () {
+				if (rawFile.readyState === 4) {
+					if (rawFile.status === 200 || rawFile.status == 0) {
+						var allText = rawFile.responseText;
+						alert(allText);
+					}
+				}
+			}
+			rawFile.send(null);
+		}
+	</script>
+</body>
+
+</html>
