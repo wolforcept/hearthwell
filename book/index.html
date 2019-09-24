@@ -10,35 +10,85 @@
 	<script>
 		function category(path) {
 			$.getJSON("patchouli_book/en_us/categories/" + path + ".json", function (data) {
-				console.log(data);
+
+				$('<h3 class="tablink" onclick="changeTab(event, \'' + data.name + '\')">Progression</h3>')
+					.appendTo(".tablinks");
+
+				$('<div class="tab" id="' + data.name + '">Hello</div>')
+					.appendTo("body");
+
 			});
 		}
-		category("introduction");
-		category("core_mechanics");
+
+		function changeTab(evt, name) {
+			var i, tab, tablinks;
+			tab = document.getElementsByClassName("tab");
+			for (i = 0; i < tab.length; i++) { tab[i].style.display = "none"; }
+			tablinks = document.getElementsByClassName("tablink");
+			for (i = 0; i < tablinks.length; i++) {
+				tablinks[i].className = tablinks[i].className.replace(" active", "");
+			}
+			document.getElementById(name).style.display = "block";
+			evt.currentTarget.className += " active";
+		}
+
+		$(document).ready(function () {
+			category("introduction");
+			category("core_mechanics");
+		});
 	</script>
+
+	<style>
+		:root {
+			--size_left: 128px;
+		}
+
+		.tablinks {
+			border-top-color: #999999;
+			margin: 50px;
+			height: 44px;
+		}
+
+		.tablinks h3 {
+			border-top: solid 1px #CCC;
+			border-left: solid 1px #CCC;
+			border-bottom: solid 1px #999;
+			border-right: solid 1px #999;
+			padding: 10px;
+			margin: 0 10px 0 0;
+		}
+
+		.tab {
+			/* left: var(--size_left); */
+			clear: both;
+			/* margin-top: 50px; */
+			display: none;
+		}
+
+		.tablink {
+			float: left;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+
+		.tablink.active {
+			background-color: #DDDDDD;
+		}
+
+		.tablink:hover {
+			background-color: #DDDDEE;
+		}
+	</style>
 </head>
 
 <body>
 	<object style="border:0;padding:0;width:100%" type="text/html" data="../navbar.html"></object>
 	<hr>
 	<h1>Book of the Well</h1>
+	<div class="tablinks"></div>
 
-	<script>
-
-		function readTextFile(file) {
-			var rawFile = new XMLHttpRequest();
-			rawFile.open("GET", file, false);
-			rawFile.onreadystatechange = function () {
-				if (rawFile.readyState === 4) {
-					if (rawFile.status === 200 || rawFile.status == 0) {
-						var allText = rawFile.responseText;
-						alert(allText);
-					}
-				}
-			}
-			rawFile.send(null);
-		}
-	</script>
 </body>
 
 </html>
