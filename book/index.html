@@ -23,6 +23,7 @@
 				$('<h2 class="tablink" onclick="changeTab(event, \'' + name + '\')">' + cat_data.name + '</h2>')
 					.appendTo("#tablinks");
 			});
+			$(".tablink")[0].css("display", "block");
 
 			elems.forEach(element => {
 				$.getJSON(basepath + "entries/" + name + "/" + element + ".json", function (elem_data) {
@@ -59,13 +60,13 @@
 			--size_left: 128px;
 		}
 
-		.tablinks {
+		#tablinks {
 			border-top-color: #999999;
 			margin: 50px;
 			height: 44px;
 		}
 
-		.tablinks h3 {
+		#tablinks h3 {
 			border-top: solid 1px #CCC;
 			border-left: solid 1px #CCC;
 			border-bottom: solid 1px #999;
