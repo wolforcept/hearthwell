@@ -32,13 +32,16 @@
 					elem_data.pages.forEach(page => {
 						if ("text" in page) {
 							// if (page.type == "text" || page.type == "spotlight" || page.type == "text" || ) {
-							$('<p>' + page.text + '</p>').appendTo(cat_div);
+							$('<p>' + replaceStuff(page.text) + '</p>').appendTo(cat_div);
 						}
 					});
 
 				});
 			});
 			cat_div.appendTo("#tabs");
+		}
+		function replaceStuff(text) {
+			return text.replace("$(br)", "<br>").replace("$(br2)", "<br><br>").replace("$(li)", "<br>&bull;");
 		}
 
 		function changeTab(evt, name) {
