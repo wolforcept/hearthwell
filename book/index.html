@@ -21,7 +21,7 @@
 
 			$.getJSON(basepath + "categories/" + name + ".json", function (cat_data) {
 				$('<h2 class="tablink" onclick="changeTab(event, \'' + name + '\')">' + cat_data.name + '</h2>')
-					.appendTo("tablinks");
+					.appendTo("#tablinks");
 			});
 
 			elems.forEach(element => {
@@ -37,7 +37,7 @@
 
 				});
 			});
-			cat_div.appendTo("tablinks");
+			cat_div.appendTo("#tabs");
 		}
 
 		function changeTab(evt, name) {
@@ -103,8 +103,8 @@
 	<object style="border:0;padding:0;width:100%" type="text/html" data="../navbar.html"></object>
 	<hr>
 	<!-- <h1>Book of the Well</h1> -->
-	<div class="tablinks"></div>
-	<div class="tabs"></div>
+	<div id="tablinks"></div>
+	<div id="tabs"></div>
 
 </body>
 
