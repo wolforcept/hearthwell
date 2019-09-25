@@ -24,9 +24,9 @@
 
 			elems.forEach(element => {
 				$.getJSON(basepath + "entries/" + name + "/" + element + ".json", function (elem_data) {
-					console.log(element_data);
+					console.log(elem_data);
 					elem_data.pages.forEach(page => {
-						if (page.type == text) {
+						if (page.type == "text") {
 							$('<p>' + page + '</p>')
 								.appendTo(".tablinks");
 						}
