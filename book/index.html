@@ -10,40 +10,24 @@
 	<script>
 
 		$(document).ready(function () {
-			category("introduction");
-			category("core_mechanics");
+			category("introduction", []);
+			category("core_mechanics", []);
 		});
 
-		function parseDirectoryListing(text) {
-			let docs = text
-				.match(/href="([\w]+)/g) // pull out the hrefs
-				.map((x) => x.replace('href="', '')); // clean up
-			console.log(docs);
-			return docs;
-		}
-
-		function category(name) {
+		function category(name, elems) {
 			var basepath = "patchouli_book/en_us/";
 			$.getJSON(basepath + "categories/" + name + ".json", function (cat_data) {
-
 				$('<h3 class="tablink" onclick="changeTab(event, \'' + name + '\')">' + cat_data.name + '</h3>')
 					.appendTo(".tablinks");
-				// $.get(basepath + "entries/" + name, (data) => {
-				$.get("https://api.github.com/repos/wolforcept/hearthwell/master/book/patchouli_book/en_us/entries/" + name, (data) => {
-					console.log(data);
-					let listing = parseDirectoryListing(data);
-					
-					console.log(listing);
-					$('body').append(JSON.stringify(listing));
+			});
+
+			elems.forEach(element => {
+				$.getJSON(basepath + "entries/" + name + "/" + element + ".json", function (element_data) {
+					console.log(element_data);
+					$('<h3 class="tablink" onclick="changeTab(event, \'' + name + '\')">' + element_data + '</h3>')
+						.appendTo(".tablinks");
 				});
 			});
-			// console.log(files);
-
-			// ####.forEach(element => {
-			// 	$('<div class="tab" id="' + data.name + '">Hello</div>')
-			// 		.appendTo("body");
-			// });
-			// });
 		}
 
 		function changeTab(evt, name) {
