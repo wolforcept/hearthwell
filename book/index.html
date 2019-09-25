@@ -29,9 +29,10 @@
 				$('<h3 class="tablink" onclick="changeTab(event, \'' + name + '\')">' + cat_data.name + '</h3>')
 					.appendTo(".tablinks");
 				// $.get(basepath + "entries/" + name, (data) => {
-				$.get("https://raw.githubusercontent.com/wolforcept/hearthwell/master/book/patchouli_book/en_us/entries/" + name, (data) => {
+				$.get("https://api.github.com/repos/wolforcept/hearthwell/master/book/patchouli_book/en_us/entries/" + name, (data) => {
 					console.log(data);
 					let listing = parseDirectoryListing(data);
+					
 					console.log(listing);
 					$('body').append(JSON.stringify(listing));
 				});
