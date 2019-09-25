@@ -10,9 +10,9 @@
 	<script>
 
 		$(document).ready(function () {
-			category("introduction", ["asul", "basestuff", "crystals", "displacer", "dusts", "soulsteel", "trees" ]);
+			category("introduction", ["asul", "basestuff", "crystals", "displacer", "dusts", "soulsteel", "trees"]);
 			category("core_mechanics", ["charging", "collecting_light", "coring", "crushing", "dustpicking",
-			"freezing", "grinding", "power", "separator", "stabilising", "tubing"]);
+				"freezing", "grinding", "power", "separator", "stabilising", "tubing"]);
 		});
 
 		function category(name, elems) {
@@ -23,10 +23,15 @@
 			});
 
 			elems.forEach(element => {
-				$.getJSON(basepath + "entries/" + name + "/" + element + ".json", function (element_data) {
+				$.getJSON(basepath + "entries/" + name + "/" + element + ".json", function (elem_data) {
 					console.log(element_data);
-					$('<h3 class="tablink" onclick="changeTab(event, \'' + name + '\')">' + element_data + '</h3>')
-						.appendTo(".tablinks");
+					elem_data.pages.forEach(page => {
+						if (page.type == text) {
+							$('<p>' + page + '</p>')
+								.appendTo(".tablinks");
+						}
+					});
+
 				});
 			});
 		}
@@ -95,6 +100,7 @@
 	<hr>
 	<!-- <h1>Book of the Well</h1> -->
 	<div class="tablinks"></div>
+	<div class="tabs"></div>
 
 </body>
 
