@@ -8,20 +8,40 @@
 	<title>Book of the Well</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script>
-		function category(path) {
-			$.getJSON("patchouli_book/en_us/categories/" + path + ".json", function (data) {
 
-				$('<h3 class="tablink" onclick="changeTab(event, \'' + data.name + '\')">Progression</h3>')
+		$(document).ready(function () {
+			category("introduction");
+			category("core_mechanics");
+		});
+
+		function parseDirectoryListing(text) {
+			let docs = text
+				.match(/href="([\w]+)/g) // pull out the hrefs
+				.map((x) => x.replace('href="', '')); // clean up
+			console.log(docs);
+			return docs;
+		}
+
+		function category(name) {
+			var basepath = "patchouli_book/en_us/";
+			$.getJSON(basepath + "categories/" + name + ".json", function (cat_data) {
+
+				$('<h3 class="tablink" onclick="changeTab(event, \'' + name + '\')">' + cat_data.name + '</h3>')
 					.appendTo(".tablinks");
-
-				var fs = require('fs');
-				var files = fs.readdirSync('/assets/photos/');
-				console.log(files);
-				// ####.forEach(element => {
-				// 	$('<div class="tab" id="' + data.name + '">Hello</div>')
-				// 		.appendTo("body");
-				// });
+				$.get(basepath + "entries/" + name, (data) => {
+					console.log(data);
+					let listing = parseDirectoryListing(data);
+					console.log(listing);
+					$('body').append(JSON.stringify(listing));
+				});
 			});
+			// console.log(files);
+
+			// ####.forEach(element => {
+			// 	$('<div class="tab" id="' + data.name + '">Hello</div>')
+			// 		.appendTo("body");
+			// });
+			// });
 		}
 
 		function changeTab(evt, name) {
@@ -36,10 +56,6 @@
 			evt.currentTarget.className += " active";
 		}
 
-		$(document).ready(function () {
-			category("introduction");
-			category("core_mechanics");
-		});
 	</script>
 
 	<style>
@@ -90,7 +106,7 @@
 <body>
 	<object style="border:0;padding:0;width:100%" type="text/html" data="../navbar.html"></object>
 	<hr>
-	<h1>Book of the Well</h1>
+	<!-- <h1>Book of the Well</h1> -->
 	<div class="tablinks"></div>
 
 </body>
