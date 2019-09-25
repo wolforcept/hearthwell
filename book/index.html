@@ -23,7 +23,7 @@
 				$('<h2 class="tablink" onclick="changeTab(event, \'' + name + '\')">' + cat_data.name + '</h2>')
 					.appendTo("#tablinks");
 			});
-			$(".tab")[0].css("display", "block");
+			//$(".tab")[0].css("display", "block");
 
 			elems.forEach(element => {
 				$.getJSON(basepath + "entries/" + name + "/" + element + ".json", function (elem_data) {
