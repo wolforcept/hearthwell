@@ -9,6 +9,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script>
 
+		var imageSources = [];
+
 		// Object.prototype.getdir = function (name) {
 		// 	if ("subdirectories" in this) {
 		// 		return this.subdirectories.filter(obj => {
@@ -20,32 +22,61 @@
 		$(document).ready(function () {
 			// var categories, entries;
 			// console.log(JSON.parse("http://wolforcept.github.io/hearthwell/reference/listdir.json"));
-			// $.getJSON("https://support.oneskyapp.com/hc/en-us/article_attachments/202761627/example_1.json", function (listdir) {
-			// 	console.log(listdir);
-			// });
+			$.getJSON("listdir.json", function (listdir) {
+				console.log(listdir);
+			});
 			// $.getJSON("/listdir.json", function (listdir) {
 			// 	categories = listdir.getdir("patchouli_books").getdir("book_of_the_well").getdir("en_us").getdir("categories");
 			// 	entries = listdir.getdir("patchouli_books").getdir("book_of_the_well").getdir("en_us").getdir("entries");
 			// });
 			// console.log(categories);
 			// console.log(entries);
-			// recipesCategory();
 			category("introduction", ["asul", "basestuff", "crystals", "displacer", "dusts", "soulsteel", "trees"]);
 			category("core_mechanics", ["charging", "collecting_light", "coring", "crushing", "dustpicking",
 				"freezing", "grinding", "power", "separator", "stabilising", "tubing"]);
+			recipesCategory();
+
 			category("multiblocks", ["charging", "furnace", "grinding", "puller", "separator"]);
 			category("other_machines", ["10_gravity", "20_forming", "30_boxing", "40_nourishing", "50_antigravity",
 				"60_setting", "70_producing"]);
 			category("other_mechanics", ["0_filtering", "10_repairing", "20_fueling", "30_bursting", "40_levitating",
 				"50_breaking", "51_grafting"]);
 		});
+		function recipesCategory() {
 
+			$('<div class="tablink" onclick="changeTab(event, \'recipes\')">Recipes</div>')
+				.appendTo("#tablinks");
+
+			// var basepath = "recipes/";
+			var cat_div = $("<div class='tab' id='recipes'></div>");
+
+			let recipe_data = {
+				"type": "minecraft:crafting_shaped",
+				"pattern": [
+					"ABA",
+					"B B",
+					"ABA"],
+				"key": {
+					"A": [{ "item": "hwell:asul_ingot" }, { "item": "hwell:asul_ingot" }],
+					"B": { "item": "minecraft:stone", "data": 0 }
+				},
+				"result": { "item": "hwell:asul_machine_case" }
+			};
+
+			fill3x3grid(recipe_data).appendTo(cat_div);
+
+			// elems.forEach(recipe => {
+			// 	$.getJSON(basepath + recipe + ".json", function (recipe_data) {
+			// 	});
+			// });
+			cat_div.appendTo("#tabs");
+		}
 		function category(name, elems) {
 			var cat_div = $("<div class='tab' id='" + name + "'></div>");
 			var basepath = "patchouli_books/book_of_the_well/en_us/";
 
 			$.getJSON(basepath + "categories/" + name + ".json", function (cat_data) {
-				$('<h2 class="tablink" onclick="changeTab(event, \'' + name + '\')">' + cat_data.name + '</h2>')
+				$('<div class="tablink" onclick="changeTab(event, \'' + name + '\')">' + cat_data.name + '</div>')
 					.appendTo("#tablinks");
 			});
 			//$(".tab")[0].css("display", "block");
@@ -80,11 +111,66 @@
 			evt.currentTarget.className += " active";
 		}
 
+		function fill3x3grid(recipe_data) {
+			table = $("<table class='recipe_table'><tr><td id='1'></td><td id='2'></td><td id='3'></td></tr><tr><td id='4'></td><td id='5'></td><td id='6'></td></tr><tr><td id='7'></td><td id='8'></td><td id='9'></td></tr></table>");
+			if (recipe_data.type == "minecraft:crafting_shaped") {
+				var i = 1;
+				recipe_data.pattern.forEach(element => {
+					for (var l = 0; l < element.length; l++) {
+						if (element.charAt(l) != " ") {
+							let content = readFromKey(recipe_data.key, element.charAt(l));
+							table.find("#" + i).html(content);
+						}
+						i++;
+					}
+				});
+			}
+			return table;
+		}
+		function readFromKey(key, char) {
+			let obj = key[char];
+			if (Array.isArray(obj)) {
+				let images = obj.map(getItemImage);
+				return createChangingImage(images);
+			} else {
+				return createStoppedImage(getItemImage(obj));
+			}
+		}
+		function getItemImage(item) {
+			return item[0];
+		}
+		function createStoppedImage(image) {
+			return $("<img width='32px' height='32px' src='" + image + "'>");
+		}
+
+		var nextId = 0;
+		function createChangingImage(images) {
+			let id = "image_" + nextId;
+			nextId++;
+			imageSources.push({ "id": id, "i": 0, "images": images });
+			image = $("<img width='32px' height='32px' id='" + id + "' src='" + images[0] + "'>");
+			return image;
+		}
+
+		setInterval(() => {
+			imageSources.forEach(element => {
+				element.i++;
+				if (element.i == element.images.length)
+					element.i = 0;
+				$("#" + element.id).attr('src', element.images[element.i]);
+				console.log(element.id);
+			});
+		}, 1000);
+
 	</script>
 
 	<style>
 		:root {
 			--size_left: 128px;
+		}
+
+		img {
+			border: dashed 1px black;
 		}
 
 		#tablinks {
@@ -93,13 +179,14 @@
 			height: 44px;
 		}
 
-		#tablinks h2 {
+		#tablinks .tablink {
 			border-top: solid 1px #CCC;
 			border-left: solid 1px #CCC;
 			border-bottom: solid 1px #999;
 			border-right: solid 1px #999;
 			padding: 10px;
 			margin: 0 10px 0 0;
+			font-size: 16pt;
 		}
 
 		.tab {
@@ -124,6 +211,12 @@
 		.tablink:hover {
 			background-color: #DDDDEE;
 		}
+
+		.recipe {
+			display: inline-block;
+			width: 128px;
+			height: 128px;
+		}
 	</style>
 </head>
 
@@ -131,7 +224,9 @@
 	<object style="border:0;padding:0;width:100%" type="text/html" data="../navbar.html"></object>
 	<hr>
 	<!-- <h1>Book of the Well</h1> -->
-	<div id="tablinks"></div>
+	<div id="tablinks">
+		<div class="tablink">Teste teste</div>
+	</div>
 	<div id="tabs"></div>
 
 </body>
