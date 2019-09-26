@@ -9,9 +9,20 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script>
 
+		Object.prototype.getdir = function (name) {
+			if ("subdirectories" in this)
+				return this.subdirectories.filter(obj => {
+					return obj.name === name
+				})
+		}
+
 		$(document).ready(function () {
 			$.getJSON("listdir.json", function (listdir) {
+				categories = listdir.getdir("patchouli_books").getdir("book_of_the_well").getdir("en_us").getdir("categories");
+				entries = listdir.getdir("patchouli_books").getdir("book_of_the_well").getdir("en_us").getdir("entries");
 				console.log(listdir);
+				console.log(categories);
+				console.log(entries);
 			});
 			// recipesCategory();
 			category("introduction", ["asul", "basestuff", "crystals", "displacer", "dusts", "soulsteel", "trees"]);
