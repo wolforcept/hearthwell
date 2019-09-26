@@ -10,16 +10,17 @@
 	<script>
 
 		Object.prototype.getdir = function (name) {
-			if ("subdirectories" in this)
+			if ("subdirectories" in this) {
 				return this.subdirectories.filter(obj => {
 					return obj.name === name
 				})
+			}
 		}
 
 		$(document).ready(function () {
 			var resp = $.getJSON("listdir.json", function (listdir) {
-				categories = listdir.getdir("patchouli_books").getdir("book_of_the_well").getdir("en_us").getdir("categories");
-				entries = listdir.getdir("patchouli_books").getdir("book_of_the_well").getdir("en_us").getdir("entries");
+				let categories = listdir.getdir("patchouli_books").getdir("book_of_the_well").getdir("en_us").getdir("categories");
+				let entries = listdir.getdir("patchouli_books").getdir("book_of_the_well").getdir("en_us").getdir("entries");
 				console.log(listdir);
 				console.log(categories);
 				console.log(entries);
