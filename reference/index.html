@@ -17,13 +17,14 @@
 		}
 
 		$(document).ready(function () {
-			$.getJSON("listdir.json", function (listdir) {
+			var resp = $.getJSON("listdir.json", function (listdir) {
 				categories = listdir.getdir("patchouli_books").getdir("book_of_the_well").getdir("en_us").getdir("categories");
 				entries = listdir.getdir("patchouli_books").getdir("book_of_the_well").getdir("en_us").getdir("entries");
 				console.log(listdir);
 				console.log(categories);
 				console.log(entries);
 			});
+			console.log(resp);
 			// recipesCategory();
 			category("introduction", ["asul", "basestuff", "crystals", "displacer", "dusts", "soulsteel", "trees"]);
 			category("core_mechanics", ["charging", "collecting_light", "coring", "crushing", "dustpicking",
