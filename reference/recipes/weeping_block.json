@@ -1,0 +1,17 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "AAA",
+	" A "],
+  "key": {
+    "A": [
+      {
+        "item": "minecraft:ghast_tear"
+      }
+    ]
+  },
+  "result": {
+    "item": "hwell:weeping_block"
+  }
+}

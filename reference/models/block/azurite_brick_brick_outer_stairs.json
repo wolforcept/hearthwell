@@ -1,0 +1,4 @@
+{
+    "parent": "block/outer_stairs",
+    "textures": { "bottom": "hwell:blocks/azurite_brick_brick", "top": "hwell:blocks/azurite_brick_brick", "side": "hwell:blocks/azurite_brick_brick" }
+}

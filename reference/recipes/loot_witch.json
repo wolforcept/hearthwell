@@ -1,0 +1,18 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YPY",
+    "GXH",
+    "YOY"  ],
+  "key": {
+	"X": [{ "item": "hwell:loot_base" }],
+	"Y": [{ "item": "hwell:crystal_nether" }],
+	"G": [{ "item": "hwell:shard_au" }],
+	"H": [{ "item": "hwell:shard_h" }],
+	"O": [{ "item": "hwell:shard_o" }],
+	"P": [{ "item": "hwell:shard_p" }]
+  },
+  "result": {
+    "item": "hwell:loot_witch"
+  }
+}

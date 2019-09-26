@@ -1,0 +1,16 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A A",
+    " A "  ],
+  "key": {
+    "A": [
+      {
+        "item": "hwell:crystal"
+      }
+    ]
+  },
+  "result": {
+    "item": "hwell:crystal_bowl"
+  }
+}

@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+	"textures": {
+        "up": "hwell:blocks/setter_top",
+        "down": "hwell:blocks/machine_base",
+        "north": "hwell:blocks/setter_side",
+        "south": "hwell:blocks/setter_side",
+        "west": "hwell:blocks/setter_side",
+        "east": "hwell:blocks/setter_side",
+        "particle": "hwell:blocks/machine_base"
+   }
+}

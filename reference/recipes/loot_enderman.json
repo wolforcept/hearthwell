@@ -1,0 +1,16 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YCY",
+    "HXH",
+    "YCY"  ],
+  "key": {
+	"X": [{ "item": "hwell:loot_base" }],
+	"Y": [{ "item": "hwell:crystal_nether" }],
+	"C": [{ "item": "hwell:shard_c" }],
+	"H": [{ "item": "hwell:shard_h" }]
+  },
+  "result": {
+    "item": "hwell:loot_enderman"
+  }
+}

@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+	"textures": {
+        "up": "hwell:blocks/stabiliser_heavy_top",
+        "down": "hwell:blocks/machine_base",
+        "north": "hwell:blocks/stabiliser_heavy_side",
+        "south": "hwell:blocks/stabiliser_heavy_side",
+        "west": "hwell:blocks/stabiliser_heavy_side",
+        "east": "hwell:blocks/stabiliser_heavy_side",
+        "particle": "hwell:blocks/stabiliser_heavy_side"
+   }
+}

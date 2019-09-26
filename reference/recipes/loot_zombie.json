@@ -1,0 +1,17 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YOY",
+    "CXC",
+    "YNY"  ],
+  "key": {
+	"X": [{ "item": "hwell:loot_base" }],
+	"Y": [{ "item": "hwell:crystal_nether" }],
+	"C": [{ "item": "hwell:shard_c" }],
+	"N": [{ "item": "hwell:shard_n" }],
+	"O": [{ "item": "hwell:shard_o" }]
+  },
+  "result": {
+    "item": "hwell:loot_zombie"
+  }
+}

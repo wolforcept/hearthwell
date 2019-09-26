@@ -1,0 +1,14 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+	"ABA",
+    "AAA" ],
+  "key": {
+    "A": [{ "item": "minecraft:cobblestone" }],
+	"B": [{ "item": "hwell:shard_fe" }]
+  },
+  "result": {
+    "item": "hwell:citrinic_stone", "count": 8
+  }
+}

@@ -1,0 +1,4 @@
+{ "type": "minecraft:crafting_shaped",
+  "pattern": [ "A ","AA" ],
+  "key": {"A": [{"item": "hwell:citrinic_stone"}]},
+  "result": { "item": "hwell:citrinic_stone_stairs", "count": 4 }}

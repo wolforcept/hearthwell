@@ -1,0 +1,14 @@
+{
+	"parent": "block/cube_column",
+	"textures": {
+		"end": "hwell:blocks/furnace_tube",
+		"side": "hwell:blocks/furnace_tube_side"
+	},
+	 "display": {
+        "gui": {
+            "rotation": [ 30, 45, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 0.625, 0.625, 0.625 ]
+        }
+   }
+}

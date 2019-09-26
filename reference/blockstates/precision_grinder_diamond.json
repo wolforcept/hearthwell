@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=up": { "model": "hwell:precision_grinder_diamond" },
+        "facing=down": { "model": "hwell:precision_grinder_diamond" },
+        "facing=north": { "model": "hwell:precision_grinder_diamond" },
+        "facing=south": { "model": "hwell:precision_grinder_diamond", "y": 180 },
+        "facing=west":  { "model": "hwell:precision_grinder_diamond", "y": 270 },
+        "facing=east":  { "model": "hwell:precision_grinder_diamond", "y": 90 }
+    }
+}

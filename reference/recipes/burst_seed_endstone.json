@@ -1,0 +1,14 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+	"ABA",
+    " A " ],
+  "key": {
+    "A": [{ "item": "minecraft:end_stone" }],
+	"B": [{ "item": "hwell:shard_au" }]
+  },
+  "result": {
+    "item": "hwell:burst_seed_endstone"
+  }
+}

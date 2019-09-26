@@ -1,0 +1,7 @@
+{ 
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "hwell:plumage_block" }
+  ],
+  "result": { "item": "minecraft:feather", "count": 9 }
+}

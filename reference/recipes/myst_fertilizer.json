@@ -1,0 +1,25 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AB",
+    "BA" ],
+  "key": {
+    "A": [
+      {
+        "item": "hwell:myst_dust",
+        "data": 0
+      }
+    ],
+	"B": [
+      {
+        "item": "hwell:dust",
+        "data": 0
+      }
+    ]
+  },
+  "result": {
+    "item": "hwell:myst_fertilizer",
+	"count": 5,
+    "data": 0
+  }
+}

@@ -1,0 +1,14 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " H ",
+    "GCG",
+    " O "  ],
+  "key": {
+    "H": [{ "item": "hwell:shard_ca" }],
+	"G": [{ "item": "minecraft:grass", "data": 0 }],
+	"C": [{ "item": "hwell:crystal" }],
+	"O": [{ "item": "hwell:shard_au" }]
+  },
+  "result": { "item": "hwell:seed_of_the_end" }
+}

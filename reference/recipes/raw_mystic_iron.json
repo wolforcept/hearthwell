@@ -1,0 +1,9 @@
+{ 
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:iron_ingot" },
+    { "item": "hwell:heavy_ingot" },
+    { "item": "hwell:asul_ingot" }
+  ],
+  "result": { "item": "hwell:raw_mystic_iron", "count": 3 }
+}

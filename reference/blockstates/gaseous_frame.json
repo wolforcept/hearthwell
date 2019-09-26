@@ -1,0 +1,6 @@
+{
+    "variants": {
+		"passable=false": { "model": "hwell:gaseous_frame" },
+		"passable=true": { "model": "hwell:gaseous_glass" }
+    }
+}

@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "hwell:onyx_bricks" }
+  ],
+  "result": { "item": "hwell:onyx", "count": 1 }
+}

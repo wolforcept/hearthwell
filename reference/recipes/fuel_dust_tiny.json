@@ -1,0 +1,7 @@
+{ 
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "hwell:fuel_dust" }
+  ],
+  "result": { "item": "hwell:fuel_dust_tiny" , "count": 4 }
+}

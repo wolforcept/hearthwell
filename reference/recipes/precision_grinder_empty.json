@@ -1,0 +1,13 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"ACA",
+    "DBD" ],
+  "key": {
+	"A": [{ "item": "hwell:crystal" }],
+	"B": [{ "item": "hwell:furnace_tube" }],
+	"C": [{ "item": "hwell:asul_machine_case" }],
+	"D": [{ "item": "hwell:heavy_ingot" }]
+  },
+  "result": { "item": "hwell:precision_grinder_empty" }
+}

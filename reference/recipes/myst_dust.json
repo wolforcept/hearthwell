@@ -1,0 +1,14 @@
+{ 
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+	  "item": "hwell:myst_dust_block",
+	  "data": 0
+	}
+  ],
+  "result": {
+    "item": "hwell:myst_dust",
+	"count": 4,
+    "data": 0
+  }
+}

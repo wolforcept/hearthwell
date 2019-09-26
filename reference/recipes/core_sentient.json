@@ -1,0 +1,10 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["ABA", "BCB", "ABA" ],
+  "key": {
+    "A": [{ "item": "minecraft:dye" , "data": 4}],
+    "B": [{ "item": "minecraft:glowstone_dust" }],
+    "C": [{ "item": "hwell:asul_ingot" }]
+  },
+  "result": { "item": "hwell:core_sentient", "count": 4 }
+}

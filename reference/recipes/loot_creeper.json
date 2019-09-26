@@ -1,0 +1,16 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YPY",
+    "NXN",
+    "YPY"  ],
+  "key": {
+	"X": [{ "item": "hwell:loot_base" }],
+	"Y": [{ "item": "hwell:crystal_nether" }],
+	"N": [{ "item": "hwell:shard_n" }],
+	"P": [{ "item": "hwell:shard_p" }]
+  },
+  "result": {
+    "item": "hwell:loot_creeper"
+  }
+}

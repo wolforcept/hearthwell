@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=north": { "model": "hwell:heat_furnace", "y": 270 },
+        "facing=south": { "model": "hwell:heat_furnace", "y": 90 },
+        "facing=west":  { "model": "hwell:heat_furnace", "y": 180 },
+        "facing=east":  { "model": "hwell:heat_furnace" },
+        "facing=up":  { "model": "hwell:heat_furnace" },
+        "facing=down":  { "model": "hwell:heat_furnace" }
+    }
+}

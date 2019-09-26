@@ -1,0 +1,9 @@
+{ 
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:clay" },
+    { "item": "hwell:crystal_block" },
+    { "item": "hwell:myst_dust_block" }
+  ],
+  "result": { "item": "hwell:raw_asul_block", "count": 3 }
+}

@@ -1,0 +1,9 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["A", "A", "B" ],
+  "key": {
+    "A": [{ "item": "hwell:soulsteel_ingot" }],
+    "B": [{ "item": "minecraft:stick" }]
+  },
+  "result": { "item": "hwell:soulsteel_sword" }
+}

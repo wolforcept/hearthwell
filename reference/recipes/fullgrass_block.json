@@ -1,0 +1,14 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+	"ABA",
+    "AAA" ],
+  "key": {
+    "A": [{ "item": "minecraft:dirt", "data": 0 }],
+	"B": [{ "item": "hwell:shard_n" }]
+  },
+  "result": {
+    "item": "hwell:fullgrass_block", "count": 8
+  }
+}

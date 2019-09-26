@@ -1,0 +1,15 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+	"BCB",
+    "DED" ],
+  "key": {
+    "A": [{ "item": "hwell:shard_ca"}],
+    "B": [{ "item": "minecraft:bone"}],
+    "C": [{ "item": "minecraft:hardened_clay"}],
+    "D": [{ "item": "hwell:asul_ingot"}],
+    "E": [{ "item": "hwell:asul_machine_case"}]	
+  },
+  "result": { "item": "hwell:freezer" }
+}

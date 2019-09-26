@@ -1,0 +1,229 @@
+item.dust.name=Каменная пыль
+item.myst_dust.name=Таинственная пыль
+item.myst_fertilizer.name=Таинственное удобрение
+item.heavy_mesh.name=Укреплённая смесь
+item.heavy_ingot.name=Укреплённый слиток
+item.heavy_nugget.name=Укреплённый самородок
+item.fuel_dust.name=Топливо из укреплённой смеси
+item.fuel_dust_tiny.name=Топливная пыль из укреплённой смеси
+item.heavy_shears.name=Укреплённые ножницы
+item.leaf_mesh.name=Таинственная смесь
+item.crystal.name=Кристалл
+item.crystal_nether.name=Кристалл Нижнего мира
+item.crystal_bowl.name=Кристальная чаша
+item.crystal_bowl_water.name=Кристальная чаша с водой
+item.shard_fe.name=Осколок Священных Земель
+item.shard_au.name=Осколок Сияющего Рассвета
+item.shard_o.name=Осколок Корней Жизни
+item.shard_c.name=Осколок Пылающих Земель
+item.shard_h.name=Осколок Живого Мира
+item.shard_p.name=Осколок Утренней Звезды
+item.shard_ca.name=Осколок Прирождённого Могущества
+item.shard_n.name=Осколок Чистой Жертвы
+item.obsidian_displacer.name=Обсидиановый разрушитель
+item.empowered_displacer.name=Укреплённый разрушитель
+item.grinding_wheel_flint.name=Кремниевый шлифовальный круг
+item.grinding_wheel_iron.name=Железный шлифовальный круг
+item.grinding_wheel_diamond.name=Алмазный шлифовальный круг
+item.grinding_wheel_crystal.name=Кристальный шлифовальный круг
+item.grinding_wheel_crystal_nether.name=Звёздный шлифовальный круг
+item.myst_dust_picker_fe.name=Пылеуловитель
+item.myst_dust_picker_ca.name=Пылеуловитель
+item.myst_dust_picker_c.name=Пылеуловитель
+item.myst_dust_picker_o.name=Пылеуловитель
+item.myst_dust_picker_au.name=Пылеуловитель
+item.myst_dust_picker_h.name=Пылеуловитель
+item.myst_dust_picker_p.name=Пылеуловитель
+item.myst_dust_picker_n.name=Пылеуловитель
+item.locked_light.name=Заточённый свет
+item.empty_rod.name=Пустой стержень
+item.rod_blaze_1.name=Огненный стержень
+item.rod_blaze_2.name=Огненный стержень
+item.rod_blaze_3.name=Огненный стержень
+item.myst_rod.name=Таинственный стержень
+item.rod_myst_1.name=Таинственный стержень
+item.rod_myst_2.name=Таинственный стержень
+item.crystal_catalyst.name=Кристальный катализатор
+item.salt.name=Соль
+
+item.metaldiamond.name=Алмазное железо
+item.raw_soulsteel.name=Сырая сталь души
+item.soulsteel_ingot.name=Сталь души
+item.asul_ingot.name=Асуловый слиток
+item.soul_dust.name=Пыль души
+item.raw_repairing_paste.name=Сырая восстанавливающая смесь
+item.repairing_paste.name=Восстанавливающая смесь
+item.seed_of_life.name=Семя жизни
+item.wheat_flour.name=Пшеничная мука
+
+item.mystic_iron_ingot.name=Таинственный слиток
+item.mystic_iron_shovel.name=Таинственная лопата
+item.mystic_iron_sword.name=Таинственный меч
+item.mystic_iron_dagger.name=Таинственный кинжал
+item.mystic_iron_pickaxe.name=Таинственная кирка
+item.mystic_iron_axe.name=Таинственный топор
+item.mystic_iron_helmet.name=Таинственный шлем
+item.mystic_iron_chest.name=Таинственный нагрудник
+item.mystic_iron_legs.name=Таинственные поножи
+item.mystic_iron_boots.name=Таинственные ботинки
+
+item.soulsteel_shovel.name=Лопата из стали души
+item.soulsteel_sword.name=Меч из стали души
+item.soulsteel_dagger.name=Кинжал из стали души
+item.soulsteel_pickaxe.name=Кирка из стали души
+item.soulsteel_axe.name=Топор из стали души
+item.soulsteel_helmet.name=Шлем из стали души
+item.soulsteel_chest.name=Нагрудник из стали души
+item.soulsteel_legs.name=Поножи из стали души
+item.soulsteel_boots.name=Ботинки из стали души
+
+
+item.loot_base.name=Основа набора добычи
+item.loot_blaze.name=Набор добычи: Ифрит
+item.loot_creeper.name=Набор добычи: Крипер
+item.loot_enderman.name=Набор добычи: Эндермен
+item.loot_ghast.name=Набор добычи: Гаст
+item.loot_shulker.name=Набор добычи: Шалкер
+item.loot_skeleton.name=Набор добычи: Скелет
+item.loot_slime.name=Набор добычи: Слизень
+item.loot_witch.name=Набор добычи: Ведьма
+item.loot_wither.name=Набор добычи: Визер-скелет
+item.loot_zombie.name=Набор добычи: Зомби
+
+item.mutation_paste.name=Трансмутационная смесь
+tile.mutation_paste_block.name=Блок трансмутационной смеси
+
+tile.producer.name=Производитель набора добычи
+tile.nourisher.name=Удобритель
+tile.puller.name=Воссоздатель руд
+tile.boxer.name=Разместитель блоков
+
+tile.quartz_ore.name=Кварцевая руда
+tile.glowstone_ore.name=Светокаменная руда
+
+tile.heavy_block.name=Укреплённый блок
+tile.crystal_block.name=Кристальный блок
+tile.crystal_nether_block.name=Блок кристалла Нижнего мира
+tile.myst_grass.name=Таинственная трава
+tile.myst_bush.name=Таинственный куст
+tile.myst_bush_big.name=Таинственный куст
+tile.myst_dust_block.name=Блок таинственной пыли
+tile.dust_block.name=Блок каменной пыли
+tile.myst_log.name=Бревно таинственного дерева
+tile.myst_planks.name=Доски таинственного дерева
+tile.myst_leaves.name=Таинственная листва
+tile.myst_planks_slab.name=Плита таинственного дерева
+tile.myst_planks_stairs.name=Ступеньки из таинственного дерева
+
+tile.asul_machine_case.name=Асуловый машинный корпус
+
+
+tile.moonstone_slab.name=Плита из лунного камня
+tile.moonstone_stairs.name=Ступеньки из лунного камня
+tile.onyx_slab.name=Плита из оникса
+tile.onyx_stairs.name=Ступеньки из оникса
+tile.smooth_onyx_slab.name=Плита из гладкого оникса
+tile.smooth_onyx_stairs.name=Ступеньки из гладкого оникса
+tile.azurite_slab.name=Плита из потресканного оникса
+tile.azurite_stairs.name=Ступеньки из потресканного оникса
+tile.smooth_azurite_slab.name=Плита из гладкого азурита
+tile.smooth_azurite_stairs.name=Ступеньки из гладкого азурита
+tile.citrinic_stone_slab.name=Солевая плита
+tile.citrinic_stone_stairs.name=Солевые ступеньки
+tile.citrinic_sand_slab.name=Белая солевая плита
+tile.citrinic_sand_stairs.name=Белые солевые ступеньки
+
+tile.moonstone_bricks.name=Кирпички из лунного камня
+tile.onyx_bricks.name=Кирпичи из оникса
+tile.smooth_onyx_bricks.name=Кирпичи из гладкого оникса
+tile.azurite_bricks.name=Кирпичи из потрескавшегося оникса
+tile.citrinic_stone_bricks.name=Солевые кирпичи
+tile.citrinic_sand_bricks.name=Белые солевые кирпичи
+tile.smooth_azurite_bricks.name=Кирпичи из гладкого азурита
+
+tile.moonstone_bricks_slab.name=Плита из кирпичей лунного камня
+tile.moonstone_bricks_stairs.name=Ступеньки из кирпичей лунного камня
+tile.onyx_bricks_slab.name=Плита из кирпичей оникса
+tile.onyx_bricks_stairs.name=Ступеньки из кирпичей оникса
+tile.smooth_onyx_bricks_slab.name=Плита из кирпичей гладкого оникса
+tile.smooth_onyx_bricks_stairs.name=Ступеньки из кирпичей гладкого оникса
+tile.azurite_bricks_slab.name=Плита из кирпичей потрескавшегося азурита
+tile.azurite_bricks_stairs.name=Ступеньки из кирпичей потрескавшегося азурита
+tile.smooth_azurite_bricks_slab.name=Плита из кирпичей гладкого азурита
+tile.smooth_azurite_bricks_stairs.name=Ступеньки из кирпичей гладкого азурита
+tile.citrinic_stone_bricks_slab.name=Плита из кирпичей солевого камня
+tile.citrinic_stone_bricks_stairs.name=Ступеньки из кирпичей солевого камня
+tile.citrinic_sand_bricks_slab.name=Плита из кирпичей белого солевого камня
+tile.citrinic_sand_bricks_stairs.name=Ступеньки из кирпичей белого солевого камня
+
+
+tile.burst_seed_dirt.name=Земляное взрывное семя
+tile.burst_seed_stone.name=Каменное взрывное семя
+tile.burst_seed_sand.name=Песчаное взрывное семя
+tile.burst_seed_snow.name=Снежное взрывное семя
+tile.burst_seed_netherrack.name=Адское взрывное семя
+
+tile.protection_block.name=Защитный блок
+tile.heavy_protection_block.name=Усиленный защитный блок
+tile.heavy_protection_block.json.name=Укреплённый защитный блок
+tile.heat_block.name=Тепловой блок
+tile.stabiliser.name=Стабилизатор ядра
+tile.compressed_clay.name=Спресованная глина
+tile.fertilizer_block.name=Удобренный блок
+
+tile.moonstone.name=Лунный камень
+tile.onyx.name=Оникс
+tile.smooth_onyx.name=Гладкий оникс
+tile.azurite.name=Потресканный азурит
+tile.citrinic_stone.name=Brackish Stone
+tile.citrinic_sand.name=Белый солевой камень
+tile.smooth_azurite.name=Гладкий азурит
+tile.white_block.name=Белый блок
+tile.fullgrass_block.name=Торфяной блок
+tile.slab_lamp.name=Лампа
+tile.fertile_soil.name=Удобренная земля
+
+tile.crushing_block.name=Разрушающий блок
+tile.gravity_block.name=Гравитационный блок
+tile.gravity_block_mini.name=Уменьшенный гравитационный блок
+tile.gravity_powered_block.name=Активированный гравитационный блок
+tile.antigravity_block.name=Анти-гравитационный блок
+tile.antigravity_powered_block.name=Активированный анти-гравитационный блок
+tile.furnace_tube.name=Усиливающая труба
+tile.heat_furnace.name=Тепловая печь
+tile.precision_grinder_flint.name=Шлифовальная машинаr (Кремниевый шлифовальный круг)
+tile.precision_grinder_iron.name=Шлифовальная машина (Железный шлифовальный круг)
+tile.precision_grinder_diamond.name=Шлифовальная машина (Алмазный шлифовальный круг)
+tile.precision_grinder_crystal.name=Шлифовальная машина (Кристальный шлифовальный круг)
+tile.precision_grinder_crystal_nether.name=Шлифовальная машина (Звёздный шлифовальный круг)
+tile.precision_grinder_empty.name=Шлифовальная машина
+tile.picking_table.name=Стол для сбора осколков
+tile.picker_holder.name=Держатель сборщика пыли
+tile.separator.name=Разделитель
+tile.freezer.name=Морозилка
+tile.generator_heat.name=Тепловой генератор
+tile.light_collector.name=Световой генератор
+
+tile.core_stone.name=Каменное ядро
+tile.core_heat.name=Тепловое ядро
+tile.core_green.name=Зеленеющее ядро
+tile.core_sentient.name=Чувствительное ядро
+
+tile.weeping_block.name=Плачущий блок
+
+tile.mystic_iron_block.name=Блок таинственного железа
+tile.soulsteel_block.name=Блок стали души
+tile.raw_asul_block.name=Блок сырого асула
+tile.asul_block.name=Блок асула
+tile.scorch_grit.name=Раскалённый гравий
+tile.scorch_glass.name=Раскалённое стекло
+tile.metaldiamond_block.name=Блок алмазного железа
+
+tile.totem_zombie.name=Тотем зомби
+tile.totem_creeper.name=Тотем крипера
+tile.totem_skeleton.name=Тотем скелета
+tile.totem_enderman.name=Тотем эндермена
+
+tile.hwell.fluid_liquid_souls=Жидкие души
+fluid.liquid_souls=Жидкие души
+itemGroup.hwell=Hearth Well

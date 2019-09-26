@@ -1,0 +1,16 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YPY",
+    "CXC",
+    "YCY"  ],
+  "key": {
+	"X": [{ "item": "hwell:loot_base" }],
+	"Y": [{ "item": "hwell:crystal_nether" }],
+	"C": [{ "item": "hwell:shard_c" }],
+	"P": [{ "item": "hwell:shard_p" }]
+  },
+  "result": {
+    "item": "hwell:loot_spider"
+  }
+}

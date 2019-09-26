@@ -1,0 +1,16 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YNY",
+    "NXN",
+    "YOY"  ],
+  "key": {
+	"X": [{ "item": "hwell:loot_base" }],
+	"Y": [{ "item": "hwell:crystal_nether" }],
+	"N": [{ "item": "hwell:shard_n" }],
+	"O": [{ "item": "hwell:shard_o" }]
+  },
+  "result": {
+    "item": "hwell:loot_slime"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "hwell:power_crystal"
+  },
+  "variants": {
+    "power_nucleous=0,power_relay=0,power_screen=0": {
+      "textures": {
+		"layer0": "power_nucleous_0",
+		"layer0": "power_relay_0",
+		"layer0": "power_screen_0",
+	  }
+    }
+  }
+}

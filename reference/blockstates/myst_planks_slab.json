@@ -1,0 +1,8 @@
+{ "variants": {														 
+    "facing=north": { "model": "hwell:myst_planks_slab_side", "y": 180 },
+    "facing=south": { "model": "hwell:myst_planks_slab_side" },
+    "facing=west":  { "model": "hwell:myst_planks_slab_side", "y": 90 },
+    "facing=east":  { "model": "hwell:myst_planks_slab_side", "y": 270 },
+    "facing=up":  { "model": "hwell:myst_planks_slab" },
+    "facing=down":  { "model": "hwell:myst_planks_slab", "x": 180 }
+} }

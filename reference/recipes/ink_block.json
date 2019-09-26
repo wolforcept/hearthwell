@@ -1,0 +1,12 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "key": {
+    "A": [ { "item": "minecraft:dye", "data": 0 } ]
+  },
+  "result": { "item": "hwell:ink_block" }
+}

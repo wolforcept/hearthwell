@@ -1,0 +1,11 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+		"up": "hwell:blocks/extractor_off",
+		"down": "hwell:blocks/extractor",
+		"north": "hwell:blocks/extractor",
+		"south": "hwell:blocks/extractor",
+		"east": "hwell:blocks/extractor",
+		"west": "hwell:blocks/extractor"
+    }
+}

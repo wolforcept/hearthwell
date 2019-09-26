@@ -1,0 +1,17 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YGY",
+    "HXH",
+    "YFY"  ],
+  "key": {
+	"X": [{ "item": "hwell:loot_base" }],
+	"Y": [{ "item": "hwell:crystal_nether" }],
+	"G": [{ "item": "hwell:shard_au" }],
+	"F": [{ "item": "hwell:shard_fe" }],
+	"H": [{ "item": "hwell:shard_h" }]
+  },
+  "result": {
+    "item": "hwell:loot_shulker"
+  }
+}

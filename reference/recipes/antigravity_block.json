@@ -1,0 +1,17 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FMF",
+    "MCM",
+    "AOA"  ],
+  "key": {
+	"F": [{ "item": "minecraft:feather" }],
+	"M": [{ "item": "hwell:moonstone" }],
+	"C": [{ "item": "hwell:asul_machine_case" }],
+	"A": [{ "item": "hwell:asul_ingot" }],
+ 	"O": [{ "item": "minecraft:obsidian" }]
+  },
+  "result": {
+    "item": "hwell:antigravity_block"
+  }
+}

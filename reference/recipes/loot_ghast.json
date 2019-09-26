@@ -1,0 +1,17 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YFY",
+    "AXA",
+    "YPY"  ],
+  "key": {
+	"X": [{ "item": "hwell:loot_base" }],
+	"Y": [{ "item": "hwell:crystal_nether" }],
+	"A": [{ "item": "hwell:shard_ca" }],
+	"F": [{ "item": "hwell:shard_fe" }],
+	"P": [{ "item": "hwell:shard_p" }]
+  },
+  "result": {
+    "item": "hwell:loot_ghast"
+  }
+}

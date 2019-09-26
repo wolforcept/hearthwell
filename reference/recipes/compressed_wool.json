@@ -1,0 +1,19 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"  ],
+  "key": {
+    "A": [
+      {
+        "item": "minecraft:wool",
+        "data": 0
+      }
+    ]
+  },
+  "result": {
+    "item": "hwell:compressed_wool",
+    "data": 0
+  }
+}

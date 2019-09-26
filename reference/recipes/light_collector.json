@@ -1,0 +1,10 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["CAC", "ABA", "CAC" ],
+  "key": {
+    "A": [{ "item": "hwell:shard_ca" }],
+    "B": [{ "item": "hwell:crystal_nether" }],
+    "C": [{ "item": "hwell:citrinic_sand" }]
+  },
+  "result": { "item": "hwell:light_collector" }
+}

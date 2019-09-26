@@ -1,0 +1,14 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+		"  A",
+		" B ",
+		"C  "
+	],
+  "key": {
+    "A": [{ "item": "hwell:shard_p" }],
+	"B": [{ "item": "hwell:soulsteel_ingot" }],
+	"C": [{ "item": "hwell:heavy_ingot" }]
+  },
+  "result": { "item": "hwell:myst_dust_picker_p" }
+}

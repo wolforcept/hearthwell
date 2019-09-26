@@ -1,0 +1,14 @@
+{ 
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+	  "item": "hwell:compressed_wool",
+	  "data": 0
+	}
+  ],
+  "result": {
+    "item": "minecraft:wool",
+	"count": 9,
+    "data": 0
+  }
+}

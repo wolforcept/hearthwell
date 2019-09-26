@@ -1,0 +1,15 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"YPY",
+	"ACA",
+    "YMY" ],
+  "key": {
+	"Y": [{ "item": "hwell:crystal" }],
+	"A": [{ "item": "hwell:asul_ingot" }],
+	"C": [{ "item": "hwell:asul_machine_case" }],
+	"P": [{ "item": "minecraft:piston" }],
+	"M": [{ "item": "hwell:mystic_iron_pickaxe" }]
+  },
+  "result": { "item": "hwell:boxer" }
+}

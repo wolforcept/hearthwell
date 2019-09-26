@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"axis=y": { "model": "hwell:myst_log" },
+		"axis=z": { "model": "hwell:myst_log", "x": 90  },
+		"axis=x": { "model": "hwell:myst_log", "x": 90, "y": 90 },
+		"axis=none": { "model": "hwell:myst_log" }
+		}
+}

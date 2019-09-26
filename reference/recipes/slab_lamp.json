@@ -1,0 +1,9 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [ "ABA" ],
+  "key": {
+    "A": [ { "item": "hwell:heavy_ingot" } ],
+    "B": [ { "item": "minecraft:torch" } ]
+  },
+  "result": { "item": "hwell:slab_lamp" }
+}
