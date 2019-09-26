@@ -42,7 +42,7 @@
 
 		function category(name, elems) {
 			var cat_div = $("<div class='tab' id='" + name + "'></div>");
-			var basepath = "patchouli_book/en_us/";
+			var basepath = "patchouli_books/book_of_the_well/en_us/";
 
 			$.getJSON(basepath + "categories/" + name + ".json", function (cat_data) {
 				$('<h2 class="tablink" onclick="changeTab(event, \'' + name + '\')">' + cat_data.name + '</h2>')
