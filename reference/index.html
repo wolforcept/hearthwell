@@ -9,25 +9,26 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script>
 
-		Object.prototype.getdir = function (name) {
-			if ("subdirectories" in this) {
-				return this.subdirectories.filter(obj => {
-					return obj.name === name;
-				});
-			}
-		};
+		// Object.prototype.getdir = function (name) {
+		// 	if ("subdirectories" in this) {
+		// 		return this.subdirectories.filter(obj => {
+		// 			return obj.name === name;
+		// 		});
+		// 	}
+		// };
 
 		$(document).ready(function () {
-			var categories, entries;
-			$.getJSON("/listdir.json", function (listdir) {
-				console.log(listdir);
-			});
-			$.getJSON("/listdir.json", function (listdir) {
-				categories = listdir.getdir("patchouli_books").getdir("book_of_the_well").getdir("en_us").getdir("categories");
-				entries = listdir.getdir("patchouli_books").getdir("book_of_the_well").getdir("en_us").getdir("entries");
-			});
-			console.log(categories);
-			console.log(entries);
+			// var categories, entries;
+			// console.log(JSON.parse("http://wolforcept.github.io/hearthwell/reference/listdir.json"));
+			// $.getJSON("https://support.oneskyapp.com/hc/en-us/article_attachments/202761627/example_1.json", function (listdir) {
+			// 	console.log(listdir);
+			// });
+			// $.getJSON("/listdir.json", function (listdir) {
+			// 	categories = listdir.getdir("patchouli_books").getdir("book_of_the_well").getdir("en_us").getdir("categories");
+			// 	entries = listdir.getdir("patchouli_books").getdir("book_of_the_well").getdir("en_us").getdir("entries");
+			// });
+			// console.log(categories);
+			// console.log(entries);
 			// recipesCategory();
 			category("introduction", ["asul", "basestuff", "crystals", "displacer", "dusts", "soulsteel", "trees"]);
 			category("core_mechanics", ["charging", "collecting_light", "coring", "crushing", "dustpicking",
