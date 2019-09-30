@@ -1,0 +1,87 @@
+:root {
+    --size_left: 128px;
+}
+
+img {
+    /* border: dashed 1px black; */
+    -webkit-backface-visibility: hidden; 
+    backface-visibility: visible;
+    -ms-transform: translateZ(0); /* IE 9 */
+    -webkit-transform: translateZ(0); /* Chrome, Safari, Opera */
+    transform: translateZ(0);
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+}
+
+#tablinks {
+    border-top-color: #999999;
+    margin: 50px;
+    height: 44px;
+}
+
+#tablinks .tablink {
+    border-top: solid 1px #CCC;
+    border-left: solid 1px #CCC;
+    border-bottom: solid 1px #999;
+    border-right: solid 1px #999;
+    padding: 5px 10px;
+    margin: 0 10px 10px 0;
+    font-size: 14pt;
+}
+
+.tab {
+    /* left: var(--size_left); */
+    clear: both;
+    /* margin-top: 50px; */
+    display: none;
+}
+
+.tablink {
+    float: left;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.tablink.active {
+    background-color: #DDDDDD;
+}
+
+.tablink:hover {
+    background-color: #DDDDEE;
+}
+
+.recipe_table {
+    display: inline-block;
+    border: solid 1px #666666;
+    background-color: #CCC;
+    width: 120px;
+    height: 120px;
+    padding: 4px;
+}
+
+.recipe_table {
+    display: inline-block;
+    font-size: 0;
+}
+
+.recipe_table img {
+    display: inline-block;
+    margin: 1px;
+    padding: 2px;
+    border-top: solid 1px #888888;
+    border-left: solid 1px #888888;
+    border-bottom: solid 1px #EFEFEF;
+    border-right: solid 1px #EFEFEF;
+}
+
+.entry_div {
+    border-top: solid 1px #888888;
+    border-left: solid 1px #888888;
+    border-bottom: solid 1px white;
+    border-right: solid 1px white;
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
