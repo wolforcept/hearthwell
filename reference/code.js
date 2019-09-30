@@ -71,26 +71,26 @@ function recipesCategory(recipesdir) {
     // var basepath = "recipes/";
     var cat_div = $("<div class='tab' id='recipes'></div>");
 
-    let recipe_data = {
-        "type": "minecraft:crafting_shaped",
-        "pattern": [
-            "ABA",
-            "B B",
-            "ABA"],
-        "key": {
-            "A": [{ "item": "hwell:asul_ingot" }, { "item": "hwell:heavy_ingot" }],
-            "B": { "item": "minecraft:stone", "data": 0 }
-        },
-        "result": { "item": "hwell:asul_machine_case" }
-    };
+    // let recipe_data = {
+    //     "type": "minecraft:crafting_shaped",
+    //     "pattern": [
+    //         "ABA",
+    //         "B B",
+    //         "ABA"],
+    //     "key": {
+    //         "A": [{ "item": "hwell:asul_ingot" }, { "item": "hwell:heavy_ingot" }],
+    //         "B": { "item": "minecraft:stone", "data": 0 }
+    //     },
+    //     "result": { "item": "hwell:asul_machine_case" }
+    // };
 
-    makeRecipeDiv(recipe_data).appendTo(cat_div);
 
     recipesdir.files.forEach(path => {
         // console.log(path);
         // console.log(getFileName(path));
         $.getJSON("assets/hwell/recipes/" + getFileName(path), function (recipe_data) {
-            // console.log(recipe_data);
+            console.log(recipe_data);
+            makeRecipeDiv(recipe_data).appendTo(cat_div);
         });
     });
     cat_div.appendTo("#tabs");
