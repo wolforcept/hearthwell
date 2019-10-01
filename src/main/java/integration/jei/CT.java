@@ -358,4 +358,19 @@ public class CT {
 			}
 		}
 	}
+
+	@ZenDoc("Remove an item from a Mutator Recipe.")
+	@ZenMethod
+	public static void removeMutatorRecipe(IItemStack input) {
+		for (Iterator<RecipeMutationPaste> it = RecipeMutationPaste.recipes.iterator(); it.hasNext();) {
+			RecipeMutationPaste recipe = (RecipeMutationPaste) it.next();
+			for (Iterator<ItemStack> item = recipe.items.iterator(); item.hasNext();) {
+				ItemStack type = (ItemStack) item.next();
+				if (Util.equalExceptAmount(type, is(input))) {
+					it.remove();
+					return;
+				}
+			}
+		}
+	}
 }

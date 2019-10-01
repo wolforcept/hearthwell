@@ -9,7 +9,7 @@
 
 <body>
 
-<object style="border:0;padding=0;" width="1000" height="50px" type="text/html" data="../navbar.html"></object>
+<object style="border:0;padding:0;width: 100%" type="text/html" data="../navbar.html"></object>
 <object class="patron" type="text/html" data="patron.html"></object>
 
 <hr>
@@ -31,6 +31,7 @@ this method may only be called on files with <span class="bold">#loader hwell_co
 
 <p><span class="bold">mods.hwell.addCustomCoreRecipe(String coreRegistryName, String shardRegName, IItemStack[] outputs, IItemStack[] inputs)</span><br>&nbsp&nbsp&nbsp&nbsp
 Add a recipe for a specific core. Will override existing recipes, if a recipe for that shard already exists.</p>
+
 <br>
 
 <p><span class="bold">mods.hwell.addChargerRecipe(IItemStack input, int power)</span><br>&nbsp&nbsp&nbsp&nbsp
