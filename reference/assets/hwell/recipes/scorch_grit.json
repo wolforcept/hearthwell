@@ -1,0 +1,14 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+	"ABA",
+    "AAA" ],
+  "key": {
+    "A": [{ "item": "minecraft:gravel" }],
+	"B": [{ "item": "hwell:shard_p" }]
+  },
+  "result": {
+    "item": "hwell:scorch_grit", "count": 8
+  }
+}

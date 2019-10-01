@@ -1,0 +1,35 @@
+{
+    "name": "Dust Picking",
+    "icon": "hwell:myst_dust_picker_h",
+    "category": "core_mechanics",
+    "sortnum": 100,
+    "pages": [
+        {
+            "type": "text",
+            "text": "Dust pickers are an essential tool to finally get specific shards instead of random ones.$(br)They are used in conjunction with a shard picking table and some dust."
+        },
+        { 	"type": "crafting",
+	        "name": "Dust Picker",
+            "recipe": "hwell:myst_dust_picker_o",
+	        "text": "The dust pickers are crafted using a Heavy Ingot, a Soulsteel Ingot and one of the shards."
+        },
+		{
+            "type": "text",
+            "text": "To use a shard picking table, simply right click it with some mysterious dust to place it on the crystal bowl.$(br)Then grab a dust picker and find some shards that are hidden in the dust. You might not be able to find none, but keep trying."
+        },
+        { 	"type": "crafting",
+	        "name": "Shard Picking Table",
+            "recipe": "hwell:picking_table",
+	        "text": ""
+        },
+		{
+            "type": "text",
+            "text": "When you have the shards you need, keep the dust pickers neatly organised in a Dust Picker Holder. Sneak Right click the dust picker holder to insert the dust picker in your hand.$(br2)When you need a dust picker back, simply right click on the holder to get one. Cycle through the dust pickers on the holder by repeatedly right clicking the holder with a dust picker."
+        },
+        { 	"type": "crafting",
+	        "name": "Dust Pickers Holder",
+            "recipe": "hwell:picker_holder",
+	        "text": ""
+        }
+    ]
+}

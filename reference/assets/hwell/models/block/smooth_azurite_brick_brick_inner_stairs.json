@@ -1,0 +1,4 @@
+{
+    "parent": "block/inner_stairs",
+    "textures": { "bottom": "hwell:blocks/smooth_azurite_brick_brick", "top": "hwell:blocks/smooth_azurite_brick_brick", "side": "hwell:blocks/smooth_azurite_brick_brick" }
+}

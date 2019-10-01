@@ -1,0 +1,32 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+	"DCC",
+    "ABA" ],
+  "key": {
+    "A": [
+      {
+        "item": "hwell:heavy_ingot"
+      }
+    ],
+	"B": [
+      {
+        "item": "hwell:heat_block"
+      }
+    ],
+	"C": [
+      {
+        "item": "hwell:furnace_tube"
+      }
+    ],
+	"D": [
+      {
+        "item": "hwell:crystal_nether"
+      }
+    ]
+  },
+  "result": {
+    "item": "hwell:heat_furnace"
+  }
+}

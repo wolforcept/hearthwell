@@ -1,0 +1,4 @@
+{
+    "parent": "block/inner_stairs",
+    "textures": { "bottom": "hwell:blocks/moonstone", "top": "hwell:blocks/moonstone", "side": "hwell:blocks/moonstone" }
+}

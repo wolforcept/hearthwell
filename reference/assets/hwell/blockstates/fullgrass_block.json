@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "hwell:fullgrass_block" },
+            { "model": "hwell:fullgrass_block", "y": 90 },
+            { "model": "hwell:fullgrass_block", "y": 180 },
+            { "model": "hwell:fullgrass_block", "y": 270 }
+        ]
+    }
+}

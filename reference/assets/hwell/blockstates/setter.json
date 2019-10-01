@@ -1,0 +1,11 @@
+{
+	"variants": {
+		"facing=north": { "model": "hwell:setter", "x": 90 },
+		"facing=east": { "model": "hwell:setter", "x": 90, "y": 90 },
+		"facing=south": { "model": "hwell:setter", "x": 90, "y": 180 },
+		"facing=west": { "model": "hwell:setter", "x": 90, "y": 270 },
+		"facing=up": { "model": "hwell:setter" },
+		"facing=down": { "model": "hwell:setter", "x": 180 },
+		"normal": { "model": "hwell:setter" }
+		}
+}

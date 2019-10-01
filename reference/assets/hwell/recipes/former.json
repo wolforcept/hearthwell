@@ -1,0 +1,16 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DRD",
+	"LCW",
+    "HHH" ],
+  "key": {
+    "R": [{ "item": "minecraft:redstone_torch"}],
+    "H": [{ "item": "hwell:heavy_ingot"}],
+    "D": [{ "item": "hwell:asul_ingot"}],
+    "L": [{ "item": "minecraft:lava_bucket"}],
+    "W": [{ "item": "minecraft:water_bucket"}],
+    "C": [{ "item": "hwell:asul_machine_case"}]	
+  },
+  "result": { "item": "hwell:former" }
+}

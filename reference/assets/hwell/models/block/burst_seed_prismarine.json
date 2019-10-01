@@ -1,0 +1,39 @@
+{
+    "ambientocclusion": false,
+    "textures": {
+        "particle": "hwell:blocks/burst_seed_prismarine",
+        "all": "hwell:blocks/burst_seed_prismarine"
+    },
+    "elements": [
+        {   "from": [ 4, 0, 4 ],
+            "to": [ 12, 8, 12 ],
+            "shade": false,
+            "faces": {
+                "up": { "uv": [ 0, 0, 16, 16], "texture": "all"},
+				"down": { "uv": [ 0, 0, 16, 16], "texture": "all"},
+				"north": { "uv": [ 0, 0, 16, 16], "texture": "all"},
+				"south": { "uv": [ 0, 0, 16, 16], "texture": "all"},
+				"east": { "uv": [ 0, 0, 16, 16], "texture": "all"},
+				"west": { "uv": [ 0, 0, 16, 16], "texture": "all"}
+            }
+        }
+    ],
+	 "display": {
+
+        "thirdperson": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 0.0625, 0.0625, 0.0625 ]
+        },
+        "firstperson": {
+            "rotation": [ 0, 0, 45 ],
+            "translation": [ 0, 16, 0 ],
+            "scale": [ 0.0625, 0.0625, 0.0625 ]
+        },
+        "gui": {
+            "rotation": [ 30, 45, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 0.625, 0.625, 0.625 ]
+        }
+   }
+}

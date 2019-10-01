@@ -1,0 +1,14 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+	"AAA",
+    "A A" ],
+  "key": {
+    "A": [{ "item": "hwell:myst_planks" }],
+	"B": [{ "item": "hwell:crystal_bowl" }]
+  },
+  "result": {
+    "item": "hwell:picking_table"
+  }
+}

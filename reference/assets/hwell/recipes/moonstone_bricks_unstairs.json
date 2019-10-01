@@ -1,0 +1,4 @@
+{ "type": "minecraft:crafting_shaped",
+  "pattern": ["AA","AA"],
+  "key": {"A": [{"item": "hwell:moonstone_bricks_stairs"}]},
+  "result": { "item": "hwell:moonstone_bricks", "count": 3 }}

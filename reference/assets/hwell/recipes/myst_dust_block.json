@@ -1,0 +1,19 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AA",
+    "AA"
+  ],
+  "key": {
+    "A": [
+      {
+        "item": "hwell:myst_dust",
+        "data": 0
+      }
+    ]
+  },
+  "result": {
+    "item": "hwell:myst_dust_block",
+    "data": 0
+  }
+}

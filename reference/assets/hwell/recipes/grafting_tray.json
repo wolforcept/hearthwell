@@ -1,0 +1,12 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+	"AAA"
+  ],
+  "key": {
+    "B": [{ "item": "hwell:tray"}],
+    "A": [{ "item": "hwell:azurite"}]
+  },
+  "result": { "item": "hwell:grafting_tray" }
+}

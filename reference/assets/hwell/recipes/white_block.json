@@ -1,0 +1,14 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+	"ABA",
+    "AAA" ],
+  "key": {
+    "A": [{ "item": "minecraft:snow", "data": 0 }],
+	"B": [{ "item": "hwell:shard_ca" }]
+  },
+  "result": {
+    "item": "hwell:white_block", "count": 8
+  }
+}

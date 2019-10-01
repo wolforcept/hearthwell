@@ -1,0 +1,9 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["ABA", "ABA", "ABA" ],
+  "key": {
+    "A": [{ "item": "hwell:heavy_nugget" }],
+    "B": [{ "item": "minecraft:glass", "data": 0 }]
+  },
+  "result": { "item": "hwell:empty_rod" }
+}

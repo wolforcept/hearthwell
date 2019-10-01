@@ -1,0 +1,12 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+	"ABA",
+    "AAA" ],
+  "key": {
+	"A": [{ "item": "minecraft:diamond" }],
+	"B": [{ "item": "hwell:metaldiamond" }]
+  },
+  "result": { "item": "hwell:grinding_wheel_diamond" }
+}

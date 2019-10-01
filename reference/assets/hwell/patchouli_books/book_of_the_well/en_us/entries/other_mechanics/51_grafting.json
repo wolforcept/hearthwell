@@ -1,0 +1,33 @@
+{
+    "name": "Grafting",
+    "icon": "hwell:grafting_tray",
+    "category": "other_mechanics",
+    "sortnum": 51,
+    "pages": [
+		{
+            "type": "crafting",
+            "recipe": "hwell:grafting_tray",
+			"text": "Grafting is a special mechanic that allows the production of Core Grafts to increase the output of Coring. It makes use of the life imbued in Branches to produce several Grafts from one core. To Graft a Core, place it in a Grafting Tray and fill it with Liquid Souls."
+        }, 
+		{
+            "type": "image",
+			"title": "Grafting",
+	        "border": true,
+            "images": [ "hwell:textures/gui/grafting_tray.png" ],
+			"text": "Place Living Branches on any of the 8 spots around the Grafting Tray."
+        }, 
+		{
+            "type": "image",
+			"title": "Grafting",
+	        "border": true,
+            "images": [ "hwell:textures/gui/grafting_tray2.png" ],
+			"text": "After the Core has absorbed enough energy, it will turn into the corresponding Graft."
+        },
+		{
+            "type": "spotlight",
+			"title": "Core Grafts",
+			"item": "hwell:graft_heat",
+			"text": "After the process is complete, simply right click the Grafting Tray to get your Grafts. Grafts are similar to cores, but they cannot be transformed directly. Instead, place them touching a core that will transform. All Grafts touching the core or any other Grafts will transform, in a chain reaction! Different Grafts require different amounts of life."
+        }
+	]
+}

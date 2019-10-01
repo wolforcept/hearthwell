@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=up": { "model": "hwell:mutator" },
+        "facing=down": { "model": "hwell:mutator" },
+        "facing=north": { "model": "hwell:mutator" },
+        "facing=south": { "model": "hwell:mutator", "y": 180 },
+        "facing=west":  { "model": "hwell:mutator", "y": 270 },
+        "facing=east":  { "model": "hwell:mutator", "y": 90 }
+    }
+}

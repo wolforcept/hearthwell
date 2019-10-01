@@ -1,0 +1,15 @@
+{
+    "name": "Boxer",
+    "icon": "hwell:boxer",
+    "category": "other_machines",
+    "sortnum": 30,
+    "pages": [
+        { 	"type": "text",
+            "text": "The Block Boxer creates a many copies of the block placed on top of it, consuming it and some energy. Not all blocks can be copied this way."
+        },
+		{ 	"type": "crafting",
+	        "name": "Boxing",
+            "recipe": "hwell:boxer"
+        }
+    ]
+}

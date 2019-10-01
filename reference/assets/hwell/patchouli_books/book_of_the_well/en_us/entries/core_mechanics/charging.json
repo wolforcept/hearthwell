@@ -1,0 +1,40 @@
+{
+    "name": "Charging",
+    "icon": "hwell:charger",
+    "category": "core_mechanics",
+    "sortnum": 50,
+    "pages": [
+        {
+            "type": "text",
+            "text": "Power Crystals get depleted sometimes. To charge them again you need a Charger, and the related multiblock structure.$(br2)To Power the Crystals, right click with them to place them into the charger. Then throw items that hold charge onto the ground. They will be pulled in and consumed by the charger to Power the Crystal that is inside."
+        },
+        {
+            "type": "multiblock",
+            "name": "Charger Multiblock",
+            "multiblock": {
+                "pattern": [
+					[ "     ", "  G  ", " GTG ", "  G  ", "     "],
+					[ "     ", "     ", "     ", "     ", "     "],
+					[ "COOOC", "OMMMO", "OM0MO", "OMMMO", "COOOC"]
+                ],
+                "mapping": {
+                    "0": "hwell:moonstone",
+                    "M": "hwell:moonstone",
+                    "C": "hwell:crystal_block",
+                    "O": "hwell:smooth_onyx",
+                    "T": "hwell:charger",
+                    "G": "hwell:gravity_block_mini"					
+                }
+            }
+        
+        },
+		{
+            "type": "text",
+            "text": "Items that hold charge:$(li)Bucket of Liquid Souls$(li)Mysterious Dust$(li)Mysterious Leaves$(li)Mysterious Rod$(li)Crystal Catalyst$(li)Imprisoned Light$(li)Glowstone Dust$(li)TNT$(li)Coal$(li)Experience Bottle$(br2)If an item has a byproduct, it will be thrown out from the top side of the charger block."
+        },
+        { 	"type": "crafting",
+	        "name": "Precision Grinding",
+            "recipe": "hwell:charger"
+        }
+	]
+}

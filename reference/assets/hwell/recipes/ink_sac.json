@@ -1,0 +1,7 @@
+{ 
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "hwell:ink_block" }
+  ],
+  "result": { "item": "minecraft:dye", "data": 0, "count": 9 }
+}

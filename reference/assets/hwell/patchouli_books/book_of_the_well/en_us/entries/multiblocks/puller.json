@@ -1,0 +1,69 @@
+{
+    "name": "Ore Puller",
+    "icon": "hwell:puller",
+    "category": "multiblocks",
+    "sortnum": 50,
+    "pages": [
+		{
+            "type": "crafting",
+            "title": "Block Puller",            
+			"text": "A multiblock structure that pulls ores from the... well, from nothing really. The higher you build it, the faster it pulls. Requires some energy per operation.",
+            "recipe": "hwell:puller"
+        },
+		{
+            "type": "text",
+			"text": "By dropping different shards inside the liquid you can try and filter the ores that are pulled. Different shards will pull different ores, but remember that no filter is 100% effective! Test with different shards to learn the items that are filtered.$(br2)A redstone signal to any of the 8 Heat Blocks will completely disable the puller."
+        },
+		{
+            "type": "multiblock",
+            "name": "Puller",
+			"text": "Adding more lines equal to the lowest one, as seen on the right, will make the puller pull faster.",
+            "multiblock": {
+                "pattern": [
+					[ "C C", "   ", "C C"],
+					[ "A A", "   ", "A A"],
+					[ "HHH", "HLH", "HHH"],
+					[ "PPP", "P0P", "PPP"],
+					[ " P ", "PAP", " P "]
+                ],
+                "mapping": {
+                    "H": "hwell:heat_block",
+					"0": "hwell:puller",
+					"A": "hwell:furnace_tube",
+					"C": "hwell:light_collector",
+                    "P": "hwell:heavy_protection_block",
+                    "L": "hwell:fluid_liquid_souls"
+                }
+            }
+		},
+		{
+            "type": "multiblock",
+            "name": "Puller",
+            "multiblock": {
+                "pattern": [
+					[ "C C", "   ", "C C"],
+					[ "A A", "   ", "A A"],
+					[ "HHH", "HLH", "HHH"],
+					[ "PPP", "P0P", "PPP"],
+					[ " P ", "PAP", " P "],
+					[ " P ", "PAP", " P "],
+					[ " P ", "PAP", " P "],
+					[ " P ", "PAP", " P "]
+
+                ],
+                "mapping": {
+                    "H": "hwell:heat_block",
+					"0": "hwell:puller",
+					"A": "hwell:furnace_tube",
+					"C": "hwell:light_collector",
+                    "P": "hwell:heavy_protection_block",
+                    "L": "hwell:fluid_liquid_souls"
+                }
+            }
+		},
+		{
+			"type": "text",
+			"text": "Materials Required:$(br)$(li)1 Bucket of Liquid Souls$(li)1 Puller Block$(li)4 Light Collectors$(li)5 Amplifying Tubes$(li)8 Heat Blocks$(li)12 Heavy Protection Blocks+"
+		}
+    ]
+}

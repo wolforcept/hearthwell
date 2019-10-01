@@ -1,0 +1,19 @@
+{
+    "name": "Protection Blocks",
+    "icon": "hwell:protection_block",
+    "category": "other",
+    "sortnum": 10,
+    "pages": [
+    	{	
+            "type": "crafting",
+            "title": "Protection Blocks",
+			"recipe": "hwell:protection_block",
+			"text": "Protection Blocks are blocks with much higher resistance than normal."
+        },
+		{	
+            "type": "crafting",
+            "title": "Heavier Version",
+			"recipe": "hwell:heavy_protection_block"
+        }
+    ]
+}

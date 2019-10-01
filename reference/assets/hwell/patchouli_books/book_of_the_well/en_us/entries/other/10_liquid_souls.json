@@ -1,0 +1,15 @@
+{
+    "name": "Liquids",
+    "icon": "forge:bucketfilled{FluidName: \"liquid_souls\", Amount: 1000}",
+    "category": "other",
+    "sortnum": 10,
+    "pages": [
+    	{	
+        	"type": "spotlight",
+            "title": "Liquid Souls",
+            "item": "forge:bucketfilled{FluidName: \"liquid_souls\", Amount: 1000}",
+            "link_recipe": true,
+            "text": "Liquid souls is a liquid created by placing a Block of Mysterious Dust under the Amplifying Tube. The Liquid Souls will lift players upwards, but you can navigate down with shift."
+        }
+    ]
+}

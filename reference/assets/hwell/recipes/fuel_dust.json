@@ -1,0 +1,8 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [ "AA", "AA" ],
+  "key": {
+    "A": [{ "item": "hwell:fuel_dust_tiny" }]
+  },
+  "result": { "item": "hwell:fuel_dust" }
+}

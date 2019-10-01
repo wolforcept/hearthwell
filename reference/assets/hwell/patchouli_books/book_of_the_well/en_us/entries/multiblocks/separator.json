@@ -1,0 +1,40 @@
+{
+    "name": "Separator",
+    "icon": "hwell:separator",
+    "category": "multiblocks",
+    "sortnum": 40,
+    "pages": [
+		{
+            "type": "crafting",
+            "title": "Separator",            
+			"text": "A multiblock structure that allows you to divide complex constructions into its components. The components will exit the machine in the various outputs. Requires some energy per operation.",
+            "recipe": "hwell:separator"
+        },
+		{
+            "type": "multiblock",
+            "name": "Separator",
+            "multiblock": {
+                "pattern": [
+					[ " C ", "   ", " C "],
+					[ " A ", "   ", " A "],
+					[ "PH ", "PPS", "PH "],
+					[ "H_H", "_L0", "H_H"]
+                ],
+                "mapping": {
+                    "H": "hwell:heat_block",
+					"S": "hwell:separator",
+					"A": "hwell:furnace_tube",
+					"C": "hwell:light_collector",
+                    "P": "hwell:heavy_protection_block",
+					"0": "hwell:heavy_protection_block",
+                    "L": "hwell:fluid_liquid_souls"
+                }
+            }
+		},
+		{
+			"type": "text",
+			"text": "Materials Required:$(br)$(li)1 Separator$(li)6 Heat Blocks$(li)5 Heavy Protection Blocks$(li)2 Amplifying Tube$(li)2 Light Collectors$(li)1 Bucket of Liquid Souls"
+		}
+
+    ]
+}

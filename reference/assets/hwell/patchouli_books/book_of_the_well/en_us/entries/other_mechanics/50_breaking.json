@@ -1,0 +1,32 @@
+{
+    "name": "Breaking",
+    "icon": "hwell:grit_vase",
+    "category": "other_mechanics",
+    "sortnum": 50,
+    "pages": [
+        {
+            "type": "image",
+			"title": "Breaking Tree",
+			"image": "Breaking Tree",
+	        "border": true,
+            "images": [ "hwell:textures/gui/breaking_tree.png" ],
+			"text": "Breaking Trees are special leafless trees that will break blocks placed around it."
+        },
+		{
+            "type": "crafting",
+            "title": "Grit Vase",            
+            "recipe": "hwell:grit_vase",
+			"text": "The Grit Vase is a special vase made to hold and grow Breaking Trees."
+        },
+		{
+            "type": "text",
+			"text": "To grow a Breaking Tree, use Mysterious Fertilizer on a Grit Vase. You can use up to 5 Mysterious Fertilizer, and the more you use, the bigger the tree will grow. Breaking Trees have a maximum reach of 5 blocks, and will emit particles when breaking a block.$(br2)Breaking Trees do not use any energy, but they can neither be stopped at any time. But a Tray may be used as a filter to choose which blocks the Breaking Tree will break aim for."
+        },
+		{
+            "type": "spotlight",
+			"title": "Branches",
+			"item": "hwell:branch",
+			"text": "Grit Vases that hold Breaking Trees will drop Branches when broken. These are dense Branches that are filled with life, so they are an important ingredient when crafting Core Grafts. They will, however, lose that energy over time. It's not possible to stop these from losing life, after they are cut from the tree. Not even by stopping the game."
+        }
+	]
+}

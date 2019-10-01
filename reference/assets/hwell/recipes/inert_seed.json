@@ -1,0 +1,14 @@
+{ 
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"ABA",
+		"BCB",
+		"ABA"
+	],
+	"key": {
+		"A": { "item": "hwell:asul_nugget" },
+		"B": { "item": "hwell:myst_dust" },
+		"C": { "item": "hwell:mutation_paste" }
+	},
+	"result": { "item": "hwell:inert_seed", "count": 2 }
+}

@@ -1,0 +1,12 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+	"B B",
+    "ABA" ],
+  "key": {
+	"A": [{ "item": "hwell:asul_ingot" }],
+    "B": [{ "item": "minecraft:stone", "data": 0 }]
+  },
+  "result": { "item": "hwell:asul_machine_case" }
+}

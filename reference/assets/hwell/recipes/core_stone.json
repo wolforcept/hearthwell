@@ -1,0 +1,29 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "ABA",
+    "CCC"  ],
+  "key": {
+    "A": [
+      {
+        "item": "minecraft:stone",
+        "data": 0
+      }
+    ],
+	"B": {
+        "item": "hwell:heavy_ingot",
+        "data": 0
+     },
+	"C": [
+      {
+        "item": "minecraft:stone_slab",
+        "data": 0
+      }
+    ]
+  },
+  "result": {
+    "item": "hwell:core_stone",
+    "count": 4
+  }
+}

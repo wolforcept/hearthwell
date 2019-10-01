@@ -1,0 +1,16 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"  ],
+  "key": {
+    "A": [
+      {
+        "item": "hwell:asul_nugget",
+        "data": 0
+      }
+    ]
+  },
+  "result": { "item": "hwell:asul_ingot"}
+}

@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "bottom": "hwell:blocks/crushing_block_bottom",
+        "top": "hwell:blocks/crushing_block_top",
+        "side": "hwell:blocks/crushing_block_side"
+    }
+}

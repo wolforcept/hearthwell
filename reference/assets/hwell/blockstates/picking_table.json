@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "filling=0": { "model": "hwell:picking_table0" },
+        "filling=1": { "model": "hwell:picking_table1" },
+        "filling=2":  { "model": "hwell:picking_table2" },
+        "filling=3":  { "model": "hwell:picking_table3" }
+    }
+}

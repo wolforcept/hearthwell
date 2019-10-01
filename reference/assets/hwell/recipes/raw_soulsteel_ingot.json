@@ -1,0 +1,13 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+    "BCB",
+    "ABA"  ],
+  "key": {
+    "A": [{ "item": "hwell:metaldiamond" }],
+    "B": [{ "item": "hwell:soul_dust" }],
+    "C": [{ "item": "hwell:crystal_catalyst" }]
+  },
+  "result": { "item": "hwell:raw_soulsteel", "count": 4 }
+}

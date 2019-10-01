@@ -1,0 +1,14 @@
+{
+    "variants": {
+        "temp=0": [ { "model": "hwell:generator_heat_0" } ],
+        "temp=1": [ { "model": "hwell:generator_heat_1" } ],
+        "temp=2": [ { "model": "hwell:generator_heat_2" } ],
+        "temp=3": [ { "model": "hwell:generator_heat_3" } ],
+        "temp=4": [ { "model": "hwell:generator_heat_4" } ],
+        "temp=5": [ { "model": "hwell:generator_heat_5" } ],
+        "temp=6": [ { "model": "hwell:generator_heat_6" } ],
+        "temp=7": [ { "model": "hwell:generator_heat_7" } ],
+        "temp=8": [ { "model": "hwell:generator_heat_8" } ],
+        "temp=9": [ { "model": "hwell:generator_heat_9" } ]
+    }
+}

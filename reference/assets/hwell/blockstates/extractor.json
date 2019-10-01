@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "burning=true": [
+            { "model": "hwell:extractor_on" }
+        ],
+		"burning=false": [
+            { "model": "hwell:extractor_off" }
+        ]
+    }
+}

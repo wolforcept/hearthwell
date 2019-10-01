@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=up": { "model": "hwell:totem_creeper" },
+        "facing=down": { "model": "hwell:totem_creeper" },
+        "facing=north": { "model": "hwell:totem_creeper" },
+        "facing=south": { "model": "hwell:totem_creeper", "y": 180 },
+        "facing=west":  { "model": "hwell:totem_creeper", "y": 270 },
+        "facing=east":  { "model": "hwell:totem_creeper", "y": 90 }
+    }
+}

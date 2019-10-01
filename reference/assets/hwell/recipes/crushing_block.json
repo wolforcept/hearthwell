@@ -1,0 +1,37 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "BCB",
+    "DDD"  ],
+  "key": {
+    "A": [
+      {
+        "item": "minecraft:stone",
+        "data": 0
+      }
+    ],
+	"B": [
+      {
+        "item": "minecraft:cobblestone",
+        "data": 0
+      }
+    ],
+	"C": [
+      {
+        "item": "hwell:heavy_block",
+        "data": 0
+      }
+    ],
+	"D": [
+      {
+        "item": "hwell:heavy_ingot",
+        "data": 0
+      }
+    ]
+  },
+  "result": {
+    "item": "hwell:crushing_block",
+    "data": 0
+  }
+}

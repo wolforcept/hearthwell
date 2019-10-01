@@ -1,0 +1,11 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"  ],
+  "key": {
+    "A": [{ "item": "hwell:mystic_iron_ingot" }]
+  },
+  "result": { "item": "hwell:mystic_iron_block" }
+}

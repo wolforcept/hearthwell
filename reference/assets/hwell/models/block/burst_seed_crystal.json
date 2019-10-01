@@ -1,0 +1,39 @@
+{
+    "ambientocclusion": false,
+    "textures": {
+        "particle": "hwell:blocks/crystal_block",
+        "all": "hwell:blocks/crystal_block"
+    },
+    "elements": [
+        {   "from": [ 4, 0, 4 ],
+            "to": [ 12, 8, 12 ],
+            "shade": false,
+            "faces": {
+                "up": { "uv": [ 0, 0, 8, 8], "texture": "all"},
+				"down": { "uv": [ 8, 0, 0, 8], "texture": "all"},
+				"north": { "uv": [ 8, 0, 0, 8], "texture": "all"},
+				"south": { "uv": [ 8, 8, 0, 0], "texture": "all"},
+				"east": { "uv": [ 0, 8, 8, 0], "texture": "all"},
+				"west": { "uv": [ 0, 0, 8, 8], "texture": "all"}
+            }
+        }
+    ],
+	 "display": {
+
+        "thirdperson": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 0.0625, 0.0625, 0.0625 ]
+        },
+        "firstperson": {
+            "rotation": [ 0, 0, 45 ],
+            "translation": [ 0, 16, 0 ],
+            "scale": [ 0.0625, 0.0625, 0.0625 ]
+        },
+        "gui": {
+            "rotation": [ 30, 45, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 0.625, 0.625, 0.625 ]
+        }
+   }
+}

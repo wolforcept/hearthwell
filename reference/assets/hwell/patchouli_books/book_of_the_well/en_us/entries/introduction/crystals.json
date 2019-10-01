@@ -1,0 +1,33 @@
+{
+    "name": "Crystal Creation",
+    "icon": "hwell:crystal",
+    "category": "introduction",
+    "sortnum": 40,
+    "pages": [
+        	{	
+        	"type": "spotlight",
+            "title": "Crystals",
+            "item": "hwell:crystal",
+            "link_recipe": true,
+            "text": "These crystals are mysterious and fragile. They shine in a myriad of colours. $(br2)Crystals can be crushed with a Crushing Block to get random shards. They can also be thrown into a Nether Portal to create Nether Crystals."
+        },
+		{
+            "type": "smelting",
+			"title": "Smelting Crystals",
+			"text": "To obtain these crystals, craft a Mysterious Mixture and then smelt the mixture to create a crystal block. The Crystal Block can then be divided into Crystals.",
+			"recipe": "hwell:leaf_mesh"		
+        },
+	    {
+            "type": "crafting",
+			"title": "Crystals",
+			"recipe": "hwell:crystal",
+			"recipe2": "hwell:crystal_block"
+		},
+		{
+            "type": "crafting",
+			"title": "Utility Crystals",
+			"recipe": "hwell:crystal_bowl",
+			"recipe2": "hwell:crystal_catalyst"
+		}
+    ]
+}

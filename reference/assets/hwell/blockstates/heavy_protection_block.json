@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "hwell:heavy_protection_block" }
+        ]
+    }
+}

@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "hwell:azurite_bricks" }
+  ],
+  "result": { "item": "hwell:azurite", "count": 1 }
+}

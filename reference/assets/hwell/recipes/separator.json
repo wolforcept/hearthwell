@@ -1,0 +1,15 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+	"BCB",
+    "BBB" ],
+  "key": {
+    "A": [{ "item": "hwell:furnace_tube"}],
+    "B": [{ "item": "hwell:soulsteel_ingot"}],
+	"C": [{ "item": "hwell:empty_rod" }]
+  },
+  "result": {
+    "item": "hwell:separator"
+  }
+}

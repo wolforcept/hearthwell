@@ -1,0 +1,17 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CSC",
+	"TMT",
+    "OOO" ],
+  "key": {
+	"S": [{ "item": "hwell:shard_p" }],
+	"M": [{ "item": "hwell:asul_machine_case" }],
+	"O": [{ "item": "hwell:smooth_onyx" }],
+	"C": [{ "item": "hwell:crystal" }],
+	"T": [{ "item": "hwell:furnace_tube" }]
+  },
+  "result": {
+    "item": "hwell:charger"
+  }
+}

@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "hwell:blocks/raw_asul_block"
+    }
+}

@@ -1,0 +1,11 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["ABA", "CBC", "AEA" ],
+  "key": {
+    "A": [{ "item": "hwell:soulsteel_ingot" }],
+    "B": [{ "item": "hwell:locked_light" }],
+    "C": [{ "item": "hwell:myst_rod" }],
+    "E": [{ "item": "hwell:asul_machine_case" }]
+  },
+  "result": { "item": "hwell:stabiliser_heavy" }
+}

@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "hwell:blocks/former_top",
+        "down":     "hwell:blocks/machine_base",
+        "up":       "hwell:blocks/former_top",
+        "north":    "hwell:blocks/former_side_1",
+        "east":     "hwell:blocks/former_side_2",
+        "south":    "hwell:blocks/former_side_1",
+        "west":     "hwell:blocks/former_side_2"
+    }
+} 

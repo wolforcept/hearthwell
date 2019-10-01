@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "hwell:asul_machine_case" }
+        ]
+    }
+}

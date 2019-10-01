@@ -1,0 +1,6 @@
+{
+	"name": "Multiblock Machines",
+	"description": "These are the multiblocks of the mod. Machines that need energy but don't have it will emit a sound.",
+	"icon": "hwell:puller",
+	"sortnum": 10
+}

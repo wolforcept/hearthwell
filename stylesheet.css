@@ -19,12 +19,13 @@ body{
 	border: 1px solid #000;
 	background-color: #FFF;
 }
+* {
+	font-family: 'Open Sans', sans-serif;
+}
 h1, h2, h3{
 	font-family: 'Raleway', sans-serif;
 }
-a, p, table, object{
-	font-family: 'Open Sans', sans-serif;
-}
+
 
 .bold{
 	font-weight: bold;
@@ -57,7 +58,7 @@ code {
 .title {
 	font-size: 28px;
 	font-weight: bold;
-	color: ##ffbb00;
+	color: #ffbb00;
 }
 .title2 {
 	font-size: 18px;

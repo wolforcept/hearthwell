@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "hwell:raw_asul_block" }
+        ]
+    }
+}

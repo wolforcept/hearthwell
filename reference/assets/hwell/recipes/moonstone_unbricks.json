@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "hwell:moonstone_bricks" }
+  ],
+  "result": { "item": "hwell:moonstone", "count": 1 }
+}

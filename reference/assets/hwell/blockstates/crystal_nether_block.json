@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "hwell:crystal_nether_block" }
+        ]
+    }
+}

@@ -1,0 +1,14 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+    "BCB",
+    "ADA"  ],
+  "key": {
+    "A": [{ "item": "minecraft:stone", "data": 0 }],
+	"B": [{ "item": "hwell:heavy_ingot"}],
+	"C": [{ "item": "hwell:asul_machine_case" }],
+	"D": [{ "item": "hwell:heavy_block" }]
+  },
+  "result": { "item": "hwell:gravity_block" }
+}

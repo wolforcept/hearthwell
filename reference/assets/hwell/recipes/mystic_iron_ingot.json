@@ -1,0 +1,12 @@
+{ 
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+	  "item": "hwell:mystic_iron_block"
+	}
+  ],
+  "result": {
+    "item": "hwell:mystic_iron_ingot",
+	"count": 9
+  }
+}

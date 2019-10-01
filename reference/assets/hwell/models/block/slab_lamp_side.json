@@ -1,0 +1,8 @@
+{
+    "parent": "hwell:block/slab_base_side",
+    "textures": {
+        "particle": "hwell:blocks/slab_lamp_side",
+        "0": "hwell:blocks/slab_lamp_end",
+        "1": "hwell:blocks/slab_lamp_side"
+    }
+}

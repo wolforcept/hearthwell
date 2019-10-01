@@ -1,0 +1,8 @@
+{
+    "parent": "hwell:block/slab_base",
+    "textures": {
+        "particle": "hwell:blocks/onyx_bricks",
+        "0": "hwell:blocks/onyx_bricks",
+        "1": "hwell:blocks/onyx_bricks"
+    }
+}

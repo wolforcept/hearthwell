@@ -1,0 +1,12 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+	"ABA",
+    "AAA" ],
+  "key": {
+	"A": [{ "item": "hwell:crystal" }],
+	"B": [{ "item": "hwell:mystic_iron_ingot" }]
+  },
+  "result": { "item": "hwell:grinding_wheel_crystal" }
+}

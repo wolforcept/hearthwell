@@ -1,0 +1,21 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABC",
+    "DEF",
+	"GHI"],
+  "key": {
+    "A": [{ "item": "hwell:shard_o" }],
+    "B": [{ "item": "hwell:shard_p" }],
+    "C": [{ "item": "hwell:shard_n" }],
+    "D": [{ "item": "hwell:shard_h" }],
+    "F": [{ "item": "hwell:shard_fe" }],
+    "G": [{ "item": "hwell:shard_au" }],
+    "H": [{ "item": "hwell:shard_c" }],
+    "I": [{ "item": "hwell:shard_ca" }],
+    "E": [{ "item": "hwell:crystal_nether" }]
+  },
+  "result": {
+    "item": "hwell:crystal_catalyst"
+  }
+}

@@ -1,0 +1,12 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+	"ABA",
+    "AAA" ],
+  "key": {
+    "A": [{ "item": "minecraft:cobblestone", "data": 0 }],
+	"B": [{ "item": "hwell:shard_o" }]
+  },
+  "result": { "item": "hwell:azurite", "count": 8 }
+}

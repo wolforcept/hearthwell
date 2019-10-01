@@ -1,0 +1,4 @@
+{ "type": "minecraft:crafting_shaped",
+  "pattern": ["A","A"],
+  "key": {"A": [{"item": "hwell:citrinic_stone_bricks_slab"}]},
+  "result": { "item": "hwell:citrinic_stone_bricks" }}

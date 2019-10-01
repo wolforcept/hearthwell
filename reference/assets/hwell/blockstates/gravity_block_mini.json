@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "hwell:gravity_block_mini" }
+        ]
+    }
+}

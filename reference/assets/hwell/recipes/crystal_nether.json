@@ -1,0 +1,7 @@
+{ 
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "hwell:crystal_nether_block"}
+  ],
+  "result": { "item": "hwell:crystal_nether", "count": 9 }
+}

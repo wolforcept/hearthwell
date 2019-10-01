@@ -1,0 +1,16 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YPY",
+    "OXO",
+    "YPY"  ],
+  "key": {
+	"X": [{ "item": "hwell:loot_base" }],
+	"Y": [{ "item": "hwell:crystal_nether" }],
+	"P": [{ "item": "hwell:shard_p" }],
+	"O": [{ "item": "hwell:shard_o" }]
+  },
+  "result": {
+    "item": "hwell:loot_guardian"
+  }
+}

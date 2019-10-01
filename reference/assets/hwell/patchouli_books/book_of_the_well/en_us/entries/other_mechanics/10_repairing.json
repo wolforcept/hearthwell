@@ -1,0 +1,20 @@
+{
+    "name": "Repairing",
+    "icon": "hwell:repairing_paste",
+    "category": "other_mechanics",
+    "sortnum": 10,
+    "pages": [
+        {
+            "type": "crafting",
+            "title": "The Setter",            
+            "recipe": "hwell:raw_repairing_paste",
+			"text": "To easily repair items while using them, craft some Raw Repairing Paste and cook it to get Repairing Paste.$(br)When in your off hand, it will slowly regenerate some durability of the item in your main hand, if possible."
+        },
+        {
+            "type": "smelting",
+			"title": "Heavy Ingots",
+			"recipe": "hwell:raw_repairing_paste",
+			"text": "Repairing Paste will lose durability as it repairs. If you get various stacks of Repairing Paste with different durabilities, mix them together by having one on each hand.$(br2)When Repairing Paste loses all durability it will simple be consumed and disapear."
+        }
+	]
+}

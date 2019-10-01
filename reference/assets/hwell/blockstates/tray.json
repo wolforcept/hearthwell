@@ -1,0 +1,17 @@
+{
+	"variants": {														 
+		"facing=north,isblack=false": { "model": "hwell:tray_w", "x":90 },
+		"facing=south,isblack=false": { "model": "hwell:tray_w", "x":90, "y": 180  },
+		"facing=west,isblack=false":  { "model": "hwell:tray_w", "x":90, "y": 270  },
+		"facing=east,isblack=false":  { "model": "hwell:tray_w", "x":90, "y": 90 },
+		"facing=up,isblack=false":  	{ "model": "hwell:tray_w" },
+		"facing=down,isblack=false":  { "model": "hwell:tray_w", "x": 180 },
+
+		"facing=north,isblack=true": { "model": "hwell:tray_b", "x":90 },
+		"facing=south,isblack=true": { "model": "hwell:tray_b", "x":90, "y": 180  },
+		"facing=west,isblack=true":  { "model": "hwell:tray_b", "x":90, "y": 270  },
+		"facing=east,isblack=true":  { "model": "hwell:tray_b", "x":90, "y": 90 },
+		"facing=up,isblack=true":  	 { "model": "hwell:tray_b" },
+		"facing=down,isblack=true":  { "model": "hwell:tray_b", "x": 180 }
+	}
+}

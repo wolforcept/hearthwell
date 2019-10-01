@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=up": { "model": "hwell:precision_grinder_flint" },
+        "facing=down": { "model": "hwell:precision_grinder_flint" },
+        "facing=north": { "model": "hwell:precision_grinder_flint" },
+        "facing=south": { "model": "hwell:precision_grinder_flint", "y": 180 },
+        "facing=west":  { "model": "hwell:precision_grinder_flint", "y": 270 },
+        "facing=east":  { "model": "hwell:precision_grinder_flint", "y": 90 }
+    }
+}

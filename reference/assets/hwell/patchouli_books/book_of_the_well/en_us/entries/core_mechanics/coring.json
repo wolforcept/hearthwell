@@ -1,0 +1,46 @@
+{
+    "name": "Coring",
+    "icon": "hwell:core_stone",
+    "category": "core_mechanics",
+    "sortnum": 20,
+    "pages": [
+        {
+            "type": "text",
+            "text": "Cores transform into resources. Activate them with a shard, and then place catalyst blocks nearby. Particle effects will tell you it's working. Sometimes, the catalyst blocks will dislodge, and have to be replaced."
+        },
+        { 
+	        "type": "core",
+	        "name": "Coring 101",
+	        "input1": "hwell:core_stone",
+	        "input2": "hwell:crystal",
+	        "input3": "minecraft:grass",
+	        "output": "minecraft:sand",
+	        "text": ""      
+        },
+		{
+            "type": "crafting",
+			"title": "Base Cores",
+            "recipe": "hwell:core_stone",
+            "recipe2": "hwell:inert_seed"
+        },
+		{
+            "type": "crafting",
+			"title": "Base Cores",
+            "recipe": "hwell:core_green",
+            "recipe2": "hwell:core_sentient"
+        },
+        {
+        	"type": "spotlight",
+            "title": "Anima Core",
+            "item": "hwell:core_anima",
+            "text": "The Anima Core has to be grown from Inert Seeds. Simply place the seeds on the ground and stay near them and they will grow. If you go away from them they will slowly regress to its Inert state. The more players near an Inert Seed, the faster it will grow."
+        },
+        {
+        	"type": "spotlight",
+            "title": "Heat Core",
+            "item": "hwell:core_heat",
+            "text": "The Heat Core is a bit different. Craft a Heat Block and light it on fire with a Flint and Steel to transform it into a Heat Core."
+        }
+            
+    ]
+}

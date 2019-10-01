@@ -1,0 +1,6 @@
+{
+	"name": "Key Mechanics",
+	"description": "These are the most important mechanics of Hearth Well. With them you can progress through the mod and reach every other mechanic available. Machines that need energy but don't have it will emit a sound.",
+	"icon": "hwell:core_stone",
+	"sortnum": 1
+}
