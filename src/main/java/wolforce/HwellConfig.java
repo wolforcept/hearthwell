@@ -180,6 +180,12 @@ public class HwellConfig {
 		@Comment({
 				"If heat blocks explode with flint and steel. Otherwise they will just transform peacefully. (default: true)" })
 		public boolean heat_blocks_explode = true;
+
+		// PICKING TABLE
+		@Comment({
+				"If heat blocks explode with flint and steel. Otherwise they will just transform peacefully. (default: true)" })
+		@Config.RangeInt(min = 1, max = 64)
+		public int inert_seed_distance = 4;
 	}
 
 	@SubscribeEvent

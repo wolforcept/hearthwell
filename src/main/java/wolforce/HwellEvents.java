@@ -37,7 +37,7 @@ import wolforce.registry.RegisterRecipes;
 @Mod.EventBusSubscriber
 public class HwellEvents {
 
-	private static HashSet<String> prayers = new HashSet();
+	private static HashSet<String> prayers = new HashSet<>();
 
 	@SubscribeEvent
 	public static void checkChatForBook(ServerChatEvent event) {
@@ -118,7 +118,8 @@ public class HwellEvents {
 			}
 		}
 
-		if (!HwellConfig.general.allowEntitiesToTravelToTheNether && event.getDimension() == DimensionType.NETHER.getId())
+		if (!HwellConfig.general.allowEntitiesToTravelToTheNether
+				&& event.getDimension() == DimensionType.NETHER.getId())
 			event.setCanceled(true);
 	}
 
@@ -136,7 +137,8 @@ public class HwellEvents {
 	@SubscribeEvent // (priority = EventPriority.NORMAL, receiveCanceled = true)
 	public static void onEvent(PlayerLoggedInEvent event) {
 		if (!event.player.getEntityWorld().isRemote && RegisterRecipes.errored_recipes_file)
-			event.player.sendMessage(new TextComponentString("HEARTH WELL WARNING - SERVER RECIPES FILE IS CORRUPTED!"));
+			event.player
+					.sendMessage(new TextComponentString("HEARTH WELL WARNING - SERVER RECIPES FILE IS CORRUPTED!"));
 
 		if (!event.player.getEntityWorld().isRemote && RegisterRecipes.old_version_recipes_file)
 			event.player.sendMessage(new TextComponentString(
@@ -206,7 +208,8 @@ public class HwellEvents {
 
 	private static void motion(EntityItem item) {
 		IBlockState bstate = item.world.getBlockState(item.getPosition());
-		if (bstate.getBlock().equals(Main.liquid_souls_block) || bstate.getBlock().isAssociatedBlock(Main.liquid_souls_block)
+		if (bstate.getBlock().equals(Main.liquid_souls_block)
+				|| bstate.getBlock().isAssociatedBlock(Main.liquid_souls_block)
 				|| bstate.getBlock() instanceof BlockLiquidSouls) {
 			BlockLiquidSouls ls = ((BlockLiquidSouls) bstate.getBlock());
 			Vec3d flow = ls.getFlowVector(item.world, item.getPosition());

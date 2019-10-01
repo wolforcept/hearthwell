@@ -30,15 +30,20 @@ public class RecipeCoring {
 		recipes.put(core, new HashMap<>());
 	}
 
-	public static void addCore(String coreRegistryName, String localizedName, int graftCost, int color1, int color2) {
+	public static void addCore(String coreRegistryName, String localizedName, int graftCost) {
+		addCore(coreRegistryName, localizedName, graftCost, 0, 0, false);
+	}
 
-		BlockCore newCore = new BlockCore(coreRegistryName, false, color1, color2) {
+	public static void addCore(String coreRegistryName, String localizedName, int graftCost, int color1, int color2,
+			boolean isCustom) {
+
+		BlockCore newCore = new BlockCore(coreRegistryName, false, color1, color2, isCustom) {
 			@Override
 			public String getLocalizedName() {
 				return localizedName;
 			}
 		};
-		Main.custom_cores.put(coreRegistryName, newCore);
+		Main.cores.put(coreRegistryName, newCore);
 
 		String temp = "" + localizedName;
 		if (localizedName.endsWith(" Core"))
@@ -47,7 +52,9 @@ public class RecipeCoring {
 			temp = localizedName.substring(0, localizedName.indexOf(" core"));
 		temp += " Graft";
 		final String graftLoc = "" + temp;
-		Block newGraft = new MyBlock("graft_" + coreRegistryName, Material.ROCK) {
+		Block newGraft = new MyBlock(
+				"graft_" + (coreRegistryName.startsWith("core_") ? coreRegistryName.substring(5) : coreRegistryName),
+				Material.ROCK) {
 			@Override
 			public String getLocalizedName() {
 				return graftLoc;
@@ -62,7 +69,7 @@ public class RecipeCoring {
 
 	public static void addCoreRecipe(String coreRegName, String shardString, ItemStack[] result, ItemStack[] consumes) {
 
-		BlockCore core = Main.custom_cores.get(coreRegName);
+		BlockCore core = Main.cores.get(coreRegName);
 		ItemShard shard = ItemShard.getFromString(shardString);
 		addCoreRecipe(core, shard, result, consumes);
 	}
@@ -131,36 +138,41 @@ public class RecipeCoring {
 
 	public static void initRecipes(JsonObject recipesJson) {
 
-		initCoreRecipes(Main.core_stone, recipesJson.get("core_stone").getAsJsonObject());
-		initCoreRecipes(Main.core_anima, recipesJson.get("core_anima").getAsJsonObject());
-		initCoreRecipes(Main.core_heat, recipesJson.get("core_heat").getAsJsonObject());
-		initCoreRecipes(Main.core_green, recipesJson.get("core_green").getAsJsonObject());
-		initCoreRecipes(Main.core_sentient, recipesJson.get("core_sentient").getAsJsonObject());
+		// initCoreRecipes(Main.cores.get("core_stone"),
+		// recipesJson.get("core_stone").getAsJsonObject());
+		// initCoreRecipes(Main.cores.get("core_anima"),
+		// recipesJson.get("core_anima").getAsJsonObject());
+		// initCoreRecipes(Main.cores.get("core_heat"),
+		// recipesJson.get("core_heat").getAsJsonObject());
+		// initCoreRecipes(Main.cores.get("core_green"),
+		// recipesJson.get("core_green").getAsJsonObject());
+		// initCoreRecipes(Main.cores.get("core_sentient"),
+		// recipesJson.get("core_sentient").getAsJsonObject());
 
 		for (Entry<String, JsonElement> entry : recipesJson.entrySet()) {
 			String nameid = entry.getKey();
-			if (getNormalCoreBlock(nameid) != null)
-				continue;
-			BlockCore core = Main.custom_cores.get(nameid);
+			// if (getNormalCoreBlock(nameid) != null)
+			// continue;
+			BlockCore core = Main.cores.get(nameid);
 			initCoreRecipes(core, recipesJson.getAsJsonObject(nameid));
 		}
 	}
 
-	public static BlockCore getNormalCoreBlock(String nameid) {
-		switch (nameid) {
-		case "core_stone":
-			return Main.core_stone;
-		case "core_anima":
-			return Main.core_anima;
-		case "core_heat":
-			return Main.core_heat;
-		case "core_green":
-			return Main.core_green;
-		case "core_sentient":
-			return Main.core_sentient;
-		}
-		return null;
-	}
+	// public static BlockCore getNormalCoreBlock(String nameid) {
+	// switch (nameid) {
+	// case "core_stone":
+	// return Main.core_stone;
+	// case "core_anima":
+	// return Main.core_anima;
+	// case "core_heat":
+	// return Main.core_heat;
+	// case "core_green":
+	// return Main.core_green;
+	// case "core_sentient":
+	// return Main.core_sentient;
+	// }
+	// return null;
+	// }
 
 	private static void initCoreRecipes(BlockCore core, JsonObject recipesJson) {
 

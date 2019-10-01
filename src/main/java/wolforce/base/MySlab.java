@@ -31,8 +31,10 @@ public class MySlab extends MyBlock {
 		this.useNeighborBrightness = true;
 	}
 
+	@SuppressWarnings("deprecation")
 	public MySlab(Block fullblock) {
-		this(fullblock.getRegistryName().getResourcePath() + "_slab", fullblock.getMaterial(fullblock.getDefaultState()));
+		this(fullblock.getRegistryName().getResourcePath() + "_slab",
+				fullblock.getMaterial(fullblock.getDefaultState()));
 		this.fullBlock = false;
 		this.setLightOpacity(255);
 		// this WILL break in the future
@@ -41,8 +43,8 @@ public class MySlab extends MyBlock {
 	}
 
 	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
-			int meta, EntityLivingBase placer) {
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY,
+			float hitZ, int meta, EntityLivingBase placer) {
 		return this.getDefaultState().withProperty(FACING, placer.isSneaking() ? facing.getOpposite() : facing);
 	}
 

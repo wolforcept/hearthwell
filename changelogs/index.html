@@ -8,6 +8,32 @@
 <hr>
 <h1>Patch History</h1>
 <pre><code id="main">{0.5.1}
+discstart************************th of August, 2019
+
+Small update with bugfixes.discend
+
+[ NEW STUFF ]
+Added JEI integration for grafting.
+Added a Mutator Recipe for Bucket of Milk.
+
+[ BALANCE ]
+Balanced the costs of the Core Grafts.
+Added a config to change the Inert Seed grow distance.
+Increased the default grow distance of the Inert Seed from 3 to 4 blocks.
+
+[ BUG FIXES ]
+Added a recipe for the Mutator.
+Fixed the Inert Seed's size becoming negative.
+
+[ OTHER ]
+<span class="chg">Massive overhaul</span> of the JEI integration system, that will allow me to much more easily integrate JEI in recipes in the future. You might also notice some changes in Recipe and Recipes Catalysts in already existing recipes.
+Removed the recipes json in favor of crafttweaker. 
+CraftTweaker Methods changed:
+	- Crushing Recipes can now have multiple inputs.
+	- Grinding Recipes can now have multiple inputs and outputs.
+
+<hr>
+{0.4.2}{0.5.1}
 discstart26th of August, 2019
 
 Major update with new content.discend
@@ -313,6 +339,7 @@ Fixed core blocks not accepting consumable blocks from all 6 directions
 
 	inner = inner.replace(/(Update:|Hearth Well| - )/g, '<span class="bolden">$1</span>');
 	inner = inner.replace(/(Added)/g, '<span class="ddd">$1</span>');
+	inner = inner.replace(/(Balanced)/g, '<span class="chg">$1</span>');
 	inner = inner.replace(/(Changed)/g, '<span class="chg">$1</span>');
 	inner = inner.replace(/(Increased)/g, '<span class="chg">$1</span>');
 	inner = inner.replace(/(Decreased)/g, '<span class="chg">$1</span>');

@@ -3,7 +3,6 @@ package wolforce.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.material.Material;
-import wolforce.Main;
 import wolforce.Util;
 
 public class BlockBox extends BlockRotatedPillar {
@@ -32,9 +31,10 @@ public class BlockBox extends BlockRotatedPillar {
 		return "Boxes are decoration variants of a block and created in the Block Boxer machine.";
 	}
 
-	public boolean isCore(Block in) {
-		return in == Main.core_stone || in == Main.core_heat || in == Main.core_green || in == Main.core_sentient;
-	}
+	// public boolean isCore(Block in) {
+	// return in == Main.core_stone || in == Main.core_heat || in == Main.core_green
+	// || in == Main.core_sentient;
+	// }
 
 	//
 

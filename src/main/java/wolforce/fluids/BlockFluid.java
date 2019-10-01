@@ -21,6 +21,7 @@ public class BlockFluid extends BlockFluidClassic {
 		this.fluid = fluid;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean canDisplace(IBlockAccess world, BlockPos pos) {
 		if (world.getBlockState(pos).getBlock().getMaterial(world.getBlockState(pos)).isLiquid())
@@ -28,6 +29,7 @@ public class BlockFluid extends BlockFluidClassic {
 		return super.canDisplace(world, pos);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean displaceIfPossible(World world, BlockPos pos) {
 		if (world.getBlockState(pos).getBlock().getMaterial(world.getBlockState(pos)).isLiquid())

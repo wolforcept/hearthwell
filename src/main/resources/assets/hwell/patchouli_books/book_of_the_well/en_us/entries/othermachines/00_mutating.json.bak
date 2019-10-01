@@ -1,0 +1,18 @@
+{
+    "name": "Mutator",
+    "icon": "hwell:mutator",
+    "category": "other_machines",
+    "sortnum": 00,
+    "pages": [
+        { 	
+			"type": "spotlight",
+            "item": "hwell:mutator",
+            "text": "The Mutator will transform items into other items. It uses Mutation Paste and energy.($br2)Simply right click with Mutation paste to insert it, then right click with any eligible item and give it a redstone signal to transform it."
+        },
+		{ 	
+			"type": "crafting",
+            "recipe": "hwell:mutator",
+            "text": "Mutation Paste will only be used when removing the item from the mutator, but every transformation will use a tiny bit of energy."
+        }
+    ]
+}

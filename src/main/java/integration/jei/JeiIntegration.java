@@ -33,13 +33,13 @@ public class JeiIntegration implements IModPlugin {
 
 		jeiCats = new LinkedList<JeiCat>();
 
-		jeiCats.add(new JeiCatCoring(Main.core_stone));
-		jeiCats.add(new JeiCatCoring(Main.core_anima));
-		jeiCats.add(new JeiCatCoring(Main.core_heat));
-		jeiCats.add(new JeiCatCoring(Main.core_green));
-		jeiCats.add(new JeiCatCoring(Main.core_sentient));
+		// jeiCats.add(new JeiCatCoring(Main.core_stone));
+		// jeiCats.add(new JeiCatCoring(Main.core_anima));
+		// jeiCats.add(new JeiCatCoring(Main.core_heat));
+		// jeiCats.add(new JeiCatCoring(Main.core_green));
+		// jeiCats.add(new JeiCatCoring(Main.core_sentient));
 
-		for (BlockCore core : Main.custom_cores.values())
+		for (BlockCore core : Main.cores.values())
 			jeiCats.add(new JeiCatCoring(core));
 
 		jeiCats.add(new JeiCatBoxing());
@@ -53,6 +53,7 @@ public class JeiIntegration implements IModPlugin {
 		jeiCats.add(new JeiCatPullingFiltered());
 		jeiCats.add(new JeiCatSeparating());
 		jeiCats.add(new JeiCatTubing());
+		jeiCats.add(new JeiCatGrafting());
 
 		for (JeiCat cat : jeiCats) {
 			reg.addRecipeCategories(cat);
@@ -144,9 +145,11 @@ public class JeiIntegration implements IModPlugin {
 
 		reg.addIngredientInfo(new ItemStack(Main.crystal_nether), VanillaTypes.ITEM,
 				"Obtained by throwing a crystal into the nether portal.");
-		reg.addIngredientInfo(new ItemStack(Main.core_anima), VanillaTypes.ITEM, "Obtained by growing an Inert Seed.",
-				"You must stay near it.");
-		reg.addIngredientInfo(new ItemStack(Main.core_heat), VanillaTypes.ITEM,
+		reg.addIngredientInfo(new ItemStack(Main.cores.get("core_anima")), VanillaTypes.ITEM,
+				"Obtained by growing an Inert Seed.", "You must stay within 4 blocks of it.");
+		reg.addIngredientInfo(new ItemStack(Main.inert_seed), VanillaTypes.ITEM,
+				"If you stay within 4 blocks of it, it will slowly grow and become an Anima Core.");
+		reg.addIngredientInfo(new ItemStack(Main.cores.get("core_heat")), VanillaTypes.ITEM,
 				"Obtained by right clicking a Heat Block with a flint and steel.", "Just be careful...");
 		reg.addIngredientInfo(new ItemStack(Main.empty_rod), VanillaTypes.ITEM, "Hold right click to use.");
 		reg.addIngredientInfo(new ItemStack(Main.branch), VanillaTypes.ITEM, "Drop from Breaking Trees on Grit Vases.");

@@ -78,7 +78,7 @@
 			{
 				"item": { "item": "minecraft:lapis_block" },
 				"name": "Azure",
-				"power": 1900, "range": 3, "purity": 0.81
+				"power": 2150, "range": 3, "purity": 0.81
 			},
 			{
 				"item": { "item": "hwell:mystic_iron_block" },

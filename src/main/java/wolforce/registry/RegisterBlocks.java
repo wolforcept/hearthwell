@@ -36,7 +36,7 @@ public class RegisterBlocks {
 		for (BlockBox box : Main.boxes)
 			event.getRegistry().register(box);
 
-		for (Entry<String, BlockCore> entry : Main.custom_cores.entrySet()) {
+		for (Entry<String, BlockCore> entry : Main.cores.entrySet()) {
 			BlockCore core = entry.getValue();
 			event.getRegistry().register(core);
 			Block graft = Main.custom_grafts.get(core);
@@ -95,7 +95,7 @@ public class RegisterBlocks {
 
 		for (
 
-		Entry<String, BlockCore> entry : Main.custom_cores.entrySet()) {
+		Entry<String, BlockCore> entry : Main.cores.entrySet()) {
 			BlockCore core = entry.getValue();
 			Item item = new ItemBlock(core) {
 				@Override

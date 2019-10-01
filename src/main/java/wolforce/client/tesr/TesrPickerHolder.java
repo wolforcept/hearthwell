@@ -9,7 +9,8 @@ import wolforce.blocks.tile.TilePickerHolder;
 public class TesrPickerHolder extends TileEntitySpecialRenderer<TilePickerHolder> {
 
 	@Override
-	public void render(TilePickerHolder te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+	public void render(TilePickerHolder te, double x, double y, double z, float partialTicks, int destroyStage,
+			float alpha) {
 		// IItemHandler itemh =
 		// te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
 		// EnumFacing.NORTH);
@@ -19,16 +20,17 @@ public class TesrPickerHolder extends TileEntitySpecialRenderer<TilePickerHolder
 		// z);
 
 		if (UtilClient.canRenderTESR(te)) {
-			for (int i = 0; i < te.nSlots; i++) {
+			for (int i = 0; i < TilePickerHolder.nSlots; i++) {
 
 				ItemStack stack = te.inventory.getStackInSlot(i);
 				if (!Util.isValid(stack))
 					continue;
 
-				double a = Math.PI * 2 / te.nSlots;
+				double a = Math.PI * 2 / TilePickerHolder.nSlots;
 				double dx = Math.cos(i * a) * (.38);
 				double dz = Math.sin(i * a) * (.38);
-				UtilClient.renderItem(0, 0, te.getWorld(), stack, x + dx, y + .87, z + dz, 0, -Math.toDegrees(a) * i - 90, -45);
+				UtilClient.renderItem(0, 0, te.getWorld(), stack, x + dx, y + .87, z + dz, 0,
+						-Math.toDegrees(a) * i - 90, -45);
 			}
 		}
 	}

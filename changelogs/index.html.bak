@@ -7,8 +7,33 @@
 <object style="border:0;padding=0;" width="1000" height="50px" type="text/html" data="../navbar.html"></object>
 <hr>
 <h1>Patch History</h1>
-<pre><code id="main">{0.5}
-discstart25th of August, 2019
+<pre><code id="main">{0.5.1}
+discstart************************th of August, 2019
+
+Small update with bugfixes.discend
+
+[ NEW STUFF ]
+Added JEI integration for grafting.
+
+[ BALANCE ]
+Balanced the costs of the Core Grafts.
+Added a config to change the Inert Seed grow distance.
+Increased the default grow distance of the Inert Seed from 3 to 4 blocks.
+
+[ BUG FIXES ]
+Added a recipe for the Mutator.
+Fixed the Inert Seed's size becoming negative.
+
+[ OTHER ]
+<span class="chg">Massive overhaul</span> of the JEI integration system, that will allow me to much more easily integrate JEI in recipes in the future. You might also notice some changes in Recipe and Recipes Catalysts in already existing recipes.
+Removed the recipes json in favor of crafttweaker. 
+CraftTweaker Methods changed:
+	- Crushing Recipes can now have multiple inputs.
+	- Grinding Recipes can now have multiple inputs and outputs.
+
+<hr>
+{0.4.2}{0.5.1}
+discstart26th of August, 2019
 
 Major update with new content.discend
 
@@ -313,6 +338,7 @@ Fixed core blocks not accepting consumable blocks from all 6 directions
 
 	inner = inner.replace(/(Update:|Hearth Well| - )/g, '<span class="bolden">$1</span>');
 	inner = inner.replace(/(Added)/g, '<span class="ddd">$1</span>');
+	inner = inner.replace(/(Balanced)/g, '<span class="chg">$1</span>');
 	inner = inner.replace(/(Changed)/g, '<span class="chg">$1</span>');
 	inner = inner.replace(/(Increased)/g, '<span class="chg">$1</span>');
 	inner = inner.replace(/(Decreased)/g, '<span class="chg">$1</span>');
@@ -329,3 +355,39 @@ Fixed core blocks not accepting consumable blocks from all 6 directions
 </script>
 </body>
 </html>
+
+<!--
+
+So this will come out as soon as the patchfix 0.5.1 is released
+
+Hello everyone !!
+**Hearth Well 0.5** is out! (With an immediate patch to 0.5.1)
+Its biggest change being the new machine: the **Mutator**!
+There are some other changes, like:
+    - the new JEI integration on most recipes
+    - the end of the json recipe file
+    - crafttweaker support for Custom Cores
+    - and more!
+(Find out how to add cores in 0.5.1 in #documentation )
+Here is the mutator in action:
+https://i.imgur.com/yITneIZ.mp4
+
+Full Changelog at: https://wolforcept.github.io/hearthwell/changelogs/
+Website: https://wolforcept.github.io/hearthwell
+Curseforge: https://www.curseforge.com/minecraft/mc-mods/hearth-well
+Crafttweaker Recipes at: https://wolforcept.github.io/hearthwell/CT
+
+--
+
+I also want to announce my new **Patreon**, and thank the kind people who have already become patrons! They are already enjoying some updates and animations of upcoming content ahead of time!
+https://www.patreon.com/wolforce
+
+With this I would like to announce that I will try to **stream**, in the near future, some **pack testing and development** on a pack that I have been working on for a couple of months, that some of you already played: `Seed the World - Hardcore Survival`. The pack is already in forge, in a Beta state:
+https://www.curseforge.com/minecraft/modpacks/seed-the-world
+
+The stream will probably be **Thursday 26, at 7pm UTC** (9pm CEST or  2pm CDT)
+If you would specifically like to watch me stream at a date and time, **please tell me when in #suggestions **
+
+If any patrons would like to participate in future streams let me know <3
+
+-->

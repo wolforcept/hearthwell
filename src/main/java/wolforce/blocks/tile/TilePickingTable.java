@@ -22,6 +22,7 @@ public class TilePickingTable extends TileEntity {
 		return super.hasCapability(capability, facing);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
 		IBlockState state = world.getBlockState(pos);
@@ -45,7 +46,7 @@ public class TilePickingTable extends TileEntity {
 
 				@Override
 				public ItemStack getStackInSlot(int slot) {
-					IBlockState block = world.getBlockState(pos);
+					// IBlockState block = world.getBlockState(pos);
 					if (state.getValue(BlockPickingTable.FILLING) == 0)
 						return ItemStack.EMPTY;
 					return new ItemStack(Main.myst_dust);

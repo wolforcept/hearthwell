@@ -43,7 +43,7 @@ public class CT {
 	@ZenMethod
 	public static void addCustomCore(String coreRegistryName, String localizedName, int graftCost, int color1,
 			int color2) {
-		RecipeCoring.addCore(coreRegistryName, localizedName, graftCost, color1, color2);
+		RecipeCoring.addCore(coreRegistryName, localizedName, graftCost, color1, color2, true);
 	}
 
 	@ZenDoc("Add a new Custom Core.")

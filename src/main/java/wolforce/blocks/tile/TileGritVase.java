@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -68,6 +67,7 @@ public class TileGritVase extends TileEntity implements ITickable {
 				// Block block = iblockstate.getBlock();
 
 				// block.dropBlockAsItem(world, pos.down(), iblockstate, 0);
+				@SuppressWarnings("deprecation")
 				List<ItemStack> drops = iblockstate.getBlock().getDrops(world, pos, iblockstate, 0);
 				for (ItemStack itemStack : drops) {
 					Util.spawnItem(world, pos.down(), itemStack, 0, 0, 0);

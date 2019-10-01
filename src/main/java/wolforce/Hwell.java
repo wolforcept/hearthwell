@@ -30,7 +30,7 @@ public class Hwell {
 
 	public static final String MODID = "hwell";
 	public static final String NAME = "Hearth Well";
-	public static final String VERSION = "0.5.1";
+	public static final String VERSION = "0.5.2";
 	public static final Logger logger = LogManager.getLogger(NAME);
 
 	@SidedProxy(serverSide = "wolforce.ServerProxy", clientSide = "wolforce.client.ClientProxy")

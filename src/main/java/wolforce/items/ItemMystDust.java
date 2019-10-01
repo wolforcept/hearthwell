@@ -18,7 +18,7 @@ import wolforce.base.MyItem;
 public class ItemMystDust extends MyItem {
 
 	private final static HashMap<Block, Block> recipes = new HashMap<>();
-	private static final double SMALLNESS = 3;
+	// private static final double SMALLNESS = 3;
 
 	public static void initRecipes() {
 		recipes.put(Blocks.GRASS, Main.myst_grass);

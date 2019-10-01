@@ -27,13 +27,13 @@ public class BlockHeat extends Block {
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand,
-			EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (playerIn.getHeldItem(hand).getItem().equals(Items.FLINT_AND_STEEL)) {
 			if (HwellConfig.other.heat_blocks_explode) {
 				worldIn.createExplosion(playerIn, pos.getX(), pos.getY(), pos.getZ(), 1, true);
 			} else {
-				worldIn.setBlockState(pos, Main.core_heat.getDefaultState());
+				worldIn.setBlockState(pos, Main.cores.get("core_heat").getDefaultState());
 			}
 			playerIn.getHeldItem(hand).damageItem(1, playerIn);
 			return true;
@@ -44,7 +44,7 @@ public class BlockHeat extends Block {
 	@Override
 	public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn) {
 		if (!worldIn.isRemote)
-			Util.spawnItem(worldIn, pos, new ItemStack(Main.core_heat));
+			Util.spawnItem(worldIn, pos, new ItemStack(Main.cores.get("core_heat")));
 	}
 
 	@Override

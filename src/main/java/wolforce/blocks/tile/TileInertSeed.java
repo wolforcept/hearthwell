@@ -10,6 +10,7 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
+import wolforce.HwellConfig;
 import wolforce.Main;
 
 public class TileInertSeed extends TileEntity implements ITickable {
@@ -26,15 +27,16 @@ public class TileInertSeed extends TileEntity implements ITickable {
 			double dx = pos.getX() - p.posX;
 			double dy = pos.getY() - p.posY;
 			double dz = pos.getZ() - p.posZ;
-			if (dx * dx + dy * dy + dz * dz < 3 * 3)
+			if (dx * dx + dy * dy + dz * dz < HwellConfig.other.inert_seed_distance
+					* HwellConfig.other.inert_seed_distance)
 				i++;
 		}
 		growth += i * 0.00025;
-		if (i <= 0)
+		if (i <= 0 && growth > .1f)
 			growth -= 0.00005;
 
 		if (growth >= 1)
-			world.setBlockState(pos, Main.core_anima.getDefaultState());
+			world.setBlockState(pos, Main.cores.get("core_anima").getDefaultState());
 
 		markDirty();
 	}

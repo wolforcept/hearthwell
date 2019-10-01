@@ -19,16 +19,16 @@ import wolforce.blocks.tile.TileBranch;
 public class ItemBranch extends ItemBlock {
 
 	public static final String branch_time = "branch_time";
-	private String[] lore;
+	// private String[] lore;
 
 	public ItemBranch(Block block, String name, String... lore) {
 		super(block);
-		this.lore = lore;
+		// this.lore = lore;
 	}
 
 	@Override
-	public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX,
-			float hitY, float hitZ, IBlockState newState) {
+	public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side,
+			float hitX, float hitY, float hitZ, IBlockState newState) {
 		boolean ret = super.placeBlockAt(stack, player, world, pos, side, hitX, hitY, hitZ, newState);
 		if (ret) {
 			TileBranch tile = (TileBranch) world.getTileEntity(pos);

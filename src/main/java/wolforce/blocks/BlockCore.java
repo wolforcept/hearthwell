@@ -26,29 +26,28 @@ public class BlockCore extends Block implements HasTE {
 
 	public static boolean isCore(ItemStack stack) {
 
-		ItemStack stack2 = new ItemStack(Main.core_stone);
-		if (stack.getItem() == stack2.getItem())
-			return true;
+		// ItemStack stack2 = new ItemStack(Main.core_stone);
+		// if (stack.getItem() == stack2.getItem())
+		// return true;
+		//
+		// stack2 = new ItemStack(Main.core_anima);
+		// if (stack.getItem() == stack2.getItem())
+		// return true;
+		//
+		// stack2 = new ItemStack(Main.core_heat);
+		// if (stack.getItem() == stack2.getItem())
+		// return true;
+		//
+		// stack2 = new ItemStack(Main.core_green);
+		// if (stack.getItem() == stack2.getItem())
+		// return true;
+		//
+		// stack2 = new ItemStack(Main.core_sentient);
+		// if (stack.getItem() == stack2.getItem())
+		// return true;
 
-		stack2 = new ItemStack(Main.core_anima);
-		if (stack.getItem() == stack2.getItem())
-			return true;
-
-		stack2 = new ItemStack(Main.core_heat);
-		if (stack.getItem() == stack2.getItem())
-			return true;
-
-		stack2 = new ItemStack(Main.core_green);
-		if (stack.getItem() == stack2.getItem())
-			return true;
-
-		stack2 = new ItemStack(Main.core_sentient);
-		if (stack.getItem() == stack2.getItem())
-			return true;
-
-		for (BlockCore customcore : Main.custom_cores.values()) {
-			stack2 = new ItemStack(customcore);
-			if (stack.getItem() == stack2.getItem())
+		for (BlockCore customcore : Main.cores.values()) {
+			if (stack.getItem() == new ItemStack(customcore).getItem())
 				return true;
 		}
 
@@ -59,46 +58,45 @@ public class BlockCore extends Block implements HasTE {
 		if (!Util.isValid(stack))
 			return null;
 
-		ItemStack stack2 = new ItemStack(Main.core_stone);
-		if (stack.getItem() == stack2.getItem())
-			return Main.core_stone;
+		// = new ItemStack(Main.core_stone);
+		// if (stack.getItem() == stack2.getItem())
+		// return Main.core_stone;
+		//
+		// stack2 = new ItemStack(Main.core_anima);
+		// if (stack.getItem() == stack2.getItem())
+		// return Main.core_anima;
+		//
+		// stack2 = new ItemStack(Main.core_heat);
+		// if (stack.getItem() == stack2.getItem())
+		// return Main.core_heat;
+		//
+		// stack2 = new ItemStack(Main.core_green);
+		// if (stack.getItem() == stack2.getItem())
+		// return Main.core_green;
+		//
+		// stack2 = new ItemStack(Main.core_sentient);
+		// if (stack.getItem() == stack2.getItem())
+		// return Main.core_sentient;
 
-		stack2 = new ItemStack(Main.core_anima);
-		if (stack.getItem() == stack2.getItem())
-			return Main.core_anima;
-
-		stack2 = new ItemStack(Main.core_heat);
-		if (stack.getItem() == stack2.getItem())
-			return Main.core_heat;
-
-		stack2 = new ItemStack(Main.core_green);
-		if (stack.getItem() == stack2.getItem())
-			return Main.core_green;
-
-		stack2 = new ItemStack(Main.core_sentient);
-		if (stack.getItem() == stack2.getItem())
-			return Main.core_sentient;
-
-		for (BlockCore customcore : Main.custom_cores.values()) {
-			stack2 = new ItemStack(customcore);
-			if (stack.getItem() == stack2.getItem())
-				return customcore;
+		for (BlockCore core : Main.cores.values()) {
+			if (stack.getItem() == new ItemStack(core).getItem())
+				return core;
 		}
 
 		return null;
 	}
 
 	public static Block getGraft(Block coreBlock) {
-		if (coreBlock == Main.core_stone)
-			return Main.graft_stone;
-		if (coreBlock == Main.core_anima)
-			return Main.graft_anima;
-		if (coreBlock == Main.core_heat)
-			return Main.graft_heat;
-		if (coreBlock == Main.core_green)
-			return Main.graft_green;
-		if (coreBlock == Main.core_sentient)
-			return Main.graft_sentient;
+		// if (coreBlock == Main.core_stone)
+		// return Main.graft_stone;
+		// if (coreBlock == Main.core_anima)
+		// return Main.graft_anima;
+		// if (coreBlock == Main.core_heat)
+		// return Main.graft_heat;
+		// if (coreBlock == Main.core_green)
+		// return Main.graft_green;
+		// if (coreBlock == Main.core_sentient)
+		// return Main.graft_sentient;
 
 		if (Main.custom_grafts.containsKey(coreBlock))
 			return Main.custom_grafts.get(coreBlock);
@@ -109,14 +107,16 @@ public class BlockCore extends Block implements HasTE {
 	public static PropertyEnum<CoreType> SHARD = PropertyEnum.create("shard", CoreType.class);
 	private boolean isToRegisterTileEntity;
 	public int color1, color2;
+	private boolean isCustom;
 
-	public BlockCore(String name, boolean isToRegister) {
-		this(name, isToRegister, 0, 0);
-	}
+	// public BlockCore(String name, boolean isToRegister) {
+	// this(name, isToRegister, 0, 0);
+	// }
 
-	public BlockCore(String name, boolean isToRegisterTileEntity, int color1, int color2) {
+	public BlockCore(String name, boolean isToRegisterTileEntity, int color1, int color2, boolean isCustom) {
 		super(Material.CLAY);
 		this.isToRegisterTileEntity = isToRegisterTileEntity;
+		this.isCustom = isCustom;
 		Util.setReg(this, name);
 		setHardness(2);
 		setHarvestLevel("pickaxe", -1);
@@ -226,6 +226,10 @@ public class BlockCore extends Block implements HasTE {
 	@Override
 	public int getMetaFromState(IBlockState state) {
 		return ((Enum<CoreType>) state.getValue(SHARD)).ordinal();
+	}
+
+	public boolean isCustom() {
+		return isCustom;
 	}
 
 }

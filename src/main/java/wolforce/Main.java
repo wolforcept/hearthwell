@@ -103,6 +103,7 @@ import wolforce.items.tools.MyDagger;
 import wolforce.items.tools.MyPickaxe;
 import wolforce.items.tools.MyShovel;
 import wolforce.items.tools.MySword;
+import wolforce.recipes.RecipeCoring;
 
 public class Main {
 
@@ -195,8 +196,10 @@ public class Main {
 	public static Block mutator, mutation_paste_block;
 	public static BlockNourisher nourisher;
 	public static BlockSetter setter;
-	public static BlockCore core_stone, core_anima, core_heat, core_green, core_sentient;
-	public static Block graft_stone, graft_anima, graft_heat, graft_green, graft_sentient;
+	// public static BlockCore core_stone, core_anima, core_heat, core_green,
+	// core_sentient;
+	// public static Block graft_stone, graft_anima, graft_heat, graft_green,
+	// graft_sentient;
 	public static Block inert_seed;
 	public static Block slab_lamp;
 	public static Block furnace_tube, heat_furnace;
@@ -244,7 +247,7 @@ public class Main {
 	// SHARDS
 
 	public static Item[] shards;
-	public static HashMap<String, BlockCore> custom_cores;
+	public static HashMap<String, BlockCore> cores;
 	public static HashMap<BlockCore, Block> custom_grafts;
 	public static HashMap<BlockCore, Integer> graft_costs;
 
@@ -388,31 +391,36 @@ public class Main {
 		inert_seed = new BlockInertSeed("inert_seed");
 		blocks.add(inert_seed);
 
-		core_stone = new BlockCore("core_stone", true);
-		blocks.add(core_stone);
-		core_anima = new BlockCore("core_anima", false);
-		blocks.add(core_anima);
-		core_heat = new BlockCore("core_heat", false);
-		blocks.add(core_heat);
-		core_green = new BlockCore("core_green", false);
-		blocks.add(core_green);
-		core_sentient = new BlockCore("core_sentient", false);
-		blocks.add(core_sentient);
-
-		graft_stone = new MyBlock("graft_stone", Material.ROCK).setHarvest("pickaxe", -1).setResistance(2)
-				.setHardness(2);
-		blocks.add(graft_stone);
-		graft_anima = new MyBlock("graft_anima", Material.ROCK).setHarvest("pickaxe", -1).setResistance(2)
-				.setHardness(2);
-		blocks.add(graft_anima);
-		graft_heat = new MyBlock("graft_heat", Material.ROCK).setHarvest("pickaxe", -1).setResistance(2).setHardness(2);
-		blocks.add(graft_heat);
-		graft_green = new MyBlock("graft_green", Material.ROCK).setHarvest("pickaxe", -1).setResistance(2)
-				.setHardness(2);
-		blocks.add(graft_green);
-		graft_sentient = new MyBlock("graft_sentient", Material.ROCK).setHarvest("pickaxe", -1).setResistance(2)
-				.setHardness(2);
-		blocks.add(graft_sentient);
+		// core_stone = new BlockCore("core_stone", true);
+		// blocks.add(core_stone);
+		// core_anima = new BlockCore("core_anima", false);
+		// blocks.add(core_anima);
+		// core_heat = new BlockCore("core_heat", false);
+		// blocks.add(core_heat);
+		// core_green = new BlockCore("core_green", false);
+		// blocks.add(core_green);
+		// core_sentient = new BlockCore("core_sentient", false);
+		// blocks.add(core_sentient);
+		//
+		// graft_stone = new MyBlock("graft_stone", Material.ROCK).setHarvest("pickaxe",
+		// -1).setResistance(2)
+		// .setHardness(2);
+		// blocks.add(graft_stone);
+		// graft_anima = new MyBlock("graft_anima", Material.ROCK).setHarvest("pickaxe",
+		// -1).setResistance(2)
+		// .setHardness(2);
+		// blocks.add(graft_anima);
+		// graft_heat = new MyBlock("graft_heat", Material.ROCK).setHarvest("pickaxe",
+		// -1).setResistance(2).setHardness(2);
+		// blocks.add(graft_heat);
+		// graft_green = new MyBlock("graft_green", Material.ROCK).setHarvest("pickaxe",
+		// -1).setResistance(2)
+		// .setHardness(2);
+		// blocks.add(graft_green);
+		// graft_sentient = new MyBlock("graft_sentient",
+		// Material.ROCK).setHarvest("pickaxe", -1).setResistance(2)
+		// .setHardness(2);
+		// blocks.add(graft_sentient);
 
 		dust = new MyItem("dust");
 		items.add(dust);
@@ -908,7 +916,7 @@ public class Main {
 				// core_stone, inert_seed, core_heat, core_green, core_sentient, //
 				compressed_clay, compressed_wool, mutation_paste_block, //
 				protection_block, heavy_protection_block, //
-				graft_stone, graft_anima, graft_heat, graft_green, graft_sentient
+				// graft_stone, graft_anima, graft_heat, graft_green, graft_sentient
 				// crushing_block,gravity_block, antigravity_block, boxer, producer,//
 		};
 		boxes = new BlockBox[blocksToBox.length];
@@ -918,14 +926,24 @@ public class Main {
 			// THESE ARE DEALT SEPARATLY
 		}
 
-		Main.custom_cores = new HashMap<>();
+		Main.cores = new HashMap<>();
+		// cores.put("core_stone", core_stone);
+		// cores.put("core_anima", core_anima);
+		// cores.put("core_heat", core_heat);
+		// cores.put("core_green", core_green);
+		// cores.put("core_sentient", core_sentient);
 		Main.custom_grafts = new HashMap<>();
 		Main.graft_costs = new HashMap<>();
-		Main.graft_costs.put(Main.core_stone, 100);
-		Main.graft_costs.put(Main.core_anima, 750);
-		Main.graft_costs.put(Main.core_heat, 300);
-		Main.graft_costs.put(Main.core_green, 500);
-		Main.graft_costs.put(Main.core_sentient, 1000);
+		// Main.graft_costs.put(core_stone, 100);
+		// Main.graft_costs.put(core_anima, 750);
+		// Main.graft_costs.put(core_heat, 300);
+		// Main.graft_costs.put(core_green, 500);
+		// Main.graft_costs.put(core_sentient, 1000);
+		RecipeCoring.addCore("core_stone", "Rock Core", 100);
+		RecipeCoring.addCore("core_anima", "Anima Core", 300);
+		RecipeCoring.addCore("core_heat", "Heat Core", 200);
+		RecipeCoring.addCore("core_green", "Verdant Core", 300);
+		RecipeCoring.addCore("core_sentient", "Sentient Core", 500);
 
 		// blocks.sort(new Comparator<Block>() {
 		// @Override

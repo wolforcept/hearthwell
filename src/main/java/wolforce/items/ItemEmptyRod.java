@@ -84,7 +84,7 @@ public class ItemEmptyRod extends MyItem {
 			return new ActionResult<>(EnumActionResult.FAIL, player.getHeldItem(hand));
 
 		ItemStack hand1 = player.getHeldItemMainhand();
-		ItemStack hand2 = player.getHeldItemOffhand();
+		// ItemStack hand2 = player.getHeldItemOffhand();
 		if (hand1.getItem() instanceof ItemEmptyRod) {
 			player.setActiveHand(EnumHand.MAIN_HAND);
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, hand1);

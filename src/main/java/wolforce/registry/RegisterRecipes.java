@@ -197,6 +197,13 @@ public class RegisterRecipes {
 		recipePowerCrystal = new RecipePowerCrystal().setRegistryName(Util.res("hwell:recipe_power_crystal"));
 		event.getRegistry().register(recipePowerCrystal);
 		// event.getRegistry().register(new Recipe);
+
+		RecipeMutationPaste.addRecipe(new ItemStack(Items.WATER_BUCKET), new ItemStack(Items.MILK_BUCKET));
+
+		// RecipeGrinding.recipes.add(new RecipeGrinding(new
+		// ItemStack(Blocks.BRICK_BLOCK), new ItemStack(Items.BRICK, 4),
+		// new ItemGrindingWheel[] { Main.grinding_wheel_iron,
+		// Main.grinding_wheel_diamond }));
 	}
 
 	//
@@ -270,48 +277,48 @@ public class RegisterRecipes {
 	// Main.graft_costs.put(Main.core_green, 500);
 	// Main.graft_costs.put(Main.core_sentient, 1000);
 	//
-//	 try {
-//	 for (Entry<String, JsonElement> entry :
-//	 recipeJson.getAsJsonObject("coring_recipes").entrySet()) {
-//	 String nameid = entry.getKey();
-//	 if (RecipeCoring.getNormalCoreBlock(nameid) != null)
-//	 continue;
-//	 JsonObject recipes = entry.getValue().getAsJsonObject();
-//	 final String localizedName = recipes.get("name").getAsString();
-//	 final String colorString1 = recipes.get("base_color").getAsString();
-//	 final String colorString2 = recipes.get("border_color").getAsString();
-//	 final int graftCost = recipes.get("graft_cost").getAsInt();
-//	 BlockCore newCore = new BlockCore(nameid, false, colorString1, colorString2)
-//	 {
-//	 @Override
-//	 public String getLocalizedName() {
-//	 return localizedName;
-//	 }
-//	 };
-//	 System.out.println("created new core with registry name <" + nameid + "> and
-//	 localized name <"
-//	 + localizedName + ">.");
-//	 Main.custom_cores.put(nameid, newCore);
-//	
-//	 String temp = "" + localizedName;
-//	 if (localizedName.endsWith(" Core"))
-//	 temp = localizedName.substring(0, localizedName.indexOf(" Core"));
-//	 if (localizedName.endsWith(" core"))
-//	 temp = localizedName.substring(0, localizedName.indexOf(" core"));
-//	 temp += " Graft";
-//	 final String graftLoc = "" + temp;
-//	 Block newGraft = new MyBlock("graft_" + nameid, Material.ROCK) {
-//	 @Override
-//	 public String getLocalizedName() {
-//	 return graftLoc;
-//	 }
-//	 }.setHarvest("pickaxe", -1).setResistance(2).setHardness(2);
-//	 Main.custom_grafts.put(newCore, newGraft);
-//	 Main.graft_costs.put(newCore, graftCost);
-//	
-//	 }
-//	
-//	 } catch (IOException e) {
-//	 e.printStackTrace();
-//	 }
+	// try {
+	// for (Entry<String, JsonElement> entry :
+	// recipeJson.getAsJsonObject("coring_recipes").entrySet()) {
+	// String nameid = entry.getKey();
+	// if (RecipeCoring.getNormalCoreBlock(nameid) != null)
+	// continue;
+	// JsonObject recipes = entry.getValue().getAsJsonObject();
+	// final String localizedName = recipes.get("name").getAsString();
+	// final String colorString1 = recipes.get("base_color").getAsString();
+	// final String colorString2 = recipes.get("border_color").getAsString();
+	// final int graftCost = recipes.get("graft_cost").getAsInt();
+	// BlockCore newCore = new BlockCore(nameid, false, colorString1, colorString2)
+	// {
+	// @Override
+	// public String getLocalizedName() {
+	// return localizedName;
+	// }
+	// };
+	// System.out.println("created new core with registry name <" + nameid + "> and
+	// localized name <"
+	// + localizedName + ">.");
+	// Main.custom_cores.put(nameid, newCore);
+	//
+	// String temp = "" + localizedName;
+	// if (localizedName.endsWith(" Core"))
+	// temp = localizedName.substring(0, localizedName.indexOf(" Core"));
+	// if (localizedName.endsWith(" core"))
+	// temp = localizedName.substring(0, localizedName.indexOf(" core"));
+	// temp += " Graft";
+	// final String graftLoc = "" + temp;
+	// Block newGraft = new MyBlock("graft_" + nameid, Material.ROCK) {
+	// @Override
+	// public String getLocalizedName() {
+	// return graftLoc;
+	// }
+	// }.setHarvest("pickaxe", -1).setResistance(2).setHardness(2);
+	// Main.custom_grafts.put(newCore, newGraft);
+	// Main.graft_costs.put(newCore, graftCost);
+	//
+	// }
+	//
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// }
 }

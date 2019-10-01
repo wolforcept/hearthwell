@@ -35,7 +35,7 @@ public class RegisterColors {
 		};
 		event.getBlockColors().registerBlockColorHandler(grassBlockColor, Main.fullgrass_block);
 
-		for (Entry<String, BlockCore> entry : Main.custom_cores.entrySet()) {
+		for (Entry<String, BlockCore> entry : Main.cores.entrySet()) {
 			BlockCore customCore = entry.getValue();
 			final int color1 = customCore.color1;
 			final int color2 = customCore.color2;
@@ -58,7 +58,7 @@ public class RegisterColors {
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public static void registerColors(ColorHandlerEvent.Item event) {
-		for (Entry<String, BlockCore> entry : Main.custom_cores.entrySet()) {
+		for (Entry<String, BlockCore> entry : Main.cores.entrySet()) {
 			BlockCore customCore = entry.getValue();
 			final int color1 = customCore.color1;
 			final int color2 = customCore.color2;

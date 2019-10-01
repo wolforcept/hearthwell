@@ -1,0 +1,13 @@
+{ 
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["GYP", "OTO", "OCO" ],
+  "key": {
+    "T": [{ "item": "hwell:furnace_tube" }],
+    "O": [{ "item": "hwell:onyx" }],
+    "C": [{ "item": "hwell:asul_machine_case" }],
+    "Y": [{ "item": "hwell:crystal" }],
+    "G": [{ "item": "hwell:shard_n" }],
+    "P": [{ "item": "hwell:shard_h" }]
+  },
+  "result": { "item": "hwell:mutator" }
+}

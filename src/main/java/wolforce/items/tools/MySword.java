@@ -13,7 +13,7 @@ import wolforce.Util;
 public class MySword extends ItemSword {
 
 	private ItemStack repairIngot;
-	private int enchantability;
+	// private int enchantability;
 	private double attackSpeed;
 
 	public MySword(String name, ToolMaterial mat, Item repairIngot, double attackSpeed) {
@@ -37,7 +37,8 @@ public class MySword extends ItemSword {
 
 	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-		if (Util.isValid(repairIngot) && net.minecraftforge.oredict.OreDictionary.itemMatches(repairIngot, repair, false))
+		if (Util.isValid(repairIngot)
+				&& net.minecraftforge.oredict.OreDictionary.itemMatches(repairIngot, repair, false))
 			return true;
 		return super.getIsRepairable(toRepair, repair);
 	}

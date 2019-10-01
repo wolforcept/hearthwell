@@ -177,7 +177,7 @@
 	"coring_recipes": {
 		"core_stone": {
 			"shard_c" : {
-				"output": [{ "item": "minecraft:coal_block" }],
+				"outputs": [{ "item": "minecraft:coal_block" }],
 				"inputs": [
 				{ "item": "minecraft:log", "data": 0},
 				{ "item": "minecraft:log", "data": 1},
@@ -188,7 +188,7 @@
 				]
 			},
 			"shard_fe" : {
-				"output": [{ "item": "minecraft:iron_block" }],
+				"outputs": [{ "item": "minecraft:iron_block" }],
 				"inputs": [
 					{ "item": "minecraft:cobblestone" },
 					{ "item": "minecraft:stone", "data": 0},
@@ -200,19 +200,19 @@
 				]
 			},
 			"shard_au" : {
-				"output": [{ "item": "minecraft:gold_block" }],
+				"outputs": [{ "item": "minecraft:gold_block" }],
 				"inputs": [{ "item": "minecraft:iron_block" }]
 			},
 			"shard_h" : {
-				"output": [{ "item": "minecraft:soul_sand" }],
+				"outputs": [{ "item": "minecraft:soul_sand" }],
 				"inputs": [{ "item": "minecraft:quartz_block", "data": 0 }]
 			},
 			"shard_o" : {
-				"output": [{ "item": "hwell:compressed_clay" }],
+				"outputs": [{ "item": "hwell:compressed_clay" }],
 				"inputs": [{ "item": "minecraft:air" }]
 			},
 			"shard_ca" : {
-				"output": [{ "item": "minecraft:bone_block" }],
+				"outputs": [{ "item": "minecraft:bone_block" }],
 				"inputs": [
 				{ "item": "minecraft:glass" },
 				{ "item": "minecraft:stained_glass", "data": 0 },
@@ -234,43 +234,43 @@
 				]
 			},
 			"shard_p" : {
-				"output": [{ "item": "minecraft:redstone_block" }],
+				"outputs": [{ "item": "minecraft:redstone_block" }],
 				"inputs": [{ "item": "minecraft:netherrack" },{ "item": "minecraft:magma" }]
 			},
 			"shard_n" : {
-				"output": [{ "item": "hwell:mutation_paste_block" }],
+				"outputs": [{ "item": "hwell:mutation_paste_block" }],
 				"inputs": [{ "item": "hwell:fertile_soil" }]
 			}
 		},
 		"core_anima": {
 			"shard_c" : {
-				"output": [{ "item": "hwell:ink_block" }],
+				"outputs": [{ "item": "hwell:ink_block" }],
 				"inputs": [{ "item": "minecraft:coal_block" }]
 			},
 			"shard_fe" : {
-				"output": [{ "item": "hwell:compressed_wool" }],
+				"outputs": [{ "item": "hwell:compressed_wool" }],
 				"inputs": [{ "item": "minecraft:air" }]
 			},
 			"shard_h" : {
-				"output": [{ "item": "hwell:meat_block" }],
+				"outputs": [{ "item": "hwell:meat_block" }],
 				"inputs": [{ "item": "hwell:skin_block" }]
 			},
 			"shard_ca" : {
-				"output": [{ "item": "hwell:plumage_block" }],
+				"outputs": [{ "item": "hwell:plumage_block" }],
 				"inputs": [{ "item": "hwell:compressed_wool" }]
 			},
 			"shard_p" : {
-				"output": [{ "item": "hwell:skin_block" }],
+				"outputs": [{ "item": "hwell:skin_block" }],
 				"inputs": [{ "item": "hwell:compressed_wool" }]
 			},
 			"shard_n" : {
-				"output": [{ "item": "minecraft:slime" }],
+				"outputs": [{ "item": "minecraft:slime" }],
 				"inputs": [{ "item": "hwell:ink_block" }]
 			}
 		},
 		"core_heat": {
 			"shard_c" : {
-				"output": [{ "item": "minecraft:tnt" }],
+				"outputs": [{ "item": "minecraft:tnt" }],
 				"inputs": [
 					{ "item": "minecraft:hardened_clay" },
 					{ "item": "minecraft:stained_hardened_clay", "data": 0 },
@@ -292,89 +292,89 @@
 				]
 			},
 			"shard_fe" : {
-				"output": [{ "item": "minecraft:nether_brick" }],
+				"outputs": [{ "item": "minecraft:nether_brick" }],
 				"inputs": [{ "item": "minecraft:iron_block" }]
 			},
 			"shard_au" : {
-				"output": [{ "item": "minecraft:glowstone" }],
+				"outputs": [{ "item": "minecraft:glowstone" }],
 				"inputs": [{ "item": "minecraft:gold_block" }]
 			},
 			"shard_h" : {
-				"output": [{ "item": "minecraft:netherrack" }],
+				"outputs": [{ "item": "minecraft:netherrack" }],
 				"inputs": [{ "item": "minecraft:coal_block" }]
 			},
 			"shard_o" : {
-				"output": [{ "item": "minecraft:sea_lantern" }],
+				"outputs": [{ "item": "minecraft:sea_lantern" }],
 				"inputs": [{ "item": "minecraft:snow" }]
 			},
 			"shard_ca" : {
-				"output": [{ "item": "minecraft:quartz_block", "data": 0 }],
+				"outputs": [{ "item": "minecraft:quartz_block", "data": 0 }],
 				"inputs": [{ "item": "minecraft:snow" }]
 			},
 			"shard_p" : {
-				"output": [{ "item": "minecraft:magma" }],
+				"outputs": [{ "item": "minecraft:magma" }],
 				"inputs": [{ "item": "minecraft:netherrack" },{ "item": "minecraft:nether_brick" }]
 			},
 			"shard_n" : {
-				"output": [{ "item": "minecraft:emerald_block" }],
+				"outputs": [{ "item": "minecraft:emerald_block" }],
 				"inputs": [{ "item": "minecraft:diamond_block" }]
 			}
 		},
 		"core_green": {
 			"shard_c" : {
-				"output": [{ "item": "minecraft:mycelium" }],
+				"outputs": [{ "item": "minecraft:mycelium" }],
 				"inputs": [{ "item": "minecraft:brown_mushroom_block" }, { "item": "minecraft:red_mushroom_block" }]
 			},
 			"shard_fe" : {
-				"output": [{ "item": "minecraft:melon_block" }],
+				"outputs": [{ "item": "minecraft:melon_block" }],
 				"inputs": [{ "item": "hwell:fertilizer_block" }]
 			},
 			"shard_au" : {
-				"output": [{ "item": "minecraft:pumpkin" }],
+				"outputs": [{ "item": "minecraft:pumpkin" }],
 				"inputs": [{ "item": "hwell:fertilizer_block" }]
 			},
 			"shard_o" : {
-				"output": [{ "item": "minecraft:lapis_block" }],
+				"outputs": [{ "item": "minecraft:lapis_block" }],
 				"inputs": [
 					{ "item": "minecraft:prismarine", "data": 0 }
 				]
 			},
 			"shard_n" : {
-				"output": [{ "item": "minecraft:prismarine", "data": 0 }],
+				"outputs": [{ "item": "minecraft:prismarine", "data": 0 }],
 				"inputs": [{ "item": "minecraft:ice" },{ "item": "minecraft:packed_ice" }]
 			}
 		},
 		"core_sentient": {
 			"shard_c" : {
-				"output": [{ "item": "minecraft:dirt", "data": 2 }],
+				"outputs": [{ "item": "minecraft:dirt", "data": 2 }],
 				"inputs": [{ "item": "minecraft:cobblestone" }]
 			},
 			"shard_fe" : {
-				"output": [{ "item": "hwell:metaldiamond_block" }],
+				"outputs": [{ "item": "hwell:metaldiamond_block" }],
 				"inputs": [{ "item": "minecraft:diamond_block" }]
 			},
 			"shard_au" : {
-				"output": [{ "item": "minecraft:end_stone" }],
+				"outputs": [{ "item": "minecraft:end_stone" }],
 				"inputs": [{ "item": "minecraft:glowstone" }]
 			},
 			"shard_h" : {
-				"output": [{ "item": "minecraft:purpur_block" }],
+				"outputs": [{ "item": "minecraft:purpur_block" }],
 				"inputs": [{ "item": "minecraft:end_stone" }]
 			},
 			"shard_o" : {
-				"output": [{ "item": "minecraft:diamond_block" }],
+				"outputs": [{ "item": "minecraft:diamond_block" }],
 				"inputs": [{ "item": "minecraft:redstone_block" }]
 			},
 			"shard_ca" : {
-				"output": [{ "item": "hwell:weeping_block" }],
+				"outputs": [{ "item": "hwell:weeping_block" }],
 				"inputs": [{ "item": "minecraft:red_nether_brick" }]
 			},
 			"shard_p" : {
-				"output": [{ "item": "minecraft:nether_wart_block" }],
+				"outputs": [{ "item": "minecraft:nether_wart_block" }],
 				"inputs": [{ "item": "minecraft:brown_mushroom_block" }, { "item": "minecraft:red_mushroom_block" }]
 			},
 			"shard_n" : {
-				"output": [{ "item": "minecraft:emerald_block" }],
+				"outputs": [{ "item": "minecraft:emerald_block" }],
 				"inputs": [{ "item": "minecraft:diamond_block" }]
 			}
 		}

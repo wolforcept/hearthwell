@@ -111,13 +111,21 @@ public class RegisterModels {
 		}
 
 		for (BlockBox box : Main.boxes) {
-			CustomBoxStateMapper mapper = new CustomBoxStateMapper(box.block.getRegistryName(), box.hasAxis,
-					box.isCore(box.block));
+			CustomBoxStateMapper mapper = new CustomBoxStateMapper(box.block.getRegistryName(), box.hasAxis);
 			customRegisterRenders(box, box.block.getRegistryName(), mapper);
 		}
 
-		for (Entry<String, BlockCore> entry : Main.custom_cores.entrySet()) {
+		for (Entry<String, BlockCore> entry : Main.cores.entrySet()) {
 			BlockCore core = entry.getValue();
+			if (!core.isCustom()) {
+				Item itemBlock = Item.getItemFromBlock(core);
+				ModelLoader.setCustomModelResourceLocation(itemBlock, 0,
+						new ModelResourceLocation(itemBlock.getRegistryName(), "inventory"));
+				Item itemBlock2 = Item.getItemFromBlock(Main.custom_grafts.get(core));
+				ModelLoader.setCustomModelResourceLocation(itemBlock2, 0,
+						new ModelResourceLocation(itemBlock2.getRegistryName(), "inventory"));
+				continue;
+			}
 			CustomCoreStateMapper mapper = new CustomCoreStateMapper(new ResourceLocation("hwell", "core_custom"));
 			customRegisterRenders(core, new ResourceLocation("hwell", "core_custom"), mapper);
 

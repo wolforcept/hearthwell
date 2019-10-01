@@ -4,7 +4,7 @@ import wolforce.base.MyItem;
 
 public class ItemMystShard extends MyItem {
 
-	private static final double SMALLNESS = 3;
+	// private static final double SMALLNESS = 3;
 
 	public ItemMystShard(String name, String... lore) {
 		super(name, lore);

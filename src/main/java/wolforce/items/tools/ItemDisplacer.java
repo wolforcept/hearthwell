@@ -1,6 +1,5 @@
 package wolforce.items.tools;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -73,7 +72,7 @@ public class ItemDisplacer extends MyItem {
 		if (!world.isBlockModifiable(player, pos))
 			return new ActionResult<>(EnumActionResult.FAIL, stack);
 
-		Block block = world.getBlockState(pos).getBlock();
+		// Block block = world.getBlockState(pos).getBlock();
 		if (canDisplace(world, player, pos)) {
 
 			player.setActiveHand(hand);
@@ -111,7 +110,8 @@ public class ItemDisplacer extends MyItem {
 			// state.getBlock().getMetaFromState(state));
 			// Util.spawnItem(world, pos, drop);
 
-			if (state.getBlock() instanceof IShearable && ((IShearable) state.getBlock()).isShearable(stack, world, pos))
+			if (state.getBlock() instanceof IShearable
+					&& ((IShearable) state.getBlock()).isShearable(stack, world, pos))
 				for (ItemStack a : ((IShearable) state.getBlock()).onSheared(stack, world, pos, 0)) {
 					if (!world.isRemote)
 						Util.spawnItem(world, pos, a);
@@ -121,7 +121,8 @@ public class ItemDisplacer extends MyItem {
 					state.getBlock().harvestBlock(world, player, pos, state, null, stack);
 				else {
 					if (!world.isRemote)
-						Util.spawnItem(world, pos, new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state)));
+						Util.spawnItem(world, pos,
+								new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state)));
 				}
 			}
 			world.destroyBlock(pos, false);

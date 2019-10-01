@@ -9,18 +9,14 @@ public class CustomBoxStateMapper extends StateMapperBase {
 
 	private ResourceLocation res;
 	private boolean hasAxis;
-	private boolean isCore;
 
-	public CustomBoxStateMapper(ResourceLocation res, boolean hasAxis, boolean isCore) {
+	public CustomBoxStateMapper(ResourceLocation res, boolean hasAxis) {
 		this.res = res;
 		this.hasAxis = hasAxis;
-		this.isCore = isCore;
 	}
 
 	@Override
 	protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-		if (isCore)
-			return new ModelResourceLocation(res, "shard=core_base");
 		if (hasAxis)
 			return new ModelResourceLocation(res, getPropertyString(state.getProperties()));
 		return new ModelResourceLocation(res, "normal");

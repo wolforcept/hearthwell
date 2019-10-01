@@ -24,13 +24,13 @@ All the methods are documented like seen below when doing <span class="bold">/ct
 
 <p><span class="bold">mods.hwell.addCustomCore(String coreRegistryName, String coreLocalizedName, int graftCost, int base_color, int border_color);</span>
 <br>&nbsp&nbsp&nbsp&nbsp
-this method may only be called on files with <span class="bold">#loader hwell_core_recipes</span>
+Add a new Custom Core.
 <br>&nbsp&nbsp&nbsp&nbsp
-Add a recipe for the Charger.</p>
+this method may only be called on files with <span class="bold">#loader hwell_core_recipes</span>
+</p>
 
 <p><span class="bold">mods.hwell.addCustomCoreRecipe(String coreRegistryName, String shardRegName, IItemStack[] outputs, IItemStack[] inputs)</span><br>&nbsp&nbsp&nbsp&nbsp
-Add a recipe for a specific core. Will override existing recipes.</p>
-
+Add a recipe for a specific core. Will override existing recipes, if a recipe for that shard already exists.</p>
 <br>
 
 <p><span class="bold">mods.hwell.addChargerRecipe(IItemStack input, int power)</span><br>&nbsp&nbsp&nbsp&nbsp

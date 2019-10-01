@@ -6,6 +6,7 @@ import wolforce.Util;
 
 public class MyStairs extends BlockStairs {
 
+	@SuppressWarnings("deprecation")
 	public MyStairs(Block fullblock) {
 		super(fullblock.getDefaultState());
 
