@@ -50,11 +50,14 @@ public class HwellConfig {
 	}
 
 	public static class Power {
-		@Comment({ "Max range that Power Providers (Power Crystals) will provide power to machines. (default: 10)" })
+		@Comment({ "Max range that Power Providers (Power Crystals) will provide power to machines. AFFECTS PERFORMANCE!! (default: 10)" })
 		public int powerMaxRange = 10;
 
 		@Comment({ "Do Power Crystals drop when they become empty? (default: false)" })
 		public boolean powerCrystalDropsWhenEmpty = false;
+
+		@Comment({ "Chance to turn a block from dripping per tick (default: 0.1%)" })
+		public float drippingChance = .001f;
 	}
 
 	public static class Machines {
@@ -186,6 +189,11 @@ public class HwellConfig {
 				"If heat blocks explode with flint and steel. Otherwise they will just transform peacefully. (default: true)" })
 		@Config.RangeInt(min = 1, max = 64)
 		public int inert_seed_distance = 4;
+
+		// PICKING TABLE
+		@Comment({ "Number of Graft Blocks a Grafting Tray creates from a single core. (default: 8)" })
+		@Config.RangeInt(min = 1, max = 64)
+		public int numberOfGrafts = 8;
 	}
 
 	@SubscribeEvent

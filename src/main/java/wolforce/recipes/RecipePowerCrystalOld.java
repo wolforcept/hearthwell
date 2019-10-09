@@ -20,7 +20,7 @@ import wolforce.Main;
 import wolforce.Util;
 import wolforce.items.ItemPowerCrystal;
 
-public class RecipePowerCrystal implements IRecipe {
+public class RecipePowerCrystalOld implements IRecipe {
 
 	public static class ItemAndVals {
 		public static final ItemAndVals invalid = new ItemAndVals(Blocks.AIR, "invalid", 0, 0, 0);

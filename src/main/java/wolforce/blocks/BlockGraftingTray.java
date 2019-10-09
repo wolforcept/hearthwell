@@ -177,7 +177,7 @@ public class BlockGraftingTray extends MyBlock implements HasTE, BlockWithDescri
 	@Override
 	public String[] getDescription() {
 		return new String[] {
-				"Allows the production of Core Grafts. Fill with water and a core, then place Living Branches around it." };
+				"Allows the production of Core Grafts. Fill with Liquid Souls and a insert a core, then place Living Branches around it." };
 	}
 
 }

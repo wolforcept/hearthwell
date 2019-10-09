@@ -35,7 +35,7 @@ public class JeiCatGrafting extends JeiCat {
 				@Override
 				public void getIngredients(IIngredients ingredients) {
 					ingredients.setInput(VanillaTypes.ITEM, new ItemStack(core));
-					ingredients.setOutput(VanillaTypes.ITEM, new ItemStack(Main.custom_grafts.get(core)));
+					ingredients.setOutput(VanillaTypes.ITEM, new ItemStack(Main.custom_grafts.get(core), 8));
 				}
 
 				@Override

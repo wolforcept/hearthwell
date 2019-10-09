@@ -67,12 +67,14 @@ import wolforce.blocks.BlockMystLeaves;
 import wolforce.blocks.BlockNourisher;
 import wolforce.blocks.BlockPickerHolder;
 import wolforce.blocks.BlockPickingTable;
+import wolforce.blocks.BlockPowerNodeBuilder;
 import wolforce.blocks.BlockPrecisionGrinder;
 import wolforce.blocks.BlockPrecisionGrinderEmpty;
 import wolforce.blocks.BlockProducer;
 import wolforce.blocks.BlockPuller;
 import wolforce.blocks.BlockSeparator;
 import wolforce.blocks.BlockSetter;
+import wolforce.blocks.BlockShardLiquifier;
 import wolforce.blocks.BlockSlabLamp;
 import wolforce.blocks.BlockStoneDust;
 import wolforce.blocks.BlockTray;
@@ -181,8 +183,8 @@ public class Main {
 	public static Block light_collector;
 	public static Block stabiliser_light, stabiliser, stabiliser_heavy;
 	public static Block picking_table, picker_holder;
-	public static MyBlock white_block, moonstone, moonstone_bricks, citrinic_stone, citrinic_sand, onyx, smooth_onyx,
-			azurite, smooth_azurite, scorch_grit, scorch_glass, gaseous_glass, fullgrass_block, metaldiamond_block;
+	public static MyBlock white_block, moonstone, citrinic_stone, citrinic_sand, onyx, smooth_onyx, azurite,
+			smooth_azurite, scorch_grit, scorch_glass, gaseous_glass, fullgrass_block, metaldiamond_block;
 	public static MyFalling gaseous_sand;
 	public static Block gaseous_frame;
 	public static Block grit_vase;
@@ -196,6 +198,7 @@ public class Main {
 	public static Block mutator, mutation_paste_block;
 	public static BlockNourisher nourisher;
 	public static BlockSetter setter;
+	public static BlockShardLiquifier shard_liquifier;
 	// public static BlockCore core_stone, core_anima, core_heat, core_green,
 	// core_sentient;
 	// public static Block graft_stone, graft_anima, graft_heat, graft_green,
@@ -206,7 +209,7 @@ public class Main {
 	public static Block protection_block, heavy_protection_block;
 	public static Block precision_grinder_flint, precision_grinder_iron, precision_grinder_diamond,
 			precision_grinder_crystal, precision_grinder_empty;
-	public static Block heat_block;
+	public static Block heat_block, overcharged_block;
 	public static BlockBurstSeed burst_seed_stone, burst_seed_cobblestone, burst_seed_gravel, burst_seed_endstone,
 			burst_seed_sand, burst_seed_dirt, burst_seed_snow, burst_seed_netherrack, burst_seed_quartz,
 			burst_seed_prismarine, burst_seed_crystal;
@@ -216,6 +219,7 @@ public class Main {
 	public static BlockPuller puller;
 	public static BlockCharger charger;
 	public static BlockTray tray;
+	public static BlockPowerNodeBuilder power_node_builder;
 	public static Block branch;
 
 	//
@@ -629,12 +633,15 @@ public class Main {
 		blocks.add(nourisher);
 		setter = new BlockSetter("setter");
 		blocks.add(setter);
-
+		shard_liquifier = new BlockShardLiquifier("shard_liquifier");
+		blocks.add(shard_liquifier);
 		// generator_heat = new BlockGeneratorHeat("generator_heat");
 		// blocks.add(generator_heat);
 
 		power_crystal = new ItemPowerCrystal("power_crystal");
 		items.add(power_crystal);
+		power_node_builder = new BlockPowerNodeBuilder("power_node_builder");
+		blocks.add(power_node_builder);
 
 		charger = new BlockCharger("charger");
 		blocks.add(charger);
@@ -651,6 +658,8 @@ public class Main {
 
 		heat_block = new BlockHeat("heat_block");
 		blocks.add(heat_block);
+		overcharged_block = new BlockHeat("overcharged_block");
+		blocks.add(overcharged_block);
 
 		picking_table = new BlockPickingTable("picking_table");
 		blocks.add(picking_table);

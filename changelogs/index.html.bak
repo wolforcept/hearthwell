@@ -7,7 +7,20 @@
 <object style="border:0;padding:0;width: 100%" type="text/html" data="../navbar.html"></object>
 <hr>
 <h1>Patch History</h1>
-<pre><code id="main">{0.5.2}
+<pre><code id="main">{0.5.3}
+discstart???????????????????????? of October, 2019
+
+Small update with bugfixes.discend
+
+[ NEW STUFF ]
+
+[ BALANCE ]
+Added a config to change the number of Graft Blocks a Grafting Tray creates from a single Core Block.
+
+[ BUG FIXES ]
+
+<hr>
+{0.5.2}
 discstart2nd of October, 2019
 
 Small update with bugfixes.discend
@@ -26,7 +39,7 @@ Added a recipe for the Mutator.
 Fixed the Inert Seed's size becoming negative.
 
 <hr>
-{0.4.2}{0.5.1}
+{0.5.1}
 discstart26th of August, 2019
 
 Major update with new content.discend

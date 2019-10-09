@@ -55,14 +55,17 @@ import wolforce.items.ItemMystDust;
 import wolforce.recipes.RecipeCharger;
 import wolforce.recipes.RecipeCoring;
 import wolforce.recipes.RecipeCrushing;
+import wolforce.recipes.RecipeDripping;
 import wolforce.recipes.RecipeFreezer;
 import wolforce.recipes.RecipeGrinding;
 import wolforce.recipes.RecipeMutationPaste;
 import wolforce.recipes.RecipeNetherPortal;
-import wolforce.recipes.RecipePowerCrystal;
+import wolforce.recipes.RecipePowerCrystalOld;
+import wolforce.recipes.RecipePowerNode;
 import wolforce.recipes.RecipePuller;
 import wolforce.recipes.RecipeSeedOfLife;
 import wolforce.recipes.RecipeSeparator;
+import wolforce.recipes.RecipeShardLiquifier;
 import wolforce.recipes.RecipeTube;
 
 @Mod.EventBusSubscriber(modid = Hwell.MODID)
@@ -126,7 +129,7 @@ public class RegisterRecipes {
 		//
 
 		recipeName = "power_crystal_recipes";
-		RecipePowerCrystal.initRecipes((defaultRecipes).get(recipeName).getAsJsonObject());
+		RecipePowerCrystalOld.initRecipes((defaultRecipes).get(recipeName).getAsJsonObject());
 
 		recipeName = "charger_recipes";
 		RecipeCharger.initRecipes((defaultRecipes).get(recipeName).getAsJsonArray());
@@ -165,6 +168,11 @@ public class RegisterRecipes {
 
 		RecipeMutationPaste.initRecipes();
 
+		RecipeShardLiquifier.initRecipes();
+
+		RecipePowerNode.initRecipes();
+		RecipeDripping.initRecipes();
+
 		Main.initShards();
 		ItemLoot.setLootTables();
 
@@ -194,7 +202,7 @@ public class RegisterRecipes {
 				'C', asul_machine_case, //
 				'Y', crystal_block);
 
-		recipePowerCrystal = new RecipePowerCrystal().setRegistryName(Util.res("hwell:recipe_power_crystal"));
+		recipePowerCrystal = new RecipePowerCrystalOld().setRegistryName(Util.res("hwell:recipe_power_crystal"));
 		event.getRegistry().register(recipePowerCrystal);
 		// event.getRegistry().register(new Recipe);
 

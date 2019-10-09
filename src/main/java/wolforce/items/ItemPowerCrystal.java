@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import wolforce.Main;
 import wolforce.base.MyItem;
 import wolforce.entities.EntityPower;
-import wolforce.recipes.RecipePowerCrystal;
+import wolforce.recipes.RecipePowerCrystalOld;
 
 public class ItemPowerCrystal extends MyItem {
 
@@ -65,16 +65,16 @@ public class ItemPowerCrystal extends MyItem {
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
-		if (RecipePowerCrystal.isInnited() && stack.hasTagCompound() && stack.getTagCompound().hasKey("hwell")) {
+		if (RecipePowerCrystalOld.isInnited() && stack.hasTagCompound() && stack.getTagCompound().hasKey("hwell")) {
 			NBTTagCompound nbt = stack.getSubCompound("hwell");
 
 			int nuc = getNucleous(nbt);
 			int rel = getRelay(nbt);
 			int scr = getScreen(nbt);
 
-			tooltip.add("Nucleous: " + RecipePowerCrystal.getNucleous(nuc).name);
-			tooltip.add("Relay: " + RecipePowerCrystal.getRelay(rel).name);
-			tooltip.add("Screen: " + RecipePowerCrystal.getScreen(scr).name);
+			tooltip.add("Nucleous: " + RecipePowerCrystalOld.getNucleous(nuc).name);
+			tooltip.add("Relay: " + RecipePowerCrystalOld.getRelay(rel).name);
+			tooltip.add("Screen: " + RecipePowerCrystalOld.getScreen(scr).name);
 
 			int pow = getPower(nbt);
 			int max = getMaxPower(nbt);
@@ -146,10 +146,10 @@ public class ItemPowerCrystal extends MyItem {
 	// }
 
 	public static void setHwellNBT(NBTTagCompound nbt, int nuc, int rel, int scr) {
-		int max = RecipePowerCrystal.calcMaxPower(nuc, rel, scr);
-		int pow = RecipePowerCrystal.calcPower(max);
-		int rng = RecipePowerCrystal.calcRange(nuc, rel, scr);
-		float pur = RecipePowerCrystal.calcPurity(nuc, rel, scr);
+		int max = RecipePowerCrystalOld.calcMaxPower(nuc, rel, scr);
+		int pow = RecipePowerCrystalOld.calcPower(max);
+		int rng = RecipePowerCrystalOld.calcRange(nuc, rel, scr);
+		float pur = RecipePowerCrystalOld.calcPurity(nuc, rel, scr);
 		setNBT(nbt, nuc, rel, scr, pow, max, rng, pur);
 	}
 

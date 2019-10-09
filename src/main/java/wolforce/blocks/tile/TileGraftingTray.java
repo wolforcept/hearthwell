@@ -14,6 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.items.ItemStackHandler;
 import wolforce.Hwell;
+import wolforce.HwellConfig;
 import wolforce.Main;
 import wolforce.Util;
 import wolforce.blocks.BlockCore;
@@ -58,7 +59,8 @@ public class TileGraftingTray extends TileEntity implements ITickable {
 		if (!world.isRemote)
 			if (charge >= Main.graft_costs.get(BlockCore.getCore(inventory.getStackInSlot(0)))) {
 				inventory.setStackInSlot(0,
-						new ItemStack(BlockCore.getGraft(Block.getBlockFromItem(inventory.getStackInSlot(0).getItem())), 8));
+						new ItemStack(BlockCore.getGraft(Block.getBlockFromItem(inventory.getStackInSlot(0).getItem())),
+								HwellConfig.other.numberOfGrafts));
 				charge = 0;
 				BlockGraftingTray.changeFilled(world, pos, false);
 				markDirty();

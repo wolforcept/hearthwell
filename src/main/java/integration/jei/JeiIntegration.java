@@ -160,7 +160,7 @@ public class JeiIntegration implements IModPlugin {
 		book.setTagInfo("patchouli:book", new NBTTagString("hwell:book_of_the_well"));
 		reg.addIngredientInfo(book, VanillaTypes.ITEM,
 				"To get this item you need two wooden pressure plates, one on each hand. "
-						+ "Then say a heartfelt prayer to the gods containing the words \"poor\", \"please\", \"send\", \"book\", \"gods\". "
+						+ "Then say an HONEST HEARTFELT prayer to the gods containing, but not only, the words \"poor\", \"please\", \"send\", \"book\", \"gods\". "
 						+ "Quickly after that, while looking directly up, smash the pressure plates together with right click!");
 		// System.out.println("AAAAAAAAAAAAAA" + RegisterRecipes.recipePowerCrystal);
 		reg.addRecipes(Util.listOfOne(RegisterRecipes.recipePowerCrystal), VanillaRecipeCategoryUid.CRAFTING);

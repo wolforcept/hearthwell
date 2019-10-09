@@ -110,7 +110,7 @@ public class RecipeCoring {
 				consumes[i] = _consumes[i];
 			}
 			for (int i = 0; i < possibleOutputs.length; i++) {
-				consumes[_consumes.length - i] = possibleOutputs[i];
+				consumes[_consumes.length + i] = possibleOutputs[i];
 			}
 		}
 	}

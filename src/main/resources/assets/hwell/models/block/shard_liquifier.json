@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+	"textures": {
+        "up": "hwell:blocks/shard_liquifier_top",
+        "down": "hwell:blocks/machine_base",
+        "north": "hwell:blocks/shard_liquifier_side",
+        "south": "hwell:blocks/shard_liquifier_side",
+        "west": "hwell:blocks/shard_liquifier_side",
+        "east": "hwell:blocks/shard_liquifier_side",
+        "particle": "hwell:blocks/shard_liquifier_top"
+   }
+}

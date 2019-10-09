@@ -70,7 +70,9 @@ public class TileCore extends TileEntity implements ITickable {
 				}
 				if (charge >= (int) ((MAX_CHARGE - 1) * getStabReduction(pos1))) {
 					// System.out.println(result.result.getMetadata());
-					IBlockState newBlock = result.getRandomResult().getDefaultState();
+					IBlockState newBlock = result.possibleOutputs.length == 1 ? //
+							Block.getBlockFromItem(result.possibleOutputs[0].getItem()).getDefaultState() //
+							: result.getRandomResult().getDefaultState();
 					changeGrafts(world, pos, BlockCore.getGraft(coreBlock), newBlock);
 					world.setBlockState(pos, newBlock, 2 | 4); // im quite sure its a block
 					return; // don't want to keep checking other touches

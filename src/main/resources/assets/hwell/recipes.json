@@ -342,6 +342,10 @@
 			"shard_n" : {
 				"outputs": [{ "item": "minecraft:prismarine", "data": 0 }],
 				"inputs": [{ "item": "minecraft:ice" },{ "item": "minecraft:packed_ice" }]
+			},
+			"shard_p" : {
+				"outputs": [{ "item": "minecraft:brown_mushroom_block" }, { "item": "minecraft:red_mushroom_block" }],
+				"inputs": [{ "item": "hwell:fertilizer_block" }]
 			}
 		},
 		"core_sentient": {

@@ -23,8 +23,8 @@ import wolforce.recipes.RecipeFreezer;
 import wolforce.recipes.RecipeGrinding;
 import wolforce.recipes.RecipeMutationPaste;
 import wolforce.recipes.RecipeNetherPortal;
-import wolforce.recipes.RecipePowerCrystal;
-import wolforce.recipes.RecipePowerCrystal.ItemAndVals;
+import wolforce.recipes.RecipePowerCrystalOld;
+import wolforce.recipes.RecipePowerCrystalOld.ItemAndVals;
 import wolforce.recipes.RecipePuller;
 import wolforce.recipes.RecipeRepairingPaste;
 import wolforce.recipes.RecipeSeedOfLife;
@@ -166,19 +166,19 @@ public class CT {
 	@ZenDoc("Add a new item to be used as a Nucleous in the Power Crystal Recipe.")
 	@ZenMethod
 	public static void addPowerCrystalNucleous(IItemStack item, String name, int power, int range, float purity) {
-		RecipePowerCrystal.nucleousRecipes.add(new ItemAndVals(is(item), name, power, range, purity));
+		RecipePowerCrystalOld.nucleousRecipes.add(new ItemAndVals(is(item), name, power, range, purity));
 	}
 
 	@ZenDoc("Add a new item to be used as a Relay in the Power Crystal Recipe.")
 	@ZenMethod
 	public static void addPowerCrystalRelay(IItemStack item, String name, int power, int range, float purity) {
-		RecipePowerCrystal.relayRecipes.add(new ItemAndVals(is(item), name, power, range, purity));
+		RecipePowerCrystalOld.relayRecipes.add(new ItemAndVals(is(item), name, power, range, purity));
 	}
 
 	@ZenDoc("Add a new item to be used as a Screen in the Power Crystal Recipe.")
 	@ZenMethod
 	public static void addPowerCrystalScreen(IItemStack item, String name, int power, int range, float purity) {
-		RecipePowerCrystal.screenRecipes.add(new ItemAndVals(is(item), name, power, range, purity));
+		RecipePowerCrystalOld.screenRecipes.add(new ItemAndVals(is(item), name, power, range, purity));
 	}
 
 	@ZenDoc("Add a new transformation recipe through the nether portal. It is not possible to change the number of items this way. 1 to 1 transformations only.")
@@ -314,7 +314,7 @@ public class CT {
 	@ZenDoc("Remove a Nucleous Item.")
 	@ZenMethod
 	public static void removePowerCrystalNucleous(IItemStack item) {
-		for (Iterator<ItemAndVals> it = RecipePowerCrystal.nucleousRecipes.iterator(); it.hasNext();) {
+		for (Iterator<ItemAndVals> it = RecipePowerCrystalOld.nucleousRecipes.iterator(); it.hasNext();) {
 			ItemAndVals recipe = (ItemAndVals) it.next();
 			if (Util.equalExceptAmount(recipe.stack, is(item))) {
 				it.remove();
@@ -326,7 +326,7 @@ public class CT {
 	@ZenDoc("Remove a Relay Item.")
 	@ZenMethod
 	public static void removePowerCrystalRelay(IItemStack item) {
-		for (Iterator<ItemAndVals> it = RecipePowerCrystal.relayRecipes.iterator(); it.hasNext();) {
+		for (Iterator<ItemAndVals> it = RecipePowerCrystalOld.relayRecipes.iterator(); it.hasNext();) {
 			ItemAndVals recipe = (ItemAndVals) it.next();
 			if (Util.equalExceptAmount(recipe.stack, is(item))) {
 				it.remove();
@@ -338,7 +338,7 @@ public class CT {
 	@ZenDoc("Remove a Screen Item.")
 	@ZenMethod
 	public static void removePowerCrystalScreen(IItemStack item) {
-		for (Iterator<ItemAndVals> it = RecipePowerCrystal.screenRecipes.iterator(); it.hasNext();) {
+		for (Iterator<ItemAndVals> it = RecipePowerCrystalOld.screenRecipes.iterator(); it.hasNext();) {
 			ItemAndVals recipe = (ItemAndVals) it.next();
 			if (Util.equalExceptAmount(recipe.stack, is(item))) {
 				it.remove();
