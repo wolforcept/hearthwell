@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script>
+
+        //  ###  ### ###  #### #### ##### 
+        // ##   #    #  #  #   #  #   #   
+        //   ## #    ###   #   ####   #   
+        // ###   ### #  # #### #      #   
+
+        var locations = [];
+        var words = 0;
+        var foundwords = 0;
+        var width, height;
+
+        $(document).ready(init);
+
+        function init() {
+            // $.getJSON("https://raw.githubusercontent.com/words/an-array-of-english-words/master/words.json", function (dictionary) {
+            $.getJSON("https://raw.githubusercontent.com/dariusk/corpora/master/data/words/common.json", function (json) {
+                const dictionary = json.commonWords;
+                console.log("Generating Table...");
+                const content = $("#content");
+                width = Math.floor(content.width() / 24);
+                height = Math.floor(Math.max(documentHeight() / 24, 10) - 3);
+                for (let r = 0; r < height; r++) {
+                    const row = $("<tr class='" + r + "'></tr>");
+                    for (let c = 0; c < width; c++) {
+                        const index = r * width + c;
+                        const td = $("<td onclick='select($(this))' class='" + index + "'>" + randomLetter() + "</td>");
+                        td.appendTo(row);
+                    }
+                    row.appendTo(content);
+                }
+                console.log("Generating Words");
+                for (let p = 0; p < 999; p++) {
+
+                    const word = randomWord(dictionary).toUpperCase();
+                    const r = Math.floor(Math.random() * height);
+                    const cStart = Math.floor(Math.random() * (width - word.length - 1));
+                    const startIndex = r * width + cStart;
+
+                    // HORIZONTAL
+                    if (Math.random() < .5 && noWordAt(r, cStart - 1, word.length + 2)) {
+                        for (var i = 0; i < word.length; i++) {
+                            setCell(r, cStart + i, startIndex, word.length, word.charAt(i), false);
+                        }
+                        words++;
+                    }
+                    //VERTICALS
+                    // else if (noWordAtVertical(r, cStart - 1, word.length + 2)) {
+                    //     for (var i = 0; i < word.length; i++) {
+                    //         setCell(r + i, cStart, startIndex, word.length, word.charAt(i), true);
+                    //     }
+                    //     words++;
+                    // }
+
+                    // VERTICALS
+                    //  else if (noWordAtVertical(r, cStart - 1, word.length + 2)) {
+                    //     for (var i = r; i < r + word.length; i++) {
+                    //         setCell();
+                    //         const c = cStart;
+                    //         const index = i * width + c;
+                    //         const element = $("." + i).find("." + index);
+                    //         locations[i * width + c] = { "row": i, "start": startIndex, "length": word.length };
+                    //         element.html(word.charAt(i));
+                    //         element.addClass("ofword");
+                    //         element.addClass("blue");
+                    //     }
+                    //     words++;
+                    // }
+                }
+                // console.log(locations);
+                $("#width").html($("#width").html() + width);
+                $("#height").html($("#height").html() + height);
+                updateWords();
+            });
+        }
+
+        function setCell(r, c, startIndex, length, char, vertical) {
+            const index = r * width + c;
+            const element = $("." + r).find("." + index);
+            locations[r * width + c] = { "row": r + 0, "start": startIndex, "length": length, "vertical": vertical };
+            element.html(char);
+            element.addClass("ofword");
+            // element.addClass("blue");
+        }
+
+        function updateWords() {
+            $("#words").html(words);
+            $("#foundwords").html(foundwords);
+        }
+
+        function giveup() {
+            $(".ofword").each(function (index, element) {
+                $(element).addClass("red");
+            });
+        }
+
+        function noWordAt(r, c, size) {
+            for (let i = 0; i < size; i++) {
+                if (locations[r * width + c + i])
+                    return false;
+            }
+            return true;
+        }
+
+        function noWordAtVertical(r, c, size) {
+            for (let i = 0; i < size; i++) {
+                if (locations[(r + i) * width + c])
+                    return false;
+            }
+            return true;
+        }
+
+        function randomLetter() {
+            return String.fromCharCode('A'.charCodeAt(0) + Math.floor(Math.random() * 26));
+        }
+
+        function randomWord(dictionary) {
+            return dictionary[Math.floor(Math.random() * dictionary.length)];
+        }
+
+        function select(element) {
+            const classes = element.attr("class").split(/\s+/);
+            const index = classes[0];
+            if (locations[index] != null) {
+
+                if (classes.includes("red"))
+                    return;
+
+                if (!classes.includes("blue")) {
+                    foundwords++;
+                    updateWords();
+                }
+
+                var obj = locations[index];
+                console.log(obj);
+                for (let i = 0; i < obj.length; i++) {
+                    if (obj.vertical) {
+                        const r = obj.row + i;
+                        // $("." + index).addClass("selected");
+                        $("." + r).find("." + obj.start).addClass("blue");
+                    } else {
+                        const c = obj.start + i;
+                        // $("." + index).addClass("selected");
+                        $("." + obj.row).find("." + c).addClass("blue");
+                    }
+                }
+            }
+        }
+
+        function documentHeight() {
+            return Math.max(
+                window.innerHeight,
+                document.body.offsetHeight,
+                document.documentElement.clientHeight
+            );
+        }
+
+        $(function () {
+            $("#content").mousemove(function (e) {
+                $(".cursor").show().css({
+                    "left": e.clientX,
+                    "top": e.clientY
+                });
+            }).mouseout(function () {
+                $(".cursor").hide();
+            });
+        });
+
+        function increaseWidth() {
+            width = 0;
+        }
+
+    </script>
+    <style>
+        /*         
+             ### ##### #  # #    #### 
+            ##     #    # # #    #    
+              ##   #     #  #    ##   
+            ###    #    #   #### #### 
+        */
+
+        * {
+            -moz-user-select: -moz-none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+
+            /*
+            Introduced in IE 10.
+            See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+            */
+            -ms-user-select: none;
+            user-select: none;
+            margin: 0;
+            padding: 0;
+
+            line-height: .7em;
+            font-weight: bolder;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 2em;
+            padding: 24px 24px 0 24px;
+        }
+
+        #content {
+            cursor: none;
+            width: 100%;
+            /* word-wrap: break-word; */
+        }
+
+        td {
+            width: 24px;
+            height: 24px;
+            transition: 5s;
+            color: rgb(197, 197, 197);
+        }
+
+        td:hover {
+            transition: 0s;
+            color: rgb(0, 0, 0);
+        }
+
+        .red {
+            color: red;
+        }
+
+        .blue {
+            transition: 2s;
+            color: blue;
+        }
+
+        #panel {
+            height: 24px;
+            margin-top: 24px;
+        }
+
+        #panel .group {
+            margin-left: 24px;
+        }
+
+        #panel a:hover {
+            cursor: pointer;
+            color: green;
+        }
+
+        #panel #giveup:hover {
+            cursor: none;
+            color: red;
+        }
+
+        .cursor {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: -100px;
+            cursor: none;
+            pointer-events: none;
+            transform: translate(-10px, -10px);
+        }
+    </style>
+</head>
+
+<body>
+    <!--     
+        #  # ##### ## ## #    
+        #  #   #   # # # #    
+        ####   #   #   # #    
+        #  #   #   #   # #### 
+    -->
+
+    <!-- <button id="giveup" onclick="giveup()">Give Up</button> -->
+    <table id="content" cellspacing="0"></table>
+    <div id="panel">
+        <span class="group">
+            <!-- <a onclick="increaseWidth()">-</a> -->
+            <span id="width">WIDTH:</span>
+            <!-- <a onclick="decreaseWidth()">+</a> -->
+        </span>
+
+        <span class="group">
+            <!-- <a onclick="increaseHeight()">-</a> -->
+            <span id="height">HEIGHT:</span>
+            <!-- <a onclick="decreaseHeight()">+</a> -->
+        </span>
+
+        <span class="group">
+            <span>WORDS:</span>
+            <span id="foundwords"></span>/<span id="words"></span>
+        </span>
+
+        <span class="group">
+            <a id="giveup" onclick="giveup()">GIVE UP</a>
+        </span>
+    </div>
+    <img src="cursor.png" alt="Cursor" class="cursor" />
+</body>
+
+</html>
