@@ -63,8 +63,8 @@ public class ItemEmptyRod extends MyItem {
 	private final Item nextItem;
 	private RodType type;
 
-	public ItemEmptyRod(String name, RodType type, Item nextItem, String... lore) {
-		super(name, lore);
+	public ItemEmptyRod(RodType type, Item nextItem, String... lore) {
+		super(lore);
 		this.nextItem = nextItem;
 		this.type = type;
 		setMaxStackSize(1);

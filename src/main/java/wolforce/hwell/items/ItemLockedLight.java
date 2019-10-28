@@ -13,8 +13,8 @@ import wolforce.hwell.blocks.BlockLightCollector;
 
 public class ItemLockedLight extends MyItem {
 
-	public ItemLockedLight(String name, String... lore) {
-		super(name, lore);
+	public ItemLockedLight(String... lore) {
+		super(lore);
 	}
 
 	@Override

@@ -21,7 +21,6 @@ import wolforce.hwell.recipes.RecipeCrushing;
 import wolforce.hwell.recipes.RecipeFreezer;
 import wolforce.hwell.recipes.RecipeGrinding;
 import wolforce.hwell.recipes.RecipeMutationPaste;
-import wolforce.hwell.recipes.RecipeNetherPortal;
 import wolforce.hwell.recipes.RecipePowerCrystalOld;
 import wolforce.hwell.recipes.RecipePowerCrystalOld.ItemAndVals;
 import wolforce.hwell.recipes.RecipePuller;
@@ -181,12 +180,6 @@ public class CT {
 		RecipePowerCrystalOld.screenRecipes.add(new ItemAndVals(is(item), name, power, range, purity));
 	}
 
-	@ZenDoc("Add a new transformation recipe through the nether portal. It is not possible to change the number of items this way. 1 to 1 transformations only.")
-	@ZenMethod
-	public static void addNetherPortalRecipe(IItemStack input, IItemStack output) {
-		RecipeNetherPortal.recipes.add(new RecipeNetherPortal(is(input), is(output)));
-	}
-
 	@ZenDoc("Add a new transformation recipe through Mutation Paste. Any item can be changed into any other.")
 	@ZenMethod
 	public static void addMutationPasteRecipe(IItemStack[] items) {
@@ -341,18 +334,6 @@ public class CT {
 		for (Iterator<ItemAndVals> it = RecipePowerCrystalOld.screenRecipes.iterator(); it.hasNext();) {
 			ItemAndVals recipe = (ItemAndVals) it.next();
 			if (Util.equalExceptAmount(recipe.stack, is(item))) {
-				it.remove();
-				return;
-			}
-		}
-	}
-
-	@ZenDoc("Remove a nether portal transformation recipe.")
-	@ZenMethod
-	public static void removeNetherPortalRecipe(IItemStack input) {
-		for (Iterator<RecipeNetherPortal> it = RecipeNetherPortal.recipes.iterator(); it.hasNext();) {
-			RecipeNetherPortal recipe = (RecipeNetherPortal) it.next();
-			if (Util.equalExceptAmount(recipe.input, is(input))) {
 				it.remove();
 				return;
 			}

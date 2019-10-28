@@ -41,8 +41,8 @@ public class ItemLoot extends MyItem {
 	private static ResourceLocation[] lootTables;
 	private final int lootTableIndex;
 
-	public ItemLoot(String name, int lootTableIndex, String... lore) {
-		super(name, lore);
+	public ItemLoot(int lootTableIndex, String... lore) {
+		super(lore);
 		this.lootTableIndex = lootTableIndex;
 		setMaxStackSize(1);
 	}

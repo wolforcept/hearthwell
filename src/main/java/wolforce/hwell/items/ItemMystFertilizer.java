@@ -19,8 +19,8 @@ public class ItemMystFertilizer extends MyItem {
 
 	private static final double SMALLNESS = 3;
 
-	public ItemMystFertilizer(String name, String... lore) {
-		super(name, lore);
+	public ItemMystFertilizer(String... lore) {
+		super(lore);
 	}
 
 	@Override

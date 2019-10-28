@@ -7,6 +7,7 @@ import net.minecraft.nbt.NBTTagString;
 import wolforce.hwell.Main;
 import wolforce.hwell.blocks.BlockCore;
 import wolforce.mechanics.api.integration.MakeJeiIntegration;
+import wolforce.mechanics.integration.jei.JeiCatPortal;
 
 public class JeiIntegration {
 

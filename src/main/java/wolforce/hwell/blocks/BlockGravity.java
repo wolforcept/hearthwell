@@ -11,10 +11,6 @@ import wolforce.hwell.blocks.tile.TileGravity;
 
 public class BlockGravity extends BlockMachineBase implements HasTE, BlockWithDescription {
 
-	public BlockGravity() {
-		super();
-	}
-
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		return new TileGravity();

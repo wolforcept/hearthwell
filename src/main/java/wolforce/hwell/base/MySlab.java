@@ -15,7 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class MySlab extends MyBlock {
+public class MySlab extends MyBlock implements CustomNamedBlock {
 
 	public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.<EnumFacing>create("facing", EnumFacing.class);
 
@@ -26,10 +26,18 @@ public class MySlab extends MyBlock {
 	protected static final AxisAlignedBB AABB_EAST = new AxisAlignedBB(0, 0, 0, .5, 1, 1);
 	protected static final AxisAlignedBB AABB_WEST = new AxisAlignedBB(.5, 0, 0, 1, 1, 1);
 
-	public MySlab(Material mat) {
+	private String name;
+
+	public MySlab(String name, Material mat) {
 		super(mat);
+		this.name = name;
 		setDefaultState(getDefaultState().withProperty(FACING, EnumFacing.DOWN));
 		this.useNeighborBrightness = true;
+	}
+
+	@Override
+	public String getName() {
+		return name;
 	}
 
 	@SuppressWarnings("deprecation")

@@ -25,8 +25,8 @@ public class ItemMystDust extends MyItem {
 		recipes.put(Blocks.LAPIS_ORE, Main.asul_block);
 	}
 
-	public ItemMystDust(String name, String... lore) {
-		super(name, lore);
+	public ItemMystDust(String... lore) {
+		super(lore);
 	}
 
 	@Override

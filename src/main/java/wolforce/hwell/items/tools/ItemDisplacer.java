@@ -25,8 +25,8 @@ public class ItemDisplacer extends MyItem {
 
 	private boolean powered;
 
-	public ItemDisplacer(String name, boolean powered, String... lore) {
-		super(name, lore);
+	public ItemDisplacer(boolean powered, String... lore) {
+		super(lore);
 		this.powered = powered;
 		setMaxStackSize(1);
 		setMaxDamage(64);

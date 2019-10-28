@@ -32,9 +32,9 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import wolforce.hwell.fluids.BlockLiquidSouls;
 import wolforce.hwell.items.ItemLoot;
-import wolforce.hwell.recipes.RecipeNetherPortal;
 import wolforce.hwell.registry.RegisterRecipes;
 import wolforce.mechanics.Util;
+import wolforce.mechanics.recipes.RecipeNetherPortal;
 
 @Mod.EventBusSubscriber
 public class HwellEvents {
@@ -103,26 +103,6 @@ public class HwellEvents {
 		return s.length() > 30 && s.contains("poor") && s.contains("please") && s.contains("send") && s.contains("book")
 				&& s.contains("gods");
 		// gods please send a book to your poor servant
-	}
-
-	@SubscribeEvent
-	public static void travelToDim(EntityTravelToDimensionEvent event) {
-
-		if ((event.getEntity() instanceof EntityItem)) {
-			EntityItem entityItem = (EntityItem) event.getEntity();
-			ItemStack stackThrown = RecipeNetherPortal.getOutput(entityItem.getItem());
-			if (Util.isValid(stackThrown)) {
-				event.setCanceled(true);
-				ItemStack newItemStack = stackThrown.copy();
-				newItemStack.setCount(entityItem.getItem().getCount() * newItemStack.getCount());
-				entityItem.setItem(newItemStack);
-				// spawnInPlaceOf(newItemStack, entityItem);
-			}
-		}
-
-		if (!HwellConfig.general.allowEntitiesToTravelToTheNether
-				&& event.getDimension() == DimensionType.NETHER.getId())
-			event.setCanceled(true);
 	}
 
 	// private static void spawnInPlaceOf(ItemStack newItemStack, EntityItem

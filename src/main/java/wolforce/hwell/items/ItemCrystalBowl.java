@@ -19,8 +19,8 @@ import wolforce.hwell.base.MyItem;
 
 public class ItemCrystalBowl extends MyItem {
 
-	public ItemCrystalBowl(String name, String... lore) {
-		super(name, lore);
+	public ItemCrystalBowl(String... lore) {
+		super(lore);
 		setMaxStackSize(16);
 	}
 

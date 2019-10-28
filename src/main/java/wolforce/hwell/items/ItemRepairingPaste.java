@@ -13,8 +13,8 @@ import wolforce.mechanics.Util;
 
 public class ItemRepairingPaste extends MyItem {
 
-	public ItemRepairingPaste(String name, String[] lore) {
-		super(name, lore);
+	public ItemRepairingPaste(String[] lore) {
+		super(lore);
 		setMaxStackSize(1);
 		setMaxDamage(500);
 	}

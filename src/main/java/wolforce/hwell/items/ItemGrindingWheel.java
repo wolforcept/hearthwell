@@ -7,8 +7,8 @@ public class ItemGrindingWheel extends MyItem {
 
 	public Block grinder;
 
-	public ItemGrindingWheel(String name, String... lore) {
-		super(name, lore);
+	public ItemGrindingWheel(String... lore) {
+		super(lore);
 		setMaxStackSize(1);
 	}
 

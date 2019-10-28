@@ -6,8 +6,8 @@ public class ItemMystShard extends MyItem {
 
 	// private static final double SMALLNESS = 3;
 
-	public ItemMystShard(String name, String... lore) {
-		super(name, lore);
+	public ItemMystShard(String... lore) {
+		super(lore);
 	}
 
 	// @Override

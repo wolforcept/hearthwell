@@ -12,11 +12,8 @@ import net.minecraft.world.IBlockAccess;
 public class BlockGravityMini extends BlockGravity {
 
 	private final static double F = 1.0 / 16.0;
-	protected static final AxisAlignedBB aabb = new AxisAlignedBB(4.0 * F, 4.0 * F, 4.0 * F, 12 * F, 12.0 * F, 12.0 * F);
-
-	public BlockGravityMini(String name) {
-		super(name);
-	}
+	protected static final AxisAlignedBB aabb = new AxisAlignedBB(4.0 * F, 4.0 * F, 4.0 * F, 12 * F, 12.0 * F,
+			12.0 * F);
 
 	@Override
 	public boolean isToRegisterTileEntity() {

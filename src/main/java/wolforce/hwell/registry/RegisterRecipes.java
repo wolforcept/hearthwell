@@ -58,7 +58,6 @@ import wolforce.hwell.recipes.RecipeDripping;
 import wolforce.hwell.recipes.RecipeFreezer;
 import wolforce.hwell.recipes.RecipeGrinding;
 import wolforce.hwell.recipes.RecipeMutationPaste;
-import wolforce.hwell.recipes.RecipeNetherPortal;
 import wolforce.hwell.recipes.RecipePowerCrystalOld;
 import wolforce.hwell.recipes.RecipePowerNode;
 import wolforce.hwell.recipes.RecipePuller;
@@ -67,6 +66,7 @@ import wolforce.hwell.recipes.RecipeSeparator;
 import wolforce.hwell.recipes.RecipeShardLiquifier;
 import wolforce.hwell.recipes.RecipeTube;
 import wolforce.mechanics.Util;
+import wolforce.mechanics.recipes.RecipeNetherPortal;
 
 @Mod.EventBusSubscriber(modid = Hwell.MODID)
 public class RegisterRecipes {

@@ -42,9 +42,6 @@ public class HwellConfig {
 				"This should always be false except for debugging (default: false)" })
 		public boolean isAutomaticMultiblocks = false;
 
-		@Comment({ "Allow Entities to travel to the nether (Players, mobs and animals, items, etc) (default: false)" })
-		public boolean allowEntitiesToTravelToTheNether = false;
-
 		@Comment({ "Allow player to perform the Book Ritual (default: true)" })
 		public boolean book_ritual_enabled = true;
 	}
