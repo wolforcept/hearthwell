@@ -2,7 +2,32 @@
 <meta http-equiv="Content-Language" content="en-gb">
 <link href="../stylesheet.css" rel="stylesheet">
 <link rel="icon" href="../docs/hearthwell.png">
-<title>Mechanics</title></head>
+<title>Mechanics</title>
+<style>
+	img { border: solid 1px black; background-color: white;}
+	code {
+		display:block; border: solid 1px #888888;
+		background-color: #BBBBBB;
+		padding: 10px 10px 10px 20px;
+		margin: 10px 0 0 20px;
+		width: 700px;
+	}
+	td {
+	    vertical-align: top;
+	}
+	.comment {
+		color: #228822;
+	}
+	.orange {
+		color: #AA5522;
+		font-weight: bold;
+	}
+	.reddish {
+		color: #FF4422;
+		font-weight: bold;
+	}
+</style>
+</head>
 <body>
 <object style="border:0;padding:0;width: 100%" type="text/html" data="../navbar.html"></object>
 <object class="patron" type="text/html" data="patron.html"></object>
@@ -15,26 +40,189 @@
 <p>
 	This mod adds some crafting mechanics to spice up modpacks.<br>
 	By itself, this mod adds almost nothing to the game, and must be configured to add recipes.<br>
-	All of the recipes are available through CraftTweaker.
+	Most recipes are available through CraftTweaker.
 </p>
-<h3>Drying.</h3>
-<p>Similar to Drying Racks from Tinker's and Primal Core. Time will transform an item stack into another.<br>
-Example usage: <code>mods.mechanics.addDryingTableRecipe(&lt;contenttweaker:monster_strips&gt;, &lt;minecraft:dryed_monster_strips&gt;);</code>
-</p>
-<img src="dryingtable.png" width="512px">
 
-<h3>Hammering.</h3>
-<p>Martlets to crack drown blocks. Comes with 3 recipes (Stone to Cobblestone, Cobblestone to Gravel and Gravel to Sand) and two varieties, stone and iron.<br>
-Example usage: <code>mods.mechanics.addMartletRecipe(&lt;minecraft:sandstone:0&gt;, &lt;minecraft:sand:0&gt;);</code>
+<hr>
+<table><td>
+<h3>Crushing Block</h3>
+<p>The Crushing Block can be dropped on top of blocks to crush them.
+<br /><br />
+Example usage:
+<code>
+	mods.mechanics.<span class="orange">addCrushingBlockRecipe</span>(<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;[&lt;minecraft:iron_ingot&gt;] <span class="comment">// item that is crushed</span> <br />
+	&nbsp;&nbsp;&nbsp;&nbsp;[&lt;minecraft:gold_ingot&gt; , &lt;minecraft:diamond&gt;], <span class="comment">// possible resulting items</span> <br />
+	&nbsp;&nbsp;&nbsp;&nbsp;[0.75, 0.25] <span class="comment">// probabilities of each possible result</span> <br />
+	);
+</code>
 </p>
-<img src="martlets.png" width="512px">
+</td><td>
+<img src="crushing.gif" width="350px">
+</td></table>
 
-<h3>Alloying.</h3>
-<p>The Alloy furnace requires a fuel to transform two item stacks into one.<br>
-Example usage: <code>mods.mechanics.addAlloyFurnaceRecipe(&lt;minecraft:iron_ingot&gt;, &lt;minecraft:gold_ingot&gt;, &lt;minecraft:diamond&gt;);</code>
-</p>
+<hr>
+
+<table><td>
+<h3>Alloying Furnace</h3>
+<p>The Alloy furnace requires fuel to transform two items into a third. The order does not matter.</p>
+Example usage:
+<code>
+	mods.mechanics.<span class="orange">addAlloyFurnaceRecipe</span>(<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&lt;minecraft:iron_ingot&gt;, <span class="comment">// one input item </span> <br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&lt;minecraft:gold_ingot&gt;, <span class="comment">// other input item </span> <br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&lt;minecraft:diamond&gt; <span class="comment">// resulting item </span> <br />
+	);
+</code>
+</td><td>
 <img src="alloyfurnace.png" width="512px">
+</td></table>
 
+<hr>
+
+<table><td>
+<h3>Transforming Items with the Nether Portal</h3>
+<p>Throw items into the Nether Portal and they come out transformed!</p>
+Example usage:
+<code>
+	mods.mechanics.<span class="orange">addNetherPortalRecipe</span>(<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&lt;minecraft:iron_ingot&gt;, <span class="comment">// item thrown in </span> <br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&lt;minecraft:gold_ingot&gt; <span class="comment">// item that comes out </span> <br />
+	);
+</code>
+</td><td>
+<img src="crystal_passing.gif" width="512px">
+</td></table>
+
+<hr>
+
+<table><td>
+<h3>Drying Table</h3>
+<p>Similar to Drying Racks from Tinker's and Primal Core. Time will transform an item stack into another.</p>
+<br /><br />
+Example usage:
+<code>
+	mods.mechanics.<span class="orange">addDryingTableRecipe</span>(<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&lt;minecraft:rotten_flesh&gt;, <span class="comment">// item placed</span> <br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&lt;minecraft:leather&gt; <span class="comment">// final dried item </span> <br />
+	);
+</code>
+</td><td>
+<img src="dryingtable.png" width="512px">
+</td></table>
+
+<hr>
+
+<table><td>
+<h3>Martlets</h3>
+<p>Martlets to crack drown blocks. Comes with 3 recipes (Stone to Cobblestone, Cobblestone to Gravel and Gravel to Sand) and two varieties, stone and iron.<br /><br />
+Example usage:
+<code>
+	mods.mechanics.<span class="orange">addMartletRecipe</span>( <br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&lt;minecraft:sandstone:0&gt;, <span class="comment">// block broken by a Martlet </span> <br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&lt;minecraft:sand:0&gt; <span class="comment">// resulting item that drops </span> <br />
+	);
+</code>
+</p>
+</td><td>
+<img src="martlets.png" width="512px">
+</td></table>
+
+<hr>
+
+<table><td>
+<h3>Amplifying Tube</h3>
+<p>The Amplifying Tube can transform blocks in world into other blocks or into liquids.<br />
+Simply place two to eight amplifying tubes vertically, and the block immediately beneath them will transform!</p>
+<br /><br />
+Example usage:
+<code>
+	mods.mechanics.<span class="orange">addTubeRecipe</span>( <br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&lt;minecraft:leaves:0&gt;, <span class="comment">// block placed on the bottom </span> <br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&lt;liquid:water&gt; <span class="comment">// resulting liquid </span> <br />
+	);
+</code>
+</p>
+</td></table>
+<table><td>
+<img src="tube.gif" width="350px">
+</td><td>
+<img src="tube2.gif" width="350px">
+</td></table>
+
+<hr>
+
+<h3>Burst Seeds</h3>
+<p>Burst Seeds are tiny blocks that, after some random amount of time, will burst into a bunch of copies of a resource.</p>
+<img src="bursting.gif" width="512px">
+<p>
+Burst Seeds, unfortunately, do not use CraftTweaker. Instead, you need to create a file called "mechanics_burst_seeds.txt" in your scripts folder.<br />
+Inside, you can add or remove burst seeds, one per line.<br />
+There are three ways of creating burst seeds (without the quotes):<br />
+"burst seed registry name" "block or item registry name" "block or item metadata"<br />
+"burst seed registry name" "block or item registry name" "block or item metadata" "any texture"<br />
+"burst seed registry name" "block or item registry name" "block or item metadata" "minimum number" "maximum number" "any texture"<br />
+<br />Example mechanics_burst_seeds.txt file:<br>
+<code>
+remove burst_seed_end_stone<br/>
+burst_seed_sea_lantern minecraft:sea_lantern 0<br/>
+burst_seed_furnace minecraft:furnace 0 minecraft:furnace_front_off<br/>
+burst_seed_heavy_block mechanics:heavy_block 0 64 64 mechanics:heavy_block<br/>
+</code>
+</p>
+
+<br />
+
+<hr>
+
+<br />
+
+<h2>All CraftTweaker Methods:</h2>
+
+<br />Add a recipe for the Alloy Furnace.
+<br /><code>mods.mechanics.<span class="orange">addAlloyFurnaceRecipe</span>(IIngredient, IIngredient, IItemStack)</code>
+<br />
+<br />Add a recipe for the Crushing Block. The number of probabilities must be the same as the number of outputs. If the sum of the probabilities isn't 1, there is a chance for an output of nothing.
+<br /><code>mods.mechanics.<span class="orange">addCrushingBlockRecipe</span>(IItemStack[], IItemStack[], double[])</code>
+<br />
+<br />Add a recipe for the Crushing Block. The number of probabilities must be the same as the number of outputs. If the sum of the probabilities isn't 1, there is a chance for an output of nothing.
+<br /><code>mods.mechanics.<span class="orange">addCrushingBlockRecipe</span>(IItemStack, IItemStack[], double[])</code>
+<br />
+<br />Add a recipe for the Drying Table.
+<br /><code>mods.mechanics.<span class="orange">addDryingTableRecipe</span>(IIngredient, IItemStack)</code>
+<br />
+<br />Add a recipe for the Drying Table specifying the time in ticks.
+<br /><code>mods.mechanics.<span class="orange">addDryingTableRecipe</span>(IIngredient, IItemStack, int)</span></code>
+<br />
+<br />Add a recipe for the Martlet.
+<br /><code>mods.mechanics.<span class="orange">addMartletRecipe</span>(IIngredient, IItemStack)</code>
+<br />
+<br />Add a new transformation recipe through the nether portal. It is not possible to change the number of items this way. 1 to 1 transformations only.
+<br /><code>mods.mechanics.<span class="orange">addNetherPortalRecipe</span>(IItemStack, IItemStack)</code>
+<br />
+<br />Add a recipe for the Tube with a solid block output.
+<br /><code>mods.mechanics.<span class="orange">addTubeRecipe</span>(IItemStack, IItemStack)</code>
+<br />
+<br />Add a recipe for the Tube with a solid block output.
+<br /><code>mods.mechanics.<span class="orange">addTubeRecipe</span>(IItemStack[], IItemStack)</code>
+<br />
+<br />Add a recipe for the Tube with a liquid output.
+<br /><code>mods.mechanics.<span class="orange">addTubeRecipe</span>(IItemStack, ILiquidStack)</code>
+<br />
+<br />Add a recipe for the Tube with a liquid output.
+<br /><code>mods.mechanics.<span class="orange">addTubeRecipe</span>(IItemStack[], ILiquidStack)</code>
+<br />
+<br />Remove a recipe for the Crushing Block.
+<br /><code>mods.mechanics.<span class="reddish">removeCrushingBlockRecipe</span>(IItemStack)</code>
+<br />
+<br />Remove a recipe for the Martlet.
+<br /><code>mods.mechanics.<span class="reddish">removeMartletRecipe</span>(IIngredient)</code>
+<br />
+<br />Remove a nether portal transformation recipe.
+<br /><code>mods.mechanics.<span class="reddish">removeNetherPortalRecipe</span>(IItemStack)</code>
+<br /> 
+<br />Remove a recipe for the Tube.
+<br /><code>mods.mechanics.<span class="reddish">removeTubeRecipe</span>(IItemStack)</code>
 
 </body>
 </html>
