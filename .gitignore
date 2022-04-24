@@ -1,29 +1,25 @@
-/*
-!/src/
-!.gitignore
-!/README.mt
-!gradlew*
-!/gradle/
-!/LICENSE.txt
-!/README.md
-!build.gradle
-!.travis.yml
-!/textures/
-!/gradle.properties
-!.gitattributes
-!ASSETS_LICENSE.txt
-!/docs/
-!index.html
-!patron.html
-!stylesheet.css
-!navbar.html
-!/reference
-!/book
-!/aTV
-!/changelogs
-!/mover
-!/CT
-!/vaultopic
-!/mechanics
-!/groves
-!/soup
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run
+
+# Files from Forge MDK
+forge*changelog.txt
