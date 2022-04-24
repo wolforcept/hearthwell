@@ -2,7 +2,6 @@ package wolforce.hearthwell.events;
 
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.event.RegistryEvent;
@@ -11,8 +10,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import wolforce.hearthwell.HearthWell;
-import wolforce.hearthwell.entities.EntityFlare;
-import wolforce.hearthwell.entities.EntityHearthWell;
 import wolforce.hearthwell.net.Net;
 import wolforce.hearthwell.particles.ParticleEnergy;
 import wolforce.hearthwell.particles.ParticleEnergyData;
@@ -43,15 +40,6 @@ public class EventsRegistry {
 		for (Item item : HearthWell.items.values()) {
 			registry.register(item);
 		}
-	}
-
-	@SubscribeEvent
-	public static void registerEntities(final RegistryEvent.Register<EntityType<?>> event) {
-		EntityFlare.TYPE.setRegistryName(new ResourceLocation(HearthWell.MODID, EntityFlare.REG_ID));
-		event.getRegistry().register(EntityFlare.TYPE);
-
-		EntityHearthWell.TYPE.setRegistryName(new ResourceLocation(HearthWell.MODID, EntityHearthWell.REG_ID));
-		event.getRegistry().register(EntityHearthWell.TYPE);
 	}
 
 	@SubscribeEvent

@@ -19,7 +19,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -35,13 +34,12 @@ import wolforce.hearthwell.data.recipes.RecipeFlare;
 import wolforce.hearthwell.data.recipes.RecipeInfluence;
 import wolforce.hearthwell.net.ClientProxy;
 import wolforce.hearthwell.particles.ParticleEnergyData;
+import wolforce.hearthwell.registries.Entities;
 import wolforce.hearthwell.util.Util;
 
 public class EntityHearthWell extends Entity {
 
 	public static final String REG_ID = "entity_hearth_well";
-	public static final EntityType<EntityHearthWell> TYPE = EntityType.Builder.<EntityHearthWell>of(EntityHearthWell::new, MobCategory.MISC).fireImmune()
-			.noSummon().sized(.4f, 1.5f).clientTrackingRange(8).build(REG_ID);
 
 	private static final EntityDataAccessor<Integer> RESEARCH = SynchedEntityData.defineId(EntityHearthWell.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Byte> RESEARCH_NODE_X = SynchedEntityData.defineId(EntityHearthWell.class, EntityDataSerializers.BYTE);
@@ -54,8 +52,7 @@ public class EntityHearthWell extends Entity {
 	private int research_cooldown = research_max_cooldown;
 
 	public EntityHearthWell(Level world) {
-		this(TYPE, world);
-		init();
+		this(Entities.entity_hearthwell.get(), world);
 	}
 
 	public EntityHearthWell(EntityType<EntityHearthWell> type, Level world) {
@@ -67,6 +64,7 @@ public class EntityHearthWell extends Entity {
 	//
 
 	private void init() {
+
 		unlockMapNode(DATA.getNode((byte) 0, (byte) 0));
 	}
 
@@ -335,33 +333,6 @@ public class EntityHearthWell extends Entity {
 	//
 	//
 
-	@Override
-	protected void addAdditionalSaveData(CompoundTag compound) {
-		compound.putInt("research", getResearch());
-
-		byte[] researchNode = getResearchNode();
-		compound.putInt("research_node_x", researchNode[0]);
-		compound.putInt("research_node_y", researchNode[1]);
-
-		compound.put("unlockedNodes", getUnlockedNodes());
-	}
-
-	@Override
-	protected void readAdditionalSaveData(CompoundTag compound) {
-		entityData.set(RESEARCH, compound.getInt("research"));
-		byte research_node_x = compound.getByte("research_node_x");
-		byte research_node_y = compound.getByte("research_node_y");
-		if (DATA.getNode(research_node_x, research_node_y) != null) {
-			entityData.set(RESEARCH_NODE_X, research_node_x);
-			entityData.set(RESEARCH_NODE_Y, research_node_y);
-		} else {
-			entityData.set(RESEARCH_NODE_X, (byte) 0);
-			entityData.set(RESEARCH_NODE_Y, (byte) 0);
-		}
-
-		setUnlockedNodes(compound.getCompound("unlockedNodes"));
-	}
-
 	public int getResearch() {
 		return entityData.get(RESEARCH);
 	}
@@ -415,6 +386,36 @@ public class EntityHearthWell extends Entity {
 
 	public boolean hasItems() {
 		return entityData.get(HAS_ITEMS);
+	}
+
+	//
+	//
+
+	@Override
+	protected void addAdditionalSaveData(CompoundTag compound) {
+		compound.putInt("research", getResearch());
+
+		byte[] researchNode = getResearchNode();
+		compound.putInt("research_node_x", researchNode[0]);
+		compound.putInt("research_node_y", researchNode[1]);
+
+		compound.put("unlockedNodes", getUnlockedNodes());
+	}
+
+	@Override
+	protected void readAdditionalSaveData(CompoundTag compound) {
+		entityData.set(RESEARCH, compound.getInt("research"));
+		byte research_node_x = compound.getByte("research_node_x");
+		byte research_node_y = compound.getByte("research_node_y");
+		if (DATA.getNode(research_node_x, research_node_y) != null) {
+			entityData.set(RESEARCH_NODE_X, research_node_x);
+			entityData.set(RESEARCH_NODE_Y, research_node_y);
+		} else {
+			entityData.set(RESEARCH_NODE_X, (byte) 0);
+			entityData.set(RESEARCH_NODE_Y, (byte) 0);
+		}
+
+		setUnlockedNodes(compound.getCompound("unlockedNodes"));
 	}
 
 	@Override

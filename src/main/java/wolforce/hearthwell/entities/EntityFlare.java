@@ -14,7 +14,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -32,14 +31,13 @@ import wolforce.hearthwell.data.MapData;
 import wolforce.hearthwell.data.recipes.RecipeHandItem;
 import wolforce.hearthwell.data.recipes.RecipeTransformation;
 import wolforce.hearthwell.particles.ParticleEnergyData;
+import wolforce.hearthwell.registries.Entities;
 import wolforce.hearthwell.util.Util;
 
 public class EntityFlare extends Entity {
 
 	public static final int PLAYER_DISTANCE = 5;
 	public static final String REG_ID = "entity_flare";
-	public static final EntityType<EntityFlare> TYPE = EntityType.Builder.<EntityFlare>of(EntityFlare::new, MobCategory.MISC).fireImmune().noSummon()
-			.sized(.1f, .1f).clientTrackingRange(8).build(REG_ID);
 	private static PerlinSimplexNoise perlin = new PerlinSimplexNoise(new WorldgenRandom(new LegacyRandomSource(2345L)),
 			IntStream.rangeClosed(-3, 0).boxed().collect(Collectors.toList()));
 
@@ -52,7 +50,7 @@ public class EntityFlare extends Entity {
 	private CompoundTag unlockedNodes = new CompoundTag();
 
 	public EntityFlare(Level world) {
-		this(TYPE, world);
+		this(Entities.entity_flare.get(), world);
 	}
 
 	public EntityFlare(EntityType<EntityFlare> type, Level world) {
@@ -144,7 +142,7 @@ public class EntityFlare extends Entity {
 	private void moveToPlayer(Player player) {
 
 		boolean torch = player.getMainHandItem().getItem() == HearthWell.flare_torch;
-		if (torch && player.isShiftKeyDown()) {
+		if (torch && !player.isShiftKeyDown()) {
 			List<EntityFlare> flaresNearPlayer = level.getEntitiesOfClass(EntityFlare.class,
 					new AABB(player.getEyePosition().add(-PLAYER_DISTANCE, -PLAYER_DISTANCE, -PLAYER_DISTANCE),
 							player.getEyePosition().add(PLAYER_DISTANCE, PLAYER_DISTANCE, PLAYER_DISTANCE)));

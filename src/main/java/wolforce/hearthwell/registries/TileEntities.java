@@ -22,7 +22,7 @@ public class TileEntities {
 		return () -> new BlockEntityType<>(create, Set.of(valid.get()), null);
 	}
 
-	// TILE ENTITIES
+	// TILE REGISTRY
 
 	public static final RegistryObject<BlockEntityType<TeBurstSeed>> burst_seed = REGISTRY.register("burst_seed_tile_entity",
 			registerType(TeBurstSeed::new, () -> HearthWell.burst_seed));

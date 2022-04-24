@@ -66,7 +66,7 @@ public class MapData implements Serializable {
 				"The Hearth Well is an infinite source of energy given you by the gods.", //
 				"The Hearth Well is an infinite source of energy given you by the gods./n" + "Throw offerings near the Hearth Well to gain blessing and/n"
 						+ "favour from the gods in the form of small flares./n" + "Flares can be made stronger by adding extra Myst Dust to the recipe./n"
-						+ "You can manipulate these flares with a flare torch./n"
+						+ "You can manipulate these flares with a entity_flare torch./n"
 						+ "Some items and blocks will react to the presence of flares in particular ways.", //
 				recipes, array(), array(), false);
 		return this;

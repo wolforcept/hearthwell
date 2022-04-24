@@ -4,6 +4,8 @@ import java.util.Random;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -39,11 +41,11 @@ public class TeBurstSeed extends BlockEntityParent {
 			return;
 
 		if (getItem().getCount() >= 4 && Math.random() < getChaos() / 25) {
-			burst();
+			burst(pos);
 		}
 	}
 
-	private void burst() {
+	private void burst(BlockPos pos) {
 		if (level.isClientSide)
 			return;
 		Random rand = new Random();
@@ -79,6 +81,8 @@ public class TeBurstSeed extends BlockEntityParent {
 			level.addFreshEntity(entity);
 		}
 		level.setBlockAndUpdate(worldPosition, Blocks.AIR.defaultBlockState());
+		for (int i = 0; i < 10; i++)
+			this.level.playSound((Player) null, pos, SoundEvents.FIREWORK_ROCKET_LARGE_BLAST, SoundSource.BLOCKS, 100000.0F, 20 + 5 * i);
 	}
 
 	public ItemStack getItem() {

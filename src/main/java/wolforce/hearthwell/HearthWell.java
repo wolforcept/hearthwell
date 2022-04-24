@@ -30,6 +30,7 @@ import wolforce.hearthwell.blocks.BlockMystGrass;
 import wolforce.hearthwell.blocks.BlockPetrifiedWood;
 import wolforce.hearthwell.items.ItemPetrifiedWoodChunk;
 import wolforce.hearthwell.items.ItemPrayerLetter;
+import wolforce.hearthwell.registries.Entities;
 import wolforce.hearthwell.registries.TileEntities;
 
 @Mod(HearthWell.MODID)
@@ -44,6 +45,7 @@ public class HearthWell {
 //		modBus.addListener(this::setupCompleteServer);
 		MinecraftForge.EVENT_BUS.register(this);
 		TileEntities.REGISTRY.register(modBus);
+		Entities.REGISTRY.register(modBus);
 	}
 
 //	private void setupCompleteServer(final FMLDedicatedServerSetupEvent event) {
@@ -112,7 +114,7 @@ public class HearthWell {
 
 //		myst_light = addBlock("myst_light", new BlockMystLight(torch));
 
-		// HAVE TILE ENTITIES
+		// HAVE TILE REGISTRY
 		burst_seed = addBlock("burst_seed", new BlockBurstSeed(miscellaneous));
 		fertile_soil = addBlock("fertile_soil", new BlockFertileSoil(rock));
 	}

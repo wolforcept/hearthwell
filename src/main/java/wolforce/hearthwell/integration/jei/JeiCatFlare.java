@@ -14,7 +14,7 @@ import wolforce.hearthwell.integration.jei.meta.JeiCat;
 public class JeiCatFlare extends JeiCat<RecipeFlare> {
 
 	public JeiCatFlare() {
-		super(RecipeFlare.class, HearthWell.MODID, "Flare Recipes", "flare", 134, 82, HearthWell.flare_torch);
+		super(RecipeFlare.class, HearthWell.MODID, "Flare Recipes", "entity_flare", 134, 82, HearthWell.flare_torch);
 	}
 
 	@Override

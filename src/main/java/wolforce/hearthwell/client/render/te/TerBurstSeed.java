@@ -66,9 +66,9 @@ public class TerBurstSeed implements BlockEntityRenderer<TeBurstSeed> {
 					matrixStackIn.translate(d, 0, 0);
 
 				matrixStackIn.translate(//
-						Math.min(.2, Math.random() * c), //
-						Math.min(.2, Math.random() * c), //
-						Math.min(.2, Math.random() * c) //
+						Math.max(-.1, Math.min(.1, (-.25 + .5 * Math.random()) * c)), //
+						Math.max(-.1, Math.min(.1, (-.25 + .5 * Math.random()) * c)), //
+						Math.max(-.1, Math.min(.1, (-.25 + .5 * Math.random()) * c)) //
 				);
 
 				matrixStackIn.translate(0, -.2, 0);

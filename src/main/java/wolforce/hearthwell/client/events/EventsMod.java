@@ -12,14 +12,13 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import wolforce.hearthwell.HearthWell;
 import wolforce.hearthwell.bases.BlockHasRenderLayer;
-import wolforce.hearthwell.client.render.entity.RendererEnergy;
+import wolforce.hearthwell.client.render.entity.RendererFlare;
 import wolforce.hearthwell.client.render.entity.RendererHearthWell;
 import wolforce.hearthwell.client.render.te.TerBurstSeed;
-import wolforce.hearthwell.entities.EntityFlare;
-import wolforce.hearthwell.entities.EntityHearthWell;
 import wolforce.hearthwell.net.ClientProxy;
 import wolforce.hearthwell.particles.ParticleEnergy;
 import wolforce.hearthwell.particles.ParticleEnergyData;
+import wolforce.hearthwell.registries.Entities;
 import wolforce.hearthwell.registries.TileEntities;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -43,8 +42,8 @@ public class EventsMod {
 
 	@SubscribeEvent
 	public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-		event.registerEntityRenderer(EntityHearthWell.TYPE, RendererHearthWell::new);
-		event.registerEntityRenderer(EntityFlare.TYPE, RendererEnergy::new);
+		event.registerEntityRenderer(Entities.entity_hearthwell.get(), RendererHearthWell::new);
+		event.registerEntityRenderer(Entities.entity_flare.get(), RendererFlare::new);
 	}
 
 	private static void registerRenderLayer(Block block) {

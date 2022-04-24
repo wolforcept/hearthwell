@@ -5,9 +5,9 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import wolforce.hearthwell.entities.EntityFlare;
 
-public class RendererEnergy extends EntityRenderer<EntityFlare> implements EntityRendererProvider<EntityFlare> {
+public class RendererFlare extends EntityRenderer<EntityFlare> implements EntityRendererProvider<EntityFlare> {
 
-	public RendererEnergy(Context context) {
+	public RendererFlare(Context context) {
 		super(context);
 	}
 
@@ -18,7 +18,7 @@ public class RendererEnergy extends EntityRenderer<EntityFlare> implements Entit
 
 	@Override
 	public EntityRenderer<EntityFlare> create(Context context) {
-		return new RendererEnergy(context);
+		return new RendererFlare(context);
 	}
 
 }
