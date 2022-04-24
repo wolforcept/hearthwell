@@ -1,0 +1,37 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "hearthwell:blocks/myst_bush",
+		"particle": "hearthwell:blocks/myst_bush"
+	},
+	"elements": [
+		{
+			"from": [3, 0, 4],
+			"to": [23, 16, 4],
+			"rotation": {"angle": 45, "axis": "y", "origin": [15, 8, 12]},
+			"faces": {
+				"north": {"uv": [0, 0, 10, 8], "texture": "#0"},
+				"east": {"uv": [0, 0, 0, 8], "texture": "#missing"},
+				"south": {"uv": [0, 0, 10, 8], "texture": "#0"},
+				"west": {"uv": [0, 0, 0, 8], "texture": "#missing"},
+				"up": {"uv": [0, 0, 10, 0], "texture": "#missing"},
+				"down": {"uv": [0, 0, 10, 0], "texture": "#missing"}
+			}
+		},
+		{
+			"from": [-8, 0, 7],
+			"to": [12, 16, 7],
+			"rotation": {"angle": -45, "axis": "y", "origin": [4, 8, 15]},
+			"faces": {
+				"north": {"uv": [0, 0, 10, 8], "texture": "#0"},
+				"east": {"uv": [0, 0, 0, 8], "texture": "#missing"},
+				"south": {"uv": [0, 0, 10, 8], "texture": "#0"},
+				"west": {"uv": [0, 0, 0, 8], "texture": "#missing"},
+				"up": {"uv": [0, 0, 10, 0], "texture": "#missing"},
+				"down": {"uv": [0, 0, 10, 0], "texture": "#missing"}
+			}
+		}
+	]
+}

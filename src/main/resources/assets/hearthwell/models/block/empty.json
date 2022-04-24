@@ -1,0 +1,8 @@
+{
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "hearthwell:blocks/empty"
+	},
+	"elements": [
+	]
+}

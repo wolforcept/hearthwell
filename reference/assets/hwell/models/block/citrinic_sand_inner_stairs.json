@@ -1,4 +1,0 @@
-{
-    "parent": "block/inner_stairs",
-    "textures": { "bottom": "hwell:blocks/citrinic_sand", "top": "hwell:blocks/citrinic_sand", "side": "hwell:blocks/citrinic_sand" }
-}

@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"AAA",
+		"ABA",
+		"AAA"
+	],
+	"key": {
+		"A": {
+			"item": "hearthwell:myst_dust"
+		},
+		"B": {
+			"item": "hearthwell:crystal"
+		}
+	},
+	"result": {
+		"item": "hearthwell:inert_seed"
+	}
+}

@@ -1,0 +1,106 @@
+---- Minecraft Crash Report ----
+// Don't be sad. I'll do better next time, I promise!
+
+Time: 18/03/21 13:25
+Description: Ticking entity
+
+java.lang.NoSuchMethodError: net.minecraft.entity.item.ItemEntity.setVelocity(DDD)V
+	at wolforce.hearthwell.items.ItemPrayerLetter.onEntityItemUpdate(ItemPrayerLetter.java:27) ~[?:?] {re:classloading}
+	at net.minecraftforge.common.extensions.IForgeItemStack.onEntityItemUpdate(IForgeItemStack.java:274) ~[?:?] {re:computing_frames,re:classloading}
+	at net.minecraft.entity.item.ItemEntity.tick(ItemEntity.java:85) ~[?:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.world.server.ServerWorld.updateEntity(ServerWorld.java:623) ~[?:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.world.World.guardEntityTick(World.java:601) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.world.server.ServerWorld.tick(ServerWorld.java:407) ~[?:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:885) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.server.dedicated.DedicatedServer.updateTimeLightAndEntities(DedicatedServer.java:303) ~[?:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:821) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.func_240802_v_(MinecraftServer.java:664) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.lambda$startServer$0(MinecraftServer.java:233) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_181] {}
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at wolforce.hearthwell.items.ItemPrayerLetter.onEntityItemUpdate(ItemPrayerLetter.java:27) ~[?:?] {re:classloading}
+	at net.minecraftforge.common.extensions.IForgeItemStack.onEntityItemUpdate(IForgeItemStack.java:274) ~[?:?] {re:computing_frames,re:classloading}
+	at net.minecraft.entity.item.ItemEntity.tick(ItemEntity.java:85) ~[?:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.world.server.ServerWorld.updateEntity(ServerWorld.java:623) ~[?:?] {re:classloading,pl:runtimedistcleaner:A}
+-- Entity being ticked --
+Details:
+	Entity Type: minecraft:item (net.minecraft.entity.item.ItemEntity)
+	Entity ID: 512
+	Entity Name: Hearth Well Prayer Letter
+	Entity's Exact location: -106.94, 78.00, -116.65
+	Entity's Block location: World: (-107,78,-117), Chunk: (at 5,4,11 in -7,-8; contains blocks -112,0,-128 to -97,255,-113), Region: (-1,-1; contains chunks -32,-32 to -1,-1, blocks -512,0,-512 to -1,255,-1)
+	Entity's Momentum: -0.00, -0.04, 0.00
+	Entity's Passengers: []
+	Entity's Vehicle: ~~ERROR~~ NullPointerException: null
+Stacktrace:
+	at net.minecraft.world.World.guardEntityTick(World.java:601) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.world.server.ServerWorld.tick(ServerWorld.java:407) ~[?:?] {re:classloading,pl:runtimedistcleaner:A}
+
+
+-- Affected level --
+Details:
+	All players: 1 total; [ServerPlayerEntity['wolforce'/221, l='ServerLevel[world]', x=-106.28, y=78.00, z=-120.63]]
+	Chunk stats: ServerChunkCache: 2451
+	Level dimension: minecraft:overworld
+	Level spawn location: World: (-48,64,-32), Chunk: (at 0,4,0 in -3,-2; contains blocks -48,0,-32 to -33,255,-17), Region: (-1,-1; contains chunks -32,-32 to -1,-1, blocks -512,0,-512 to -1,255,-1)
+	Level time: 90360 game time, 90360 day time
+	Level name: world
+	Level game mode: Game mode: survival (ID 0). Hardcore: false. Cheats: false
+	Level weather: Rain time: 92497 (now: false), thunder time: 4082 (now: false)
+	Known server brands: forge
+	Level was modded: true
+	Level storage version: 0x04ABD - Anvil
+Stacktrace:
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:885) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.server.dedicated.DedicatedServer.updateTimeLightAndEntities(DedicatedServer.java:303) ~[?:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:821) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.func_240802_v_(MinecraftServer.java:664) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.lambda$startServer$0(MinecraftServer.java:233) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_181] {}
+
+
+-- System Details --
+Details:
+	Minecraft Version: 1.16.5
+	Minecraft Version ID: 1.16.5
+	Operating System: Windows 7 (amd64) version 6.1
+	Java Version: 1.8.0_181, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 1253205608 bytes (1195 MB) / 1891631104 bytes (1804 MB) up to 3804758016 bytes (3628 MB)
+	CPUs: 8
+	JVM Flags: 0 total; 
+	ModLauncher: 8.0.9+86+master.3cf110c
+	ModLauncher launch target: fmluserdevserver
+	ModLauncher naming: mcp
+	ModLauncher services: 
+		/mixin-0.8.2.jar mixin PLUGINSERVICE 
+		/eventbus-4.0.0.jar eventbus PLUGINSERVICE 
+		/forge-1.16.5-36.0.22_mapped_snapshot_20201028-1.16.3-launcher.jar object_holder_definalize PLUGINSERVICE 
+		/forge-1.16.5-36.0.22_mapped_snapshot_20201028-1.16.3-launcher.jar runtime_enum_extender PLUGINSERVICE 
+		/accesstransformers-3.0.1.jar accesstransformer PLUGINSERVICE 
+		/forge-1.16.5-36.0.22_mapped_snapshot_20201028-1.16.3-launcher.jar capability_inject_definalize PLUGINSERVICE 
+		/forge-1.16.5-36.0.22_mapped_snapshot_20201028-1.16.3-launcher.jar runtimedistcleaner PLUGINSERVICE 
+		/mixin-0.8.2.jar mixin TRANSFORMATIONSERVICE 
+		/forge-1.16.5-36.0.22_mapped_snapshot_20201028-1.16.3-launcher.jar fml TRANSFORMATIONSERVICE 
+	FML: 36.0
+	Forge: net.minecraftforge:36.0.22
+	FML Language Providers: 
+		javafml@36.0
+		minecraft@1
+	Mod List: 
+		client-extra.jar                                  |Minecraft                     |minecraft                     |1.16.5              |DONE      |a1:d4:5e:04:4f:d3:d6:e0:7b:37:97:cf:77:b0:de:ad:4a:47:ce:8c:96:49:5f:0a:cf:8c:ae:b2:6d:4b:8a:3f
+		main                                              |Hearth Well                   |hearthwell                    |NONE                |DONE      |NOSIGNATURE
+		forge-1.16.5-36.0.22_mapped_snapshot_20201028-1.16|Forge                         |forge                         |36.0.22             |DONE      |NOSIGNATURE
+		jei-1.16.4-7.6.0.58_mapped_snapshot_20201028-1.16.|Just Enough Items             |jei                           |7.6.0.58            |DONE      |NOSIGNATURE
+	Crash Report UUID: 29ccb903-1fee-443f-9626-1d7c1c18db51
+	Player Count: 1 / 20; [ServerPlayerEntity['wolforce'/221, l='ServerLevel[world]', x=-106.28, y=78.00, z=-120.63]]
+	Data Packs: vanilla, mod:hearthwell, mod:forge, mod:jei
+	Is Modded: Definitely; Server brand changed to 'forge'
+	Type: Dedicated Server (map_server.txt)

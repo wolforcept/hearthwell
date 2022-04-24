@@ -1,0 +1,12 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "hearthwell:inert_dust_block"
+		}
+	],
+	"result": {
+		"item": "hearthwell:inert_dust",
+		"count": 4
+	}
+}

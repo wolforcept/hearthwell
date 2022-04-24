@@ -1,8 +1,0 @@
-{
-    "parent": "block/cube_bottom_top",
-    "textures": {
-        "bottom": "hwell:blocks/generator_heat_bottom",
-        "top": "hwell:blocks/generator_heat_top",
-        "side": "hwell:blocks/generator_heat_6"
-    }
-}

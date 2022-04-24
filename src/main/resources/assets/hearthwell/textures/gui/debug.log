@@ -1,0 +1,51 @@
+[0212/043521.492:WARNING:angle_platform_impl.cc(52)] compileToBinary(230): 
+C:\fakepath(57,8-58): warning X3571: pow(f, e) will not work for negative f, use abs(f) or conditionally handle negative values if you expect them
+C:\fakepath(65,8-28): warning X3571: pow(f, e) will not work for negative f, use abs(f) or conditionally handle negative values if you expect them
+
+[0212/043621.518:INFO:CONSOLE(1)] "Long rAF frame-time", source: file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-rich-tooltips/build/external.js (1)
+[0212/043621.634:ERROR:mf_helpers.cc(14)] Error in dxva_video_decode_accelerator_win.cc on line 1612
+[0212/043621.634:ERROR:mf_helpers.cc(14)] Error in dxva_video_decode_accelerator_win.cc on line 842
+[0212/043621.670:WARNING:angle_platform_impl.cc(52)] compileToBinary(230): 
+C:\fakepath(69,8-58): warning X3571: pow(f, e) will not work for negative f, use abs(f) or conditionally handle negative values if you expect them
+C:\fakepath(77,8-28): warning X3571: pow(f, e) will not work for negative f, use abs(f) or conditionally handle negative values if you expect them
+
+[0212/044831.704:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0212/044831.743:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0212/044831.876:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0212/044832.063:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0212/044832.206:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0212/074102.791:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0212/074102.918:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0212/092338.583:WARNING:angle_platform_impl.cc(52)] compileToBinary(230): 
+C:\fakepath(57,8-58): warning X3571: pow(f, e) will not work for negative f, use abs(f) or conditionally handle negative values if you expect them
+C:\fakepath(65,8-28): warning X3571: pow(f, e) will not work for negative f, use abs(f) or conditionally handle negative values if you expect them
+
+[0212/130644.949:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0212/130645.093:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0212/145025.325:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0212/145025.749:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0212/145025.753:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0213/010432.275:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0213/025432.414:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0213/030031.304:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0213/032732.302:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0213/032732.330:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0213/033832.263:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0213/033832.303:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0213/040431.193:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0214/034931.330:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0214/045532.384:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0214/045532.392:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0214/045532.397:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0214/045725.377:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0219/123238.625:WARNING:angle_platform_impl.cc(52)] compileToBinary(230): 
+C:\fakepath(57,8-58): warning X3571: pow(f, e) will not work for negative f, use abs(f) or conditionally handle negative values if you expect them
+C:\fakepath(65,8-28): warning X3571: pow(f, e) will not work for negative f, use abs(f) or conditionally handle negative values if you expect them
+
+[0219/181715.175:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0219/181715.546:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0219/181715.562:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0220/145036.420:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0220/145036.433:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0220/145036.449:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0220/214916.522:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.

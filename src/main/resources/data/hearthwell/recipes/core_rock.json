@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"ABA",
+		"BCB",
+		"ABA"
+	],
+	"key": {
+		"A": {
+			"item": "minecraft:stone"
+		},
+		"B": {
+			"item": "minecraft:cobblestone"
+		},
+		"C": {
+			"item": "hearthwell:crystal"
+		}
+	},
+	"result": {
+		"item": "hearthwell:core_rock"
+	}
+}

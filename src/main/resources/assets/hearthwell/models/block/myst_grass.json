@@ -1,0 +1,9 @@
+{
+	"parent": "block/cube_bottom_top",
+	"textures": {
+		"bottom": "hearthwell:blocks/myst_grass_bottom",
+		"top": "hearthwell:blocks/myst_grass_top",
+		"side": "hearthwell:blocks/myst_grass_side",
+		"particle": "hearthwell:blocks/myst_grass_side"
+	}
+}

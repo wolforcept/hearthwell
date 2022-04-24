@@ -1,0 +1,346 @@
+---- Minecraft Crash Report ----
+// Would you like a cupcake?
+
+Time: 08/12/20 22:36
+Description: Watching Server
+
+java.lang.Error: ServerHangWatchdog detected that a single server tick took 60.00 seconds (should be max 0.05)
+	at wolforce.hearthwell.net.MessageEnergy.onMessage(MessageEnergy.java:45) ~[main/:?] {re:classloading}
+	at wolforce.hearthwell.net.Net$$Lambda$2906/824779236.accept(Unknown Source) ~[?:?] {}
+	at net.minecraftforge.fml.network.simple.IndexedMessageCodec.lambda$tryDecode$3(IndexedMessageCodec.java:128) ~[forge-1.16.4-35.1.2_mapped_snapshot_20201028-1.16.3-recomp.jar:?] {re:classloading}
+	at net.minecraftforge.fml.network.simple.IndexedMessageCodec$$Lambda$4871/104552397.accept(Unknown Source) ~[?:?] {}
+	at java.util.Optional.ifPresent(Optional.java:159) ~[?:1.8.0_181] {}
+	at net.minecraftforge.fml.network.simple.IndexedMessageCodec.tryDecode(IndexedMessageCodec.java:128) ~[forge-1.16.4-35.1.2_mapped_snapshot_20201028-1.16.3-recomp.jar:?] {re:classloading}
+	at net.minecraftforge.fml.network.simple.IndexedMessageCodec.consume(IndexedMessageCodec.java:162) ~[forge-1.16.4-35.1.2_mapped_snapshot_20201028-1.16.3-recomp.jar:?] {re:classloading}
+	at net.minecraftforge.fml.network.simple.SimpleChannel.networkEventListener(SimpleChannel.java:80) ~[forge-1.16.4-35.1.2_mapped_snapshot_20201028-1.16.3-recomp.jar:?] {re:classloading}
+	at net.minecraftforge.fml.network.simple.SimpleChannel$$Lambda$2638/653434597.accept(Unknown Source) ~[?:?] {}
+	at net.minecraftforge.eventbus.EventBus.doCastFilter(EventBus.java:247) ~[eventbus-3.0.5-service.jar:?] {}
+	at net.minecraftforge.eventbus.EventBus.lambda$addListener$11(EventBus.java:239) ~[eventbus-3.0.5-service.jar:?] {}
+	at net.minecraftforge.eventbus.EventBus$$Lambda$2640/1711023673.invoke(Unknown Source) ~[?:?] {}
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:297) ~[eventbus-3.0.5-service.jar:?] {}
+	at net.minecraftforge.fml.network.NetworkInstance.dispatch(NetworkInstance.java:84) ~[?:?] {re:classloading}
+	at net.minecraftforge.fml.network.NetworkHooks.lambda$onCustomPayload$1(NetworkHooks.java:88) ~[?:?] {re:classloading}
+	at net.minecraftforge.fml.network.NetworkHooks$$Lambda$4859/441310765.apply(Unknown Source) ~[?:?] {}
+	at java.util.Optional.map(Optional.java:215) ~[?:1.8.0_181] {}
+	at net.minecraftforge.fml.network.NetworkHooks.onCustomPayload(NetworkHooks.java:88) ~[?:?] {re:classloading}
+	at net.minecraft.network.play.ServerPlayNetHandler.processCustomPayload(ServerPlayNetHandler.java:1500) ~[?:?] {re:classloading}
+	at net.minecraft.network.play.client.CCustomPayloadPacket.processPacket(CCustomPayloadPacket.java:51) ~[?:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.network.play.client.CCustomPayloadPacket.processPacket(CCustomPayloadPacket.java:12) ~[?:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.network.PacketThreadUtil.lambda$checkThreadAndEnqueue$0(PacketThreadUtil.java:19) ~[?:?] {re:classloading}
+	at net.minecraft.network.PacketThreadUtil$$Lambda$5031/771011307.run(Unknown Source) ~[?:?] {}
+	at net.minecraft.util.concurrent.TickDelayedTask.run(TickDelayedTask.java:20) ~[?:?] {re:classloading}
+	at net.minecraft.util.concurrent.ThreadTaskExecutor.run(ThreadTaskExecutor.java:139) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.util.concurrent.RecursiveEventLoop.run(RecursiveEventLoop.java:22) ~[?:?] {re:classloading}
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:758) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:159) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.util.concurrent.ThreadTaskExecutor.driveOne(ThreadTaskExecutor.java:109) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.driveOneInternal(MinecraftServer.java:741) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.driveOne(MinecraftServer.java:735) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.util.concurrent.ThreadTaskExecutor.driveUntil(ThreadTaskExecutor.java:122) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.runScheduledTasks(MinecraftServer.java:721) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.func_240802_v_(MinecraftServer.java:667) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.lambda$startServer$0(MinecraftServer.java:233) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer$$Lambda$4222/1649053800.run(Unknown Source) ~[?:?] {}
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_181] {}
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server Watchdog
+Stacktrace:
+	at wolforce.hearthwell.net.MessageEnergy.onMessage(MessageEnergy.java:45) ~[main/:?] {re:classloading}
+	at wolforce.hearthwell.net.Net$$Lambda$2906/824779236.accept(Unknown Source) ~[?:?] {}
+	at net.minecraftforge.fml.network.simple.IndexedMessageCodec.lambda$tryDecode$3(IndexedMessageCodec.java:128) ~[forge-1.16.4-35.1.2_mapped_snapshot_20201028-1.16.3-recomp.jar:?] {re:classloading}
+	at net.minecraftforge.fml.network.simple.IndexedMessageCodec$$Lambda$4871/104552397.accept(Unknown Source) ~[?:?] {}
+	at java.util.Optional.ifPresent(Optional.java:159) ~[?:1.8.0_181] {}
+	at net.minecraftforge.fml.network.simple.IndexedMessageCodec.tryDecode(IndexedMessageCodec.java:128) ~[forge-1.16.4-35.1.2_mapped_snapshot_20201028-1.16.3-recomp.jar:?] {re:classloading}
+	at net.minecraftforge.fml.network.simple.IndexedMessageCodec.consume(IndexedMessageCodec.java:162) ~[forge-1.16.4-35.1.2_mapped_snapshot_20201028-1.16.3-recomp.jar:?] {re:classloading}
+	at net.minecraftforge.fml.network.simple.SimpleChannel.networkEventListener(SimpleChannel.java:80) ~[forge-1.16.4-35.1.2_mapped_snapshot_20201028-1.16.3-recomp.jar:?] {re:classloading}
+	at net.minecraftforge.fml.network.simple.SimpleChannel$$Lambda$2638/653434597.accept(Unknown Source) ~[?:?] {}
+	at net.minecraftforge.eventbus.EventBus.doCastFilter(EventBus.java:247) ~[eventbus-3.0.5-service.jar:?] {}
+	at net.minecraftforge.eventbus.EventBus.lambda$addListener$11(EventBus.java:239) ~[eventbus-3.0.5-service.jar:?] {}
+	at net.minecraftforge.eventbus.EventBus$$Lambda$2640/1711023673.invoke(Unknown Source) ~[?:?] {}
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:297) ~[eventbus-3.0.5-service.jar:?] {}
+	at net.minecraftforge.fml.network.NetworkInstance.dispatch(NetworkInstance.java:84) ~[?:?] {re:classloading}
+	at net.minecraftforge.fml.network.NetworkHooks.lambda$onCustomPayload$1(NetworkHooks.java:88) ~[?:?] {re:classloading}
+	at net.minecraftforge.fml.network.NetworkHooks$$Lambda$4859/441310765.apply(Unknown Source) ~[?:?] {}
+	at java.util.Optional.map(Optional.java:215) ~[?:1.8.0_181] {}
+	at net.minecraftforge.fml.network.NetworkHooks.onCustomPayload(NetworkHooks.java:88) ~[?:?] {re:classloading}
+	at net.minecraft.network.play.ServerPlayNetHandler.processCustomPayload(ServerPlayNetHandler.java:1500) ~[?:?] {re:classloading}
+	at net.minecraft.network.play.client.CCustomPayloadPacket.processPacket(CCustomPayloadPacket.java:51) ~[?:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.network.play.client.CCustomPayloadPacket.processPacket(CCustomPayloadPacket.java:12) ~[?:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.network.PacketThreadUtil.lambda$checkThreadAndEnqueue$0(PacketThreadUtil.java:19) ~[?:?] {re:classloading}
+	at net.minecraft.network.PacketThreadUtil$$Lambda$5031/771011307.run(Unknown Source) ~[?:?] {}
+	at net.minecraft.util.concurrent.TickDelayedTask.run(TickDelayedTask.java:20) ~[?:?] {re:classloading}
+	at net.minecraft.util.concurrent.ThreadTaskExecutor.run(ThreadTaskExecutor.java:139) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.util.concurrent.RecursiveEventLoop.run(RecursiveEventLoop.java:22) ~[?:?] {re:classloading}
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:758) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:159) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.util.concurrent.ThreadTaskExecutor.driveOne(ThreadTaskExecutor.java:109) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.driveOneInternal(MinecraftServer.java:741) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.driveOne(MinecraftServer.java:735) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.util.concurrent.ThreadTaskExecutor.driveUntil(ThreadTaskExecutor.java:122) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.runScheduledTasks(MinecraftServer.java:721) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.func_240802_v_(MinecraftServer.java:667) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.lambda$startServer$0(MinecraftServer.java:233) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+-- Thread Dump --
+Details:
+	Threads: "Netty Server IO #1" Id=73 RUNNABLE (in native)
+	at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll0(Native Method)
+	at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll(WindowsSelectorImpl.java:296)
+	at sun.nio.ch.WindowsSelectorImpl$SubSelector.access$400(WindowsSelectorImpl.java:278)
+	at sun.nio.ch.WindowsSelectorImpl.doSelect(WindowsSelectorImpl.java:159)
+	at sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:86)
+	-  locked io.netty.channel.nio.SelectedSelectionKeySet@21f09692
+	-  locked java.util.Collections$UnmodifiableSet@2f377cdc
+	-  locked sun.nio.ch.WindowsSelectorImpl@2b08fde2
+	at sun.nio.ch.SelectorImpl.select(SelectorImpl.java:97)
+	at io.netty.channel.nio.SelectedSelectionKeySetSelector.select(SelectedSelectionKeySetSelector.java:62)
+	at io.netty.channel.nio.NioEventLoop.select(NioEventLoop.java:756)
+	...
+
+
+"DestroyJavaVM" Id=67 RUNNABLE
+
+
+"Server Watchdog" Id=66 RUNNABLE
+	at sun.management.ThreadImpl.dumpThreads0(Native Method)
+	at sun.management.ThreadImpl.dumpAllThreads(ThreadImpl.java:454)
+	at net.minecraft.server.dedicated.ServerHangWatchdog.run(ServerHangWatchdog.java:41)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+"Thread-9" Id=61 RUNNABLE (in native)
+	at sun.nio.fs.WindowsNativeDispatcher.GetQueuedCompletionStatus0(Native Method)
+	at sun.nio.fs.WindowsNativeDispatcher.GetQueuedCompletionStatus(WindowsNativeDispatcher.java:1007)
+	at sun.nio.fs.WindowsWatchService$Poller.run(WindowsWatchService.java:586)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+"Netty Server IO #0" Id=60 RUNNABLE (in native)
+	at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll0(Native Method)
+	at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll(WindowsSelectorImpl.java:296)
+	at sun.nio.ch.WindowsSelectorImpl$SubSelector.access$400(WindowsSelectorImpl.java:278)
+	at sun.nio.ch.WindowsSelectorImpl.doSelect(WindowsSelectorImpl.java:159)
+	at sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:86)
+	-  locked io.netty.channel.nio.SelectedSelectionKeySet@6e0a76e7
+	-  locked java.util.Collections$UnmodifiableSet@4b6b39b2
+	-  locked sun.nio.ch.WindowsSelectorImpl@5f2e7d9f
+	at sun.nio.ch.SelectorImpl.select(SelectorImpl.java:97)
+	at io.netty.channel.nio.SelectedSelectionKeySetSelector.select(SelectedSelectionKeySetSelector.java:62)
+	at io.netty.channel.nio.NioEventLoop.select(NioEventLoop.java:756)
+	...
+
+
+"ObjectCleanerThread" Id=59 TIMED_WAITING on java.lang.ref.ReferenceQueue$Lock@33a56c75
+	at java.lang.Object.wait(Native Method)
+	-  waiting on java.lang.ref.ReferenceQueue$Lock@33a56c75
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:144)
+	at io.netty.util.internal.ObjectCleaner$1.run(ObjectCleaner.java:54)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+"Server console handler" Id=58 RUNNABLE (in native)
+	at java.io.FileInputStream.readBytes(Native Method)
+	at java.io.FileInputStream.read(FileInputStream.java:255)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	-  locked java.io.BufferedInputStream@e2589a8
+	at sun.nio.cs.StreamDecoder.readBytes(StreamDecoder.java:284)
+	at sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:326)
+	at sun.nio.cs.StreamDecoder.read(StreamDecoder.java:178)
+	-  locked java.io.InputStreamReader@1c919777
+	at java.io.InputStreamReader.read(InputStreamReader.java:184)
+	...
+
+
+"Server thread" Id=46 RUNNABLE (suspended)
+	at wolforce.hearthwell.net.MessageEnergy.onMessage(MessageEnergy.java:45)
+	at wolforce.hearthwell.net.Net$$Lambda$2906/824779236.accept(Unknown Source)
+	at net.minecraftforge.fml.network.simple.IndexedMessageCodec.lambda$tryDecode$3(IndexedMessageCodec.java:128)
+	at net.minecraftforge.fml.network.simple.IndexedMessageCodec$$Lambda$4871/104552397.accept(Unknown Source)
+	at java.util.Optional.ifPresent(Optional.java:159)
+	at net.minecraftforge.fml.network.simple.IndexedMessageCodec.tryDecode(IndexedMessageCodec.java:128)
+	at net.minecraftforge.fml.network.simple.IndexedMessageCodec.consume(IndexedMessageCodec.java:162)
+	at net.minecraftforge.fml.network.simple.SimpleChannel.networkEventListener(SimpleChannel.java:80)
+	...
+
+
+"Thread-5" Id=53 WAITING on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@30ffc3ff
+	at sun.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@30ffc3ff
+	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+	at java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+	at com.mojang.util.QueueLogAppender.getNextLogEvent(QueueLogAppender.java:77)
+	at net.minecraft.server.gui.MinecraftServerGui.lambda$getLogComponent$1(MinecraftServerGui.java:136)
+	at net.minecraft.server.gui.MinecraftServerGui$$Lambda$4237/1368295389.run(Unknown Source)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+"D3D Screen Updater" Id=56 RUNNABLE
+	at java.lang.Object.wait(Native Method)
+	at sun.java2d.d3d.D3DScreenUpdateManager.run(D3DScreenUpdateManager.java:423)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+"TimerQueue" Id=54 TIMED_WAITING on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@a6b7324
+	at sun.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@a6b7324
+	at java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:215)
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2078)
+	at java.util.concurrent.DelayQueue.take(DelayQueue.java:223)
+	at javax.swing.TimerQueue.run(TimerQueue.java:174)
+	at java.lang.Thread.run(Thread.java:748)
+
+	Number of locked synchronizers = 1
+	- java.util.concurrent.locks.ReentrantLock$NonfairSync@28a1c751
+
+
+"AWT-EventQueue-0" Id=52 WAITING on java.lang.Object@1a517731
+	at java.lang.Object.wait(Native Method)
+	-  waiting on java.lang.Object@1a517731
+	at java.lang.Object.wait(Object.java:502)
+	at sun.java2d.d3d.D3DScreenUpdateManager.runUpdateNow(D3DScreenUpdateManager.java:406)
+	at sun.java2d.d3d.D3DBlitLoops.IsoBlit(D3DBlitLoops.java:356)
+	at sun.java2d.d3d.D3DRTTSurfaceToSurfaceBlit.Blit(D3DBlitLoops.java:443)
+	at sun.java2d.pipe.DrawImage.blitSurfaceData(DrawImage.java:959)
+	at sun.java2d.pipe.DrawImage.renderImageCopy(DrawImage.java:577)
+	at sun.java2d.pipe.DrawImage.copyImage(DrawImage.java:67)
+	...
+
+
+"AWT-Windows" Id=50 RUNNABLE (in native)
+	at sun.awt.windows.WToolkit.eventLoop(Native Method)
+	at sun.awt.windows.WToolkit.run(WToolkit.java:313)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+"AWT-Shutdown" Id=49 WAITING on java.lang.Object@547fafbf
+	at java.lang.Object.wait(Native Method)
+	-  waiting on java.lang.Object@547fafbf
+	at java.lang.Object.wait(Object.java:502)
+	at sun.awt.AWTAutoShutdown.run(AWTAutoShutdown.java:295)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+"Java2D Disposer" Id=48 WAITING on java.lang.ref.ReferenceQueue$Lock@7242612e
+	at java.lang.Object.wait(Native Method)
+	-  waiting on java.lang.ref.ReferenceQueue$Lock@7242612e
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:144)
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:165)
+	at sun.java2d.Disposer.run(Disposer.java:148)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+"Snooper Timer" Id=47 WAITING on java.util.TaskQueue@23e1ce11
+	at java.lang.Object.wait(Native Method)
+	-  waiting on java.util.TaskQueue@23e1ce11
+	at java.lang.Object.wait(Object.java:502)
+	at java.util.TimerThread.mainLoop(Timer.java:526)
+	at java.util.TimerThread.run(Timer.java:505)
+
+
+"Timer hack thread" Id=27 TIMED_WAITING
+	at java.lang.Thread.sleep(Native Method)
+	at net.minecraft.util.Util$6.run(Util.java:508)
+
+
+"Thread-2" Id=18 RUNNABLE (in native)
+	at sun.nio.fs.WindowsNativeDispatcher.GetQueuedCompletionStatus0(Native Method)
+	at sun.nio.fs.WindowsNativeDispatcher.GetQueuedCompletionStatus(WindowsNativeDispatcher.java:1007)
+	at sun.nio.fs.WindowsWatchService$Poller.run(WindowsWatchService.java:586)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+"Thread-1" Id=17 TIMED_WAITING
+	at sun.misc.Unsafe.park(Native Method)
+	at java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:338)
+	at com.electronwill.nightconfig.core.file.FileWatcher$WatcherThread.run(FileWatcher.java:190)
+
+
+"JDWP Command Reader" Id=8 RUNNABLE (in native)
+
+
+"JDWP Event Helper Thread" Id=7 RUNNABLE
+
+
+"JDWP Transport Listener: dt_socket" Id=6 RUNNABLE
+
+
+"Attach Listener" Id=5 RUNNABLE
+
+
+"Signal Dispatcher" Id=4 RUNNABLE
+
+
+"Finalizer" Id=3 WAITING on java.lang.ref.ReferenceQueue$Lock@3298dda3
+	at java.lang.Object.wait(Native Method)
+	-  waiting on java.lang.ref.ReferenceQueue$Lock@3298dda3
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:144)
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:165)
+	at java.lang.ref.Finalizer$FinalizerThread.run(Finalizer.java:216)
+
+
+"Reference Handler" Id=2 WAITING on java.lang.ref.Reference$Lock@1bb39e18
+	at java.lang.Object.wait(Native Method)
+	-  waiting on java.lang.ref.Reference$Lock@1bb39e18
+	at java.lang.Object.wait(Object.java:502)
+	at java.lang.ref.Reference.tryHandlePending(Reference.java:191)
+	at java.lang.ref.Reference$ReferenceHandler.run(Reference.java:153)
+
+
+
+Stacktrace:
+	at net.minecraft.server.dedicated.ServerHangWatchdog.run(ServerHangWatchdog.java:56) [?:?] {re:classloading}
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_181] {}
+
+
+-- Performance stats --
+Details:
+	Random tick rate: 3
+	Level stats: ResourceKey[minecraft:dimension / minecraft:overworld]: players: 1, entities: 171 [minecraft:guardian:63,minecraft:item:36,minecraft:cod:23,minecraft:bat:15,minecraft:turtle:8], block_entities: 6 [minecraft:mob_spawner:3,minecraft:chest:3], block_ticks: 22, fluid_ticks: 373, chunk_source: ServerChunkCache: 2094,
+ResourceKey[minecraft:dimension / minecraft:the_nether]: players: 0, entities: 0 [], block_entities: 0 [], block_ticks: 0, fluid_ticks: 0, chunk_source: ServerChunkCache: 0,
+ResourceKey[minecraft:dimension / minecraft:the_end]: players: 0, entities: 0 [], block_entities: 0 [], block_ticks: 0, fluid_ticks: 0, chunk_source: ServerChunkCache: 0
+
+-- System Details --
+Details:
+	Minecraft Version: 1.16.4
+	Minecraft Version ID: 1.16.4
+	Operating System: Windows 7 (amd64) version 6.1
+	Java Version: 1.8.0_181, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 1477257408 bytes (1408 MB) / 1877475328 bytes (1790 MB) up to 3804758016 bytes (3628 MB)
+	CPUs: 8
+	JVM Flags: 0 total; 
+	ModLauncher: 8.0.6+85+master.325de55
+	ModLauncher launch target: fmluserdevserver
+	ModLauncher naming: mcp
+	ModLauncher services: 
+		/mixin-0.8.2.jar mixin PLUGINSERVICE 
+		/eventbus-3.0.5-service.jar eventbus PLUGINSERVICE 
+		/forge-1.16.4-35.1.2_mapped_snapshot_20201028-1.16.3-launcher.jar object_holder_definalize PLUGINSERVICE 
+		/forge-1.16.4-35.1.2_mapped_snapshot_20201028-1.16.3-launcher.jar runtime_enum_extender PLUGINSERVICE 
+		/accesstransformers-2.2.0-shadowed.jar accesstransformer PLUGINSERVICE 
+		/forge-1.16.4-35.1.2_mapped_snapshot_20201028-1.16.3-launcher.jar capability_inject_definalize PLUGINSERVICE 
+		/forge-1.16.4-35.1.2_mapped_snapshot_20201028-1.16.3-launcher.jar runtimedistcleaner PLUGINSERVICE 
+		/mixin-0.8.2.jar mixin TRANSFORMATIONSERVICE 
+		/forge-1.16.4-35.1.2_mapped_snapshot_20201028-1.16.3-launcher.jar fml TRANSFORMATIONSERVICE 
+	FML: 35.1
+	Forge: net.minecraftforge:35.1.2
+	FML Language Providers: 
+		javafml@35.1
+		minecraft@1
+	Mod List: 
+		client-extra.jar                                  |Minecraft                     |minecraft                     |1.16.4              |DONE      |a1:d4:5e:04:4f:d3:d6:e0:7b:37:97:cf:77:b0:de:ad:4a:47:ce:8c:96:49:5f:0a:cf:8c:ae:b2:6d:4b:8a:3f
+		main                                              |Hearth Well                   |hearthwell                    |NONE                |DONE      |NOSIGNATURE
+		forge-1.16.4-35.1.2_mapped_snapshot_20201028-1.16.|Forge                         |forge                         |35.1.2              |DONE      |NOSIGNATURE
+		jei-1.16.4-7.6.0.58_mapped_snapshot_20201028-1.16.|Just Enough Items             |jei                           |7.6.0.58            |DONE      |NOSIGNATURE
+	Crash Report UUID: 26cd0ed6-1e27-4da3-8354-d85602a9ab19
+	Player Count: 1 / 20; [ServerPlayerEntity['wolforce'/445, l='ServerLevel[world]', x=-212.85, y=64.00, z=-12.61]]
+	Data Packs: vanilla, mod:hearthwell, mod:forge, mod:jei
+	Is Modded: Definitely; Server brand changed to 'forge'
+	Type: Dedicated Server (map_server.txt)

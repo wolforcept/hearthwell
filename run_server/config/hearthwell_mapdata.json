@@ -1,0 +1,223 @@
+{
+  "nodes": {
+    "material_infusion": {
+      "x": 2,
+      "y": 3,
+      "time": 600,
+      "name": "Material Infusion",
+      "icon_stack": "hearthwell:mystic_ingot",
+      "short_description": "More mysterious stuff.",
+      "full_description": "Holding an Iron Ingot in the presence of a Pure Flare will attract it,/nand the two will fuse, creating a new, strong, mystical alloy.",
+      "recipes_ids": [
+        "mystic_ingot"
+      ],
+      "parent_ids": [
+        "crystal_formation"
+      ],
+      "required_items": [
+        "hearthwell:crystal"
+      ]
+    },
+    "hearthwell": {
+      "x": 0,
+      "y": 0,
+      "time": 0,
+      "name": "The Hearth Well",
+      "icon_stack": "hearthwell:crystal_diversity",
+      "short_description": "The Hearth Well is an infinite source of energy given you by the gods.",
+      "full_description": "The Hearth Well is an infinite source of energy given you by the gods./nThrow offerings near the Hearth Well to gain favour from the gods/nin the form of small flares. You can manipulate this flares/nwith a flare torch. Some items blocks will react to the presence of flares in particular ways.",
+      "recipes_ids": [
+        "burst_seed"
+      ],
+      "parent_ids": [],
+      "required_items": []
+    },
+    "magical_plants": {
+      "x": -2,
+      "y": -1,
+      "time": 60,
+      "name": "Magical Plants",
+      "icon_stack": "hearthwell:myst_grass",
+      "short_description": "The Hearth Well can give life and magic.",
+      "full_description": "Nearby grass absorbs the mysterious energies and changes colour.",
+      "recipes_ids": [
+        "myst_grass"
+      ],
+      "parent_ids": [
+        "hearthwell"
+      ],
+      "required_items": []
+    },
+    "material_multiplication": {
+      "x": -2,
+      "y": 3,
+      "time": 600,
+      "name": "Material Multiplication",
+      "icon_stack": "minecraft:cobblestone",
+      "short_description": "When you need more.",
+      "full_description": "Nearby stone begins to transform into some sort of Mysterious Crystal.",
+      "recipes_ids": [
+        "burstseed_cobblestone",
+        "burstseed_stone",
+        "burstseed_gravel",
+        "burstseed_sand"
+      ],
+      "parent_ids": [
+        "crystal_formation"
+      ],
+      "required_items": [
+        "hearthwell:crystal"
+      ]
+    },
+    "petrification": {
+      "x": 2,
+      "y": -1,
+      "time": 60,
+      "name": "Petrification",
+      "icon_stack": "hearthwell:petrified_wood",
+      "short_description": "The Hearth Well can also take away life and magic.",
+      "full_description": "Nearby wood petrifies and becomes harder and brittle.",
+      "recipes_ids": [
+        "petrified_wood"
+      ],
+      "parent_ids": [
+        "hearthwell"
+      ],
+      "required_items": []
+    },
+    "crystal_formation": {
+      "x": 0,
+      "y": 2,
+      "time": 60,
+      "name": "Crystal Formation",
+      "icon_stack": "hearthwell:crystal",
+      "short_description": "Nearby stone begins to transform into some sort of Mysterious Crystal.",
+      "full_description": "Stone near the Hearth Well is influenced by it./nIt absorbs the mysterious energies and has a chance/nto transform into crystal ore.",
+      "recipes_ids": [
+        "crystal_ore"
+      ],
+      "parent_ids": [
+        "hearthwell"
+      ],
+      "required_items": []
+    },
+    "example_node": {
+      "x": 4,
+      "y": -1,
+      "time": 120,
+      "name": "Example Node",
+      "icon_stack": "minecraft:diamond",
+      "short_description": "Provides recipe examples.",
+      "full_description": "Make a Cyan Flare from Cyan Dye, then use it to transform/ncoal into diamonds and coal blocks into diamond blocks.",
+      "recipes_ids": [
+        "example_flare",
+        "example_recipe_handitem",
+        "example_recipe_transformation"
+      ],
+      "parent_ids": [
+        "petrification"
+      ],
+      "required_items": [
+        "minecraft:cyan_dye"
+      ]
+    }
+  },
+  "recipes_flare": [
+    {
+      "inputs": [
+        "hearthwell:myst_dust",
+        "hearthwell:crystal"
+      ],
+      "color_string": "AA55FF",
+      "flare_name": "Pure Flare",
+      "uses": 1,
+      "recipeId": "pure_flare"
+    },
+    {
+      "inputs": [
+        "minecraft:cyan_dye"
+      ],
+      "color_string": "0077FF",
+      "flare_name": "Example Flare",
+      "uses": 1,
+      "recipeId": "example_flare"
+    }
+  ],
+  "recipes_influence": [
+    {
+      "inputs": [
+        "minecraft:grass_block"
+      ],
+      "output": "hearthwell:myst_grass",
+      "recipeId": "myst_grass"
+    },
+    {
+      "inputs": [
+        "minecraft:logs"
+      ],
+      "output": "hearthwell:petrified_wood",
+      "recipeId": "petrified_wood"
+    },
+    {
+      "inputs": [
+        "minecraft:base_stone_overworld"
+      ],
+      "output": "hearthwell:crystal_ore",
+      "recipeId": "crystal_ore"
+    }
+  ],
+  "recipes_transformation": [
+    {
+      "inputs": [
+        "minecraft:coal_block"
+      ],
+      "output": "minecraft:diamond_block",
+      "flareType": "example_flare",
+      "recipeId": "example_recipe_transformation"
+    }
+  ],
+  "recipes_handitem": [
+    {
+      "inputs": [
+        "hearthwell:inert_seed"
+      ],
+      "output": "hearthwell:burst_seed",
+      "flareType": "pure_flare",
+      "recipeId": "burst_seed"
+    },
+    {
+      "inputs": [
+        "minecraft:iron_ingot"
+      ],
+      "output": "hearthwell:mystic_ingot",
+      "flareType": "pure_flare",
+      "recipeId": "mystic_ingot"
+    },
+    {
+      "inputs": [
+        "minecraft:coal"
+      ],
+      "output": "minecraft:diamond",
+      "flareType": "example_flare",
+      "recipeId": "example_recipe_handitem"
+    }
+  ],
+  "recipes_burst": [
+    {
+      "input": "minecraft:cobblestone",
+      "recipeId": "burstseed_cobblestone"
+    },
+    {
+      "input": "minecraft:stone",
+      "recipeId": "burstseed_stone"
+    },
+    {
+      "input": "minecraft:gravel",
+      "recipeId": "burstseed_gravel"
+    },
+    {
+      "input": "minecraft:sand",
+      "recipeId": "burstseed_sand"
+    }
+  ]
+}
