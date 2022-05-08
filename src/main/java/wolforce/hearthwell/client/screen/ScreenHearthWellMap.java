@@ -34,6 +34,7 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.item.ItemStack;
 import wolforce.hearthwell.HearthWell;
 import wolforce.hearthwell.client.render.RenderRecipes;
@@ -41,19 +42,25 @@ import wolforce.hearthwell.data.MapData;
 import wolforce.hearthwell.data.MapNode;
 import wolforce.hearthwell.data.RecipeHearthWell;
 import wolforce.hearthwell.data.RecipePart;
+import wolforce.hearthwell.data.recipes.RecipeFlare;
 import wolforce.hearthwell.entities.EntityHearthWell;
 import wolforce.hearthwell.net.ClientProxy;
 import wolforce.hearthwell.net.Net;
+import wolforce.hearthwell.util.Point;
 import wolforce.hearthwell.util.Util;
 import wolforce.hearthwell.util.UtilClient;
+import wolforce.hearthwell.util.UtilClient.RGBA;
 
 public class ScreenHearthWellMap extends Screen {
 
 	public static boolean EDIT_MODE = false;
 
-	public static final ResourceLocation GUI_TEXTURE = new ResourceLocation(HearthWell.MODID, "textures/gui/hearthwell.png");
-	public static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(HearthWell.MODID, "textures/gui/hearthwell_background.png");
-	public static final ResourceLocation BACKGROUND_TEXTURE_GRID = new ResourceLocation(HearthWell.MODID, "textures/gui/hearthwell_background2.png");
+	public static final ResourceLocation GUI_TEXTURE = new ResourceLocation(HearthWell.MODID,
+			"textures/gui/hearthwell.png");
+	public static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(HearthWell.MODID,
+			"textures/gui/hearthwell_background.png");
+	public static final ResourceLocation BACKGROUND_TEXTURE_GRID = new ResourceLocation(HearthWell.MODID,
+			"textures/gui/hearthwell_background2.png");
 
 	private static final int S = 32; // GRID SIZE
 	private static final int TEXTURE_W = 256, TEXTURE_H = 128;
@@ -194,7 +201,8 @@ public class ScreenHearthWellMap extends Screen {
 					while (DATA.nodes.containsKey("new_node_" + i))
 						i++;
 					DATA.addNode("new_node_" + i, x, y, "New Node", 50, "minecraft:diamond", "add a short description",
-							"add a long description. You can use \n to create a new line.", MapData.array(), MapData.array(), MapData.array(), true);
+							"add a long description. You can use \n to create a new line.", MapData.array(),
+							MapData.array(), MapData.array(), true);
 				}
 				return true;
 			}
@@ -274,7 +282,8 @@ public class ScreenHearthWellMap extends Screen {
 	public boolean keyReleased(int keyCode, int scanCode, int modifiers) {
 
 		if (selectedNode == null) {
-			if (ClientProxy.MC.options.keyInventory.getKey().getValue() == keyCode || ClientProxy.MC.options.keyDown.getKey().getValue() == keyCode) {
+			if (ClientProxy.MC.options.keyInventory.getKey().getValue() == keyCode
+					|| ClientProxy.MC.options.keyDown.getKey().getValue() == keyCode) {
 
 				onClose();
 			}
@@ -351,6 +360,7 @@ public class ScreenHearthWellMap extends Screen {
 		RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_BLOCKS);
 		this.minecraft.textureManager.getTexture(TextureAtlas.LOCATION_BLOCKS).setFilter(false, false);
 
+		LinkedList<Tuple<Point, Integer>> flareRenders = new LinkedList<>();
 		for (MapNode node : allNodes) {
 
 			int x = dx + node.x * S;
@@ -358,10 +368,36 @@ public class ScreenHearthWellMap extends Screen {
 			if (x + S < 0 || y + S < 0 || x > width || y > height)
 				continue;
 
-			if (hearthwell.isUnlocked(node) || hearthwell.isUnlockable(node))
-				UtilClient.renderItem(matrix, Util.tryGetItemStack(node.icon_stack), x + 8, y + 8, 100);
-			else
-				UtilClient.renderItem(matrix, Util.tryGetItemStack(node.icon_stack), x + 8, y + 8, 100, true);
+			RecipeFlare flare = DATA.recipes_flare.stream().filter(rf -> rf.recipeId.equals(node.icon_stack))
+					.findFirst().orElse(null);
+			if (flare != null) {
+				int color = hearthwell.isUnlocked(node) || hearthwell.isUnlockable(node) ? flare.color : 0;
+				flareRenders.add(new Tuple<>(new Point(x, y), color));
+			} else {
+				ItemStack item = Util.tryGetItemStack(node.icon_stack);
+				if (hearthwell.isUnlocked(node) || hearthwell.isUnlockable(node))
+					UtilClient.renderItem(matrix, item, x + 8, y + 8, 100);
+				else
+					UtilClient.renderItem(matrix, item, x + 8, y + 8, 100, (r, g, b, a) -> new RGBA(0, 0, 0, a));
+			}
+		}
+
+//		this.minecraft.textureManager.getTexture(new ResourceLocation(HearthWell.MODID, "particles/particle_energy.png")).setFilter(false, false);
+		RenderSystem.defaultBlendFunc();
+		RenderSystem.enableBlend();
+		RenderSystem.setShaderTexture(0,
+				new ResourceLocation(HearthWell.MODID, "textures/particle/particle_energy.png"));
+		for (Tuple<Point, Integer> tuple : flareRenders) {
+
+//			RenderSystem.colo
+
+//			System.out.println(tuple.getB());
+			UtilClient.colorBlit(matrix, (int) tuple.getA().x + 4, (int) tuple.getA().y + 4, 0, 0, S - 8, S - 8,
+					tuple.getB());
+//			blit(matrix, (int) tuple.getA().x + 4, (int) tuple.getA().y + 4, S - 8, S - 8, // X, Y, W, H
+//					0, 0, S, S, // U, V, UW, VH
+//					S, S // TOTAL W, TOTAL H
+//			);
 		}
 
 		if (EDIT_MODE) {
@@ -369,7 +405,8 @@ public class ScreenHearthWellMap extends Screen {
 			font.draw(matrix, "Right click to edit a node.", 3, height - 40, 0xFF0000);
 			font.draw(matrix, "Middle click to create/delete a node.", 3, height - 30, 0xFF0000);
 			font.draw(matrix, "Use the command \"/hw edit\" to toggle Edit Mode.", 3, height - 20, 0xFF0000);
-			font.draw(matrix, "Use the command \"/hw reload\" to load the map from the config file.", 3, height - 10, 0xFF0000);
+			font.draw(matrix, "Use the command \"/hw reload\" to load the map from the config file.", 3, height - 10,
+					0xFF0000);
 		}
 
 		RenderSystem.disableBlend();
@@ -451,7 +488,8 @@ public class ScreenHearthWellMap extends Screen {
 				for (RecipePart part : node.requiredItems) {
 					List<ItemStack> stacks = part.stacks();
 					if (stacks != null && !stacks.isEmpty()) {
-						int itemIndex = (int) System.currentTimeMillis() / 1000 % stacks.size();
+						int itemIndex = (int) Math.max(0,
+								Math.min(stacks.size() - 1, System.currentTimeMillis() / 1000 % stacks.size()));
 						UtilClient.renderItem(matrix, stacks.get(itemIndex),
 								mouseX + 12 + dx - (width - mouseX < tooltipTextWidth + 16 ? tooltipTextWidth + 28 : 0),
 								Math.min(height - dy - 10, mouseY + dy), 500);
@@ -600,7 +638,8 @@ public class ScreenHearthWellMap extends Screen {
 				lines.add("");
 				lines.addAll(Arrays.asList(node.full_description.split("/n")));
 
-				recipes = Arrays.stream(node.recipes_ids).map(id -> DATA.getRecipeById(id)).collect(Collectors.toList());
+				recipes = Arrays.stream(node.recipes_ids).map(id -> DATA.getRecipeById(id))
+						.collect(Collectors.toList());
 			}
 
 		}

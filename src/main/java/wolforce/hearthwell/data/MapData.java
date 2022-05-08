@@ -64,8 +64,10 @@ public class MapData implements Serializable {
 
 		addNode("hearthwell", 0, 0, "The Hearth Well", 0, "hearthwell:crystal_diversity", //
 				"The Hearth Well is an infinite source of energy given you by the gods.", //
-				"The Hearth Well is an infinite source of energy given you by the gods./n" + "Throw offerings near the Hearth Well to gain blessing and/n"
-						+ "favour from the gods in the form of small flares./n" + "Flares can be made stronger by adding extra Myst Dust to the recipe./n"
+				"The Hearth Well is an infinite source of energy given you by the gods./n"
+						+ "Throw offerings near the Hearth Well to gain blessing and/n"
+						+ "favour from the gods in the form of small flares./n"
+						+ "Flares can be made stronger by adding extra Myst Dust to the recipe./n"
 						+ "You can manipulate these flares with a entity_flare torch./n"
 						+ "Some items and blocks will react to the presence of flares in particular ways.", //
 				recipes, array(), array(), false);
@@ -74,15 +76,22 @@ public class MapData implements Serializable {
 
 	private MapData createDefaults() {
 
-		recipes_influence.add(new RecipeInfluence("recipe_myst_grass", "minecraft:dirt|minecraft:grass_block", "hearthwell:myst_grass"));
-		recipes_influence.add(new RecipeInfluence("recipe_petrified_wood", "#minecraft:logs", "hearthwell:petrified_wood"));
-		recipes_influence.add(new RecipeInfluence("recipe_crystal_ore", "#minecraft:base_stone_overworld", "hearthwell:crystal_ore"));
-		recipes_influence.add(new RecipeInfluence("recipe_crystal_ore_black", "minecraft:blackstone", "hearthwell:crystal_ore_black"));
+		recipes_influence.add(new RecipeInfluence("recipe_myst_grass", "minecraft:dirt|minecraft:grass_block",
+				"hearthwell:myst_grass"));
+		recipes_influence
+				.add(new RecipeInfluence("recipe_petrified_wood", "#minecraft:logs", "hearthwell:petrified_wood"));
+		recipes_influence.add(
+				new RecipeInfluence("recipe_crystal_ore", "#minecraft:base_stone_overworld", "hearthwell:crystal_ore"));
+		recipes_influence.add(new RecipeInfluence("recipe_crystal_ore_black", "minecraft:blackstone",
+				"hearthwell:crystal_ore_black"));
 
-		recipes_flare.add(new RecipeFlare("pure_flare", "Pure Flare", "AA55FF", "hearthwell:myst_dust,hearthwell:crystal"));
+		recipes_flare
+				.add(new RecipeFlare("pure_flare", "Pure Flare", "AA55FF", "hearthwell:myst_dust,hearthwell:crystal"));
 
-		recipes_handitem.add(new RecipeHandItem("recipe_burst_seed", "pure_flare", "hearthwell:inert_seed", "hearthwell:burst_seed"));
-		recipes_handitem.add(new RecipeHandItem("recipe_mystic_ingot", "pure_flare", "minecraft:iron_ingot", "hearthwell:mystic_ingot"));
+		recipes_handitem.add(new RecipeHandItem("recipe_burst_seed", "pure_flare", "hearthwell:inert_seed",
+				"hearthwell:burst_seed"));
+		recipes_handitem.add(new RecipeHandItem("recipe_mystic_ingot", "pure_flare", "minecraft:iron_ingot",
+				"hearthwell:mystic_ingot"));
 
 //	dirt gravel sand red_sand clay
 //	cobblestone andesite diorite granite calcite basalt blackstone mossy_cobblestone tuff  deepslate
@@ -130,17 +139,23 @@ public class MapData implements Serializable {
 
 		recipes_burst.add(new RecipeBurstSeed("burstseed_quartz", "minecraft:quartz_block"));
 
-		recipes_flare.add(new RecipeFlare("flare_life", "Flare of Life", "33FF77", "hearthwell:myst_dust,#minecraft:saplings"));
-		recipes_flare.add(new RecipeFlare("flare_flame", "Flare of Flame", "FF3300", "minecraft:myst_dust,minecraft:coal"));
+		recipes_flare.add(new RecipeFlare("flare_growth", "Flare of Growth", "33FF77", "#minecraft:saplings,"));
+		recipes_flare.add(new RecipeFlare("flare_rarity", "Flare of Rarity", "0033FF",
+				"hearthwell:myst_dust,#minecraft:saplings"));
+		recipes_flare.add(new RecipeFlare("flare_reaction", "Flare of Reaction", "FF3300",
+				"hearthwell:myst_dust,#minecraft:saplings"));
 
 		// examples
-		recipes_transformation.add(new RecipeTransformation("recipe_fertile_soil", "flare_life", "minecraft:dirt", "hearthwell:fertile_soil"));
-		recipes_transformation
-				.add(new RecipeTransformation("recipe_myst_grass_2", "pure_flare", "minecraft:dirt|minecraft:grass_block", "hearthwell:myst_grass"));
-		recipes_transformation
-				.add(new RecipeTransformation("recipe_crystal_ore_black_2", "pure_flare", "minecraft:blackstone", "hearthwell:crystal_ore_black"));
-		recipes_transformation.add(new RecipeTransformation("recipe_crystal_ore_2", "pure_flare", "#minecraft:base_stone_overworld", "hearthwell:crystal_ore"));
-		recipes_transformation.add(new RecipeTransformation("recipe_petrified_wood_2", "pure_flare", "#minecraft:logs", "hearthwell:petrified_wood"));
+		recipes_transformation.add(new RecipeTransformation("recipe_fertile_soil", "flare_life", "minecraft:dirt",
+				"hearthwell:fertile_soil"));
+		recipes_transformation.add(new RecipeTransformation("recipe_myst_grass_2", "pure_flare",
+				"minecraft:dirt|minecraft:grass_block", "hearthwell:myst_grass"));
+		recipes_transformation.add(new RecipeTransformation("recipe_crystal_ore_black_2", "pure_flare",
+				"minecraft:blackstone", "hearthwell:crystal_ore_black"));
+		recipes_transformation.add(new RecipeTransformation("recipe_crystal_ore_2", "pure_flare",
+				"#minecraft:base_stone_overworld", "hearthwell:crystal_ore"));
+		recipes_transformation.add(new RecipeTransformation("recipe_petrified_wood_2", "pure_flare", "#minecraft:logs",
+				"hearthwell:petrified_wood"));
 //		recipes_handitem.add(new RecipeHandItem("example_recipe_handitem", "example_flare", "minecraft:diamond", "minecraft:coal"));
 
 		recipes_crushing.add(new RecipeCrushing("recipe_", "hearthwell:fertile_soil", "minecraft:dirt"));
@@ -161,40 +176,65 @@ public class MapData implements Serializable {
 		addNode("crystal_formation", 0, 2, "Crystal Formation", 60, "hearthwell:crystal", //
 				"Nearby stone begins to transform into some sort of Mysterious Crystal.", //
 				"Stone near the Hearth Well is influenced by it./nIt absorbs the mysterious energies and has a chance/nto transform into crystal ore.", //
-				array("recipe_crystal_ore", "recipe_crystal_ore_black", "recipe_crystal_ore_2", "recipe_crystal_ore_black_2"), // recipes
+				array("recipe_crystal_ore", "recipe_crystal_ore_black", "recipe_crystal_ore_2",
+						"recipe_crystal_ore_black_2"), // recipes
 				array("hearthwell"), array(), false);
 
-		addNode("material_infusion", 2, 3, "Material Infusion", 600, "hearthwell:mystic_ingot", //
-				"More mysterious stuff.", //
-				"Holding an Iron Ingot in the presence of a Pure Flare will attract it,/nand the two will fuse, creating a new, strong, mystical alloy.", //
-				array("recipe_mystic_ingot"), // recipes
-				array("crystal_formation"), array("hearthwell:crystal"), false);
+		//
 
-		addNode("rapid_growth", 0, -2, "Rapid Growth", 600, "hearthwell:fertile_soil", //
+		addNode("on_reactions", 2, 1, "On Reactions", 60, "flare_reaction", //
+				"", //
+				"", //
+				array("flare_reaction"), // recipes
+				array(), array(), false);
+
+		addNode("on_rarity", -2, 1, "On Rarity", 60, "hearthwell:mystic_ingot", //
+				"", //
+				"", //
+				array("flare_rarity"), // recipes
+				array(), array(), false);
+
+		addNode("on_growth", 0, -2, "On Growth", 60, "hearthwell:mystic_ingot", //
+				"", //
+				"", //
+				array("flare_growth"), // recipes
+				array(), array(), false);
+
+		//
+
+//		addNode("material_infusion", 2, 3, "Material Infusion", 120, "hearthwell:mystic_ingot", //
+//				"More mysterious stuff.", //
+//				"Holding an Iron Ingot in the presence of a Pure Flare will attract it,/nand the two will fuse, creating a new, strong, mystical alloy.", //
+//				array("recipe_mystic_ingot"), // recipes
+//				array("crystal_formation"), array("hearthwell:crystal"), false);
+
+		addNode("rapid_growth", 0, -4, "Rapid Growth", 120, "hearthwell:fertile_soil", //
 				"Create a new better soil for the growth of plant life.", //
 				"Make a Cyan Flare from Cyan Dye, then use it to transform/ncoal into diamonds and coal blocks into diamond blocks.", //
 				array("flare_life", "recipe_fertile_soil"), // recipes
 				array("magical_plants", "petrification"), array("#minecraft:saplings|#minecraft:seeds"), false);
 
-		addNode("material_multiplication", -2, 1, "Material Multiplication", 600, "hearthwell:burst_seed", //
+		addNode("material_multiplication", -2, 1, "Material Multiplication", 120, "hearthwell:burst_seed", //
 				"When you need more of the same.", //
 				"Burst seeds may be fed certain materials which will grow and multiply./nBut be careful, for they are unstable.", //
 				array("recipe_burst_seed"), // recipes
 				array("magical_plants", "crystal_formation"), array("hearthwell:crystal"), false);
 
-		addNode("material_infusion", 2, 1, "Material Infusion", 600, "hearthwell:mystic_ingot", //
-				"Create a new better soil for the growth of plant life.", //
-				"Make a Cyan Flare from Cyan Dye, then use it to transform/ncoal into diamonds and coal blocks into diamond blocks.", //
-				array("flare_life", "recipe_fertile_soil"), // recipes
-				array("crystal_formation", "petrification"), array("minecraft:cobblestone", "minecraft:stone", "minecraft:blackstone"), false);
+		//
+
+//		addNode("material_infusion", 2, 1, "Material Infusion", 600, "hearthwell:mystic_ingot", //
+//				"Create a new better soil for the growth of plant life.", //
+//				"Make a Cyan Flare from Cyan Dye, then use it to transform/ncoal into diamonds and coal blocks into diamond blocks.", //
+//				array("flare_life", "recipe_fertile_soil"), // recipes
+//				array("crystal_formation", "petrification"), array("minecraft:cobblestone", "minecraft:stone", "minecraft:blackstone"), false);
 
 		// Layer2
-		
-		addNode("material_infusion", 4, 1, "Material Infusion", 600, "hearthwell:mystic_ingot", //
-				"Create a new better soil for the growth of plant life.", //
-				"Make a Cyan Flare from Cyan Dye, then use it to transform/ncoal into diamonds and coal blocks into diamond blocks.", //
-				array("flare_life", "recipe_fertile_soil"), // recipes
-				array("material_infusion"), array("minecraft:cobblestone", "minecraft:stone", "minecraft:blackstone"), false);
+
+//		addNode("material_infusion", 4, 1, "Material Infusion", 600, "hearthwell:mystic_ingot", //
+//				"Create a new better soil for the growth of plant life.", //
+//				"Make a Cyan Flare from Cyan Dye, then use it to transform/ncoal into diamonds and coal blocks into diamond blocks.", //
+//				array("flare_life", "recipe_fertile_soil"), // recipes
+//				array("material_infusion"), array("minecraft:cobblestone", "minecraft:stone", "minecraft:blackstone"), false);
 
 		return this;
 	}
@@ -270,7 +310,9 @@ public class MapData implements Serializable {
 		for (MapNode node : nodes.values()) {
 			short nodeXY = MapNode.hash(node.x, node.y);
 			if (nodesByPosition.containsKey(nodeXY))
-				new HearthWellException("Location collision for nodes: " + node.name + " and " + nodesByPosition.get(nodeXY).name).printStackTrace();
+				new HearthWellException(
+						"Location collision for nodes: " + node.name + " and " + nodesByPosition.get(nodeXY).name)
+						.printStackTrace();
 			nodesByPosition.put(nodeXY, node);
 			for (String parentId : node.parent_ids) {
 				MapNode parent = getNode(parentId);
@@ -280,9 +322,10 @@ public class MapData implements Serializable {
 		}
 	}
 
-	public void addNode(String id, int x, int y, String name, int time, String stack, String description, String fullDescription, String[] recipes,
-			String[] connections, String[] required_items, boolean write) {
-		nodes.put(id, new MapNode((byte) x, (byte) y, name, time, stack, description, fullDescription, recipes, connections, required_items));
+	public void addNode(String id, int x, int y, String name, int time, String stack, String description,
+			String fullDescription, String[] recipes, String[] connections, String[] required_items, boolean write) {
+		nodes.put(id, new MapNode((byte) x, (byte) y, name, time, stack, description, fullDescription, recipes,
+				connections, required_items));
 		if (write) {
 			init();
 			writeData(this);
@@ -375,8 +418,16 @@ public class MapData implements Serializable {
 			return ((MapData) gson.fromJson(reader, MapData.class)) //
 					.createBaseNode() //
 					.init(); //
-		//@f--
-		} catch (Exception e) {e.printStackTrace();} finally { if (reader != null) try { reader.close(); } catch (Exception e) {} } //@f++
+			// @f--
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (reader != null)
+				try {
+					reader.close();
+				} catch (Exception e) {
+				}
+		} // @f++
 		return null;
 	}
 
@@ -397,8 +448,16 @@ public class MapData implements Serializable {
 //			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 //			writer.write(gson.toJson(data));
 			return data;
-		//@f--
-		} catch (Exception e) {e.printStackTrace();} finally { if (writer != null) try { writer.close(); } catch (Exception e) {} } //@f++
+			// @f--
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (writer != null)
+				try {
+					writer.close();
+				} catch (Exception e) {
+				}
+		} // @f++
 		return null;
 	}
 

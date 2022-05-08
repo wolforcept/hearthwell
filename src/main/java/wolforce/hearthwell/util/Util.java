@@ -76,7 +76,8 @@ public class Util {
 			return new ItemStack((Block) object);
 		if (object instanceof Item)
 			return new ItemStack((Item) object);
-		throw new InvalidParameterException("Object of type" + object.getClass() + " cannot be made into an ItemStack.");
+		throw new InvalidParameterException(
+				"Object of type" + object.getClass() + " cannot be made into an ItemStack.");
 	}
 
 	public static FluidStack fluidStack(Fluid f) {
@@ -388,7 +389,8 @@ public class Util {
 //		return 0xff000000 | (r << 16) | (g << 8) | (b << 0);
 	}
 
-	public static boolean callBooleanMethod(Object obj, String methodName, Class<?> clazz, Object[] args, Class<?>[] paramTypes) {
+	public static boolean callBooleanMethod(Object obj, String methodName, Class<?> clazz, Object[] args,
+			Class<?>[] paramTypes) {
 
 		try {
 			Method method = clazz.getDeclaredMethod(methodName, paramTypes);
@@ -397,10 +399,12 @@ public class Util {
 			if (ret instanceof Boolean)
 				return (Boolean) ret;
 			else
-				System.err.println(
-						"The return was not a boolean from method " + methodName + " from object " + obj.toString() + " of class " + obj.getClass().getName());
-		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			System.err.println("Could not call boolean method " + methodName + " from object " + obj.toString() + " of class " + obj.getClass().getName());
+				System.err.println("The return was not a boolean from method " + methodName + " from object "
+						+ obj.toString() + " of class " + obj.getClass().getName());
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			System.err.println("Could not call boolean method " + methodName + " from object " + obj.toString()
+					+ " of class " + obj.getClass().getName());
 			e.printStackTrace();
 		}
 
@@ -432,6 +436,13 @@ public class Util {
 				return stack;
 		}
 		return null;
+	}
+
+	public static String substring(String s, int i) {
+		if (i < 0) {
+			return s.substring(s.length() + i, s.length());
+		}
+		return s.substring(i);
 	}
 
 }

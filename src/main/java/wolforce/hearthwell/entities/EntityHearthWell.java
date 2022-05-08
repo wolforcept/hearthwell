@@ -41,12 +41,16 @@ public class EntityHearthWell extends Entity {
 
 	public static final String REG_ID = "entity_hearth_well";
 
-	private static final EntityDataAccessor<Integer> RESEARCH = SynchedEntityData.defineId(EntityHearthWell.class, EntityDataSerializers.INT);
-	private static final EntityDataAccessor<Byte> RESEARCH_NODE_X = SynchedEntityData.defineId(EntityHearthWell.class, EntityDataSerializers.BYTE);
-	private static final EntityDataAccessor<Byte> RESEARCH_NODE_Y = SynchedEntityData.defineId(EntityHearthWell.class, EntityDataSerializers.BYTE);
-	private static final EntityDataAccessor<Boolean> HAS_ITEMS = SynchedEntityData.defineId(EntityHearthWell.class, EntityDataSerializers.BOOLEAN);
-	private static final EntityDataAccessor<CompoundTag> UNLOCKED_NODES = SynchedEntityData.defineId(EntityHearthWell.class,
-			EntityDataSerializers.COMPOUND_TAG);
+	private static final EntityDataAccessor<Integer> RESEARCH = SynchedEntityData.defineId(EntityHearthWell.class,
+			EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Byte> RESEARCH_NODE_X = SynchedEntityData.defineId(EntityHearthWell.class,
+			EntityDataSerializers.BYTE);
+	private static final EntityDataAccessor<Byte> RESEARCH_NODE_Y = SynchedEntityData.defineId(EntityHearthWell.class,
+			EntityDataSerializers.BYTE);
+	private static final EntityDataAccessor<Boolean> HAS_ITEMS = SynchedEntityData.defineId(EntityHearthWell.class,
+			EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<CompoundTag> UNLOCKED_NODES = SynchedEntityData
+			.defineId(EntityHearthWell.class, EntityDataSerializers.COMPOUND_TAG);
 
 	private static final int research_max_cooldown = 30;
 	private int research_cooldown = research_max_cooldown;
@@ -84,6 +88,13 @@ public class EntityHearthWell extends Entity {
 //			for (ItemEntity ent : nearItems)
 //				ent.setNoGravity(false);
 //		}
+
+		AABB faraabb = new AABB(x - 4, y - 4, z - 4, x + 4, y + 4, z + 4);
+		List<ItemEntity> farItems = level.getEntitiesOfClass(ItemEntity.class, faraabb);
+		for (ItemEntity itemEntity : farItems) {
+			itemEntity.setNoGravity(false);
+		}
+
 		AABB nearaabb = new AABB(x - 2, y - 2, z - 2, x + 2, y + 2, z + 2);
 		List<ItemEntity> nearItems = level.getEntitiesOfClass(ItemEntity.class, nearaabb);
 		List<ItemEntity> nearItemsGood = nearItems.stream().filter(e -> e.tickCount > 100).collect(toList());
@@ -149,7 +160,8 @@ public class EntityHearthWell extends Entity {
 						if (flarePos == null)
 							flarePos = new Vec3(x, y + 1, z);
 						EntityFlare flareEntity = new EntityFlare(level);
-						flareEntity.set(recipe.recipeId, recipe.color, /* uses */ (byte) Math.min(64, recipe.uses + extraDust), unlockedNodes);
+						flareEntity.set(recipe.recipeId, recipe.color,
+								/* uses */ (byte) Math.min(64, recipe.uses + extraDust), unlockedNodes);
 						flareEntity.setRealPosition(flarePos.x, flarePos.y, flarePos.z);
 						level.addFreshEntity(flareEntity);
 					}
@@ -181,7 +193,8 @@ public class EntityHearthWell extends Entity {
 				entityStack.shrink(inputStack.getCount());
 				itemEntity.tickCount = 0;
 				Vec3 itemPos = itemEntity.position();
-				((ServerLevel) level).sendParticles(new ParticleEnergyData(0), itemPos.x, itemPos.y, itemPos.z, 20, 0, 0, 0, 0.01);
+				((ServerLevel) level).sendParticles(new ParticleEnergyData(0), itemPos.x, itemPos.y, itemPos.z, 20, 0,
+						0, 0, 0.01);
 				return itemPos;
 			}
 		}
@@ -355,7 +368,8 @@ public class EntityHearthWell extends Entity {
 			unlockMapNode(node);
 			if (!level.isClientSide && level instanceof ServerLevel) {
 				Vec3 pos = position();
-				((ServerLevel) level).sendParticles(new ParticleEnergyData(0), pos.x, pos.y + 0.66, pos.z, 240, 0, 0, 0, 0.1);
+				((ServerLevel) level).sendParticles(new ParticleEnergyData(0), pos.x, pos.y + 0.66, pos.z, 240, 0, 0, 0,
+						0.1);
 			}
 			return true;
 		}

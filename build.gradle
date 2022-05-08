@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: "$forgegradle_version", changing: true
     }
 }
 plugins {
@@ -13,21 +13,24 @@ plugins {
 }
 apply plugin: 'net.minecraftforge.gradle'
 
-version = '1.0'
-group = 'wolforce.${modid}'
-archivesBaseName = modid
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+version = "$mod_version"
+group = "wolforce.$mod_id"
+archivesBaseName = "$mod_id"
+java.toolchain.languageVersion = JavaLanguageVersion.of("$java_version")
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'official', version: '1.18.2'
+    mappings channel: 'official', version: "$minecraft_version"
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg') 
+    
     runs {
         client {
-            taskName "hearthwell 18 client"
+            args '--username', 'Wolforce'
+            taskName "$mod_id 18 client"
             workingDirectory project.file('run')
-
             property 'forge.logging.markers', ''
             property 'forge.logging.console.level', 'info'
+            property 'forge.enabledGameTestNamespaces', "$mod_id"
 
             mods {
                 mod {
@@ -37,27 +40,11 @@ minecraft {
         }
 
         server {
-            taskName "hearthwell 18 server"
+            taskName "$mod_id 18 server"
             workingDirectory project.file('run_server')
-            //property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.markers', ''
             property 'forge.logging.console.level', 'info'
-
-            mods {
-                mod {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        datagen {
-            taskName "hearthwell 18 datagen"
-            workingDirectory project.file('run_datagen')
-
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-
-            args '--mod', modid, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            property 'forge.enabledGameTestNamespaces', "$mod_id"
 
             mods {
                 mod {
@@ -98,31 +85,26 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.2-40.0.49'
-    compileOnly fg.deobf("mezz.jei:jei-1.18.2:9.7.0.192:api")
-    runtimeOnly fg.deobf('mezz.jei:jei-1.18.2:9.7.0.192')
-	//fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
+    minecraft "net.minecraftforge:forge:$minecraft_version-$forge_version"
+    compileOnly fg.deobf("mezz.jei:jei-$minecraft_version:$jei_version:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-$minecraft_version:$jei_version")
 }
 
 jar {
     manifest {
         attributes([
-            "Specification-Title": "${modid}",
-            "Specification-Vendor": "${modid}",
-            "Specification-Version": "1", // We are version 1 of ourselves
-            "Implementation-Title": project.name,
-            "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"${modid}",
+            "Specification-Title"     : "$mod_id",
+            "Specification-Vendor"    : "$mod_id",
+            "Specification-Version"   : "1",
+            "Implementation-Title"    : project.name,
+            "Implementation-Version"  : project.jar.archiveVersion,
+            "Implementation-Vendor"   : "$mod_id",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
 }
 
-// Example configuration to allow publishing using the maven-publish task
-// This is the preferred method to reobfuscate your jar file
-jar.finalizedBy('reobfJar') 
-// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
-//publish.dependsOn('reobfJar')
+jar.finalizedBy('reobfJar')
 
 publishing {
     publications {
@@ -132,7 +114,11 @@ publishing {
     }
     repositories {
         maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
+            url "file://${project.projectDir}/mcmodsrepo"
         }
     }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
 }

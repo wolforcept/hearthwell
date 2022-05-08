@@ -2,11 +2,18 @@ package wolforce.hearthwell.util;
 
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.BufferUploader;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.math.Matrix4f;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -31,10 +38,10 @@ public class UtilClient {
 	public static LocalPlayer player = Minecraft.getInstance().player;
 
 	public static void renderItem(PoseStack matrix, ItemStack stack, int x, int y, int z) {
-		renderItem(matrix, stack, x, y, z, false);
+		renderItem(matrix, stack, x, y, z, null);
 	}
 
-	public static void renderItem(PoseStack matrix, ItemStack stack, int x, int y, int z, boolean isSilhouette) {
+	public static void renderItem(PoseStack matrix, ItemStack stack, int x, int y, int z, ColorAction colorAction) {
 
 		if (!Util.isValid(stack))
 			return;
@@ -51,12 +58,12 @@ public class UtilClient {
 		MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
 		Lighting.setupForFlatItems();
 
-		if (isSilhouette)
-			renderItemBlack(stack, ItemTransforms.TransformType.GUI, false, posestack1, multibuffersource$buffersource, 15728880,
-					OverlayTexture.NO_OVERLAY, model);
+		if (colorAction != null)
+			renderItemBlack(stack, ItemTransforms.TransformType.GUI, false, posestack1, multibuffersource$buffersource, 15728880, OverlayTexture.NO_OVERLAY,
+					model, colorAction);
 		else
-			renderItem.render(stack, ItemTransforms.TransformType.GUI, false, posestack1, multibuffersource$buffersource, 15728880,
-					OverlayTexture.NO_OVERLAY, model);
+			renderItem.render(stack, ItemTransforms.TransformType.GUI, false, posestack1, multibuffersource$buffersource, 15728880, OverlayTexture.NO_OVERLAY,
+					model);
 
 		multibuffersource$buffersource.endBatch();
 
@@ -65,19 +72,17 @@ public class UtilClient {
 
 	}
 
-	public static void renderItemBlack(ItemStack stack, ItemTransforms.TransformType type, boolean _flag, PoseStack matrix,
-			MultiBufferSource source, int x, int y, BakedModel p_115151_) {
+	public static void renderItemBlack(ItemStack stack, ItemTransforms.TransformType type, boolean _flag, PoseStack matrix, MultiBufferSource source, int x,
+			int y, BakedModel p_115151_, ColorAction colorAction) {
 		if (!stack.isEmpty()) {
 			matrix.pushPose();
 			boolean flag = type == ItemTransforms.TransformType.GUI || type == ItemTransforms.TransformType.GROUND
 					|| type == ItemTransforms.TransformType.FIXED;
 			if (flag) {
 				if (stack.is(Items.TRIDENT)) {
-					p_115151_ = renderItem.getItemModelShaper().getModelManager()
-							.getModel(new ModelResourceLocation("minecraft:trident#inventory"));
+					p_115151_ = renderItem.getItemModelShaper().getModelManager().getModel(new ModelResourceLocation("minecraft:trident#inventory"));
 				} else if (stack.is(Items.SPYGLASS)) {
-					p_115151_ = renderItem.getItemModelShaper().getModelManager()
-							.getModel(new ModelResourceLocation("minecraft:spyglass#inventory"));
+					p_115151_ = renderItem.getItemModelShaper().getModelManager().getModel(new ModelResourceLocation("minecraft:spyglass#inventory"));
 				}
 			}
 
@@ -118,23 +123,31 @@ public class UtilClient {
 						vertexconsumer = ItemRenderer.getFoilBuffer(source, rendertype, true, stack.hasFoil());
 					}
 
-					renderItem.renderModelLists(p_115151_, stack, x, y, matrix, new BlackVertexConsumer(vertexconsumer));
+					renderItem.renderModelLists(p_115151_, stack, x, y, matrix, new CustomVertexConsumer(vertexconsumer, colorAction));
 				}
 			} else {
-				net.minecraftforge.client.RenderProperties.get(stack).getItemStackRenderer().renderByItem(stack, type, matrix, source, x,
-						y);
+				net.minecraftforge.client.RenderProperties.get(stack).getItemStackRenderer().renderByItem(stack, type, matrix, source, x, y);
 			}
 
 			matrix.popPose();
 		}
 	}
 
-	static class BlackVertexConsumer implements VertexConsumer {
+	public record RGBA(int r, int g, int b, int a) {
+	}
+
+	public static interface ColorAction {
+		RGBA apply(int r, int g, int b, int a);
+	}
+
+	static class CustomVertexConsumer implements VertexConsumer {
 
 		private VertexConsumer vc;
+		private ColorAction colorAction;
 
-		public BlackVertexConsumer(VertexConsumer vc) {
+		public CustomVertexConsumer(VertexConsumer vc, ColorAction colorAction) {
 			this.vc = vc;
+			this.colorAction = colorAction;
 		}
 
 		@Override
@@ -144,9 +157,9 @@ public class UtilClient {
 		}
 
 		@Override
-		public VertexConsumer color(int p_85973_, int p_85974_, int p_85975_, int p_85976_) {
-//			System.out.println(p_85973_ + " " + p_85974_ + " " + p_85975_ + " " + p_85976_);
-			vc.color(0, 0, 0, p_85976_);
+		public VertexConsumer color(int r, int g, int b, int a) {
+			RGBA color = colorAction.apply(r, g, b, a);
+			vc.color(color.r, color.g, color.b, color.a);
 			return this;
 		}
 
@@ -198,4 +211,28 @@ public class UtilClient {
 				Integer.valueOf(colorStr.substring(4, 6), 16) / 256f //
 		};
 	}
+
+	public static void colorBlit(PoseStack pMatrixStack, int pX, int pY, float pUOffset, float pVOffset, int pUWidth, int pVHeight, int color) {
+		innerBlit(pMatrixStack, pX, pX + pUWidth, pY, pY + pVHeight, 0, pUWidth, pVHeight, pUOffset, pVOffset, pUWidth, pVHeight, color);
+	}
+
+	private static void innerBlit(PoseStack pMatrixStack, int pX1, int pX2, int pY1, int pY2, int pBlitOffset, int pUWidth, int pVHeight, float pUOffset,
+			float pVOffset, int pTextureWidth, int pTextureHeight, int color) {
+		innerBlit(pMatrixStack.last().pose(), pX1, pX2, pY1, pY2, pBlitOffset, (pUOffset + 0.0F) / pTextureWidth, (pUOffset + pUWidth) / pTextureWidth,
+				(pVOffset + 0.0F) / pTextureHeight, (pVOffset + pVHeight) / pTextureHeight, color);
+	}
+
+	private static void innerBlit(Matrix4f pMatrix, int pX1, int pX2, int pY1, int pY2, int pBlitOffset, float pMinU, float pMaxU, float pMinV, float pMaxV,
+			int color) {
+		RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
+		BufferBuilder bufferbuilder = Tesselator.getInstance().getBuilder();
+		bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR_TEX);
+		bufferbuilder.vertex(pMatrix, pX1, pY2, pBlitOffset).color(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF, 255).uv(pMinU, pMaxV).endVertex();
+		bufferbuilder.vertex(pMatrix, pX2, pY2, pBlitOffset).color(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF, 255).uv(pMaxU, pMaxV).endVertex();
+		bufferbuilder.vertex(pMatrix, pX2, pY1, pBlitOffset).color(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF, 255).uv(pMaxU, pMinV).endVertex();
+		bufferbuilder.vertex(pMatrix, pX1, pY1, pBlitOffset).color(color >> 16 & 0xFF, color >> 8 & 0xFF, color & 0xFF, 255).uv(pMinU, pMinV).endVertex();
+		bufferbuilder.end();
+		BufferUploader.end(bufferbuilder);
+	}
+
 }

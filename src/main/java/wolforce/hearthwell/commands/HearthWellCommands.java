@@ -54,7 +54,8 @@ public class HearthWellCommands {
 	public static final Command<CommandSourceStack> toggleEditMode = (CommandContext<CommandSourceStack> context) -> {
 		ScreenHearthWellMap.EDIT_MODE = !ScreenHearthWellMap.EDIT_MODE;
 		Minecraft.getInstance().player.sendMessage(
-				new TextComponent("Hearth Well Edit Mode is now: " + (ScreenHearthWellMap.EDIT_MODE ? "ON" : "OFF")), Util.NIL_UUID);
+				new TextComponent("Hearth Well Edit Mode is now: " + (ScreenHearthWellMap.EDIT_MODE ? "ON" : "OFF")),
+				Util.NIL_UUID);
 		return 1;
 	};
 }

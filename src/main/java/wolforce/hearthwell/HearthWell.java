@@ -2,7 +2,9 @@ package wolforce.hearthwell;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
@@ -16,7 +18,9 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import wolforce.hearthwell.bases.BaseFallingBlock;
 import wolforce.hearthwell.bases.BlockItemProperties;
@@ -30,6 +34,8 @@ import wolforce.hearthwell.blocks.BlockMystGrass;
 import wolforce.hearthwell.blocks.BlockPetrifiedWood;
 import wolforce.hearthwell.items.ItemPetrifiedWoodChunk;
 import wolforce.hearthwell.items.ItemPrayerLetter;
+import wolforce.hearthwell.items.ItemTokenBase;
+import wolforce.hearthwell.items.ItemTokenOf;
 import wolforce.hearthwell.registries.Entities;
 import wolforce.hearthwell.registries.TileEntities;
 
@@ -40,6 +46,8 @@ public class HearthWell {
 	public static final String VERSION = "0.1";
 
 	public HearthWell() {
+		ConfigServer.init();
+		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ConfigServer.CONFIG_SPEC, MODID + "_server.toml");
 		IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 //		modBus.addListener(this::setupCompleteClient);
 //		modBus.addListener(this::setupCompleteServer);
@@ -91,8 +99,10 @@ public class HearthWell {
 				.strength(.8f);
 //		Block.Properties torch = AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance()
 //				.setLightLevel((state) -> 14).sound(SoundType.WOOD);
-		Block.Properties plantNoDrops = Properties.of(Material.PLANT, MaterialColor.COLOR_PURPLE).noCollission().instabreak().sound(SoundType.GRASS).noDrops();
-		Block.Properties miscellaneous = Properties.of(Material.DECORATION, MaterialColor.NONE).strength(.3f).sound(SoundType.BONE_BLOCK);
+		Block.Properties plantNoDrops = Properties.of(Material.PLANT, MaterialColor.COLOR_PURPLE).noCollission()
+				.instabreak().sound(SoundType.GRASS).noDrops();
+		Block.Properties miscellaneous = Properties.of(Material.DECORATION, MaterialColor.NONE).strength(.3f)
+				.sound(SoundType.BONE_BLOCK);
 
 		myst_grass = addBlock("myst_grass", new BlockMystGrass(organic));
 		petrified_wood = addBlock("petrified_wood", new BlockPetrifiedWood(rockNoToolNeeded));
@@ -116,14 +126,16 @@ public class HearthWell {
 
 		// HAVE TILE REGISTRY
 		burst_seed = addBlock("burst_seed", new BlockBurstSeed(miscellaneous));
-		fertile_soil = addBlock("fertile_soil", new BlockFertileSoil(rock));
+		fertile_soil = addBlock("fertile_soil", new BlockFertileSoil(organic));
 	}
 
-	public static Item myst_dust, petrified_wood_chunk, crystal, flare_torch, prayer_letter;
+	public static Item myst_dust, petrified_wood_chunk, crystal, flare_torch, prayer_letter, token_base;
+	private static ArrayList<ItemTokenOf> tokenItems;
 
 	public static void setupItems() {
 
 		Item.Properties props = new Item.Properties().tab(group);
+		Item.Properties propsNoStack = new Item.Properties().tab(group).stacksTo(1);
 		myst_dust = addItem("myst_dust", props);
 		addItem("inert_dust", props);
 		petrified_wood_chunk = addItem("petrified_wood_chunk", new ItemPetrifiedWoodChunk(props));
@@ -143,10 +155,14 @@ public class HearthWell {
 		addItem("crystal_white", props);
 		addItem("crystal_yellow", props);
 
+		token_base = addItem("token_base", new ItemTokenBase(propsNoStack));
+		tokenItems = new ArrayList<ItemTokenOf>(12);
+		for (int i = 0; i < 12; i++)
+			tokenItems.add(i, addItem("token_" + i, new ItemTokenOf(propsNoStack, i)));
+
 		flare_torch = addItem("flare_torch", props);
 
-		props.stacksTo(1);
-		prayer_letter = addItem("prayer_letter", new ItemPrayerLetter(props));
+		prayer_letter = addItem("prayer_letter", new ItemPrayerLetter(propsNoStack));
 	}
 
 	//
@@ -157,7 +173,7 @@ public class HearthWell {
 		return addItem(string, new Item(props));
 	}
 
-	private static Item addItem(String string, Item item) {
+	private static <T extends Item> T addItem(String string, T item) {
 		item.setRegistryName(new ResourceLocation(MODID, string));
 		items.put(string, item);
 		return item;
@@ -169,5 +185,13 @@ public class HearthWell {
 		if (block instanceof BlockItemProperties)
 			addItem(regId, new BlockItem(block, ((BlockItemProperties) block).getItemProperties()));
 		return block;
+	}
+
+	public static Item getTokenItem(int i) {
+		return tokenItems.get(i);
+	}
+
+	public static List<ItemTokenOf> getTokenItems() {
+		return tokenItems.stream().toList();
 	}
 }

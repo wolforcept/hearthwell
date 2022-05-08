@@ -20,6 +20,8 @@
   "item.hearthwell.crystal_green" : "Green Crystal",
   "item.hearthwell.flare_torch" : "Flare Torch",
   "item.hearthwell.inert_seed" : "Inert Seed",
+  "item.hearthwell.token_base" : "Token Base",
+  "item.hearthwell.token_of" : "Token Of %s",
   "BLOCKS" : "",
   "block.hearthwell.core_rock" : "Rock Core",
   "block.hearthwell.core_soft" : "Soft Core",
@@ -39,5 +41,13 @@
   "block.hearthwell.burst_seed" : "Burst Seed",
   "block.hearthwell.fertile_soil" : "Fertile Soil",
   "block.hearthwell.crushing_block" : "Crushing Block",
+  "DESCRIPTIONS" : "",
+  "description.hearthwell.prayer_letter" : "A prayer to the Gods, requesting help in a time of need. When thrown, this item will summon a Hearth Well.",
+  "description.hearthwell.flare_torch" : "Used to control Hearth Well Flares. Control multiple flares by sneaking.",
+  "description.hearthwell.myst_dust" : "Obtained by breaking the Mysterious Bushes that grow on top of Mysterious Grass.",
+  "description.hearthwell.myst_bush" : "These grow on top of Mysterious Grass. When broken, they drop Mysterious Dust",
+  "description.hearthwell.myst_bush_small" : "These grow on top of Mysterious Grass. When broken, they may drop Mysterious Dust",
+  "description.hearthwell.crystal" : "Obtained by breaking the Crystal Ore that may form near the HearthWell.",
+  "description.hearthwell.token_base" : "When a block is right-clicked with a Token Base, a letter will appear. To get any token, you must use these letters to write the desired Token's Name.",
   "the" : "end"
 }
