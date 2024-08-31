@@ -1,0 +1,7 @@
+{
+	"parent": "hearthwell:block/core",
+	"textures": {
+		"all": "hearthwell:block/core_heat",
+		"particle": "hearthwell:block/core_heat"
+	}
+}

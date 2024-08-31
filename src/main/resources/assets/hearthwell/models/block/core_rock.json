@@ -1,0 +1,7 @@
+{
+	"parent": "hearthwell:block/core",
+	"textures": {
+		"all": "hearthwell:block/core_rock",
+		"particle": "hearthwell:block/core_rock"
+	}
+}

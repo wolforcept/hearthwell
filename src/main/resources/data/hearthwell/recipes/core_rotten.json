@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"AAA",
+		"BCB",
+		"AAA"
+	],
+	"key": {
+		"A": {
+			"item": "minecraft:netherrack"
+		},
+		"B": {
+			"item": "minecraft:bone_block"
+		},
+		"C": {
+			"item": "hearthwell:crystal"
+		}
+	},
+	"result": {
+		"item": "hearthwell:core_rotten"
+	}
+}

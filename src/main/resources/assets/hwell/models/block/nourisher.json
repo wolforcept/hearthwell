@@ -1,8 +1,0 @@
-{
-    "parent": "block/cube_bottom_top",
-    "textures": {
-        "bottom": "hwell:blocks/machine_base",
-        "top": "hwell:blocks/nourisher_top",
-        "side": "hwell:blocks/nourisher"
-    }
-}

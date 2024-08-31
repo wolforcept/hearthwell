@@ -1,6 +1,0 @@
-{
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "hwell:blocks/smooth_onyx_bricks"
-    }
-}

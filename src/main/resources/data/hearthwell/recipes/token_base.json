@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"AA ",
+		"AAA",
+		"ABA"
+	],
+	"key": {
+		"A": {
+			"item": "hearthwell:petrified_wood_chunk"
+		},
+		"B": {
+			"item": "hearthwell:crystal"
+		}
+	},
+	"result": {
+		"item": "hearthwell:token_base",
+		"count": 1
+	}
+}

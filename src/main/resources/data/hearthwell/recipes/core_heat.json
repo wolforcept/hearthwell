@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"AAA",
+		"BCB",
+		"AAA"
+	],
+	"key": {
+		"A": {
+			"item": "minecraft:gravel"
+		},
+		"B": {
+			"item": "minecraft:terracotta"
+		},
+		"C": {
+			"item": "hearthwell:crystal"
+		}
+	},
+	"result": {
+		"item": "hearthwell:core_heat"
+	}
+}
